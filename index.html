@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+  <meta name="referrer" content="no-referrer" />
+  <title>一颗椰饭饲养指南</title>
+  <style>
+    /* ===== 全局 ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; }
+    body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
+
+    /* ===== 加载页 ===== */
+    .loading-page {
+      width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;
+      background: linear-gradient(135deg, #e6f4ff 0%, #b8e0ff 50%, #ffffff 100%);
+      display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999;
+      transition: opacity 0.5s ease;
+    }
+    .loading-page.hide { opacity: 0; pointer-events: none; }
+    .rice-emoji { font-size: 56px; margin-bottom: 6px; }
+    .title-text { color: #1f5a8a; font-size: 32px; font-weight: 600; letter-spacing: 2px; }
+    .load-box { margin-top: 24px; width: 240px; height: 6px; background: rgba(36,104,168,0.15); border-radius: 99px; overflow: hidden; }
+    .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg,#4299e1,#1f5a8a); border-radius: 99px; animation: fastLoad 0.6s ease-out forwards; }
+    @keyframes fastLoad { 0% { width: 0; } 100% { width: 100%; } }
+
+    /* ===== 主布局 ===== */
+    .main-page {
+      display: flex; width: 100vw; min-height: 100vh;
+      background: transparent;
+    }
+
+    /* ===== 侧边栏 - 桌面版固定左侧 ===== */
+    .sidebar {
+      width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
+      background: rgba(255,255,255,0.60); backdrop-filter: blur(16px);
+      border-right: 1px solid rgba(184,224,255,0.25);
+      padding: 24px 14px 20px 14px;
+      display: flex; flex-direction: column; gap: 4px;
+      flex-shrink: 0;
+      box-shadow: 2px 0 20px rgba(36,104,168,0.04);
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
+
+    .avatar-box {
+      text-align: center; padding-bottom: 14px; border-bottom: 1px solid rgba(36,104,168,0.08);
+      margin-bottom: 10px;
+    }
+    .avatar {
+      width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+      margin: 0 auto 4px; box-shadow: 0 4px 12px rgba(36,104,168,0.10);
+    }
+    .avatar-name { color: #1a4a6f; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; }
+    /* 新增标语 */
+    .avatar-sub {
+      font-size: 11px; color: #4a779e; letter-spacing: 0.5px; margin-top: 2px;
+      opacity: 0.8;
+    }
+
+    /* 目录项行距进一步加大 */
+    .menu-item {
+      font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px; /* 上下内边距从8px增至12px */
+      border-radius: 8px; cursor: pointer; transition: all 0.2s;
+      border: 1px solid transparent;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 4px; /* 额外增加间距 */
+    }
+    .menu-item:hover { background: rgba(36,104,168,0.06); border-color: rgba(36,104,168,0.08); }
+    .menu-item.active {
+      background: rgba(36,104,168,0.10); border-color: rgba(36,104,168,0.15);
+      color: #1a4a6f; font-weight: 600;
+      box-shadow: 0 2px 8px rgba(36,104,168,0.06);
+    }
+    .menu-item .icon { font-size: 14px; width: 22px; text-align: center; }
+
+    /* ===== 内容区 ===== */
+    .content-area {
+      flex: 1; padding: 20px 24px; max-height: 100vh; overflow-y: auto;
+      background: transparent;
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .content-area::-webkit-scrollbar { width: 4px; }
+    .content-area::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
+
+    /* ===== 蝴蝶背景 ===== */
+    .content-area::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 200px;
+      right: 0;
+      bottom: 0;
+      background-image: url("/img/3dabc18697b79afeea0378212c3c8e9f.jpg");
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.12;
+      filter: blur(3px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .page-box { position: relative; z-index: 1; display: none; width: 100%; }
+    .page-box.active { display: block; }
+
+    /* ===== 卡片 ===== */
+    .info-box {
+      max-width: 1000px; margin: 0 auto;
+      background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(26, 74, 111, 0.20);
+      box-shadow: 0 2px 12px rgba(26, 74, 111, 0.06);
+      padding: 18px 22px;
+      transition: box-shadow 0.3s ease;
+    }
+    .info-box:hover {
+      box-shadow: 0 4px 20px rgba(26, 74, 111, 0.10);
+    }
+
+    /* ===== 首页头部 - 深蓝背景 ===== */
+    .welcome-header {
+      text-align: center;
+      padding: 28px 20px 20px 20px;
+      background: rgba(26, 74, 111, 0.12);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(26, 74, 111, 0.15);
+      backdrop-filter: blur(4px);
+    }
+    .welcome-header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1a4a6f;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .welcome-header .sub {
+      font-size: 15px;
+      color: #2a5a7a;
+      margin-bottom: 12px;
+    }
+    .welcome-header .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .welcome-header .links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1a4a6f;
+      text-decoration: none;
+      padding: 4px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(26, 74, 111, 0.12);
+      transition: all 0.2s ease;
+    }
+    .welcome-header .links a:hover {
+      background: rgba(26, 74, 111, 0.10);
+      border-color: rgba(26, 74, 111, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(26, 74, 111, 0.08);
+    }
+
+    /* ===== info-title ===== */
+    .info-title {
+      font-size: 16px; color: #1f5a8a; font-weight: 600; letter-spacing: 0.5px;
+      padding-bottom: 8px; margin-bottom: 12px;
+      border-bottom: 1px solid rgba(184,224,255,0.25);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .info-title .deco { font-size: 14px; opacity: 0.5; }
+
+    /* ===== 饭记 ===== */
+    .diary-top-bg { display: none; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .info-card {
+      background: rgba(230,244,255,0.20); border: 1px solid rgba(184,224,255,0.15);
+      border-radius: 10px; padding: 8px 12px;
+    }
+    .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
+    .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; }
+
+    /* ===== 链接卡片 - 无流光 ===== */
+    .link-card {
+      background: rgba(230,244,255,0.20);
+      border: 1px solid rgba(184,224,255,0.15);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .link-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(36, 104, 168, 0.06);
+      border-color: rgba(36, 104, 168, 0.15);
+      background: rgba(230, 244, 255, 0.35);
+    }
+    .link-card .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
+    .link-card .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+
+    /* ===== 时间线 - 小圆点 ===== */
+    .timeline-wrap { margin-top: 10px; padding-left: 14px; position: relative; }
+    .timeline-wrap::before {
+      content: ''; position: absolute; left: 4px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom,#4299e1,#1f5a8a);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative; padding-left: 24px; margin-bottom: 12px;
+      cursor: default;
+    }
+    .timeline-item .timeline-dot {
+      position: absolute; left: -6px; top: 2px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #1f5a8a; border: 2px solid #b8e0ff;
+      box-shadow: 0 0 0 2px rgba(36,104,168,0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+    .timeline-item .timeline-dot:hover {
+      transform: scale(1.2);
+      background: #4299e1;
+      box-shadow: 0 0 0 4px rgba(36,104,168,0.12);
+    }
+    .timeline-item .timeline-dot.no-link {
+      cursor: default;
+      background: #b8d4e8;
+    }
+    .timeline-item .timeline-dot.no-link:hover {
+      transform: none;
+      background: #b8d4e8;
+      box-shadow: 0 0 0 2px rgba(36,104,168,0.08);
+    }
+    .timeline-date { font-size: 12px; color: #1f5a8a; font-weight: 600; }
+    .timeline-text { font-size: 13px; color: #4a779e; line-height: 1.5; }
+
+    /* ===== 饭之大小作（舞台） ===== */
+    .stage-wrap { max-width: 1000px; margin: 0 auto; }
+    .stage-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+      margin-bottom: 14px;
+    }
+    .stage-nav-item {
+      padding: 5px 14px; border-radius: 24px; font-size: 12px; font-weight: 500;
+      color: #2c5a7a; background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(184,224,255,0.20); cursor: pointer; transition: all 0.2s;
+    }
+    .stage-nav-item:hover { background: rgba(255,255,255,0.6); border-color: #8ab3d0; }
+    .stage-nav-item.active {
+      background: #1f5a8a; color: #fff; border-color: #1f5a8a;
+      box-shadow: 0 2px 10px rgba(36,104,168,0.12);
+    }
+
+    /* ===== 饭之拍 - 平台导航 ===== */
+    .platform-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+      margin-bottom: 14px;
+    }
+    .platform-nav-item {
+      padding: 5px 14px; border-radius: 24px; font-size: 12px; font-weight: 500;
+      color: #2c5a7a; background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(184,224,255,0.20); cursor: pointer; transition: all 0.2s;
+    }
+    .platform-nav-item:hover { background: rgba(255,255,255,0.6); border-color: #8ab3d0; }
+    .platform-nav-item.active {
+      background: #1f5a8a; color: #fff; border-color: #1f5a8a;
+      box-shadow: 0 2px 10px rgba(36,104,168,0.12);
+    }
+
+    .filter-search-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .search-box {
+      flex: 1; display: flex; align-items: center; background: rgba(255,255,255,0.50);
+      border-radius: 24px; padding: 0 12px;
+      border: 1px solid rgba(184,224,255,0.15);
+      max-width: 360px;
+      backdrop-filter: blur(4px);
+    }
+    .search-box input {
+      border: none; outline: none; background: transparent; padding: 6px 4px;
+      font-size: 13px; width: 100%; color: #1a3a4f;
+    }
+    .search-box input::placeholder { color: #9ab7cf; }
+    .search-box .search-icon { font-size: 14px; color: #4a779e; margin-right: 4px; }
+
+    /* 日期筛选标签 - 每个平台独立 */
+    .filter-tabs-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
+      background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 24px;
+      backdrop-filter: blur(2px);
+      margin-bottom: 10px;
+      min-height: 32px;
+    }
+    .category-tab {
+      padding: 3px 12px; border-radius: 24px; font-size: 11px; font-weight: 500;
+      background: rgba(255,255,255,0.25); border: 1px solid rgba(184,224,255,0.10);
+      color: #2c5a7a; cursor: pointer; transition: all 0.15s;
+    }
+    .category-tab:hover { background: rgba(255,255,255,0.5); }
+    .category-tab.active {
+      background: #1f5a8a; color: #fff; border-color: #1f5a8a;
+    }
+    /* 平台标签前缀 */
+    .platform-prefix {
+      font-size: 10px;
+      color: #4a779e;
+      opacity: 0.6;
+      margin-right: 2px;
+      font-weight: 400;
+    }
+
+    .stage-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin-top: 10px;
+    }
+    .video-card {
+      background: rgba(255,255,255,0.45); backdrop-filter: blur(4px);
+      border-radius: 12px; overflow: hidden; position: relative;
+      cursor: pointer; transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 2px 8px rgba(36,104,168,0.03);
+    }
+    .video-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(36,104,168,0.06); }
+    .video-tag {
+      position: absolute; top: 8px; left: 8px;
+      color: #fff; font-weight: 600; padding: 2px 8px; border-radius: 5px;
+      font-size: 10px; letter-spacing: 0.3px; z-index: 2;
+    }
+    .video-cover-box {
+      padding: 20px 12px 10px; text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .video-icon { font-size: 32px; color: #88b8a8; margin-bottom: 2px; }
+    .video-tip { font-size: 11px; color: #689888; }
+    .video-title-bar {
+      background: rgba(242,248,252,0.35); padding: 6px 12px;
+      border-top: 1px solid rgba(184,224,255,0.10);
+    }
+    .video-name { font-size: 13px; color: #1f4a5a; font-weight: 500; }
+    .video-date { font-size: 11px; color: #689888; margin-top: 1px; }
+
+    /* ===== 空状态 ===== */
+    .empty-state {
+      text-align: center; padding: 30px 0; color: #4a779e; font-size: 14px;
+    }
+
+    /* ===== 底部标语 -All For YeFan- ===== */
+    .footer-slogan {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(184,224,255,0.2);
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: #4a779e;
+      opacity: 0.6;
+      font-weight: 400;
+    }
+
+    /* ===== 饭之拍 - 折叠微博卡片 ===== */
+    .update-trigger {
+      margin: 0.8rem 0 0.4rem 0;
+    }
+    .update-badge {
+      background: rgba(240,244,248,0.7);
+      border-radius: 40px;
+      padding: 0.4rem 1.4rem 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: #1a4a6f;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid rgba(26,74,111,0.12);
+      cursor: pointer;
+      transition: 0.15s;
+      user-select: none;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+    .update-badge:hover {
+      background: rgba(230,244,255,0.6);
+      border-color: rgba(26,74,111,0.2);
+    }
+    .update-badge .arrow {
+      font-size: 0.7rem;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+    .update-badge .arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .weibo-card-wrapper {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease, margin 0.3s ease;
+      margin-top: 0;
+    }
+    .weibo-card-wrapper.open {
+      max-height: 1500px;
+      opacity: 1;
+      margin-top: 0.8rem;
+    }
+
+    .weibo-card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 14px;
+      border: 1px solid rgba(26,74,111,0.08);
+      padding: 1.2rem 1.2rem 1rem;
+      box-shadow: 0 2px 8px rgba(36,104,168,0.02);
+    }
+    .weibo-time {
+      font-size: 0.8rem;
+      color: #4a779e;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px dashed rgba(184,224,255,0.25);
+    }
+    .weibo-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #1a2f3f;
+      margin-bottom: 0.8rem;
+      word-break: break-word;
+    }
+    .weibo-text .line { display: block; }
+    /* 评论样式 - 放在最下面，无高亮 */
+    .weibo-comment-bottom {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(184,224,255,0.2);
+      font-size: 0.9rem;
+      color: #2c5a7a;
+    }
+    .weibo-comment-bottom .comment-label {
+      color: #6a8fa8;
+      margin-right: 0.3rem;
+    }
+
+    /* ===== 小图网格排列 (动态列数: 2列或3列) ===== */
+    .weibo-media-grid {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      max-width: 480px;
+    }
+    /* 默认2列 (用于4张图) */
+    .weibo-media-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    /* 3列 (用于6张或9张图) */
+    .weibo-media-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .weibo-media-grid .media-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #d4e6f5;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .weibo-media-grid .media-item:hover {
+      transform: scale(1.03);
+    }
+    .weibo-media-grid .media-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 新增：跳转链接按钮样式 */
+    .weibo-link-button {
+      display: inline-block;
+      margin: 0.5rem 0 0.2rem 0;
+      padding: 0.3rem 1.2rem;
+      background: rgba(26, 74, 111, 0.08);
+      border: 1px solid rgba(26, 74, 111, 0.15);
+      border-radius: 20px;
+      color: #1a4a6f;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .weibo-link-button:hover {
+      background: rgba(26, 74, 111, 0.15);
+      border-color: rgba(26, 74, 111, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
+    }
+
+    /* ===== 大图预览 Modal - 带滑动切换 ===== */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      flex-direction: column;
+    }
+    .image-modal.open {
+      display: flex;
+    }
+    .modal-image-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .modal-image-container img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+      transition: opacity 0.3s ease;
+    }
+    .modal-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .modal-btn.prev { left: 10px; }
+    .modal-btn.next { right: 10px; }
+    .modal-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+      padding: 0.5rem;
+    }
+    .modal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      padding: 0;
+    }
+    .modal-dot.active {
+      background: #ffffff;
+    }
+    .close-hint {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      z-index: 10;
+    }
+    /* 手机端适配大图 */
+    @media (max-width: 768px) {
+      .modal-btn { width: 36px; height: 36px; font-size: 18px; }
+      .modal-btn.prev { left: 4px; }
+      .modal-btn.next { right: 4px; }
+      .image-modal { padding: 0.5rem; }
+      .modal-image-container { max-height: 70vh; }
+      .modal-image-container img { max-height: 70vh; }
+      .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
+    }
+
+    /* ============================================================
+               手机端适配
+               ============================================================ */
+    @media screen and (max-width: 768px) {
+      .main-page { flex-direction: column; min-height: 100vh; }
+      .sidebar {
+        width: 100%; height: auto; min-height: auto;
+        position: sticky; bottom: 0; top: auto;
+        flex-direction: row; flex-wrap: nowrap;
+        overflow-x: auto; overflow-y: hidden;
+        padding: 8px 12px; gap: 4px;
+        border-right: none; border-top: 1px solid rgba(184,224,255,0.25);
+        box-shadow: 0 -2px 20px rgba(36,104,168,0.06);
+        background: rgba(255,255,255,0.80); backdrop-filter: blur(16px);
+        z-index: 20; flex-shrink: 0;
+        justify-content: flex-start; align-items: center;
+      }
+      .sidebar::-webkit-scrollbar { height: 2px; }
+      .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
+      .sidebar .avatar-box { display: none; }
+      .menu-item {
+        font-size: 12px; padding: 6px 12px;
+        white-space: nowrap; flex-shrink: 0;
+        border: 1px solid rgba(184,224,255,0.15);
+        background: rgba(255,255,255,0.3); border-radius: 20px;
+        margin-bottom: 0; /* 手机端行距重置 */
+      }
+      .menu-item .icon { font-size: 13px; width: 18px; }
+      .menu-item.active { background: rgba(36,104,168,0.12); border-color: rgba(36,104,168,0.25); }
+      .content-area {
+        flex: 1; max-height: none; overflow-y: visible;
+        padding: 16px 14px; padding-bottom: 70px;
+      }
+      .content-area::before { left: 0; }
+      .stage-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .welcome-header { padding: 20px 16px 16px 16px; }
+      .welcome-header h1 { font-size: 20px; }
+      .welcome-header .links { gap: 12px; }
+      .welcome-header .links a { font-size: 12px; padding: 3px 12px; }
+      .search-box { max-width: 100%; }
+      .filter-search-row { flex-wrap: wrap; }
+      .weibo-media-grid { max-width: 100%; }
+      .weibo-media-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .weibo-media-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .platform-nav { gap: 4px; }
+      .platform-nav-item { font-size: 11px; padding: 4px 10px; }
+      .filter-tabs-row { padding: 4px 6px; gap: 3px; }
+      .category-tab { font-size: 10px; padding: 2px 8px; }
+    }
+    @media screen and (max-width: 480px) {
+      .content-area { padding: 12px 10px; padding-bottom: 64px; }
+      .info-box { padding: 14px 14px; }
+      .stage-grid { grid-template-columns: 1fr; gap: 10px; }
+      .menu-item { font-size: 11px; padding: 5px 10px; }
+      .menu-item .icon { font-size: 12px; width: 16px; }
+      .sidebar { padding: 6px 10px; gap: 3px; }
+      .welcome-header { padding: 14px 12px 12px 12px; }
+      .welcome-header h1 { font-size: 17px; }
+      .welcome-header .sub { font-size: 13px; }
+      .welcome-header .links a { font-size: 11px; padding: 3px 10px; }
+      .weibo-card { padding: 0.8rem; }
+      .weibo-media-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      .weibo-media-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .media-item { border-radius: 6px; }
+      .platform-nav-item { font-size: 10px; padding: 3px 8px; }
+      .filter-tabs-row { padding: 3px 4px; gap: 2px; }
+      .category-tab { font-size: 9px; padding: 2px 6px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 加载页 -->
+  <div class="loading-page" id="loading">
+    <div class="rice-emoji">🍚</div>
+    <div class="title-text">欢迎使用椰饭饲养指南</div>
+    <div class="load-box"><div class="progress-bar"></div></div>
+  </div>
+
+  <!-- 浮动装饰 -->
+  <div class="float-deco deco-butterfly" style="top:8%;left:3%;font-size:18px;opacity:0.20;position:fixed;pointer-events:none;z-index:0;animation:floatAnim 12s infinite alternate ease-in-out;">🦋</div>
+  <div class="float-deco deco-star" style="bottom:12%;right:4%;font-size:16px;opacity:0.20;position:fixed;pointer-events:none;z-index:0;animation:floatAnim 12s infinite alternate ease-in-out 2s;">✦</div>
+  <style>
+    .float-deco {
+      position: fixed; pointer-events: none; z-index: 0;
+      animation: floatAnim 14s infinite alternate ease-in-out;
+    }
+    @keyframes floatAnim {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      100% { transform: translate(16px, -16px) rotate(10deg) scale(1.05); }
+    }
+    .deco-butterfly { color: #5f8db0; opacity: 0.20; }
+    .deco-star { color: #f5c542; opacity: 0.15; text-shadow: 0 0 8px rgba(245,197,66,0.10); }
+    @media screen and (max-width: 480px) {
+      .float-deco { display: none; }
+    }
+  </style>
+
+  <!-- 大图预览 Modal（带滑动切换） -->
+  <div class="image-modal" id="imageModal">
+    <div class="modal-image-container" id="modalImageContainer">
+      <button class="modal-btn prev" id="modalPrev">‹</button>
+      <img id="modalImage" src="" alt="大图预览" />
+      <button class="modal-btn next" id="modalNext">›</button>
+    </div>
+    <div class="modal-dots" id="modalDots"></div>
+    <div class="close-hint">点击图片外任意处关闭 · 左右切换</div>
+  </div>
+
+  <div class="main-page">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+      <div class="avatar-box">
+        <div class="avatar">🍚</div>
+        <div class="avatar-name">一颗椰饭</div>
+        <div class="avatar-sub">✨ 允许一切发生 ✨</div>
+      </div>
+      <div class="menu-item active" data-page="diary"><span class="icon">📔</span> 饭记</div>
+      <div class="menu-item" data-page="stage"><span class="icon">🎤</span> 饭之大小作</div>
+      <div class="menu-item" data-page="fancam"><span class="icon">📸</span> 饭之拍</div>
+      <div class="menu-item" data-page="bobo"><span class="icon">📹</span> 饭之啵</div>
+      <div class="menu-item" data-page="contact"><span class="icon">💬</span> 饭言饭语</div>
+      <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 未完待续</div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="content-area" id="contentWrap">
+      <!-- 饭记 -->
+      <div class="page-box active" id="diary">
+        <div class="info-box">
+          <div class="welcome-header">
+            <h1>🌾 欢迎使用一颗椰饭的饲养指南</h1>
+            <div class="sub">椰丝之家：933624308</div>
+            <div class="links">
+              <a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a>
+              <a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a>
+            </div>
+          </div>
+
+          <div class="info-title"><span class="deco">✦</span> 椰饭的自我介绍</div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">姓名</div><div class="info-value">叶凡</div></div>
+            <div class="info-card"><div class="info-label">昵称</div><div class="info-value">小晞、晞宝</div></div>
+            <div class="info-card"><div class="info-label">生日</div><div class="info-value">0723</div></div>
+            <div class="info-card"><div class="info-label">身高</div><div class="info-value">166</div></div>
+            <div class="info-card"><div class="info-label">星座</div><div class="info-value">狮子座</div></div>
+            <div class="info-card"><div class="info-label">家乡</div><div class="info-value">安徽</div></div>
+            <div class="info-card"><div class="info-label">特长</div><div class="info-value">睡觉时间特长、其他待发掘</div></div>
+            <div class="info-card"><div class="info-label">兴趣爱好</div><div class="info-value">追剧、旅游、打游戏</div></div>
+          </div>
+
+          <div style="height:16px;"></div>
+          <div class="info-title"><span class="deco">✦</span> 椰饭的联系方式</div>
+          <div class="info-grid">
+            <div class="link-card" onclick="window.open('https://weibo.com/u/7901094930','_blank')">
+              <div class="info-label">微博</div>
+              <div class="info-value"><span>🌐</span> 微博</div>
+            </div>
+            <div class="link-card" onclick="window.open('https://v.douyin.com/eHTaJ0FG-pU/','_blank')">
+              <div class="info-label">抖音</div>
+              <div class="info-value"><span>🎵</span> 抖音</div>
+            </div>
+            <div class="link-card" onclick="window.open('https://b23.tv/GBgXhm7','_blank')">
+              <div class="info-label">B站</div>
+              <div class="info-value"><span>📺</span> b站</div>
+            </div>
+            <div class="link-card" onclick="window.open('https://xhslink.com/m/2k2G04DVjBy','_blank')">
+              <div class="info-label">小红书</div>
+              <div class="info-value"><span>📕</span> 小红书</div>
+            </div>
+          </div>
+
+          <div style="height:16px;"></div>
+          <div class="info-title"><span class="deco">✦</span> 椰饭的里程日记</div>
+          <div class="timeline-wrap">
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV12W4y1P7xc/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=1','_blank')"></span>
+              <div class="timeline-date">2023.09.30</div>
+              <div class="timeline-text">十九期生亮相新生公演《命运的X号》 表演前座曲《春夏秋冬》</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1qK4y1q7Ej/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=1','_blank')"></span>
+              <div class="timeline-date">2023.11.25</div>
+              <div class="timeline-text">首次代役SNH48 Team NII《应许之地》</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1k4421A73g/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=1','_blank')"></span>
+              <div class="timeline-date">2024.02.02</div>
+              <div class="timeline-text">春晚特别公演（S、N联合）正式升格为SNH48 Team NII的成员</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1SD421p7Y1/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=2','_blank')"></span>
+              <div class="timeline-date">2024.04.14</div>
+              <div class="timeline-text">达成50 场公演</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1oU411U7sC/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=1','_blank')"></span>
+              <div class="timeline-date">2024.08.03</div>
+              <div class="timeline-text">第十一届青春盛典取得年度新人潜力奖第4名</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV17KxqeREcV/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=2','_blank')"></span>
+              <div class="timeline-date">2024.09.28</div>
+              <div class="timeline-text">达成100场公演</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1ojhtzPEYx/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=28','_blank')"></span>
+              <div class="timeline-date">2025.08.02</div>
+              <div class="timeline-text">第十二届青春盛典取得年度梦想成员奖第38名</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot" onclick="window.open('https://www.bilibili.com/video/BV1cSmABYE1T/?spm_id_from=333.788.videopod.episodes&amp;vd_source=c75d08da15d9e42d84b7d696f458aae2&amp;p=2','_blank')"></span>
+              <div class="timeline-date">2025.12.07</div>
+              <div class="timeline-text">达成200场公演 · 出道800天 🎉</div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot no-link"></span>
+              <div class="timeline-text">未完待续…</div>
+            </div>
+          </div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 饭之大小作 -->
+      <div class="page-box" id="stage">
+        <div class="info-box stage-wrap">
+          <div class="stage-nav" id="stageNav">
+            <button class="stage-nav-item active" data-category="all">全部</button>
+            <button class="stage-nav-item" data-category="unit">UNIT</button>
+            <button class="stage-nav-item" data-category="special">特殊舞台</button>
+            <button class="stage-nav-item" data-category="assist">助演</button>
+          </div>
+
+          <div class="filter-search-row">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
+            </div>
+          </div>
+
+          <div class="filter-tabs-row" id="categoryTabs"></div>
+
+          <div class="stage-grid" id="stageGrid"></div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 饭之拍 - 已移除大标题，内容直接顶头 -->
+      <div class="page-box" id="fancam">
+        <div class="info-box">
+          <!-- 原本的 info-title 已被移除 -->
+
+          <!-- 平台导航 -->
+          <div class="platform-nav" id="platformNav">
+            <button class="platform-nav-item active" data-platform="all">全部</button>
+            <button class="platform-nav-item" data-platform="weibo">微博</button>
+            <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
+            <button class="platform-nav-item" data-platform="douyin">抖音</button>
+            <button class="platform-nav-item" data-platform="bilibili">B站</button>
+          </div>
+
+          <div class="filter-search-row">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="weiboSearch" placeholder="搜索内容..." />
+            </div>
+          </div>
+
+          <!-- 日期筛选标签 -->
+          <div class="filter-tabs-row" id="weiboTabs">
+            <span class="category-tab active" data-month="全部">全部</span>
+            <span class="category-tab" data-month="2026-07">2026-07</span>
+            <span class="category-tab" data-month="2026-01">2026-01</span>
+          </div>
+
+          <div id="weiboFeed">
+            <!-- ===== 置顶微博1：2026.01.05 ===== -->
+            <div class="update-trigger" data-platform="weibo" data-date="2026-01-05">
+              <div class="update-badge" id="toggleBadgeTop">
+                <span>📌 置顶 · 微博 2026.01.05 更新</span>
+                <span class="arrow" id="arrowIconTop">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapperTop">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
+                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>第一百条微博</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== 2026.07.18 微博 ===== -->
+            <div class="update-trigger" data-platform="weibo" data-date="2026-07-18">
+              <div class="update-badge" id="toggleBadge">
+                <span>📌 微博 2026.07.18 更新</span>
+                <span class="arrow" id="arrowIcon">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapper">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-07-18 22:52 · 发布于 上海</div>
+                <div class="weibo-text">哼！</div>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426604.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426605.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>真的能忍住喜欢我吗</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-18 22:53 来自上海</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== 2026.07.16 微博 ===== -->
+            <div class="update-trigger" data-platform="weibo" data-date="2026-07-16">
+              <div class="update-badge" id="toggleBadge2">
+                <span>📌 微博 2026.07.16 更新</span>
+                <span class="arrow" id="arrowIcon2">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapper2">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-07-16 01:23 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider2', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333947.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333948.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333949.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333950.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+                <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>看到我就不许有烦恼啦</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:25 来自上海</span></div>
+                <div class="weibo-comment-bottom" style="margin-top:0.3rem; padding-top:0.3rem; border-top-color:rgba(184,224,255,0.1);"><span class="comment-label">评论</span><span>美图攻击！</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:24 来自上海</span></div>
+              </div>
+            </div>
+
+            <!-- ===== 2026.07.14 微博 ===== -->
+            <div class="update-trigger" data-platform="weibo" data-date="2026-07-14">
+              <div class="update-badge" id="toggleBadge3">
+                <span>📌 微博 2026.07.14 更新</span>
+                <span class="arrow" id="arrowIcon3">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapper3">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-07-14 18:06 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider3', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259647.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259648.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259649.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259650.jpg" alt="配图6" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259651.jpg" alt="配图7" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.jpg" alt="配图8" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图9" loading="lazy" /></div>
+                </div>
+                <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>我早上发的没发出来吗</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-14 18:07 来自上海</span></div>
+              </div>
+            </div>
+
+            <!-- ===== 2026.07.05 新图文微博 (按日期排在7.14之后) ===== -->
+            <div class="update-trigger" data-platform="weibo" data-date="2026-07-05">
+              <div class="update-badge" id="toggleBadgeNew">
+                <span>📌 微博 2026.07.05 更新</span>
+                <span class="arrow" id="arrowIconNew">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapperNew">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">今天的天空和心情一样好 🌤️</span><span class="line">分享一些随手拍 📸</span></div>
+                <!-- 四张图片的网格 (2列) -->
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('sliderNew', 0)">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg" alt="配图1" loading="lazy" />
+                  </div>
+                  <div class="media-item" onclick="openModalWithImages('sliderNew', 1)">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg" alt="配图2" loading="lazy" />
+                  </div>
+                  <div class="media-item" onclick="openModalWithImages('sliderNew', 2)">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836500.jpg" alt="配图3" loading="lazy" />
+                  </div>
+                  <div class="media-item" onclick="openModalWithImages('sliderNew', 3)">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.jpg" alt="配图4" loading="lazy" />
+                  </div>
+                </div>
+                <!-- 评论已删除 -->
+              </div>
+            </div>
+
+          </div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 饭之啵 -->
+      <div class="page-box" id="bobo">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 饭之啵</div>
+          <div class="empty-state">📹 内容待更新</div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 饭言饭语 -->
+      <div class="page-box" id="contact">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 饭言饭语</div>
+          <div class="empty-state">💬 这里将记录椰饭的日常碎碎念…</div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 未完待续 -->
+      <div class="page-box" id="wait">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 更多内容</div>
+          <div class="empty-state">⏳ 后续内容持续更新中，敬请期待…</div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 加载动画
+    setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
+
+    // 侧边栏切换
+    const menuItems = document.querySelectorAll('.menu-item');
+    const allPages = document.querySelectorAll('.page-box');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menuItems.forEach(m => m.classList.remove('active'));
+        allPages.forEach(p => p.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(item.getAttribute('data-page')).classList.add('active');
+      });
+    });
+
+    // ---- 舞台数据 (饭之大小作) ----
+    const unitData = [
+      { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1qfKz6ZE4p/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1UXNu6xE2y/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1VvNN6pEJn/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1YFTg6BEoD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1T4jJ65EKk/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13YJ561EmZ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV16LEh6MECm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1uCV36DEwe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1ESGJ69EbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1KALH61EHm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1Cz5R6NEDb/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1k7RCBwEQW/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NBRcBUEJU/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1whoEBPEmR/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1rxSUBYEfc/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1LNAAztEmo/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV2sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1syk4BxEPD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1PfrSBHEVf/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' }
+    ];
+
+    const specialData = [
+      { date: '2023.09.30', title: '春夏秋冬', url: 'https://www.bilibili.com/video/BV12W4y1P7xc/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=1' },
+      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/?spm_id_from=333.1387.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/?spm_id_from=333.788.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
+      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1fqN365ER3/?spm_id_from=333.788.player.switch&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7' },
+      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7' },
+      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=17' },
+      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV1ssFxzwEhY/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=12' },
+      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1zZrCBoEjr/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8' },
+      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV14qiJBxEVS/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' }
+    ];
+
+    const assistData = [
+      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
+      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
+      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1T4jJ65EKk/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
+      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1ESGJ69EbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
+      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV11pX5BEEYr/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=19' },
+      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV1jmPazLEKo/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8' },
+      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
+      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV1Si6UBWEBf/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' }
+    ];
+
+    const allData = { unit: unitData, special: specialData, assist: assistData };
+    let currentCategory = 'all';
+
+    function getMonthList(category) {
+      let data = [];
+      if (category === 'all') data = [...unitData, ...specialData, ...assistData];
+      else data = allData[category] || [];
+      const set = new Set();
+      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
+      return Array.from(set).sort((a,b) => b.localeCompare(a));
+    }
+
+    function getDataByCategory(category) {
+      let data = [];
+      if (category === 'all') data = [...unitData, ...specialData, ...assistData];
+      else data = allData[category] || [];
+      return data.sort((a, b) => b.date.localeCompare(a.date));
+    }
+
+    const grid = document.getElementById('stageGrid');
+    function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
+      const data = getDataByCategory(category);
+      const filtered = data.filter(item => {
+        const month = item.date ? item.date.slice(0,7) : '';
+        const matchMonth = filterMonth === '全部' || month === filterMonth;
+        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
+        return matchMonth && matchKey;
+      });
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
+        return;
+      }
+      grid.innerHTML = filtered.map(item => {
+        const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
+        const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
+        const isAssist = assistData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
+        let tagText = 'UNIT', tagColor = '#00a1d6';
+        if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+        else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
+        if (category === 'all') {
+          if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+          else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+          else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
+        }
+        return `
+          <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
+            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            <div class="video-cover-box">
+              <div class="video-icon">🎬</div>
+              <div class="video-tip">点击前往B站</div>
+            </div>
+            <div class="video-title-bar">
+              <div class="video-name">${item.title}</div>
+              <div class="video-date">${item.date || ''}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderTabs(category, activeMonth = '全部') {
+      const container = document.getElementById('categoryTabs');
+      const months = getMonthList(category);
+      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部">全部</span>`;
+      months.forEach(m => {
+        const active = activeMonth === m ? 'active' : '';
+        html += `<span class="category-tab ${active}" data-month="${m}">${m}</span>`;
+      });
+      container.innerHTML = html;
+      container.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const month = this.dataset.month;
+          const keyword = document.getElementById('stageSearch').value;
+          container.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          renderCards(currentCategory, month, keyword);
+        });
+      });
+    }
+
+    const navItems = document.querySelectorAll('.stage-nav-item');
+    navItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        navItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentCategory = this.dataset.category;
+        document.getElementById('stageSearch').value = '';
+        renderTabs(currentCategory, '全部');
+        renderCards(currentCategory, '全部', '');
+      });
+    });
+
+    const searchInput = document.getElementById('stageSearch');
+    searchInput.addEventListener('input', function() {
+      const keyword = this.value;
+      const activeTab = document.querySelector('#categoryTabs .category-tab.active');
+      const month = activeTab ? activeTab.dataset.month : '全部';
+      renderCards(currentCategory, month, keyword);
+    });
+
+    renderTabs('all', '全部');
+    renderCards('all', '全部', '');
+
+    // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
+    const platformItems = document.querySelectorAll('.platform-nav-item');
+    const allTriggers = document.querySelectorAll('#weiboFeed .update-trigger');
+    const allWrappers = document.querySelectorAll('#weiboFeed .weibo-card-wrapper');
+    const weiboSearchInput = document.getElementById('weiboSearch');
+    const dateTabs = document.querySelectorAll('#weiboTabs .category-tab');
+
+    // 获取当前活跃的日期
+    function getActiveDate() {
+      const active = document.querySelector('#weiboTabs .category-tab.active');
+      return active ? active.dataset.month : '全部';
+    }
+
+    // 核心筛选函数
+    function filterWeiboFeed() {
+      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
+      const currentDate = getActiveDate();
+      const keyword = weiboSearchInput.value.trim().toLowerCase();
+
+      allTriggers.forEach((trigger, index) => {
+        const wrapper = allWrappers[index];
+        if (!wrapper) return;
+
+        // 平台匹配
+        const triggerPlatform = trigger.dataset.platform || 'weibo';
+        const platformMatch = currentPlatform === 'all' || triggerPlatform === currentPlatform;
+
+        // 日期匹配 (从data-date属性读取)
+        const triggerDate = trigger.dataset.date || '';
+        const dateMatch = currentDate === '全部' || (triggerDate && triggerDate.startsWith(currentDate));
+
+        // 关键词匹配
+        const card = wrapper.querySelector('.weibo-card');
+        let textMatch = true;
+        if (keyword !== '') {
+          const cardText = card ? card.textContent.toLowerCase() : '';
+          textMatch = cardText.includes(keyword);
+        }
+
+        const shouldShow = platformMatch && dateMatch && textMatch;
+        trigger.style.display = shouldShow ? '' : 'none';
+        if (!shouldShow) {
+          wrapper.classList.remove('open');
+          const arrow = trigger.querySelector('.arrow');
+          if (arrow) arrow.classList.remove('open');
+        }
+      });
+    }
+
+    // 平台点击事件
+    platformItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        platformItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        filterWeiboFeed();
+      });
+    });
+
+    // 日期点击事件
+    dateTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        dateTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        filterWeiboFeed();
+      });
+    });
+
+    // 搜索输入事件
+    weiboSearchInput.addEventListener('input', function() {
+      filterWeiboFeed();
+    });
+
+    // ---- 大图预览 (包含新增的图片组) ----
+    const imageSets = {
+      slider1: [
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426604.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426605.jpg'
+      ],
+      slider2: [
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721171333947.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721171333948.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721171333949.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721171333950.jpg'
+      ],
+      slider3: [
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259647.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259648.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259649.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259650.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259651.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg'
+      ],
+      // 新增图片组
+      sliderNew: [
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836500.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.jpg'
+      ]
+    };
+
+    let currentSetId = 'slider1';
+    let currentIndex = 0;
+    let currentImages = [];
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalDots = document.getElementById('modalDots');
+    const prevBtn = document.getElementById('modalPrev');
+    const nextBtn = document.getElementById('modalNext');
+
+    function openModalWithImages(setId, index) {
+      const images = imageSets[setId];
+      if (!images || images.length === 0) return;
+      currentSetId = setId;
+      currentImages = images;
+      currentIndex = index;
+      updateModal();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateModal() {
+      if (!currentImages.length) return;
+      modalImg.src = currentImages[currentIndex];
+      modalImg.style.opacity = '1';
+      modalDots.innerHTML = '';
+      currentImages.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentIndex = i;
+          updateModal();
+        });
+        modalDots.appendChild(dot);
+      });
+      prevBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+      nextBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+    }
+
+    function goToPrev() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateModal();
+    }
+
+    function goToNext() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateModal();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goToPrev(); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goToNext(); });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target === modalImg) {
+        if (e.target === modalImg) return;
+        closeModal();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') goToPrev();
+      if (e.key === 'ArrowRight') goToNext();
+    });
+
+    // ---- 折叠控制 ----
+    const togglePairs = [
+      { badge: 'toggleBadgeTop', wrapper: 'weiboCardWrapperTop', arrow: 'arrowIconTop' },
+      { badge: 'toggleBadge', wrapper: 'weiboCardWrapper', arrow: 'arrowIcon' },
+      { badge: 'toggleBadge2', wrapper: 'weiboCardWrapper2', arrow: 'arrowIcon2' },
+      { badge: 'toggleBadge3', wrapper: 'weiboCardWrapper3', arrow: 'arrowIcon3' },
+      { badge: 'toggleBadgeNew', wrapper: 'weiboCardWrapperNew', arrow: 'arrowIconNew' }
+    ];
+
+    togglePairs.forEach(({ badge, wrapper, arrow }) => {
+      const badgeEl = document.getElementById(badge);
+      const wrapperEl = document.getElementById(wrapper);
+      const arrowEl = document.getElementById(arrow);
+      if (badgeEl && wrapperEl && arrowEl) {
+        wrapperEl.classList.remove('open');
+        arrowEl.classList.remove('open');
+        badgeEl.addEventListener('click', function(e) {
+          e.stopPropagation();
+          wrapperEl.classList.toggle('open');
+          arrowEl.classList.toggle('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
