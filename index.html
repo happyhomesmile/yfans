@@ -328,7 +328,7 @@
       aspect-ratio: 16/9;
       position: relative;
       overflow: hidden;
-      background: #d4e6f5;
+      background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
     }
     .video-cover-box img {
       width: 100%;
@@ -1126,45 +1126,89 @@
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
 
-    // ---- 从B站链接获取封面图（使用代理服务绕开跨域） ----
-    // 使用多个备用代理，提高成功率
+    // ========== 优化后的封面获取（并行 + 快速代理） ==========
+    // 使用多个代理服务，并行请求，哪个先返回用哪个
     const PROXY_SERVERS = [
-      'https://corsproxy.io/?',
       'https://api.allorigins.win/raw?url=',
-      'https://corsproxy.cf/?'
+      'https://corsproxy.io/?'
     ];
 
-    async function fetchBilibiliCover(url) {
+    // 从链接提取 BV 号
+    function extractBvid(url) {
+      const match = url.match(/BV([a-zA-Z0-9]+)/);
+      if (!match) return null;
+      return 'BV' + match[1];
+    }
+
+    // 单个封面获取（带超时和重试）
+    async function fetchSingleCover(url, proxy, timeout = 3000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
       try {
-        // 提取 BV 号
-        const bvMatch = url.match(/BV([a-zA-Z0-9]+)/);
-        if (!bvMatch) return null;
-        const bvid = 'BV' + bvMatch[1];
-        
-        // 尝试使用多个代理服务
-        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
-        
-        for (const proxy of PROXY_SERVERS) {
-          try {
-            const response = await fetch(proxy + encodeURIComponent(apiUrl), {
-              signal: AbortSignal.timeout(5000)
-            });
-            if (response.ok) {
-              const data = await response.json();
-              if (data.code === 0 && data.data && data.data.pic) {
-                return data.data.pic;
-              }
-            }
-          } catch (e) {
-            // 继续尝试下一个代理
-            continue;
+        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${url}`;
+        const response = await fetch(proxy + encodeURIComponent(apiUrl), {
+          signal: controller.signal,
+          mode: 'cors'
+        });
+        clearTimeout(timer);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.code === 0 && data.data && data.data.pic) {
+            return data.data.pic;
           }
         }
         return null;
       } catch (e) {
-        console.warn('获取B站封面失败:', e);
+        clearTimeout(timer);
         return null;
       }
+    }
+
+    // 并行获取封面（多个代理同时请求，取最快返回的结果）
+    async function fetchBilibiliCoverFast(url) {
+      const bvid = extractBvid(url);
+      if (!bvid) return null;
+
+      // 先查缓存
+      if (coverCache.has(url)) {
+        return coverCache.get(url);
+      }
+
+      // 并行请求所有代理
+      const promises = PROXY_SERVERS.map(proxy => 
+        fetchSingleCover(bvid, proxy, 3000)
+      );
+
+      // 使用 Promise.race 取最快返回的结果
+      // 但为了容错，使用 Promise.allSettled 等待所有完成，取第一个成功的
+      try {
+        const results = await Promise.allSettled(promises);
+        for (const result of results) {
+          if (result.status === 'fulfilled' && result.value) {
+            const coverUrl = result.value;
+            // 确保图片能加载
+            if (coverUrl) {
+              coverCache.set(url, coverUrl);
+              return coverUrl;
+            }
+          }
+        }
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // 批量获取封面（并行，每批5个）
+    async function fetchBatchCovers(items, batchSize = 5) {
+      const results = [];
+      for (let i = 0; i < items.length; i += batchSize) {
+        const batch = items.slice(i, i + batchSize);
+        const batchPromises = batch.map(item => fetchBilibiliCoverFast(item.url));
+        const batchResults = await Promise.all(batchPromises);
+        results.push(...batchResults);
+      }
+      return results;
     }
 
     // ---- 渲染卡片 ----
@@ -1187,6 +1231,16 @@
     const grid = document.getElementById('stageGrid');
     const coverCache = new Map();
 
+    // 预加载图片（确保图片能快速显示）
+    function preloadImage(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(url);
+        img.onerror = () => resolve(null);
+        img.src = url;
+      });
+    }
+
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
       const data = getDataByCategory(category);
       const filtered = data.filter(item => {
@@ -1200,6 +1254,7 @@
         return;
       }
 
+      // 生成卡片HTML（先显示占位图）
       let html = '';
       for (const item of filtered) {
         const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
@@ -1214,15 +1269,17 @@
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
         }
 
-        let coverUrl = coverCache.get(item.url);
+        // 检查是否有缓存
+        const cachedCover = coverCache.get(item.url);
         let coverHtml = '';
-        if (coverUrl) {
-          coverHtml = `<img src="${coverUrl}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'" />`;
+        if (cachedCover) {
+          coverHtml = `<img src="${cachedCover}" alt="${item.title}" loading="lazy" />`;
         } else {
+          // 使用渐变色占位 + 加载提示
           coverHtml = `
-            <div class="cover-fallback">
+            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
               <div class="video-icon">🎬</div>
-              <div class="video-tip">加载封面中...</div>
+              <div class="video-tip" style="color:#fff;">加载中...</div>
             </div>
           `;
         }
@@ -1243,53 +1300,58 @@
       }
       grid.innerHTML = html;
 
-      // 异步加载未缓存的封面图
+      // 异步加载未缓存的封面（并行）
       const pendingItems = filtered.filter(item => !coverCache.has(item.url));
       if (pendingItems.length > 0) {
-        // 分批加载，避免过多并发
-        const batchSize = 3;
-        for (let i = 0; i < pendingItems.length; i += batchSize) {
-          const batch = pendingItems.slice(i, i + batchSize);
-          const promises = batch.map(async (item) => {
-            const cover = await fetchBilibiliCover(item.url);
-            if (cover) {
-              coverCache.set(item.url, cover);
-              // 更新对应的卡片
-              const cards = grid.querySelectorAll('.video-card');
-              for (const card of cards) {
-                if (card.dataset.url === item.url) {
-                  const coverBox = card.querySelector('.video-cover-box');
-                  if (coverBox) {
-                    const fallback = coverBox.querySelector('.cover-fallback');
-                    if (fallback) {
-                      fallback.remove();
-                    }
-                    const existingImg = coverBox.querySelector('img');
-                    if (!existingImg) {
-                      const img = document.createElement('img');
-                      img.src = cover;
-                      img.alt = item.title;
-                      img.loading = 'lazy';
-                      img.onerror = function() { 
-                        // 加载失败时显示占位
-                        this.style.display = 'none';
-                        const fallbackDiv = document.createElement('div');
-                        fallbackDiv.className = 'cover-fallback';
-                        fallbackDiv.innerHTML = `
-                          <div class="video-icon">🎬</div>
-                          <div class="video-tip">封面加载失败</div>
-                        `;
-                        coverBox.insertBefore(fallbackDiv, coverBox.querySelector('.play-icon'));
-                      };
-                      coverBox.insertBefore(img, coverBox.querySelector('.play-icon'));
-                    }
-                    break;
+        // 使用 Promise.all 并行请求所有封面
+        const coverPromises = pendingItems.map(async (item) => {
+          const cover = await fetchBilibiliCoverFast(item.url);
+          if (cover) {
+            // 预加载图片
+            await preloadImage(cover);
+            return { item, cover };
+          }
+          return null;
+        });
+
+        const results = await Promise.all(coverPromises);
+        
+        // 更新卡片
+        for (const result of results) {
+          if (result) {
+            const { item, cover } = result;
+            const cards = grid.querySelectorAll('.video-card');
+            for (const card of cards) {
+              if (card.dataset.url === item.url) {
+                const coverBox = card.querySelector('.video-cover-box');
+                if (coverBox) {
+                  const fallback = coverBox.querySelector('.cover-fallback');
+                  if (fallback) {
+                    fallback.remove();
                   }
+                  const existingImg = coverBox.querySelector('img');
+                  if (!existingImg) {
+                    const img = document.createElement('img');
+                    img.src = cover;
+                    img.alt = item.title;
+                    img.loading = 'lazy';
+                    img.onerror = function() {
+                      this.style.display = 'none';
+                      const fallbackDiv = document.createElement('div');
+                      fallbackDiv.className = 'cover-fallback';
+                      fallbackDiv.innerHTML = `
+                        <div class="video-icon">🎬</div>
+                        <div class="video-tip">封面加载失败</div>
+                      `;
+                      coverBox.insertBefore(fallbackDiv, coverBox.querySelector('.play-icon'));
+                    };
+                    coverBox.insertBefore(img, coverBox.querySelector('.play-icon'));
+                  }
+                  break;
                 }
               }
             }
-          });
-          await Promise.all(promises);
+          }
         }
       }
     }
