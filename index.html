@@ -56,19 +56,17 @@
       margin: 0 auto 4px; box-shadow: 0 4px 12px rgba(36,104,168,0.10);
     }
     .avatar-name { color: #1a4a6f; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; }
-    /* 新增标语 */
     .avatar-sub {
       font-size: 11px; color: #4a779e; letter-spacing: 0.5px; margin-top: 2px;
       opacity: 0.8;
     }
 
-    /* 目录项行距进一步加大 */
     .menu-item {
-      font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px; /* 上下内边距从8px增至12px */
+      font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px;
       border-radius: 8px; cursor: pointer; transition: all 0.2s;
       border: 1px solid transparent;
       display: flex; align-items: center; gap: 8px;
-      margin-bottom: 4px; /* 额外增加间距 */
+      margin-bottom: 4px;
     }
     .menu-item:hover { background: rgba(36,104,168,0.06); border-color: rgba(36,104,168,0.08); }
     .menu-item.active {
@@ -88,7 +86,6 @@
     .content-area::-webkit-scrollbar { width: 4px; }
     .content-area::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
-    /* ===== 蝴蝶背景 ===== */
     .content-area::before {
       content: '';
       position: fixed;
@@ -121,7 +118,7 @@
       box-shadow: 0 4px 20px rgba(26, 74, 111, 0.10);
     }
 
-    /* ===== 首页头部 - 深蓝背景 ===== */
+    /* ===== 首页头部 ===== */
     .welcome-header {
       text-align: center;
       padding: 28px 20px 20px 20px;
@@ -168,7 +165,6 @@
       box-shadow: 0 2px 10px rgba(26, 74, 111, 0.08);
     }
 
-    /* ===== info-title ===== */
     .info-title {
       font-size: 16px; color: #1f5a8a; font-weight: 600; letter-spacing: 0.5px;
       padding-bottom: 8px; margin-bottom: 12px;
@@ -177,8 +173,6 @@
     }
     .info-title .deco { font-size: 14px; opacity: 0.5; }
 
-    /* ===== 饭记 ===== */
-    .diary-top-bg { display: none; }
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .info-card {
       background: rgba(230,244,255,0.20); border: 1px solid rgba(184,224,255,0.15);
@@ -187,7 +181,6 @@
     .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
     .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; }
 
-    /* ===== 链接卡片 - 无流光 ===== */
     .link-card {
       background: rgba(230,244,255,0.20);
       border: 1px solid rgba(184,224,255,0.15);
@@ -205,7 +198,7 @@
     .link-card .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
     .link-card .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
-    /* ===== 时间线 - 小圆点 ===== */
+    /* ===== 时间线 ===== */
     .timeline-wrap { margin-top: 10px; padding-left: 14px; position: relative; }
     .timeline-wrap::before {
       content: ''; position: absolute; left: 4px; top: 0; bottom: 0;
@@ -292,7 +285,6 @@
     .search-box input::placeholder { color: #9ab7cf; }
     .search-box .search-icon { font-size: 14px; color: #4a779e; margin-right: 4px; }
 
-    /* 日期筛选标签 - 每个平台独立 */
     .filter-tabs-row {
       display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px;
       background: rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 24px;
@@ -308,14 +300,6 @@
     .category-tab:hover { background: rgba(255,255,255,0.5); }
     .category-tab.active {
       background: #1f5a8a; color: #fff; border-color: #1f5a8a;
-    }
-    /* 平台标签前缀 */
-    .platform-prefix {
-      font-size: 10px;
-      color: #4a779e;
-      opacity: 0.6;
-      margin-right: 2px;
-      font-weight: 400;
     }
 
     .stage-grid {
@@ -336,24 +320,63 @@
       font-size: 10px; letter-spacing: 0.3px; z-index: 2;
     }
     .video-cover-box {
-      padding: 20px 12px 10px; text-align: center;
-      display: flex; flex-direction: column; align-items: center;
+      padding: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
     }
-    .video-icon { font-size: 32px; color: #88b8a8; margin-bottom: 2px; }
-    .video-tip { font-size: 11px; color: #689888; }
+    .video-cover-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .video-card:hover .video-cover-box img {
+      transform: scale(1.03);
+    }
+    .video-cover-box .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      pointer-events: none;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .video-card:hover .play-icon {
+      opacity: 1;
+    }
+    .video-cover-box .cover-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
+      color: #1a4a6f;
+    }
+    .video-cover-box .cover-fallback .video-icon { font-size: 32px; margin-bottom: 4px; }
+    .video-cover-box .cover-fallback .video-tip { font-size: 11px; color: #4a779e; }
     .video-title-bar {
       background: rgba(242,248,252,0.35); padding: 6px 12px;
       border-top: 1px solid rgba(184,224,255,0.10);
     }
-    .video-name { font-size: 13px; color: #1f4a5a; font-weight: 500; }
+    .video-name { font-size: 13px; color: #1f4a5a; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .video-date { font-size: 11px; color: #689888; margin-top: 1px; }
 
-    /* ===== 空状态 ===== */
     .empty-state {
       text-align: center; padding: 30px 0; color: #4a779e; font-size: 14px;
     }
 
-    /* ===== 底部标语 -All For YeFan- ===== */
     .footer-slogan {
       text-align: center;
       margin-top: 20px;
@@ -435,7 +458,6 @@
       word-break: break-word;
     }
     .weibo-text .line { display: block; }
-    /* 评论样式 - 放在最下面，无高亮 */
     .weibo-comment-bottom {
       margin-top: 0.8rem;
       padding-top: 0.8rem;
@@ -448,18 +470,15 @@
       margin-right: 0.3rem;
     }
 
-    /* ===== 小图网格排列 (动态列数: 2列或3列) ===== */
     .weibo-media-grid {
       display: grid;
       gap: 0.5rem;
       margin: 0.5rem 0;
       max-width: 480px;
     }
-    /* 默认2列 (用于4张图) */
     .weibo-media-grid.cols-2 {
       grid-template-columns: repeat(2, 1fr);
     }
-    /* 3列 (用于6张或9张图) */
     .weibo-media-grid.cols-3 {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -482,7 +501,6 @@
       display: block;
     }
 
-    /* 新增：跳转链接按钮样式 */
     .weibo-link-button {
       display: inline-block;
       margin: 0.5rem 0 0.2rem 0;
@@ -504,7 +522,7 @@
       box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
     }
 
-    /* ===== 大图预览 Modal - 带滑动切换 ===== */
+    /* ===== 大图预览 Modal ===== */
     .image-modal {
       display: none;
       position: fixed;
@@ -595,7 +613,6 @@
       letter-spacing: 1px;
       z-index: 10;
     }
-    /* 手机端适配大图 */
     @media (max-width: 768px) {
       .modal-btn { width: 36px; height: 36px; font-size: 18px; }
       .modal-btn.prev { left: 4px; }
@@ -606,9 +623,7 @@
       .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
     }
 
-    /* ============================================================
-               手机端适配
-               ============================================================ */
+    /* ===== 手机端适配 ===== */
     @media screen and (max-width: 768px) {
       .main-page { flex-direction: column; min-height: 100vh; }
       .sidebar {
@@ -631,7 +646,7 @@
         white-space: nowrap; flex-shrink: 0;
         border: 1px solid rgba(184,224,255,0.15);
         background: rgba(255,255,255,0.3); border-radius: 20px;
-        margin-bottom: 0; /* 手机端行距重置 */
+        margin-bottom: 0;
       }
       .menu-item .icon { font-size: 13px; width: 18px; }
       .menu-item.active { background: rgba(36,104,168,0.12); border-color: rgba(36,104,168,0.25); }
@@ -704,7 +719,7 @@
     }
   </style>
 
-  <!-- 大图预览 Modal（带滑动切换） -->
+  <!-- 大图预览 Modal -->
   <div class="image-modal" id="imageModal">
     <div class="modal-image-container" id="modalImageContainer">
       <button class="modal-btn prev" id="modalPrev">‹</button>
@@ -854,12 +869,9 @@
         </div>
       </div>
 
-      <!-- 饭之拍 - 已移除大标题，内容直接顶头 -->
+      <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
         <div class="info-box">
-          <!-- 原本的 info-title 已被移除 -->
-
-          <!-- 平台导航 -->
           <div class="platform-nav" id="platformNav">
             <button class="platform-nav-item active" data-platform="all">全部</button>
             <button class="platform-nav-item" data-platform="weibo">微博</button>
@@ -875,7 +887,6 @@
             </div>
           </div>
 
-          <!-- 日期筛选标签 -->
           <div class="filter-tabs-row" id="weiboTabs">
             <span class="category-tab active" data-month="全部">全部</span>
             <span class="category-tab" data-month="2026-07">2026-07</span>
@@ -883,7 +894,6 @@
           </div>
 
           <div id="weiboFeed">
-            <!-- ===== 置顶微博1：2026.01.05 ===== -->
             <div class="update-trigger" data-platform="weibo" data-date="2026-01-05">
               <div class="update-badge" id="toggleBadgeTop">
                 <span>📌 置顶 · 微博 2026.01.05 更新</span>
@@ -903,7 +913,6 @@
               </div>
             </div>
 
-            <!-- ===== 2026.07.18 微博 ===== -->
             <div class="update-trigger" data-platform="weibo" data-date="2026-07-18">
               <div class="update-badge" id="toggleBadge">
                 <span>📌 微博 2026.07.18 更新</span>
@@ -928,7 +937,6 @@
               </div>
             </div>
 
-            <!-- ===== 2026.07.16 微博 ===== -->
             <div class="update-trigger" data-platform="weibo" data-date="2026-07-16">
               <div class="update-badge" id="toggleBadge2">
                 <span>📌 微博 2026.07.16 更新</span>
@@ -950,7 +958,6 @@
               </div>
             </div>
 
-            <!-- ===== 2026.07.14 微博 ===== -->
             <div class="update-trigger" data-platform="weibo" data-date="2026-07-14">
               <div class="update-badge" id="toggleBadge3">
                 <span>📌 微博 2026.07.14 更新</span>
@@ -976,7 +983,6 @@
               </div>
             </div>
 
-            <!-- ===== 2026.07.05 新图文微博 (按日期排在7.14之后) ===== -->
             <div class="update-trigger" data-platform="weibo" data-date="2026-07-05">
               <div class="update-badge" id="toggleBadgeNew">
                 <span>📌 微博 2026.07.05 更新</span>
@@ -987,7 +993,6 @@
               <div class="weibo-card">
                 <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">今天的天空和心情一样好 🌤️</span><span class="line">分享一些随手拍 📸</span></div>
-                <!-- 四张图片的网格 (2列) -->
                 <div class="weibo-media-grid cols-2">
                   <div class="media-item" onclick="openModalWithImages('sliderNew', 0)">
                     <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg" alt="配图1" loading="lazy" />
@@ -1002,7 +1007,6 @@
                     <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.jpg" alt="配图4" loading="lazy" />
                   </div>
                 </div>
-                <!-- 评论已删除 -->
               </div>
             </div>
 
@@ -1121,6 +1125,36 @@
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
 
+    // ---- 从B站链接提取封面图 ----
+    function getBilibiliCoverUrl(url) {
+      // 提取 BV 号
+      const bvMatch = url.match(/BV([a-zA-Z0-9]+)/);
+      if (bvMatch) {
+        const bvid = 'BV' + bvMatch[1];
+        // 使用 B站 API 获取视频信息（通过 jsonp 方式）
+        return `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
+      }
+      return null;
+    }
+
+    // 获取封面图 (异步)
+    async function fetchBilibiliCover(url) {
+      try {
+        const apiUrl = getBilibiliCoverUrl(url);
+        if (!apiUrl) return null;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.code === 0 && data.data && data.data.pic) {
+          return data.data.pic;
+        }
+        return null;
+      } catch (e) {
+        console.warn('获取B站封面失败:', e);
+        return null;
+      }
+    }
+
+    // ---- 渲染卡片（支持封面图） ----
     function getMonthList(category) {
       let data = [];
       if (category === 'all') data = [...unitData, ...specialData, ...assistData];
@@ -1138,7 +1172,10 @@
     }
 
     const grid = document.getElementById('stageGrid');
-    function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
+    // 缓存封面图
+    const coverCache = new Map();
+
+    async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
       const data = getDataByCategory(category);
       const filtered = data.filter(item => {
         const month = item.date ? item.date.slice(0,7) : '';
@@ -1150,7 +1187,10 @@
         grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
         return;
       }
-      grid.innerHTML = filtered.map(item => {
+
+      // 生成卡片HTML（先使用占位图，后面异步加载封面）
+      let html = '';
+      for (const item of filtered) {
         const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
         const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
         const isAssist = assistData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
@@ -1162,12 +1202,27 @@
           else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
         }
-        return `
-          <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
-            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
-            <div class="video-cover-box">
+
+        // 使用缓存的封面图或占位图
+        let coverUrl = coverCache.get(item.url);
+        let coverHtml = '';
+        if (coverUrl) {
+          coverHtml = `<img src="${coverUrl}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'" />`;
+        } else {
+          coverHtml = `
+            <div class="cover-fallback">
               <div class="video-icon">🎬</div>
               <div class="video-tip">点击前往B站</div>
+            </div>
+          `;
+        }
+
+        html += `
+          <div class="video-card" data-url="${item.url}" data-title="${item.title}">
+            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            <div class="video-cover-box" onclick="window.open('${item.url || '#'}','_blank')">
+              ${coverHtml}
+              <div class="play-icon">▶</div>
             </div>
             <div class="video-title-bar">
               <div class="video-name">${item.title}</div>
@@ -1175,7 +1230,42 @@
             </div>
           </div>
         `;
-      }).join('');
+      }
+      grid.innerHTML = html;
+
+      // 异步加载未缓存的封面图
+      for (const item of filtered) {
+        if (!coverCache.has(item.url)) {
+          const cover = await fetchBilibiliCover(item.url);
+          if (cover) {
+            coverCache.set(item.url, cover);
+            // 更新对应的卡片
+            const cards = grid.querySelectorAll('.video-card');
+            for (const card of cards) {
+              if (card.dataset.url === item.url) {
+                const coverBox = card.querySelector('.video-cover-box');
+                if (coverBox) {
+                  // 移除占位图，添加真实封面
+                  const fallback = coverBox.querySelector('.cover-fallback');
+                  if (fallback) {
+                    fallback.remove();
+                  }
+                  const existingImg = coverBox.querySelector('img');
+                  if (!existingImg) {
+                    const img = document.createElement('img');
+                    img.src = cover;
+                    img.alt = item.title;
+                    img.loading = 'lazy';
+                    img.onerror = function() { this.style.display = 'none'; };
+                    coverBox.insertBefore(img, coverBox.querySelector('.play-icon'));
+                  }
+                }
+                break;
+              }
+            }
+          }
+        }
+      }
     }
 
     function renderTabs(category, activeMonth = '全部') {
@@ -1228,13 +1318,11 @@
     const weiboSearchInput = document.getElementById('weiboSearch');
     const dateTabs = document.querySelectorAll('#weiboTabs .category-tab');
 
-    // 获取当前活跃的日期
     function getActiveDate() {
       const active = document.querySelector('#weiboTabs .category-tab.active');
       return active ? active.dataset.month : '全部';
     }
 
-    // 核心筛选函数
     function filterWeiboFeed() {
       const activePlatform = document.querySelector('.platform-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
@@ -1245,15 +1333,12 @@
         const wrapper = allWrappers[index];
         if (!wrapper) return;
 
-        // 平台匹配
         const triggerPlatform = trigger.dataset.platform || 'weibo';
         const platformMatch = currentPlatform === 'all' || triggerPlatform === currentPlatform;
 
-        // 日期匹配 (从data-date属性读取)
         const triggerDate = trigger.dataset.date || '';
         const dateMatch = currentDate === '全部' || (triggerDate && triggerDate.startsWith(currentDate));
 
-        // 关键词匹配
         const card = wrapper.querySelector('.weibo-card');
         let textMatch = true;
         if (keyword !== '') {
@@ -1271,7 +1356,6 @@
       });
     }
 
-    // 平台点击事件
     platformItems.forEach(btn => {
       btn.addEventListener('click', function() {
         platformItems.forEach(b => b.classList.remove('active'));
@@ -1280,7 +1364,6 @@
       });
     });
 
-    // 日期点击事件
     dateTabs.forEach(tab => {
       tab.addEventListener('click', function() {
         dateTabs.forEach(t => t.classList.remove('active'));
@@ -1289,12 +1372,11 @@
       });
     });
 
-    // 搜索输入事件
     weiboSearchInput.addEventListener('input', function() {
       filterWeiboFeed();
     });
 
-    // ---- 大图预览 (包含新增的图片组) ----
+    // ---- 大图预览 ----
     const imageSets = {
       slider1: [
         'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg',
@@ -1319,7 +1401,6 @@
         'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg'
       ],
-      // 新增图片组
       sliderNew: [
         'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg',
