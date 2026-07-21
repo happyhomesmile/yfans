@@ -328,6 +328,7 @@
       aspect-ratio: 16/9;
       position: relative;
       overflow: hidden;
+      background: #d4e6f5;
     }
     .video-cover-box img {
       width: 100%;
@@ -1125,27 +1126,39 @@
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
 
-    // ---- 从B站链接提取封面图 ----
-    function getBilibiliCoverUrl(url) {
-      // 提取 BV 号
-      const bvMatch = url.match(/BV([a-zA-Z0-9]+)/);
-      if (bvMatch) {
-        const bvid = 'BV' + bvMatch[1];
-        // 使用 B站 API 获取视频信息（通过 jsonp 方式）
-        return `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
-      }
-      return null;
-    }
+    // ---- 从B站链接获取封面图（使用代理服务绕开跨域） ----
+    // 使用多个备用代理，提高成功率
+    const PROXY_SERVERS = [
+      'https://corsproxy.io/?',
+      'https://api.allorigins.win/raw?url=',
+      'https://corsproxy.cf/?'
+    ];
 
-    // 获取封面图 (异步)
     async function fetchBilibiliCover(url) {
       try {
-        const apiUrl = getBilibiliCoverUrl(url);
-        if (!apiUrl) return null;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        if (data.code === 0 && data.data && data.data.pic) {
-          return data.data.pic;
+        // 提取 BV 号
+        const bvMatch = url.match(/BV([a-zA-Z0-9]+)/);
+        if (!bvMatch) return null;
+        const bvid = 'BV' + bvMatch[1];
+        
+        // 尝试使用多个代理服务
+        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`;
+        
+        for (const proxy of PROXY_SERVERS) {
+          try {
+            const response = await fetch(proxy + encodeURIComponent(apiUrl), {
+              signal: AbortSignal.timeout(5000)
+            });
+            if (response.ok) {
+              const data = await response.json();
+              if (data.code === 0 && data.data && data.data.pic) {
+                return data.data.pic;
+              }
+            }
+          } catch (e) {
+            // 继续尝试下一个代理
+            continue;
+          }
         }
         return null;
       } catch (e) {
@@ -1154,7 +1167,7 @@
       }
     }
 
-    // ---- 渲染卡片（支持封面图） ----
+    // ---- 渲染卡片 ----
     function getMonthList(category) {
       let data = [];
       if (category === 'all') data = [...unitData, ...specialData, ...assistData];
@@ -1172,7 +1185,6 @@
     }
 
     const grid = document.getElementById('stageGrid');
-    // 缓存封面图
     const coverCache = new Map();
 
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
@@ -1188,7 +1200,6 @@
         return;
       }
 
-      // 生成卡片HTML（先使用占位图，后面异步加载封面）
       let html = '';
       for (const item of filtered) {
         const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
@@ -1203,7 +1214,6 @@
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
         }
 
-        // 使用缓存的封面图或占位图
         let coverUrl = coverCache.get(item.url);
         let coverHtml = '';
         if (coverUrl) {
@@ -1212,7 +1222,7 @@
           coverHtml = `
             <div class="cover-fallback">
               <div class="video-icon">🎬</div>
-              <div class="video-tip">点击前往B站</div>
+              <div class="video-tip">加载封面中...</div>
             </div>
           `;
         }
@@ -1234,36 +1244,52 @@
       grid.innerHTML = html;
 
       // 异步加载未缓存的封面图
-      for (const item of filtered) {
-        if (!coverCache.has(item.url)) {
-          const cover = await fetchBilibiliCover(item.url);
-          if (cover) {
-            coverCache.set(item.url, cover);
-            // 更新对应的卡片
-            const cards = grid.querySelectorAll('.video-card');
-            for (const card of cards) {
-              if (card.dataset.url === item.url) {
-                const coverBox = card.querySelector('.video-cover-box');
-                if (coverBox) {
-                  // 移除占位图，添加真实封面
-                  const fallback = coverBox.querySelector('.cover-fallback');
-                  if (fallback) {
-                    fallback.remove();
-                  }
-                  const existingImg = coverBox.querySelector('img');
-                  if (!existingImg) {
-                    const img = document.createElement('img');
-                    img.src = cover;
-                    img.alt = item.title;
-                    img.loading = 'lazy';
-                    img.onerror = function() { this.style.display = 'none'; };
-                    coverBox.insertBefore(img, coverBox.querySelector('.play-icon'));
+      const pendingItems = filtered.filter(item => !coverCache.has(item.url));
+      if (pendingItems.length > 0) {
+        // 分批加载，避免过多并发
+        const batchSize = 3;
+        for (let i = 0; i < pendingItems.length; i += batchSize) {
+          const batch = pendingItems.slice(i, i + batchSize);
+          const promises = batch.map(async (item) => {
+            const cover = await fetchBilibiliCover(item.url);
+            if (cover) {
+              coverCache.set(item.url, cover);
+              // 更新对应的卡片
+              const cards = grid.querySelectorAll('.video-card');
+              for (const card of cards) {
+                if (card.dataset.url === item.url) {
+                  const coverBox = card.querySelector('.video-cover-box');
+                  if (coverBox) {
+                    const fallback = coverBox.querySelector('.cover-fallback');
+                    if (fallback) {
+                      fallback.remove();
+                    }
+                    const existingImg = coverBox.querySelector('img');
+                    if (!existingImg) {
+                      const img = document.createElement('img');
+                      img.src = cover;
+                      img.alt = item.title;
+                      img.loading = 'lazy';
+                      img.onerror = function() { 
+                        // 加载失败时显示占位
+                        this.style.display = 'none';
+                        const fallbackDiv = document.createElement('div');
+                        fallbackDiv.className = 'cover-fallback';
+                        fallbackDiv.innerHTML = `
+                          <div class="video-icon">🎬</div>
+                          <div class="video-tip">封面加载失败</div>
+                        `;
+                        coverBox.insertBefore(fallbackDiv, coverBox.querySelector('.play-icon'));
+                      };
+                      coverBox.insertBefore(img, coverBox.querySelector('.play-icon'));
+                    }
+                    break;
                   }
                 }
-                break;
               }
             }
-          }
+          });
+          await Promise.all(promises);
         }
       }
     }
@@ -1308,6 +1334,7 @@
       renderCards(currentCategory, month, keyword);
     });
 
+    // ---- 初始化 ----
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
 
