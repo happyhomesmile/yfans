@@ -389,6 +389,30 @@
       opacity: 0.6;
       font-weight: 400;
     }
+    /* ===== 蝴蝶掉落动画 ===== */
+    .butterfly-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+}
+    .butterfly {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      animation: butterflyFall linear infinite;
+      will-change: transform, opacity;
+}
+    @keyframes butterflyFall {
+      0% { opacity: 0; transform: translateY(-10vh) rotate(0deg) scale(0.5); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(1.2); }
+}
 
     /* ===== 饭之拍 - 折叠微博卡片 ===== */
     .update-trigger {
@@ -626,6 +650,10 @@
   </style>
 </head>
 <body>
+  <!-- 蝴蝶容器 -->
+  <div class="butterfly-container" id="butterflyContainer"></div>
+  <!-- 加载页 -->
+  <div class="loading-page" id="loading">
   <!-- 加载页 -->
   <div class="loading-page" id="loading">
     <div class="rice-emoji">🍚</div>
@@ -961,6 +989,39 @@
   <script>
     // 加载动画
     setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
+    // ===== 蓝色蝴蝶掉落效果 =====
+(function createButterflies() {
+  const container = document.getElementById('butterflyContainer');
+  if (!container) return;
+  const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0'];
+  function getColoredButterfly() {
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    return `<span style="color:${color};">🦋</span>`;
+  }
+  function createButterfly() {
+    const el = document.createElement('div');
+    el.className = 'butterfly';
+    if (Math.random() > 0.3) {
+      el.innerHTML = getColoredButterfly();
+    } else {
+      el.textContent = '🦋';
+      el.style.color = colors[Math.floor(Math.random() * colors.length)];
+    }
+    const size = 14 + Math.random() * 18;
+    el.style.fontSize = size + 'px';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (8 + Math.random() * 10) + 's';
+    el.style.animationDelay = Math.random() * 8 + 's';
+    container.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+  for (let i = 0; i < 25; i++) {
+    setTimeout(() => createButterfly(), i * 200);
+  }
+  setInterval(() => {
+    if (container.children.length < 40) createButterfly();
+  }, 1500 + Math.random() * 1500);
+})();
 
     // 侧边栏切换
     const menuItems = document.querySelectorAll('.menu-item');
