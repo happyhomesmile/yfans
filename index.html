@@ -576,24 +576,34 @@
     }
 
     /* ===== 饭之拍 - 布局 ===== */
-    .fancam-layout {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
+    .fancam-wrap {
+      position: relative;
       max-width: 780px;
       margin: 0 auto;
-      align-items: flex-start;
     }
-    .fancam-layout .info-box {
+    .fancam-wrap .info-box {
       max-width: 780px;
       width: 100%;
       margin: 0;
-      flex-shrink: 0;
+      padding: 18px 22px;
     }
-    .fancam-layout .timeline-sidebar {
-      position: sticky;
+    .fancam-wrap .timeline-sidebar {
+      position: absolute;
+      right: -88px;
       top: 24px;
-      flex-shrink: 0;
+      width: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 12px 4px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(26,74,111,0.08);
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      z-index: 5;
     }
 
     /* ===== 大图预览 Modal ===== */
@@ -917,7 +927,7 @@
 
       <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
-        <div class="fancam-layout">
+        <div class="fancam-wrap">
           <!-- 浅色框 -->
           <div class="info-box" style="padding:18px 22px;">
             
@@ -1124,7 +1134,7 @@
             </div>
           </div>
 
-          <!-- 时间轴独立在右侧 -->
+          <!-- 时间轴独立在右侧（绝对定位） -->
           <div class="timeline-sidebar" id="timelineSidebar">
             <div class="tl-year-label">2026</div>
             <div class="tl-item" data-month="2026-07">07</div>
