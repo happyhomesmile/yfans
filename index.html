@@ -1914,8 +1914,10 @@
         months = platformMonths[currentPlatform] || [];
       }
       
+      // 如果没有月份数据，隐藏时间轴并清空内容
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
+        timelineContainer.innerHTML = '';
         return;
       }
       timelineContainer.style.display = 'flex';
@@ -1972,11 +1974,36 @@
         tab.addEventListener('click', function() {
           tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
           this.classList.add('active');
-          filterWeiboFeed();
-        });
+              function filterWeiboFeed() {
+      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
+      const currentDate = getActiveDate();
+      const keyword = weiboSearchInput.value.trim().toLowerCase();
+
+      // 每次重新获取所有卡片
+      const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+
+      allCards.forEach(card => {
+        const cardPlatform = card.dataset.platform || 'weibo';
+        const cardMonth = card.dataset.month || '';
+        
+        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
+        if (card.classList.contains('pinned')) {
+          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
+          const dateMatch = currentDate === '全部';
+          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
+          return;
+        }
+        
+        const dateMatch = currentDate === '全部' || cardMonth === currentDate;
+        const cardText = card.textContent.toLowerCase();
+        const textMatch = keyword === '' || cardText.includes(keyword);
+        const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
+
+        card.style.display = (dateMatch && textMatch && platformMatch) ? '' : 'none';
       });
       
-      renderTimeline();
+      updateTimelineHighlight();
     }
 
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
