@@ -1284,7 +1284,7 @@
                 <div class="weibo-text"><span class="line">看我</span><span class="line">#樱花</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69dca94b000000001f007844?source=webshare&xhsshare=pc_web&xsec_token=ABV48WJJnGYuc1B9ZZ4lSNaEpzx28i5I-jShD96VElavw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
-              
+
               <!-- 微博 4.10 -->
               <div class="weibo-card" data-platform="weibo" data-month="2026-04">
                 <div class="weibo-time">📅 2026-04-10 22:28 · 发布于 上海</div>
@@ -1914,10 +1914,8 @@
         months = platformMonths[currentPlatform] || [];
       }
       
-      // 如果没有月份数据，隐藏时间轴并清空内容
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
-        timelineContainer.innerHTML = '';
         return;
       }
       timelineContainer.style.display = 'flex';
@@ -1974,40 +1972,16 @@
         tab.addEventListener('click', function() {
           tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
           this.classList.add('active');
-              function filterWeiboFeed() {
-      const activePlatform = document.querySelector('.platform-nav-item.active');
-      const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
-      const currentDate = getActiveDate();
-      const keyword = weiboSearchInput.value.trim().toLowerCase();
-
-      // 每次重新获取所有卡片
-      const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
-
-      allCards.forEach(card => {
-        const cardPlatform = card.dataset.platform || 'weibo';
-        const cardMonth = card.dataset.month || '';
-        
-        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
-        if (card.classList.contains('pinned')) {
-          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-          const dateMatch = currentDate === '全部';
-          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
-          return;
-        }
-        
-        const dateMatch = currentDate === '全部' || cardMonth === currentDate;
-        const cardText = card.textContent.toLowerCase();
-        const textMatch = keyword === '' || cardText.includes(keyword);
-        const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-
-        card.style.display = (dateMatch && textMatch && platformMatch) ? '' : 'none';
+          filterWeiboFeed();
+        });
       });
       
-      updateTimelineHighlight();
+      renderTimeline();
     }
 
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
     const platformItems = document.querySelectorAll('.platform-nav-item');
+    const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
     const weiboSearchInput = document.getElementById('weiboSearch');
 
     function getActiveDate() {
@@ -2021,16 +1995,13 @@
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
-      // 每次重新获取所有卡片
-      const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
-
       allCards.forEach(card => {
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
+        // 置顶卡片：只在对应平台且月份为"全部"时显示
         if (card.classList.contains('pinned')) {
-          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
+          const platformMatch = cardPlatform === currentPlatform;
           const dateMatch = currentDate === '全部';
           card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
@@ -2046,7 +2017,23 @@
       
       updateTimelineHighlight();
     }
-    
+
+    platformItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        platformItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderMonthTabs();
+        renderTimeline();
+        filterWeiboFeed();
+      });
+    });
+
+    weiboSearchInput.addEventListener('input', function() {
+      filterWeiboFeed();
+    });
+
+    renderMonthTabs();
+
     // ---- 大图预览 ----
     const imageSets = {
       slider1: [
