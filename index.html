@@ -510,19 +510,21 @@
     }
 
     /* ===== 饭之拍 - 布局 ===== */
-    .fancam-container {
+    .fancam-wrapper {
       display: flex;
       gap: 24px;
-      position: relative;
       max-width: 100%;
       align-items: flex-start;
-      padding-right: 0;
+      justify-content: center;
+      padding: 0;
     }
-    .fancam-container .weibo-feed-wrap {
-      flex: 1;
+    .fancam-wrapper .weibo-feed-wrap {
+      flex: 0 0 780px;
       max-width: 780px;
       min-width: 0;
     }
+
+    /* 时间轴 - 独立在右侧 */
     .timeline-sidebar {
       position: sticky;
       top: 24px;
@@ -682,8 +684,9 @@
 
     /* ===== 响应式 ===== */
     @media (max-width: 1024px) {
-      .fancam-container {
+      .fancam-wrapper {
         flex-direction: column;
+        align-items: center;
       }
       .timeline-sidebar {
         position: relative;
@@ -712,7 +715,8 @@
         padding: 4px 8px;
         font-size: 0.65rem;
       }
-      .fancam-container .weibo-feed-wrap {
+      .fancam-wrapper .weibo-feed-wrap {
+        flex: 1 1 100%;
         max-width: 100%;
       }
       .info-box {
@@ -907,37 +911,36 @@
 
       <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
-        <div class="info-box" style="max-width:100%; padding:18px 22px;">
-          <div class="platform-nav" id="platformNav">
-            <button class="platform-nav-item active" data-platform="all">全部</button>
-            <button class="platform-nav-item" data-platform="weibo">微博</button>
-            <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
-            <button class="platform-nav-item" data-platform="douyin">抖音</button>
-            <button class="platform-nav-item" data-platform="bilibili">B站</button>
-          </div>
+        <!-- 平台导航 -->
+        <div class="platform-nav" id="platformNav">
+          <button class="platform-nav-item active" data-platform="all">全部</button>
+          <button class="platform-nav-item" data-platform="weibo">微博</button>
+          <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
+          <button class="platform-nav-item" data-platform="douyin">抖音</button>
+          <button class="platform-nav-item" data-platform="bilibili">B站</button>
+        </div>
 
-          <div class="filter-search-row">
-            <div class="search-box">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="weiboSearch" placeholder="搜索内容..." />
-            </div>
+        <div class="filter-search-row">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="weiboSearch" placeholder="搜索内容..." />
           </div>
+        </div>
 
-          <div class="filter-tabs-row" id="weiboTabs">
-            <span class="category-tab active" data-month="全部">全部</span>
-            <span class="category-tab" data-month="2026-07">2026-07</span>
-            <span class="category-tab" data-month="2026-06">2026-06</span>
-            <span class="category-tab" data-month="2026-05">2026-05</span>
-            <span class="category-tab" data-month="2026-04">2026-04</span>
-            <span class="category-tab" data-month="2026-03">2026-03</span>
-            <span class="category-tab" data-month="2026-02">2026-02</span>
-            <span class="category-tab" data-month="2026-01">2026-01</span>
-          </div>
+        <div class="filter-tabs-row" id="weiboTabs">
+          <span class="category-tab active" data-month="全部">全部</span>
+          <span class="category-tab" data-month="2026-07">2026-07</span>
+          <span class="category-tab" data-month="2026-06">2026-06</span>
+          <span class="category-tab" data-month="2026-05">2026-05</span>
+          <span class="category-tab" data-month="2026-04">2026-04</span>
+        </div>
 
-          <div class="fancam-container">
-            <!-- 微博列表 -->
-            <div class="weibo-feed-wrap" id="weiboFeed">
-              <!-- 置顶（始终第一条） -->
+        <!-- 浅框 + 时间轴 并列 -->
+        <div class="fancam-wrapper">
+          <!-- 浅色背景框：只包微博列表 -->
+          <div class="info-box" style="max-width:780px; padding:18px 22px; margin:0;">
+            <div id="weiboFeed">
+              <!-- 置顶 -->
               <div class="weibo-card pinned" id="weiboCardTop">
                 <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
@@ -1107,18 +1110,18 @@
 
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
+          </div>
 
-            <!-- 右侧时间轴（置顶不显示在时间轴上） -->
-            <div class="timeline-sidebar" id="timelineSidebar">
-              <div class="tl-year-label">2026</div>
-              <div class="tl-item" data-month="2026-07">07</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-06">06</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-05">05</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-04">04</div>
-            </div>
+          <!-- 时间轴独立在右侧 -->
+          <div class="timeline-sidebar" id="timelineSidebar">
+            <div class="tl-year-label">2026</div>
+            <div class="tl-item" data-month="2026-07">07</div>
+            <div class="tl-line"></div>
+            <div class="tl-item" data-month="2026-06">06</div>
+            <div class="tl-line"></div>
+            <div class="tl-item" data-month="2026-05">05</div>
+            <div class="tl-line"></div>
+            <div class="tl-item" data-month="2026-04">04</div>
           </div>
         </div>
       </div>
@@ -1456,7 +1459,6 @@
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
       allCards.forEach(card => {
-        // 置顶卡片始终显示
         if (card.id === 'weiboCardTop') {
           card.style.display = '';
           return;
@@ -1648,7 +1650,6 @@
     const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
     const feedWrap = document.getElementById('weiboFeed');
 
-    // 点击跳转（跳过置顶）
     tlItems.forEach(item => {
       item.addEventListener('click', function() {
         const month = this.dataset.month;
@@ -1659,14 +1660,12 @@
       });
     });
 
-    // 滚动高亮
     const contentArea = document.querySelector('.content-area');
     let highlightTimeout = null;
 
     function updateTimelineHighlight() {
       const cards = feedWrap.querySelectorAll('.weibo-card:not(#weiboCardTop)');
       let activeMonth = null;
-      const scrollTop = contentArea.scrollTop;
       const offset = 120;
 
       cards.forEach(card => {
@@ -1689,7 +1688,6 @@
       highlightTimeout = requestAnimationFrame(updateTimelineHighlight);
     });
 
-    // 初始高亮
     setTimeout(updateTimelineHighlight, 300);
   </script>
 </body>
