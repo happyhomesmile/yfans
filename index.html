@@ -704,9 +704,12 @@
 
     /* ===== 响应式 ===== */
     @media (max-width: 1024px) {
+      .fancam-wrap {
+        flex-direction: column;
+        align-items: center;
+      }
       .fancam-wrap .timeline-sidebar {
         position: relative;
-        right: auto;
         top: 0;
         flex-direction: row;
         flex-wrap: wrap;
@@ -1499,8 +1502,7 @@
 
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
-        renderMonthTabs();
-    
+
     // ---- 各平台的月份数据 ----
     const platformMonths = {
       weibo: ['2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
@@ -1540,7 +1542,7 @@
         });
       });
     }
-    
+
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
     const platformItems = document.querySelectorAll('.platform-nav-item');
     const allCards = document.querySelectorAll('#weiboFeed .weibo-card');
@@ -1559,6 +1561,7 @@
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
       allCards.forEach(card => {
+        // 置顶卡片：只在"全部"或"微博"平台，且月份为"全部"或"2026-01"时显示
         if (card.id === 'weiboCardTop') {
           const platformMatch = currentPlatform === 'all' || currentPlatform === 'weibo';
           const dateMatch = currentDate === '全部' || currentDate === '2026-01';
@@ -1583,9 +1586,13 @@
       });
     });
 
+    // dateTabs 现在由 renderMonthTabs 动态生成
+
     weiboSearchInput.addEventListener('input', function() {
       filterWeiboFeed();
     });
+
+    renderMonthTabs();
 
     // ---- 大图预览 ----
     const imageSets = {
