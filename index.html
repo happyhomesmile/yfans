@@ -2465,19 +2465,19 @@
     // ---- 右侧时间轴：点击跳转 + 滚动高亮 ----
     let highlightTimeout = null;
 
-    函数 updateTimelineHighlight() {
-      常量 feedWrap = document.getElementById('weiboFeed');
+    function updateTimelineHighlight() {
+      const feedWrap = document.getElementById('weiboFeed');
       const cards = feedWrap.querySelectorAll('.weibo-card:not(.pinned), .xiaohongshu-card:not(.pinned)');
       const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
       let activeMonth = null;
       const offset = 120;
 
       cards.forEach(card => {
-        如果 (card.样式.显示 === 'none') 返回;
+        if (card.style.display === 'none') return;
         const rect = card.getBoundingClientRect();
         const containerRect = contentArea.getBoundingClientRect();
         const cardTop = rect.top - containerRect.top;
-        如果 (cardTop < offset && cardTop > -rect.height) {
+        if (cardTop < offset && cardTop > -rect.height) {
           activeMonth = card.dataset.month;
         }
       });
@@ -2493,6 +2493,6 @@
     });
 
     setTimeout(updateTimelineHighlight, 300);
-  </脚本>
+  </script>
 </body>
     </html>
