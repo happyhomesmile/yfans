@@ -623,74 +623,6 @@
       .modal-image-container img { max-height: 70vh; }
       .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
     }
-
-    /* ===== 手机端适配 ===== */
-    @media screen and (max-width: 768px) {
-      .main-page { flex-direction: column; min-height: 100vh; }
-      .sidebar {
-        width: 100%; height: auto; min-height: auto;
-        position: sticky; bottom: 0; top: auto;
-        flex-direction: row; flex-wrap: nowrap;
-        overflow-x: auto; overflow-y: hidden;
-        padding: 8px 12px; gap: 4px;
-        border-right: none; border-top: 1px solid rgba(184,224,255,0.25);
-        box-shadow: 0 -2px 20px rgba(36,104,168,0.06);
-        background: rgba(255,255,255,0.80); backdrop-filter: blur(16px);
-        z-index: 20; flex-shrink: 0;
-        justify-content: flex-start; align-items: center;
-      }
-      .sidebar::-webkit-scrollbar { height: 2px; }
-      .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
-      .sidebar .avatar-box { display: none; }
-      .menu-item {
-        font-size: 12px; padding: 6px 12px;
-        white-space: nowrap; flex-shrink: 0;
-        border: 1px solid rgba(184,224,255,0.15);
-        background: rgba(255,255,255,0.3); border-radius: 20px;
-        margin-bottom: 0;
-      }
-      .menu-item .icon { font-size: 13px; width: 18px; }
-      .menu-item.active { background: rgba(36,104,168,0.12); border-color: rgba(36,104,168,0.25); }
-      .content-area {
-        flex: 1; max-height: none; overflow-y: visible;
-        padding: 16px 14px; padding-bottom: 70px;
-      }
-      .content-area::before { left: 0; }
-      .stage-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .info-grid { grid-template-columns: 1fr; }
-      .welcome-header { padding: 20px 16px 16px 16px; }
-      .welcome-header h1 { font-size: 20px; }
-      .welcome-header .links { gap: 12px; }
-      .welcome-header .links a { font-size: 12px; padding: 3px 12px; }
-      .search-box { max-width: 100%; }
-      .filter-search-row { flex-wrap: wrap; }
-      .weibo-media-grid { max-width: 100%; }
-      .weibo-media-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-      .weibo-media-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-      .platform-nav { gap: 4px; }
-      .platform-nav-item { font-size: 11px; padding: 4px 10px; }
-      .filter-tabs-row { padding: 4px 6px; gap: 3px; }
-      .category-tab { font-size: 10px; padding: 2px 8px; }
-    }
-    @media screen and (max-width: 480px) {
-      .content-area { padding: 12px 10px; padding-bottom: 64px; }
-      .info-box { padding: 14px 14px; }
-      .stage-grid { grid-template-columns: 1fr; gap: 10px; }
-      .menu-item { font-size: 11px; padding: 5px 10px; }
-      .menu-item .icon { font-size: 12px; width: 16px; }
-      .sidebar { padding: 6px 10px; gap: 3px; }
-      .welcome-header { padding: 14px 12px 12px 12px; }
-      .welcome-header h1 { font-size: 17px; }
-      .welcome-header .sub { font-size: 13px; }
-      .welcome-header .links a { font-size: 11px; padding: 3px 10px; }
-      .weibo-card { padding: 0.8rem; }
-      .weibo-media-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-      .weibo-media-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-      .media-item { border-radius: 6px; }
-      .platform-nav-item { font-size: 10px; padding: 3px 8px; }
-      .filter-tabs-row { padding: 3px 4px; gap: 2px; }
-      .category-tab { font-size: 9px; padding: 2px 6px; }
-    }
   </style>
 </head>
 <body>
@@ -1067,7 +999,7 @@
       { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
-      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV2sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
+      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
