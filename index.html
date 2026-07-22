@@ -33,16 +33,21 @@
 
     /* ===== 侧边栏 - 桌面版固定左侧 ===== */
     .sidebar {
-      width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
-      background: rgba(255,255,255,0.60); backdrop-filter: blur(16px);
-      border-right: 1px solid rgba(184,224,255,0.25);
-      padding: 24px 14px 20px 14px;
-      display: flex; flex-direction: column; gap: 4px;
-      flex-shrink: 0;
-      box-shadow: 2px 0 20px rgba(36,104,168,0.04);
-      overflow-y: auto;
-      z-index: 10;
-    }
+  width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
+  background: rgba(255,255,255,0.50);
+  backdrop-filter: blur(16px);
+  background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101345752.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;  /* 让背景图和半透明白色混合 */
+  border-right: 1px solid rgba(184,224,255,0.25);
+  padding: 24px 14px 20px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  flex-shrink: 0;
+  box-shadow: 2px 0 20px rgba(36,104,168,0.04);
+  overflow-y: auto;
+  z-index: 10;
+}
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
