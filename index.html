@@ -2037,9 +2037,10 @@
       btn.addEventListener('click', function() {
         platformItems.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
+      setTimeout(function() {
         renderMonthTabs();
         filterWeiboFeed();
-      });
+      }, 100);
     });
 
     weiboSearchInput.addEventListener('input', function() {
