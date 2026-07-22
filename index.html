@@ -1995,10 +1995,14 @@
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
+      // 每次重新获取所有卡片
+      const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+
       allCards.forEach(card => {
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
-
+        
+        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
         if (card.classList.contains('pinned')) {
           const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
           const dateMatch = currentDate === '全部';
@@ -2016,13 +2020,7 @@
       
       updateTimelineHighlight();
     }
-
-    weiboSearchInput.addEventListener('input', function() {
-      filterWeiboFeed();
-    });
-
-    renderMonthTabs();
-
+    
     // ---- 大图预览 ----
     const imageSets = {
       slider1: [
