@@ -58,9 +58,15 @@
     }
 
     /* ===== 侧边栏 - 桌面版固定左侧 ===== */
-    .sidebar {
+      .sidebar {
       width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
-      background: rgba(255,255,255,0.60); backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.75);  /* 半透明底色，保证文字可读 */
+      /* 新增背景图片 */
+      background-image: url("https://gitee.com/a1814747459/img-bed/raw/master/20260722101345752.jpg");
+      background-size: cover;
+      background-position: center center;
+      background-blend-mode: overlay;  /* 让图片和底色融合 */
+      backdrop-filter: blur(16px);
       border-right: 1px solid rgba(184,224,255,0.25);
       padding: 24px 14px 20px 14px;
       display: flex; flex-direction: column; gap: 4px;
@@ -69,9 +75,6 @@
       overflow-y: auto;
       z-index: 10;
     }
-    .sidebar::-webkit-scrollbar { width: 3px; }
-    .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
-
     .avatar-box {
       text-align: center; padding-bottom: 14px; border-bottom: 1px solid rgba(36,104,168,0.08);
       margin-bottom: 10px;
@@ -145,24 +148,21 @@
     .content-area::-webkit-scrollbar { width: 4px; }
     .content-area::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
-    .content-area::before {
+      .content-area::before {
       content: '';
       position: fixed;
       top: 0;
       left: 200px;
       right: 0;
       bottom: 0;
-      background-image: url("/img/3dabc18697b79afeea0378212c3c8e9f.jpg");
+      background-image: url("https://gitee.com/a1814747459/img-bed/raw/master/20260722101215361.jpg");
       background-size: cover;
-      background-position: center 30%;
-      opacity: 0.12;
-      filter: blur(3px);
+      background-position: center center;
+      opacity: 0.35;
+      filter: blur(4px);
       z-index: -1;
       pointer-events: none;
     }
-    .page-box { position: relative; z-index: 1; display: none; width: 100%; }
-    .page-box.active { display: block; }
-
     /* ===== 卡片 ===== */
     .info-box {
       max-width: 1000px; margin: 0 auto;
