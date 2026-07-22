@@ -9,7 +9,7 @@
     /* ===== 全局 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; scroll-behavior: smooth; }
-    body { background: linear-gradient(145dg, #eaf3fa 0%, #d4e6f5 100%); }
+    body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
 
     /* ===== 加载页 ===== */
     .loading-page {
@@ -273,7 +273,7 @@
       box-shadow: 0 2px 10px rgba(36,104,168,0.12);
     }
 
-    /* =====  - 平台导航 ===== */
+    /* ===== 饭之拍 - 平台导航 ===== */
     .platform-nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
       margin-bottom: 14px;
@@ -411,7 +411,7 @@
       font-weight: 400;
     }
 
-    /* =====  - 微博卡片 ===== */
+    /* ===== 饭之拍 - 微博卡片 ===== */
     .weibo-card {
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
@@ -700,12 +700,9 @@
 
     /* ===== 响应式 ===== */
     @media (max-width: 1024px) {
-      .fancam-layout {
-        flex-direction: column;
-        align-items: center;
-      }
-      .fancam-layout .timeline-sidebar {
+      .fancam-wrap .timeline-sidebar {
         position: relative;
+        right: auto;
         top: 0;
         flex-direction: row;
         flex-wrap: wrap;
@@ -716,22 +713,23 @@
         overflow-y: visible;
         justify-content: center;
         border-radius: 12px;
+        margin-top: 12px;
       }
-      .fancam-layout .timeline-sidebar .tl-item {
+      .fancam-wrap .timeline-sidebar .tl-item {
         width: auto;
         padding: 4px 10px;
         font-size: 0.7rem;
       }
-      .fancam-layout .timeline-sidebar .tl-line {
+      .fancam-wrap .timeline-sidebar .tl-line {
         display: none;
       }
-      .fancam-layout .timeline-sidebar .tl-year-label {
+      .fancam-wrap .timeline-sidebar .tl-year-label {
         width: auto;
         border-bottom: none;
         padding: 4px 8px;
         font-size: 0.65rem;
       }
-      .fancam-layout .info-box {
+      .fancam-wrap .info-box {
         max-width: 100%;
         width: 100%;
       }
@@ -785,6 +783,30 @@
     <div class="modal-dots" id="modalDots"></div>
     <div class="close-hint">点击图片外任意处关闭 · 左右切换</div>
   </div>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(31, 90, 138, 0.85);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(31,90,138,0.3);
+    transition: all 0.3s ease;
+    display: none;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+    ↑
+  </button>
 
   <div class="main-page">
     <!-- 侧边栏 -->
@@ -1180,6 +1202,24 @@
   <script>
     // 加载动画
     setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
+
+    // ---- 返回顶部按钮 ----
+    const backBtn = document.getElementById('backToTop');
+    const contentArea = document.querySelector('.content-area');
+
+    if (backBtn && contentArea) {
+      contentArea.addEventListener('scroll', function() {
+        if (contentArea.scrollTop > 300) {
+          backBtn.style.display = 'flex';
+        } else {
+          backBtn.style.display = 'none';
+        }
+      });
+
+      backBtn.addEventListener('click', function() {
+        contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     // 侧边栏切换
     const menuItems = document.querySelectorAll('.menu-item');
@@ -1682,7 +1722,7 @@
       });
     });
 
-    const contentArea = document.querySelector('.content-area');
+    // ---- 滚动高亮 ----
     let highlightTimeout = null;
 
     function updateTimelineHighlight() {
@@ -1712,28 +1752,5 @@
 
     setTimeout(updateTimelineHighlight, 300);
   </script>
-    <!-- 返回顶部按钮 -->
-  <button id="backToTop" style="
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(31, 90, 138, 0.85);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.2);
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(31,90,138,0.3);
-    transition: all 0.3s ease;
-    display: none;
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-  " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-    ↑
-  </button>
 </body>
 </html>
