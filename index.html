@@ -588,8 +588,7 @@
       padding: 18px 22px;
     }
     .fancam-wrap .timeline-sidebar {
-      position: absolute;
-      right: -88px;
+      position: sticky;
       top: 24px;
       width: 64px;
       display: flex;
@@ -604,6 +603,8 @@
       max-height: calc(100vh - 140px);
       overflow-y: auto;
       z-index: 5;
+      margin-left: 796px; 
+      flex-shrink: 0;
     }
 
     /* ===== 大图预览 Modal ===== */
@@ -1712,5 +1713,28 @@
 
     setTimeout(updateTimelineHighlight, 300);
   </script>
+    <!-- 返回顶部按钮 -->
+  <button id="backToTop" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(31, 90, 138, 0.85);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(31,90,138,0.3);
+    transition: all 0.3s ease;
+    display: none;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+    ↑
+  </button>
 </body>
 </html>
