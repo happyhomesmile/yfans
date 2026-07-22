@@ -911,35 +911,42 @@
 
       <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
-        <!-- 平台导航 -->
-        <div class="platform-nav" id="platformNav">
-          <button class="platform-nav-item active" data-platform="all">全部</button>
-          <button class="platform-nav-item" data-platform="weibo">微博</button>
-          <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
-          <button class="platform-nav-item" data-platform="douyin">抖音</button>
-          <button class="platform-nav-item" data-platform="bilibili">B站</button>
-        </div>
-
-        <div class="filter-search-row">
-          <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="weiboSearch" placeholder="搜索内容..." />
+        <!-- 浅色框包住所有内容 -->
+        <div class="info-box" style="max-width:100%; padding:18px 22px;">
+          
+          <!-- 平台导航 -->
+          <div class="platform-nav" id="platformNav">
+            <button class="platform-nav-item active" data-platform="all">全部</button>
+            <button class="platform-nav-item" data-platform="weibo">微博</button>
+            <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
+            <button class="platform-nav-item" data-platform="douyin">抖音</button>
+            <button class="platform-nav-item" data-platform="bilibili">B站</button>
           </div>
-        </div>
 
-        <div class="filter-tabs-row" id="weiboTabs">
-          <span class="category-tab active" data-month="全部">全部</span>
-          <span class="category-tab" data-month="2026-07">2026-07</span>
-          <span class="category-tab" data-month="2026-06">2026-06</span>
-          <span class="category-tab" data-month="2026-05">2026-05</span>
-          <span class="category-tab" data-month="2026-04">2026-04</span>
-        </div>
+          <!-- 搜索框 -->
+          <div class="filter-search-row">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="weiboSearch" placeholder="搜索内容..." />
+            </div>
+          </div>
 
-        <!-- 浅框 + 时间轴 并列 -->
-        <div class="fancam-wrapper">
-          <!-- 浅色背景框：只包微博列表 -->
-          <div class="info-box" style="max-width:780px; padding:18px 22px; margin:0;">
-            <div id="weiboFeed">
+          <!-- 月份筛选 -->
+          <div class="filter-tabs-row" id="weiboTabs">
+            <span class="category-tab active" data-month="全部">全部</span>
+            <span class="category-tab" data-month="2026-07">2026-07</span>
+            <span class="category-tab" data-month="2026-06">2026-06</span>
+            <span class="category-tab" data-month="2026-05">2026-05</span>
+            <span class="category-tab" data-month="2026-04">2026-04</span>
+            <span class="category-tab" data-month="2026-03">2026-03</span>
+            <span class="category-tab" data-month="2026-02">2026-02</span>
+            <span class="category-tab" data-month="2026-01">2026-01</span>
+          </div>
+
+          <!-- 微博列表 + 时间轴 并列 -->
+          <div style="display: flex; gap: 24px; align-items: flex-start; justify-content: center;">
+            <!-- 左侧微博列表 -->
+            <div id="weiboFeed" style="flex:1; max-width:780px; min-width:0;">
               <!-- 置顶 -->
               <div class="weibo-card pinned" id="weiboCardTop">
                 <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
@@ -1110,18 +1117,18 @@
 
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
-          </div>
 
-          <!-- 时间轴独立在右侧 -->
-          <div class="timeline-sidebar" id="timelineSidebar">
-            <div class="tl-year-label">2026</div>
-            <div class="tl-item" data-month="2026-07">07</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-06">06</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-05">05</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-04">04</div>
+            <!-- 时间轴独立在右侧（浅框内，与列表并列） -->
+            <div class="timeline-sidebar" id="timelineSidebar">
+              <div class="tl-year-label">2026</div>
+              <div class="tl-item" data-month="2026-07">07</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-06">06</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-05">05</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-04">04</div>
+            </div>
           </div>
         </div>
       </div>
