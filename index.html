@@ -1265,6 +1265,13 @@
                 </div>
               </div>
 
+              <!-- 小红书 4.13 -->
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
+                <div class="weibo-time">📅 2026-04-13 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">看我</span><span class="line">#樱花</span></div>
+                <a href="https://www.xiaohongshu.com/discovery/item/69dca94b000000001f007844?source=webshare&xhsshare=pc_web&xsec_token=ABV48WJJnGYuc1B9ZZ4lSNaEpzx28i5I-jShD96VElavw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
+              </div>
+
               <!-- 微博 4.29 -->
               <div class="weibo-card" data-platform="weibo" data-month="2026-04">
                 <div class="weibo-time">📅 2026-04-29 06:25 · 发布于 上海</div>
@@ -1276,13 +1283,6 @@
                   <div class="media-item" onclick="openModalWithImages('slider9', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441828.jpg" alt="配图3" loading="lazy" /></div>
                   <div class="media-item" onclick="openModalWithImages('slider9', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441829.jpg" alt="配图4" loading="lazy" /></div>
                 </div>
-              </div>
-
-              <!-- 小红书 4.13 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
-                <div class="weibo-time">📅 2026-04-13 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">看我</span><span class="line">#樱花</span></div>
-                <a href="https://www.xiaohongshu.com/discovery/item/69dca94b000000001f007844?source=webshare&xhsshare=pc_web&xsec_token=ABV48WJJnGYuc1B9ZZ4lSNaEpzx28i5I-jShD96VElavw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
               <!-- 微博 4.10 -->
@@ -1527,7 +1527,7 @@
 
               <!-- ========== 置顶卡片（仅在对应平台显示） ========== -->
               <!-- 微博置顶（仅在微博平台显示） -->
-              <div class="weibo-card pinned" data-platform="weibo">
+              <div class="weibo-card pinned" data-platform="weibo" data-month="2026-01">
                 <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
                 <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1539,7 +1539,7 @@
               </div>
 
               <!-- 小红书置顶（仅在小红书平台显示） -->
-              <div class="xiaohongshu-card pinned" data-platform="xiaohongshu">
+              <div class="xiaohongshu-card pinned" data-platform="xiaohongshu" data-month="2025-07">
                 <div class="weibo-time">📌 置顶 · 2025-07-25 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">Ok今天长这样</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/68826038000000002400810b?source=webshare&xhsshare=pc_web&xsec_token=ABmhMHaVLL_qkqoXAudvqHFc_56xf_KSMKZP8Gtxlj58g=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1894,7 +1894,7 @@
     // ---- 各平台的月份数据 ----
     const platformMonths = {
       weibo: ['2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      xiaohongshu: ['2026-05', '2026-04', '2026-03'],
+      xiaohongshu: ['2025-07', '2026-05', '2026-04', '2026-03'],
       douyin: [],
       bilibili: []
     };
@@ -1916,17 +1916,33 @@
       
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
+        timelineContainer.innerHTML = '';
         return;
       }
       timelineContainer.style.display = 'flex';
       
-      let html = `<div class="tl-year-label">2026</div>`;
-      months.forEach((m, index) => {
-        const monthNum = m.split('-')[1];
-        html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
-        if (index < months.length - 1) {
-          html += `<div class="tl-line"></div>`;
-        }
+      // 按年份分组显示
+      const yearGroups = {};
+      months.forEach(m => {
+        const year = m.split('-')[0];
+        if (!yearGroups[year]) yearGroups[year] = [];
+        yearGroups[year].push(m);
+      });
+      
+      let html = '';
+      // 从后往前遍历年份（2026 在前，2025 在后）
+      const sortedYears = Object.keys(yearGroups).sort((a, b) => b.localeCompare(a));
+      sortedYears.forEach((year, yearIndex) => {
+        if (yearIndex > 0) html += `<div class="tl-line"></div>`;
+        html += `<div class="tl-year-label">${year}</div>`;
+        const yearMonths = yearGroups[year].sort((a, b) => b.localeCompare(a));
+        yearMonths.forEach((m, index) => {
+          const monthNum = m.split('-')[1];
+          html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
+          if (index < yearMonths.length - 1) {
+            html += `<div class="tl-line"></div>`;
+          }
+        });
       });
       
       timelineContainer.innerHTML = html;
@@ -1999,10 +2015,10 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
+        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"或对应月份
         if (card.classList.contains('pinned')) {
           const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-          const dateMatch = currentDate === '全部';
+          const dateMatch = currentDate === '全部' || cardMonth === currentDate;
           card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
         }
@@ -2023,7 +2039,6 @@
         platformItems.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         renderMonthTabs();
-        renderTimeline();
         filterWeiboFeed();
       });
     });
