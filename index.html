@@ -577,20 +577,24 @@
 
     /* ===== 饭之拍 - 布局 ===== */
     .fancam-wrap {
-      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
       max-width: 780px;
       margin: 0 auto;
+      align-items: flex-start;
     }
     .fancam-wrap .info-box {
       max-width: 780px;
       width: 100%;
       margin: 0;
       padding: 18px 22px;
+      flex-shrink: 0;
     }
     .fancam-wrap .timeline-sidebar {
-      position: absolute;
-      right: -88px;
+      position: sticky;
       top: 24px;
+      flex-shrink: 0;
       width: 64px;
       display: flex;
       flex-direction: column;
@@ -1156,7 +1160,7 @@
             </div>
           </div>
 
-          <!-- 时间轴独立在右侧（绝对定位） -->
+          <!-- 时间轴独立在右侧（sticky 固定） -->
           <div class="timeline-sidebar" id="timelineSidebar">
             <div class="tl-year-label">2026</div>
             <div class="tl-item" data-month="2026-07">07</div>
