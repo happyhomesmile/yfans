@@ -2144,23 +2144,21 @@
       
       updateTimelineHighlight();
     }
-
+    
       platformItems.forEach(btn => {
         btn.addEventListener('click', function() {
           platformItems.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          setTimeout(function() {
-            renderMonthTabs();
-            filterWeiboFeed();
-          }, 100);
+          // 重置月份为"全部"
+          const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
+          if (allTab) {
+            document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
+            allTab.classList.add('active');
+          }
+          renderMonthTabs();
+          filterWeiboFeed();
         });
       });
-
-    weiboSearchInput.addEventListener('input', function() {
-      filterWeiboFeed();
-    });
-
-    renderMonthTabs();
 
     // ---- 大图预览 ----
     const imageSets = {
