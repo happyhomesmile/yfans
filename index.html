@@ -977,13 +977,6 @@
             <!-- 月份筛选 -->
             <div class="filter-tabs-row" id="weiboTabs">
               <span class="category-tab active" data-month="全部">全部</span>
-              <span class="category-tab" data-month="2026-07">2026-07</span>
-              <span class="category-tab" data-month="2026-06">2026-06</span>
-              <span class="category-tab" data-month="2026-05">2026-05</span>
-              <span class="category-tab" data-month="2026-04">2026-04</span>
-              <span class="category-tab" data-month="2026-03">2026-03</span>
-              <span class="category-tab" data-month="2026-02">2026-02</span>
-              <span class="category-tab" data-month="2026-01">2026-01</span>
             </div>
 
             <!-- 微博列表 -->
@@ -1506,7 +1499,48 @@
 
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
+        renderMonthTabs();
+    
+    // ---- 各平台的月份数据 ----
+    const platformMonths = {
+      weibo: ['2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
+      xiaohongshu: [],
+      douyin: [],
+      bilibili: []
+    };
 
+    // ---- 渲染月份筛选标签 ----
+    function renderMonthTabs() {
+      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
+      const tabsContainer = document.getElementById('weiboTabs');
+      
+      let html = `<span class="category-tab active" data-month="全部">全部</span>`;
+      
+      let months = [];
+      if (currentPlatform === 'all') {
+        const allMonths = new Set();
+        Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
+        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
+      } else {
+        months = platformMonths[currentPlatform] || [];
+      }
+      
+      months.forEach(m => {
+        html += `<span class="category-tab" data-month="${m}">${m}</span>`;
+      });
+      
+      tabsContainer.innerHTML = html;
+      
+      tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          filterWeiboFeed();
+        });
+      });
+    }
+    
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
     const platformItems = document.querySelectorAll('.platform-nav-item');
     const allCards = document.querySelectorAll('#weiboFeed .weibo-card');
@@ -1544,14 +1578,7 @@
       btn.addEventListener('click', function() {
         platformItems.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        filterWeiboFeed();
-      });
-    });
-
-    dateTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        dateTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
+        renderMonthTabs();
         filterWeiboFeed();
       });
     });
