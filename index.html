@@ -1526,11 +1526,9 @@
 
       allCards.forEach(card => {
         if (card.id === 'weiboCardTop') {
-          if (currentDate === '全部') {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+          const platformMatch = currentPlatform === 'all' || currentPlatform === 'weibo';
+          const dateMatch = currentDate === '全部' || currentDate === '2026-01';
+          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
         }
         const cardMonth = card.dataset.month || '';
