@@ -65,21 +65,15 @@
       font-size: 11px; color: #4a779e; letter-spacing: 0.5px; margin-top: 2px;
       opacity: 0.8;
     }
-
     .menu-item {
-      font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px;
-      border-radius: 8px; cursor: pointer; transition: all 0.2s;
-      border: 1px solid transparent;
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 4px;
-    }
-    .menu-item:hover { background: rgba(36,104,168,0.06); border-color: rgba(36,104,168,0.08); }
-    .menu-item.active {
-      background: rgba(36,104,168,0.10); border-color: rgba(36,104,168,0.15);
-      color: #1a4a6f; font-weight: 600;
-      box-shadow: 0 2px 8px rgba(36,104,168,0.06);
-    }
-    .menu-item .icon { font-size: 14px; width: 22px; text-align: center; }
+  font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px;
+  border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  border: 1px solid transparent;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 4px;
+  background: rgba(255,255,255,0.30);
+  backdrop-filter: blur(4px);
+}
 
     /* ===== 内容区 ===== */
     .content-area {
@@ -101,7 +95,7 @@
       background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101215361.jpg");
       background-size: cover;
       background-position: center 30%;
-      opacity: 0.5;
+      opacity: 0.12;
       filter: blur(3px);
       z-index: 0;
       pointer-events: none;
