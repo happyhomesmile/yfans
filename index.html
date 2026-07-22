@@ -701,25 +701,6 @@
     <div class="load-box"><div class="progress-bar"></div></div>
   </div>
 
-  <!-- 浮动装饰 -->
-  <div class="float-deco deco-butterfly" style="top:8%;left:3%;font-size:18px;opacity:0.20;position:fixed;pointer-events:none;z-index:0;animation:floatAnim 12s infinite alternate ease-in-out;">🦋</div>
-  <div class="float-deco deco-star" style="bottom:12%;right:4%;font-size:16px;opacity:0.20;position:fixed;pointer-events:none;z-index:0;animation:floatAnim 12s infinite alternate ease-in-out 2s;">✦</div>
-  <style>
-    .float-deco {
-      position: fixed; pointer-events: none; z-index: 0;
-      animation: floatAnim 14s infinite alternate ease-in-out;
-    }
-    @keyframes floatAnim {
-      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-      100% { transform: translate(16px, -16px) rotate(10deg) scale(1.05); }
-    }
-    .deco-butterfly { color: #5f8db0; opacity: 0.20; }
-    .deco-star { color: #f5c542; opacity: 0.15; text-shadow: 0 0 8px rgba(245,197,66,0.10); }
-    @media screen and (max-width: 480px) {
-      .float-deco { display: none; }
-    }
-  </style>
-
   <!-- 大图预览 Modal -->
   <div class="image-modal" id="imageModal">
     <div class="modal-image-container" id="modalImageContainer">
@@ -1125,92 +1106,45 @@
 
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
+// ===== 使用你自己的 Deno Deploy 代理 =====
+const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
 
-    // ========== 优化后的封面获取（并行 + 快速代理） ==========
-    // 使用多个代理服务，并行请求，哪个先返回用哪个
-    const PROXY_SERVERS = [
-      'https://api.allorigins.win/raw?url=',
-      'https://corsproxy.io/?'
-    ];
+// 从链接提取 BV 号
+function extractBvid(url) {
+    const match = url.match(/BV([a-zA-Z0-9]+)/);
+    if (!match) return null;
+    return 'BV' + match[1];
+}
 
-    // 从链接提取 BV 号
-    function extractBvid(url) {
-      const match = url.match(/BV([a-zA-Z0-9]+)/);
-      if (!match) return null;
-      return 'BV' + match[1];
-    }
+// 使用你的代理获取封面
+async function fetchBilibiliCoverFast(url) {
+    const bvid = extractBvid(url);
+    if (!bvid) return null;
+    if (coverCache.has(url)) return coverCache.get(url);
 
-    // 单个封面获取（带超时和重试）
-    async function fetchSingleCover(url, proxy, timeout = 3000) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeout);
-      try {
-        const apiUrl = `https://api.bilibili.com/x/web-interface/view?bvid=${url}`;
-        const response = await fetch(proxy + encodeURIComponent(apiUrl), {
-          signal: controller.signal,
-          mode: 'cors'
-        });
-        clearTimeout(timer);
+    try {
+        const response = await fetch(`${MY_PROXY}?bvid=${bvid}`);
         if (response.ok) {
-          const data = await response.json();
-          if (data.code === 0 && data.data && data.data.pic) {
-            return data.data.pic;
-          }
-        }
-        return null;
-      } catch (e) {
-        clearTimeout(timer);
-        return null;
-      }
-    }
-
-    // 并行获取封面（多个代理同时请求，取最快返回的结果）
-    async function fetchBilibiliCoverFast(url) {
-      const bvid = extractBvid(url);
-      if (!bvid) return null;
-
-      // 先查缓存
-      if (coverCache.has(url)) {
-        return coverCache.get(url);
-      }
-
-      // 并行请求所有代理
-      const promises = PROXY_SERVERS.map(proxy => 
-        fetchSingleCover(bvid, proxy, 3000)
-      );
-
-      // 使用 Promise.race 取最快返回的结果
-      // 但为了容错，使用 Promise.allSettled 等待所有完成，取第一个成功的
-      try {
-        const results = await Promise.allSettled(promises);
-        for (const result of results) {
-          if (result.status === 'fulfilled' && result.value) {
-            const coverUrl = result.value;
-            // 确保图片能加载
-            if (coverUrl) {
-              coverCache.set(url, coverUrl);
-              return coverUrl;
+            const data = await response.json();
+            if (data.code === 0 && data.data && data.data.pic) {
+                const coverUrl = data.data.pic;
+                // 预加载图片
+                await new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve();
+                    img.onerror = () => resolve();
+                    img.src = coverUrl;
+                });
+                coverCache.set(url, coverUrl);
+                return coverUrl;
             }
-          }
         }
         return null;
-      } catch (e) {
+    } catch (e) {
+        console.warn('获取封面失败:', e);
         return null;
-      }
     }
-
-    // 批量获取封面（并行，每批5个）
-    async function fetchBatchCovers(items, batchSize = 5) {
-      const results = [];
-      for (let i = 0; i < items.length; i += batchSize) {
-        const batch = items.slice(i, i + batchSize);
-        const batchPromises = batch.map(item => fetchBilibiliCoverFast(item.url));
-        const batchResults = await Promise.all(batchPromises);
-        results.push(...batchResults);
-      }
-      return results;
-    }
-
+}
     // ---- 渲染卡片 ----
     function getMonthList(category) {
       let data = [];
