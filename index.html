@@ -1091,6 +1091,29 @@
 
             <!-- 微博列表 -->
             <div id="weiboFeed">
+              
+              <!-- ========== 置顶卡片（仅在对应平台显示） ========== -->
+              <!-- 微博置顶（仅在微博平台显示） -->
+              <div class="weibo-card pinned" data-platform="weibo">
+                <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
+                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>第一百条微博</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+                </div>
+              </div>
+
+              <div class="xiaohongshu-card pinned" data-platform="xiaohongshu">
+                <div class="weibo-time">📌 置顶 · 2025-07-25 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">Ok今天长这样</span></div>
+                <a href="https://www.xiaohongshu.com/discovery/item/68826038000000002400810b?source=webshare&xhsshare=pc_web&xsec_token=ABmhMHaVLL_qkqoXAudvqHFc_56xf_KSMKZP8Gtxlj58g=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.jpg" alt="配图2" loading="lazy" /></div>
+                </div>
+              </div>
 
               <!-- ========== 2026-07 ========== -->
               <!-- 微博 7.18 -->
@@ -1525,28 +1548,6 @@
                 </div>
               </div>
 
-              <!-- ========== 置顶卡片（仅在对应平台显示） ========== -->
-              <!-- 微博置顶（仅在微博平台显示） -->
-              <div class="weibo-card pinned" data-platform="weibo">
-                <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
-                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-                <div class="weibo-comment-bottom">
-                  <span class="comment-label">评论</span>
-                  <span>第一百条微博</span>
-                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
-                </div>
-              </div>
-
-              <div class="xiaohongshu-card pinned" data-platform="xiaohongshu">
-                <div class="weibo-time">📌 置顶 · 2025-07-25 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">Ok今天长这样</span></div>
-                <a href="https://www.xiaohongshu.com/discovery/item/68826038000000002400810b?source=webshare&xhsshare=pc_web&xsec_token=ABmhMHaVLL_qkqoXAudvqHFc_56xf_KSMKZP8Gtxlj58g=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
-                <div class="weibo-media-grid cols-2">
-                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.jpg" alt="配图1" loading="lazy" /></div>
-                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.jpg" alt="配图2" loading="lazy" /></div>
-                </div>
-              </div>
 
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
@@ -2014,9 +2015,9 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：只在对应平台显示，不受月份影响
+        // 置顶卡片：只在对应平台显示，不显示在"全部"中
         if (card.classList.contains('pinned')) {
-          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
+          const platformMatch = cardPlatform === currentPlatform;
           card.style.display = platformMatch ? '' : 'none';
           return;
         }
