@@ -1334,6 +1334,17 @@
                   <div class="media-item" onclick="openModalWithImages('slider24', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151933094.jpg" alt="配图4" loading="lazy" /></div>
                 </div>
               </div>
+              
+                <div class="weibo-card" data-month="2026-01">
+                 <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
+                  <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
+                  <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                  <div class="weibo-comment-bottom">
+                    <span class="comment-label">评论</span>
+                    <span>第一百条微博</span>
+                    <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+                  </div>
+                </div>
 
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
@@ -1744,10 +1755,10 @@
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
       allCards.forEach(card => {
-        // 置顶卡片：只在"全部"或"微博"平台，且月份为"全部"或"2026-01"时显示
+        // 置顶卡片：只在"全部"平台显示，月份不影响
         if (card.id === 'weiboCardTop') {
           const platformMatch = currentPlatform === 'all' || currentPlatform === 'weibo';
-          const dateMatch = currentDate === '全部' || currentDate === '2026-01';
+          const dateMatch = currentDate === '全部';
           card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
         }
