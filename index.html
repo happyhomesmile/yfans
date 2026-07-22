@@ -8,8 +8,53 @@
   <style>
     /* ===== 全局 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; }
+    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; cursor: none; }
     body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
+
+    /* ===== 蝴蝶掉落动画 ===== */
+    .butterfly-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+      opacity: 0.8;
+    }
+    .butterfly {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      animation: butterflyFall linear infinite;
+      will-change: transform, opacity;
+    }
+    @keyframes butterflyFall {
+      0% { opacity: 0; transform: translateY(-10vh) rotate(0deg) scale(0.5); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(1.2); }
+    }
+
+    /* ===== 鼠标蝴蝶指针 ===== */
+    .cursor-butterfly {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999999;
+      font-size: 28px;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s ease;
+      filter: drop-shadow(0 0 8px rgba(74, 144, 217, 0.3));
+      opacity: 1;
+    }
+    .cursor-butterfly.flutter {
+      animation: flutterAnim 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes flutterAnim {
+      0% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
+      100% { transform: translate(-50%, -50%) rotate(10deg) scale(1.1); }
+    }
 
     /* ===== 加载页 ===== */
     .loading-page {
@@ -29,6 +74,8 @@
     .main-page {
       display: flex; width: 100vw; min-height: 100vh;
       background: transparent;
+      position: relative;
+      z-index: 1;
     }
 
     /* ===== 侧边栏 - 桌面版固定左侧 ===== */
@@ -88,6 +135,26 @@
       0% { transform: scale(1) rotate(-8deg) translateY(-2px); }
       100% { transform: scale(1.1) rotate(8deg) translateY(2px); }
     }
+    .avatar-name { color: #1a4a6f; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; }
+    .avatar-sub {
+      font-size: 11px; color: #4a779e; letter-spacing: 0.5px; margin-top: 2px;
+      opacity: 0.8;
+    }
+
+    .menu-item {
+      font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px;
+      border-radius: 8px; cursor: pointer; transition: all 0.2s;
+      border: 1px solid transparent;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 4px;
+    }
+    .menu-item:hover { background: rgba(36,104,168,0.06); border-color: rgba(36,104,168,0.08); }
+    .menu-item.active {
+      background: rgba(36,104,168,0.10); border-color: rgba(36,104,168,0.15);
+      color: #1a4a6f; font-weight: 600;
+      box-shadow: 0 2px 8px rgba(36,104,168,0.06);
+    }
+    .menu-item .icon { font-size: 14px; width: 22px; text-align: center; }
 
     /* ===== 内容区 ===== */
     .content-area {
@@ -95,6 +162,7 @@
       background: transparent;
       position: relative;
       padding-bottom: 20px;
+      z-index: 1;
     }
     .content-area::-webkit-scrollbar { width: 4px; }
     .content-area::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
@@ -111,7 +179,7 @@
       background-position: center 30%;
       opacity: 0.12;
       filter: blur(3px);
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
     }
     .page-box { position: relative; z-index: 1; display: none; width: 100%; }
@@ -402,48 +470,6 @@
       opacity: 0.6;
       font-weight: 400;
     }
-    /* ===== 蝴蝶掉落动画 ===== */
-    .butterfly-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.7;
-    }
-    .butterfly {
-    /* ===== 鼠标蝴蝶指针 ===== */
-    .cursor-butterfly {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      font-size: 28px;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s ease;
-      filter: drop-shadow(0 0 8px rgba(74, 144, 217, 0.3));
-    }
-    .cursor-butterfly.flutter {
-      animation: flutterAnim 0.6s ease-in-out infinite alternate;
-    }
-    @keyframes flutterAnim {
-      0% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
-      100% { transform: translate(-50%, -50%) rotate(10deg) scale(1.1); }
-    }
-      position: absolute;
-      font-size: 20px;
-      opacity: 0;
-      animation: butterflyFall linear infinite;
-      will-change: transform, opacity;
-    }
-    @keyframes butterflyFall {
-      0% { opacity: 0; transform: translateY(-10vh) rotate(0deg) scale(0.5); }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(1.2); }
-    }
 
     /* ===== 饭之拍 - 折叠微博卡片 ===== */
     .update-trigger {
@@ -683,8 +709,7 @@
 <body>
   <!-- 蝴蝶容器 -->
   <div class="butterfly-container" id="butterflyContainer"></div>
-  <!-- 加载页 -->
-  <div class="loading-page" id="loading">
+  
   <!-- 加载页 -->
   <div class="loading-page" id="loading">
     <div class="rice-emoji">🍚</div>
@@ -708,9 +733,9 @@
     <div class="sidebar">
       <div class="avatar-box">
         <div class="avatar">
-  <span class="avatar-emoji">🍚</span>
-  <span class="avatar-butterfly" style="color:#4a90d9;">🦋</span>
-</div>
+          <span class="avatar-emoji">🍚</span>
+          <span class="avatar-butterfly" id="avatarButterfly">🦋</span>
+        </div>
         <div class="avatar-name">一颗椰饭</div>
         <div class="avatar-sub">✨ 允许一切发生 ✨</div>
       </div>
@@ -1023,90 +1048,87 @@
   <script>
     // 加载动画
     setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
+
     // ===== 蓝色蝴蝶掉落效果 =====
-(function createButterflies() {
-  const container = document.getElementById('butterflyContainer');
-  if (!container) return;
-  const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0'];
-  function getColoredButterfly() {
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    return `<span style="color:${color};">🦋</span>`;
-  }
-  function createButterfly() {
-    const el = document.createElement('div');
-    el.className = 'butterfly';
-    if (Math.random() > 0.3) {
-      el.innerHTML = getColoredButterfly();
-    } else {
-      el.textContent = '🦋';
-      el.style.color = colors[Math.floor(Math.random() * colors.length)];
-    }
-    const size = 14 + Math.random() * 18;
-    el.style.fontSize = size + 'px';
-    el.style.left = Math.random() * 100 + '%';
-    el.style.animationDuration = (8 + Math.random() * 10) + 's';
-    el.style.animationDelay = Math.random() * 8 + 's';
-    container.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
-  }
-  for (let i = 0; i < 25; i++) {
-    setTimeout(() => createButterfly(), i * 200);
-  }
-  setInterval(() => {
-    if (container.children.length < 40) createButterfly();
-  }, 1500 + Math.random() * 1500);
-})();
-        // ===== 鼠标变成蝴蝶 =====
+    (function createButterflies() {
+      const container = document.getElementById('butterflyContainer');
+      if (!container) return;
+      const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0'];
+      function getColoredButterfly() {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        return `<span style="color:${color};">🦋</span>`;
+      }
+      function createButterfly() {
+        const el = document.createElement('div');
+        el.className = 'butterfly';
+        if (Math.random() > 0.3) {
+          el.innerHTML = getColoredButterfly();
+        } else {
+          el.textContent = '🦋';
+          el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        }
+        const size = 14 + Math.random() * 18;
+        el.style.fontSize = size + 'px';
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDuration = (8 + Math.random() * 10) + 's';
+        el.style.animationDelay = Math.random() * 8 + 's';
+        container.appendChild(el);
+        el.addEventListener('animationend', () => el.remove());
+      }
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => createButterfly(), i * 200);
+      }
+      setInterval(() => {
+        if (container.children.length < 40) createButterfly();
+      }, 1500 + Math.random() * 1500);
+    })();
+
+    // ===== 鼠标变成蝴蝶 =====
     (function cursorButterfly() {
-      // 默认隐藏系统鼠标
       document.body.style.cursor = 'none';
-      
-      // 创建蝴蝶元素
       const butterfly = document.createElement('div');
       butterfly.className = 'cursor-butterfly flutter';
       butterfly.textContent = '🦋';
-      // 随机蓝色
       const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0'];
       butterfly.style.color = colors[Math.floor(Math.random() * colors.length)];
       document.body.appendChild(butterfly);
-      
-      // 跟随鼠标移动
       let mouseX = window.innerWidth / 2;
       let mouseY = window.innerHeight / 2;
-      
       document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         butterfly.style.left = mouseX + 'px';
         butterfly.style.top = mouseY + 'px';
       });
-      
-      // 鼠标离开页面时显示系统指针
       document.addEventListener('mouseleave', () => {
         document.body.style.cursor = 'default';
         butterfly.style.display = 'none';
       });
-      
       document.addEventListener('mouseenter', () => {
         document.body.style.cursor = 'none';
         butterfly.style.display = 'block';
       });
-      
-      // 点击时蝴蝶扑腾一下
       document.addEventListener('click', () => {
         butterfly.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(-20deg)';
         setTimeout(() => {
           butterfly.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
         }, 150);
       });
-      
-      // 窗口大小变化时跟随
       window.addEventListener('resize', () => {
         if (mouseX > window.innerWidth) mouseX = window.innerWidth - 10;
         if (mouseY > window.innerHeight) mouseY = window.innerHeight - 10;
         butterfly.style.left = mouseX + 'px';
         butterfly.style.top = mouseY + 'px';
       });
+    })();
+
+    // ===== 头像蝴蝶随机颜色 =====
+    (function avatarButterflyColor() {
+      const bt = document.getElementById('avatarButterfly');
+      if (bt) {
+        const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0', '#9ac8f5'];
+        bt.style.color = colors[Math.floor(Math.random() * colors.length)];
+      }
     })();
 
     // 侧边栏切换
@@ -1185,45 +1207,44 @@
 
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
-// ===== 使用你自己的 Deno Deploy 代理 =====
-const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
+    // ===== 使用你自己的 Deno Deploy 代理 =====
+    const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
 
-// 从链接提取 BV 号
-function extractBvid(url) {
-    const match = url.match(/BV([a-zA-Z0-9]+)/);
-    if (!match) return null;
-    return 'BV' + match[1];
-}
+    // 从链接提取 BV 号
+    function extractBvid(url) {
+      const match = url.match(/BV([a-zA-Z0-9]+)/);
+      if (!match) return null;
+      return 'BV' + match[1];
+    }
 
-// 使用你的代理获取封面
-async function fetchBilibiliCoverFast(url) {
-    const bvid = extractBvid(url);
-    if (!bvid) return null;
-    if (coverCache.has(url)) return coverCache.get(url);
+    // 使用你的代理获取封面
+    async function fetchBilibiliCoverFast(url) {
+      const bvid = extractBvid(url);
+      if (!bvid) return null;
+      if (coverCache.has(url)) return coverCache.get(url);
 
-    try {
+      try {
         const response = await fetch(`${MY_PROXY}?bvid=${bvid}`);
         if (response.ok) {
-            const data = await response.json();
-            if (data.code === 0 && data.data && data.data.pic) {
-                const coverUrl = data.data.pic;
-                // 预加载图片
-                await new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve();
-                    img.onerror = () => resolve();
-                    img.src = coverUrl;
-                });
-                coverCache.set(url, coverUrl);
-                return coverUrl;
-            }
+          const data = await response.json();
+          if (data.code === 0 && data.data && data.data.pic) {
+            const coverUrl = data.data.pic;
+            await new Promise((resolve) => {
+              const img = new Image();
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+              img.src = coverUrl;
+            });
+            coverCache.set(url, coverUrl);
+            return coverUrl;
+          }
         }
         return null;
-    } catch (e) {
+      } catch (e) {
         console.warn('获取封面失败:', e);
         return null;
+      }
     }
-}
     // ---- 渲染卡片 ----
     function getMonthList(category) {
       let data = [];
