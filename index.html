@@ -513,41 +513,40 @@
 
     /* ===== 小红书卡片样式 ===== */
     .xiaohongshu-card {
-      background: rgba(255, 245, 245, 0.75);
+      background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
       border-radius: 14px;
       border-left: 4px solid #ff6b7a;
-      border-right: 1px solid rgba(255, 100, 120, 0.15);
-      border-top: 1px solid rgba(255, 100, 120, 0.15);
-      border-bottom: 1px solid rgba(255, 100, 120, 0.15);
+      border-right: 1px solid rgba(26,74,111,0.08);
+      border-top: 1px solid rgba(26,74,111,0.08);
+      border-bottom: 1px solid rgba(26,74,111,0.08);
       padding: 1.2rem 1.2rem 1rem;
-      box-shadow: 0 2px 8px rgba(255, 80, 100, 0.04);
+      box-shadow: 0 2px 8px rgba(36,104,168,0.02);
       margin-bottom: 0.8rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
     }
     .xiaohongshu-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(255, 80, 100, 0.12);
+      box-shadow: 0 4px 16px rgba(36,104,168,0.08);
     }
     .xiaohongshu-card.pinned {
       border-left: 4px solid #e85a6a;
-      border-right: 2px solid rgba(255, 80, 100, 0.25);
-      border-top: 2px solid rgba(255, 80, 100, 0.25);
-      border-bottom: 2px solid rgba(255, 80, 100, 0.25);
-      background: rgba(255, 240, 240, 0.85);
+      border-right: 2px solid rgba(26,74,111,0.15);
+      border-top: 2px solid rgba(26,74,111,0.15);
+      border-bottom: 2px solid rgba(26,74,111,0.15);
+      background: rgba(255,255,255,0.75);
     }
     .xiaohongshu-card .weibo-time {
       font-size: 0.8rem;
-      color: #c05a6a;
+      color: #4a779e;
       margin-bottom: 0.6rem;
       padding-bottom: 0.3rem;
-      border-bottom: 1px dashed rgba(255, 100, 120, 0.20);
+      border-bottom: 1px dashed rgba(184,224,255,0.25);
     }
     .xiaohongshu-card .weibo-text {
       font-size: 0.95rem;
       line-height: 1.7;
-      color: #4a2a2a;
+      color: #1a2f3f;
       margin-bottom: 0.8rem;
       word-break: break-word;
     }
@@ -556,10 +555,10 @@
       display: inline-block;
       margin: 0.5rem 0 0.2rem 0;
       padding: 0.3rem 1.2rem;
-      background: rgba(255, 80, 100, 0.10);
-      border: 1px solid rgba(255, 80, 100, 0.20);
+      background: rgba(26, 74, 111, 0.08);
+      border: 1px solid rgba(26, 74, 111, 0.15);
       border-radius: 20px;
-      color: #c05a6a;
+      color: #1a4a6f;
       font-size: 0.85rem;
       font-weight: 500;
       text-decoration: none;
@@ -567,20 +566,20 @@
       cursor: pointer;
     }
     .xiaohongshu-card .weibo-link-button:hover {
-      background: rgba(255, 80, 100, 0.18);
-      border-color: rgba(255, 80, 100, 0.35);
+      background: rgba(26, 74, 111, 0.15);
+      border-color: rgba(26, 74, 111, 0.3);
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(255, 80, 100, 0.10);
+      box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
     }
     .xiaohongshu-card .weibo-comment-bottom {
       margin-top: 0.8rem;
       padding-top: 0.8rem;
-      border-top: 1px solid rgba(255, 100, 120, 0.15);
+      border-top: 1px solid rgba(184,224,255,0.2);
       font-size: 0.9rem;
-      color: #7a4a4a;
+      color: #2c5a7a;
     }
     .xiaohongshu-card .weibo-comment-bottom .comment-label {
-      color: #b06a7a;
+      color: #6a8fa8;
       margin-right: 0.3rem;
     }
     .xiaohongshu-card .weibo-media-grid {
@@ -600,7 +599,7 @@
       aspect-ratio: 1 / 1;
       overflow: hidden;
       border-radius: 8px;
-      background: #fce8ea;
+      background: #d4e6f5;
       cursor: pointer;
       transition: transform 0.15s ease;
     }
@@ -1941,9 +1940,8 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片特殊处理：只在平台匹配且月份为"全部"时显示
         if (card.classList.contains('pinned')) {
-          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
+          const platformMatch = currentPlatform === 'weibo';
           const dateMatch = currentDate === '全部';
           card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
