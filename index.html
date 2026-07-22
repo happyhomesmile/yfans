@@ -2006,7 +2006,7 @@
     // ---- 各平台的月份数据 ----
     const platformMonths = {
       weibo: ['2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      xiaohongshu: ['2025-07', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
+      xiaohongshu: ['2026-05', '2026-04', '2026-03', '2026-02', '2026-01,'2025-07', '],
       douyin: [],
       bilibili: []
     };
@@ -2127,10 +2127,12 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：只在对应平台显示，不显示在"全部"中
+        // 置顶卡片：只在对应平台且匹配它的月份时显示
         if (card.classList.contains('pinned')) {
           const platformMatch = cardPlatform === currentPlatform;
-          card.style.display = platformMatch ? '' : 'none';
+          const dateMatch = cardMonth === currentDate;
+          const allMatch = currentDate === '全部';
+          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
         }
         
