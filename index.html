@@ -636,6 +636,7 @@
     .timeline-sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
     .timeline-sidebar .tl-year-label {
+      position: relative;         
       font-size: 0.55rem;
       font-weight: 700;
       color: #1f5a8a;
@@ -646,6 +647,13 @@
       margin-bottom: 2px;
       width: 100%;
       text-align: center;
+      cursor: pointer;               
+      transition: all 0.2s ease;
+      border-radius: 4px;
+    }
+    .timeline-sidebar .tl-year-label:hover {
+      background: rgba(36,104,168,0.08);
+      opacity: 1;
     }
     .timeline-sidebar .tl-item {
       font-size: 0.6rem;
@@ -677,6 +685,249 @@
       height: 8px;
       background: rgba(184,224,255,0.3);
       flex-shrink: 0;
+    }
+
+    /* ===== 内联日历 ===== */
+    .inline-calendar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: calc(100% + 10px);
+      z-index: 20;
+      width: 300px;
+      height: 300px;
+      min-width: 260px;
+      min-height: 260px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      border: 1px solid rgba(26,74,111,0.12);
+      box-shadow: 0 8px 40px rgba(26,74,111,0.18);
+    }
+    .inline-calendar .cal-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+      flex: 1;
+      align-content: center;
+    }
+    .inline-calendar .cal-days-grid > div {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      position: relative;
+      color: #1a2f3f;
+      cursor: default;
+    }
+    .inline-calendar .cal-days-grid > div[data-date] {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .inline-calendar .cal-days-grid > div[data-date]:hover {
+      background: rgba(36,104,168,0.10);
+    }
+
+    /* ===== 日历弹窗 ===== */
+    .calendar-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(26,74,111,0.12);
+      box-shadow: 0 20px 60px rgba(26,74,111,0.15);
+      padding: 24px 28px;
+      z-index: 9998;
+      max-width: 400px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .calendar-popup.open {
+      display: block;
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .calendar-popup .cal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(26,74,111,0.08);
+    }
+    .calendar-popup .cal-header .cal-year {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a4a6f;
+    }
+    .calendar-popup .cal-header .cal-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: #7a9ab0;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .calendar-popup .cal-header .cal-close:hover {
+      background: rgba(26,74,111,0.06);
+    }
+    .calendar-popup .cal-months {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .calendar-popup .cal-month {
+      border-radius: 12px;
+      padding: 8px 4px;
+      background: rgba(240,247,254,0.5);
+    }
+    .calendar-popup .cal-month .cal-month-label {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1a4a6f;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(184,224,255,0.2);
+    }
+    .calendar-popup .cal-month .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      font-size: 0.5rem;
+      color: #7a9ab0;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .calendar-popup .cal-month .cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .calendar-popup .cal-month .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+      color: #1a2f3f;
+      border: 1px solid transparent;
+      font-weight: 500;
+    }
+    .calendar-popup .cal-month .cal-day.empty {
+      cursor: default;
+      color: transparent;
+    }
+    .calendar-popup .cal-month .cal-day.has-update {
+      border-color: transparent;
+      font-weight: 700;
+    }
+    .calendar-popup .cal-month .cal-day .dot {
+      position: absolute;
+      bottom: 0px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      transition: transform 0.15s ease;
+    }
+    .calendar-popup .cal-month .cal-day .dot.weibo {
+      background: #4299e1;
+    }
+    .calendar-popup .cal-month .cal-day .dot.xiaohongshu {
+      background: #ff6b7a;
+    }
+    .calendar-popup .cal-month .cal-day .dot.multi {
+      background: linear-gradient(135deg, #4299e1 50%, #ff6b7a 50%);
+    }
+    .calendar-popup .cal-month .cal-day:hover {
+      background: rgba(36,104,168,0.08);
+      transform: scale(1.05);
+    }
+    .calendar-popup .cal-month .cal-day.has-update:hover {
+      background: rgba(36,104,168,0.12);
+    }
+    .calendar-popup .cal-month .cal-day .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.55rem;
+      white-space: nowrap;
+      font-weight: 400;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .calendar-popup .cal-month .cal-day .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0,0,0,0.8);
+    }
+    .calendar-popup .cal-month .cal-day:hover .tooltip {
+      display: block;
+    }
+    .calendar-popup .cal-month .cal-day .tooltip .platform-tag {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      margin: 0 1px;
+    }
+    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.weibo {
+      background: #4299e1;
+      color: #fff;
+    }
+    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.xiaohongshu {
+      background: #ff6b7a;
+      color: #fff;
+    }
+    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.multi {
+      background: linear-gradient(135deg, #4299e1, #ff6b7a);
+      color: #fff;
+    }
+
+    /* ===== 遮罩 ===== */
+    .calendar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      z-index: 9997;
+    }
+    .calendar-overlay.open {
+      display: block;
     }
 
     /* ===== 饭之拍 - 布局 ===== */
@@ -850,6 +1101,13 @@
       .stage-wrap {
         max-width: 100%;
       }
+      .calendar-popup {
+        max-width: 95%;
+        padding: 16px;
+      }
+      .calendar-popup .cal-months {
+        grid-template-columns: 1fr 1fr;
+      }
     }
     @media (max-width: 768px) {
       .modal-btn { width: 36px; height: 36px; font-size: 18px; }
@@ -865,6 +1123,16 @@
       .content-area { padding: 12px; }
       .avatar { width: 48px; height: 48px; }
       .avatar-name { font-size: 13px; }
+      .calendar-popup .cal-months {
+        grid-template-columns: 1fr 1fr;
+      }
+      .inline-calendar {
+        width: 260px;
+        height: 260px;
+        min-width: 220px;
+        min-height: 220px;
+        padding: 12px 14px;
+      }
     }
     @media (max-width: 480px) {
       .stage-grid { grid-template-columns: 1fr; }
@@ -876,6 +1144,26 @@
       .weibo-card .weibo-media-grid.cols-3,
       .xiaohongshu-card .weibo-media-grid.cols-2,
       .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+      .calendar-popup .cal-months {
+        grid-template-columns: 1fr 1fr;
+      }
+      .calendar-popup .cal-month .cal-day {
+        font-size: 0.5rem;
+      }
+      .calendar-popup .cal-month .cal-day .dot {
+        width: 4px;
+        height: 4px;
+      }
+      .inline-calendar {
+        width: 220px;
+        height: 220px;
+        min-width: 180px;
+        min-height: 180px;
+        padding: 10px 12px;
+      }
+      .inline-calendar .cal-days-grid > div {
+        font-size: 0.55rem;
+      }
     }
   </style>
 </head>
@@ -1067,10 +1355,8 @@
       <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
         <div class="fancam-wrap">
-          <!-- 浅色框 -->
           <div class="info-box" style="padding:18px 22px;">
             
-            <!-- 平台导航 -->
             <div class="platform-nav" id="platformNav">
               <button class="platform-nav-item active" data-platform="all">全部</button>
               <button class="platform-nav-item" data-platform="weibo">微博</button>
@@ -1079,7 +1365,6 @@
               <button class="platform-nav-item" data-platform="bilibili">B站</button>
             </div>
 
-            <!-- 搜索框 -->
             <div class="filter-search-row">
               <div class="search-box">
                 <span class="search-icon">🔍</span>
@@ -1087,16 +1372,13 @@
               </div>
             </div>
 
-            <!-- 月份筛选 -->
             <div class="filter-tabs-row" id="weiboTabs">
               <span class="category-tab active" data-month="全部">全部</span>
             </div>
 
-            <!-- 微博列表 -->
             <div id="weiboFeed">
 
-              <!-- ========== 置顶卡片（仅在对应平台显示） ========== -->
-              <!-- 微博置顶（只在微博平台显示） -->
+              <!-- 微博置顶 -->
               <div class="weibo-card pinned" data-platform="weibo">
                 <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
@@ -1108,7 +1390,7 @@
                 </div>
               </div>
 
-              <!-- 小红书置顶（只在小红书平台显示） -->
+              <!-- 小红书置顶 -->
               <div class="xiaohongshu-card pinned" data-platform="xiaohongshu">
                 <div class="weibo-time">📌 置顶 · 2025-07-25 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">Ok今天长这样</span></div>
@@ -1119,9 +1401,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-07 ========== -->
               <!-- 微博 7.18 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-07">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="18">
                 <div class="weibo-time">📅 2026-07-18 22:52 · 发布于 上海</div>
                 <div class="weibo-text">哼！</div>
                 <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1139,7 +1420,7 @@
               </div>
 
               <!-- 微博 7.16 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-07">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="16">
                 <div class="weibo-time">📅 2026-07-16 01:23 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
                 <a href="https://weibo.com/7901094930/R8Rj4o1sG" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1154,7 +1435,7 @@
               </div>
 
               <!-- 微博 7.14 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-07">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="14">
                 <div class="weibo-time">📅 2026-07-14 18:06 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
                 <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1173,7 +1454,7 @@
               </div>
 
               <!-- 微博 7.05 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-07">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="05">
                 <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">❤️‍🔥</span></div>
                 <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1185,9 +1466,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-06 ========== -->
               <!-- 微博 6.01 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-06">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-06" data-day="01">
                 <div class="weibo-time">📅 2026-06-01 18:23 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">可以一直当个小朋友咩 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1199,9 +1479,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-05 ========== -->
               <!-- 小红书 5.23 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-05">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-05" data-day="23">
                 <div class="weibo-time">📅 2026-05-23 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">氛围感</span><span class="line">#理想型</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/6a098e5a0000000007024cff?source=webshare&xhsshare=pc_web&xsec_token=ABgP_Xrzde0bCzJj0UKsbVsSokFCkulmTrtnvN-C2PP9o=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1216,7 +1495,7 @@
               </div>
 
               <!-- 小红书 5.20 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-05">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-05" data-day="20">
                 <div class="weibo-time">📅 2026-05-20 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">Ins氛围感电竞文女主</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/6a0d99890000000006031964?source=webshare&xhsshare=pc_web&xsec_token=ABQ8N7rJywPdo0JoX28seWPESE-5Q9au4g_4D-znNm9v4=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1229,7 +1508,7 @@
               </div>
 
               <!-- 微博 5.20 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-05">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-05" data-day="20">
                 <div class="weibo-time">📅 2026-05-20 15:14 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
                 <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1247,7 +1526,7 @@
               </div>
 
               <!-- 微博 5.17 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-05">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-05" data-day="17">
                 <div class="weibo-time">📅 2026-05-17 17:40 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🌟</span></div>
                 <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1262,7 +1541,7 @@
               </div>
 
               <!-- 微博 5.14 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-05">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-05" data-day="14">
                 <div class="weibo-time">📅 2026-05-14 13:01 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">今天是😺😺 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1277,9 +1556,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-04 ========== -->
               <!-- 小红书 4.30 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04" data-day="30">
                 <div class="weibo-time">📅 2026-04-30 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">学姐你好！！</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69f341fa0000000022027320?source=webshare&xhsshare=pc_web&xsec_token=ABmYK4nWp_DvehyQjeBCstzuTniyO3YzHwjLdCqQQMOEU=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1293,14 +1571,14 @@
               </div>
 
               <!-- 小红书 4.13 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04" data-day="13">
                 <div class="weibo-time">📅 2026-04-13 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">看我</span><span class="line">#樱花</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69dca94b000000001f007844?source=webshare&xhsshare=pc_web&xsec_token=ABV48WJJnGYuc1B9ZZ4lSNaEpzx28i5I-jShD96VElavw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
               <!-- 小红书 4.10 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04" data-day="10">
                 <div class="weibo-time">📅 2026-04-10 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">又美了</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69d8dbc7000000002300474c?source=webshare&xhsshare=pc_web&xsec_token=ABKGHljAu5QUMrvM3WMOmzwnk9ZWZifRNyQhgpYhiY2CM=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1315,7 +1593,7 @@
               </div>
 
               <!-- 小红书 4.04 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-04" data-day="04">
                 <div class="weibo-time">📅 2026-04-04 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">在想什么呢</span><span class="line">想我是吧！</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69cfe4de000000001f0053fb?source=webshare&xhsshare=pc_web&xsec_token=ABvf8u6yM-ihr5-pvRixovwrUa5cthj7CvVy06bh_3WdQ=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1326,7 +1604,7 @@
               </div>
 
               <!-- 微博 4.29 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-04">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-04" data-day="29">
                 <div class="weibo-time">📅 2026-04-29 06:25 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">美好的一天从看到美丽的人开始 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1339,7 +1617,7 @@
               </div>
 
               <!-- 微博 4.10 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-04">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-04" data-day="10">
                 <div class="weibo-time">📅 2026-04-10 22:28 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">⸝⸝⸝˘◡˘♡你宝宝 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1351,7 +1629,7 @@
               </div>
 
               <!-- 微博 4.04 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-04">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-04" data-day="04">
                 <div class="weibo-time">📅 2026-04-04 00:04 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🌬️</span></div>
                 <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1361,9 +1639,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-03 ========== -->
               <!-- 小红书 3.29 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-03">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-03" data-day="29">
                 <div class="weibo-time">📅 2026-03-29 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">雨后也出图</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69c8ae3d000000002202b189?source=webshare&xhsshare=pc_web&xsec_token=AB6YUaNsqOSLerdQ-GpJqXcdQHx0XfOQvbzLs2a6nq6T8=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1376,7 +1653,7 @@
               </div>
 
               <!-- 小红书 3.07 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-03">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-03" data-day="07">
                 <div class="weibo-time">📅 2026-03-07 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">周六</span><span class="line">#今天</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69abce21000000001a02c00c?source=webshare&xhsshare=pc_web&xsec_token=ABi_M6yT5rZtVrpOy65XbiBpg8PPaSC8oH_S5fa7OiA1I=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1388,7 +1665,7 @@
               </div>
 
               <!-- 微博 3.29 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-03">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-03" data-day="29">
                 <div class="weibo-time">📅 2026-03-29 12:40 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">📷 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QyjBYrbcD" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1401,7 +1678,7 @@
               </div>
 
               <!-- 微博 3.17 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-03">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-03" data-day="17">
                 <div class="weibo-time">📅 2026-03-17 19:47 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">9️⃣0️⃣0️⃣ ​​​</span></div>
                 <a href="https://weibo.com/7901094930/Qwxhb7N8r" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1414,7 +1691,7 @@
               </div>
 
               <!-- 微博 3.07 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-03">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-03" data-day="07">
                 <div class="weibo-time">📅 2026-03-07 15:03 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">周六 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QuZ95ADAh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1425,7 +1702,7 @@
               </div>
 
               <!-- 微博 3.04 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-03">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-03" data-day="04">
                 <div class="weibo-time">📅 2026-03-04 22:42 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">我这辈子还要再流多少次眼泪[泪奔]可恶呀！！！ ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QuzRMftGQ" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1436,9 +1713,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-02 ========== -->
               <!-- 小红书 2.26 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02" data-day="26">
                 <div class="weibo-time">📅 2026-02-26 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">轮到我帅一下了</span><span class="line">#滑雪 🏂</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/699faf84000000001a032fa3?source=webshare&xhsshare=pc_web&xsec_token=ABmVF4SjLTpJaeEe6rWXmwL-IK4lAdZ_uIzFiO5ySjfuU=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1450,14 +1726,14 @@
               </div>
 
               <!-- 小红书 2.15 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02" data-day="15">
                 <div class="weibo-time">📅 2026-02-15 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">#每天都有值得记录的瞬间</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69914f75000000002801f8f9?source=webshare&xhsshare=pc_web&xsec_token=AB4bcfeOGkds9ZrjNkqFrG_Z6F3uboAmumtWyx98csTbY=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
               <!-- 小红书 2.09 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-02" data-day="09">
                 <div class="weibo-time">📅 2026-02-09 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">今天长这样2.0</span><span class="line">#今天长这样明天我再想办法</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69892162000000001a023253?source=webshare&xhsshare=pc_web&xsec_token=ABWHmCI6_02SI40drdCiyg0V4E4rYKDjKj8xeaxAe1L9g=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1468,7 +1744,7 @@
               </div>
 
               <!-- 微博 2.28 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="28">
                 <div class="weibo-time">📅 2026-02-28 16:48 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">叫我什么 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QtVQj7Fgl" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1483,7 +1759,7 @@
               </div>
 
               <!-- 微博 2.26 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="26">
                 <div class="weibo-time">📅 2026-02-26 10:18 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🏂 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QtAqNcTYW" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1494,7 +1770,7 @@
               </div>
 
               <!-- 微博 2.19 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="19">
                 <div class="weibo-time">📅 2026-02-19 22:21 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">我便毁你整个天堂👾@SNH48-唐程成 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QsBaT6ZFe" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1522,14 +1798,14 @@
               </div>
 
               <!-- 微博 2.17 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="17">
                 <div class="weibo-time">📅 2026-02-17 02:13 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">新年快乐！！[柯基]新的一年也要和我在一起了！！</span></div>
                 <a href="https://weibo.com/7901094930/QsapsnMxk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
               </div>
 
               <!-- 微博 2.09 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="09">
                 <div class="weibo-time">📅 2026-02-09 08:07 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">碎片🧩 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QqZjsD98R" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1547,7 +1823,7 @@
               </div>
 
               <!-- 微博 2.02 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-02">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-02" data-day="02">
                 <div class="weibo-time">📅 2026-02-02 20:56 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">升格两周年，有你们陪着真好[来抱抱] ​​​</span></div>
                 <a href="https://weibo.com/7901094930/Qq0lJ3YtO" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1567,11 +1843,8 @@
                 </div>
               </div>
 
-              <!-- ========== 2026-01 ========== -->
-
-
               <!-- 微博 1.31 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-01">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="31">
                 <div class="weibo-time">📅 2026-01-31 16:26 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🤤🥯 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QpFJf1Hmj" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1586,7 +1859,7 @@
               </div>
 
               <!-- 微博 1.28 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-01">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="28">
                 <div class="weibo-time">📅 2026-01-28 18:26 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🦋 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QpeeD8eFz" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1597,8 +1870,9 @@
                   <div class="media-item" onclick="openModalWithImages('slider22', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151732490.jpg" alt="配图4" loading="lazy" /></div>
                 </div>
               </div>
+
               <!-- 小红书 1.28 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01" data-day="28">
                 <div class="weibo-time">📅 2026-01-28 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">蝴蝶和我</span><span class="line">#为自己生长出蝴蝶翅膀</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/6979e3a0000000002802148c?source=webshare&xhsshare=pc_web&xsec_token=ABDLyGKZC-5kO1mLG8l-doQSp4pxZ1dNWgEPQSBvsQIqw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
@@ -1611,7 +1885,7 @@
               </div>
 
               <!-- 微博 1.21 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-01">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="21">
                 <div class="weibo-time">📅 2026-01-21 22:51 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">[期待] ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QobYOk81c" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1622,7 +1896,7 @@
               </div>
 
               <!-- 微博 1.08 -->
-              <div class="weibo-card" data-platform="weibo" data-month="2026-01">
+              <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="08">
                 <div class="weibo-time">📅 2026-01-08 16:46 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">嗷[柯基] ​​​</span></div>
                 <a href="https://weibo.com/7901094930/Qmb29fF21" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1635,53 +1909,31 @@
               </div>
 
               <!-- 小红书 1.08 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01" data-day="08">
                 <div class="weibo-time">📅 2026-01-08 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">干嘛扯我耳朵！</span><span class="line">#超凶</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/695f70a1000000001a02410b?source=webshare&xhsshare=pc_web&xsec_token=ABNzBFt7tStOErtYhWi7xYF5tf5BYxJDTNObd5Zn21uTY=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
               <!-- 小红书 1.05 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01" data-day="05">
                 <div class="weibo-time">📅 2026-01-05 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">原来是起点</span><span class="line">#就在一瞬间</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/695b9e4e000000001a02a32d?source=webshare&xhsshare=pc_web&xsec_token=ABBpxM9dHHfmqCtd-fhhSXauLcLBakSl9tseu1Jf09NHw=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
-              <div class="weibo-card" data-platform="weibo" data-month="2026-01">
-                <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
-                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-                <div class="weibo-comment-bottom">
-                  <span class="comment-label">评论</span>
-                  <span>第一百条微博</span>
-                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
-                </div>
-              </div>
-
               <!-- 小红书 1.02 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01" data-day="02">
                 <div class="weibo-time">📅 2026-01-02 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">很blue 的冬天</span><span class="line">#冬 #蓝色系</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69579a39000000001e026358?source=webshare&xhsshare=pc_web&xsec_token=ABbXPfZhr63uAofm5iNJY8MnqWo67XqexhRSTS6_frzw4=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               </div>
 
               <!-- 小红书 1.01 -->
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01">
+              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-01" data-day="01">
                 <div class="weibo-time">📅 2026-01-01 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">2026.1.1</span></div>
                 <a href="https://www.xiaohongshu.com/discovery/item/69564065000000001e02e252?source=webshare&xhsshare=pc_web&xsec_token=AB6arhIJxmjgIJaQnYyfEsBRsqtIIBBmWmpIySvf6L99E=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
-              </div>
-
-              
-              <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2025-07">
-                <div class="weibo-time">📅 2025-07-25 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">Ok今天长这样</span></div>
-                <a href="https://www.xiaohongshu.com/discovery/item/68826038000000002400810b?source=webshare&xhsshare=pc_web&xsec_token=ABmhMHaVLL_qkqoXAudvqHFc_56xf_KSMKZP8Gtxlj58g=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
-                <div class="weibo-media-grid cols-2">
-                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.jpg" alt="配图1" loading="lazy" /></div>
-                  <div class="media-item" onclick="openModalWithImages('xhs_slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.jpg" alt="配图2" loading="lazy" /></div>
-                </div>
               </div>
 
               <div class="footer-slogan">-All For YeFan-</div>
@@ -2034,6 +2286,264 @@
       bilibili: []
     };
 
+    // ---- 日历数据 ----
+    function buildUpdateMap() {
+      const map = {};
+      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      cards.forEach(card => {
+        if (card.classList.contains('pinned')) return;
+        const month = card.dataset.month;
+        const day = card.dataset.day;
+        const platform = card.dataset.platform || 'weibo';
+        if (!month || !day) return;
+        const key = month + '-' + day.padStart(2, '0');
+        if (!map[key]) map[key] = [];
+        map[key].push(platform);
+      });
+      return map;
+    }
+
+    function renderCalendar() {
+      const popup = document.getElementById('calendarPopup');
+      const overlay = document.getElementById('calendarOverlay');
+      const year = 2026;
+      document.getElementById('calYear').textContent = year;
+      
+      const monthsContainer = document.getElementById('calMonths');
+      monthsContainer.innerHTML = '';
+      
+      const updateMap = buildUpdateMap();
+      const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+      
+      for (let m = 0; m < 12; m++) {
+        const monthDiv = document.createElement('div');
+        monthDiv.className = 'cal-month';
+        
+        const label = document.createElement('div');
+        label.className = 'cal-month-label';
+        label.textContent = monthNames[m];
+        monthDiv.appendChild(label);
+        
+        const weekdays = document.createElement('div');
+        weekdays.className = 'cal-weekdays';
+        ['日','一','二','三','四','五','六'].forEach(d => {
+          const span = document.createElement('span');
+          span.textContent = d;
+          weekdays.appendChild(span);
+        });
+        monthDiv.appendChild(weekdays);
+        
+        const daysGrid = document.createElement('div');
+        daysGrid.className = 'cal-days';
+        
+        const daysInMonth = new Date(year, m + 1, 0).getDate();
+        const firstDay = new Date(year, m, 1).getDay();
+        
+        for (let i = 0; i < firstDay; i++) {
+          const empty = document.createElement('div');
+          empty.className = 'cal-day empty';
+          daysGrid.appendChild(empty);
+        }
+        
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.className = 'cal-day';
+          dayDiv.textContent = d;
+          
+          const monthStr = String(m + 1).padStart(2, '0');
+          const dayStr = String(d).padStart(2, '0');
+          const key = `${year}-${monthStr}-${dayStr}`;
+          
+          if (updateMap[key]) {
+            const platforms = updateMap[key];
+            dayDiv.classList.add('has-update');
+            
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            if (platforms.includes('weibo') && platforms.includes('xiaohongshu')) {
+              dot.className = 'dot multi';
+            } else if (platforms.includes('weibo')) {
+              dot.className = 'dot weibo';
+            } else if (platforms.includes('xiaohongshu')) {
+              dot.className = 'dot xiaohongshu';
+            }
+            dayDiv.appendChild(dot);
+            
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            const platformNames = platforms.map(p => {
+              const cls = p === 'weibo' ? 'weibo' : 'xiaohongshu';
+              const name = p === 'weibo' ? '微博' : '小红书';
+              return `<span class="platform-tag ${cls}">${name}</span>`;
+            }).join(' ');
+            tooltip.innerHTML = platformNames;
+            dayDiv.appendChild(tooltip);
+            
+            dayDiv.addEventListener('click', function(e) {
+              e.stopPropagation();
+              closeCalendar();
+              const monthKey = key.slice(0, 7);
+              const tab = document.querySelector(`#weiboTabs .category-tab[data-month="${monthKey}"]`);
+              if (tab) {
+                document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                filterWeiboFeed();
+              }
+              setTimeout(() => {
+                const targetCard = document.querySelector(`#weiboFeed .weibo-card[data-month="${monthKey}"][data-day="${dayStr}"], #weiboFeed .xiaohongshu-card[data-month="${monthKey}"][data-day="${dayStr}"]`);
+                if (targetCard && targetCard.style.display !== 'none') {
+                  targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 150);
+            });
+          }
+          
+          daysGrid.appendChild(dayDiv);
+        }
+        
+        monthDiv.appendChild(daysGrid);
+        monthsContainer.appendChild(monthDiv);
+      }
+      
+      popup.classList.add('open');
+      overlay.classList.add('open');
+    }
+
+    function closeCalendar() {
+      document.getElementById('calendarPopup').classList.remove('open');
+      document.getElementById('calendarOverlay').classList.remove('open');
+    }
+
+    // ---- 创建内联日历（正方形 + 展开动画） ----
+    function createInlineCalendar(year) {
+      const container = document.createElement('div');
+      container.className = 'inline-calendar';
+      
+      // 初始状态：缩小 + 透明（用于动画）
+      container.style.transform = 'translateX(-50%) scale(0.6)';
+      container.style.opacity = '0';
+      container.style.transition = 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      
+      let currentMonth = 1;
+      const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+      
+      function renderMonth(monthIndex) {
+        const updateMap = buildUpdateMap();
+        const monthStr = String(monthIndex + 1).padStart(2, '0');
+        const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+        const firstDay = new Date(year, monthIndex, 1).getDay();
+        
+        let html = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-shrink:0;">
+            <button class="cal-nav" style="background:none;border:none;font-size:1.1rem;cursor:pointer;padding:2px 10px;border-radius:6px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">‹</button>
+            <span style="font-size:0.85rem;font-weight:700;color:#1a4a6f;letter-spacing:1px;">${year}年 ${monthNames[monthIndex]}</span>
+            <button class="cal-nav" style="background:none;border:none;font-size:1.1rem;cursor:pointer;padding:2px 10px;border-radius:6px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">›</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);font-size:0.55rem;color:#7a9ab0;text-align:center;margin-bottom:4px;flex-shrink:0;">
+            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+          </div>
+          <div class="cal-days-grid">
+        `;
+        
+        for (let i = 0; i < firstDay; i++) {
+          html += `<div></div>`;
+        }
+        
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dayStr = String(d).padStart(2, '0');
+          const key = `${year}-${monthStr}-${dayStr}`;
+          const hasUpdate = updateMap[key] && updateMap[key].length > 0;
+          
+          let dotHtml = '';
+          if (hasUpdate) {
+            const platforms = updateMap[key];
+            let dotColor = '#4299e1';
+            if (platforms.includes('weibo') && platforms.includes('xiaohongshu')) {
+              dotColor = 'linear-gradient(135deg, #4299e1 50%, #ff6b7a 50%)';
+            } else if (platforms.includes('xiaohongshu')) {
+              dotColor = '#ff6b7a';
+            }
+            const platformNames = platforms.map(p => {
+              const cls = p === 'weibo' ? 'weibo' : 'xiaohongshu';
+              const name = p === 'weibo' ? '微博' : '小红书';
+              return `<span style="display:inline-block;padding:1px 5px;border-radius:3px;font-size:0.45rem;font-weight:600;margin:0 1px;${cls === 'weibo' ? 'background:#4299e1;color:#fff;' : 'background:#ff6b7a;color:#fff;'}">${name}</span>`;
+            }).join(' ');
+            dotHtml = `
+              <span style="position:absolute;bottom:1px;width:5px;height:5px;border-radius:50%;background:${dotColor};"></span>
+              <span style="display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:3px 8px;border-radius:4px;font-size:0.5rem;white-space:nowrap;font-weight:400;pointer-events:none;z-index:10;">${platformNames}</span>
+            `;
+          }
+          
+          const extraAttrs = hasUpdate ? `data-date="${key}" data-month="${monthStr}" data-day="${dayStr}" style="font-weight:700;cursor:pointer;"` : '';
+          const hoverAttrs = hasUpdate ? `onmouseover="this.style.background='rgba(36,104,168,0.10)';this.querySelector('span:last-child').style.display='block'" onmouseout="this.style.background='transparent';this.querySelector('span:last-child').style.display='none'"` : '';
+          
+          html += `<div ${extraAttrs} ${hoverAttrs} style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.7rem;border-radius:50%;position:relative;color:#1a2f3f;cursor:default;">
+            ${d}${dotHtml}
+          </div>`;
+        }
+        
+        html += `</div>`;
+        container.innerHTML = html;
+        
+        // 导航按钮事件
+        const prevBtn = container.querySelector('.cal-nav:first-child');
+        const nextBtn = container.querySelector('.cal-nav:last-child');
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentMonth = (currentMonth - 1 + 12) % 12;
+            renderMonth(currentMonth);
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentMonth = (currentMonth + 1) % 12;
+            renderMonth(currentMonth);
+          });
+        }
+        
+        // 日期点击跳转
+        container.querySelectorAll('[data-date]').forEach(day => {
+          day.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const month = this.dataset.month;
+            const dayStr = this.dataset.day;
+            const monthKey = `${year}-${month}`;
+            const tab = document.querySelector(`#weiboTabs .category-tab[data-month="${monthKey}"]`);
+            if (tab) {
+              document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
+              tab.classList.add('active');
+              filterWeiboFeed();
+            }
+            setTimeout(() => {
+              const targetCard = document.querySelector(`#weiboFeed .weibo-card[data-month="${monthKey}"][data-day="${dayStr}"], #weiboFeed .xiaohongshu-card[data-month="${monthKey}"][data-day="${dayStr}"]`);
+              if (targetCard && targetCard.style.display !== 'none') {
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+              // 收起日历
+              const cal = document.querySelector('.inline-calendar');
+              if (cal) {
+                cal.style.transform = 'translateX(-50%) scale(0.6)';
+                cal.style.opacity = '0';
+                setTimeout(() => cal.remove(), 350);
+              }
+            }, 150);
+          });
+        });
+      }
+      
+      renderMonth(currentMonth);
+      
+      // 触发入场动画
+      requestAnimationFrame(() => {
+        container.style.transform = 'translateX(-50%) scale(1)';
+        container.style.opacity = '1';
+      });
+      
+      return container;
+    }
+
     // ---- 动态生成时间轴 ----
     function renderTimeline() {
       const activePlatform = document.querySelector('.platform-nav-item.active');
@@ -2044,10 +2554,19 @@
       if (currentPlatform === 'all') {
         const allMonths = new Set();
         Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
-        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
+        months = Array.from(allMonths);
       } else {
         months = platformMonths[currentPlatform] || [];
       }
+      
+      months.sort((a, b) => {
+        const yearA = a.split('-')[0];
+        const yearB = b.split('-')[0];
+        const monthA = parseInt(a.split('-')[1]);
+        const monthB = parseInt(b.split('-')[1]);
+        if (yearA !== yearB) return yearB.localeCompare(yearA);
+        return monthB - monthA;
+      });
       
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
@@ -2056,7 +2575,6 @@
       }
       timelineContainer.style.display = 'flex';
       
-      // 按年份分组显示
       const yearGroups = {};
       months.forEach(m => {
         const year = m.split('-')[0];
@@ -2065,12 +2583,15 @@
       });
       
       let html = '';
-      // 从后往前遍历年份（2026 在前，2025 在后）
       const sortedYears = Object.keys(yearGroups).sort((a, b) => b.localeCompare(a));
       sortedYears.forEach((year, yearIndex) => {
         if (yearIndex > 0) html += `<div class="tl-line"></div>`;
-        html += `<div class="tl-year-label">${year}</div>`;
-        const yearMonths = yearGroups[year].sort((a, b) => b.localeCompare(a));
+        html += `<div class="tl-year-label" data-year="${year}">${year}</div>`;
+        const yearMonths = yearGroups[year].sort((a, b) => {
+          const monthA = parseInt(a.split('-')[1]);
+          const monthB = parseInt(b.split('-')[1]);
+          return monthB - monthA;
+        });
         yearMonths.forEach((m, index) => {
           const monthNum = m.split('-')[1];
           html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
@@ -2082,11 +2603,46 @@
       
       timelineContainer.innerHTML = html;
       
+      // 年份标签点击展开/收起日历
+      timelineContainer.querySelectorAll('.tl-year-label').forEach(label => {
+        label.addEventListener('click', function() {
+          const year = this.dataset.year;
+          const existingCal = this.querySelector('.inline-calendar');
+          if (existingCal) {
+            // 如果已展开，则收起
+            existingCal.style.transform = 'translateX(-50%) scale(0.6)';
+            existingCal.style.opacity = '0';
+            setTimeout(() => existingCal.remove(), 350);
+            return;
+          }
+          // 收起其他年份的日历
+          document.querySelectorAll('.inline-calendar').forEach(cal => {
+            cal.style.transform = 'translateX(-50%) scale(0.6)';
+            cal.style.opacity = '0';
+            setTimeout(() => cal.remove(), 350);
+          });
+          const cal = createInlineCalendar(year);
+          this.appendChild(cal);
+        });
+      });
+      
+      // 月份点击跳转
       timelineContainer.querySelectorAll('.tl-item').forEach(item => {
         item.addEventListener('click', function() {
           const month = this.dataset.month;
           const feedWrap = document.getElementById('weiboFeed');
-          const targetCard = feedWrap.querySelector(`.weibo-card[data-month="${month}"], .xiaohongshu-card[data-month="${month}"]`);
+          const cards = feedWrap.querySelectorAll(`.weibo-card[data-month="${month}"], .xiaohongshu-card[data-month="${month}"]`);
+          let targetCard = null;
+          for (const card of cards) {
+            if (card.style.display !== 'none') {
+              targetCard = card;
+              break;
+            }
+          }
+          if (!targetCard && cards.length > 0) {
+            targetCard = cards[0];
+            targetCard.style.display = '';
+          }
           if (targetCard) {
             targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
@@ -2113,15 +2669,12 @@
         months = platformMonths[currentPlatform] || [];
       }
       
-      // 自定义排序：2026年在前，2025年在后，年份内月份从高到低
       months.sort((a, b) => {
         const yearA = a.split('-')[0];
         const yearB = b.split('-')[0];
         const monthA = parseInt(a.split('-')[1]);
         const monthB = parseInt(b.split('-')[1]);
-        // 年份从高到低（2026 > 2025）
         if (yearA !== yearB) return yearB.localeCompare(yearA);
-        // 同一年份，月份从高到低
         return monthB - monthA;
       });
       
@@ -2163,9 +2716,8 @@
         const cardMonth = card.dataset.month || '';
         
         if (card.classList.contains('pinned')) {
-          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-          const dateMatch = currentDate === '全部' || cardMonth === currentDate;
-          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
+          const platformMatch = cardPlatform === currentPlatform;
+          card.style.display = platformMatch ? '' : 'none';
           return;
         }
         
@@ -2179,22 +2731,30 @@
       
       updateTimelineHighlight();
     }
-      platformItems.forEach(btn => {
-        btn.addEventListener('click', function() {
-          platformItems.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          setTimeout(function() {
-            renderMonthTabs();
-            filterWeiboFeed();
-          }, 100);
-        });
+
+    platformItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        platformItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        setTimeout(function() {
+          renderMonthTabs();
+          filterWeiboFeed();
+        }, 100);
       });
+    });
 
     weiboSearchInput.addEventListener('input', function() {
       filterWeiboFeed();
     });
 
     renderMonthTabs();
+
+    // ---- 日历关闭事件 ----
+    document.getElementById('calClose').addEventListener('click', closeCalendar);
+    document.getElementById('calendarOverlay').addEventListener('click', closeCalendar);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCalendar();
+    });
 
     // ---- 大图预览 ----
     const imageSets = {
@@ -2529,4 +3089,4 @@
     setTimeout(updateTimelineHighlight, 300);
   </script>
 </body>
-    </html>
+</html>
