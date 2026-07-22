@@ -31,7 +31,7 @@
       background: transparent;
     }
 
-    /* ===== 侧边栏 - 桌面版固定左侧 ===== */
+    /* ===== 侧边栏 ===== */
     .sidebar {
       width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
       background: rgba(255,255,255,0.75);
@@ -411,7 +411,7 @@
       font-weight: 400;
     }
 
-    /* ===== 饭之拍 - 微博卡片（无折叠） ===== */
+    /* ===== 饭之拍 - 微博卡片 ===== */
     .weibo-card {
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
@@ -426,13 +426,9 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(36,104,168,0.08);
     }
-    .weibo-card .month-label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #1f5a8a;
-      margin-bottom: 0.4rem;
-      padding-bottom: 0.3rem;
-      border-bottom: 2px solid rgba(26,74,111,0.10);
+    .weibo-card.pinned {
+      border: 2px solid rgba(26,74,111,0.15);
+      background: rgba(255,255,255,0.75);
     }
     .weibo-time {
       font-size: 0.8rem;
@@ -513,13 +509,14 @@
       box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
     }
 
-    /* ===== 饭之拍 - 右侧时间轴 ===== */
+    /* ===== 饭之拍 - 布局 ===== */
     .fancam-container {
       display: flex;
       gap: 24px;
       position: relative;
       max-width: 100%;
       align-items: flex-start;
+      padding-right: 0;
     }
     .fancam-container .weibo-feed-wrap {
       flex: 1;
@@ -530,12 +527,12 @@
       position: sticky;
       top: 24px;
       flex-shrink: 0;
-      width: 60px;
+      width: 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      padding: 8px 0;
+      padding: 12px 4px;
       background: rgba(255,255,255,0.5);
       backdrop-filter: blur(8px);
       border-radius: 12px;
@@ -546,6 +543,19 @@
     }
     .timeline-sidebar::-webkit-scrollbar { width: 2px; }
     .timeline-sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
+
+    .timeline-sidebar .tl-year-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #1f5a8a;
+      padding: 4px 0 2px 0;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      border-bottom: 1px solid rgba(26,74,111,0.10);
+      margin-bottom: 2px;
+      width: 100%;
+      text-align: center;
+    }
     .timeline-sidebar .tl-item {
       font-size: 0.6rem;
       font-weight: 600;
@@ -559,7 +569,6 @@
       letter-spacing: 0.3px;
       border: 1px solid transparent;
       user-select: none;
-      font-family: monospace;
     }
     .timeline-sidebar .tl-item:hover {
       background: rgba(36,104,168,0.08);
@@ -574,7 +583,7 @@
     }
     .timeline-sidebar .tl-line {
       width: 2px;
-      height: 12px;
+      height: 8px;
       background: rgba(184,224,255,0.3);
       flex-shrink: 0;
     }
@@ -687,6 +696,7 @@
         max-height: none;
         overflow-y: visible;
         justify-content: center;
+        border-radius: 12px;
       }
       .timeline-sidebar .tl-item {
         width: auto;
@@ -695,6 +705,12 @@
       }
       .timeline-sidebar .tl-line {
         display: none;
+      }
+      .timeline-sidebar .tl-year-label {
+        width: auto;
+        border-bottom: none;
+        padding: 4px 8px;
+        font-size: 0.65rem;
       }
       .fancam-container .weibo-feed-wrap {
         max-width: 100%;
@@ -921,8 +937,20 @@
           <div class="fancam-container">
             <!-- 微博列表 -->
             <div class="weibo-feed-wrap" id="weiboFeed">
+              <!-- 置顶（始终第一条） -->
+              <div class="weibo-card pinned" id="weiboCardTop">
+                <div class="weibo-time">📌 置顶 · 2026-01-05 20:46 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
+                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>第一百条微博</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+                </div>
+              </div>
+
               <!-- 2026-07 -->
-              <div class="weibo-card" data-month="2026-07" id="weiboCard">
+              <div class="weibo-card" data-month="2026-07">
                 <div class="weibo-time">📅 2026-07-18 22:52 · 发布于 上海</div>
                 <div class="weibo-text">哼！</div>
                 <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -939,7 +967,7 @@
                 </div>
               </div>
 
-              <div class="weibo-card" data-month="2026-07" id="weiboCard2">
+              <div class="weibo-card" data-month="2026-07">
                 <div class="weibo-time">📅 2026-07-16 01:23 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
                 <a href="https://weibo.com/7901094930/R8Rj4o1sG" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -953,7 +981,7 @@
                 <div class="weibo-comment-bottom" style="margin-top:0.3rem; padding-top:0.3rem; border-top-color:rgba(184,224,255,0.1);"><span class="comment-label">评论</span><span>美图攻击！</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:24 来自上海</span></div>
               </div>
 
-              <div class="weibo-card" data-month="2026-07" id="weiboCard3">
+              <div class="weibo-card" data-month="2026-07">
                 <div class="weibo-time">📅 2026-07-14 18:06 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
                 <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -971,7 +999,7 @@
                 <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>我早上发的没发出来吗</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-14 18:07 来自上海</span></div>
               </div>
 
-              <div class="weibo-card" data-month="2026-07" id="weiboCard4">
+              <div class="weibo-card" data-month="2026-07">
                 <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">❤️‍🔥</span></div>
                 <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -984,7 +1012,7 @@
               </div>
 
               <!-- 2026-06 -->
-              <div class="weibo-card" data-month="2026-06" id="weiboCard5">
+              <div class="weibo-card" data-month="2026-06">
                 <div class="weibo-time">📅 2026-06-01 18:23 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">可以一直当个小朋友咩 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -997,7 +1025,7 @@
               </div>
 
               <!-- 2026-05 -->
-              <div class="weibo-card" data-month="2026-05" id="weiboCard6">
+              <div class="weibo-card" data-month="2026-05">
                 <div class="weibo-time">📅 2026-05-20 15:14 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
                 <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1014,7 +1042,7 @@
                 </div>
               </div>
 
-              <div class="weibo-card" data-month="2026-05" id="weiboCard7">
+              <div class="weibo-card" data-month="2026-05">
                 <div class="weibo-time">📅 2026-05-17 17:40 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🌟</span></div>
                 <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1028,7 +1056,7 @@
                 </div>
               </div>
 
-              <div class="weibo-card" data-month="2026-05" id="weiboCard8">
+              <div class="weibo-card" data-month="2026-05">
                 <div class="weibo-time">📅 2026-05-14 13:01 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">今天是😺😺 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1044,7 +1072,7 @@
               </div>
 
               <!-- 2026-04 -->
-              <div class="weibo-card" data-month="2026-04" id="weiboCard9">
+              <div class="weibo-card" data-month="2026-04">
                 <div class="weibo-time">📅 2026-04-29 06:25 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">美好的一天从看到美丽的人开始 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1056,7 +1084,7 @@
                 </div>
               </div>
 
-              <div class="weibo-card" data-month="2026-04" id="weiboCard10">
+              <div class="weibo-card" data-month="2026-04">
                 <div class="weibo-time">📅 2026-04-10 22:28 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">⸝⸝⸝˘◡˘♡你宝宝 ​​​</span></div>
                 <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1067,7 +1095,7 @@
                 </div>
               </div>
 
-              <div class="weibo-card" data-month="2026-04" id="weiboCard11">
+              <div class="weibo-card" data-month="2026-04">
                 <div class="weibo-time">📅 2026-04-04 00:04 · 发布于 上海</div>
                 <div class="weibo-text"><span class="line">🌬️</span></div>
                 <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
@@ -1077,23 +1105,12 @@
                 </div>
               </div>
 
-              <!-- 2026-01 置顶 -->
-              <div class="weibo-card" data-month="2026-01" id="weiboCardTop" style="border: 2px solid rgba(26,74,111,0.15);">
-                <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
-                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
-                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-                <div class="weibo-comment-bottom">
-                  <span class="comment-label">评论</span>
-                  <span>第一百条微博</span>
-                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
-                </div>
-              </div>
-
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
 
-            <!-- 右侧时间轴 -->
+            <!-- 右侧时间轴（置顶不显示在时间轴上） -->
             <div class="timeline-sidebar" id="timelineSidebar">
+              <div class="tl-year-label">2026</div>
               <div class="tl-item" data-month="2026-07">07</div>
               <div class="tl-line"></div>
               <div class="tl-item" data-month="2026-06">06</div>
@@ -1101,8 +1118,6 @@
               <div class="tl-item" data-month="2026-05">05</div>
               <div class="tl-line"></div>
               <div class="tl-item" data-month="2026-04">04</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-01">01</div>
             </div>
           </div>
         </div>
@@ -1441,6 +1456,11 @@
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
       allCards.forEach(card => {
+        // 置顶卡片始终显示
+        if (card.id === 'weiboCardTop') {
+          card.style.display = '';
+          return;
+        }
         const cardMonth = card.dataset.month || '';
         const dateMatch = currentDate === '全部' || cardMonth === currentDate;
         const cardText = card.textContent.toLowerCase();
@@ -1628,7 +1648,7 @@
     const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
     const feedWrap = document.getElementById('weiboFeed');
 
-    // 点击跳转
+    // 点击跳转（跳过置顶）
     tlItems.forEach(item => {
       item.addEventListener('click', function() {
         const month = this.dataset.month;
@@ -1644,7 +1664,7 @@
     let highlightTimeout = null;
 
     function updateTimelineHighlight() {
-      const cards = feedWrap.querySelectorAll('.weibo-card');
+      const cards = feedWrap.querySelectorAll('.weibo-card:not(#weiboCardTop)');
       let activeMonth = null;
       const scrollTop = contentArea.scrollTop;
       const offset = 120;
