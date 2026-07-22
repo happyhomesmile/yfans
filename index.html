@@ -2006,7 +2006,7 @@
     // ---- 各平台的月份数据 ----
     const platformMonths = {
       weibo: ['2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      xiaohongshu: ['2026-05', '2026-04', '2026-03', '2026-02', '2026-01', '2025-07'],
+      xiaohongshu: ['2025-07', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
       douyin: [],
       bilibili: []
     };
@@ -2021,10 +2021,9 @@
       if (currentPlatform === 'all') {
         const allMonths = new Set();
         Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
-        months = Array.from(allMonths).sort((a, b) => a.localeCompare(b)); // 改为升序
+        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
       } else {
         months = platformMonths[currentPlatform] || [];
-        months = months.sort((a, b) => a.localeCompare(b)); // 改为升序
       }
       
       if (months.length === 0) {
@@ -2043,12 +2042,12 @@
       });
       
       let html = '';
-      // 年份从旧到新（2025 在前，2026 在后）
-      const sortedYears = Object.keys(yearGroups).sort((a, b) => a.localeCompare(b));
+      // 从后往前遍历年份（2026 在前，2025 在后）
+      const sortedYears = Object.keys(yearGroups).sort((a, b) => b.localeCompare(a));
       sortedYears.forEach((year, yearIndex) => {
         if (yearIndex > 0) html += `<div class="tl-line"></div>`;
         html += `<div class="tl-year-label">${year}</div>`;
-        const yearMonths = yearGroups[year].sort((a, b) => a.localeCompare(b));
+        const yearMonths = yearGroups[year].sort((a, b) => b.localeCompare(a));
         yearMonths.forEach((m, index) => {
           const monthNum = m.split('-')[1];
           html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
@@ -2128,12 +2127,10 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：只在对应平台且匹配它的月份时显示
+        // 置顶卡片：只在对应平台显示，不显示在"全部"中
         if (card.classList.contains('pinned')) {
           const platformMatch = cardPlatform === currentPlatform;
-          const dateMatch = cardMonth === currentDate;
-          const allMatch = currentDate === '全部';
-          card.style.display = (platformMatch && dateMatch) ? '' : 'none';
+          card.style.display = platformMatch ? '' : 'none';
           return;
         }
         
@@ -2147,21 +2144,23 @@
       
       updateTimelineHighlight();
     }
-    
+
       platformItems.forEach(btn => {
         btn.addEventListener('click', function() {
           platformItems.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          // 重置月份为"全部"
-          const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
-          if (allTab) {
-            document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
-            allTab.classList.add('active');
-          }
-          renderMonthTabs();
-          filterWeiboFeed();
+          setTimeout(function() {
+            renderMonthTabs();
+            filterWeiboFeed();
+          }, 100);
         });
       });
+
+    weiboSearchInput.addEventListener('input', function() {
+      filterWeiboFeed();
+    });
+
+    renderMonthTabs();
 
     // ---- 大图预览 ----
     const imageSets = {
@@ -2466,19 +2465,19 @@
     // ---- 右侧时间轴：点击跳转 + 滚动高亮 ----
     let highlightTimeout = null;
 
-    function updateTimelineHighlight() {
-      const feedWrap = document.getElementById('weiboFeed');
+    函数 updateTimelineHighlight() {
+      常量 feedWrap = document.getElementById('weiboFeed');
       const cards = feedWrap.querySelectorAll('.weibo-card:not(.pinned), .xiaohongshu-card:not(.pinned)');
       const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
       let activeMonth = null;
       const offset = 120;
 
       cards.forEach(card => {
-        if (card.style.display === 'none') return;
+        如果 (card.样式.显示 === 'none') 返回;
         const rect = card.getBoundingClientRect();
         const containerRect = contentArea.getBoundingClientRect();
         const cardTop = rect.top - containerRect.top;
-        if (cardTop < offset && cardTop > -rect.height) {
+        如果 (cardTop < offset && cardTop > -rect.height) {
           activeMonth = card.dataset.month;
         }
       });
@@ -2494,6 +2493,6 @@
     });
 
     setTimeout(updateTimelineHighlight, 300);
-  </script>
+  </脚本>
 </body>
-</html>
+    </html>
