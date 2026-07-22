@@ -9,7 +9,7 @@
     /* ===== 全局 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; scroll-behavior: smooth; }
-    body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
+    body { background: linear-gradient(145dg, #eaf3fa 0%, #d4e6f5 100%); }
 
     /* ===== 加载页 ===== */
     .loading-page {
@@ -582,17 +582,26 @@
       gap: 24px;
       max-width: 100%;
       align-items: flex-start;
+      position: relative;
     }
     .fancam-layout .info-box {
-      max-width: 780px;
-      width: 100%;
-      margin: 0;
+      max-width: 780px !important;
+      width: 780px !important;
+      min-width: 780px !important;
+      margin: 0 auto !important;
       flex-shrink: 0;
+      padding: 18px 22px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      border: 1px solid rgba(26, 74, 111, 0.20);
+      box-shadow: 0 2px 12px rgba(26, 74, 111, 0.06);
     }
     .fancam-layout .timeline-sidebar {
       position: sticky;
       top: 24px;
       flex-shrink: 0;
+      margin-left: -8px;
     }
 
     /* ===== 大图预览 Modal ===== */
