@@ -8,7 +8,6 @@
   <style>
     /* ===== 全局 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; cursor: none; }
     body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
 
     /* ===== 蝴蝶掉落动画 ===== */
@@ -36,26 +35,6 @@
       90% { opacity: 0.8; }
       100% { opacity: 0; transform: translateY(110vh) rotate(720deg) scale(1.2); }
     }
-
-    /* ===== 鼠标蝴蝶指针 ===== */
-    .cursor-butterfly {
-      position: fixed;
-      pointer-events: none;
-      z-index: 999999;
-      font-size: 28px;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s ease;
-      filter: drop-shadow(0 0 8px rgba(74, 144, 217, 0.3));
-      opacity: 1;
-    }
-    .cursor-butterfly.flutter {
-      animation: flutterAnim 0.6s ease-in-out infinite alternate;
-    }
-    @keyframes flutterAnim {
-      0% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
-      100% { transform: translate(-50%, -50%) rotate(10deg) scale(1.1); }
-    }
-
     /* ===== 加载页 ===== */
     .loading-page {
       width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;
@@ -98,13 +77,15 @@
       margin-bottom: 10px;
     }
     .avatar {
-      width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
-      display: flex; align-items: center; justify-content: center; font-size: 28px;
-      margin: 0 auto 4px; box-shadow: 0 4px 12px rgba(36,104,168,0.10);
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, #4a90d9, #7bb8f0);
+      display: flex; align-items: center; justify-content: center; font-size: 32px;
+      margin: 0 auto 4px;
+      box-shadow: 0 4px 15px rgba(74, 144, 217, 0.35);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
       position: relative;
-      overflow: hidden;
+      border: 3px solid rgba(74, 144, 217, 0.5);
     }
     .avatar .avatar-emoji {
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -112,28 +93,25 @@
     }
     .avatar .avatar-butterfly {
       position: absolute;
-      font-size: 32px;
-      opacity: 0;
-      transform: scale(0) rotate(-30deg);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .avatar:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 30px rgba(74, 144, 217, 0.25);
-      background: linear-gradient(135deg, #b8d4e8, #7bb8f0);
-    }
-    .avatar:hover .avatar-emoji {
-      transform: scale(0) rotate(30deg);
-      opacity: 0;
-    }
-    .avatar:hover .avatar-butterfly {
+      font-size: 36px;
       opacity: 1;
       transform: scale(1) rotate(0deg);
-      animation: avatarFlutter 0.8s ease-in-out infinite alternate;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    .avatar:hover {
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: 0 8px 30px rgba(74, 144, 217, 0.5);
+      border-color: #ffffff;
+    }
+    .avatar:hover .avatar-butterfly {
+      transform: scale(1.15) rotate(10deg);
+      animation: avatarFlutter 0.6s ease-in-out infinite alternate;
     }
     @keyframes avatarFlutter {
-      0% { transform: scale(1) rotate(-8deg) translateY(-2px); }
-      100% { transform: scale(1.1) rotate(8deg) translateY(2px); }
+      0% { transform: scale(1) rotate(-5deg) translateY(-2px); }
+      100% { transform: scale(1.1) rotate(5deg) translateY(2px); }
     }
     .avatar-name { color: #1a4a6f; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; }
     .avatar-sub {
@@ -733,8 +711,7 @@
     <div class="sidebar">
       <div class="avatar-box">
         <div class="avatar">
-          <span class="avatar-emoji">🍚</span>
-          <span class="avatar-butterfly" id="avatarButterfly">🦋</span>
+          <span class="avatar-butterfly">🦋</span>
         </div>
         <div class="avatar-name">一颗椰饭</div>
         <div class="avatar-sub">✨ 允许一切发生 ✨</div>
@@ -1081,54 +1058,6 @@
       setInterval(() => {
         if (container.children.length < 40) createButterfly();
       }, 1500 + Math.random() * 1500);
-    })();
-
-    // ===== 鼠标变成蝴蝶 =====
-    (function cursorButterfly() {
-      document.body.style.cursor = 'none';
-      const butterfly = document.createElement('div');
-      butterfly.className = 'cursor-butterfly flutter';
-      butterfly.textContent = '🦋';
-      const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0'];
-      butterfly.style.color = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(butterfly);
-      let mouseX = window.innerWidth / 2;
-      let mouseY = window.innerHeight / 2;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        butterfly.style.left = mouseX + 'px';
-        butterfly.style.top = mouseY + 'px';
-      });
-      document.addEventListener('mouseleave', () => {
-        document.body.style.cursor = 'default';
-        butterfly.style.display = 'none';
-      });
-      document.addEventListener('mouseenter', () => {
-        document.body.style.cursor = 'none';
-        butterfly.style.display = 'block';
-      });
-      document.addEventListener('click', () => {
-        butterfly.style.transform = 'translate(-50%, -50%) scale(0.7) rotate(-20deg)';
-        setTimeout(() => {
-          butterfly.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
-        }, 150);
-      });
-      window.addEventListener('resize', () => {
-        if (mouseX > window.innerWidth) mouseX = window.innerWidth - 10;
-        if (mouseY > window.innerHeight) mouseY = window.innerHeight - 10;
-        butterfly.style.left = mouseX + 'px';
-        butterfly.style.top = mouseY + 'px';
-      });
-    })();
-
-    // ===== 头像蝴蝶随机颜色 =====
-    (function avatarButterflyColor() {
-      const bt = document.getElementById('avatarButterfly');
-      if (bt) {
-        const colors = ['#4a90d9', '#5ba3e6', '#7bb8f0', '#3a7bc8', '#6aadf0', '#9ac8f5'];
-        bt.style.color = colors[Math.floor(Math.random() * colors.length)];
-      }
     })();
 
     // 侧边栏切换
