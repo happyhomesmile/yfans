@@ -8,7 +8,7 @@
   <style>
     /* ===== 全局 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; }
+    html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; scroll-behavior: smooth; }
     body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
 
     /* ===== 加载页 ===== */
@@ -33,21 +33,21 @@
 
     /* ===== 侧边栏 - 桌面版固定左侧 ===== */
     .sidebar {
-  width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
-  background: rgba(255,255,255,0.75);  /* 从 0.50 改成 0.75，更不透明 */
-  backdrop-filter: blur(16px);
-  background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101345752.jpg");
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
-  border-right: 1px solid rgba(184,224,255,0.25);
-  padding: 24px 14px 20px 14px;
-  display: flex; flex-direction: column; gap: 4px;
-  flex-shrink: 0;
-  box-shadow: 2px 0 20px rgba(36,104,168,0.04);
-  overflow-y: auto;
-  z-index: 10;
-}
+      width: 200px; min-height: 100vh; height: 100vh; position: sticky; top: 0;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(16px);
+      background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101345752.jpg");
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
+      border-right: 1px solid rgba(184,224,255,0.25);
+      padding: 24px 14px 20px 14px;
+      display: flex; flex-direction: column; gap: 4px;
+      flex-shrink: 0;
+      box-shadow: 2px 0 20px rgba(36,104,168,0.04);
+      overflow-y: auto;
+      z-index: 10;
+    }
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
@@ -56,16 +56,32 @@
       margin-bottom: 10px;
     }
     .avatar {
-  width: 64px; height: 64px; border-radius: 50%;
-  background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101539050.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px;
-  margin: 0 auto 4px;
-  box-shadow: 0 4px 12px rgba(36,104,168,0.10);
-  border: 3px solid rgba(255,255,255,0.8);
-}
+      width: 64px; height: 64px; border-radius: 50%;
+      background-image: url("https://images.weserv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101539050.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 4px;
+      box-shadow: 0 4px 12px rgba(36,104,168,0.10);
+      border: 3px solid rgba(255,255,255,0.8);
+    }
+    .avatar-name { 
+      color: #1f5a8a; 
+      font-size: 16px; 
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .avatar-sub {
+      font-size: 12px;
+      color: #4299e1;
+      letter-spacing: 1px;
+      margin-top: 2px;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+
     .menu-item {
       font-size: 13px; font-weight: 500; color: #2c5a7a; padding: 12px 14px;
       border-radius: 8px; cursor: pointer; transition: all 0.2s;
@@ -111,7 +127,7 @@
 
     /* ===== 卡片 ===== */
     .info-box {
-      max-width: 1000px; margin: 0 auto;
+      max-width: 780px; margin: 0 auto;
       background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
       border-radius: 16px;
       border: 1px solid rgba(26, 74, 111, 0.20);
@@ -241,7 +257,7 @@
     .timeline-text { font-size: 13px; color: #4a779e; line-height: 1.5; }
 
     /* ===== 饭之大小作（舞台） ===== */
-    .stage-wrap { max-width: 1000px; margin: 0 auto; }
+    .stage-wrap { max-width: 780px; margin: 0 auto; }
     .stage-nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
       margin-bottom: 14px;
@@ -395,52 +411,7 @@
       font-weight: 400;
     }
 
-    /* ===== 饭之拍 - 折叠微博卡片 ===== */
-    .update-trigger {
-      margin: 0.8rem 0 0.4rem 0;
-    }
-    .update-badge {
-      background: rgba(240,244,248,0.7);
-      border-radius: 40px;
-      padding: 0.4rem 1.4rem 0.4rem 1.2rem;
-      font-size: 0.85rem;
-      color: #1a4a6f;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      border: 1px solid rgba(26,74,111,0.12);
-      cursor: pointer;
-      transition: 0.15s;
-      user-select: none;
-      font-weight: 500;
-      backdrop-filter: blur(4px);
-    }
-    .update-badge:hover {
-      background: rgba(230,244,255,0.6);
-      border-color: rgba(26,74,111,0.2);
-    }
-    .update-badge .arrow {
-      font-size: 0.7rem;
-      transition: transform 0.25s ease;
-      display: inline-block;
-    }
-    .update-badge .arrow.open {
-      transform: rotate(180deg);
-    }
-
-    .weibo-card-wrapper {
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease, margin 0.3s ease;
-      margin-top: 0;
-    }
-    .weibo-card-wrapper.open {
-      max-height: 1500px;
-      opacity: 1;
-      margin-top: 0.8rem;
-    }
-
+    /* ===== 饭之拍 - 微博卡片（无折叠） ===== */
     .weibo-card {
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
@@ -448,6 +419,20 @@
       border: 1px solid rgba(26,74,111,0.08);
       padding: 1.2rem 1.2rem 1rem;
       box-shadow: 0 2px 8px rgba(36,104,168,0.02);
+      margin-bottom: 0.8rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .weibo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(36,104,168,0.08);
+    }
+    .weibo-card .month-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1f5a8a;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid rgba(26,74,111,0.10);
     }
     .weibo-time {
       font-size: 0.8rem;
@@ -526,6 +511,72 @@
       border-color: rgba(26, 74, 111, 0.3);
       transform: translateY(-1px);
       box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
+    }
+
+    /* ===== 饭之拍 - 右侧时间轴 ===== */
+    .fancam-container {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      max-width: 100%;
+      align-items: flex-start;
+    }
+    .fancam-container .weibo-feed-wrap {
+      flex: 1;
+      max-width: 780px;
+      min-width: 0;
+    }
+    .timeline-sidebar {
+      position: sticky;
+      top: 24px;
+      flex-shrink: 0;
+      width: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 8px 0;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      border: 1px solid rgba(26,74,111,0.08);
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      z-index: 5;
+    }
+    .timeline-sidebar::-webkit-scrollbar { width: 2px; }
+    .timeline-sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
+    .timeline-sidebar .tl-item {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #7a9ab0;
+      padding: 4px 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      width: 44px;
+      letter-spacing: 0.3px;
+      border: 1px solid transparent;
+      user-select: none;
+      font-family: monospace;
+    }
+    .timeline-sidebar .tl-item:hover {
+      background: rgba(36,104,168,0.08);
+      color: #1f5a8a;
+      border-color: rgba(36,104,168,0.10);
+    }
+    .timeline-sidebar .tl-item.active {
+      background: #1f5a8a;
+      color: #fff;
+      border-color: #1f5a8a;
+      box-shadow: 0 2px 8px rgba(36,104,168,0.15);
+    }
+    .timeline-sidebar .tl-line {
+      width: 2px;
+      height: 12px;
+      background: rgba(184,224,255,0.3);
+      flex-shrink: 0;
     }
 
     /* ===== 大图预览 Modal ===== */
@@ -619,6 +670,42 @@
       letter-spacing: 1px;
       z-index: 10;
     }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 1024px) {
+      .fancam-container {
+        flex-direction: column;
+      }
+      .timeline-sidebar {
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 8px 12px;
+        gap: 4px;
+        max-height: none;
+        overflow-y: visible;
+        justify-content: center;
+      }
+      .timeline-sidebar .tl-item {
+        width: auto;
+        padding: 4px 10px;
+        font-size: 0.7rem;
+      }
+      .timeline-sidebar .tl-line {
+        display: none;
+      }
+      .fancam-container .weibo-feed-wrap {
+        max-width: 100%;
+      }
+      .info-box {
+        max-width: 100%;
+      }
+      .stage-wrap {
+        max-width: 100%;
+      }
+    }
     @media (max-width: 768px) {
       .modal-btn { width: 36px; height: 36px; font-size: 18px; }
       .modal-btn.prev { left: 4px; }
@@ -627,22 +714,21 @@
       .modal-image-container { max-height: 70vh; }
       .modal-image-container img { max-height: 70vh; }
       .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
+      .stage-grid { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { width: 160px; padding: 16px 10px; }
+      .menu-item { font-size: 12px; padding: 10px 10px; }
+      .content-area { padding: 12px; }
+      .avatar { width: 48px; height: 48px; }
+      .avatar-name { font-size: 13px; }
     }
-    .avatar-name { 
-  color: #1f5a8a; 
-  font-size: 16px; 
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
-.avatar-sub {
-  font-size: 12px;
-  color: #4299e1;
-  letter-spacing: 1px;
-  margin-top: 2px;
-  opacity: 0.85;
-  font-weight: 400;
-}
+    @media (max-width: 480px) {
+      .stage-grid { grid-template-columns: 1fr; }
+      .sidebar { width: 100%; height: auto; min-height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 10px; gap: 4px; }
+      .sidebar .avatar-box { display: none; }
+      .sidebar .menu-item { padding: 6px 10px; font-size: 11px; flex: 1 0 auto; }
+      .content-area { padding: 8px; }
+      .weibo-media-grid.cols-2, .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -805,7 +891,7 @@
 
       <!-- 饭之拍 -->
       <div class="page-box" id="fancam">
-        <div class="info-box">
+        <div class="info-box" style="max-width:100%; padding:18px 22px;">
           <div class="platform-nav" id="platformNav">
             <button class="platform-nav-item active" data-platform="all">全部</button>
             <button class="platform-nav-item" data-platform="weibo">微博</button>
@@ -832,294 +918,193 @@
             <span class="category-tab" data-month="2026-01">2026-01</span>
           </div>
 
-<div id="weiboFeed">
-          <div class="update-trigger" data-platform="weibo" data-date="2026-01-05">
-            <div class="update-badge" id="toggleBadgeTop">
-              <span>📌 置顶 · 微博 2026.01.05 更新</span>
-              <span class="arrow" id="arrowIconTop">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapperTop">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
-              <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-comment-bottom">
-                <span class="comment-label">评论</span>
-                <span>第一百条微博</span>
-                <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-07-18">
-            <div class="update-badge" id="toggleBadge">
-              <span>📌 微博 2026.07.18 更新</span>
-              <span class="arrow" id="arrowIcon">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-07-18 22:52 · 发布于 上海</div>
-              <div class="weibo-text">哼！</div>
-              <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider1', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426604.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider1', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426605.jpg" alt="配图4" loading="lazy" /></div>
-              </div>
-              <div class="weibo-comment-bottom">
-                <span class="comment-label">评论</span>
-                <span>真的能忍住喜欢我吗</span>
-                <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-18 22:53 来自上海</span>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-07-16">
-            <div class="update-badge" id="toggleBadge2">
-              <span>📌 微博 2026.07.16 更新</span>
-              <span class="arrow" id="arrowIcon2">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper2">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-07-16 01:23 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
-              <a href="https://weibo.com/7901094930/R8Rj4o1sG" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider2', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333947.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333948.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333949.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333950.jpg" alt="配图4" loading="lazy" /></div>
-              </div>
-              <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>看到我就不许有烦恼啦</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:25 来自上海</span></div>
-              <div class="weibo-comment-bottom" style="margin-top:0.3rem; padding-top:0.3rem; border-top-color:rgba(184,224,255,0.1);"><span class="comment-label">评论</span><span>美图攻击！</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:24 来自上海</span></div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-07-14">
-            <div class="update-badge" id="toggleBadge3">
-              <span>📌 微博 2026.07.14 更新</span>
-              <span class="arrow" id="arrowIcon3">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper3">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-07-14 18:06 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
-              <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-3">
-                <div class="media-item" onclick="openModalWithImages('slider3', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259647.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259648.jpg" alt="配图4" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259649.jpg" alt="配图5" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259650.jpg" alt="配图6" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259651.jpg" alt="配图7" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.jpg" alt="配图8" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider3', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图9" loading="lazy" /></div>
-              </div>
-              <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>我早上发的没发出来吗</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-14 18:07 来自上海</span></div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-07-05">
-            <div class="update-badge" id="toggleBadge4">
-              <span>📌 微博 2026.07.05 更新</span>
-              <span class="arrow" id="arrowIcon4">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper4">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">❤️‍🔥</span></div>
-              <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider4', 0)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg" alt="配图1" loading="lazy" />
+          <div class="fancam-container">
+            <!-- 微博列表 -->
+            <div class="weibo-feed-wrap" id="weiboFeed">
+              <!-- 2026-07 -->
+              <div class="weibo-card" data-month="2026-07" id="weiboCard">
+                <div class="weibo-time">📅 2026-07-18 22:52 · 发布于 上海</div>
+                <div class="weibo-text">哼！</div>
+                <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426604.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider1', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426605.jpg" alt="配图4" loading="lazy" /></div>
                 </div>
-                <div class="media-item" onclick="openModalWithImages('slider4', 1)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg" alt="配图2" loading="lazy" />
-                </div>
-                <div class="media-item" onclick="openModalWithImages('slider4', 2)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836500.jpg" alt="配图3" loading="lazy" />
-                </div>
-                <div class="media-item" onclick="openModalWithImages('slider4', 3)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.jpg" alt="配图4" loading="lazy" />
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>真的能忍住喜欢我吗</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-18 22:53 来自上海</span>
                 </div>
               </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-06-01">
-            <div class="update-badge" id="toggleBadge5">
-              <span>📌 微博 2026.06.01 更新</span>
-              <span class="arrow" id="arrowIcon5">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper5">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-06-01 18:23 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">可以一直当个小朋友咩 ​​​</span></div>
-              <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider5', 0)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416589.jpg" alt="配图1" loading="lazy" />
-                </div>
-                <div class="media-item" onclick="openModalWithImages('slider5', 1)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416590.jpg" alt="配图2" loading="lazy" />
-                </div>
-                <div class="media-item" onclick="openModalWithImages('slider5', 2)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113437300.jpg" alt="配图3" loading="lazy" />
-                </div>
-                <div class="media-item" onclick="openModalWithImages('slider5', 3)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113437301.jpg" alt="配图4" loading="lazy" />
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-05-20">
-            <div class="update-badge" id="toggleBadge6">
-              <span>📌 微博 2026.05.20 更新</span>
-              <span class="arrow" id="arrowIcon6">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper6">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-05-20 15:14 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
-              <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-3">
-                <div class="media-item" onclick="openModalWithImages('slider6', 0)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 1)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 2)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 3)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021091.jpg" alt="配图4" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 4)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021092.jpg" alt="配图5" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 5)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.jpg" alt="配图6" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 6)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.jpg" alt="配图7" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 7)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.jpg" alt="配图8" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider6', 8)">
-                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg" alt="配图9" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-05-17">
-            <div class="update-badge" id="toggleBadge7">
-              <span>📌 微博 2026.05.17 更新</span>
-              <span class="arrow" id="arrowIcon7">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper7">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-05-17 17:40 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">🌟</span></div>
-              <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-3">
-                <div class="media-item" onclick="openModalWithImages('slider7', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider7', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider7', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042728.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider7', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042729.jpg" alt="配图4" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider7', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042730.jpg" alt="配图5" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider7', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042731.jpg" alt="配图6" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-05-14">
-            <div class="update-badge" id="toggleBadge8">
-              <span>📌 微博 2026.05.14 更新</span>
-              <span class="arrow" id="arrowIcon8">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper8">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-05-14 13:01 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">今天是😺😺 ​​​</span></div>
-              <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-3">
-                <div class="media-item" onclick="openModalWithImages('slider8', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118189.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118190.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118191.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118192.jpg" alt="配图4" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118193.jpg" alt="配图5" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118194.jpg" alt="配图6" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider8', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118195.jpg" alt="配图7" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-04-29">
-            <div class="update-badge" id="toggleBadge9">
-              <span>📌 微博 2026.04.29 更新</span>
-              <span class="arrow" id="arrowIcon9">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper9">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-04-29 06:25 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">美好的一天从看到美丽的人开始 ​​​</span></div>
-              <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider9', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441826.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider9', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441827.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider9', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441828.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider9', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441829.jpg" alt="配图4" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-04-10">
-            <div class="update-badge" id="toggleBadge10">
-              <span>📌 微博 2026.04.10 更新</span>
-              <span class="arrow" id="arrowIcon10">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper10">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-04-10 22:28 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">⸝⸝⸝˘◡˘♡你宝宝 ​​​</span></div>
-              <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider10', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620238.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider10', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620239.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider10', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620240.jpg" alt="配图3" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="update-trigger" data-platform="weibo" data-date="2026-04-04">
-            <div class="update-badge" id="toggleBadge11">
-              <span>📌 微博 2026.04.04 更新</span>
-              <span class="arrow" id="arrowIcon11">▼</span>
-            </div>
-          </div>
-          <div class="weibo-card-wrapper" id="weiboCardWrapper11">
-            <div class="weibo-card">
-              <div class="weibo-time">📅 2026-04-04 00:04 · 发布于 上海</div>
-              <div class="weibo-text"><span class="line">🌬️</span></div>
-              <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider11', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider11', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.jpg" alt="配图2" loading="lazy" /></div>
-              </div>
-            </div>
-          </div>
-        </div>
 
+              <div class="weibo-card" data-month="2026-07" id="weiboCard2">
+                <div class="weibo-time">📅 2026-07-16 01:23 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
+                <a href="https://weibo.com/7901094930/R8Rj4o1sG" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider2', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333947.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333948.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333949.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider2', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333950.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+                <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>看到我就不许有烦恼啦</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:25 来自上海</span></div>
+                <div class="weibo-comment-bottom" style="margin-top:0.3rem; padding-top:0.3rem; border-top-color:rgba(184,224,255,0.1);"><span class="comment-label">评论</span><span>美图攻击！</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:24 来自上海</span></div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-07" id="weiboCard3">
+                <div class="weibo-time">📅 2026-07-14 18:06 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
+                <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider3', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259647.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259648.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259649.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259650.jpg" alt="配图6" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259651.jpg" alt="配图7" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.jpg" alt="配图8" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider3', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图9" loading="lazy" /></div>
+                </div>
+                <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>我早上发的没发出来吗</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-14 18:07 来自上海</span></div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-07" id="weiboCard4">
+                <div class="weibo-time">📅 2026-07-05 16:02 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">❤️‍🔥</span></div>
+                <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider4', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider4', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider4', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836500.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider4', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <!-- 2026-06 -->
+              <div class="weibo-card" data-month="2026-06" id="weiboCard5">
+                <div class="weibo-time">📅 2026-06-01 18:23 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">可以一直当个小朋友咩 ​​​</span></div>
+                <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider5', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416589.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider5', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416590.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider5', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113437300.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider5', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113437301.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <!-- 2026-05 -->
+              <div class="weibo-card" data-month="2026-05" id="weiboCard6">
+                <div class="weibo-time">📅 2026-05-20 15:14 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
+                <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider6', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021091.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021092.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.jpg" alt="配图6" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.jpg" alt="配图7" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.jpg" alt="配图8" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg" alt="配图9" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-05" id="weiboCard7">
+                <div class="weibo-time">📅 2026-05-17 17:40 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">🌟</span></div>
+                <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider7', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider7', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider7', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042728.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider7', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042729.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider7', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042730.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider7', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042731.jpg" alt="配图6" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-05" id="weiboCard8">
+                <div class="weibo-time">📅 2026-05-14 13:01 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">今天是😺😺 ​​​</span></div>
+                <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider8', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118189.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118190.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118191.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118192.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118193.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118194.jpg" alt="配图6" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider8', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118195.jpg" alt="配图7" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <!-- 2026-04 -->
+              <div class="weibo-card" data-month="2026-04" id="weiboCard9">
+                <div class="weibo-time">📅 2026-04-29 06:25 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">美好的一天从看到美丽的人开始 ​​​</span></div>
+                <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider9', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441826.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider9', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441827.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider9', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441828.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider9', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441829.jpg" alt="配图4" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-04" id="weiboCard10">
+                <div class="weibo-time">📅 2026-04-10 22:28 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">⸝⸝⸝˘◡˘♡你宝宝 ​​​</span></div>
+                <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider10', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620238.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider10', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620239.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider10', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620240.jpg" alt="配图3" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <div class="weibo-card" data-month="2026-04" id="weiboCard11">
+                <div class="weibo-time">📅 2026-04-04 00:04 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">🌬️</span></div>
+                <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-media-grid cols-2">
+                  <div class="media-item" onclick="openModalWithImages('slider11', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider11', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.jpg" alt="配图2" loading="lazy" /></div>
+                </div>
+              </div>
+
+              <!-- 2026-01 置顶 -->
+              <div class="weibo-card" data-month="2026-01" id="weiboCardTop" style="border: 2px solid rgba(26,74,111,0.15);">
+                <div class="weibo-time">📅 2026-01-05 20:46 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">冬！2026！吉！</span></div>
+                <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+                <div class="weibo-comment-bottom">
+                  <span class="comment-label">评论</span>
+                  <span>第一百条微博</span>
+                  <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+                </div>
+              </div>
+
+              <div class="footer-slogan">-All For YeFan-</div>
+            </div>
+
+            <!-- 右侧时间轴 -->
+            <div class="timeline-sidebar" id="timelineSidebar">
+              <div class="tl-item" data-month="2026-07">07</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-06">06</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-05">05</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-04">04</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-01">01</div>
+            </div>
           </div>
-          <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
 
@@ -1232,46 +1217,41 @@
 
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
-// ===== 使用你自己的 Deno Deploy 代理 =====
-const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
+    const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
 
-// 从链接提取 BV 号
-function extractBvid(url) {
-    const match = url.match(/BV([a-zA-Z0-9]+)/);
-    if (!match) return null;
-    return 'BV' + match[1];
-}
+    function extractBvid(url) {
+      const match = url.match(/BV([a-zA-Z0-9]+)/);
+      if (!match) return null;
+      return 'BV' + match[1];
+    }
 
-// 使用你的代理获取封面
-async function fetchBilibiliCoverFast(url) {
-    const bvid = extractBvid(url);
-    if (!bvid) return null;
-    if (coverCache.has(url)) return coverCache.get(url);
-
-    try {
+    async function fetchBilibiliCoverFast(url) {
+      const bvid = extractBvid(url);
+      if (!bvid) return null;
+      if (coverCache.has(url)) return coverCache.get(url);
+      try {
         const response = await fetch(`${MY_PROXY}?bvid=${bvid}`);
         if (response.ok) {
-            const data = await response.json();
-            if (data.code === 0 && data.data && data.data.pic) {
-                const coverUrl = data.data.pic;
-                // 预加载图片
-                await new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => resolve();
-                    img.onerror = () => resolve();
-                    img.src = coverUrl;
-                });
-                coverCache.set(url, coverUrl);
-                return coverUrl;
-            }
+          const data = await response.json();
+          if (data.code === 0 && data.data && data.data.pic) {
+            const coverUrl = data.data.pic;
+            await new Promise((resolve) => {
+              const img = new Image();
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+              img.src = coverUrl;
+            });
+            coverCache.set(url, coverUrl);
+            return coverUrl;
+          }
         }
         return null;
-    } catch (e) {
+      } catch (e) {
         console.warn('获取封面失败:', e);
         return null;
+      }
     }
-}
-    // ---- 渲染卡片 ----
+
     function getMonthList(category) {
       let data = [];
       if (category === 'all') data = [...unitData, ...specialData, ...assistData];
@@ -1291,7 +1271,6 @@ async function fetchBilibiliCoverFast(url) {
     const grid = document.getElementById('stageGrid');
     const coverCache = new Map();
 
-    // 预加载图片（确保图片能快速显示）
     function preloadImage(url) {
       return new Promise((resolve) => {
         const img = new Image();
@@ -1313,8 +1292,6 @@ async function fetchBilibiliCoverFast(url) {
         grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
         return;
       }
-
-      // 生成卡片HTML（先显示占位图）
       let html = '';
       for (const item of filtered) {
         const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
@@ -1328,14 +1305,11 @@ async function fetchBilibiliCoverFast(url) {
           else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
         }
-
-        // 检查是否有缓存
         const cachedCover = coverCache.get(item.url);
         let coverHtml = '';
         if (cachedCover) {
           coverHtml = `<img src="${cachedCover}" alt="${item.title}" loading="lazy" />`;
         } else {
-          // 使用渐变色占位 + 加载提示
           coverHtml = `
             <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
               <div class="video-icon">🎬</div>
@@ -1343,7 +1317,6 @@ async function fetchBilibiliCoverFast(url) {
             </div>
           `;
         }
-
         html += `
           <div class="video-card" data-url="${item.url}" data-title="${item.title}">
             <span class="video-tag" style="background:${tagColor};">${tagText}</span>
@@ -1359,24 +1332,17 @@ async function fetchBilibiliCoverFast(url) {
         `;
       }
       grid.innerHTML = html;
-
-      // 异步加载未缓存的封面（并行）
       const pendingItems = filtered.filter(item => !coverCache.has(item.url));
       if (pendingItems.length > 0) {
-        // 使用 Promise.all 并行请求所有封面
         const coverPromises = pendingItems.map(async (item) => {
           const cover = await fetchBilibiliCoverFast(item.url);
           if (cover) {
-            // 预加载图片
             await preloadImage(cover);
             return { item, cover };
           }
           return null;
         });
-
         const results = await Promise.all(coverPromises);
-        
-        // 更新卡片
         for (const result of results) {
           if (result) {
             const { item, cover } = result;
@@ -1386,9 +1352,7 @@ async function fetchBilibiliCoverFast(url) {
                 const coverBox = card.querySelector('.video-cover-box');
                 if (coverBox) {
                   const fallback = coverBox.querySelector('.cover-fallback');
-                  if (fallback) {
-                    fallback.remove();
-                  }
+                  if (fallback) fallback.remove();
                   const existingImg = coverBox.querySelector('img');
                   if (!existingImg) {
                     const img = document.createElement('img');
@@ -1456,14 +1420,12 @@ async function fetchBilibiliCoverFast(url) {
       renderCards(currentCategory, month, keyword);
     });
 
-    // ---- 初始化 ----
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
 
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
     const platformItems = document.querySelectorAll('.platform-nav-item');
-    const allTriggers = document.querySelectorAll('#weiboFeed .update-trigger');
-    const allWrappers = document.querySelectorAll('#weiboFeed .weibo-card-wrapper');
+    const allCards = document.querySelectorAll('#weiboFeed .weibo-card');
     const weiboSearchInput = document.getElementById('weiboSearch');
     const dateTabs = document.querySelectorAll('#weiboTabs .category-tab');
 
@@ -1478,30 +1440,13 @@ async function fetchBilibiliCoverFast(url) {
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
 
-      allTriggers.forEach((trigger, index) => {
-        const wrapper = allWrappers[index];
-        if (!wrapper) return;
-
-        const triggerPlatform = trigger.dataset.platform || 'weibo';
-        const platformMatch = currentPlatform === 'all' || triggerPlatform === currentPlatform;
-
-        const triggerDate = trigger.dataset.date || '';
-        const dateMatch = currentDate === '全部' || (triggerDate && triggerDate.startsWith(currentDate));
-
-        const card = wrapper.querySelector('.weibo-card');
-        let textMatch = true;
-        if (keyword !== '') {
-          const cardText = card ? card.textContent.toLowerCase() : '';
-          textMatch = cardText.includes(keyword);
-        }
-
-        const shouldShow = platformMatch && dateMatch && textMatch;
-        trigger.style.display = shouldShow ? '' : 'none';
-        if (!shouldShow) {
-          wrapper.classList.remove('open');
-          const arrow = trigger.querySelector('.arrow');
-          if (arrow) arrow.classList.remove('open');
-        }
+      allCards.forEach(card => {
+        const cardMonth = card.dataset.month || '';
+        const dateMatch = currentDate === '全部' || cardMonth === currentDate;
+        const cardText = card.textContent.toLowerCase();
+        const textMatch = keyword === '' || cardText.includes(keyword);
+        const platformMatch = currentPlatform === 'all' || currentPlatform === 'weibo';
+        card.style.display = (dateMatch && textMatch && platformMatch) ? '' : 'none';
       });
     }
 
@@ -1571,7 +1516,7 @@ async function fetchBilibiliCoverFast(url) {
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.jpg',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg'
       ],
       slider7: [
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.jpg',
@@ -1604,7 +1549,7 @@ async function fetchBilibiliCoverFast(url) {
       slider11: [
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.jpg'
-      ],
+      ]
     };
 
     let currentSetId = 'slider1';
@@ -1679,36 +1624,53 @@ async function fetchBilibiliCoverFast(url) {
       if (e.key === 'ArrowRight') goToNext();
     });
 
-    // ---- 折叠控制 ----
-    const togglePairs = [
-      { badge: 'toggleBadgeTop', wrapper: 'weiboCardWrapperTop', arrow: 'arrowIconTop' },
-      { badge: 'toggleBadge', wrapper: 'weiboCardWrapper', arrow: 'arrowIcon' },
-      { badge: 'toggleBadge2', wrapper: 'weiboCardWrapper2', arrow: 'arrowIcon2' },
-      { badge: 'toggleBadge3', wrapper: 'weiboCardWrapper3', arrow: 'arrowIcon3' },
-      { badge: 'toggleBadge4', wrapper: 'weiboCardWrapper4', arrow: 'arrowIcon4' },
-      { badge: 'toggleBadge5', wrapper: 'weiboCardWrapper5', arrow: 'arrowIcon5' },
-      { badge: 'toggleBadge6', wrapper: 'weiboCardWrapper6', arrow: 'arrowIcon6' },
-      { badge: 'toggleBadge7', wrapper: 'weiboCardWrapper7', arrow: 'arrowIcon7' },
-      { badge: 'toggleBadge8', wrapper: 'weiboCardWrapper8', arrow: 'arrowIcon8' },
-      { badge: 'toggleBadge9', wrapper: 'weiboCardWrapper9', arrow: 'arrowIcon9' },
-      { badge: 'toggleBadge10', wrapper: 'weiboCardWrapper10', arrow: 'arrowIcon10' },
-      { badge: 'toggleBadge11', wrapper: 'weiboCardWrapper11', arrow: 'arrowIcon11' }
-    ];
+    // ---- 右侧时间轴：点击跳转 + 滚动高亮 ----
+    const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
+    const feedWrap = document.getElementById('weiboFeed');
 
-    togglePairs.forEach(({ badge, wrapper, arrow }) => {
-      const badgeEl = document.getElementById(badge);
-      const wrapperEl = document.getElementById(wrapper);
-      const arrowEl = document.getElementById(arrow);
-      if (badgeEl && wrapperEl && arrowEl) {
-        wrapperEl.classList.remove('open');
-        arrowEl.classList.remove('open');
-        badgeEl.addEventListener('click', function(e) {
-          e.stopPropagation();
-          wrapperEl.classList.toggle('open');
-          arrowEl.classList.toggle('open');
-        });
-      }
+    // 点击跳转
+    tlItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const month = this.dataset.month;
+        const targetCard = feedWrap.querySelector(`.weibo-card[data-month="${month}"]`);
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
+
+    // 滚动高亮
+    const contentArea = document.querySelector('.content-area');
+    let highlightTimeout = null;
+
+    function updateTimelineHighlight() {
+      const cards = feedWrap.querySelectorAll('.weibo-card');
+      let activeMonth = null;
+      const scrollTop = contentArea.scrollTop;
+      const offset = 120;
+
+      cards.forEach(card => {
+        if (card.style.display === 'none') return;
+        const rect = card.getBoundingClientRect();
+        const containerRect = contentArea.getBoundingClientRect();
+        const cardTop = rect.top - containerRect.top;
+        if (cardTop < offset && cardTop > -rect.height) {
+          activeMonth = card.dataset.month;
+        }
+      });
+
+      tlItems.forEach(item => {
+        item.classList.toggle('active', item.dataset.month === activeMonth);
+      });
+    }
+
+    contentArea.addEventListener('scroll', function() {
+      if (highlightTimeout) cancelAnimationFrame(highlightTimeout);
+      highlightTimeout = requestAnimationFrame(updateTimelineHighlight);
+    });
+
+    // 初始高亮
+    setTimeout(updateTimelineHighlight, 300);
   </script>
 </body>
 </html>
