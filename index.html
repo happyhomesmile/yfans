@@ -1118,18 +1118,11 @@
         </div>
         
         <!-- 时间轴独立在浅框外面右侧 -->
-        <div style="display: flex; justify-content: center; gap: 24px; max-width: 100%; margin-top: 12px;">
-          <div style="width: 780px; flex-shrink: 0; position: relative;">
-            <div class="timeline-sidebar" id="timelineSidebar" style="position: absolute; right: -88px; top: 0;">
-              <div class="tl-year-label">2026</div>
-              <div class="tl-item" data-month="2026-07">07</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-06">06</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-05">05</div>
-              <div class="tl-line"></div>
-              <div class="tl-item" data-month="2026-04">04</div>
-            </div>
+        <div style="display: flex; justify-content: center; gap: 24px; max-width: 100%; margin-top: 0;">
+          <!-- 占位让时间轴对齐到浅框右侧 -->
+          <div style="width: 780px; flex-shrink: 0;"></div>
+          <div class="timeline-sidebar" id="timelineSidebar">
+            ...
           </div>
         </div>
       
