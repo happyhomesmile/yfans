@@ -273,7 +273,7 @@
       box-shadow: 0 2px 10px rgba(36,104,168,0.12);
     }
 
-    /* ===== 饭之拍 - 平台导航 ===== */
+    /* =====  - 平台导航 ===== */
     .platform-nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
       margin-bottom: 14px;
@@ -411,7 +411,7 @@
       font-weight: 400;
     }
 
-    /* ===== 饭之拍 - 微博卡片 ===== */
+    /* =====  - 微博卡片 ===== */
     .weibo-card {
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
@@ -509,7 +509,7 @@
       box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
     }
 
-    /* ===== 饭之拍 - 布局 ===== */
+    /* =====  - 布局 ===== */
     .fancam-wrapper {
       display: flex;
       gap: 24px;
@@ -780,7 +780,7 @@
       </div>
       <div class="menu-item active" data-page="diary"><span class="icon">📔</span> 饭记</div>
       <div class="menu-item" data-page="stage"><span class="icon">🎤</span> 饭之大小作</div>
-      <div class="menu-item" data-page="fancam"><span class="icon">📸</span> 饭之拍</div>
+      <div class="menu-item" data-page="fancam"><span class="icon">📸</span> </div>
       <div class="menu-item" data-page="bobo"><span class="icon">📹</span> 饭之啵</div>
       <div class="menu-item" data-page="contact"><span class="icon">💬</span> 饭言饭语</div>
       <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 未完待续</div>
@@ -1116,23 +1116,23 @@
             <div class="footer-slogan">-All For YeFan-</div>
           </div>
         </div>
-
+        
         <!-- 时间轴独立在浅框外面右侧 -->
-        <div style="display: flex; justify-content: center; gap: 24px; max-width: 100%; margin-top: 0;">
-          <!-- 占位让时间轴对齐到浅框右侧 -->
-          <div style="width: 780px; flex-shrink: 0;"></div>
-          <div class="timeline-sidebar" id="timelineSidebar">
-            <div class="tl-year-label">2026</div>
-            <div class="tl-item" data-month="2026-07">07</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-06">06</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-05">05</div>
-            <div class="tl-line"></div>
-            <div class="tl-item" data-month="2026-04">04</div>
+        <div style="display: flex; justify-content: center; gap: 24px; max-width: 100%; margin-top: 12px;">
+          <div style="width: 780px; flex-shrink: 0; position: relative;">
+            <div class="timeline-sidebar" id="timelineSidebar" style="position: absolute; right: -88px; top: 0;">
+              <div class="tl-year-label">2026</div>
+              <div class="tl-item" data-month="2026-07">07</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-06">06</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-05">05</div>
+              <div class="tl-line"></div>
+              <div class="tl-item" data-month="2026-04">04</div>
+            </div>
           </div>
         </div>
-      </div>
+      
       <!-- 饭之啵 -->
       <div class="page-box" id="bobo">
         <div class="info-box">
