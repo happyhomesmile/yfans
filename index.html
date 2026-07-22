@@ -1999,9 +1999,9 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
-        // 置顶卡片：只在对应平台且月份为"全部"时显示
+        // 置顶卡片：在"全部"或对应平台时显示，且月份为"全部"
         if (card.classList.contains('pinned')) {
-          const platformMatch = cardPlatform === currentPlatform;
+          const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
           const dateMatch = currentDate === '全部';
           card.style.display = (platformMatch && dateMatch) ? '' : 'none';
           return;
