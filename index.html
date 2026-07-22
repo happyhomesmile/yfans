@@ -971,6 +971,30 @@
               </div>
             </div>
             
+            <div class="update-trigger" data-platform="weibo" data-date="2026-05-20">
+              <div class="update-badge" id="toggleBadge6">
+                <span>📌 微博 2026.05.20 更新</span>
+                <span class="arrow" id="arrowIcon6">▼</span>
+              </div>
+            </div>
+            <div class="weibo-card-wrapper" id="weiboCardWrapper6">
+              <div class="weibo-card">
+                <div class="weibo-time">📅 2026-05-20 15:14 · 发布于 上海</div>
+                <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
+                <div class="weibo-media-grid cols-3">
+                  <div class="media-item" onclick="openModalWithImages('slider6', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg" alt="配图1" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.jpg" alt="配图2" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.jpg" alt="配图3" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021091.jpg" alt="配图4" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021092.jpg" alt="配图5" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.jpg" alt="配图6" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.jpg" alt="配图7" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.jpg" alt="配图8" loading="lazy" /></div>
+                  <div class="media-item" onclick="openModalWithImages('slider6', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg" alt="配图9" loading="lazy" /></div>
+                </div>
+              </div>
+            </div>
+            
 
           </div>
           <div class="footer-slogan">-All For YeFan-</div>
@@ -1415,7 +1439,18 @@ async function fetchBilibiliCoverFast(url) {
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722113416590.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722113437300.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722113437301.jpg' 
-      ]
+      ],
+      slider6: [
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021091.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021092.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.jpg',
+        'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.jpg'
+],
     };
 
     let currentSetId = 'slider1';
@@ -1498,6 +1533,7 @@ async function fetchBilibiliCoverFast(url) {
       { badge: 'toggleBadge3', wrapper: 'weiboCardWrapper3', arrow: 'arrowIcon3' },
       { badge: 'toggleBadge4', wrapper: 'weiboCardWrapper4', arrow: 'arrowIcon4' },
       { badge: 'toggleBadge5', wrapper: 'weiboCardWrapper5', arrow: 'arrowIcon5' }
+      
     ];
 
     togglePairs.forEach(({ badge, wrapper, arrow }) => {
