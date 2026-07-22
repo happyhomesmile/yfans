@@ -680,6 +680,21 @@
     }
 
     /* ===== 饭之拍 - 布局 ===== */
+    .fancam-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      max-width: 780px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+    .fancam-wrap .info-box {
+      max-width: 780px;
+      width: 100%;
+      margin: 0;
+      padding: 18px 22px;
+      flex-shrink: 0;
+    }
     .fancam-wrap .timeline-sidebar {
       position: sticky;
       top: 24px;
@@ -1292,7 +1307,7 @@
                   <div class="media-item" onclick="openModalWithImages('slider11', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.jpg" alt="配图2" loading="lazy" /></div>
                 </div>
               </div>
-              
+
               <!-- ========== 2026-03 ========== -->
               <!-- 小红书 3.29 -->
               <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-03">
@@ -1355,7 +1370,7 @@
                   <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-3-4 22:49 来自上海</span>
                 </div>
               </div>
-              
+
               <!-- ========== 2026-02 ========== -->
               <!-- 微博 2.28 -->
               <div class="weibo-card" data-platform="weibo" data-month="2026-02">
@@ -1536,6 +1551,7 @@
 
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
+          </div>
 
           <!-- 时间轴 -->
           <div class="timeline-sidebar" id="timelineSidebar"></div>
@@ -1889,7 +1905,6 @@
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const timelineContainer = document.getElementById('timelineSidebar');
       
-      // 获取当前平台的月份列表
       let months = [];
       if (currentPlatform === 'all') {
         const allMonths = new Set();
@@ -1899,14 +1914,12 @@
         months = platformMonths[currentPlatform] || [];
       }
       
-      // 如果没有任何月份，隐藏时间轴
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
         return;
       }
       timelineContainer.style.display = 'flex';
       
-      // 生成时间轴HTML
       let html = `<div class="tl-year-label">2026</div>`;
       months.forEach((m, index) => {
         const monthNum = m.split('-')[1];
@@ -1918,7 +1931,6 @@
       
       timelineContainer.innerHTML = html;
       
-      // 重新绑定点击事件
       timelineContainer.querySelectorAll('.tl-item').forEach(item => {
         item.addEventListener('click', function() {
           const month = this.dataset.month;
@@ -1930,8 +1942,41 @@
         });
       });
       
-      // 更新高亮
       updateTimelineHighlight();
+    }
+
+    // ---- 渲染月份筛选标签 ----
+    function renderMonthTabs() {
+      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
+      const tabsContainer = document.getElementById('weiboTabs');
+      
+      let html = `<span class="category-tab active" data-month="全部">全部</span>`;
+      
+      let months = [];
+      if (currentPlatform === 'all') {
+        const allMonths = new Set();
+        Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
+        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
+      } else {
+        months = platformMonths[currentPlatform] || [];
+      }
+      
+      months.forEach(m => {
+        html += `<span class="category-tab" data-month="${m}">${m}</span>`;
+      });
+      
+      tabsContainer.innerHTML = html;
+      
+      tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          filterWeiboFeed();
+        });
+      });
+      
+      renderTimeline();
     }
 
     // ---- 饭之拍：平台 + 日期 + 关键词 联合筛选 ----
@@ -1954,6 +1999,7 @@
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         
+        // 置顶卡片：只在对应平台且月份为"全部"时显示
         if (card.classList.contains('pinned')) {
           const platformMatch = cardPlatform === currentPlatform;
           const dateMatch = currentDate === '全部';
@@ -1968,6 +2014,8 @@
 
         card.style.display = (dateMatch && textMatch && platformMatch) ? '' : 'none';
       });
+      
+      updateTimelineHighlight();
     }
 
     platformItems.forEach(btn => {
@@ -1975,6 +2023,7 @@
         platformItems.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         renderMonthTabs();
+        renderTimeline();
         filterWeiboFeed();
       });
     });
@@ -2254,24 +2303,12 @@
     });
 
     // ---- 右侧时间轴：点击跳转 + 滚动高亮 ----
-    const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
-    const feedWrap = document.getElementById('weiboFeed');
-
-    tlItems.forEach(item => {
-      item.addEventListener('click', function() {
-        const month = this.dataset.month;
-        const targetCard = feedWrap.querySelector(`.weibo-card[data-month="${month}"], .xiaohongshu-card[data-month="${month}"]`);
-        if (targetCard) {
-          targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // ---- 滚动高亮 ----
     let highlightTimeout = null;
 
     function updateTimelineHighlight() {
+      const feedWrap = document.getElementById('weiboFeed');
       const cards = feedWrap.querySelectorAll('.weibo-card:not(.pinned), .xiaohongshu-card:not(.pinned)');
+      const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
       let activeMonth = null;
       const offset = 120;
 
