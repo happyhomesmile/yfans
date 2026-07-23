@@ -1085,16 +1085,53 @@
             <button class="stage-nav-item" data-category="special">特殊舞台</button>
             <button class="stage-nav-item" data-category="assist">助演</button>
           </div>
-
+      
           <div class="filter-search-row">
             <div class="search-box">
               <span class="search-icon">🔍</span>
               <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
             </div>
           </div>
-
-          <div class="filter-tabs-row" id="categoryTabs"></div>
-
+      
+          <!-- ===== 月份筛选 + 左右箭头 ===== -->
+          <div class="filter-tabs-row" id="categoryTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
+            <button class="month-nav-btn" id="stageMonthPrev" style="
+              background:rgba(255,255,255,0.6);
+              border:1px solid rgba(184,224,255,0.2);
+              border-radius:50%;
+              width:24px;height:24px;
+              cursor:pointer;
+              font-size:14px;
+              color:#1f5a8a;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              flex-shrink:0;
+              transition:all 0.2s;
+            " onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
+            
+            <div id="stageMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
+              <div id="stageMonthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;">
+                <!-- 月份标签由 JavaScript 动态生成 -->
+              </div>
+            </div>
+            
+            <button class="month-nav-btn" id="stageMonthNext" style="
+              background:rgba(255,255,255,0.6);
+              border:1px solid rgba(184,224,255,0.2);
+              border-radius:50%;
+              width:24px;height:24px;
+              cursor:pointer;
+              font-size:14px;
+              color:#1f5a8a;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              flex-shrink:0;
+              transition:all 0.2s;
+            " onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
+          </div>
+      
           <div class="stage-grid" id="stageGrid"></div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
@@ -2871,23 +2908,108 @@
     function renderTabs(category, activeMonth = '全部') {
       const container = document.getElementById('categoryTabs');
       const months = getMonthList(category);
-      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部">全部</span>`;
+      
+      // 找到滚动容器
+      const scrollInner = document.getElementById('stageMonthScrollInner');
+      if (!scrollInner) return;
+      
+      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
       months.forEach(m => {
         const active = activeMonth === m ? 'active' : '';
-        html += `<span class="category-tab ${active}" data-month="${m}">${m}</span>`;
+        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
       });
-      container.innerHTML = html;
-      container.querySelectorAll('.category-tab').forEach(tab => {
+      scrollInner.innerHTML = html;
+    
+      // 绑定点击事件
+      scrollInner.querySelectorAll('.category-tab').forEach(tab => {
         tab.addEventListener('click', function() {
           const month = this.dataset.month;
           const keyword = document.getElementById('stageSearch').value;
-          container.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          scrollInner.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
           this.classList.add('active');
           renderCards(currentCategory, month, keyword);
         });
       });
+    
+      // ===== 左右箭头滚动 + 手指滑动 =====
+      const prevBtn = document.getElementById('stageMonthPrev');
+      const nextBtn = document.getElementById('stageMonthNext');
+      const wrapper = document.getElementById('stageMonthScrollWrapper');
+      let scrollPosition = 0;
+      const step = 120;
+    
+      if (prevBtn && nextBtn && scrollInner && wrapper) {
+        // 重置滚动位置
+        scrollPosition = 0;
+        scrollInner.style.transform = 'translateX(0px)';
+        scrollInner.style.cursor = 'grab';
+        
+        // 按钮点击
+        prevBtn.onclick = function(e) {
+          e.stopPropagation();
+          scrollPosition = Math.min(scrollPosition + step, 0);
+          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+        
+        nextBtn.onclick = function(e) {
+          e.stopPropagation();
+          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
+          scrollPosition = Math.max(scrollPosition - step, maxScroll);
+          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+    
+        // ===== 手指触摸滑动 =====
+        let startX = 0;
+        let currentTranslate = 0;
+        let isDragging = false;
+    
+        scrollInner.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          currentTranslate = scrollPosition;
+          isDragging = true;
+          this.style.cursor = 'grabbing';
+          this.style.transition = 'none';
+        }, { passive: true });
+    
+        scrollInner.addEventListener('touchmove', function(e) {
+          if (!isDragging) return;
+          const moveX = e.touches[0].clientX - startX;
+          const newPos = currentTranslate + moveX;
+          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
+          // 边界限制
+          const clamped = Math.min(Math.max(newPos, maxScroll), 0);
+          this.style.transform = 'translateX(' + clamped + 'px)';
+        }, { passive: true });
+    
+        scrollInner.addEventListener('touchend', function(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          this.style.cursor = 'grab';
+          this.style.transition = 'transform 0.3s ease';
+          // 最终位置取整到最近的步长
+          const currentPos = parseFloat(this.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
+          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
+          // 如果超出边界则回弹
+          if (currentPos > 0) {
+            scrollPosition = 0;
+          } else if (currentPos < maxScroll) {
+            scrollPosition = maxScroll;
+          } else {
+            scrollPosition = currentPos;
+          }
+          this.style.transform = 'translateX(' + scrollPosition + 'px)';
+        }, { passive: true });
+    
+        // 鼠标滚轮支持（桌面端）
+        wrapper.addEventListener('wheel', function(e) {
+          e.preventDefault();
+          const delta = e.deltaX || e.deltaY;
+          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
+          scrollPosition = Math.min(Math.max(scrollPosition - delta * 0.5, maxScroll), 0);
+          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
+        }, { passive: false });
+      }
     }
-
     const navItems = document.querySelectorAll('.stage-nav-item');
     navItems.forEach(btn => {
       btn.addEventListener('click', function() {
@@ -3230,9 +3352,23 @@
       
       let html = `
         <div style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
-          <button class="month-nav-btn" id="monthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
-          <div id="monthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
-            <div id="monthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;">
+          <button class="month-nav-btn" id="weiboMonthPrev" style="
+            background:rgba(255,255,255,0.6);
+            border:1px solid rgba(184,224,255,0.2);
+            border-radius:50%;
+            width:24px;height:24px;
+            cursor:pointer;
+            font-size:14px;
+            color:#1f5a8a;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            transition:all 0.2s;
+          " onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
+          
+          <div id="weiboMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
+            <div id="weiboMonthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;">
       `;
       html += `<span class="category-tab active" data-month="全部" style="flex-shrink:0;">全部</span>`;
       months.forEach(m => {
@@ -3241,32 +3377,104 @@
       html += `
             </div>
           </div>
-          <button class="month-nav-btn" id="monthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
+          
+          <button class="month-nav-btn" id="weiboMonthNext" style="
+            background:rgba(255,255,255,0.6);
+            border:1px solid rgba(184,224,255,0.2);
+            border-radius:50%;
+            width:24px;height:24px;
+            cursor:pointer;
+            font-size:14px;
+            color:#1f5a8a;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            transition:all 0.2s;
+          " onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
         </div>
       `;
       
       tabsContainer.innerHTML = html;
       
-      const scrollInner = document.getElementById('monthScrollInner');
-      const scrollWrapper = document.getElementById('monthScrollWrapper');
-      const prevBtn = document.getElementById('monthPrev');
-      const nextBtn = document.getElementById('monthNext');
+      const scrollInner = document.getElementById('weiboMonthScrollInner');
+      const scrollWrapper = document.getElementById('weiboMonthScrollWrapper');
+      const prevBtn = document.getElementById('weiboMonthPrev');
+      const nextBtn = document.getElementById('weiboMonthNext');
       
       let scrollPosition = 0;
       const step = 120;
       
       if (prevBtn && nextBtn && scrollInner && scrollWrapper) {
-        prevBtn.addEventListener('click', function() {
+        // 重置滚动位置
+        scrollPosition = 0;
+        scrollInner.style.transform = 'translateX(0px)';
+        scrollInner.style.cursor = 'grab';
+        
+        // 按钮点击
+        prevBtn.onclick = function(e) {
+          e.stopPropagation();
           scrollPosition = Math.min(scrollPosition + step, 0);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
-        });
-        nextBtn.addEventListener('click', function() {
+        };
+        
+        nextBtn.onclick = function(e) {
+          e.stopPropagation();
           const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
           scrollPosition = Math.max(scrollPosition - step, maxScroll);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
-        });
+        };
+    
+        // ===== 手指触摸滑动 =====
+        let startX = 0;
+        let currentTranslate = 0;
+        let isDragging = false;
+    
+        scrollInner.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          currentTranslate = scrollPosition;
+          isDragging = true;
+          this.style.cursor = 'grabbing';
+          this.style.transition = 'none';
+        }, { passive: true });
+    
+        scrollInner.addEventListener('touchmove', function(e) {
+          if (!isDragging) return;
+          const moveX = e.touches[0].clientX - startX;
+          const newPos = currentTranslate + moveX;
+          const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
+          const clamped = Math.min(Math.max(newPos, maxScroll), 0);
+          this.style.transform = 'translateX(' + clamped + 'px)';
+        }, { passive: true });
+    
+        scrollInner.addEventListener('touchend', function(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          this.style.cursor = 'grab';
+          this.style.transition = 'transform 0.3s ease';
+          const currentPos = parseFloat(this.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
+          const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
+          if (currentPos > 0) {
+            scrollPosition = 0;
+          } else if (currentPos < maxScroll) {
+            scrollPosition = maxScroll;
+          } else {
+            scrollPosition = currentPos;
+          }
+          this.style.transform = 'translateX(' + scrollPosition + 'px)';
+        }, { passive: true });
+    
+        // 鼠标滚轮支持（桌面端）
+        scrollWrapper.addEventListener('wheel', function(e) {
+          e.preventDefault();
+          const delta = e.deltaX || e.deltaY;
+          const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
+          scrollPosition = Math.min(Math.max(scrollPosition - delta * 0.5, maxScroll), 0);
+          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
+        }, { passive: false });
       }
       
+      // 绑定月份点击事件
       tabsContainer.querySelectorAll('.category-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
           tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
