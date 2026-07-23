@@ -839,45 +839,63 @@
       .avatar-name { font-size: 13px; }
       .inline-calendar { width: 260px; height: 260px; min-width: 220px; min-height: 220px; padding: 14px 16px; }
     }
-    @media (max-width: 480px) {
-      .stage-grid { grid-template-columns: 1fr; }
-      /* 手机端侧边栏保持原样（不沉底） */
-      .sidebar { 
-        width: 160px; 
-        height: 100vh; 
-        min-height: 100vh; 
-        position: sticky; 
-        top: 0; 
-        flex-direction: column; 
-        flex-wrap: nowrap; 
-        padding: 16px 10px; 
-        gap: 4px; 
+      @media (max-width: 480px) {
+        .stage-grid { grid-template-columns: 1fr; }
+        
+        /* 手机端侧边栏保持PC样式，不变 */
+        .sidebar {
+          width: 160px;
+          height: 100vh;
+          min-height: 100vh;
+          position: sticky;
+          top: 0;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          padding: 16px 10px;
+          gap: 4px;
+        }
+        .sidebar .avatar-box { display: block; }
+        .sidebar .menu-item {
+          padding: 10px 10px;
+          font-size: 12px;
+          flex: 0 0 auto;
+        }
+        
+        .content-area {
+          padding: 12px;
+          max-height: 100vh;
+          height: auto;
+        }
+        
+        .weibo-card .weibo-media-grid.cols-2,
+        .weibo-card .weibo-media-grid.cols-3,
+        .xiaohongshu-card .weibo-media-grid.cols-2,
+        .xiaohongshu-card .weibo-media-grid.cols-3 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .inline-calendar {
+          width: 220px;
+          height: 220px;
+          min-width: 180px;
+          min-height: 180px;
+          padding: 10px 12px;
+        }
+        .inline-calendar .cal-days-grid > div {
+          font-size: 0.65rem;
+        }
+        
+        /* ===== 手机端隐藏饭之拍的时间轴 ===== */
+        .fancam-wrap .timeline-sidebar {
+          display: none !important;
+        }
+        .fancam-wrap {
+          gap: 0;
+        }
+        .fancam-wrap .info-box {
+          padding: 12px 14px;
+        }
       }
-      .sidebar .avatar-box { display: block; }
-      .sidebar .menu-item { 
-        padding: 10px 10px; 
-        font-size: 12px; 
-        flex: 0 0 auto; 
-      }
-      .content-area { padding: 12px; }
-      .weibo-card .weibo-media-grid.cols-2,
-      .weibo-card .weibo-media-grid.cols-3,
-      .xiaohongshu-card .weibo-media-grid.cols-2,
-      .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
-      .inline-calendar { width: 220px; height: 220px; min-width: 180px; min-height: 180px; padding: 10px 12px; }
-      .inline-calendar .cal-days-grid > div { font-size: 0.65rem; }
-      
-      /* ===== 手机端隐藏饭之拍的时间轴 ===== */
-      .fancam-wrap .timeline-sidebar {
-        display: none !important;
-      }
-      .fancam-wrap {
-        gap: 0;
-      }
-      .fancam-wrap .info-box {
-        padding: 12px 14px;
-      }
-    }
   </style>
 </head>
 <body>
