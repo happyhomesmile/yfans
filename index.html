@@ -972,56 +972,55 @@
     });
 
     // ===== 舞台数据 =====
-const unitData = [
-  // ===== 不空因果 =====
-  { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1qfKz6ZE4p/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-  { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-  { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1UXNu6xE2y/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-  { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1VvNN6pEJn/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-  { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1YFTg6BEoD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-  { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
-
-  // ===== 等价交换 =====
-  { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13YJ561EmZ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-  { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV16LEh6MECm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-  { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1k7RCBwEQW/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-  { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1whoEBPEmR/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-  { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-
-  // ===== High Light =====
-  { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1ESGJ69EbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1Cz5R6NEDb/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NBRcBUEJU/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1rxSUBYEfc/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1syk4BxEPD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-  { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1PfrSBHEVf/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
-
-  // ===== 浅呼吸（Axis Kiss） =====
-  { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1T4jJ65EKk/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
-  { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1LNAAztEmo/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
-  { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
-
-  // ===== 再见制服 =====
-  { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1uCV36DEwe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-  { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-  { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1KALH61EHm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-  { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-];
+    const unitData = [
+      // ===== 不空因果 =====
+      { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1qfKz6ZE4p/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+      { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+      { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1UXNu6xE2y/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+      { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1VvNN6pEJn/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+      { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1YFTg6BEoD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+      { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723215224501.png' },
+    
+      // ===== 等价交换 =====
+      { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13YJ561EmZ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV16LEh6MECm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1k7RCBwEQW/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1whoEBPEmR/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+    
+      // ===== High Light =====
+      { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1ESGJ69EbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1Cz5R6NEDb/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NBRcBUEJU/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1rxSUBYEfc/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1sMPgzaEGB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1syk4BxEPD/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+      { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1PfrSBHEVf/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220831408.png' },
+    
+      // ===== 浅呼吸（Axis Kiss） =====
+      { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1T4jJ65EKk/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
+      { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1LNAAztEmo/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
+      { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1NwApzwESQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222522968.png' },
+    
+      // ===== 再见制服 =====
+      { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1uCV36DEwe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1KALH61EHm/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1nWzxBgEys/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+    ];
     const specialData = [
-      { date: '2023.09.30', title: '春夏秋冬', url: 'https://www.bilibili.com/video/BV12W4y1P7xc/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=1' },
-      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/?spm_id_from=333.1387.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/?spm_id_from=333.788.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2' },
-      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1fqN365ER3/?spm_id_from=333.788.player.switch&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7' },
+      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg' },
+      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.jpg' },
+      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.jpg' },
+      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048061.jpg' },
+      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg' },
+      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/?spm_id_from=333.1387.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/?spm_id_from=333.788.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1fqN365ER3/?spm_id_from=333.788.player.switch&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
       { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7' },
       { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=17' },
@@ -1118,18 +1117,17 @@ const unitData = [
           else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
         }
-        const cachedCover = coverCache.get(item.url);
-        let coverHtml = '';
-        if (item.cover) {
-          coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
-        } else {
-          coverHtml = `
-            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
-              <div class="video-icon">🎬</div>
-              <div class="video-tip" style="color:#fff;">暂无封面</div>
-            </div>
-          `;
-        }
+          let coverHtml = '';
+          if (item.cover) {
+            coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+          } else {
+            coverHtml = `
+              <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
+                <div class="video-icon">🎬</div>
+                <div class="video-tip" style="color:#fff;">暂无封面</div>
+              </div>
+            `;
+          }
         html += `
           <div class="video-card" data-url="${item.url}" data-title="${item.title}">
             <span class="video-tag" style="background:${tagColor};">${tagText}</span>
