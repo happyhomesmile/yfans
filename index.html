@@ -512,8 +512,10 @@
       .inline-calendar { width: 260px; height: 260px; min-width: 220px; min-height: 220px; padding: 14px 16px; }
     }
     @media (max-width: 480px) {
-      .stage-grid { grid-template-columns: 1fr; }
-      
+      .stage-grid { 
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 8px !important;
+      }
       .sidebar {
         width: 100% !important; height: auto !important; min-height: auto !important;
         position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; top: auto !important;
@@ -549,6 +551,10 @@
       .fancam-wrap .timeline-sidebar { display: none !important; }
       .fancam-wrap { gap: 0 !important; }
       .fancam-wrap .info-box { padding: 12px 14px !important; }
+      
+      .video-card .video-title-bar { padding: 4px 8px; }
+      .video-card .video-name { font-size: 11px; }
+      .video-card .video-date { font-size: 10px; }
     }
   </style>
 </head>
