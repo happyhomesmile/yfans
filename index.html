@@ -682,31 +682,29 @@
       flex-shrink: 0;
     }
 
-    /* ===== 内联日历 ===== */
+    /* ===== 内联日历（更大 + 圈住日期） ===== */
     .inline-calendar {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: calc(100% + 10px);
+      position: fixed;
       z-index: 20;
-      width: 300px;
-      height: 300px;
+      width: 280px;           /* 更大 */
+      height: 280px;          /* 更大 */
       min-width: 260px;
       min-height: 260px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      padding: 16px 18px;
+      padding: 18px 20px;     /* 内边距增加 */
       background: rgba(255,255,255,0.98);
       backdrop-filter: blur(16px);
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid rgba(26,74,111,0.12);
-      box-shadow: 0 8px 40px rgba(26,74,111,0.18);
+      box-shadow: 0 12px 48px rgba(26,74,111,0.20);
+      font-size: 0.85rem;     /* 整体字体略大 */
     }
     .inline-calendar .cal-days-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 3px;
+      gap: 4px;
       flex: 1;
       align-content: center;
     }
@@ -715,11 +713,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.8rem;      /* 日期数字更大 */
       border-radius: 50%;
       position: relative;
       color: #1a2f3f;
       cursor: default;
+      font-weight: 500;
     }
     .inline-calendar .cal-days-grid > div[data-date] {
       cursor: pointer;
@@ -727,6 +726,76 @@
     }
     .inline-calendar .cal-days-grid > div[data-date]:hover {
       background: rgba(36,104,168,0.10);
+    }
+
+    /* ===== 日历 Tooltip ===== */
+    [data-tooltip] {
+      position: relative;
+    }
+    
+    [data-tooltip][data-show-tooltip="true"] .tooltip-badge {
+      display: flex !important;
+    }
+    
+    .tooltip-badge {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 4px 8px;
+      border-radius: 8px;
+      z-index: 100;
+      white-space: nowrap;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+    }
+    
+    .tooltip-badge span {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    
+    /* 有更新的日期：用圆形边框圈住日期 */
+    .inline-calendar .cal-days-grid > div.has-update {
+      border: 2px solid #4299e1;  /* 默认蓝色边框，圈住日期 */
+      border-radius: 50%;
+      background: rgba(66,153,225,0.05);
+    }
+    /* 不同平台用不同边框颜色，更清晰 */
+    .inline-calendar .cal-days-grid > div.has-update.platform-weibo {
+      border-color: #4299e1;      /* 微博蓝 */
+    }
+    .inline-calendar .cal-days-grid > div.has-update.platform-xiaohongshu {
+      border-color: #ff2d55;      /* 小红书红 */
+    }
+    .inline-calendar .cal-days-grid > div.has-update.platform-douyin {
+      border-color: #f97316;      /* 抖音橙 */
+    }
+    .inline-calendar .cal-days-grid > div.has-update.platform-bilibili {
+      border-color: #fb7299;      /* B站粉 */
+    }
+    .inline-calendar .cal-days-grid > div.has-update.multi-platform {
+      border-color: #8b5cf6;      /* 多平台用紫色 */
+      border-width: 2.5px;
+    }
+    /* 小圆点保留，但弱化，以边框为主 */
+    .inline-calendar .cal-days-grid > div .dot-indicator {
+      position: absolute;
+      bottom: 2px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #4299e1;
     }
 
     /* ===== 饭之拍 - 布局 ===== */
@@ -920,7 +989,7 @@
         height: 260px;
         min-width: 220px;
         min-height: 220px;
-        padding: 12px 14px;
+        padding: 14px 16px;
       }
     }
     @media (max-width: 480px) {
@@ -941,7 +1010,7 @@
         padding: 10px 12px;
       }
       .inline-calendar .cal-days-grid > div {
-        font-size: 0.55rem;
+        font-size: 0.65rem;
       }
     }
     
@@ -1277,12 +1346,12 @@
               <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>我早上发的没发出来吗</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-14 18:07 来自上海</span></div>
             </div>
       
-            <!-- ====== 7.12 抖音 ====== -->
+            <!-- ====== 7.05 抖音 ====== -->
             <div class="weibo-card" data-platform="douyin" data-month="2026-07" data-day="12" >
               <div class="weibo-time">
                 <span class="platform-tag douyin">抖音</span>
                 <span style="display:inline-block;background:#8b5cf6;color:#fff;padding:0 12px;border-radius:12px;font-size:0.65rem;font-weight:600;line-height:22px;margin-right:6px;">视频</span>
-                2026-07-12 · 发布于 上海
+                2026-07-05 · 发布于 上海
               </div>
               <a href="https://v.douyin.com/tE0tqQ2yn_A/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
                 <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.5);border-radius:10px;padding:10px 14px;border:1px solid rgba(249,115,22,0.2);transition:all 0.2s ease;cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='#f97316'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(249,115,22,0.2)'">
@@ -2166,22 +2235,22 @@
               </div>
               <div class="weibo-text"><span class="line">升格两周年，有你们陪着真好[来抱抱] ​​​</span></div>
               <a href="https://weibo.com/7901094930/Qq0lJ3YtO" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-3" style="max-width: 300px;">
-                <div class="media-item" onclick="openModalWithImages('slider19', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151528370.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider19', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151559256.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider19', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151559257.jpg" alt="配图3" loading="lazy" /></div>
+              <div class="weibo-media-grid cols-2" style="max-width:300px;">
+                <div class="media-item" onclick="openModalWithImages('slider20', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321626.jpg" alt="配图1" loading="lazy" /></div>
+                <div class="media-item" onclick="openModalWithImages('slider20', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321627.jpg" alt="配图2" loading="lazy" /></div>
               </div>
               <div class="weibo-comment-bottom">
                 <span class="comment-label">评论</span>
                 <span>[哇]</span>
                 <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-2-2 20:57 来自上海</span>
               </div>
-              <div class="weibo-media-grid cols-2" style="max-width:200px; margin-top:0.5rem;">
-                <div class="media-item" onclick="openModalWithImages('slider20', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321626.jpg" alt="小图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider20', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321627.jpg" alt="小图2" loading="lazy" /></div>
+              <div class="weibo-media-grid cols-3" style="max-width:200px; margin-top:0.5rem;">
+                <div class="media-item" onclick="openModalWithImages('slider19', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151528370.jpg" alt="配图1" loading="lazy" /></div>
+                <div class="media-item" onclick="openModalWithImages('slider19', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151559256.jpg" alt="配图2" loading="lazy" /></div>
+                <div class="media-item" onclick="openModalWithImages('slider19', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151559257.jpg" alt="配图3" loading="lazy" /></div>
               </div>
             </div>
-      
+            
             <!-- ====== 1.31 微博 ====== -->
             <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="31">
               <div class="weibo-time">
@@ -2923,7 +2992,7 @@
       bilibili: ['2026-07', '2026-01', '2025-12', '2025-06', '2025-03', '2025-01', '2024-07', '2024-06', '2023-11']
     };
 
-    // ---- 小日历函数 ----
+    // ---- 小日历函数（更大 + 圈住日期 + 区分平台颜色） ----
     function buildUpdateMap() {
       const map = {};
       const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
@@ -2935,7 +3004,7 @@
         if (!month || !day) return;
         const key = month + '-' + day.padStart(2, '0');
         if (!map[key]) map[key] = [];
-        map[key].push(platform);
+        if (!map[key].includes(platform)) map[key].push(platform);
       });
       return map;
     }
@@ -2958,17 +3027,17 @@
       container.style.position = 'fixed';
       container.style.opacity = '0';
       container.style.transition = 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      container.style.width = '220px';
-      container.style.height = '220px';
-      container.style.minWidth = '200px';
-      container.style.minHeight = '200px';
+      container.style.width = '280px';          // 更大
+      container.style.height = '280px';         // 更大
+      container.style.minWidth = '260px';
+      container.style.minHeight = '260px';
       container.style.overflow = 'hidden';
       container.style.display = 'flex';
       container.style.flexDirection = 'column';
-      container.style.padding = '12px 14px';
+      container.style.padding = '18px 20px';
       container.style.background = 'rgba(255,255,255,0.98)';
       container.style.backdropFilter = 'blur(16px)';
-      container.style.borderRadius = '14px';
+      container.style.borderRadius = '18px';
       container.style.border = '1px solid rgba(26,74,111,0.12)';
       container.style.boxShadow = '0 20px 60px rgba(26,74,111,0.3)';
       container.style.zIndex = '9999';
@@ -2984,14 +3053,14 @@
         
         let html = `
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0;">
-            <button class="cal-nav" style="background:none;border:none;font-size:0.9rem;cursor:pointer;padding:1px 6px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">‹</button>
-            <span style="font-size:0.7rem;font-weight:700;color:#1a4a6f;letter-spacing:1px;">${year}年 ${monthNames[monthIndex]}</span>
-            <button class="cal-nav" style="background:none;border:none;font-size:0.9rem;cursor:pointer;padding:1px 6px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">›</button>
+            <button class="cal-nav" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:1px 8px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">‹</button>
+            <span style="font-size:0.85rem;font-weight:700;color:#1a4a6f;letter-spacing:1px;">${year}年 ${monthNames[monthIndex]}</span>
+            <button class="cal-nav" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:1px 8px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">›</button>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);font-size:0.45rem;color:#7a9ab0;text-align:center;margin-bottom:3px;flex-shrink:0;">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);font-size:0.55rem;color:#7a9ab0;text-align:center;margin-bottom:4px;flex-shrink:0;">
             <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
           </div>
-          <div class="cal-days-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;flex:1;align-content:center;">
+          <div class="cal-days-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;flex:1;align-content:center;">
         `;
         
         for (let i = 0; i < firstDay; i++) {
@@ -3001,39 +3070,73 @@
         for (let d = 1; d <= daysInMonth; d++) {
           const dayStr = String(d).padStart(2, '0');
           const key = `${year}-${monthStr}-${dayStr}`;
-          const hasUpdate = updateMap[key] && updateMap[key].length > 0;
+          const platforms = updateMap[key] || [];
+          const platformSet = new Set(platforms);
           
-          let dotHtml = '';
-          if (hasUpdate) {
-            const platforms = updateMap[key];
-            let dotColor = '#4299e1';
-            if (platforms.includes('weibo') && platforms.includes('xiaohongshu')) {
-              dotColor = 'linear-gradient(135deg, #4299e1 50%, #ff6b7a 50%)';
-            } else if (platforms.includes('xiaohongshu')) {
-              dotColor = '#ff6b7a';
+          let borderStyle = '';
+          let platformNames = [];
+          const colorMap = {'weibo':'#4299e1','xiaohongshu':'#ff2d55','douyin':'#f97316','bilibili':'#fb7299'};
+          const nameMap = {'weibo':'微博','xiaohongshu':'小红书','douyin':'抖音','bilibili':'B站'};
+          
+          if (platformSet.size > 0) {
+            const colors = [];
+            platformNames = [];
+            
+            if (platformSet.has('weibo')) {
+              platformNames.push('微博');
+              colors.push('#4299e1');
             }
-            const platformNames = platforms.map(p => {
-              const cls = p === 'weibo' ? 'weibo' : 'xiaohongshu';
-              const name = p === 'weibo' ? '微博' : '小红书';
-              return `<span style="display:inline-block;padding:1px 4px;border-radius:2px;font-size:0.4rem;font-weight:600;margin:0 1px;${cls === 'weibo' ? 'background:#4299e1;color:#fff;' : 'background:#ff6b7a;color:#fff;'}">${name}</span>`;
-            }).join(' ');
-            dotHtml = `
-              <span style="position:absolute;bottom:1px;width:4px;height:4px;border-radius:50%;background:${dotColor};"></span>
-              <span style="display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:2px 6px;border-radius:3px;font-size:0.4rem;white-space:nowrap;font-weight:400;pointer-events:none;z-index:10;">${platformNames}</span>
-            `;
+            if (platformSet.has('xiaohongshu')) {
+              platformNames.push('小红书');
+              colors.push('#ff2d55');
+            }
+            if (platformSet.has('douyin')) {
+              platformNames.push('抖音');
+              colors.push('#f97316');
+            }
+            if (platformSet.has('bilibili')) {
+              platformNames.push('B站');
+              colors.push('#fb7299');
+            }
+            
+            if (platformSet.size > 1) {
+              const colorStops = colors.map((c, i) => {
+                const percent = (i / (colors.length - 1)) * 100;
+                return `${c} ${percent}%`;
+              }).join(', ');
+              borderStyle = `border: 2.5px solid transparent;border-radius: 50%;background-image: linear-gradient(135deg, ${colorStops}), linear-gradient(white, white);background-origin: border-box;background-clip: padding-box, border-box;`;
+            } else {
+              borderStyle = `border: 2.5px solid ${colors[0]}; border-radius: 50%;`;
+            }
           }
           
-          const extraAttrs = hasUpdate ? `data-date="${key}" data-month="${monthStr}" data-day="${dayStr}" style="font-weight:700;cursor:pointer;"` : '';
-          const hoverAttrs = hasUpdate ? `onmouseover="this.style.background='rgba(36,104,168,0.10)';this.querySelector('span:last-child').style.display='block'" onmouseout="this.style.background='transparent';this.querySelector('span:last-child').style.display='none'"` : '';
+          // 生成平台标签 HTML
+          let badgeHtml = '';
+          if (platformSet.size > 0) {
+            const tagColorMap = {'微博':'#4299e1','小红书':'#ff2d55','抖音':'#f97316','B站':'#fb7299'};
+            const tags = platformNames.map(name => {
+              return `<span style="display:inline-block;background:${tagColorMap[name]};color:#fff;padding:2px 10px;border-radius:4px;font-size:0.55rem;font-weight:600;margin:1px;letter-spacing:0.3px;">${name}</span>`;
+            }).join('');
+            badgeHtml = `<span class="tooltip-badge" style="display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);padding:4px 8px;border-radius:8px;z-index:100;white-space:nowrap;gap:3px;flex-wrap:wrap;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);backdrop-filter:blur(4px);">${tags}</span>`;
+          }
           
-          html += `<div ${extraAttrs} ${hoverAttrs} style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.6rem;border-radius:50%;position:relative;color:#1a2f3f;cursor:default;">
-            ${d}${dotHtml}
-          </div>`;
+          html += `
+            <div data-date="${key}" 
+                 data-month="${monthStr}" 
+                 data-day="${dayStr}" 
+                 style="font-weight:${platformSet.size > 0 ? '700' : '400'};cursor:${platformSet.size > 0 ? 'pointer' : 'default'};${borderStyle}position:relative;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#1a2f3f;aspect-ratio:1;${platformSet.size > 1 ? 'background-clip: padding-box;' : ''}"
+                 onmouseover="this.style.backgroundColor='rgba(36,104,168,0.10)';this.querySelector('.tooltip-badge').style.display='flex'" 
+                 onmouseout="this.style.backgroundColor='transparent';this.querySelector('.tooltip-badge').style.display='none'">
+              ${d}
+              ${badgeHtml}
+            </div>
+          `;
         }
         
         html += `</div>`;
         container.innerHTML = html;
         
+        // 导航按钮事件
         const prevBtn = container.querySelector('.cal-nav:first-child');
         const nextBtn = container.querySelector('.cal-nav:last-child');
         if (prevBtn) {
@@ -3051,6 +3154,7 @@
           });
         }
         
+        // 日期点击事件
         container.querySelectorAll('[data-date]').forEach(day => {
           day.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -3170,14 +3274,12 @@
         });
       });
       
-      // ★★★ 月份点击：只滑动，不切换筛选标签 ★★★
+      // 月份点击：只滑动，不切换筛选标签
       timelineContainer.querySelectorAll('.tl-item').forEach(function(item) {
         item.addEventListener('click', function(e) {
           e.stopPropagation();
           const month = this.dataset.month;
-          console.log('点击月份:', month);  // 调试：看控制台有没有输出
           
-          // 在当前已筛选的结果中，找到该月第一条可见的卡片
           const feedWrap = document.getElementById('weiboFeed');
           const cards = feedWrap.querySelectorAll('.weibo-card, .xiaohongshu-card');
           let targetCard = null;
@@ -3196,8 +3298,6 @@
             const scrollTarget = contentArea.scrollTop + cardRect.top - containerRect.top - 80;
             contentArea.scrollTo({ top: scrollTarget, behavior: 'smooth' });
             setTimeout(updateTimelineHighlight, 400);
-          } else {
-            console.log('未找到 ' + month + ' 月份的可见卡片');
           }
         });
       });
@@ -3211,9 +3311,6 @@
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const tabsContainer = document.getElementById('weiboTabs');
       
-      // 获取当前平台的月份列表
-      console.log('当前平台:', currentPlatform);
-      
       let months = [];
       if (currentPlatform === 'all') {
         const allMonths = new Set();
@@ -3224,14 +3321,11 @@
         months = [...months].sort((a, b) => b.localeCompare(a));
       }
       
-      console.log('当前平台月份:', months);
-      // 如果月份为空，显示占位
       if (months.length === 0) {
         tabsContainer.innerHTML = `<span style="font-size:12px;color:#7a9ab0;padding:4px 0;">暂无数据</span>`;
         return;
       }
       
-      // ★★★ 构建左右滑动容器 ★★★
       let html = `
         <div style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
           <button class="month-nav-btn" id="monthPrev" style="
@@ -3262,7 +3356,6 @@
             ">
       `;
       
-      // 添加"全部"标签
       html += `<span class="category-tab active" data-month="全部" style="flex-shrink:0;">全部</span>`;
       
       months.forEach(m => {
@@ -3292,7 +3385,6 @@
       
       tabsContainer.innerHTML = html;
       
-      // ---- 获取元素 ----
       const scrollInner = document.getElementById('monthScrollInner');
       const scrollWrapper = document.getElementById('monthScrollWrapper');
       const prevBtn = document.getElementById('monthPrev');
@@ -3301,7 +3393,6 @@
       let scrollPosition = 0;
       const step = 120;
       
-      // 左右滑动逻辑
       if (prevBtn && nextBtn && scrollInner && scrollWrapper) {
         prevBtn.addEventListener('click', function() {
           scrollPosition = Math.min(scrollPosition + step, 0);
@@ -3315,19 +3406,14 @@
         });
       }
       
-      // ---- 月份点击事件：调用 filterWeiboFeed 统一筛选 ----
       tabsContainer.querySelectorAll('.category-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
-          // 切换激活状态
           tabsContainer.querySelectorAll('.category-tab').forEach(function(t) {
             t.classList.remove('active');
           });
           this.classList.add('active');
           
-          // ★★★ 调用 filterWeiboFeed 统一筛选 ★★★
           filterWeiboFeed();
-          
-          // 只更新时间轴高亮，不滚动
           setTimeout(updateTimelineHighlight, 100);
         });
       });
@@ -3351,7 +3437,6 @@
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
     
-      // 置顶卡片显示条件：当前平台是 weibo 或 xiaohongshu，且月份是"全部"
       const showPinned = (currentPlatform === 'weibo' || currentPlatform === 'xiaohongshu') && currentDate === '全部';
     
       allCards.forEach(card => {
@@ -3359,30 +3444,22 @@
         const cardMonth = card.dataset.month || '';
         const isPinned = card.classList.contains('pinned');
     
-        // ★★★ 平台匹配规则：当前平台是"全部" 或 卡片平台等于当前平台 ★★★
         const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-    
-        // 日期匹配
         const dateMatch = currentDate === '全部' || cardMonth === currentDate;
-    
-        // 关键词匹配
         const cardText = card.textContent.toLowerCase();
         const textMatch = keyword === '' || cardText.includes(keyword);
     
         let shouldShow = false;
     
         if (isPinned) {
-          // ★★★ 置顶卡片：只在自己的专栏 + 月份全部 时显示 ★★★
           shouldShow = showPinned && cardPlatform === currentPlatform;
         } else {
-          // 普通卡片：平台匹配 + 日期匹配 + 关键词匹配
           shouldShow = platformMatch && dateMatch && textMatch;
         }
     
         card.style.display = shouldShow ? '' : 'none';
       });
     
-      // 将置顶卡片移到最前面
       if (showPinned) {
         const feedWrap = document.getElementById('weiboFeed');
         const pinnedCards = feedWrap.querySelectorAll('.weibo-card.pinned, .xiaohongshu-card.pinned');
@@ -3402,21 +3479,17 @@
           platformItems.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
           
-          // ★★★ 先清空月份标签容器 ★★★
           const tabsContainer = document.getElementById('weiboTabs');
           tabsContainer.innerHTML = '';
           
-          // ★★★ 重新渲染月份标签 ★★★
           renderMonthTabs();
           
-          // ★★★ 切换平台后，重置月份为"全部" ★★★
           const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
           if (allTab) {
             document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
             allTab.classList.add('active');
           }
           
-          // ★★★ 重新执行筛选 ★★★
           filterWeiboFeed();
           renderTimeline();
           setTimeout(updateTimelineHighlight, 100);
