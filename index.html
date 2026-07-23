@@ -1059,6 +1059,8 @@
           <div class="filter-tabs-row" id="weiboTabs">
             <span class="category-tab active" data-month="全部">全部</span>
           </div>
+
+
       
           <div id="weiboFeed">
       
@@ -2474,13 +2476,51 @@
 
       <!-- 饭言饭语 -->
       <div class="page-box" id="contact">
-        <div class="info-box">
-          <div class="info-title"><span class="deco">✦</span> 饭言饭语</div>
-          <div class="empty-state">💬 这里将记录椰饭的日常碎碎念…</div>
-          <div class="footer-slogan">-All For YeFan-</div>
+        <div class="fancam-wrap">
+          <div class="info-box" style="padding:18px 22px;">
+            
+            <div class="platform-nav" id="contactNav">
+              <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
+              <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
+              <button class="platform-nav-item" data-category="words">💬 饭所言</button>
+            </div>
+      
+            <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
+              <span class="category-tab active" data-sub="water">一天八杯水</span>
+              <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
+              <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
+            </div>
+      
+            <div id="contactFeed">
+              
+              <div class="weibo-card" data-category="food" data-sub="water">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+              </div>
+      
+              <div class="weibo-card" data-category="food" data-sub="sweet">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+              </div>
+      
+              <div class="weibo-card" data-category="food" data-sub="steel">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+              </div>
+      
+              <div class="weibo-card" data-category="travel" data-sub="all">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+              </div>
+      
+              <div class="weibo-card" data-category="words" data-sub="all">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+              </div>
+      
+              <div class="footer-slogan">-All For YeFan-</div>
+            </div>
+          </div>
+      
+          <div class="timeline-sidebar" id="contactTimeline"></div>
         </div>
       </div>
-
+      
       <!-- 未完待续 -->
       <div class="page-box" id="wait">
         <div class="info-box">
@@ -3589,6 +3629,61 @@
     });
 
     setTimeout(updateTimelineHighlight, 300);
+
+    // ===== 饭言饭语切换 =====
+    (function() {
+      const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
+      const cards = document.querySelectorAll('#contactFeed .weibo-card');
+      const tabs = document.querySelectorAll('#contactTabs .category-tab');
+    
+      // 默认"饭食饭"激活时，三个子分类标签都显示
+      tabs.forEach(tab => {
+        tab.style.display = '';
+      });
+      // 默认选中"一天八杯水"
+      tabs.forEach(t => t.classList.remove('active'));
+      tabs[0].classList.add('active');
+    
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          navBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const category = this.dataset.category;
+          tabs.forEach(tab => {
+            if (category === 'food') {
+              tab.style.display = '';
+            } else {
+              tab.style.display = 'none';
+            }
+          });
+          if (category === 'food') {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabs[0].classList.add('active');
+          }
+          filterContact();
+        });
+      });
+    
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          tabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          filterContact();
+        });
+      });
+    
+      function filterContact() {
+        const category = document.querySelector('#contactNav .platform-nav-item.active')?.dataset.category || 'food';
+        const activeTab = document.querySelector('#contactTabs .category-tab.active');
+        const sub = activeTab ? activeTab.dataset.sub : 'water';
+        cards.forEach(card => {
+          const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
+          card.style.display = match ? '' : 'none';
+        });
+      }
+    
+      filterContact();
+    })();
   </script>
 </body>
 </html>
