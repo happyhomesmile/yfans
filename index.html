@@ -414,7 +414,6 @@
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
       border-radius: 14px;
-      border: 1px solid rgba(26,74,111,0.08);
       border-right: 1px solid rgba(26,74,111,0.08);
       border-top: 1px solid rgba(26,74,111,0.08);
       border-bottom: 1px solid rgba(26,74,111,0.08);
@@ -428,7 +427,6 @@
       box-shadow: 0 4px 16px rgba(36,104,168,0.08);
     }
     .weibo-card.pinned {
-      border-left: none;
       border-right: 2px solid rgba(26,74,111,0.15);
       border-top: 2px solid rgba(26,74,111,0.15);
       border-bottom: 2px solid rgba(26,74,111,0.15);
@@ -516,7 +514,6 @@
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(4px);
       border-radius: 14px;
-      border: 1px solid rgba(26,74,111,0.08);
       border-right: 1px solid rgba(26,74,111,0.08);
       border-top: 1px solid rgba(26,74,111,0.08);
       border-bottom: 1px solid rgba(26,74,111,0.08);
@@ -530,7 +527,6 @@
       box-shadow: 0 4px 16px rgba(36,104,168,0.08);
     }
     .xiaohongshu-card.pinned {
-      border-left: none;
       border-right: 2px solid rgba(26,74,111,0.15);
       border-top: 2px solid rgba(26,74,111,0.15);
       border-bottom: 2px solid rgba(26,74,111,0.15);
@@ -618,8 +614,7 @@
       position: sticky;
       top: 24px;
       flex-shrink: 0;
-      width: 64px;          
-      min-height: 400px;  
+      width: 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -637,7 +632,6 @@
     .timeline-sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
 
     .timeline-sidebar .tl-year-label {
-      position: relative;
       font-size: 0.55rem;
       font-weight: 700;
       color: #1f5a8a;
@@ -660,18 +654,15 @@
       font-size: 0.6rem;
       font-weight: 600;
       color: #7a9ab0;
-      padding: 2px 0;
-      border-radius: 4px;
+      padding: 4px 6px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: center;
-      width: 36px;          
-      height: 28px;          
-      line-height: 28px;    
+      width: 44px;
       letter-spacing: 0.3px;
       border: 1px solid transparent;
       user-select: none;
-      flex-shrink: 0;
     }
     .timeline-sidebar .tl-item:hover {
       background: rgba(36,104,168,0.08);
@@ -736,202 +727,6 @@
     }
     .inline-calendar .cal-days-grid > div[data-date]:hover {
       background: rgba(36,104,168,0.10);
-    }
-
-    /* ===== 日历弹窗 ===== */
-    .calendar-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(26,74,111,0.12);
-      box-shadow: 0 20px 60px rgba(26,74,111,0.15);
-      padding: 24px 28px;
-      z-index: 9998;
-      max-width: 400px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    .calendar-popup.open {
-      display: block;
-      animation: popIn 0.25s ease;
-    }
-    @keyframes popIn {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
-    .calendar-popup .cal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(26,74,111,0.08);
-    }
-    .calendar-popup .cal-header .cal-year {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1a4a6f;
-    }
-    .calendar-popup .cal-header .cal-close {
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      color: #7a9ab0;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-    .calendar-popup .cal-header .cal-close:hover {
-      background: rgba(26,74,111,0.06);
-    }
-    .calendar-popup .cal-months {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-    .calendar-popup .cal-month {
-      border-radius: 12px;
-      padding: 8px 4px;
-      background: rgba(240,247,254,0.5);
-    }
-    .calendar-popup .cal-month .cal-month-label {
-      text-align: center;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #1a4a6f;
-      margin-bottom: 6px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid rgba(184,224,255,0.2);
-    }
-    .calendar-popup .cal-month .cal-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      font-size: 0.5rem;
-      color: #7a9ab0;
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .calendar-popup .cal-month .cal-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
-    }
-    .calendar-popup .cal-month .cal-day {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6rem;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      position: relative;
-      color: #1a2f3f;
-      border: 1px solid transparent;
-      font-weight: 500;
-    }
-    .calendar-popup .cal-month .cal-day.empty {
-      cursor: default;
-      color: transparent;
-    }
-    .calendar-popup .cal-month .cal-day.has-update {
-      border-color: transparent;
-      font-weight: 700;
-    }
-    .calendar-popup .cal-month .cal-day .dot {
-      position: absolute;
-      bottom: 0px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      transition: transform 0.15s ease;
-    }
-    .calendar-popup .cal-month .cal-day .dot.weibo {
-      background: #4299e1;
-    }
-    .calendar-popup .cal-month .cal-day .dot.xiaohongshu {
-      background: #ff6b7a;
-    }
-    .calendar-popup .cal-month .cal-day .dot.multi {
-      background: linear-gradient(135deg, #4299e1 50%, #ff6b7a 50%);
-    }
-    .calendar-popup .cal-month .cal-day:hover {
-      background: rgba(36,104,168,0.08);
-      transform: scale(1.05);
-    }
-    .calendar-popup .cal-month .cal-day.has-update:hover {
-      background: rgba(36,104,168,0.12);
-    }
-    .calendar-popup .cal-month .cal-day .tooltip {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.55rem;
-      white-space: nowrap;
-      font-weight: 400;
-      pointer-events: none;
-      z-index: 10;
-    }
-    .calendar-popup .cal-month .cal-day .tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 4px solid transparent;
-      border-top-color: rgba(0,0,0,0.8);
-    }
-    .calendar-popup .cal-month .cal-day:hover .tooltip {
-      display: block;
-    }
-    .calendar-popup .cal-month .cal-day .tooltip .platform-tag {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 0.5rem;
-      font-weight: 600;
-      margin: 0 1px;
-    }
-    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.weibo {
-      background: #4299e1;
-      color: #fff;
-    }
-    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.xiaohongshu {
-      background: #ff6b7a;
-      color: #fff;
-    }
-    .calendar-popup .cal-month .cal-day .tooltip .platform-tag.multi {
-      background: linear-gradient(135deg, #4299e1, #ff6b7a);
-      color: #fff;
-    }
-
-    /* ===== 遮罩 ===== */
-    .calendar-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(4px);
-      z-index: 9997;
-    }
-    .calendar-overlay.open {
-      display: block;
     }
 
     /* ===== 饭之拍 - 布局 ===== */
@@ -1105,13 +900,6 @@
       .stage-wrap {
         max-width: 100%;
       }
-      .calendar-popup {
-        max-width: 95%;
-        padding: 16px;
-      }
-      .calendar-popup .cal-months {
-        grid-template-columns: 1fr 1fr;
-      }
     }
     @media (max-width: 768px) {
       .modal-btn { width: 36px; height: 36px; font-size: 18px; }
@@ -1127,9 +915,6 @@
       .content-area { padding: 12px; }
       .avatar { width: 48px; height: 48px; }
       .avatar-name { font-size: 13px; }
-      .calendar-popup .cal-months {
-        grid-template-columns: 1fr 1fr;
-      }
       .inline-calendar {
         width: 260px;
         height: 260px;
@@ -1148,16 +933,6 @@
       .weibo-card .weibo-media-grid.cols-3,
       .xiaohongshu-card .weibo-media-grid.cols-2,
       .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
-      .calendar-popup .cal-months {
-        grid-template-columns: 1fr 1fr;
-      }
-      .calendar-popup .cal-month .cal-day {
-        font-size: 0.5rem;
-      }
-      .calendar-popup .cal-month .cal-day .dot {
-        width: 4px;
-        height: 4px;
-      }
       .inline-calendar {
         width: 220px;
         height: 220px;
@@ -2516,7 +2291,7 @@
       bilibili: []
     };
 
-    // ---- 日历数据 ----
+    // ---- 小日历函数 ----
     function buildUpdateMap() {
       const map = {};
       const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
@@ -2533,132 +2308,19 @@
       return map;
     }
 
-    function renderCalendar() {
-      const popup = document.getElementById('calendarPopup');
-      const overlay = document.getElementById('calendarOverlay');
-      const year = 2026;
-      document.getElementById('calYear').textContent = year;
-      
-      const monthsContainer = document.getElementById('calMonths');
-      monthsContainer.innerHTML = '';
-      
-      const updateMap = buildUpdateMap();
-      const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-      
-      for (let m = 0; m < 12; m++) {
-        const monthDiv = document.createElement('div');
-        monthDiv.className = 'cal-month';
-        
-        const label = document.createElement('div');
-        label.className = 'cal-month-label';
-        label.textContent = monthNames[m];
-        monthDiv.appendChild(label);
-        
-        const weekdays = document.createElement('div');
-        weekdays.className = 'cal-weekdays';
-        ['日','一','二','三','四','五','六'].forEach(d => {
-          const span = document.createElement('span');
-          span.textContent = d;
-          weekdays.appendChild(span);
-        });
-        monthDiv.appendChild(weekdays);
-        
-        const daysGrid = document.createElement('div');
-        daysGrid.className = 'cal-days';
-        
-        const daysInMonth = new Date(year, m + 1, 0).getDate();
-        const firstDay = new Date(year, m, 1).getDay();
-        
-        for (let i = 0; i < firstDay; i++) {
-          const empty = document.createElement('div');
-          empty.className = 'cal-day empty';
-          daysGrid.appendChild(empty);
-        }
-        
-        for (let d = 1; d <= daysInMonth; d++) {
-          const dayDiv = document.createElement('div');
-          dayDiv.className = 'cal-day';
-          dayDiv.textContent = d;
-          
-          const monthStr = String(m + 1).padStart(2, '0');
-          const dayStr = String(d).padStart(2, '0');
-          const key = `${year}-${monthStr}-${dayStr}`;
-          
-          if (updateMap[key]) {
-            const platforms = updateMap[key];
-            dayDiv.classList.add('has-update');
-            
-            const dot = document.createElement('span');
-            dot.className = 'dot';
-            if (platforms.includes('weibo') && platforms.includes('xiaohongshu')) {
-              dot.className = 'dot multi';
-            } else if (platforms.includes('weibo')) {
-              dot.className = 'dot weibo';
-            } else if (platforms.includes('xiaohongshu')) {
-              dot.className = 'dot xiaohongshu';
-            }
-            dayDiv.appendChild(dot);
-            
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            const platformNames = platforms.map(p => {
-              const cls = p === 'weibo' ? 'weibo' : 'xiaohongshu';
-              const name = p === 'weibo' ? '微博' : '小红书';
-              return `<span class="platform-tag ${cls}">${name}</span>`;
-            }).join(' ');
-            tooltip.innerHTML = platformNames;
-            dayDiv.appendChild(tooltip);
-            
-            dayDiv.addEventListener('click', function(e) {
-              e.stopPropagation();
-              closeCalendar();
-              const monthKey = key.slice(0, 7);
-              const tab = document.querySelector(`#weiboTabs .category-tab[data-month="${monthKey}"]`);
-              if (tab) {
-                document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                filterWeiboFeed();
-              }
-              setTimeout(() => {
-                const targetCard = document.querySelector(`#weiboFeed .weibo-card[data-month="${monthKey}"][data-day="${dayStr}"], #weiboFeed .xiaohongshu-card[data-month="${monthKey}"][data-day="${dayStr}"]`);
-                if (targetCard && targetCard.style.display !== 'none') {
-                  targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }, 150);
-            });
-          }
-          
-          daysGrid.appendChild(dayDiv);
-        }
-        
-        monthDiv.appendChild(daysGrid);
-        monthsContainer.appendChild(monthDiv);
-      }
-      
-      popup.classList.add('open');
-      overlay.classList.add('open');
-    }
-
-    function closeCalendar() {
-      document.getElementById('calendarPopup').classList.remove('open');
-      document.getElementById('calendarOverlay').classList.remove('open');
-    }
-
-    // ---- 创建内联日历（正方形 + 展开动画） ----
     function createInlineCalendar(year) {
       const container = document.createElement('div');
       container.className = 'inline-calendar';
       
-      // 找到点击的年份标签
       const label = document.querySelector(`.tl-year-label[data-year="${year}"]`);
       if (label) {
-          const rect = label.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2 + 50;
-          const centerY = rect.top + rect.height / 2 + 80;
-          container.style.left = centerX + 'px';
-          container.style.top = centerY + 'px';
-          container.style.transform = 'translate(-50%, -50%) scale(0.3)';
-          container.style.transformOrigin = 'center center';
+        const rect = label.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2 + 50;
+        const centerY = rect.top + rect.height / 2 + 80;
+        container.style.left = centerX + 'px';
+        container.style.top = centerY + 'px';
+        container.style.transform = 'translate(-50%, -50%) scale(0.3)';
+        container.style.transformOrigin = 'center center';
       }
       
       container.style.position = 'fixed';
@@ -2819,7 +2481,7 @@
         if (container.parentNode) container.remove();
       }, 350);
     }
-    
+
     // ---- 动态生成时间轴 ----
     function renderTimeline() {
       const activePlatform = document.querySelector('.platform-nav-item.active');
@@ -2830,19 +2492,10 @@
       if (currentPlatform === 'all') {
         const allMonths = new Set();
         Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
-        months = Array.from(allMonths);
+        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
       } else {
         months = platformMonths[currentPlatform] || [];
       }
-      
-      months.sort((a, b) => {
-        const yearA = a.split('-')[0];
-        const yearB = b.split('-')[0];
-        const monthA = parseInt(a.split('-')[1]);
-        const monthB = parseInt(b.split('-')[1]);
-        if (yearA !== yearB) return yearB.localeCompare(yearA);
-        return monthB - monthA;
-      });
       
       if (months.length === 0) {
         timelineContainer.style.display = 'none';
@@ -2863,11 +2516,7 @@
       sortedYears.forEach((year, yearIndex) => {
         if (yearIndex > 0) html += `<div class="tl-line"></div>`;
         html += `<div class="tl-year-label" data-year="${year}">${year}</div>`;
-        const yearMonths = yearGroups[year].sort((a, b) => {
-          const monthA = parseInt(a.split('-')[1]);
-          const monthB = parseInt(b.split('-')[1]);
-          return monthB - monthA;
-        });
+        const yearMonths = yearGroups[year].sort((a, b) => b.localeCompare(a));
         yearMonths.forEach((m, index) => {
           const monthNum = m.split('-')[1];
           html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
@@ -2879,7 +2528,7 @@
       
       timelineContainer.innerHTML = html;
       
-      // 年份标签点击展开/收起日历
+      // 年份标签点击展开小日历
       timelineContainer.querySelectorAll('.tl-year-label').forEach(label => {
         label.addEventListener('click', function() {
           const year = this.dataset.year;
@@ -2892,31 +2541,21 @@
           document.body.appendChild(cal);
         });
       });
-            
+      
       // 月份点击跳转
       timelineContainer.querySelectorAll('.tl-item').forEach(item => {
         item.addEventListener('click', function() {
           const month = this.dataset.month;
           const feedWrap = document.getElementById('weiboFeed');
-          const cards = feedWrap.querySelectorAll(`.weibo-card[data-month="${month}"], .xiaohongshu-card[data-month="${month}"]`);
-          let targetCard = null;
-          for (const card of cards) {
-            if (card.style.display !== 'none') {
-              targetCard = card;
-              break;
-            }
-          }
-          if (!targetCard && cards.length > 0) {
-            targetCard = cards[0];
-            targetCard.style.display = '';
-          }
+          const targetCard = feedWrap.querySelector(`.weibo-card[data-month="${month}"], .xiaohongshu-card[data-month="${month}"]`);
           if (targetCard) {
             targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(updateTimelineHighlight, 500);
           }
         });
       });
       
-      updateTimelineHighlight();
+      setTimeout(updateTimelineHighlight, 100);
     }
 
     // ---- 渲染月份筛选标签 ----
@@ -2931,19 +2570,10 @@
       if (currentPlatform === 'all') {
         const allMonths = new Set();
         Object.values(platformMonths).forEach(m => m.forEach(mm => allMonths.add(mm)));
-        months = Array.from(allMonths);
+        months = Array.from(allMonths).sort((a, b) => b.localeCompare(a));
       } else {
         months = platformMonths[currentPlatform] || [];
       }
-      
-      months.sort((a, b) => {
-        const yearA = a.split('-')[0];
-        const yearB = b.split('-')[0];
-        const monthA = parseInt(a.split('-')[1]);
-        const monthB = parseInt(b.split('-')[1]);
-        if (yearA !== yearB) return yearB.localeCompare(yearA);
-        return monthB - monthA;
-      });
       
       months.forEach(m => {
         html += `<span class="category-tab" data-month="${m}">${m}</span>`;
@@ -2978,41 +2608,45 @@
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
     
+      // 置顶卡片只在"微博/小红书专栏 + 全部月份"时显示
       const showPinned = (currentPlatform !== 'all' && currentDate === '全部');
     
       allCards.forEach(card => {
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         const isPinned = card.classList.contains('pinned');
-        
+    
         const dateMatch = currentDate === '全部' || cardMonth === currentDate;
         const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
         const cardText = card.textContent.toLowerCase();
         const textMatch = keyword === '' || cardText.includes(keyword);
-        
+    
         let shouldShow = false;
-        
+    
         if (isPinned) {
+          // 置顶卡片：只在"微博/小红书专栏 + 全部月份"时显示，且必须匹配当前平台
           shouldShow = showPinned && platformMatch;
         } else {
+          // 普通卡片：正常筛选
           shouldShow = dateMatch && platformMatch && textMatch;
         }
-        
+    
         card.style.display = shouldShow ? '' : 'none';
       });
-      
+    
+      // 在置顶显示时，把置顶卡片移到最前面
       if (showPinned) {
         const feedWrap = document.getElementById('weiboFeed');
         const pinnedCards = feedWrap.querySelectorAll('.weibo-card.pinned, .xiaohongshu-card.pinned');
         pinnedCards.forEach(card => {
           const cardPlatform = card.dataset.platform || 'weibo';
-          if (cardPlatform === currentPlatform || currentPlatform === 'all') {
+          if (cardPlatform === currentPlatform) {
             feedWrap.prepend(card);
           }
         });
       }
-      
-      updateTimelineHighlight();
+    
+      setTimeout(updateTimelineHighlight, 50);
     }
 
     platformItems.forEach(btn => {
@@ -3031,13 +2665,6 @@
     });
 
     renderMonthTabs();
-
-    // ---- 日历关闭事件 ----
-    document.getElementById('calClose').addEventListener('click', closeCalendar);
-    document.getElementById('calendarOverlay').addEventListener('click', closeCalendar);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeCalendar();
-    });
 
     // ---- 大图预览 ----
     const imageSets = {
