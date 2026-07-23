@@ -807,7 +807,7 @@
       z-index: 10;
     }
 
-    /* ===== 响应式 ===== */
+    /* ===== 响应式 - PC端保留侧边栏，手机端隐藏时间轴 ===== */
     @media (max-width: 1024px) {
       .fancam-wrap { flex-direction: column; align-items: center; }
       .fancam-wrap .timeline-sidebar {
@@ -841,16 +841,42 @@
     }
     @media (max-width: 480px) {
       .stage-grid { grid-template-columns: 1fr; }
-      .sidebar { width: 100%; height: auto; min-height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 10px; gap: 4px; }
-      .sidebar .avatar-box { display: none; }
-      .sidebar .menu-item { padding: 6px 10px; font-size: 11px; flex: 1 0 auto; }
-      .content-area { padding: 8px; }
+      /* 手机端侧边栏保持原样（不沉底） */
+      .sidebar { 
+        width: 160px; 
+        height: 100vh; 
+        min-height: 100vh; 
+        position: sticky; 
+        top: 0; 
+        flex-direction: column; 
+        flex-wrap: nowrap; 
+        padding: 16px 10px; 
+        gap: 4px; 
+      }
+      .sidebar .avatar-box { display: block; }
+      .sidebar .menu-item { 
+        padding: 10px 10px; 
+        font-size: 12px; 
+        flex: 0 0 auto; 
+      }
+      .content-area { padding: 12px; }
       .weibo-card .weibo-media-grid.cols-2,
       .weibo-card .weibo-media-grid.cols-3,
       .xiaohongshu-card .weibo-media-grid.cols-2,
       .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
       .inline-calendar { width: 220px; height: 220px; min-width: 180px; min-height: 180px; padding: 10px 12px; }
       .inline-calendar .cal-days-grid > div { font-size: 0.65rem; }
+      
+      /* ===== 手机端隐藏饭之拍的时间轴 ===== */
+      .fancam-wrap .timeline-sidebar {
+        display: none !important;
+      }
+      .fancam-wrap {
+        gap: 0;
+      }
+      .fancam-wrap .info-box {
+        padding: 12px 14px;
+      }
     }
   </style>
 </head>
@@ -2533,8 +2559,6 @@
             <p>有任何好的建议和问题都可以wb小窗我！@除号好耶耶耶</p>
             <p>祝大家在看这个小凡的旅途中开心幸福，祝这个小凡万事顺遂！</p>
 
-            <p>tips:舞台的封面不显示是正常的，因为我的代理有月上限，我还没找好新的代理（。</p>
-            <p>     暂时还没测试过微博图片会不会无法显示……如果有问题也请联系我。</p>
           </div>
       
           <div style="height:20px;"></div>
