@@ -808,332 +808,50 @@
     }
 
     /* ===== 响应式 ===== */
+    @media (max-width: 1024px) {
+      .fancam-wrap { flex-direction: column; align-items: center; }
+      .fancam-wrap .timeline-sidebar {
+        position: relative; top: 0; flex-direction: row; flex-wrap: wrap;
+        width: 100%; padding: 8px 12px; gap: 4px; max-height: none;
+        overflow-y: visible; justify-content: center; border-radius: 12px;
+        margin-top: 12px;
+      }
+      .fancam-wrap .timeline-sidebar .tl-item { width: auto; padding: 4px 10px; font-size: 0.7rem; }
+      .fancam-wrap .timeline-sidebar .tl-line { display: none; }
+      .fancam-wrap .timeline-sidebar .tl-year-label { width: auto; border-bottom: none; padding: 4px 8px; font-size: 0.65rem; }
+      .fancam-wrap .info-box { max-width: 100%; width: 100%; }
+      .info-box { max-width: 100%; }
+      .stage-wrap { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .modal-btn { width: 36px; height: 36px; font-size: 18px; }
+      .modal-btn.prev { left: 4px; }
+      .modal-btn.next { right: 4px; }
+      .image-modal { padding: 0.5rem; }
+      .modal-image-container { max-height: 70vh; }
+      .modal-image-container img { max-height: 70vh; }
+      .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
+      .stage-grid { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { width: 160px; padding: 16px 10px; }
+      .menu-item { font-size: 12px; padding: 10px 10px; }
+      .content-area { padding: 12px; }
+      .avatar { width: 48px; height: 48px; }
+      .avatar-name { font-size: 13px; }
+      .inline-calendar { width: 260px; height: 260px; min-width: 220px; min-height: 220px; padding: 14px 16px; }
+    }
     @media (max-width: 480px) {
       .stage-grid { grid-template-columns: 1fr; }
-      
-      .sidebar {
-        width: 100%;
-        height: auto;
-        min-height: auto;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: auto;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        padding: 4px 6px;
-        gap: 0px;
-        border-right: none;
-        border-top: 1px solid rgba(184,224,255,0.25);
-        box-shadow: 0 -2px 20px rgba(36,104,168,0.08);
-        overflow-x: auto;
-        overflow-y: hidden;
-        background: rgba(255,255,255,0.92);
-        backdrop-filter: blur(16px);
-        z-index: 100;
-        justify-content: space-around;
-      }
+      .sidebar { width: 100%; height: auto; min-height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 10px; gap: 4px; }
       .sidebar .avatar-box { display: none; }
-      .sidebar .menu-item {
-        padding: 4px 6px;
-        font-size: 10px;
-        flex: 0 0 auto;
-        margin-bottom: 0;
-        border-radius: 4px;
-        white-space: nowrap;
-      }
-      .sidebar .menu-item .icon { font-size: 14px; width: auto; margin-right: 1px; }
-      
-      .content-area {
-        padding: 6px 6px 60px 6px;
-        max-height: none;
-        height: calc(100vh - 50px);
-      }
-      .content-area::before {
-        left: 0;
-      }
-      
-      .info-box {
-        max-width: 100% !important;
-        padding: 10px 8px !important;
-        margin: 0 !important;
-        border-radius: 10px;
-      }
-      .stage-wrap .info-box {
-        padding: 10px 8px !important;
-      }
-      
-      .fancam-wrap {
-        gap: 6px;
-        padding: 0;
-        max-width: 100%;
-        margin: 0;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .fancam-wrap .info-box {
-        padding: 8px 6px !important;
-        border-radius: 10px;
-        max-width: 100% !important;
-        width: 100% !important;
-        margin: 0 !important;
-      }
-      .fancam-wrap .timeline-sidebar {
-        position: relative;
-        top: 0;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        width: 100%;
-        padding: 4px 6px;
-        gap: 3px;
-        max-height: none;
-        overflow-x: auto;
-        overflow-y: hidden;
-        justify-content: flex-start;
-        border-radius: 8px;
-        margin-top: 0;
-        margin-bottom: 4px;
-        background: rgba(255,255,255,0.4);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(26,74,111,0.06);
-      }
-      .fancam-wrap .timeline-sidebar .tl-year-label {
-        font-size: 9px;
-        padding: 2px 6px;
-        width: auto;
-        border-bottom: none;
-        flex-shrink: 0;
-      }
-      .fancam-wrap .timeline-sidebar .tl-item {
-        font-size: 9px;
-        padding: 2px 6px;
-        width: auto;
-        flex-shrink: 0;
-      }
-      .fancam-wrap .timeline-sidebar .tl-line {
-        display: none;
-      }
-      
-      .fancam-wrap .info-box .platform-nav {
-        gap: 3px;
-        margin-bottom: 6px;
-        flex-wrap: wrap;
-      }
-      .fancam-wrap .info-box .platform-nav .platform-nav-item {
-        font-size: 9px;
-        padding: 3px 6px;
-      }
-      .fancam-wrap .info-box .filter-search-row {
-        margin-bottom: 4px;
-      }
-      .fancam-wrap .info-box .filter-search-row .search-box {
-        max-width: 100%;
-        padding: 0 4px;
-      }
-      .fancam-wrap .info-box .filter-search-row .search-box input {
-        font-size: 11px;
-        padding: 3px 2px;
-      }
-      .fancam-wrap .info-box .filter-tabs-row {
-        padding: 2px 4px;
-        gap: 2px;
-        flex-wrap: wrap;
-      }
-      .fancam-wrap .info-box .filter-tabs-row .category-tab {
-        font-size: 8px;
-        padding: 1px 4px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card {
-        padding: 6px 6px;
-        margin-bottom: 4px;
-        border-radius: 8px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-time,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-time {
-        font-size: 9px;
-        margin-bottom: 3px;
-        padding-bottom: 3px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-text,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-text {
-        font-size: 11px;
-        margin-bottom: 3px;
-        line-height: 1.4;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-media-grid,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-media-grid {
-        gap: 3px;
-        max-width: 100%;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-link-button,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-link-button {
-        font-size: 9px;
-        padding: 1px 6px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-comment-bottom,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-comment-bottom {
-        font-size: 10px;
-        margin-top: 3px;
-        padding-top: 3px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-media-grid .media-item,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-media-grid .media-item {
-        border-radius: 4px;
-      }
-      
-      .platform-tag {
-        font-size: 9px;
-        line-height: 18px;
-        padding: 0 8px;
-      }
-      
+      .sidebar .menu-item { padding: 6px 10px; font-size: 11px; flex: 1 0 auto; }
+      .content-area { padding: 8px; }
       .weibo-card .weibo-media-grid.cols-2,
       .weibo-card .weibo-media-grid.cols-3,
       .xiaohongshu-card .weibo-media-grid.cols-2,
       .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
       .inline-calendar { width: 220px; height: 220px; min-width: 180px; min-height: 180px; padding: 10px 12px; }
       .inline-calendar .cal-days-grid > div { font-size: 0.65rem; }
-      
-      #backToTop {
-        bottom: 65px;
-        right: 10px;
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-      }
     }
-      /* 饭之拍时间轴在手机端隐藏或调整 */
-      .fancam-wrap .timeline-sidebar {
-        display: none;
-      }
-      .fancam-wrap .info-box {
-        padding: 12px 14px;
-      }
-      
-      /* 平台导航按钮缩小 */
-      .platform-nav-item {
-        font-size: 10px;
-        padding: 4px 10px;
-      }
-      .platform-nav {
-        gap: 4px;
-        margin-bottom: 8px;
-      }
-      
-      /* 子分类标签缩小 */
-      .category-tab {
-        font-size: 10px;
-        padding: 2px 8px;
-      }
-      .filter-tabs-row {
-        padding: 4px 6px;
-        gap: 3px 4px;
-      }
-      
-      /* 卡片内边距缩小 */
-      .weibo-card, .xiaohongshu-card {
-        padding: 0.8rem 0.8rem 0.6rem;
-        margin-bottom: 0.5rem;
-      }
-      .weibo-card .weibo-text, .xiaohongshu-card .weibo-text {
-        font-size: 0.85rem;
-      }
-      
-      /* 返回顶部按钮调整 */
-      #backToTop {
-        bottom: 75px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-      }
-      /* 饭之拍 - 手机适配（完整版） */
-      .fancam-wrap {
-        gap: 0;
-        padding: 0;
-        max-width: 100%;
-        margin: 0;
-      }
-      .fancam-wrap .info-box {
-        padding: 10px 8px !important;
-        border-radius: 12px;
-        max-width: 100% !important;
-        width: 100% !important;
-        margin: 0 !important;
-        box-sizing: border-box;
-        overflow: hidden;
-      }
-      .fancam-wrap .info-box .platform-nav {
-        gap: 3px;
-        margin-bottom: 6px;
-        flex-wrap: wrap;
-      }
-      .fancam-wrap .info-box .platform-nav .platform-nav-item {
-        font-size: 10px;
-        padding: 3px 6px;
-      }
-      .fancam-wrap .info-box .filter-search-row {
-        margin-bottom: 6px;
-        flex-wrap: wrap;
-      }
-      .fancam-wrap .info-box .filter-search-row .search-box {
-        max-width: 100%;
-        padding: 0 6px;
-        flex: 1 1 100%;
-      }
-      .fancam-wrap .info-box .filter-search-row .search-box input {
-        font-size: 12px;
-        padding: 4px 2px;
-      }
-      .fancam-wrap .info-box .filter-tabs-row {
-        padding: 3px 4px;
-        gap: 2px;
-        flex-wrap: wrap;
-      }
-      .fancam-wrap .info-box .filter-tabs-row .category-tab {
-        font-size: 9px;
-        padding: 2px 5px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card {
-        padding: 8px 8px;
-        margin-bottom: 6px;
-        border-radius: 10px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-time,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-time {
-        font-size: 10px;
-        margin-bottom: 4px;
-        padding-bottom: 4px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-text,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-text {
-        font-size: 12px;
-        margin-bottom: 4px;
-        line-height: 1.5;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-media-grid,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-media-grid {
-        gap: 3px;
-        max-width: 100%;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-link-button,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-link-button {
-        font-size: 10px;
-        padding: 2px 8px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-comment-bottom,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-comment-bottom {
-        font-size: 11px;
-        margin-top: 4px;
-        padding-top: 4px;
-      }
-      .fancam-wrap .info-box #weiboFeed .weibo-card .weibo-media-grid .media-item,
-      .fancam-wrap .info-box #weiboFeed .xiaohongshu-card .weibo-media-grid .media-item {
-        border-radius: 4px;
-      }
   </style>
 </head>
 <body>
@@ -3141,33 +2859,35 @@
     };
 
     // ---- 小日历 ----
+    function buildUpdateMap() {
+      const map = {};
+      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      cards.forEach(card => {
+        if (card.classList.contains('pinned')) return;
+        const month = card.dataset.month;
+        const day = card.dataset.day;
+        const platform = card.dataset.platform || 'weibo';
+        if (!month || !day) return;
+        const key = month + '-' + day.padStart(2, '0');
+        if (!map[key]) map[key] = [];
+        if (!map[key].includes(platform)) map[key].push(platform);
+      });
+      return map;
+    }
+
     function createInlineCalendar(year) {
       const container = document.createElement('div');
       container.className = 'inline-calendar';
       
-      // 判断是否为手机端（宽度 ≤ 480px）
-      const isMobile = window.innerWidth <= 480;
-      
-      // 手机端：居中显示在屏幕最中间
-      if (isMobile) {
-        container.style.left = '50%';
-        container.style.top = '50%';
+      const label = document.querySelector(`.tl-year-label[data-year="${year}"]`);
+      if (label) {
+        const rect = label.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2 + 50;
+        const centerY = rect.top + rect.height / 2 + 80;
+        container.style.left = centerX + 'px';
+        container.style.top = centerY + 'px';
         container.style.transform = 'translate(-50%, -50%) scale(0.3)';
         container.style.transformOrigin = 'center center';
-        container.style.width = '280px';
-        container.style.height = '280px';
-      } else {
-        // PC端：定位在年份标签附近
-        const label = document.querySelector(`.tl-year-label[data-year="${year}"]`);
-        if (label) {
-          const rect = label.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2 + 50;
-          const centerY = rect.top + rect.height / 2 + 80;
-          container.style.left = centerX + 'px';
-          container.style.top = centerY + 'px';
-          container.style.transform = 'translate(-50%, -50%) scale(0.3)';
-          container.style.transformOrigin = 'center center';
-        }
       }
       
       container.style.position = 'fixed';
