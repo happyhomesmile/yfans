@@ -605,6 +605,9 @@
       <div class="menu-item" data-page="fancam"><span class="icon">📸</span> 饭之拍</div>
       <div class="menu-item" data-page="bobo"><span class="icon">📹</span> 饭之啵</div>
       <div class="menu-item" data-page="contact"><span class="icon">💬</span> 饭言饭语</div>
+      <div class="menu-item" data-page="today"><span class="icon">📅</span> 那年今日</div>
+      <div class="menu-item" data-page="birth"><span class="icon">🎂</span> 饭之诞</div>
+      <div class="menu-item" data-page="dream"><span class="icon">💪</span> 梦想汗水坚持</div>
       <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 未完待续</div>
     </div>
 
@@ -2146,7 +2149,7 @@
               <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
               <button class="platform-nav-item" data-category="words">💬 饭所言</button>
             </div>
-
+      
             <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
               <span class="category-tab active" data-sub="water">一天八杯水</span>
               <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
@@ -2154,24 +2157,51 @@
             </div>
 
             <div id="contactFeed">
-              <div class="weibo-card" data-category="food" data-sub="water">
+              <div class="contact-card" data-category="food" data-sub="water">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
               </div>
-              <div class="weibo-card" data-category="food" data-sub="sweet">
+              <div class="contact-card" data-category="food" data-sub="sweet">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
               </div>
-              <div class="weibo-card" data-category="food" data-sub="steel">
+              <div class="contact-card" data-category="food" data-sub="steel">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
               </div>
-              <div class="weibo-card" data-category="travel" data-sub="all">
+              <div class="contact-card" data-category="travel" data-sub="all">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
               </div>
-              <div class="weibo-card" data-category="words" data-sub="all">
+              <div class="contact-card" data-category="words" data-sub="all">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
               </div>
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- 那年今日 -->
+      <div class="page-box" id="today">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 那年今日</div>
+          <div class="empty-state">📅 内容待更新</div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 饭之诞 -->
+      <div class="page-box" id="birth">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 饭之诞</div>
+          <div class="empty-state">🎂 内容待更新</div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
+      <!-- 梦想汗水坚持 -->
+      <div class="page-box" id="dream">
+        <div class="info-box">
+          <div class="info-title"><span class="deco">✦</span> 梦想汗水坚持</div>
+          <div class="empty-state">支持一颗小凡达成目标……🥉</div>
+          <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
 
@@ -2231,20 +2261,56 @@
     const allPages = document.querySelectorAll('.page-box');
     menuItems.forEach(item => {
       item.addEventListener('click', () => {
+        const pageId = item.getAttribute('data-page');
         menuItems.forEach(m => m.classList.remove('active'));
         allPages.forEach(p => p.classList.remove('active'));
         item.classList.add('active');
-        document.getElementById(item.getAttribute('data-page')).classList.add('active');
+        document.getElementById(pageId).classList.add('active');
+        
+        if (pageId === 'fancam') {
+          const searchInput = document.getElementById('weiboSearch');
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          const platformItems = document.querySelectorAll('.platform-nav-item');
+          platformItems.forEach(p => p.classList.remove('active'));
+          const allPlatform = document.querySelector('.platform-nav-item[data-platform="all"]');
+          if (allPlatform) allPlatform.classList.add('active');
+          const tabs = document.querySelectorAll('#weiboTabs .category-tab');
+          tabs.forEach(t => t.classList.remove('active'));
+          const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
+          if (allTab) allTab.classList.add('active');
+          setTimeout(() => {
+            const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+            allCards.forEach(card => {
+              card.style.display = '';
+            });
+            if (typeof filterWeiboFeed === 'function') {
+              filterWeiboFeed();
+            }
+            setTimeout(updateTimelineHighlight, 100);
+          }, 50);
+        }
+
+        if (pageId === 'contact') {
+          setTimeout(() => {
+            if (typeof window.restoreContactState === 'function') {
+              window.restoreContactState();
+            }
+          }, 50);
+        }
       });
     });
-
+    
     // ===== 舞台数据 =====
     const unitData = [
       // ===== 不空因果 =====
+      { date: '2026.07.24', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
       { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kEKy/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
       { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rE7X/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
       { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kE3j/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
       { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEAz/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.04', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
       { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEMT/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
       { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEzd/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
     
@@ -2292,19 +2358,20 @@
       { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7' },
       { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' },
       { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=17' },
-      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV1ssFxzwEhY/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=12' },
+      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=12' },
       { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1zZrCBoEjr/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8' },
       { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV14qiJBxEVS/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' }
     ];
     const assistData = [
-      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
-      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1WHKP6KEbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
-      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1T4jJ65EKk/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
-      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1ESGJ69EbA/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
-      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV11pX5BEEYr/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=19' },
-      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV1jmPazLEKo/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8' },
-      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1CE6nBwExQ/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4' },
-      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV1Si6UBWEBf/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3' }
+      { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg' },
+      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg' },
+      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg' },
+      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg' },
+      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png' },
+      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=19', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg' },
+      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg' },
+      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201511349.jpg' },
+      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg' }
     ];
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
@@ -3373,12 +3440,45 @@
 
     setTimeout(updateTimelineHighlight, 300);
 
-    // ===== 饭言饭语切换 =====
-    (function() {
-      const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
-      const cards = document.querySelectorAll('#contactFeed .weibo-card');
-      const tabs = document.querySelectorAll('#contactTabs .category-tab');
-    
+// ===== 饭言饭语切换 =====
+(function() {
+  // 保存状态
+  let savedCategory = 'food';
+  let savedSub = 'water';
+  
+  const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
+  const tabs = document.querySelectorAll('#contactTabs .category-tab');
+
+  function applyContactState(category, sub) {
+    // 恢复分类导航
+    navBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.category === category);
+    });
+    // 恢复子分类标签显示
+    tabs.forEach(tab => {
+      if (category === 'food') {
+        tab.style.display = '';
+      } else {
+        tab.style.display = 'none';
+      }
+    });
+    // 恢复子分类激活状态
+    tabs.forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.sub === sub);
+    });
+    // 执行筛选
+    filterContact(category, sub);
+  }
+
+  function filterContact(category, sub) {
+    const cards = document.querySelectorAll('#contactFeed .contact-card');
+    cards.forEach(card => {
+      const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+      // 初始化
       tabs.forEach(tab => {
         tab.style.display = '';
       });
@@ -3387,43 +3487,70 @@
     
       navBtns.forEach(btn => {
         btn.addEventListener('click', function() {
+          const category = this.dataset.category;
+          savedCategory = category;
+          // 更新导航按钮状态
           navBtns.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          const category = this.dataset.category;
-          tabs.forEach(tab => {
-            if (category === 'food') {
-              tab.style.display = '';
-            } else {
-              tab.style.display = 'none';
-            }
-          });
+          
           if (category === 'food') {
+            tabs.forEach(tab => {
+              if (tab.dataset.sub !== 'all') {
+                tab.style.display = '';
+              }
+            });
+            // 默认选中第一个非all的子分类
+            let firstTab = document.querySelector('#contactTabs .category-tab:not([data-sub="all"])');
+            if (firstTab) {
+              savedSub = firstTab.dataset.sub;
+              tabs.forEach(t => t.classList.remove('active'));
+              firstTab.classList.add('active');
+            }
+          } else {
+            tabs.forEach(tab => {
+              if (tab.dataset.sub !== 'all') {
+                tab.style.display = 'none';
+              }
+            });
+            // 选中 all
             tabs.forEach(t => t.classList.remove('active'));
-            tabs[0].classList.add('active');
+            const allTab = document.querySelector('#contactTabs .category-tab[data-sub="all"]');
+            if (allTab) {
+              allTab.classList.add('active');
+              savedSub = 'all';
+            }
           }
-          filterContact();
+          filterContact(savedCategory, savedSub);
         });
       });
     
       tabs.forEach(tab => {
         tab.addEventListener('click', function() {
+          // 更新子分类激活状态
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
-          filterContact();
+          savedSub = this.dataset.sub;
+          
+          // 确保导航按钮也保持正确的激活状态
+          // 如果当前子分类是 all，且属于 travel 或 words，导航按钮已经是正确的
+          // 如果当前是 food 分类下的子分类，确保饭食饭按钮高亮
+          if (savedCategory === 'food') {
+            navBtns.forEach(b => b.classList.remove('active'));
+            const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
+            if (foodBtn) foodBtn.classList.add('active');
+          }
+          
+          filterContact(savedCategory, savedSub);
         });
       });
     
-      function filterContact() {
-        const category = document.querySelector('#contactNav .platform-nav-item.active')?.dataset.category || 'food';
-        const activeTab = document.querySelector('#contactTabs .category-tab.active');
-        const sub = activeTab ? activeTab.dataset.sub : 'water';
-        cards.forEach(card => {
-          const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
-          card.style.display = match ? '' : 'none';
-        });
-      }
+      // 暴露恢复函数，供页面切换时调用
+      window.restoreContactState = function() {
+        applyContactState(savedCategory, savedSub);
+      };
     
-      filterContact();
+      // 初始执行
+      filterContact('food', 'water');
     })();
   </script>
 
