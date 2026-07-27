@@ -2267,16 +2267,26 @@
                   <!-- 竖线 -->
                   <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
                   
-                  <!-- 2026.07 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
-                    <div style="padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        07.24 伯牙绝弦
-                      </div>
+                <!-- 2026.07 -->
+                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
+                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
+                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
+                  
+                  <!-- 两个条目并排在一行 -->
+                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
+                    
+                    <!-- 07.24 伯牙绝弦 -->
+                    <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
+                      07.24 伯牙绝弦
                     </div>
+                    
+                    <!-- 07.16 西瓜冰柠茶霸王杯 -->
+                    <div data-target="popupOverlayTea" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
+                      07.16 西瓜冰柠茶霸王杯
+                    </div>
+                    
                   </div>
+                </div>
                   
                   <!-- 2026.06 -->
                   <div style="position:relative; padding-left:24px; margin-bottom:4px;">
@@ -2407,6 +2417,52 @@
                   </div>
                 </div>
               </div>
+      
+              <!-- ===== 弹窗 - 西瓜冰柠茶霸王杯 ===== -->
+              <div class="popup-overlay" id="popupOverlayTea">
+                <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px;">
+                  <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
+                  
+                  <!-- 标题 -->
+                  <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+                    2026.07.16 <span style="font-size:13px; font-weight:500;">林里柠檬茶·西瓜冰柠茶霸王杯</span>
+                  </div>
+                  
+                  <!-- 关键词 -->
+                  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">正常冰</span>
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">3分糖</span>
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">去脆波波</span>
+                  </div>
+                  
+                  <!-- 图片 -->
+                  <div style="margin-bottom:8px;">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727184945909.jpg" alt="西瓜冰柠茶霸王杯" style="width:100%; height:auto; display:block; border-radius:12px;" />
+                  </div>
+                  
+                  <!-- 聊天记录 -->
+                  <div style="display:flex; flex-direction:column; gap:4px; margin-top:4px;">
+                    
+                    <!-- 喝一口醒醒神 -->
+                    <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
+                      <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        喝一口醒醒神
+                      </div>
+                      <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">23:29:13</span>
+                    </div>
+                    
+                    <!-- 我三分糖居然还甜 -->
+                    <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
+                      <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                        我三分糖居然还甜
+                      </div>
+                      <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">23:31:09</span>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              </div>
               
               <!-- ===== 弹窗 - 蛋糕 ===== -->
               <div class="popup-overlay" id="popupOverlayCake">
@@ -2479,6 +2535,7 @@
                     <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:24:49</span>
                 </div>
               </div>
+            </div>
 
       <!-- 那年今日 -->
       <div class="page-box" id="today">
