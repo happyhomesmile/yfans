@@ -106,8 +106,10 @@
       z-index: 0;
       pointer-events: none;
     }
-    .page-box { position: relative; z-index: 1; display: none; width: 100%; }
-    .page-box.active { display: block; }
+    .page-box { 
+      display: block; 
+      margin-bottom: 30px; /* 区块之间留点间距 */
+    }
 
     /* ===== 卡片 ===== */
     .info-box {
@@ -3553,6 +3555,100 @@
       filterContact('food', 'water');
     })();
   </script>
+<script>
+  (function() {
+    // 获取元素
+    const contentArea = document.querySelector('.content-area');
+    const sidebarMenu = document.querySelector('.sidebar');
+    const menuItems = document.querySelectorAll('.menu-item');
 
+    // 1. 建立菜单项与页面区块的映射
+    const pageMap = {};
+    menuItems.forEach(item => {
+      const pageId = item.getAttribute('data-page');
+      const pageElement = document.getElementById(pageId);
+      if (pageElement) {
+        pageMap[pageId] = {
+          menuItem: item,
+          pageElement: pageElement
+        };
+      }
+    });
+
+    // 2. 滚动联动：高亮当前可见区块对应的菜单
+    function updateActiveMenu() {
+      if (!contentArea) return;
+      
+      const scrollTop = contentArea.scrollTop;
+      // 获取所有页面区块，按其在文档中的顺序排列
+      const pageIds = Object.keys(pageMap);
+      let activeId = pageIds[0]; // 默认第一个
+
+      for (const id of pageIds) {
+        const element = pageMap[id].pageElement;
+        // 获取元素相对于 contentArea 顶部的位置
+        const offsetTop = element.offsetTop - contentArea.offsetTop;
+        // 如果滚动位置超过了某个区块的顶部，则认为该区块是当前区块
+        if (scrollTop >= offsetTop - 50) { // 减去50px偏移，让高亮更灵敏
+          activeId = id;
+        } else {
+          break; // 因为区块是按顺序排列的，一旦不满足条件，后面的都不满足
+        }
+      }
+
+      // 更新菜单高亮
+      menuItems.forEach(item => {
+        const itemId = item.getAttribute('data-page');
+        if (itemId === activeId) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    // 3. 点击菜单跳转
+    menuItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        // 阻止默认的锚点跳转行为
+        e.preventDefault();
+        
+        const pageId = this.getAttribute('data-page');
+        const targetElement = document.getElementById(pageId);
+        if (targetElement && contentArea) {
+          // 计算目标元素相对于 contentArea 顶部的位置
+          const targetOffset = targetElement.offsetTop - contentArea.offsetTop;
+          contentArea.scrollTo({
+            top: targetOffset,
+            behavior: 'smooth'
+          });
+        }
+        
+        // 手动更新高亮，因为滚动事件可能触发不及时
+        menuItems.forEach(m => m.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // 4. 监听滚动事件（使用节流优化性能）
+    let ticking = false;
+    contentArea.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          updateActiveMenu();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // 5. 页面加载、窗口大小变化时重新计算
+    window.addEventListener('load', updateActiveMenu);
+    window.addEventListener('resize', updateActiveMenu);
+
+    // 初始执行一次
+    updateActiveMenu();
+  })();
+</script>
 </body>
 </html>
