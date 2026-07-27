@@ -106,10 +106,8 @@
       z-index: 0;
       pointer-events: none;
     }
-    .page-box { 
-      display: block; 
-      margin-bottom: 30px; /* 区块之间留点间距 */
-    }
+    .page-box { position: relative; z-index: 1; display: none; width: 100%; }
+    .page-box.active { display: block; }
 
     /* ===== 卡片 ===== */
     .info-box {
@@ -557,6 +555,103 @@
       .video-card .video-title-bar { padding: 4px 8px; }
       .video-card .video-name { font-size: 11px; }
       .video-card .video-date { font-size: 10px; }
+    }
+
+        /* 弹窗样式 */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-overlay.open {
+      display: flex;
+    }
+    .popup-box {
+      background: #fff;
+      border-radius: 28px;
+      max-width: 380px;
+      width: 90%;
+      padding: 28px 24px 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #7a9ab0;
+      background: none;
+      border: none;
+      padding: 0 6px;
+    }
+    .popup-close:hover {
+      color: #1f5a8a;
+    }
+    .popup-keywords {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a4a6f;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .popup-keywords span {
+      background: rgba(36,104,168,0.06);
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(36,104,168,0.08);
+    }
+    .popup-emoji {
+      font-size: 56px;
+      text-align: center;
+      padding: 16px 0 12px;
+      background: #f0f7fe;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+    .popup-dialog {
+      background: #eaf3fa;
+      border-radius: 20px 20px 20px 6px;
+      padding: 14px 20px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a4a6f;
+      display: inline-block;
+      position: relative;
+      border: 1px solid rgba(26,74,111,0.08);
+      width: 100%;
+      text-align: center;
+    }
+    .popup-dialog::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 20px;
+      width: 16px;
+      height: 16px;
+      background: #eaf3fa;
+      border-radius: 0 0 0 8px;
+      border-left: 1px solid rgba(26,74,111,0.08);
+      border-bottom: 1px solid rgba(26,74,111,0.08);
+      transform: rotate(-6deg);
+    }
+    .popup-dialog .drink-text {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
     }
   </style>
 </head>
@@ -2142,41 +2237,143 @@
         </div>
       </div>
 
-      <!-- ==================== 饭言饭语 ==================== -->
+      <!-- ===== 饭言饭语 ===== -->
       <div class="page-box" id="contact">
         <div class="fancam-wrap">
           <div class="info-box" style="padding:18px 22px;">
+            
+            <!-- 三个分类导航 -->
             <div class="platform-nav" id="contactNav">
               <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
               <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
               <button class="platform-nav-item" data-category="words">💬 饭所言</button>
             </div>
-      
+
+            <!-- 子分类标签 -->
             <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
               <span class="category-tab active" data-sub="water">一天八杯水</span>
               <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
               <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
             </div>
 
+            <!-- ===== 内容区 ===== -->
             <div id="contactFeed">
+              
+              <!-- ====== 一天八杯水 ====== -->
               <div class="contact-card" data-category="food" data-sub="water">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+                
+                <!-- 薏米水标题 -->
+                <div style="padding:6px 0 14px 0; border-bottom:2px solid rgba(26,74,111,0.10); margin-bottom:12px;">
+                  <span style="font-size:16px; font-weight:400; font-style:normal; color:#1a4a6f;">累了困了喝</span>
+                  <span style="font-size:22px; font-weight:900; font-style:italic; background:linear-gradient(145deg,#0b3b5a,#2a7fb5); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">薏米水！</span>
+                </div>
+                
+                <!-- 月份列表 - 时间线样式 -->
+                <div style="padding-left:4px; position:relative;">
+                  
+                  <!-- 时间线竖线 -->
+                  <div style="position:absolute; left:5px; top:10px; bottom:10px; width:2px; background:#1f5a8a; opacity:0.3; border-radius:2px;"></div>
+                  
+                  <!-- 2026.07 -->
+                  <div style="display:flex; align-items:center; gap:10px; padding:8px 0 4px 0; border-bottom:1px solid rgba(184,224,255,0.12); position:relative;">
+                    <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#1f5a8a; flex-shrink:0; position:relative; z-index:2;"></span>
+                    <span style="font-size:16px; font-weight:800; color:#1f5a8a; min-width:76px;">2026.07</span>
+                  </div>
+                  <div style="padding:6px 0 10px 86px; border-bottom:1px solid rgba(184,224,255,0.06);">
+                    <div id="popupTriggerInContact" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
+                      07.24 伯牙绝弦
+                    </div>
+                  </div>
+                  
+                  <!-- 2026.06 -->
+                  <div style="display:flex; align-items:center; gap:10px; padding:8px 0 4px 0; border-bottom:1px solid rgba(184,224,255,0.12); position:relative;">
+                    <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#1f5a8a; flex-shrink:0; position:relative; z-index:2;"></span>
+                    <span style="font-size:16px; font-weight:800; color:#1f5a8a; min-width:76px;">2026.06</span>
+                  </div>
+                  <div style="padding:6px 0 10px 86px; border-bottom:1px solid rgba(184,224,255,0.06);">
+                    <span style="font-size:13px; color:#9ab7cf;">— 暂无内容 —</span>
+                  </div>
+                  
+                  <!-- 2026.05 -->
+                  <div style="display:flex; align-items:center; gap:10px; padding:8px 0 4px 0; border-bottom:1px solid rgba(184,224,255,0.12); position:relative;">
+                    <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#1f5a8a; flex-shrink:0; position:relative; z-index:2;"></span>
+                    <span style="font-size:16px; font-weight:800; color:#1f5a8a; min-width:76px;">2026.05</span>
+                  </div>
+                  <div style="padding:6px 0 10px 86px; border-bottom:1px solid rgba(184,224,255,0.06);">
+                    <span style="font-size:13px; color:#9ab7cf;">— 暂无内容 —</span>
+                  </div>
+                  
+                  <!-- 2026.04 -->
+                  <div style="display:flex; align-items:center; gap:10px; padding:8px 0 4px 0; position:relative;">
+                    <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#1f5a8a; flex-shrink:0; position:relative; z-index:2;"></span>
+                    <span style="font-size:16px; font-weight:800; color:#1f5a8a; min-width:76px;">2026.04</span>
+                  </div>
+                  <div style="padding:6px 0 10px 86px;">
+                    <span style="font-size:13px; color:#9ab7cf;">— 暂无内容 —</span>
+                  </div>
+                  
+                </div>
               </div>
+
+              <!-- ====== 生活需要加点甜 ====== -->
               <div class="contact-card" data-category="food" data-sub="sweet">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🍰 生活需要加点甜 · 待更新</div>
               </div>
+
+              <!-- ====== 人是铁饭是钢 ====== -->
               <div class="contact-card" data-category="food" data-sub="steel">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">椰饭最爱的费大厨正失望地看着你…</div>
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🍚 人是铁饭是钢 · 待更新</div>
               </div>
+
+              <!-- ====== 旅行椰饭 & 饭所言 ====== -->
               <div class="contact-card" data-category="travel" data-sub="all">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
               </div>
               <div class="contact-card" data-category="words" data-sub="all">
                 <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
               </div>
+              
               <div class="footer-slogan">-All For YeFan-</div>
             </div>
           </div>
+        </div>
+      </div>
+
+              <!-- ===== 弹窗 (内容框) ===== -->
+              <div class="popup-overlay" id="popupOverlay">
+                <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px;">
+                  <button class="popup-close" id="popupClose" style="top:8px; right:12px; font-size:20px;">✕</button>
+                  
+                  <!-- 标题 -->
+                  <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+                    2026.07.24 霸王茶姬·<span style="font-size:13px; font-weight:500;">伯牙绝弦</span>
+                  </div>
+                  
+                  <!-- 关键词 -->
+                  <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">中杯</span>
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">花香款</span>
+                    <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准糖</span>
+                  </div>
+                  
+                  <!-- 图片（按原始尺寸比例显示） -->
+                  <div style="margin-bottom: 8px;">
+                      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727165612400.jpg" 
+                          alt="伯牙绝弦" 
+                          style="width: 100%; height: auto; display: block; border-radius: 12px;" />
+                  </div>
+                  
+                  <!-- 聊天消息 -->
+                  <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
+                    <div style="background:#ffffff; padding:6px 14px; border-radius:4px 12px 12px 12px; font-size:15px; font-weight:500; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+                      喝！
+                    </div>
+                    <span style="font-size:10px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-24 16:30:49</span>
+                  </div>
+                  
+                </div>
+              </div>
+          
         </div>
       </div>
 
@@ -3554,101 +3751,39 @@
       // 初始执行
       filterContact('food', 'water');
     })();
-  </script>
-<script>
-  (function() {
-    // 获取元素
-    const contentArea = document.querySelector('.content-area');
-    const sidebarMenu = document.querySelector('.sidebar');
-    const menuItems = document.querySelectorAll('.menu-item');
 
-    // 1. 建立菜单项与页面区块的映射
-    const pageMap = {};
-    menuItems.forEach(item => {
-      const pageId = item.getAttribute('data-page');
-      const pageElement = document.getElementById(pageId);
-      if (pageElement) {
-        pageMap[pageId] = {
-          menuItem: item,
-          pageElement: pageElement
-        };
-      }
-    });
+    // 绑定弹窗
+    const triggerContact = document.getElementById('popupTriggerInContact');
+    const overlay = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('popupClose');
 
-    // 2. 滚动联动：高亮当前可见区块对应的菜单
-    function updateActiveMenu() {
-      if (!contentArea) return;
+    if (triggerContact && overlay && closeBtn) {
+      triggerContact.addEventListener('click', function(e) {
+        e.stopPropagation();
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
       
-      const scrollTop = contentArea.scrollTop;
-      // 获取所有页面区块，按其在文档中的顺序排列
-      const pageIds = Object.keys(pageMap);
-      let activeId = pageIds[0]; // 默认第一个
-
-      for (const id of pageIds) {
-        const element = pageMap[id].pageElement;
-        // 获取元素相对于 contentArea 顶部的位置
-        const offsetTop = element.offsetTop - contentArea.offsetTop;
-        // 如果滚动位置超过了某个区块的顶部，则认为该区块是当前区块
-        if (scrollTop >= offsetTop - 50) { // 减去50px偏移，让高亮更灵敏
-          activeId = id;
-        } else {
-          break; // 因为区块是按顺序排列的，一旦不满足条件，后面的都不满足
+      closeBtn.addEventListener('click', function() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+      
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
         }
-      }
-
-      // 更新菜单高亮
-      menuItems.forEach(item => {
-        const itemId = item.getAttribute('data-page');
-        if (itemId === activeId) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
+      });
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
         }
       });
     }
+  </script>
 
-    // 3. 点击菜单跳转
-    menuItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        // 阻止默认的锚点跳转行为
-        e.preventDefault();
-        
-        const pageId = this.getAttribute('data-page');
-        const targetElement = document.getElementById(pageId);
-        if (targetElement && contentArea) {
-          // 计算目标元素相对于 contentArea 顶部的位置
-          const targetOffset = targetElement.offsetTop - contentArea.offsetTop;
-          contentArea.scrollTo({
-            top: targetOffset,
-            behavior: 'smooth'
-          });
-        }
-        
-        // 手动更新高亮，因为滚动事件可能触发不及时
-        menuItems.forEach(m => m.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    // 4. 监听滚动事件（使用节流优化性能）
-    let ticking = false;
-    contentArea.addEventListener('scroll', function() {
-      if (!ticking) {
-        window.requestAnimationFrame(function() {
-          updateActiveMenu();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // 5. 页面加载、窗口大小变化时重新计算
-    window.addEventListener('load', updateActiveMenu);
-    window.addEventListener('resize', updateActiveMenu);
-
-    // 初始执行一次
-    updateActiveMenu();
-  })();
-</script>
 </body>
 </html>
