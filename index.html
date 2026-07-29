@@ -653,6 +653,323 @@
       position: relative;
       z-index: 2;
     }
+
+    /* ===== 旅行椰饭 · 奇迹饭饭 ===== */
+    .miracle-card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .miracle-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(26, 74, 111, 0.08);
+      border: 1px solid rgba(26, 74, 111, 0.06);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .miracle-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(26, 74, 111, 0.14);
+    }
+
+    .miracle-card .cover-image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #d4e6f5;
+      position: relative;
+    }
+    .miracle-card .cover-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .miracle-card:hover .cover-image img {
+      transform: scale(1.04);
+    }
+
+    .miracle-card .cover-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 12px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .miracle-card .card-footer {
+      text-align: center;
+      padding: 8px 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1f5a8a;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.5);
+      border-top: 1px solid rgba(184, 224, 255, 0.15);
+    }
+
+    /* ===== 悬浮窗 - 居中 ===== */
+    .floating-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      z-index: 9998;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .floating-overlay.open {
+      display: flex;
+    }
+
+    .floating-box {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 80vh;
+      padding: 24px 24px 20px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      animation: floatIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+    @keyframes floatIn {
+      0% { transform: scale(0.9) translateY(30px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .floating-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.06);
+      border: none;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: #4a779e;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .floating-close:hover {
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .floating-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a4a6f;
+      margin-bottom: 16px;
+      padding-right: 40px;
+    }
+
+    .floating-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      overflow-y: auto;
+      padding-right: 4px;
+      flex: 1;
+      max-height: 55vh;
+    }
+    .floating-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+    .floating-grid::-webkit-scrollbar-thumb {
+      background: #b8d4e8;
+      border-radius: 99px;
+    }
+
+    .floating-item {
+      background: #eaf3fa;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      border: 2px solid transparent;
+    }
+    .floating-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 20px rgba(26, 74, 111, 0.15);
+      border-color: rgba(26, 74, 111, 0.2);
+    }
+    .floating-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .floating-item .item-date {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 20px 10px 8px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== 大图预览 Modal ===== */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      flex-direction: column;
+    }
+    .image-modal.open {
+      display: flex;
+    }
+    .modal-image-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-image-container img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+    .modal-date-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 6px 16px;
+      border-radius: 40px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .modal-close-btn {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .modal-close-hint {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .miracle-card-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+      }
+      .floating-box {
+        max-width: 95%;
+        max-height: 85vh;
+        padding: 18px 16px 16px;
+      }
+      .floating-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .floating-box {
+        padding: 16px;
+        border-radius: 20px;
+        max-height: 90vh;
+        max-width: 98%;
+      }
+      .floating-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+        max-height: 50vh;
+      }
+      .floating-title {
+        font-size: 15px;
+      }
+      .modal-close-btn {
+        top: 12px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+      }
+      .modal-date-badge {
+        top: 12px;
+        left: 12px;
+        font-size: 0.7rem;
+        padding: 4px 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2520,19 +2837,67 @@
                 </div>
               </div>
       
-              <!-- ====== 旅行椰饭 & 饭所言 ====== -->
+              <!-- ====== 旅行椰饭 ====== -->
               <div class="contact-card" data-category="travel" data-sub="all">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+                <div class="miracle-card-grid">
+                  <!-- 卡片1：2026年7月 -->
+                  <div class="miracle-card" data-month="2026-07">
+                    <div class="cover-image">
+                      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg" alt="2026年7月" loading="lazy" />
+                      <div class="cover-badge">7月</div>
+                    </div>
+                    <div class="card-footer">2026.07</div>
+                  </div>
+
+                  <!-- 卡片2：2026年6月（占位示例） -->
+                  <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
+                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                      <span style="font-size:42px;opacity:0.4;">📅</span>
+                    </div>
+                    <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
+                  </div>
+
+                  <!-- 卡片3：2026年5月（占位示例） -->
+                  <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
+                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                      <span style="font-size:42px;opacity:0.4;">📅</span>
+                    </div>
+                    <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
+                  </div>
+
+                  <!-- 卡片4：2026年4月（占位示例） -->
+                  <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
+                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                      <span style="font-size:42px;opacity:0.4;">📅</span>
+                    </div>
+                    <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
+                  </div>
+                </div>
+
+                <!-- ===== 悬浮窗 ===== -->
+                <div class="floating-overlay" id="floatingOverlay">
+                  <div class="floating-box">
+                    <button class="floating-close" id="floatingClose">✕</button>
+                    <div class="floating-title" id="floatingTitle">🍚 旅行椰饭 · 2026年7月</div>
+                    <div class="floating-grid" id="floatingGrid"></div>
+                  </div>
+                </div>
+
+                <!-- ===== 大图预览 Modal ===== -->
+                <div class="image-modal" id="imageModal">
+                  <div class="modal-close-btn" id="modalCloseBtn">✕</div>
+                  <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="大图预览" />
+                    <div class="modal-date-badge" id="modalDateBadge">2026.07.27</div>
+                  </div>
+                  <div class="modal-close-hint">点击空白处关闭 · 左右滑动切换</div>
+                </div>
               </div>
-              <div class="contact-card" data-category="words" data-sub="all">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
-              </div>
-              
-              <div class="footer-slogan">-All For YeFan-</div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- ====== 饭所言 ====== -->
+<div class="contact-card" data-category="words" data-sub="all">
+  <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+</div>
       
               <!-- ===== 弹窗 - 伯牙绝弦 ===== -->
               <div class="popup-overlay" id="popupOverlay">
@@ -3359,10 +3724,8 @@
                       </div>
                     </div>
                   </div>
-          
-                </div>
-              </div>
 
+  
       <!-- 那年今日 -->
       <div class="page-box" id="today">
         <div class="info-box">
@@ -3490,6 +3853,7 @@
     // ===== 舞台数据 =====
     const unitData = [
       // ===== 不空因果 =====
+      { date: '2026.07.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV15v3y67EJn/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
       { date: '2026.07.24', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
       { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kEKy/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
       { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rE7X/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
@@ -3539,13 +3903,13 @@
       { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/?spm_id_from=333.1387.upload.video_card.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg' },
       { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/?spm_id_from=333.1387.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
       { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/?spm_id_from=333.788.top_right_bar_window_dynamic.content.click&vd_source=c75d08da15d9e42d84b7d696f458aae2', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/?spm_id_from=333.788.player.switch&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg' },
-      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV11KoMB6E58/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg' },
-      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1ztPqzYEGu/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=17', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg' },
+      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/?spm_id_from=333.788.player.switch&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=7', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg' },
+      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg' },
+      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=17', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg' },
       { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=12', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.jpg' },
-      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1zZrCBoEjr/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg' },
-      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV14qiJBxEVS/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg' }
+      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=8', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg' },
+      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=3', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg' }
     ];
     const assistData = [
       { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/?spm_id_from=333.788.videopod.episodes&vd_source=c75d08da15d9e42d84b7d696f458aae2&p=4', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg' },
@@ -4798,6 +5162,138 @@
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
+    // ===== 旅行椰饭 · 奇迹饭饭 =====
+    (function() {
+      const monthData = {
+        '2026-07': [
+          { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
+          { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.jpg' },
+          { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' }
+        ]
+        // 后续月份数据可继续添加
+        // '2026-06': [...]
+      };
+
+      const overlay = document.getElementById('floatingOverlay');
+      const closeBtn = document.getElementById('floatingClose');
+      const grid = document.getElementById('floatingGrid');
+      const title = document.getElementById('floatingTitle');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalDate = document.getElementById('modalDateBadge');
+      const modalClose = document.getElementById('modalCloseBtn');
+
+      let currentImages = [];
+      let currentModalIndex = 0;
+
+      function renderFloatingGrid(month) {
+        const images = monthData[month] || [];
+        currentImages = images;
+        grid.innerHTML = '';
+        
+        if (images.length === 0) {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#7a9ab0;">暂无图片</div>';
+          return;
+        }
+
+        images.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'floating-item';
+          div.innerHTML = `
+            <img src="${item.url}" alt="${item.date}" loading="lazy" />
+            <div class="item-date">${item.date}</div>
+          `;
+          div.addEventListener('click', () => openImageModal(index));
+          grid.appendChild(div);
+        });
+      }
+
+      function openFloating(month) {
+        const monthNames = { '2026-07': '2026年7月', '2026-06': '2026年6月', '2026-05': '2026年5月', '2026-04': '2026年4月' };
+        title.textContent = `🍚 旅行椰饭 · ${monthNames[month] || month}`;
+        renderFloatingGrid(month);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeFloating() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function openImageModal(index) {
+        if (!currentImages.length) return;
+        currentModalIndex = index;
+        updateModal();
+        modal.classList.add('open');
+      }
+
+      function updateModal() {
+        const item = currentImages[currentModalIndex];
+        if (!item) return;
+        modalImg.src = item.url;
+        modalDate.textContent = item.date;
+      }
+
+      function closeImageModal() {
+        modal.classList.remove('open');
+      }
+
+      function goPrev() {
+        if (currentImages.length <= 1) return;
+        currentModalIndex = (currentModalIndex - 1 + currentImages.length) % currentImages.length;
+        updateModal();
+      }
+
+      function goNext() {
+        if (currentImages.length <= 1) return;
+        currentModalIndex = (currentModalIndex + 1) % currentImages.length;
+        updateModal();
+      }
+
+      // 卡片点击
+      document.querySelectorAll('.miracle-card[data-month]').forEach(card => {
+        card.addEventListener('click', function() {
+          const month = this.dataset.month;
+          if (monthData[month] && monthData[month].length > 0) {
+            openFloating(month);
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', closeFloating);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeFloating();
+      });
+
+      modalClose.addEventListener('click', closeImageModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeImageModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('open')) {
+          if (e.key === 'Escape') closeImageModal();
+          else if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+          else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+        }
+        if (overlay.classList.contains('open') && e.key === 'Escape') {
+          closeFloating();
+        }
+      });
+
+      let touchStart = 0;
+      modal.addEventListener('touchstart', (e) => {
+        touchStart = e.changedTouches[0].screenX;
+      }, { passive: true });
+      modal.addEventListener('touchend', (e) => {
+        const diff = touchStart - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 40) {
+          diff > 0 ? goNext() : goPrev();
+        }
+      }, { passive: true });
+    })();
   </script>
 
 </body>
