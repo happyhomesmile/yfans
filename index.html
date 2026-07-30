@@ -2861,24 +2861,24 @@
                     </div>
                     <div class="card-footer">2026.07</div>
                   </div>
-              
-                  <!-- 卡片2：2026年6月（占位示例） -->
+
+                  <!-- 卡片2：2026年6月 -->
                   <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
                       <span style="font-size:42px;opacity:0.4;">📅</span>
                     </div>
                     <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
                   </div>
-              
-                  <!-- 卡片3：2026年5月（占位示例） -->
+
+                  <!-- 卡片3：2026年5月 -->
                   <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
                       <span style="font-size:42px;opacity:0.4;">📅</span>
                     </div>
                     <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
                   </div>
-              
-                  <!-- 卡片4：2026年4月（占位示例） -->
+
+                  <!-- 卡片4：2026年4月 -->
                   <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
                       <span style="font-size:42px;opacity:0.4;">📅</span>
@@ -3792,6 +3792,18 @@
     </div>
   </div>
 
+  <!-- ===== 奇迹饭饭 - 弹窗 ===== -->
+  <div class="popup-overlay" id="popupOverlayMiracle">
+    <div class="popup-box" style="max-width:480px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
+      <button class="popup-close" id="miraclePopupClose">✕</button>
+      <div style="font-size:16px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid rgba(184,224,255,0.2);">
+        <span id="miraclePopupTitle">2026年7月 · 旅行椰饭</span>
+      </div>
+      <div id="miraclePopupGrid" style="display:flex; flex-direction:column; gap:12px;">
+        <!-- 动态插入图片 -->
+      </div>
+    </div>
+  </div>
   <script>
     // ===== 加载动画 =====
     setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
@@ -5191,120 +5203,125 @@
       });
     });
 
-    // ===== 旅行椰饭 · 悬浮窗控制 =====
+    // ===== 旅行椰饭 · 奇迹饭饭弹窗 =====
     (function() {
-      const floatingOverlay = document.getElementById('floatingOverlay');
-      const floatingGrid = document.getElementById('floatingGrid');
-      const floatingTitle = document.getElementById('floatingTitle');
-      const floatingClose = document.getElementById('floatingClose');
-
-      // 图片数据映射（按月份）
+      // 图片数据
       const monthImages = {
         '2026-07': [
           { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
           { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.jpg' },
           { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' }
         ],
-        '2026-06': [
-          // 6月的图片数据
-        ],
-        // 添加其他月份...
+        '2026-06': [],
+        '2026-05': [],
+        '2026-04': []
       };
 
-      // 为所有 miracle-card 添加点击事件
-      document.querySelectorAll('.miracle-card').forEach(card => {
-        card.addEventListener('click', function() {
-          const month = this.dataset.month;
-          const images = monthImages[month] || [];
-          
-          if (images.length === 0) {
-            // 如果没有图片数据，显示占位信息
-            floatingGrid.innerHTML = `
-              <div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#7a9ab0;font-size:14px;">
-                📸 暂无图片，敬请期待
+      // 获取弹窗元素
+      const popup = document.getElementById('popupOverlayMiracle');
+      const popupTitle = document.getElementById('miraclePopupTitle');
+      const popupGrid = document.getElementById('miraclePopupGrid');
+      const popupClose = document.getElementById('miraclePopupClose');
+
+      // 打开弹窗
+      function openMiraclePopup(month) {
+        if (!popup) return;
+        const images = monthImages[month] || [];
+        const monthName = month.replace('-', '年') + '月';
+        popupTitle.textContent = monthName + ' · 旅行椰饭';
+
+        if (images.length === 0) {
+          popupGrid.innerHTML = `
+            <div style="text-align:center; padding:40px 0; color:#7a9ab0; font-size:14px;">
+              📸 暂无图片，敬请期待
+            </div>
+          `;
+        } else {
+          popupGrid.innerHTML = images.map(function(item) {
+            return `
+              <div style="border-radius:12px; overflow:hidden; background:#d4e6f5; cursor:pointer; position:relative;" onclick="previewImage('${item.url}')">
+                <img src="${item.url}" style="width:100%; height:auto; display:block;" loading="lazy" />
+                <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(0,0,0,0.5)); padding:24px 14px 10px 14px; color:#fff; font-size:12px; font-weight:500; letter-spacing:0.5px;">
+                  ${item.date}
+                </div>
               </div>
             `;
-          } else {
-            // 渲染图片网格
-            floatingGrid.innerHTML = images.map(img => `
-              <div class="floating-item" onclick="openModalFromFloating('${img.url}', '${img.date}')">
-                <img src="${img.url}" alt="${img.date}" loading="lazy" />
-                <div class="item-date">${img.date}</div>
-              </div>
-            `).join('');
-          }
-          
-          // 更新标题
-          const monthName = month.replace('-', '年') + '月';
-          floatingTitle.textContent = `🍚 旅行椰饭 · ${monthName}`;
-          
-          // 打开悬浮窗
-          floatingOverlay.classList.add('open');
-        });
+          }).join('');
+        }
+
+        popup.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 关闭弹窗
+      function closeMiraclePopup() {
+        if (!popup) return;
+        popup.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // 为卡片绑定点击事件（使用事件委托）
+      document.querySelector('.miracle-card-grid').addEventListener('click', function(e) {
+        var card = e.target.closest('.miracle-card');
+        if (card) {
+          var month = card.dataset.month;
+          openMiraclePopup(month);
+        }
       });
 
       // 关闭按钮
-      if (floatingClose) {
-        floatingClose.addEventListener('click', function() {
-          floatingOverlay.classList.remove('open');
-        });
+      if (popupClose) {
+        popupClose.addEventListener('click', closeMiraclePopup);
       }
 
       // 点击背景关闭
-      floatingOverlay.addEventListener('click', function(e) {
-        if (e.target === this) {
-          this.classList.remove('open');
-        }
-      });
-
-      // 从悬浮窗点击图片打开大图
-      window.openModalFromFloating = function(imgUrl, date) {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        const dateBadge = document.getElementById('modalDateBadge');
-        
-        if (modalImg && modal) {
-          modalImg.src = imgUrl;
-          if (dateBadge) dateBadge.textContent = date || '';
-          modal.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
-      };
-
-      // 复用已有的图片预览 Modal 关闭逻辑
-      const modalClose = document.getElementById('modalCloseBtn');
-      if (modalClose) {
-        modalClose.addEventListener('click', function() {
-          document.getElementById('imageModal').classList.remove('open');
-          document.body.style.overflow = '';
+      if (popup) {
+        popup.addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeMiraclePopup();
+          }
         });
       }
 
       // ESC 键关闭
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          floatingOverlay.classList.remove('open');
-          document.getElementById('imageModal').classList.remove('open');
-          document.body.style.overflow = '';
+        if (e.key === 'Escape' && popup && popup.classList.contains('open')) {
+          closeMiraclePopup();
         }
       });
+
+      // 确保 previewImage 能正确显示日期
+      var originalPreviewImage = window.previewImage;
+      window.previewImage = function(src) {
+        var modal = document.getElementById('imageModal');
+        var modalImg = document.getElementById('modalImage');
+        var dateBadge = document.getElementById('modalDateBadge');
+        
+        if (modal && modalImg) {
+          modalImg.src = src;
+          
+          // 从 src 中提取日期（匹配 2026.07.27 格式）
+          var dateMatch = src.match(/(\d{4}\.\d{2}\.\d{2})/);
+          if (dateMatch && dateBadge) {
+            dateBadge.textContent = dateMatch[0];
+            dateBadge.style.display = 'block';
+          } else if (dateBadge) {
+            dateBadge.style.display = 'none';
+          }
+          
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          
+          // 隐藏导航按钮
+          var prevBtn = document.getElementById('modalPrev');
+          var nextBtn = document.getElementById('modalNext');
+          var dots = document.getElementById('modalDots');
+          if (prevBtn) prevBtn.style.display = 'none';
+          if (nextBtn) nextBtn.style.display = 'none';
+          if (dots) dots.innerHTML = '';
+        }
+      };
     })();
-
-    // 图片预览函数（用于弹窗内图片点击放大）
-    function previewImage(src) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      if (modal && modalImg) {
-        modalImg.src = src;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        // 隐藏导航按钮和dots（因为不是多图）
-        document.getElementById('modalPrev').style.display = 'none';
-        document.getElementById('modalNext').style.display = 'none';
-        document.getElementById('modalDots').innerHTML = '';
-      }
-    }
-
     // 重写 imageModal 的关闭，恢复导航按钮显示
     const originalCloseModal = closeModal;
     closeModal = function() {
