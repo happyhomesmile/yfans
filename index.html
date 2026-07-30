@@ -2558,21 +2558,23 @@
       <!-- ===== 饭言饭语 ===== -->
       <div class="page-box" id="contact">
         <div class="fancam-wrap">
-          <div class="info-box" style="padding:18px 22px;">
+        <div class="info-box" style="padding:18px 22px;">
+          
+          <div class="platform-nav" id="contactNav">
+            <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
+            <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
+            <button class="platform-nav-item" data-category="words">💬 饭所言</button>
+          </div>
             
-            <!-- 三个分类导航 -->
-            <div class="platform-nav" id="contactNav">
-              <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
-              <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
-              <button class="platform-nav-item" data-category="words">💬 饭所言</button>
-            </div>
-      
-            <!-- 子分类标签 -->
-            <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
-              <span class="category-tab active" data-sub="water">一天八杯水</span>
-              <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
-              <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
-            </div>
+        <!-- 子分类标签 -->
+        <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
+          <span class="category-tab active" data-sub="water">一天八杯水</span>
+          <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
+          <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
+          <span class="category-tab" data-sub="miracle" style="display:none;">🍚 奇迹饭饭</span>
+          <span class="category-tab" data-sub="postcard" style="display:none;">📮 饭之明信片</span>
+          <span class="category-tab" data-sub="daily" style="display:none;">📷 日常饭</span>
+        </div>
       
             <!-- ===== 内容区 ===== -->
             <div id="contactFeed">
@@ -2837,9 +2839,9 @@
                   
                 </div>
               </div>
-      
-              <!-- ====== 旅行椰饭 ====== -->
-              <div class="contact-card" data-category="travel" data-sub="all">
+              
+              <!-- ====== 旅行椰饭 - 奇迹饭饭 ====== -->
+              <div class="contact-card" data-category="travel" data-sub="miracle">
                 <div class="miracle-card-grid">
                   <!-- 卡片1：2026年7月 -->
                   <div class="miracle-card" data-month="2026-07">
@@ -2849,7 +2851,7 @@
                     </div>
                     <div class="card-footer">2026.07</div>
                   </div>
-
+              
                   <!-- 卡片2：2026年6月（占位示例） -->
                   <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
@@ -2857,7 +2859,7 @@
                     </div>
                     <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
                   </div>
-
+              
                   <!-- 卡片3：2026年5月（占位示例） -->
                   <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
@@ -2865,7 +2867,7 @@
                     </div>
                     <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
                   </div>
-
+              
                   <!-- 卡片4：2026年4月（占位示例） -->
                   <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
                     <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
@@ -2874,7 +2876,7 @@
                     <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
                   </div>
                 </div>
-
+              
                 <!-- ===== 悬浮窗 ===== -->
                 <div class="floating-overlay" id="floatingOverlay">
                   <div class="floating-box">
@@ -2883,7 +2885,7 @@
                     <div class="floating-grid" id="floatingGrid"></div>
                   </div>
                 </div>
-
+              
                 <!-- ===== 大图预览 Modal ===== -->
                 <div class="image-modal" id="imageModal">
                   <div class="modal-close-btn" id="modalCloseBtn">✕</div>
@@ -2894,11 +2896,21 @@
                   <div class="modal-close-hint">点击空白处关闭 · 左右滑动切换</div>
                 </div>
               </div>
-
-<!-- ====== 饭所言 ====== -->
-<div class="contact-card" data-category="words" data-sub="all">
-  <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
-</div>
+              
+              <!-- ====== 旅行椰饭 - 饭之明信片 ====== -->
+              <div class="contact-card" data-category="travel" data-sub="postcard" style="display:none;">
+                <div class="empty-state">📮 饭之明信片 · 内容待更新</div>
+              </div>
+              
+              <!-- ====== 旅行椰饭 - 日常饭 ====== -->
+              <div class="contact-card" data-category="travel" data-sub="daily" style="display:none;">
+                <div class="empty-state">📷 日常饭 · 内容待更新</div>
+              </div>
+              
+              <!-- ====== 饭所言 ====== -->
+              <div class="contact-card" data-category="words" data-sub="all">
+                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+              </div>
       
               <!-- ===== 弹窗 - 伯牙绝弦 ===== -->
               <div class="popup-overlay" id="popupOverlay">
@@ -3725,8 +3737,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
-
+                </div>  
+              </div>     
+            </div>      
+          </div>         
   
       <!-- 那年今日 -->
       <div class="page-box" id="today">
@@ -3855,74 +3869,74 @@
     // ===== 舞台数据 =====
     const unitData = [
       // ===== 不空因果 =====
-      { date: '2026.07.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV15v3y67EJn/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
-      { date: '2026.07.24', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
-      { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kEKy/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-      { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rE7X/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-      { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kE3j/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-      { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEAz/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-      { date: '2026.07.04', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
-      { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEMT/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-      { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEzd/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
+      { date: '2026.07.24', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
+      { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.04', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
+      { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
     
       // ===== 等价交换 =====
-      { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEii/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
     
       // ===== High Light =====
-      { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEho/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
     
       // ===== 浅呼吸（Axis Kiss） =====
-      { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg' },
-      { date: '2026.04.05', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg' },
-      { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg' },
-      { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg' },
+      { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg' },
+      { date: '2026.04.05', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg' },
+      { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg' },
+      { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg' },
     
       // ===== 再见制服 =====
-      { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
     ];
     const specialData = [
-      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg' },
-      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.jpg' },
-      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.jpg' },
-      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225558911.jpg' },
-      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg' },
-      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg' },
-      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg' },
-      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg' },
-      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.jpg' },
-      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg' },
-      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg' }
+      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg' },
+      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.jpg' },
+      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.jpg' },
+      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225558911.jpg' },
+      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg' },
+      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg' },
+      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg' },
+      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg' },
+      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.jpg' },
+      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg' },
+      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg' }
     ];
     const assistData = [
-      { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg' },
-      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg' },
-      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg' },
-      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg' },
-      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png' },
-      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg' },
-      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg' },
-      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg' },
-      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/ ', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg' }
+      { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg' },
+      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg' },
+      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg' },
+      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg' },
+      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png' },
+      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg' },
+      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg' },
+      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg' },
+      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg' }
     ];
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
@@ -4993,309 +5007,302 @@
 
     setTimeout(updateTimelineHighlight, 300);
 
-// ===== 饭言饭语切换 =====
-(function() {
-  // 保存状态
-  let savedCategory = 'food';
-  let savedSub = 'water';
-  
-  const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
-  const tabs = document.querySelectorAll('#contactTabs .category-tab');
-
-  function applyContactState(category, sub) {
-    // 恢复分类导航
-    navBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.category === category);
-    });
-    // 恢复子分类标签显示
-    tabs.forEach(tab => {
-      if (category === 'food') {
-        tab.style.display = '';
-      } else {
-        tab.style.display = 'none';
-      }
-    });
-    // 恢复子分类激活状态
-    tabs.forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.sub === sub);
-    });
-    // 执行筛选
-    filterContact(category, sub);
-  }
-
-  function filterContact(category, sub) {
-    const cards = document.querySelectorAll('#contactFeed .contact-card');
-    cards.forEach(card => {
-      const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
-      card.style.display = match ? '' : 'none';
-    });
-  }
-
-      // 初始化
-      tabs.forEach(tab => {
-        tab.style.display = '';
-      });
-      tabs.forEach(t => t.classList.remove('active'));
-      tabs[0].classList.add('active');
-    
-      navBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const category = this.dataset.category;
-          savedCategory = category;
-          // 更新导航按钮状态
-          navBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          
+      // ===== 饭言饭语切换 =====
+      (function() {
+        // 保存状态
+        let savedCategory = 'food';
+        let savedSub = 'water';
+        
+        const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
+        const tabs = document.querySelectorAll('#contactTabs .category-tab');
+      
+        function applyContactState(category, sub) {
+          // 恢复分类导航
+          navBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.category === category);
+          });
+          // 恢复子分类标签显示
+          tabs.forEach(tab => {
+            tab.style.display = 'none';
+          });
           if (category === 'food') {
             tabs.forEach(tab => {
-              if (tab.dataset.sub !== 'all') {
+              if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
                 tab.style.display = '';
               }
             });
-            // 默认选中第一个非all的子分类
-            let firstTab = document.querySelector('#contactTabs .category-tab:not([data-sub="all"])');
-            if (firstTab) {
-              savedSub = firstTab.dataset.sub;
-              tabs.forEach(t => t.classList.remove('active'));
-              firstTab.classList.add('active');
-            }
-          } else {
+          } else if (category === 'travel') {
             tabs.forEach(tab => {
-              if (tab.dataset.sub !== 'all') {
-                tab.style.display = 'none';
+              if (tab.dataset.sub === 'miracle' || tab.dataset.sub === 'postcard' || tab.dataset.sub === 'daily') {
+                tab.style.display = '';
               }
             });
-            // 选中 all
-            tabs.forEach(t => t.classList.remove('active'));
-            const allTab = document.querySelector('#contactTabs .category-tab[data-sub="all"]');
-            if (allTab) {
-              allTab.classList.add('active');
-              savedSub = 'all';
-            }
+          } else if (category === 'words') {
+            tabs.forEach(tab => {
+              if (tab.dataset.sub === 'all') {
+                tab.style.display = '';
+              }
+            });
           }
-          filterContact(savedCategory, savedSub);
+          // 恢复子分类激活状态
+          tabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.sub === sub);
+          });
+          // 执行筛选
+          filterContact(category, sub);
+        }
+      
+        function filterContact(category, sub) {
+          const cards = document.querySelectorAll('#contactFeed .contact-card');
+          cards.forEach(card => {
+            const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
+            card.style.display = match ? '' : 'none';
+          });
+        }
+      
+        // 初始化
+        tabs.forEach(tab => {
+          if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
+            tab.style.display = '';
+          } else {
+            tab.style.display = 'none';
+          }
         });
-      });
-    
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // 更新子分类激活状态
-          tabs.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          savedSub = this.dataset.sub;
+        tabs.forEach(t => t.classList.remove('active'));
+        tabs[0].classList.add('active');
           
-          // 确保导航按钮也保持正确的激活状态
-          // 如果当前子分类是 all，且属于 travel 或 words，导航按钮已经是正确的
-          // 如果当前是 food 分类下的子分类，确保饭食饭按钮高亮
-          if (savedCategory === 'food') {
+        navBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const category = this.dataset.category;
+            savedCategory = category;
+            // 更新导航按钮状态
             navBtns.forEach(b => b.classList.remove('active'));
-            const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
-            if (foodBtn) foodBtn.classList.add('active');
-          }
+            this.classList.add('active');
+            
+            if (category === 'food') {
+              tabs.forEach(tab => {
+                if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
+                  tab.style.display = '';
+                } else {
+                  tab.style.display = 'none';
+                }
+              });
+              // 默认选中第一个子分类
+              let firstTab = document.querySelector('#contactTabs .category-tab[data-sub="water"]');
+              if (firstTab) {
+                savedSub = 'water';
+                tabs.forEach(t => t.classList.remove('active'));
+                firstTab.classList.add('active');
+              }
+            } else if (category === 'travel') {
+              tabs.forEach(tab => {
+                if (tab.dataset.sub === 'miracle' || tab.dataset.sub === 'postcard' || tab.dataset.sub === 'daily') {
+                  tab.style.display = '';
+                } else {
+                  tab.style.display = 'none';
+                }
+              });
+              // 默认选中 miracle
+              let firstTab = document.querySelector('#contactTabs .category-tab[data-sub="miracle"]');
+              if (firstTab) {
+                savedSub = 'miracle';
+                tabs.forEach(t => t.classList.remove('active'));
+                firstTab.classList.add('active');
+              }
+            } else if (category === 'words') {
+              tabs.forEach(tab => {
+                if (tab.dataset.sub === 'all') {
+                  tab.style.display = '';
+                } else {
+                  tab.style.display = 'none';
+                }
+              });
+              tabs.forEach(t => t.classList.remove('active'));
+              const allTab = document.querySelector('#contactTabs .category-tab[data-sub="all"]');
+              if (allTab) {
+                allTab.classList.add('active');
+                savedSub = 'all';
+              }
+            }
+            filterContact(savedCategory, savedSub);
+          });
+        });
           
-          filterContact(savedCategory, savedSub);
+        tabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+            // 更新子分类激活状态
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            savedSub = this.dataset.sub;
+            
+            // 确保导航按钮也保持正确的激活状态
+            if (savedCategory === 'food') {
+              navBtns.forEach(b => b.classList.remove('active'));
+              const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
+              if (foodBtn) foodBtn.classList.add('active');
+            } else if (savedCategory === 'travel') {
+              navBtns.forEach(b => b.classList.remove('active'));
+              const travelBtn = document.querySelector('#contactNav .platform-nav-item[data-category="travel"]');
+              if (travelBtn) travelBtn.classList.add('active');
+            } else if (savedCategory === 'words') {
+              navBtns.forEach(b => b.classList.remove('active'));
+              const wordsBtn = document.querySelector('#contactNav .platform-nav-item[data-category="words"]');
+              if (wordsBtn) wordsBtn.classList.add('active');
+            }
+            
+            filterContact(savedCategory, savedSub);
+          });
+        });
+          
+        // 暴露恢复函数，供页面切换时调用
+        window.restoreContactState = function() {
+          applyContactState(savedCategory, savedSub);
+        };
+          
+        // 初始执行
+        filterContact('food', 'water');
+      })();
+
+      // ===== 饭言饭语弹窗控制 =====
+      document.addEventListener('DOMContentLoaded', function() {
+        // 为所有带有 data-target 属性的元素添加点击事件
+        const clickableItems = document.querySelectorAll('[data-target]');
+        
+        clickableItems.forEach(item => {
+          item.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('data-target');
+            const popup = document.getElementById(targetId);
+            
+            if (popup) {
+              // 关闭所有已打开的弹窗
+              document.querySelectorAll('.popup-overlay.open').forEach(p => {
+                p.classList.remove('open');
+              });
+              
+              // 打开目标弹窗
+              popup.classList.add('open');
+            }
+          });
+        });
+        
+        // 为所有弹窗的关闭按钮添加点击事件
+        document.querySelectorAll('.popup-close').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const popup = this.closest('.popup-overlay');
+            if (popup) {
+              popup.classList.remove('open');
+            }
+          });
+        });
+        
+        // 点击弹窗背景关闭弹窗
+        document.querySelectorAll('.popup-overlay').forEach(overlay => {
+          overlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+              this.classList.remove('open');
+            }
+          });
         });
       });
-    
-      // 暴露恢复函数，供页面切换时调用
-      window.restoreContactState = function() {
-        applyContactState(savedCategory, savedSub);
-      };
-    
-      // 初始执行
-      filterContact('food', 'water');
-    })();
-    
-    // ===== 一键绑定所有弹窗（事件委托） =====
-    document.addEventListener('click', function(e) {
-      // 点击触发器打开弹窗
-      const trigger = e.target.closest('[data-target]');
-      if (trigger) {
-        const overlay = document.getElementById(trigger.dataset.target);
-        if (overlay) {
-          overlay.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
-        return;
-      }
-      
-      // 点击关闭按钮
-      const closeBtn = e.target.closest('.popup-close');
-      if (closeBtn) {
-        const overlay = closeBtn.closest('.popup-overlay');
-        if (overlay) {
-          overlay.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-        return;
-      }
-      
-      // 点击背景关闭
-      if (e.target.classList.contains('popup-overlay')) {
-        e.target.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-    
-    // ESC 键关闭
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        const openOverlay = document.querySelector('.popup-overlay.open');
-        if (openOverlay) {
-          openOverlay.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-      }
-    });
 
-    // 单图预览（无左右滑动）
-    function previewImage(imgUrl) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      const modalDots = document.getElementById('modalDots');
-      const prevBtn = document.getElementById('modalPrev');
-      const nextBtn = document.getElementById('modalNext');
-      
-      modalImg.src = imgUrl;
-      modalDots.innerHTML = '';
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-      
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+      // ===== 旅行椰饭 · 悬浮窗控制 =====
+      (function() {
+        const floatingOverlay = document.getElementById('floatingOverlay');
+        const floatingGrid = document.getElementById('floatingGrid');
+        const floatingTitle = document.getElementById('floatingTitle');
+        const floatingClose = document.getElementById('floatingClose');
 
-    // ===== 旅行椰饭 · 奇迹饭饭 =====
-    (function() {
-      const monthData = {
+        // 图片数据映射（按月份）
+        const monthImages = {
         '2026-07': [
           { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
           { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.jpg' },
           { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' }
-        ]
-        // 后续月份数据可继续添加
-        // '2026-06': [...]
-      };
+          ],
+          '2026-06': [
+            // 6月的图片数据
+          ],
+          // 添加其他月份...
+        };
 
-      const overlay = document.getElementById('floatingOverlay');
-      const closeBtn = document.getElementById('floatingClose');
-      const grid = document.getElementById('floatingGrid');
-      const title = document.getElementById('floatingTitle');
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      const modalDate = document.getElementById('modalDateBadge');
-      const modalClose = document.getElementById('modalCloseBtn');
+        // 为所有 miracle-card 添加点击事件
+        document.querySelectorAll('.miracle-card').forEach(card => {
+          card.addEventListener('click', function() {
+            const month = this.dataset.month;
+            const images = monthImages[month] || [];
+            
+            if (images.length === 0) {
+              // 如果没有图片数据，显示占位信息
+              floatingGrid.innerHTML = `
+                <div style="grid-column:1/-1;text-align:center;padding:30px 0;color:#7a9ab0;font-size:14px;">
+                  📸 暂无图片，敬请期待
+                </div>
+              `;
+            } else {
+              // 渲染图片网格
+              floatingGrid.innerHTML = images.map(img => `
+                <div class="floating-item" onclick="openModalFromFloating('${img.url}', '${img.date}')">
+                  <img src="${img.url}" alt="${img.date}" loading="lazy" />
+                  <div class="item-date">${img.date}</div>
+                </div>
+              `).join('');
+            }
+            
+            // 更新标题
+            const monthName = month.replace('-', '年') + '月';
+            floatingTitle.textContent = `🍚 旅行椰饭 · ${monthName}`;
+            
+            // 打开悬浮窗
+            floatingOverlay.classList.add('open');
+          });
+        });
 
-      let currentImages = [];
-      let currentModalIndex = 0;
-
-      function renderFloatingGrid(month) {
-        const images = monthData[month] || [];
-        currentImages = images;
-        grid.innerHTML = '';
-        
-        if (images.length === 0) {
-          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#7a9ab0;">暂无图片</div>';
-          return;
+        // 关闭按钮
+        if (floatingClose) {
+          floatingClose.addEventListener('click', function() {
+            floatingOverlay.classList.remove('open');
+          });
         }
 
-        images.forEach((item, index) => {
-          const div = document.createElement('div');
-          div.className = 'floating-item';
-          div.innerHTML = `
-            <img src="${item.url}" alt="${item.date}" loading="lazy" />
-            <div class="item-date">${item.date}</div>
-          `;
-          div.addEventListener('click', () => openImageModal(index));
-          grid.appendChild(div);
-        });
-      }
-
-      function openFloating(month) {
-        const monthNames = { '2026-07': '2026年7月', '2026-06': '2026年6月', '2026-05': '2026年5月', '2026-04': '2026年4月' };
-        title.textContent = `🍚 旅行椰饭 · ${monthNames[month] || month}`;
-        renderFloatingGrid(month);
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeFloating() {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      function openImageModal(index) {
-        if (!currentImages.length) return;
-        currentModalIndex = index;
-        updateModal();
-        modal.classList.add('open');
-      }
-
-      function updateModal() {
-        const item = currentImages[currentModalIndex];
-        if (!item) return;
-        modalImg.src = item.url;
-        modalDate.textContent = item.date;
-      }
-
-      function closeImageModal() {
-        modal.classList.remove('open');
-      }
-
-      function goPrev() {
-        if (currentImages.length <= 1) return;
-        currentModalIndex = (currentModalIndex - 1 + currentImages.length) % currentImages.length;
-        updateModal();
-      }
-
-      function goNext() {
-        if (currentImages.length <= 1) return;
-        currentModalIndex = (currentModalIndex + 1) % currentImages.length;
-        updateModal();
-      }
-
-      // 卡片点击
-      document.querySelectorAll('.miracle-card[data-month]').forEach(card => {
-        card.addEventListener('click', function() {
-          const month = this.dataset.month;
-          if (monthData[month] && monthData[month].length > 0) {
-            openFloating(month);
+        // 点击背景关闭
+        floatingOverlay.addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.classList.remove('open');
           }
         });
-      });
 
-      closeBtn.addEventListener('click', closeFloating);
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeFloating();
-      });
+        // 从悬浮窗点击图片打开大图
+        window.openModalFromFloating = function(imgUrl, date) {
+          const modal = document.getElementById('imageModal');
+          const modalImg = document.getElementById('modalImage');
+          const dateBadge = document.getElementById('modalDateBadge');
+          
+          if (modalImg && modal) {
+            modalImg.src = imgUrl;
+            if (dateBadge) dateBadge.textContent = date || '';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+        };
 
-      modalClose.addEventListener('click', closeImageModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeImageModal();
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (modal.classList.contains('open')) {
-          if (e.key === 'Escape') closeImageModal();
-          else if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
-          else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+        // 复用已有的图片预览 Modal 关闭逻辑
+        const modalClose = document.getElementById('modalCloseBtn');
+        if (modalClose) {
+          modalClose.addEventListener('click', function() {
+            document.getElementById('imageModal').classList.remove('open');
+            document.body.style.overflow = '';
+          });
         }
-        if (overlay.classList.contains('open') && e.key === 'Escape') {
-          closeFloating();
-        }
-      });
 
-      let touchStart = 0;
-      modal.addEventListener('touchstart', (e) => {
-        touchStart = e.changedTouches[0].screenX;
-      }, { passive: true });
-      modal.addEventListener('touchend', (e) => {
-        const diff = touchStart - e.changedTouches[0].screenX;
-        if (Math.abs(diff) > 40) {
-          diff > 0 ? goNext() : goPrev();
-        }
-      }, { passive: true });
-    })();
+        // ESC 键关闭
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            floatingOverlay.classList.remove('open');
+            document.getElementById('imageModal').classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+      })();
   </script>
 
 </body>
