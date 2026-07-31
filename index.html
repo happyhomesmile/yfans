@@ -1209,7 +1209,7 @@
             </div>
       
             <!-- ====== 7.05 抖音 ====== -->
-            <div class="weibo-card" data-platform="douyin" data-month="2026-07" data-day="12" >
+            <div class="weibo-card" data-platform="douyin" data-month="2026-07" data-day="05" >
               <div class="weibo-time">
                 <span class="platform-tag douyin">抖音</span>
                 <span style="display:inline-block;background:#8b5cf6;color:#fff;padding:0 12px;border-radius:12px;font-size:0.65rem;font-weight:600;line-height:22px;margin-right:6px;">视频</span>
@@ -2513,9 +2513,9 @@
           <span class="category-tab active" data-sub="water">一天八杯水</span>
           <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
           <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
-          <span class="category-tab" data-sub="miracle" style="display:none;">🍚 奇迹饭饭</span>
-          <span class="category-tab" data-sub="postcard" style="display:none;">📮 饭之明信片</span>
-          <span class="category-tab" data-sub="daily" style="display:none;">📷 日常饭</span>
+          <span class="category-tab" data-sub="miracle" style="display:none;">奇迹饭饭</span>
+          <span class="category-tab" data-sub="postcard" style="display:none;"> 饭之明信片</span>
+          <span class="category-tab" data-sub="daily" style="display:none;">日常饭</span>
         </div>
       
             <!-- ===== 内容区 ===== -->
@@ -2822,12 +2822,12 @@
               
               <!-- ====== 旅行椰饭 - 饭之明信片 ====== -->
               <div class="contact-card" data-category="travel" data-sub="postcard" style="display:none;">
-                <div class="empty-state">📮 饭之明信片 · 内容待更新</div>
+                <div class="empty-state">饭之明信片 · 内容待更新</div>
               </div>
               
               <!-- ====== 旅行椰饭 - 日常饭 ====== -->
               <div class="contact-card" data-category="travel" data-sub="daily" style="display:none;">
-                <div class="empty-state">📷 日常饭 · 内容待更新</div>
+                <div class="empty-state">日常饭 · 内容待更新</div>
               </div>
               
               <!-- ====== 饭所言 ====== -->
@@ -2844,7 +2844,7 @@
       <div class="page-box" id="today">
         <div class="info-box">
           <div class="info-title"><span class="deco">✦</span> 那年今日</div>
-          <div class="empty-state">📅 内容待更新</div>
+          <div class="empty-state">内容待更新</div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -2853,7 +2853,7 @@
       <div class="page-box" id="birth">
         <div class="info-box">
           <div class="info-title"><span class="deco">✦</span> 饭之诞</div>
-          <div class="empty-state">🎂 内容待更新</div>
+          <div class="empty-state">内容待更新</div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -4571,6 +4571,27 @@
           }
         });
       }
+      const feedWrap = document.getElementById('weiboFeed');
+      // 只选择卡片，排除 .footer-slogan
+      const visibleCards = Array.from(feedWrap.querySelectorAll('.weibo-card:not(.pinned), .xiaohongshu-card:not(.pinned)'))
+        .filter(card => card.style.display !== 'none');
+
+      visibleCards.sort((a, b) => {
+        const dateA = a.dataset.month + '-' + a.dataset.day.padStart(2, '0');
+        const dateB = b.dataset.month + '-' + b.dataset.day.padStart(2, '0');
+        return dateB.localeCompare(dateA);
+      });
+
+      // 重新插入排序后的卡片
+      visibleCards.forEach(card => {
+        feedWrap.appendChild(card);
+      });
+
+      // 确保 footer-slogan 在最后
+      const footer = feedWrap.querySelector('.footer-slogan');
+      if (footer) {
+        feedWrap.appendChild(footer);
+      }
       setTimeout(updateTimelineHighlight, 50);
     }
 
@@ -5138,6 +5159,7 @@
       // 图片数据
       const monthImages = {
         '2026-07': [
+          { date: '2026.07.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731123249578.jpg' },
           { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
           { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.jpg' },
           { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' }
@@ -5158,12 +5180,12 @@
         if (!popup) return;
         const images = monthImages[month] || [];
         const monthName = month.replace('-', '年') + '月';
-        popupTitle.textContent = monthName + ' · 旅行椰饭';
+        popupTitle.textContent = monthName ;
 
         if (images.length === 0) {
           popupGrid.innerHTML = `
             <div style="text-align:center; padding:40px 0; color:#7a9ab0; font-size:14px;">
-              📸 暂无图片，敬请期待
+              📸
             </div>
           `;
         } else {
