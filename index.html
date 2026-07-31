@@ -11,20 +11,6 @@
     html, body { width: 100%; min-height: 100vh; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f0f7fe; scroll-behavior: smooth; }
     body { background: linear-gradient(145deg, #eaf3fa 0%, #d4e6f5 100%); }
 
-    /* ===== 加载页 ===== */
-    .loading-page {
-      width: 100vw; height: 100vh; position: fixed; top: 0; left: 0;
-      background: linear-gradient(135deg, #e6f4ff 0%, #b8e0ff 50%, #ffffff 100%);
-      display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999;
-      transition: opacity 0.5s ease;
-    }
-    .loading-page.hide { opacity: 0; pointer-events: none; }
-    .rice-emoji { font-size: 56px; margin-bottom: 6px; }
-    .title-text { color: #1f5a8a; font-size: 32px; font-weight: 600; letter-spacing: 2px; }
-    .load-box { margin-top: 24px; width: 240px; height: 6px; background: rgba(36,104,168,0.15); border-radius: 99px; overflow: hidden; }
-    .progress-bar { height: 100%; width: 0; background: linear-gradient(90deg,#4299e1,#1f5a8a); border-radius: 99px; animation: fastLoad 0.6s ease-out forwards; }
-    @keyframes fastLoad { 0% { width: 0; } 100% { width: 100%; } }
-
     /* ===== 主布局 ===== */
     .main-page { display: flex; width: 100vw; min-height: 100vh; background: transparent; }
 
@@ -916,13 +902,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ===== 加载页 ===== -->
-  <div class="loading-page" id="loading">
-    <div class="rice-emoji">🍚</div>
-    <div class="title-text">欢迎使用椰饭饲养指南</div>
-    <div class="load-box"><div class="progress-bar"></div></div>
-  </div>
 
   <!-- ===== 大图预览 Modal ===== -->
   <div class="image-modal" id="imageModal">
@@ -3735,9 +3714,7 @@
     </div>
   </div>
   <script>
-    // ===== 加载动画 =====
-    setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
-
+    
     // ===== 返回顶部按钮 =====
     const backBtn = document.getElementById('backToTop');
     const contentArea = document.querySelector('.content-area');
