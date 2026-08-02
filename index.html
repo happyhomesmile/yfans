@@ -4169,7 +4169,8 @@
       container.style.boxShadow = '0 20px 60px rgba(26,74,111,0.3)';
       container.style.zIndex = '9999';
       
-      let currentMonth = 1;
+      const today = new Date();
+      let currentMonth = today.getMonth(); 
       const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
       
       function renderMonth(monthIndex) {
