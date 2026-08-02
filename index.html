@@ -1126,11 +1126,11 @@
                 2026-08-01 · 发布于 上海
               </div>
               <div class="weibo-text"><span class="line">#后置闪光灯</span></div>
-              <a href="https://www.xiaohongshu.com/discovery/item/6a6d0d27000000003302d176?source=webshare&xhsshare=pc_web&xsec_token=ABhj0b4kRZfvL2RQjy1-c35PHG9KrGL09ZaEnGKuNIT7o=&xsec_source=pc_share">🔗 点击跳转查看原文</a>
+              <a href="https://www.xiaohongshu.com/discovery/item/6a6d0d27000000003302d176?source=webshare&xhsshare=pc_web&xsec_token=ABhj0b4kRZfvL2RQjy1-c35PHG9KrGL09ZaEnGKuNIT7o=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
               <div class="weibo-media-grid cols-3">
                 <div class="media-item" onclick="openModalWithImages('xhs_slider12', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111525767.jpg" alt="配图1" loading="lazy" /></div>
                 <div class="media-item" onclick="openModalWithImages('xhs_slider12', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('xhs_slider12', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpgg" alt="配图3" loading="lazy" /></div>
+                <div class="media-item" onclick="openModalWithImages('xhs_slider12', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpg" alt="配图3" loading="lazy" /></div>
               </div>
             </div>
             
@@ -2500,13 +2500,37 @@
 
       <!-- ==================== 饭之啵 ==================== -->
       <div class="page-box" id="bobo">
-        <div class="info-box">
-          <div class="info-title"><span class="deco">✦</span> 饭之啵</div>
-          <div class="empty-state">📹 内容待更新</div>
+        <div class="info-box stage-wrap">
+          <!-- 分类导航 -->
+          <div class="stage-nav" id="boboNav">
+            <button class="stage-nav-item active" data-category="all">全部</button>
+            <button class="stage-nav-item" data-category="single">单播</button>
+            <button class="stage-nav-item" data-category="special">特殊直播</button>
+          </div>
+
+          <!-- 搜索栏 -->
+          <div class="filter-search-row">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="boboSearch" placeholder="搜索内容 / 日期..." />
+            </div>
+          </div>
+
+          <!-- 月份分类标签 -->
+          <div class="filter-tabs-row" id="boboTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
+            <button class="month-nav-btn" id="boboMonthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
+            <div id="boboMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
+              <div id="boboMonthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;"></div>
+            </div>
+            <button class="month-nav-btn" id="boboMonthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
+          </div>
+
+          <!-- 视频卡片网格 -->
+          <div class="stage-grid" id="boboGrid"></div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
-
+      
       <!-- ===== 饭言饭语 ===== -->
       <div class="page-box" id="contact">
         <div class="fancam-wrap">
@@ -5318,6 +5342,157 @@
         closeModal();
       }
     });
+
+    // ---- 饭之啵数据 ----
+    const boboData = [
+      { date: '2026.07.25', title: '冲并冲', category: 'single', url: 'https://www.bilibili.com/video/BV1jZ346BEfx/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.26', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1jE346NEeB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.29', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1oZ346qEUn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.29', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1sA346jEF1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' }
+    ];
+    
+    let currentBoboCategory = 'all';
+    
+    // 获取月份列表
+    function getBoboMonthList(category) {
+      let data = [];
+      if (category === 'all') data = boboData;
+      else data = boboData.filter(item => item.category === category);
+      const set = new Set();
+      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
+      return Array.from(set).sort((a,b) => b.localeCompare(a));
+    }
+    
+    // 获取分类数据
+    function getBoboDataByCategory(category) {
+      if (category === 'all') return boboData;
+      return boboData.filter(item => item.category === category);
+    }
+    
+    // 渲染卡片
+    const boboGrid = document.getElementById('boboGrid');
+    function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
+      const data = getBoboDataByCategory(category);
+      const filtered = data.filter(item => {
+        const month = item.date ? item.date.slice(0,7) : '';
+        const matchMonth = filterMonth === '全部' || month === filterMonth;
+        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
+        return matchMonth && matchKey;
+      });
+      if (filtered.length === 0) {
+        boboGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
+        return;
+      }
+      let html = '';
+      for (const item of filtered) {
+        // 根据分类决定标签颜色
+        let tagColor = '#4299e1';
+        let tagText = '单播';
+        if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
+        else if (item.category === 'special') { tagColor = '#e67e22'; tagText = '特殊直播'; }
+        
+        let coverHtml = '';
+        if (item.cover) {
+          coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+        } else {
+          coverHtml = `
+            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
+              <div class="video-icon">🎬</div>
+              <div class="video-tip" style="color:#fff;">暂无封面</div>
+            </div>
+          `;
+        }
+        html += `
+          <div class="video-card" data-url="${item.url}" data-title="${item.title}">
+            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            <div class="video-cover-box" onclick="window.open('${item.url || '#'}','_blank')">
+              ${coverHtml}
+              <div class="play-icon">▶</div>
+            </div>
+            <div class="video-title-bar">
+              <div class="video-name">${item.title}</div>
+              <div class="video-date">${item.date || ''}</div>
+            </div>
+          </div>
+        `;
+      }
+      boboGrid.innerHTML = html;
+    }
+    
+    // 渲染月份标签
+    function renderBoboTabs(category, activeMonth = '全部') {
+      const container = document.getElementById('boboMonthScrollInner');
+      if (!container) return;
+      const months = getBoboMonthList(category);
+      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
+      months.forEach(m => {
+        const active = activeMonth === m ? 'active' : '';
+        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
+      });
+      container.innerHTML = html;
+    
+      container.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const month = this.dataset.month;
+          const keyword = document.getElementById('boboSearch').value;
+          container.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          renderBoboCards(currentBoboCategory, month, keyword);
+        });
+      });
+    
+      // 左右滚动按钮
+      const prevBtn = document.getElementById('boboMonthPrev');
+      const nextBtn = document.getElementById('boboMonthNext');
+      const wrapper = document.getElementById('boboMonthScrollWrapper');
+      let scrollPosition = 0;
+      const step = 120;
+    
+      if (prevBtn && nextBtn && container && wrapper) {
+        scrollPosition = 0;
+        container.style.transform = 'translateX(0px)';
+        container.style.cursor = 'grab';
+        
+        prevBtn.onclick = function(e) {
+          e.stopPropagation();
+          scrollPosition = Math.min(scrollPosition + step, 0);
+          container.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+        
+        nextBtn.onclick = function(e) {
+          e.stopPropagation();
+          const maxScroll = -(container.scrollWidth - wrapper.clientWidth + 20);
+          scrollPosition = Math.max(scrollPosition - step, maxScroll);
+          container.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+      }
+    }
+    
+    // 分类导航切换
+    const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
+    boboNavItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        boboNavItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentBoboCategory = this.dataset.category;
+        document.getElementById('boboSearch').value = '';
+        renderBoboTabs(currentBoboCategory, '全部');
+        renderBoboCards(currentBoboCategory, '全部', '');
+      });
+    });
+    
+    // 搜索框监听
+    const boboSearchInput = document.getElementById('boboSearch');
+    boboSearchInput.addEventListener('input', function() {
+      const keyword = this.value;
+      const activeTab = document.querySelector('#boboMonthScrollInner .category-tab.active');
+      const month = activeTab ? activeTab.dataset.month : '全部';
+      renderBoboCards(currentBoboCategory, month, keyword);
+    });
+    
+    // 初始化
+    renderBoboTabs('all', '全部');
+    renderBoboCards('all', '全部', '');
   </script>
 
 </body>
