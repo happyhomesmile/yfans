@@ -183,11 +183,10 @@
       width: 14px; height: 14px; border-radius: 50%;
       background: #1f5a8a; border: 2px solid #b8e0ff;
       box-shadow: 0 0 0 2px rgba(36,104,168,0.08);
-      cursor: pointer;
+      cursor: default;
       transition: all 0.2s ease;
       z-index: 2;
     }
-    .timeline-item .timeline-dot:hover { transform: scale(1.2); background: #4299e1; box-shadow: 0 0 0 4px rgba(36,104,168,0.12); }
     .timeline-item .timeline-dot.no-link { cursor: default; background: #b8d4e8; }
     .timeline-item .timeline-dot.no-link:hover { transform: none; background: #b8d4e8; box-shadow: 0 0 0 2px rgba(36,104,168,0.08); }
     .timeline-date { font-size: 12px; color: #1f5a8a; font-weight: 600; }
@@ -564,7 +563,7 @@
     .popup-box {
       background: #ffffff;
       border-radius: 28px;
-      max-width: 380px;
+      max-width: 560px;
       width: 90%;
       max-height: 85vh;
       overflow-y: auto;
@@ -732,43 +731,43 @@
     .floating-overlay.open {
       display: flex;
     }
-#miraclePopupGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);  /* 每行5列 */
-  gap: 10px;
-  max-height: 50vh;
-  overflow-y: auto;
-  padding: 4px;
-}
-
-#miraclePopupGrid > div {
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #d4e6f5;
-  cursor: pointer;
-  position: relative;
-}
-
-#miraclePopupGrid > div img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-#miraclePopupGrid > div .date-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
-  color: #fff;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 16px 8px 6px;
-  text-align: center;
-}
+    #miraclePopupGrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      max-height: 60vh;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    
+    #miraclePopupGrid > div {
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #d4e6f5;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    #miraclePopupGrid > div img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    #miraclePopupGrid > div .date-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 16px 8px 6px;
+      text-align: center;
+    }
 
     /* ===== 大图预览 Modal ===== */
     .image-modal {
@@ -942,7 +941,7 @@
       <div class="menu-item" data-page="bobo"><span class="icon">📹</span> 饭之啵</div>
       <div class="menu-item" data-page="contact"><span class="icon">💬</span> 饭言饭语</div>
       <div class="menu-item" data-page="today"><span class="icon">📅</span> 那年今日</div>
-      <div class="menu-item" data-page="birth"><span class="icon">🎂</span> 饭之诞</div>
+
       <div class="menu-item" data-page="dream"><span class="icon">💪</span> 梦想汗水坚持</div>
       <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 关于本站</div>
     </div>
@@ -983,7 +982,11 @@
             </div>
             <div class="link-card" onclick="window.open('https://v.douyin.com/eHTaJ0FG-pU/','_blank')">
               <div class="info-label">抖音</div>
-              <div class="info-value"><span>🎵</span> 抖音</div>
+              <div class="info-value"><span>🎵</span> 抖音（大号）</div>
+            </div>
+            <div class="link-card" onclick="window.open('https://v.douyin.com/OymhX5fu7Go/','_blank')">
+              <div class="info-label">抖音</div>
+              <div class="info-value"><span>🎵</span> 抖音（小号）</div>
             </div>
             <div class="link-card" onclick="window.open('https://b23.tv/GBgXhm7','_blank')">
               <div class="info-label">B站</div>
@@ -1178,23 +1181,7 @@
               </div>
             </div>
       
-            <!-- ====== 7.16 微博 ====== -->
-            <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="16">
-              <div class="weibo-time">
-                <span class="platform-tag weibo">微博</span>
-                2026-07-16 01:23 · 发布于 上海
-              </div>
-              <div class="weibo-text"><span class="line">帮你一拳打跑所有烦恼</span><span class="line">不开心就看看我！</span></div>
-              <a href="https://weibo.com/7901094930/R8Rj4o1sG" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
-              <div class="weibo-media-grid cols-2">
-                <div class="media-item" onclick="openModalWithImages('slider2', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333947.jpg" alt="配图1" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333948.jpg" alt="配图2" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333949.jpg" alt="配图3" loading="lazy" /></div>
-                <div class="media-item" onclick="openModalWithImages('slider2', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721171333950.jpg" alt="配图4" loading="lazy" /></div>
-              </div>
-              <div class="weibo-comment-bottom"><span class="comment-label">评论</span><span>看到我就不许有烦恼啦</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:25 来自上海</span></div>
-              <div class="weibo-comment-bottom" style="margin-top:0.3rem; padding-top:0.3rem; border-top-color:rgba(184,224,255,0.1);"><span class="comment-label">评论</span><span>美图攻击！</span><span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-7-16 01:24 来自上海</span></div>
-            </div>
+
       
             <!-- ====== 7.14 微博 ====== -->
             <div class="weibo-card" data-platform="weibo" data-month="2026-07" data-day="14">
@@ -2532,361 +2519,130 @@
       </div>
       
       <!-- ===== 饭言饭语 ===== -->
-      <div class="page-box" id="contact">
-        <div class="fancam-wrap">
+    <div class="page-box" id="contact">
+      <div class="fancam-wrap">
         <div class="info-box" style="padding:18px 22px;">
-          
+    
           <div class="platform-nav" id="contactNav">
             <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
             <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
             <button class="platform-nav-item" data-category="words">💬 饭所言</button>
           </div>
-            
-        <!-- 子分类标签 -->
-        <div class="filter-tabs-row" id="contactTabs" style="justify-content:center;">
-          <span class="category-tab active" data-sub="water">一天八杯水</span>
-          <span class="category-tab" data-sub="sweet">生活需要加点甜</span>
-          <span class="category-tab" data-sub="steel">人是铁饭是钢</span>
-          <span class="category-tab" data-sub="miracle" style="display:none;">奇迹饭饭</span>
-          <span class="category-tab" data-sub="postcard" style="display:none;"> 饭之明信片</span>
-          <span class="category-tab" data-sub="daily" style="display:none;">日常饭</span>
-        </div>
-      
+
             <!-- ===== 内容区 ===== -->
             <div id="contactFeed">
-              
-              <!-- ====== 一天八杯水 ====== -->
-              <div class="contact-card" data-category="food" data-sub="water">
-                
-                <!-- 时间线 -->
-                <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
-                  <!-- 竖线 -->
-                  <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
-                  
+            <!-- ====== 饭食饭 ====== -->
+            <div class="contact-card" data-category="food" data-sub="water">
+              <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
+                <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
+    
                 <!-- 2026.07 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
                   <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
-                  
-                  <!-- 两个条目并排在一行 -->
                   <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    
-                    <!-- 07.24 伯牙绝弦 -->
-                    <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.24 伯牙绝弦
-                    </div>
-                    
-                    <!-- 07.16 西瓜冰柠茶霸王杯 -->
-                    <div data-target="popupOverlayTea" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.16 西瓜冰柠茶霸王杯
-                    </div>
-
-                    <!-- 07.05 幽兰拿铁 -->
-                    <div data-target="popupOverlayTea2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.05 幽兰拿铁
-                    </div>
-                    
+                    <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.24 伯牙绝弦</div>
+                    <div data-target="popupOverlayTea" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.16 西瓜冰柠茶霸王杯</div>
+                    <div data-target="popupOverlayTea2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.05 幽兰拿铁</div>
                   </div>
                 </div>
-                  
-                    <!-- 2026.06 -->
-                    <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                      <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                      <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
-                      <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                        <!-- 06.11 现煮绿豆木薯冰 -->
-                        <div data-target="popupOverlayMungBean" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          06.11 现煮绿豆木薯冰
-                        </div>
-                        <!-- 06.08 蒸馏饮用水 -->
-                        <div data-target="popupOverlayWater" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          06.08 蒸馏饮用水
-                        </div>
-                        <!-- 06.05 轻因·伯牙绝弦 -->
-                        <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          06.05 轻因·伯牙绝弦
-                        </div>
-                      </div>
-                    </div>
-                  
-                    <!-- 2026.05 -->
-                    <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                      <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                      <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
-                      <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                        <!-- 05.31 伯牙绝弦 -->
-                        <div data-target="popupOverlayMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.31 伯牙绝弦
-                        </div>
-                        <!-- 05.30 玫瑰20抹茶拿铁 -->
-                        <div data-target="popupOverlayRose" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.30 玫瑰20抹茶拿铁
-                        </div>
-                        <!-- 05.28 多肉芒芒 -->
-                        <div data-target="popupOverlayMango" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.28 多肉芒芒
-                        </div>
-                        <!-- 05.20 小黄油美式 -->
-                        <div data-target="popupOverlayButter" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.20 小黄油美式
-                        </div>
-                        <!-- 05.19 小黄油美式 -->
-                        <div data-target="popupOverlayButter2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.19 小黄油美式
-                        </div>
-                        <!-- 05.13 山竹荔枝冰茶 -->
-                        <div data-target="popupOverlayLychee" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.13 山竹荔枝冰茶
-                        </div>
-                        <!-- 05.03 轻因·伯牙绝弦 -->
-                        <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          05.03 轻因·伯牙绝弦
-                        </div>
-                      </div>
-                    </div>
-                  
-                    <!-- 2026.04 -->
-                    <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                      <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                      <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
-                      <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                        <!-- 04.25 伯牙绝弦 -->
-                        <div data-target="popupOverlayAprMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          04.25 伯牙绝弦
-                        </div>
-                        <!-- 04.19 冰摇红莓黑加仑 -->
-                        <div data-target="popupOverlayBerry" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                          04.19 冰摇红莓黑加仑
-                        </div>
-                      </div>
-                    </div>
-                  
-                </div>
-              </div>
-      
-              <!-- ====== 生活需要加点甜 ====== -->
-              <div class="contact-card" data-category="food" data-sub="sweet">
-                
-                <!-- 时间线 -->
-                <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
-                  <!-- 竖线 -->
-                  <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
-                  
-                <!-- 2026.07 -->
+    
+                <!-- 2026.06 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
-
+                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
                   <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    
-                    <!-- 07.24 蛋糕 -->
-                    <div data-target="popupOverlayCake" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.24 蛋糕
-                    </div>
-                    
-                    <!-- 07.22 菠萝包 -->
-                    <div data-target="popupOverlayBread" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.22 菠萝包
-                    </div>
-                    
-                    <!-- 07.15 雪糕 -->
-                    <div data-target="popupOverlayIce" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                      07.15 雪糕
-                    </div>
-                    
+                    <div data-target="popupOverlayMungBean" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.11 现煮绿豆木薯冰</div>
+                    <div data-target="popupOverlayWater" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.08 蒸馏饮用水</div>
+                    <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.05 轻因·伯牙绝弦</div>
                   </div>
                 </div>
-                  
-                  <!-- 2026.06 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 06.17 土凤梨酥 -->
-                      <div data-target="popupOverlayPineapple" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        06.17 土凤梨酥
-                      </div>
-                    </div>
+    
+                <!-- 2026.05 -->
+                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
+                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
+                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
+                    <div data-target="popupOverlayMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.31 伯牙绝弦</div>
+                    <div data-target="popupOverlayRose" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.30 玫瑰20抹茶拿铁</div>
+                    <div data-target="popupOverlayMango" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.28 多肉芒芒</div>
+                    <div data-target="popupOverlayButter" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.20 小黄油美式</div>
+                    <div data-target="popupOverlayButter2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.19 小黄油美式</div>
+                    <div data-target="popupOverlayLychee" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.13 山竹荔枝冰茶</div>
+                    <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.03 轻因·伯牙绝弦</div>
                   </div>
-                  
-                  <!-- 2026.05 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 05.11 坚果芒芒酸奶碗 -->
-                      <div data-target="popupOverlayYogurtBowl" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        05.11 坚果芒芒酸奶碗
-                      </div>
-                    </div>
+                </div>
+    
+                <!-- 2026.04 -->
+                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
+                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
+                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
+                    <div data-target="popupOverlayAprMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">04.25 伯牙绝弦</div>
+                    <div data-target="popupOverlayBerry" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">04.19 冰摇红莓黑加仑</div>
                   </div>
-                  
-                  <!-- 2026.04 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 04.18 花椒味雪糕 -->
-                      <div data-target="popupOverlayPepperIce" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        04.18 花椒味雪糕
-                      </div>
-                    </div>
-                  </div>
-                  
                 </div>
               </div>
-      
-              <!-- ====== 人是铁饭是钢 ====== -->
-              <div class="contact-card" data-category="food" data-sub="steel">
+            </div>
+    
+            <!-- ====== 旅行椰饭 ====== -->
+            <div class="contact-card" data-category="travel" data-sub="miracle" style="display:none;">
+              <div class="miracle-card-grid">
+                <div class="miracle-card" data-month="2026-08">
+                  <div class="cover-image">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802171214258.jpg" alt="2026年8月" loading="lazy" />
+                    <div class="cover-badge">8月</div>
+                  </div>
+                  <div class="card-footer">2026.08</div>
+                </div>
                 
-                <!-- 时间线 -->
-                <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
-                  <!-- 竖线 -->
-                  <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
-                  
-                  <!-- 2026.07 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
-                    
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 07.04 川菜 -->
-                      <div data-target="popupOverlaySpicy" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        07.04 川菜
-                      </div>
-                    </div>
+                <div class="miracle-card" data-month="2026-07">
+                  <div class="cover-image">
+                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802172750062.jpg" alt="2026年7月" loading="lazy" />
+                    <div class="cover-badge">7月</div>
                   </div>
-                  
-                  <!-- 2026.06 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 06.11 金沙鸡翅 -->
-                      <div data-target="popupOverlayChicken" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        06.11 金沙鸡翅
-                      </div>
-                      <!-- 06.05 米线+咕咾肉 -->
-                      <div data-target="popupOverlayNoodles" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        06.05 米线+百香果咕咾肉
-                      </div>
-                    </div>
+                  <div class="card-footer">2026.07</div>
+                </div>
+                
+                <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
+                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                    <span style="font-size:42px;opacity:0.4;"></span>
                   </div>
-                  
-                  <!-- 2026.05 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 05.26 牛肉拉面 -->
-                      <div data-target="popupOverlayNoodle" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        05.26 牛肉拉面
-                      </div>
-                      <!-- 05.19 菠萝咕咾肉+金钱蛋 -->
-                      <div data-target="popupOverlayPork" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        05.19 菠萝咕咾肉+金钱蛋
-                      </div>
-                      <!-- 05.12 烧烤 -->
-                      <div data-target="popupOverlayBBQ" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        05.12 烧烤
-                      </div>
-                    </div>
+                  <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
+                </div>
+                
+                <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
+                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                    <span style="font-size:42px;opacity:0.4;"></span>
                   </div>
-                  
-                  <!-- 2026.04 -->
-                  <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                    <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                    <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                      <!-- 04.28 火锅 -->
-                      <div data-target="popupOverlayHotpot" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        04.28 火锅
-                      </div>
-                      <!-- 04.21 拉面 -->
-                      <div data-target="popupOverlayRamen" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        04.21 拉面
-                      </div>
-                      <!-- 04.18 铁板豆腐 -->
-                      <div data-target="popupOverlayTofu" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">
-                        04.18 铁板豆腐
-                      </div>
-                    </div>
+                  <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
+                </div>
+                
+                <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
+                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                    <span style="font-size:42px;opacity:0.4;"></span>
                   </div>
-                  
+                  <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
                 </div>
               </div>
-              
-              <!-- ====== 旅行椰饭 - 奇迹饭饭 ====== -->
-              <div class="contact-card" data-category="travel" data-sub="miracle">
-                <div class="miracle-card-grid">
-                  <!-- 卡片1：2026年7月 -->
-                  <div class="miracle-card" data-month="2026-07">
-                    <div class="cover-image">
-                      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg" alt="2026年7月" loading="lazy" />
-                      <div class="cover-badge">7月</div>
-                    </div>
-                    <div class="card-footer">2026.07</div>
-                  </div>
+            </div>
 
-                  <!-- 卡片2：2026年6月 -->
-                  <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
-                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                      <span style="font-size:42px;opacity:0.4;"></span>
-                    </div>
-                    <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
-                  </div>
+            <!-- ====== 饭所言 ====== -->
+            <div class="contact-card" data-category="words" data-sub="all">
+              <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+            </div>
 
-                  <!-- 卡片3：2026年5月 -->
-                  <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
-                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                      <span style="font-size:42px;opacity:0.4;"></span>
-                    </div>
-                    <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
-                  </div>
+            <div class="footer-slogan">-All For YeFan-</div>
 
-                  <!-- 卡片4：2026年4月 -->
-                  <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
-                    <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                      <span style="font-size:42px;opacity:0.4;"></span>
-                    </div>
-                    <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- ====== 旅行椰饭 - 饭之明信片 ====== -->
-              <div class="contact-card" data-category="travel" data-sub="postcard" style="display:none;">
-                <div class="empty-state">饭之明信片 · 内容待更新</div>
-              </div>
-              
-              <!-- ====== 旅行椰饭 - 日常饭 ====== -->
-              <div class="contact-card" data-category="travel" data-sub="daily" style="display:none;">
-                <div class="empty-state">日常饭 · 内容待更新</div>
-              </div>
-              
-              <!-- ====== 饭所言 ====== -->
-              <div class="contact-card" data-category="words" data-sub="all">
-                <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
-              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            </div>  
-          </div>     
-        </div>      
-      </div>          
-  
       <!-- 那年今日 -->
       <div class="page-box" id="today">
         <div class="info-box">
           <div class="info-title"><span class="deco">✦</span> 那年今日</div>
-          <div class="empty-state">内容待更新</div>
-          <div class="footer-slogan">-All For YeFan-</div>
-        </div>
-      </div>
-
-      <!-- 饭之诞 -->
-      <div class="page-box" id="birth">
-        <div class="info-box">
-          <div class="info-title"><span class="deco">✦</span> 饭之诞</div>
           <div class="empty-state">内容待更新</div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
@@ -3348,429 +3104,18 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 蛋糕 -->
-  <div class="popup-overlay" id="popupOverlayCake">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.07.24 <span style="font-size:13px; font-weight:500;">蛋糕</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423294.jpg?width=300" alt="蛋糕" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423294.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">好美丽的蛋糕吧</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-24 18:56:47</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 弹窗 - 菠萝包 -->
-  <div class="popup-overlay" id="popupOverlayBread">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.07.22 <span style="font-size:13px; font-weight:500;">菠萝包</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">咸口</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423295.jpg?width=300" alt="菠萝包" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423295.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:260px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">菠萝包！</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:19:09</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">咸的</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:19:14</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">你们先吃</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:20:01</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">就是夹心是咸的🤔</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:20:52</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">挺好吃的</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:24:16</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">但是吃两口有点腻</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:24:27</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">还好我有矿泉水</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-22 17:24:49</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 弹窗 - 雪糕 -->
-  <div class="popup-overlay" id="popupOverlayIce">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.07.15 <span style="font-size:13px; font-weight:500;">雪糕</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423297.jpg?width=300" alt="雪糕" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423297.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:260px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">哇</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:31:33</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">剧场有雪糕🍦</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:31:37</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">没有冰柜但是有雪糕</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:36:10</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">hh而且没化</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:36:18</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">时间是有点久远了</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:55:59</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">浅尝一口。</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-15 15:56:03</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 土凤梨酥 -->
-  <div class="popup-overlay" id="popupOverlayPineapple">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.06.17 <span style="font-size:13px; font-weight:500;">闽南特产·土凤梨酥</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">酸甜口</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">果香</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727210649903.jpg?width=300" alt="土凤梨酥" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727210649903.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">呀米呀米</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-06-17 22:32:58</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 坚果芒芒酸奶碗 -->
-  <div class="popup-overlay" id="popupOverlayYogurtBowl">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.11 <span style="font-size:13px; font-weight:500;">宝珠奶酪·坚果芒芒酸奶碗</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">活酒酿酸奶底</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727224731520.jpg?width=300" alt="坚果芒芒酸奶碗" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727224731520.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">吃这个</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-11 17:20:11</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 花椒味雪糕 -->
-  <div class="popup-overlay" id="popupOverlayPepperIce">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.04.18 <span style="font-size:13px; font-weight:500;">花椒味雪糕</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727232021289.jpg?width=300" alt="花椒味雪糕" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727232021289.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">花椒味的雪糕</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-18 21:43:06</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 弹窗 - 川菜 -->
-  <div class="popup-overlay" id="popupOverlaySpicy">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.07.03 <span style="font-size:13px; font-weight:500;">香辣洋葱·麻辣小龙虾</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">劲辣</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423292.jpg?width=300" alt="川菜1" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423292.jpg')" />
-      </div>
-      <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px; margin-bottom:12px;">
-        <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">好吃😋</div>
-        <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-03 20:08:39</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423291.jpg?width=300" alt="川菜2" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423291.jpg')" />
-      </div>
-      <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-        <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">辣之辣之</div>
-        <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-07-03 20:27:30</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 金沙鸡翅 -->
-  <div class="popup-overlay" id="popupOverlayChicken">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.06.11 <span style="font-size:13px; font-weight:500;">KFC·金沙鸡翅</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">甜辣口</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">蒜香</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727211607397.jpg?width=300" alt="金沙鸡翅" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727211607397.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">这个kfc新品怪好吃的</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-06-11 13:14:19</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 米线+咕咾肉 -->
-  <div class="popup-overlay" id="popupOverlayNoodles">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.06.05 <span style="font-size:13px; font-weight:500;">米线·百香果咕咾肉</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">酸甜口</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727212216559.jpg?width=300" alt="米线+咕咾肉1" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727212216559.jpg')" />
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727212157463.jpg?width=300" alt="米线+咕咾肉2" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727212157463.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">米线香香的</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-06-05 19:04:16</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 牛肉拉面 -->
-  <div class="popup-overlay" id="popupOverlayNoodle">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.26 <span style="font-size:13px; font-weight:500;">兰州拉面·清汤牛肉拉面</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">咸鲜口</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">微辣</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727214513851.jpg?width=300" alt="牛肉拉面" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727214513851.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:200px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">～</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-26 17:51:45</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">但是跟我之前吃的不一样了</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-26 18:06:08</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">感觉没那么米味了</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-26 18:06:27</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">哪里变了</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-26 18:06:32</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 菠萝咕咾肉+金钱蛋 -->
-  <div class="popup-overlay" id="popupOverlayPork">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.19 <span style="font-size:13px; font-weight:500;">菠萝咕咾肉·金钱蛋</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">酸甜口</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">微辣</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727222905258.jpg?width=300" alt="菠萝咕咾肉+金钱蛋1" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727222905258.jpg')" />
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727222905259.jpg?width=300" alt="菠萝咕咾肉+金钱蛋2" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727222905259.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">米西米西</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-19 17:13:53</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 烧烤 -->
-  <div class="popup-overlay" id="popupOverlayBBQ">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.12 <span style="font-size:13px; font-weight:500;">烧烤</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">微辣</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727224352058.jpg?width=300" alt="烧烤1" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727224352058.jpg')" />
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727224352059.jpg?width=300" alt="烧烤2" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727224352059.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:200px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">米味！</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-12 22:54:58</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">点了一堆香菇哈哈哈</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-12 23:06:11</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 火锅 -->
-  <div class="popup-overlay" id="popupOverlayHotpot">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.04.28 <span style="font-size:13px; font-weight:500;">红糖冰沙·炒饭</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">甜口</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">咸口</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727230520784.jpg?width=300" alt="火锅1" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727230520784.jpg')" />
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727230520786.jpg?width=300" alt="火锅2" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727230520786.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:200px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">我7火锅！</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-28 19:19:26</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">这个炒饭好好吃</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-28 19:27:34</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">🤤</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-28 19:27:36</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 拉面 -->
-  <div class="popup-overlay" id="popupOverlayRamen">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.04.21 <span style="font-size:13px; font-weight:500;">寿司·拉面</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">咸鲜口</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727231213326.jpg?width=300" alt="拉面" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727231213326.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; max-height:200px; overflow-y:auto; padding-right:4px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">我去吃寿司去🤤</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-21 19:29:13</span>
-        </div>
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">哈哈哈寿司也吃拉面</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-04-21 19:47:59</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 铁板豆腐 -->
-  <div class="popup-overlay" id="popupOverlayTofu">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.04.18 <span style="font-size:13px; font-weight:500;">铁板豆腐</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">微辣</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727232013101.jpg?width=300" alt="铁板豆腐" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727232013101.jpg')" />
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== 奇迹饭饭 - 弹窗 ===== -->
+  <!-- ===== 旅行椰饭 弹窗 ===== -->
   <div class="popup-overlay" id="popupOverlayMiracle">
-    <div class="popup-box" style="max-width:480px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
+    <div class="popup-box" style="max-width:560px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
       <button class="popup-close" id="miraclePopupClose">✕</button>
       <div style="font-size:16px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid rgba(184,224,255,0.2);">
         <span id="miraclePopupTitle">2026年7月</span>
       </div>
-        <div id="miraclePopupGrid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-height:50vh; overflow-y:auto; padding:4px;">
+      <div id="miraclePopupGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-height:65vh; overflow-y:auto; padding:4px;">
       </div>
     </div>
   </div>
   <script>
-
-
     
     // ===== 返回顶部按钮 =====
     const backBtn = document.getElementById('backToTop');
@@ -3805,15 +3150,23 @@
           platformItems.forEach(p => p.classList.remove('active'));
           const allPlatform = document.querySelector('.platform-nav-item[data-platform="all"]');
           if (allPlatform) allPlatform.classList.add('active');
-          const tabs = document.querySelectorAll('#weiboTabs .category-tab');
-          tabs.forEach(t => t.classList.remove('active'));
-          const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
-          if (allTab) allTab.classList.add('active');
+          
+          // 重新渲染月份标签
+          if (typeof renderMonthTabs === 'function') {
+            renderMonthTabs();
+          }
+          
           setTimeout(() => {
             const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
             allCards.forEach(card => {
               card.style.display = '';
             });
+            // 重置筛选
+            const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
+            if (allTab) {
+              document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
+              allTab.classList.add('active');
+            }
             if (typeof filterWeiboFeed === 'function') {
               filterWeiboFeed();
             }
@@ -3883,14 +3236,22 @@
           }, 50);
         }
     
-        // 如果切换到饭言饭语页面，恢复之前的状态
-        if (pageId === 'contact') {
-          setTimeout(() => {
-            if (typeof window.restoreContactState === 'function') {
-              window.restoreContactState();
-            }
-          }, 50);
-        }
+          // 如果切换到饭言饭语页面，重置到饭食饭
+          if (pageId === 'contact') {
+            setTimeout(() => {
+              // 重置导航按钮到"饭食饭"
+              const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
+              navBtns.forEach(b => b.classList.remove('active'));
+              const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
+              if (foodBtn) foodBtn.classList.add('active');
+              
+              // 只显示饭食饭的内容
+              const cards = document.querySelectorAll('#contactFeed .contact-card');
+              cards.forEach(card => {
+                card.style.display = card.dataset.category === 'food' ? '' : 'none';
+              });
+            }, 50);
+          }
       });
     });
     
@@ -4200,6 +3561,165 @@
 
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
+
+    // ===== 饭之啵数据 =====
+    const boboData = [
+      { date: '2026.08.01凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1Vg3X6iEQ3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.31晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1W83X6XEU6/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.31凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1ci3X6UE7g/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.29晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1sA346jEF1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.29凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1oZ346qEUn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.26晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1jE346NEeB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.07.25晚', title: '冲并冲', category: 'single', url: 'https://www.bilibili.com/video/BV1jZ346BEfx/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+     
+      
+      
+      
+      
+
+    ];
+    
+    let currentBoboCategory = 'all';
+    
+    // 获取月份列表
+    function getBoboMonthList(category) {
+      let data = [];
+      if (category === 'all') data = boboData;
+      else data = boboData.filter(item => item.category === category);
+      const set = new Set();
+      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
+      return Array.from(set).sort((a,b) => b.localeCompare(a));
+    }
+    
+    // 获取分类数据
+    function getBoboDataByCategory(category) {
+      if (category === 'all') return boboData;
+      return boboData.filter(item => item.category === category);
+    }
+    
+    // 渲染卡片（饭之啵专用）
+    const boboGrid = document.getElementById('boboGrid');
+    function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
+      const data = getBoboDataByCategory(category);
+      const filtered = data.filter(item => {
+        const month = item.date ? item.date.slice(0,7) : '';
+        const matchMonth = filterMonth === '全部' || month === filterMonth;
+        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
+        return matchMonth && matchKey;
+      });
+      if (filtered.length === 0) {
+        boboGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
+        return;
+      }
+      let html = '';
+      for (const item of filtered) {
+        let tagColor = '#4299e1';
+        let tagText = '单播';
+        if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
+        else if (item.category === 'special') { tagColor = '#e67e22'; tagText = '特殊直播'; }
+        
+        let coverHtml = '';
+        if (item.cover) {
+          coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+        } else {
+          coverHtml = `
+            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
+              <div class="video-icon">🎬</div>
+              <div class="video-tip" style="color:#fff;">暂无封面</div>
+            </div>
+          `;
+        }
+        html += `
+          <div class="video-card" data-url="${item.url}" data-title="${item.title}">
+            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            <div class="video-cover-box" onclick="window.open('${item.url || '#'}','_blank')">
+              ${coverHtml}
+              <div class="play-icon">▶</div>
+            </div>
+            <div class="video-title-bar">
+              <div class="video-name">${item.title}</div>
+              <div class="video-date">${item.date || ''}</div>
+            </div>
+          </div>
+        `;
+      }
+      boboGrid.innerHTML = html;
+    }
+    
+    // 渲染月份标签（饭之啵专用）
+    function renderBoboTabs(category, activeMonth = '全部') {
+      const container = document.getElementById('boboMonthScrollInner');
+      if (!container) return;
+      const months = getBoboMonthList(category);
+      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
+      months.forEach(m => {
+        const active = activeMonth === m ? 'active' : '';
+        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
+      });
+      container.innerHTML = html;
+    
+      container.querySelectorAll('.category-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const month = this.dataset.month;
+          const keyword = document.getElementById('boboSearch').value;
+          container.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          renderBoboCards(currentBoboCategory, month, keyword);
+        });
+      });
+    
+      // 左右滚动
+      const prevBtn = document.getElementById('boboMonthPrev');
+      const nextBtn = document.getElementById('boboMonthNext');
+      const wrapper = document.getElementById('boboMonthScrollWrapper');
+      let scrollPosition = 0;
+      const step = 120;
+    
+      if (prevBtn && nextBtn && container && wrapper) {
+        scrollPosition = 0;
+        container.style.transform = 'translateX(0px)';
+        container.style.cursor = 'grab';
+        
+        prevBtn.onclick = function(e) {
+          e.stopPropagation();
+          scrollPosition = Math.min(scrollPosition + step, 0);
+          container.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+        
+        nextBtn.onclick = function(e) {
+          e.stopPropagation();
+          const maxScroll = -(container.scrollWidth - wrapper.clientWidth + 20);
+          scrollPosition = Math.max(scrollPosition - step, maxScroll);
+          container.style.transform = 'translateX(' + scrollPosition + 'px)';
+        };
+      }
+    }
+    
+    // 分类导航切换（饭之啵专用）
+    const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
+    boboNavItems.forEach(btn => {
+      btn.addEventListener('click', function() {
+        boboNavItems.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentBoboCategory = this.dataset.category;
+        document.getElementById('boboSearch').value = '';
+        renderBoboTabs(currentBoboCategory, '全部');
+        renderBoboCards(currentBoboCategory, '全部', '');
+      });
+    });
+    
+    // 搜索框监听（饭之啵专用）
+    const boboSearchInput = document.getElementById('boboSearch');
+    boboSearchInput.addEventListener('input', function() {
+      const keyword = this.value;
+      const activeTab = document.querySelector('#boboMonthScrollInner .category-tab.active');
+      const month = activeTab ? activeTab.dataset.month : '全部';
+      renderBoboCards(currentBoboCategory, month, keyword);
+    });
+    
+    // 初始化饭之啵
+    renderBoboTabs('all', '全部');
+    renderBoboCards('all', '全部', '');
 
     // ---- 平台月份数据 ----
     const platformMonths = {
@@ -5069,158 +4589,26 @@
 
     // ===== 饭言饭语切换 =====
     (function() {
-      // 保存状态
-      let savedCategory = 'food';
-      let savedSub = 'water';
-      
       const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
-      const tabs = document.querySelectorAll('#contactTabs .category-tab');
+      const cards = document.querySelectorAll('#contactFeed .contact-card');
     
-      function applyContactState(category, sub) {
-        // 恢复分类导航
-        navBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.category === category);
-        });
-        // 恢复子分类标签显示
-        tabs.forEach(tab => {
-          tab.style.display = 'none';
-        });
-        if (category === 'food') {
-          tabs.forEach(tab => {
-            if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
-              tab.style.display = '';
-            }
-          });
-        } else if (category === 'travel') {
-          tabs.forEach(tab => {
-            if (tab.dataset.sub === 'miracle' || tab.dataset.sub === 'postcard' || tab.dataset.sub === 'daily') {
-              tab.style.display = '';
-            }
-          });
-        } else if (category === 'words') {
-          tabs.forEach(tab => {
-            if (tab.dataset.sub === 'all') {
-              tab.style.display = '';
-            }
-          });
-        }
-        // 恢复子分类激活状态
-        tabs.forEach(tab => {
-          tab.classList.toggle('active', tab.dataset.sub === sub);
-        });
-        // 执行筛选
-        filterContact(category, sub);
-      }
-    
-      function filterContact(category, sub) {
-        const cards = document.querySelectorAll('#contactFeed .contact-card');
+      function filterContact(category) {
         cards.forEach(card => {
-          const match = card.dataset.category === category && (card.dataset.sub === sub || card.dataset.sub === 'all');
+          const match = card.dataset.category === category;
           card.style.display = match ? '' : 'none';
         });
       }
     
-      // 初始化
-      tabs.forEach(tab => {
-        if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
-          tab.style.display = '';
-        } else {
-          tab.style.display = 'none';
-        }
-      });
-      tabs.forEach(t => t.classList.remove('active'));
-      tabs[0].classList.add('active');
-        
+      // 默认显示 food（饭食饭）
+      filterContact('food');
+    
       navBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-          const category = this.dataset.category;
-          savedCategory = category;
-          // 更新导航按钮状态
           navBtns.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
-          
-          if (category === 'food') {
-            tabs.forEach(tab => {
-              if (tab.dataset.sub === 'water' || tab.dataset.sub === 'sweet' || tab.dataset.sub === 'steel') {
-                tab.style.display = '';
-              } else {
-                tab.style.display = 'none';
-              }
-            });
-            // 默认选中第一个子分类
-            let firstTab = document.querySelector('#contactTabs .category-tab[data-sub="water"]');
-            if (firstTab) {
-              savedSub = 'water';
-              tabs.forEach(t => t.classList.remove('active'));
-              firstTab.classList.add('active');
-            }
-          } else if (category === 'travel') {
-            tabs.forEach(tab => {
-              if (tab.dataset.sub === 'miracle' || tab.dataset.sub === 'postcard' || tab.dataset.sub === 'daily') {
-                tab.style.display = '';
-              } else {
-                tab.style.display = 'none';
-              }
-            });
-            // 默认选中 miracle
-            let firstTab = document.querySelector('#contactTabs .category-tab[data-sub="miracle"]');
-            if (firstTab) {
-              savedSub = 'miracle';
-              tabs.forEach(t => t.classList.remove('active'));
-              firstTab.classList.add('active');
-            }
-          } else if (category === 'words') {
-            tabs.forEach(tab => {
-              if (tab.dataset.sub === 'all') {
-                tab.style.display = '';
-              } else {
-                tab.style.display = 'none';
-              }
-            });
-            tabs.forEach(t => t.classList.remove('active'));
-            const allTab = document.querySelector('#contactTabs .category-tab[data-sub="all"]');
-            if (allTab) {
-              allTab.classList.add('active');
-              savedSub = 'all';
-            }
-          }
-          filterContact(savedCategory, savedSub);
+          filterContact(this.dataset.category);
         });
       });
-        
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // 更新子分类激活状态
-          tabs.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          savedSub = this.dataset.sub;
-          
-          // 确保导航按钮也保持正确的激活状态
-          if (savedCategory === 'food') {
-            navBtns.forEach(b => b.classList.remove('active'));
-            const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
-            if (foodBtn) foodBtn.classList.add('active');
-          } else if (savedCategory === 'travel') {
-            navBtns.forEach(b => b.classList.remove('active'));
-            const travelBtn = document.querySelector('#contactNav .platform-nav-item[data-category="travel"]');
-            if (travelBtn) travelBtn.classList.add('active');
-          } else if (savedCategory === 'words') {
-            navBtns.forEach(b => b.classList.remove('active'));
-            const wordsBtn = document.querySelector('#contactNav .platform-nav-item[data-category="words"]');
-            if (wordsBtn) wordsBtn.classList.add('active');
-          }
-          
-          filterContact(savedCategory, savedSub);
-        });
-      });
-        
-      // 暴露恢复函数，供页面切换时调用
-      window.restoreContactState = function() {
-        applyContactState(savedCategory, savedSub);
-      };
-        
-      // 初始执行
-      filterContact('food', 'water');
     })();
 
     // ===== 饭言饭语弹窗控制 =====
@@ -5265,15 +4653,28 @@
       });
     });
 
-    // ===== 旅行椰饭 · 奇迹饭饭弹窗 =====
+    // ===== 旅行椰饭弹窗 =====
     (function() {
       // 图片数据
       const monthImages = {
+        '2026-08': [
+          { date: '2026.08.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171214258.jpg' },
+          { date: '2026.08.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171214259.jpg' },
+          { date: '2026.08.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802170849752.jpg' },
+        ],
         '2026-07': [
-          { date: '2026.07.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731123249578.jpg' },
-          { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
+          { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172639485.jpg' },
+          { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172711116.jpg' },
+          { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172750062.jpg' },
+          { date: '2026.07.07', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172318578.jpg' },
+          { date: '2026.07.07', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172417394.jpg' },
+          { date: '2026.07.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172211663.jpg' },
+          { date: '2026.07.18', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171946546.jpg' },
+          { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' },
           { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.jpg' },
-          { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.jpg' }
+          { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
+          { date: '2026.07.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731123249578.jpg' },
+          { date: '2026.07.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171233465.jpg' },
         ],
         '2026-06': [],
         '2026-05': [],
@@ -5408,156 +4809,6 @@
         closeModal();
       }
     });
-
-    // ===== 饭之啵数据（独立版本） =====
-    const boboData = [
-      { date: '2026.07.25晚', title: '冲并冲', category: 'single', url: 'https://www.bilibili.com/video/BV1jZ346BEfx/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.26晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1jE346NEeB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.29凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1oZ346qEUn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.29晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1sA346jEF1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' }
-    ];
-    
-    let currentBoboCategory = 'all';
-    
-    // 获取月份列表
-    function getBoboMonthList(category) {
-      let data = [];
-      if (category === 'all') data = boboData;
-      else data = boboData.filter(item => item.category === category);
-      const set = new Set();
-      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
-      return Array.from(set).sort((a,b) => b.localeCompare(a));
-    }
-    
-    // 获取分类数据
-    function getBoboDataByCategory(category) {
-      if (category === 'all') return boboData;
-      return boboData.filter(item => item.category === category);
-    }
-    
-    // 渲染卡片（饭之啵专用）
-    const boboGrid = document.getElementById('boboGrid');
-    function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
-      const data = getBoboDataByCategory(category);
-      const filtered = data.filter(item => {
-        const month = item.date ? item.date.slice(0,7) : '';
-        const matchMonth = filterMonth === '全部' || month === filterMonth;
-        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
-        return matchMonth && matchKey;
-      });
-      if (filtered.length === 0) {
-        boboGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
-        return;
-      }
-      let html = '';
-      for (const item of filtered) {
-        let tagColor = '#4299e1';
-        let tagText = '单播';
-        if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
-        else if (item.category === 'special') { tagColor = '#e67e22'; tagText = '特殊直播'; }
-        
-        let coverHtml = '';
-        if (item.cover) {
-          coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
-        } else {
-          coverHtml = `
-            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
-              <div class="video-icon">🎬</div>
-              <div class="video-tip" style="color:#fff;">暂无封面</div>
-            </div>
-          `;
-        }
-        html += `
-          <div class="video-card" data-url="${item.url}" data-title="${item.title}">
-            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
-            <div class="video-cover-box" onclick="window.open('${item.url || '#'}','_blank')">
-              ${coverHtml}
-              <div class="play-icon">▶</div>
-            </div>
-            <div class="video-title-bar">
-              <div class="video-name">${item.title}</div>
-              <div class="video-date">${item.date || ''}</div>
-            </div>
-          </div>
-        `;
-      }
-      boboGrid.innerHTML = html;
-    }
-    
-    // 渲染月份标签（饭之啵专用）
-    function renderBoboTabs(category, activeMonth = '全部') {
-      const container = document.getElementById('boboMonthScrollInner');
-      if (!container) return;
-      const months = getBoboMonthList(category);
-      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
-      months.forEach(m => {
-        const active = activeMonth === m ? 'active' : '';
-        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
-      });
-      container.innerHTML = html;
-    
-      container.querySelectorAll('.category-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          const month = this.dataset.month;
-          const keyword = document.getElementById('boboSearch').value;
-          container.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          renderBoboCards(currentBoboCategory, month, keyword);
-        });
-      });
-    
-      // 左右滚动
-      const prevBtn = document.getElementById('boboMonthPrev');
-      const nextBtn = document.getElementById('boboMonthNext');
-      const wrapper = document.getElementById('boboMonthScrollWrapper');
-      let scrollPosition = 0;
-      const step = 120;
-    
-      if (prevBtn && nextBtn && container && wrapper) {
-        scrollPosition = 0;
-        container.style.transform = 'translateX(0px)';
-        container.style.cursor = 'grab';
-        
-        prevBtn.onclick = function(e) {
-          e.stopPropagation();
-          scrollPosition = Math.min(scrollPosition + step, 0);
-          container.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
-        
-        nextBtn.onclick = function(e) {
-          e.stopPropagation();
-          const maxScroll = -(container.scrollWidth - wrapper.clientWidth + 20);
-          scrollPosition = Math.max(scrollPosition - step, maxScroll);
-          container.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
-      }
-    }
-    
-    // 分类导航切换（饭之啵专用）
-    const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
-    boboNavItems.forEach(btn => {
-      btn.addEventListener('click', function() {
-        boboNavItems.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        currentBoboCategory = this.dataset.category;
-        document.getElementById('boboSearch').value = '';
-        renderBoboTabs(currentBoboCategory, '全部');
-        renderBoboCards(currentBoboCategory, '全部', '');
-      });
-    });
-    
-    // 搜索框监听（饭之啵专用）
-    const boboSearchInput = document.getElementById('boboSearch');
-    boboSearchInput.addEventListener('input', function() {
-      const keyword = this.value;
-      const activeTab = document.querySelector('#boboMonthScrollInner .category-tab.active');
-      const month = activeTab ? activeTab.dataset.month : '全部';
-      renderBoboCards(currentBoboCategory, month, keyword);
-    });
-    
-    // 初始化饭之啵
-    renderBoboTabs('all', '全部');
-    renderBoboCards('all', '全部', '');
   </script>
 
 </body>
