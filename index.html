@@ -3769,6 +3769,8 @@
     </div>
   </div>
   <script>
+
+
     
     // ===== 返回顶部按钮 =====
     const backBtn = document.getElementById('backToTop');
@@ -3793,6 +3795,7 @@
         item.classList.add('active');
         document.getElementById(pageId).classList.add('active');
         
+        // 如果切换到饭之拍页面，重置所有筛选条件并重新显示卡片
         if (pageId === 'fancam') {
           const searchInput = document.getElementById('weiboSearch');
           if (searchInput) {
@@ -3817,7 +3820,70 @@
             setTimeout(updateTimelineHighlight, 100);
           }, 50);
         }
-
+    
+        // 如果切换到饭之大小作页面，强制重置到"全部"分类并重新渲染
+        if (pageId === 'stage') {
+          // 重置导航按钮状态
+          const navItems = document.querySelectorAll('#stageNav .stage-nav-item');
+          navItems.forEach(b => b.classList.remove('active'));
+          const allBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
+          if (allBtn) allBtn.classList.add('active');
+          
+          // 重置变量
+          currentCategory = 'all';
+          
+          // 重置搜索框
+          const searchInput = document.getElementById('stageSearch');
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          
+          // 重置月份标签
+          const tabs = document.querySelectorAll('#stageMonthScrollInner .category-tab');
+          tabs.forEach(t => t.classList.remove('active'));
+          const allTab = document.querySelector('#stageMonthScrollInner .category-tab[data-month="全部"]');
+          if (allTab) allTab.classList.add('active');
+          
+          // 重新渲染
+          setTimeout(() => {
+            if (typeof renderCards === 'function') {
+              renderCards('all', '全部', ''); 
+            }
+          }, 50);
+        }
+        
+        // 如果切换到饭之啵页面，强制重置到"全部"分类并重新渲染
+        if (pageId === 'bobo') {
+          // 重置导航按钮状态
+          const navItems = document.querySelectorAll('#boboNav .stage-nav-item');
+          navItems.forEach(b => b.classList.remove('active'));
+          const allBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]');
+          if (allBtn) allBtn.classList.add('active');
+          
+          // 重置变量
+          currentBoboCategory = 'all';
+          
+          // 重置搜索框
+          const searchInput = document.getElementById('boboSearch');
+          if (searchInput) {
+            searchInput.value = '';
+          }
+          
+          // 重置月份标签
+          const tabs = document.querySelectorAll('#boboMonthScrollInner .category-tab');
+          tabs.forEach(t => t.classList.remove('active'));
+          const allTab = document.querySelector('#boboMonthScrollInner .category-tab[data-month="全部"]');
+          if (allTab) allTab.classList.add('active');
+          
+          // 重新渲染
+          setTimeout(() => {
+            if (typeof renderBoboCards === 'function') {
+              renderBoboCards('all', '全部', '');
+            }
+          }, 50);
+        }
+    
+        // 如果切换到饭言饭语页面，恢复之前的状态
         if (pageId === 'contact') {
           setTimeout(() => {
             if (typeof window.restoreContactState === 'function') {
@@ -5343,7 +5409,7 @@
       }
     });
 
-    // ---- 饭之啵数据 ----
+    // ===== 饭之啵数据（独立版本） =====
     const boboData = [
       { date: '2026.07.25晚', title: '冲并冲', category: 'single', url: 'https://www.bilibili.com/video/BV1jZ346BEfx/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
       { date: '2026.07.26晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1jE346NEeB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
@@ -5369,7 +5435,7 @@
       return boboData.filter(item => item.category === category);
     }
     
-    // 渲染卡片
+    // 渲染卡片（饭之啵专用）
     const boboGrid = document.getElementById('boboGrid');
     function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
       const data = getBoboDataByCategory(category);
@@ -5385,7 +5451,6 @@
       }
       let html = '';
       for (const item of filtered) {
-        // 根据分类决定标签颜色
         let tagColor = '#4299e1';
         let tagText = '单播';
         if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
@@ -5419,7 +5484,7 @@
       boboGrid.innerHTML = html;
     }
     
-    // 渲染月份标签
+    // 渲染月份标签（饭之啵专用）
     function renderBoboTabs(category, activeMonth = '全部') {
       const container = document.getElementById('boboMonthScrollInner');
       if (!container) return;
@@ -5441,7 +5506,7 @@
         });
       });
     
-      // 左右滚动按钮
+      // 左右滚动
       const prevBtn = document.getElementById('boboMonthPrev');
       const nextBtn = document.getElementById('boboMonthNext');
       const wrapper = document.getElementById('boboMonthScrollWrapper');
@@ -5468,7 +5533,7 @@
       }
     }
     
-    // 分类导航切换
+    // 分类导航切换（饭之啵专用）
     const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
     boboNavItems.forEach(btn => {
       btn.addEventListener('click', function() {
@@ -5481,7 +5546,7 @@
       });
     });
     
-    // 搜索框监听
+    // 搜索框监听（饭之啵专用）
     const boboSearchInput = document.getElementById('boboSearch');
     boboSearchInput.addEventListener('input', function() {
       const keyword = this.value;
@@ -5490,7 +5555,7 @@
       renderBoboCards(currentBoboCategory, month, keyword);
     });
     
-    // 初始化
+    // 初始化饭之啵
     renderBoboTabs('all', '全部');
     renderBoboCards('all', '全部', '');
   </script>
