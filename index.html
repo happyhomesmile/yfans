@@ -6391,16 +6391,18 @@ document.addEventListener('DOMContentLoaded', function() {
             root.style.setProperty('--bg-opacity', 0.5);
             root.style.setProperty('--blur-amount', '0px');
             
-          } else if (mode === 'solid') {
-            const hue = parseInt(root.style.getPropertyValue('--theme-hue')) || 265;
-            const color = 'hsl(' + hue + ', 60%, 85%)';
-            contentArea.style.backgroundColor = 'transparent';
-            contentArea.style.backgroundImage = 'none';
-            document.body.style.background = color;
-            document.documentElement.style.setProperty('--page-bg', color);
-            root.style.setProperty('--bg-opacity', 0);
-            root.style.setProperty('--blur-amount', '0px');
-          }
+          } 
+            else if (mode === 'solid') {
+              // 根据当前暗色模式决定纯色背景
+              const isDark = document.body.classList.contains('dark-mode');
+              const color = isDark ? '#000000' : '#ffffff';  // 暗色→黑，亮色→白
+              contentArea.style.backgroundColor = 'transparent';
+              contentArea.style.backgroundImage = 'none';
+              document.body.style.background = color;
+              document.documentElement.style.setProperty('--page-bg', color);
+              root.style.setProperty('--bg-opacity', 0);
+              root.style.setProperty('--blur-amount', '0px');
+            }
         
           wallpaperBtns.forEach(function(btn) {
             btn.classList.toggle('active', btn.dataset.mode === mode);
@@ -6564,19 +6566,25 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       if (darkToggle && darkIcon) {
-        darkToggle.addEventListener('click', function() {
-          const isDark = document.body.classList.toggle('dark-mode');
-
-          if (isDark) {
-            darkIcon.src = darkIconUrl;
-            localStorage.setItem('darkMode', 'dark');
-          } else {
-            darkIcon.src = lightIcon;
-            localStorage.setItem('darkMode', 'light');
-          }
-        });
+      darkToggle.addEventListener('click', function() {
+        const isDark = document.body.classList.toggle('dark-mode');
+      
+        if (isDark) {
+          darkIcon.src = darkIconUrl;
+          localStorage.setItem('darkMode', 'dark');
+        } else {
+          darkIcon.src = lightIcon;
+          localStorage.setItem('darkMode', 'light');
+        }
+      
+        const activeWallpaper = document.querySelector('#wallpaperBtns .btn-sm.active');
+        if (activeWallpaper && activeWallpaper.dataset.mode === 'solid') {
+          setWallpaper('solid');
+        }
+      });
       }
-    });
+     });
+    
 
     // ===== 大图预览功能（全局） =====
     window.previewImage = function(src) {
