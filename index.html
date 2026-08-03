@@ -1090,6 +1090,229 @@
         font-size: 0.7rem;
       }
     }
+
+    /* ===== 暗色模式 ===== */
+    body.dark-mode {
+      background: linear-gradient(145deg, #1a2a3a 0%, #0d1b2a 100%);
+    }
+    
+    body.dark-mode .top-nav {
+      background: rgba(20, 30, 45, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    body.dark-mode .top-nav .menu-item {
+      color: #b0c4de;
+    }
+    body.dark-mode .top-nav .menu-item:hover {
+      background: rgba(66, 153, 225, 0.15);
+      border-color: rgba(66, 153, 225, 0.3);
+    }
+    body.dark-mode .top-nav .menu-item.active {
+      background: rgba(66, 153, 225, 0.2);
+      color: #fff;
+    }
+    
+    body.dark-mode .content-area::before {
+      opacity: 0.15;
+    }
+    
+    body.dark-mode .info-box,
+    body.dark-mode .weibo-card,
+    body.dark-mode .xiaohongshu-card,
+    body.dark-mode .miracle-card,
+    body.dark-mode .video-card,
+    body.dark-mode .link-card,
+    body.dark-mode .welcome-header,
+    body.dark-mode .stage-nav-item,
+    body.dark-mode .category-tab,
+    body.dark-mode .timeline-sidebar,
+    body.dark-mode .popup-box,
+    body.dark-mode .settings-panel {
+      background: rgba(20, 30, 45, 0.75) !important;
+      backdrop-filter: blur(12px);
+      border-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    
+    body.dark-mode .info-box {
+      background: rgba(20, 30, 45, 0.7) !important;
+    }
+    
+    body.dark-mode .welcome-header h1,
+    body.dark-mode .info-title,
+    body.dark-mode .info-value,
+    body.dark-mode .timeline-date,
+    body.dark-mode .video-name,
+    body.dark-mode .card-footer,
+    body.dark-mode .weibo-text,
+    body.dark-mode .timeline-text,
+    body.dark-mode .footer-slogan,
+    body.dark-mode .weibo-time,
+    body.dark-mode .weibo-comment-bottom,
+    body.dark-mode .comment-label,
+    body.dark-mode .weibo-link-button,
+    body.dark-mode .empty-state,
+    body.dark-mode .info-label,
+    body.dark-mode .sub,
+    body.dark-mode .panel-title,
+    body.dark-mode .control-row label,
+    body.dark-mode .slider-val,
+    body.dark-mode .hue-value,
+    body.dark-mode .btn-sm,
+    body.dark-mode .stage-nav-item,
+    body.dark-mode .category-tab,
+    body.dark-mode .platform-nav-item,
+    body.dark-mode .search-box input,
+    body.dark-mode .search-box .search-icon,
+    body.dark-mode .timeline-sidebar .tl-year-label,
+    body.dark-mode .timeline-sidebar .tl-item {
+      color: #c8d8e8 !important;
+    }
+    
+    body.dark-mode .welcome-header .links a {
+      background: rgba(255, 255, 255, 0.06);
+      color: #c8d8e8;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    body.dark-mode .welcome-header .links a:hover {
+      background: rgba(66, 153, 225, 0.15);
+    }
+    
+    body.dark-mode .info-card {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    body.dark-mode .search-box {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    body.dark-mode .search-box input {
+      color: #c8d8e8;
+    }
+    body.dark-mode .search-box input::placeholder {
+      color: #6a8a9a;
+    }
+    
+    body.dark-mode .weibo-card.pinned,
+    body.dark-mode .xiaohongshu-card.pinned {
+      border: 2px solid rgba(66, 153, 225, 0.25) !important;
+      background: rgba(20, 30, 45, 0.85) !important;
+    }
+    
+    body.dark-mode .settings-panel {
+      background: rgba(20, 30, 45, 0.9) !important;
+      border-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    
+    body.dark-mode .palette-toggle {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    body.dark-mode .palette-toggle:hover {
+      background: rgba(66, 153, 225, 0.15);
+    }
+    
+    body.dark-mode .popup-box {
+      background: rgba(20, 30, 45, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    body.dark-mode .popup-box .popup-close {
+      color: #8aa8c8;
+    }
+    body.dark-mode .popup-box .popup-close:hover {
+      color: #fff;
+    }
+    body.dark-mode .popup-dialog {
+      background: rgba(66, 153, 225, 0.15);
+      color: #c8d8e8;
+    }
+    body.dark-mode .popup-dialog::before {
+      background: rgba(66, 153, 225, 0.15);
+    }
+    body.dark-mode .popup-keywords {
+      color: #c8d8e8;
+    }
+    body.dark-mode .popup-keywords span {
+      background: rgba(66, 153, 225, 0.1);
+      border-color: rgba(66, 153, 225, 0.15);
+    }
+    body.dark-mode .popup-emoji {
+      background: rgba(66, 153, 225, 0.08);
+    }
+    
+    body.dark-mode .timeline-wrap::before {
+      background: linear-gradient(to bottom, #4299e1, #1a4a6f);
+    }
+    
+    body.dark-mode .timeline-item .timeline-dot {
+      background: #4299e1;
+      border-color: #1a4a6f;
+      box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.15);
+    }
+    body.dark-mode .timeline-item .timeline-dot.no-link {
+      background: #4a6a8a;
+    }
+    
+    body.dark-mode .platform-tag.weibo { background: #4299e1; }
+    body.dark-mode .platform-tag.xiaohongshu { background: #ff2d55; }
+    body.dark-mode .platform-tag.douyin { background: #f97316; }
+    body.dark-mode .platform-tag.bilibili { background: #fb7299; }
+    
+    body.dark-mode .video-tag {
+      color: #fff;
+    }
+    
+    body.dark-mode .stage-nav-item.active,
+    body.dark-mode .platform-nav-item.active,
+    body.dark-mode .category-tab.active {
+      background: #4299e1;
+      color: #fff !important;
+      border-color: #4299e1;
+    }
+    body.dark-mode .stage-nav-item:hover,
+    body.dark-mode .platform-nav-item:hover,
+    body.dark-mode .category-tab:hover {
+      background: rgba(66, 153, 225, 0.15);
+    }
+    
+    body.dark-mode .miracle-card .card-footer {
+      background: rgba(255, 255, 255, 0.04);
+      border-top-color: rgba(255, 255, 255, 0.04);
+      color: #c8d8e8 !important;
+    }
+    body.dark-mode .miracle-card {
+      background: rgba(20, 30, 45, 0.6) !important;
+      border-color: rgba(255, 255, 255, 0.04) !important;
+    }
+    body.dark-mode .miracle-card .cover-badge {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    
+    body.dark-mode .contact-card .timeline-wrap > div > div {
+      color: #c8d8e8 !important;
+    }
+    
+    body.dark-mode .divider {
+      border-top-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    body.dark-mode .inline-calendar {
+      background: rgba(20, 30, 45, 0.95) !important;
+      border-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    body.dark-mode .inline-calendar .cal-days-grid > div {
+      color: #c8d8e8 !important;
+    }
+    body.dark-mode .inline-calendar .cal-days-grid > div[data-date]:hover {
+      background: rgba(66, 153, 225, 0.15);
+    }
+    body.dark-mode .inline-calendar .cal-nav {
+      color: #8aa8c8 !important;
+    }
+    body.dark-mode .inline-calendar .cal-nav:hover {
+      background: rgba(66, 153, 225, 0.1) !important;
+    }
   </style>
 </head>
 <body>
@@ -1130,12 +1353,13 @@
       <div class="menu-item" data-page="today"><span class="icon">📅</span> 那年今日</div>
       <div class="menu-item" data-page="dream"><span class="icon">💪</span> 梦想汗水坚持</div>
       <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 关于本站</div>
-      <!-- 👇 新增调色盘 -->
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
-        <span class="icon">🎨</span> 调色盘
+        <span class="icon">🎨</span> 
+      </div>
+      <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
+        <span class="icon" id="darkIcon">🌙</span>
       </div>
     </div>
-
     <!-- ===== 内容区 ===== -->
     <div class="content-area" id="contentWrap">
       
@@ -5555,23 +5779,23 @@
       const root = document.documentElement;
       const paletteToggle = document.getElementById('paletteToggle');
       const settingsPanel = document.getElementById('settingsPanel');
-  
+    
       const hueTrack = document.getElementById('hueTrack');
       const hueThumb = document.getElementById('hueThumb');
       const hueDisplay = document.getElementById('hueDisplay');
       const wallpaperBtns = document.querySelectorAll('#wallpaperBtns .btn-sm');
       const layoutBtns = document.querySelectorAll('#layoutBtns .btn-sm');
-  
+    
       const bgOpacity = document.getElementById('bgOpacity');
       const bgOpacityVal = document.getElementById('bgOpacityVal');
       const blurAmount = document.getElementById('blurAmount');
       const blurVal = document.getElementById('blurVal');
       const cardOpacity = document.getElementById('cardOpacity');
       const cardOpacityVal = document.getElementById('cardOpacityVal');
-  
+    
       // ----- 面板展开/收起 -----
       let panelOpen = false;
-  
+    
       if (paletteToggle && settingsPanel) {
         paletteToggle.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -5579,7 +5803,7 @@
           this.classList.toggle('active', panelOpen);
           settingsPanel.classList.toggle('open', panelOpen);
         });
-  
+    
         document.addEventListener('click', function(e) {
           if (panelOpen &&
             !settingsPanel.contains(e.target) &&
@@ -5590,49 +5814,41 @@
           }
         });
       }
-  
+    
       // ----- 色相颜色条 -----
       let isDragging = false;
-  
+    
       function getHueFromClick(e) {
         if (!hueTrack) return 265;
         const rect = hueTrack.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         return Math.round(Math.max(0, Math.min(1, x)) * 360);
       }
-  
+    
       function setHue(hue) {
         const clamped = Math.max(0, Math.min(360, hue));
         const pct = (clamped / 360) * 100;
         if (hueThumb) hueThumb.style.left = pct + '%';
         if (hueDisplay) hueDisplay.textContent = clamped + '°';
         root.style.setProperty('--theme-hue', clamped);
-  
-      function setHue(hue) {
-        const clamped = Math.max(0, Math.min(360, hue));
-        const pct = (clamped / 360) * 100;
-        if (hueThumb) hueThumb.style.left = pct + '%';
-        if (hueDisplay) hueDisplay.textContent = clamped + '°';
-        root.style.setProperty('--theme-hue', clamped);
-      
-        // ===== 只有这些会变色 =====
-        // 1. 设置面板里的 active 按钮
+    
+        // 更新 active 按钮
         document.querySelectorAll('#wallpaperBtns .btn-sm.active, #layoutBtns .btn-sm.active').forEach(function(btn) {
           btn.style.background = 'hsl(' + clamped + ', 80%, 55%)';
           btn.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
         });
-      
-        // 2. 调色盘导航按钮的边框
+    
+        // 调色盘导航按钮边框
         if (paletteToggle && paletteToggle.classList.contains('active')) {
           paletteToggle.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
         }
-      
-        // 3. 色相值显示文字
+    
+        // 色相值显示
         if (hueDisplay) {
           hueDisplay.style.color = 'hsl(' + clamped + ', 80%, 55%)';
         }
-      
-        // 4. 纯色模式背景跟随色相
+    
+        // 纯色模式背景
         const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
         if (wallpaperLayer) {
           const isSolid = wallpaperLayer.className.includes('solid');
@@ -5640,28 +5856,8 @@
             wallpaperLayer.style.background = 'hsl(' + clamped + ', 60%, 85%)';
           }
         }
-      
-        // ===== 其他所有元素的颜色都不变 =====
       }
-  
-        // 纯色模式跟随色相
-        const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
-        if (wallpaperLayer) {
-          const currentMode = wallpaperLayer.className.includes('solid') ? 'solid' : 'full';
-          if (currentMode === 'solid') {
-            wallpaperLayer.style.background = 'hsl(' + clamped + ', 60%, 85%)';
-          }
-          // 全屏模式下的壁纸也要更新
-          if (currentMode === 'full') {
-            // 保持图片不变
-          }
-        }
-  
-        if (paletteToggle && paletteToggle.classList.contains('active')) {
-          paletteToggle.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
-        }
-      }
-  
+    
       if (hueTrack) {
         hueTrack.addEventListener('mousedown', function(e) {
           isDragging = true;
@@ -5671,7 +5867,7 @@
           if (isDragging) setHue(getHueFromClick(e));
         });
         document.addEventListener('mouseup', function() { isDragging = false; });
-  
+    
         hueTrack.addEventListener('touchstart', function(e) {
           e.preventDefault();
           setHue(getHueFromClick(e.touches[0]));
@@ -5681,21 +5877,19 @@
           setHue(getHueFromClick(e.touches[0]));
         }, { passive: false });
       }
-  
+    
       // ----- 壁纸模式切换 -----
       let currentMode = 'full';
       const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
-  
+    
       function setWallpaper(mode) {
         currentMode = mode;
         if (!wallpaperLayer) return;
-  
-        // 先移除所有模式类
+    
         wallpaperLayer.className = 'wallpaper-layer';
-  
+    
         if (mode === 'full') {
           wallpaperLayer.classList.add('full');
-          // 使用你原有的壁纸图片
           wallpaperLayer.style.backgroundImage = "url('https://wsrv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101215361.jpg')";
           wallpaperLayer.style.backgroundSize = 'cover';
           wallpaperLayer.style.backgroundPosition = 'center 30%';
@@ -5708,8 +5902,7 @@
           wallpaperLayer.style.opacity = '1';
           wallpaperLayer.style.filter = 'none';
         }
-  
-        // 更新按钮状态
+    
         wallpaperBtns.forEach(function(btn) {
           btn.classList.toggle('active', btn.dataset.mode === mode);
           if (btn.classList.contains('active')) {
@@ -5724,13 +5917,13 @@
           }
         });
       }
-  
+    
       wallpaperBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
           setWallpaper(this.dataset.mode);
         });
       });
-  
+    
       // ----- 滑块控制 -----
       if (bgOpacity) {
         bgOpacity.addEventListener('input', function() {
@@ -5742,7 +5935,7 @@
           }
         });
       }
-  
+    
       if (blurAmount) {
         blurAmount.addEventListener('input', function() {
           var val = this.value + 'px';
@@ -5753,7 +5946,7 @@
           }
         });
       }
-  
+    
       if (cardOpacity) {
         cardOpacity.addEventListener('input', function() {
           var val = this.value / 100;
@@ -5764,12 +5957,12 @@
           });
         });
       }
-  
+    
       // ----- 布局切换 -----
       function setLayout(mode) {
         var articlesContainer = document.getElementById('weiboFeed') || document.querySelector('.stage-grid') || document.querySelector('.articles');
         if (!articlesContainer) return;
-  
+    
         if (mode === 'grid') {
           articlesContainer.style.display = 'grid';
           articlesContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
@@ -5779,7 +5972,7 @@
           articlesContainer.style.gridTemplateColumns = 'none';
           articlesContainer.style.gap = '0';
         }
-  
+    
         layoutBtns.forEach(function(btn) {
           btn.classList.toggle('active', btn.dataset.layout === mode);
           if (btn.classList.contains('active')) {
@@ -5794,28 +5987,56 @@
           }
         });
       }
-  
+    
       layoutBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
           setLayout(this.dataset.layout);
         });
       });
-  
+    
       // ----- 初始化 -----
-      // 默认色相 265
       setHue(265);
-      // 默认壁纸全屏
       setWallpaper('full');
-      // 默认网格布局
       setLayout('grid');
-  
-      // 如果已经有背景元素，应用初始透明度/模糊
+    
       if (wallpaperLayer) {
         wallpaperLayer.style.opacity = '0.5';
         wallpaperLayer.style.filter = 'blur(3px)';
       }
-  
+    
     })();
+
+      // ===== 白天/黑夜模式切换 =====
+        (function() {
+          const darkToggle = document.getElementById('darkToggle');
+          const darkIcon = document.getElementById('darkIcon');
+          const darkLabel = document.getElementById('darkLabel');
+      
+          // 检查本地存储是否有保存的模式
+          const savedMode = localStorage.getItem('darkMode');
+      
+          if (savedMode === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkIcon.textContent = '☀️';
+            darkLabel.textContent = '白天';
+          }
+      
+          if (darkToggle) {
+            darkToggle.addEventListener('click', function() {
+              const isDark = document.body.classList.toggle('dark-mode');
+      
+              if (isDark) {
+                darkIcon.textContent = '☀️';
+                darkLabel.textContent = '白天';
+                localStorage.setItem('darkMode', 'dark');
+              } else {
+                darkIcon.textContent = '🌙';
+                darkLabel.textContent = '夜间';
+                localStorage.setItem('darkMode', 'light');
+              }
+            });
+          }
+        })();
   </script>
     <!-- ===== 设置面板 ===== -->
     <div class="settings-panel" id="settingsPanel">
@@ -5876,6 +6097,5 @@
         </div>
       </div>
     </div>
-
 </body>
 </html>
