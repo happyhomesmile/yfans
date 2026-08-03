@@ -371,13 +371,20 @@
     }
     .stage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 10px; }
     .video-card {
-      background: rgba(255, 255, 255, 0.9); 
-      border-radius: 12px; overflow: hidden; position: relative;
-      cursor: pointer; transition: all 0.2s;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px; 
+      overflow: hidden; 
+      position: relative;
+      cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s;
       border: 1px solid rgba(255,255,255,0.3);
       box-shadow: 0 2px 8px rgba(36,104,168,0.03);
+      will-change: transform; 
     }
-    .video-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(36,104,168,0.06); }
+    .video-card:hover { 
+      transform: translateY(-2px) scale(1.02); 
+      box-shadow: 0 6px 20px rgba(36,104,168,0.06); 
+    }
     .video-tag {
       position: absolute; top: 8px; left: 8px;
       color: #fff; font-weight: 600; padding: 2px 8px; border-radius: 5px;
