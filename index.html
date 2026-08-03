@@ -61,6 +61,15 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+
+    .top-nav .menu-item.active {
+      background: rgba(36,104,168,0.10);
+      border-color: rgba(36,104,168,0.15);
+      color: #1a4a6f;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(36,104,168,0.06);
+    }
+    
     .top-nav .menu-item:hover {
       background: rgba(36, 104, 168, 0.12);
       border-color: rgba(36, 104, 168, 0.20);
@@ -1343,18 +1352,19 @@
   </button>
 
   <div class="main-page">
+    
     <!-- ===== 顶部导航栏 ===== -->
     <div class="top-nav">
-      <div class="menu-item active" data-page="diary"><span class="icon">📔</span> 饭记</div>
-      <div class="menu-item" data-page="stage"><span class="icon">🎤</span> 饭之大小作</div>
-      <div class="menu-item" data-page="fancam"><span class="icon">📸</span> 饭之拍</div>
-      <div class="menu-item" data-page="bobo"><span class="icon">📹</span> 饭之啵</div>
-      <div class="menu-item" data-page="contact"><span class="icon">💬</span> 饭言饭语</div>
-      <div class="menu-item" data-page="today"><span class="icon">📅</span> 那年今日</div>
-      <div class="menu-item" data-page="dream"><span class="icon">💪</span> 梦想汗水坚持</div>
-      <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 关于本站</div>
+      <div class="menu-item active" data-page="diary">饭记</div>
+      <div class="menu-item" data-page="stage">饭之大小作</div>
+      <div class="menu-item" data-page="fancam">饭之拍</div>
+      <div class="menu-item" data-page="bobo">饭之啵</div>
+      <div class="menu-item" data-page="contact">饭言饭语</div>
+      <div class="menu-item" data-page="today">那年今日</div>
+      <div class="menu-item" data-page="dream">梦想汗水坚持</div>
+      <div class="menu-item" data-page="wait">关于本站</div>
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
-        <span class="icon">🎨</span> 调色盘
+        <span class="icon">🎨</span>
       </div>
       <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
         <span class="icon" id="darkIcon">🌙</span> <span id="darkLabel">夜间</span>
@@ -4100,14 +4110,16 @@
     }
 
     // ===== 导航栏切换 =====
-    const menuItems = document.querySelectorAll('.menu-item');
+    const menuItems = document.querySelectorAll('.menu-item[data-page]');
     const allPages = document.querySelectorAll('.page-box');
     menuItems.forEach(item => {
       item.addEventListener('click', () => {
         const pageId = item.getAttribute('data-page');
         allPages.forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
-        
+
+        menuItems.forEach(m => m.classList.remove('active'));
+        item.classList.add('active');
         // 如果切换到饭之拍页面，重置所有筛选条件并重新显示卡片
         if (pageId === 'fancam') {
           const searchInput = document.getElementById('weiboSearch');
