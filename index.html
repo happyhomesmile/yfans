@@ -409,8 +409,21 @@
       background: rgba(242,248,252,0.35); padding: 6px 12px;
       border-top: 1px solid rgba(184,224,255,0.10);
     }
-    .video-name { font-size: 13px; color: #1f4a5a; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .video-date { font-size: 11px; color: #689888; margin-top: 1px; }
+    .video-name { 
+      font-size: 13px; 
+      color: #1f5a8a;
+      font-weight: 600; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+    }
+    .video-card .video-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;          /* 调大间距 */
+      padding: 6px 10px;
+    }
+    .video-date,.video-show { font-size: 11px; color: #689888; margin-top: 1px; }
 
     .empty-state { text-align: center; padding: 30px 0; color: #4a779e; font-size: 14px; }
 
@@ -1557,7 +1570,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 4px;
+      gap: 8px;
       padding: 4px 0;
       min-width: 0;
     }
@@ -1565,196 +1578,14 @@
     .stage-grid.list-mode .video-card .video-info .video-name {
       font-size: 16px;
       font-weight: 600;
-      color: #1a2f3f;
+      color: #1f5a8a;
       white-space: normal;
       line-height: 1.4;
       word-break: break-word;
     }
 
-    .stage-grid.list-mode .video-card .video-info .video-date {
-      font-size: 13px;
-      color: #6a8fa8;
-      font-weight: 500;
-    }
-
-    .stage-grid.list-mode .video-card .video-info .video-desc {
-      font-size: 13px;
-      color: #4a779e;
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .stage-grid.list-mode .video-card .video-info .video-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 12px;
-      color: #7a9ab0;
-      margin-top: 2px;
-    }
-
-    .stage-grid.list-mode .video-card .video-info .video-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* 封面图 fallback */
-    .stage-grid.list-mode .video-card .cover-fallback {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
-      color: #1a4a6f;
-    }
-
-    .stage-grid.list-mode .video-card .cover-fallback .video-icon {
-      font-size: 28px;
-      margin-bottom: 4px;
-    }
-
-    .stage-grid.list-mode .video-card .cover-fallback .video-tip {
-      font-size: 11px;
-      color: #4a779e;
-    }
-
-    /* 响应式：小屏幕改为上下布局 */
-    @media (max-width: 640px) {
-      .stage-grid.list-mode .video-card {
-        flex-direction: column;
-        padding: 10px;
-      }
-      .stage-grid.list-mode .video-card .video-cover-box {
-        width: 100%;
-        min-width: unset;
-        aspect-ratio: 16 / 9;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-name {
-        font-size: 14px;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-date {
-        font-size: 12px;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-desc {
-        font-size: 12px;
-        -webkit-line-clamp: 1;
-      }
-    }
-
-    /* ===== 列表模式（饭之大小作 & 饭之啵） ===== */
-    .stage-grid.list-mode {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 10px;
-    }
-
-    .stage-grid.list-mode .video-card {
-      display: flex;
-      flex-direction: row;
-      gap: 16px;
-      align-items: stretch;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid rgba(26, 74, 111, 0.08);
-      box-shadow: 0 2px 8px rgba(36, 104, 168, 0.04);
-      transition: all 0.25s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: visible;
-    }
-
-    .stage-grid.list-mode .video-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(36, 104, 168, 0.10);
-      background: rgba(255, 255, 255, 0.85);
-    }
-
-    /* 封面图 - 左侧 */
-    .stage-grid.list-mode .video-card .video-cover-box {
-      width: 200px;
-      min-width: 200px;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
-    }
-
-    .stage-grid.list-mode .video-card .video-cover-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .stage-grid.list-mode .video-card:hover .video-cover-box img {
-      transform: scale(1.04);
-    }
-
-    .stage-grid.list-mode .video-card .video-cover-box .play-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 36px;
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
-      pointer-events: none;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    .stage-grid.list-mode .video-card:hover .video-cover-box .play-icon {
-      opacity: 1;
-    }
-
-    /* 标签 - 左上角 */
-    .stage-grid.list-mode .video-card .video-tag {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      color: #fff;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 4px;
-      font-size: 10px;
-      letter-spacing: 0.3px;
-      z-index: 2;
-    }
-
-    /* 右侧信息区 */
-    .stage-grid.list-mode .video-card .video-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-      padding: 4px 0;
-      min-width: 0;
-    }
-
-    .stage-grid.list-mode .video-card .video-info .video-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1a2f3f;
-      white-space: normal;
-      line-height: 1.4;
-      word-break: break-word;
-    }
-
-    .stage-grid.list-mode .video-card .video-info .video-date {
+    .stage-grid.list-mode .video-card .video-info .video-date,
+    .stage-grid.list-mode .video-card .video-info .video-show {
       font-size: 13px;
       color: #6a8fa8;
       font-weight: 500;
@@ -1858,7 +1689,9 @@
     align-items: center; justify-content: center;
     padding: 0; overflow: hidden;
   " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-    <span style="display:inline-block;width:60%;height:60%;background-color:#ffffff;-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png" 
+        alt="返回顶部" 
+        style="width:28px; height:28px; display:block; filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg);" />
   </button>
 
   <div class="main-page">
@@ -1874,7 +1707,9 @@
       <div class="menu-item" data-page="dream">梦想汗水坚持</div>
       <div class="menu-item" data-page="wait">关于本站</div>
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;display:flex;align-items:center;justify-content:center;">
-        <span style="display:inline-block;width:20px;height:20px;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" 
+            alt="调色盘" 
+            style="width:20px; height:20px; display:block; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </div>
       <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
         <img id="darkIcon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" alt="切换主题" class="dark-toggle-icon" />
@@ -1982,7 +1817,10 @@
 
           <div class="filter-search-row">
           <div class="search-box">
-            <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+          <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+               alt="搜索" 
+               class="search-icon" 
+               style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
             <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
           </div>
           </div>
@@ -2014,7 +1852,10 @@
 
             <div class="filter-search-row">
               <div class="search-box">
-                <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+              <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+                   alt="搜索" 
+                   class="search-icon" 
+                   style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
                 <input type="text" id="weiboSearch" placeholder="搜索内容..." />
               </div>
             </div>
@@ -4012,7 +3853,10 @@
           <!-- 搜索栏 -->
           <div class="filter-search-row">
           <div class="search-box">
-            <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+          <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+               alt="搜索" 
+               class="search-icon" 
+               style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
             <input type="text" id="boboSearch" placeholder="搜索内容 / 日期..." />
           </div>
           </div>
@@ -4772,47 +4616,47 @@
     // ===== 舞台数据 =====
     const unitData = [
       // ===== 不空因果 =====
-      { date: '2026.07.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
-      { date: '2026.07.24', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
-      { date: '2026.07.19', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg' },
-      { date: '2026.07.18', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141019316.jpg' },
-      { date: '2026.07.12', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141022013.jpg' },
-      { date: '2026.07.11', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141015276.jpg' },
-      { date: '2026.07.04', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
-      { date: '2026.06.28', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.jpg' },
-      { date: '2026.06.27', title: '《不空因果》', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
+      { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
+      { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
+      { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg' },
+      { date: '2026.07.18', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141019316.jpg' },
+      { date: '2026.07.12', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141022013.jpg' },
+      { date: '2026.07.11', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141015276.jpg' },
+      { date: '2026.07.04', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
+      { date: '2026.06.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.jpg' },
+      { date: '2026.06.27', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
     
       // ===== 等价交换 =====
-      { date: '2026.06.12', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.06.07', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.05.05', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.04.24', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.03.01', title: '《等价交换》', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.06.12', title: '等价交换', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.06.07', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.05.05', title: '等价交换', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.04.24', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
+      { date: '2026.03.01', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
     
       // ===== High Light =====
-      { date: '2026.05.24', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.14', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.03', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.23', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.05', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.20', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.01', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.31', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.25', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.18', title: '《High Light》', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.17', title: '《High Light》', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.24', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.14', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.05.03', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.04.23', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.04.05', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.03.20', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.03.01', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.31', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.25', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
+      { date: '2026.01.17', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
     
       // ===== 浅呼吸（Axis Kiss） =====
-      { date: '2026.06.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg' },
-      { date: '2026.04.05', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg' },
-      { date: '2026.03.21', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg' },
-      { date: '2026.03.20', title: '《浅呼吸（Axis Kiss）》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg' },
+      { date: '2026.06.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg' },
+      { date: '2026.04.05', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg' },
+      { date: '2026.03.21', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg' },
+      { date: '2026.03.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg' },
     
       // ===== 再见制服 =====
-      { date: '2026.05.30', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.28', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.17', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.01.25', title: '《再见制服》', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.30', title: '再见制服', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.28', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.17', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.01.25', title: '再见制服', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
     ];
     const specialData = [
       { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg' },
@@ -4841,9 +4685,70 @@
       { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg' },
       { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg' }
     ];
+    const showMap = {
+      '2026.07.28|不空因果': '【SNH48】TEAM NII《肆时墟》公演',
+      '2026.07.24|花园舞曲': '【SNH48】TEAM NII《肆时墟》公演',
+      '2026.07.24|不空因果': '【SNH48】TEAM NII《肆时墟》公演',
+      '2026.07.19|不空因果': '【SNH48】TEAM NII《肆时墟》钟亚男生日公演',
+      '2026.07.18|不空因果': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
+      '2026.07.18|One Life': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
+      '2026.07.18|新目的地&星光环绕的孤岛': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
+      '2026.07.12|不空因果': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|致明天': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|HAKUNAMATATA': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|七点钟（7 o\'clock）': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|白昼街灯': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|Dream up': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|初日': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.12|悬铃木&因为喜欢你&钻石呐喊': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
+      '2026.07.11|不空因果': '【SNH48】TEAM NII 胡晓慧《一小部分我》生日公演',
+      '2026.07.04|不空因果': '【SNH48】TEAM NII《肆时墟》重庆巡演',
+      '2026.06.28|不空因果': '【SNH48】TEAM NII《肆时墟》首演（第二场）',
+      '2026.06.27|不空因果': '【SNH48】TEAM NII《肆时墟》首演',
+      '2026.06.20|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演',
+      '2026.06.20|睡衣兜风': '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演',
+      '2026.06.12|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.06.07|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.05.30|再见制服': '【SNH48】TEAM NII《Nice to meet you II》钟亚男季度MVP公演',
+      '2026.05.28|再见制服': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.05.24|High Light': '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演',
+      '2026.05.24|不可阻挡': '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演',
+      '2026.05.17|再见制服': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.05.14|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.05.05|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.05.03|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.04.24|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.04.23|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.04.23|青春的约定': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.04.18|High Light': '【SNH48】20260418 Team NII《Nice to Meet You II》北京巡演',
+      '2026.04.05|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.04.05|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.28|最后的曙光': '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演',
+      '2026.03.21|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.21|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.20|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.20|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.07|月': '【SNH48】TEAM NII《Plan B》刘洁毕业公演',
+      '2026.03.04|人鱼': '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场',
+      '2026.03.04|Mad World': '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场',
+      '2026.03.01|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.03.01|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
+      '2026.02.07|返校日': '【SNH48】新春特别公演 Team NII &Team X 联合公演',
+      '2026.01.31|乐曜日': '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演',
+      '2026.01.31|High Light': '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演',
+      '2026.01.25|再见制服': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
+      '2026.01.25|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
+      '2026.01.18|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
+      '2026.01.17|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
+      '2026.01.16|叹云兮': '【SNH48】TEAM HII《赫兹共振》声动星河淘汰赛',
+      '2026.01.10|Miss Victouria': '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演',
+      '2026.01.03|梦之河': '【SNH48】《声动星河之匿声唱将》特别公演'
+    };
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
     const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
+    let currentLayoutMode = 'list';
+
 
     function extractBvid(url) {
       const match = url.match(/BV([a-zA-Z0-9]+)/);
@@ -4888,34 +4793,30 @@
 
     const grid = document.getElementById('stageGrid');
     
-    // 渲染卡片函数
+    // ===== 渲染饭之大小作卡片（列表模式） =====
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
-      // 1. 获取所有导航按钮
+      // 1. 获取所有导航按钮并重置
       const navBtns = document.querySelectorAll('#stageNav .stage-nav-item');
-      
-      // 2. 【关键修复】清除所有按钮的内联样式和 active 类，防止残留
       navBtns.forEach(btn => {
         btn.classList.remove('active');
-        btn.style.background = ''; 
+        btn.style.background = '';
         btn.style.color = '';
         btn.style.borderColor = '';
         btn.style.boxShadow = '';
       });
       
-      // 3. 激活当前选中的按钮
+      // 2. 激活当前选中的按钮
       let targetBtn = document.querySelector(`#stageNav .stage-nav-item[data-category="${category}"]`);
       if (!targetBtn) {
         targetBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
-        category = 'all'; 
+        category = 'all';
       }
       if (targetBtn) {
         targetBtn.classList.add('active');
       }
-
-      // 更新全局变量
       currentCategory = category;
 
-      // 获取并过滤数据
+      // 3. 获取并过滤数据
       const data = getDataByCategory(category);
       const filtered = data.filter(item => {
         const month = item.date ? item.date.slice(0,7) : '';
@@ -4924,28 +4825,31 @@
         return matchMonth && matchKey;
       });
 
-      // 渲染空状态或内容
+      // 4. 渲染
       if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
         return;
       }
-      
+
       let html = '';
       for (const item of filtered) {
+        // 判断分类并设置标签
         const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
         const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
         const isAssist = assistData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
         
         let tagText = 'UNIT', tagColor = '#00a1d6';
-        if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-        else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
-        
         if (category === 'all') {
           if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
           else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
           else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
+        } else {
+          if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+          else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+          else if (category === 'assist') { tagText = '助演'; tagColor = '#8e44ad'; }
         }
-        
+
+        // 封面图
         let coverHtml = '';
         if (item.cover) {
           coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
@@ -4957,11 +4861,12 @@
             </div>
           `;
         }
-        
-        const descText = (category === 'all') 
-          ? (isUnit ? 'UNIT · ' + item.date : isSpecial ? '特殊舞台 · ' + item.date : '助演 · ' + item.date)
-          : item.date;
 
+        // 获取公演名
+        const key = item.date + '|' + item.title;
+        const showName = showMap[key] || '';
+
+        // 生成卡片
         html += `
           <div class="video-card" data-url="${item.url}" data-title="${item.title}" onclick="window.open('${item.url || '#'}','_blank')">
             <div class="video-cover-box">
@@ -4972,16 +4877,13 @@
             <div class="video-info">
               <div class="video-name">${item.title}</div>
               <div class="video-date">${item.date || ''}</div>
-              <div class="video-desc">${descText}</div>
-              <div class="video-meta">
-                <span>👁️ ${Math.floor(Math.random() * 500 + 50)}</span>
-                <span>📅 ${item.date || ''}</span>
-              </div>
+              ${showName ? `<div class="video-show">${showName}</div>` : ''}
             </div>
           </div>
         `;
       }
-      grid.className = 'stage-grid list-mode';
+
+      grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
       grid.innerHTML = html;
     }
 
@@ -5253,7 +5155,7 @@
           </div>
         `;
       }
-      boboGrid.className = 'stage-grid list-mode';
+      boboGrid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
       boboGrid.innerHTML = html;
     }
     
@@ -6490,6 +6392,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const layoutBtns = document.querySelectorAll('#layoutBtns .btn-sm');
         
         function setLayout(mode) {
+        currentLayoutMode = mode;
           // 控制饭之拍
           const feed = document.getElementById('weiboFeed');
           if (feed) {
