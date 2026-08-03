@@ -1851,13 +1851,14 @@
     position: fixed; bottom: 30px; right: 30px;
     width: 48px; height: 48px; border-radius: 50%;
     background: rgba(31, 90, 138, 0.85); backdrop-filter: blur(8px);
-    color: #fff; border: 1px solid rgba(255,255,255,0.2);
-    font-size: 20px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
     box-shadow: 0 4px 16px rgba(31,90,138,0.3);
     transition: all 0.3s ease; display: none; z-index: 999;
     align-items: center; justify-content: center;
+    padding: 0; overflow: hidden;
   " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-    ↑
+    <span style="display:inline-block;width:60%;height:60%;background-color:#ffffff;-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png);mask-size:contain;mask-repeat:no-repeat;"></span>
   </button>
 
   <div class="main-page">
@@ -1872,8 +1873,8 @@
       <div class="menu-item" data-page="today">那年今日</div>
       <div class="menu-item" data-page="dream">梦想汗水坚持</div>
       <div class="menu-item" data-page="wait">关于本站</div>
-      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
-        <span class="icon">🎨</span>
+      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;display:flex;align-items:center;justify-content:center;">
+        <span style="display:inline-block;width:20px;height:20px;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png);mask-size:contain;mask-repeat:no-repeat;"></span>
       </div>
       <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
         <img id="darkIcon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" alt="切换主题" class="dark-toggle-icon" />
@@ -1980,10 +1981,10 @@
           </div>
 
           <div class="filter-search-row">
-            <div class="search-box">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
-            </div>
+          <div class="search-box">
+            <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+            <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
+          </div>
           </div>
 
           <div class="filter-tabs-row" id="categoryTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
@@ -2013,7 +2014,7 @@
 
             <div class="filter-search-row">
               <div class="search-box">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
                 <input type="text" id="weiboSearch" placeholder="搜索内容..." />
               </div>
             </div>
@@ -4010,10 +4011,10 @@
 
           <!-- 搜索栏 -->
           <div class="filter-search-row">
-            <div class="search-box">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="boboSearch" placeholder="搜索内容 / 日期..." />
-            </div>
+          <div class="search-box">
+            <span class="search-icon" style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;background-color:var(--theme-color);-webkit-mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;mask-image:url(https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png);mask-size:contain;mask-repeat:no-repeat;"></span>
+            <input type="text" id="boboSearch" placeholder="搜索内容 / 日期..." />
+          </div>
           </div>
 
           <!-- 月份分类标签 -->
@@ -4037,9 +4038,9 @@
         <div class="info-box" style="padding:18px 22px;">
     
           <div class="platform-nav" id="contactNav">
-            <button class="platform-nav-item active" data-category="food">🍚 饭食饭</button>
-            <button class="platform-nav-item" data-category="travel">✈️ 旅行椰饭</button>
-            <button class="platform-nav-item" data-category="words">💬 饭所言</button>
+            <button class="platform-nav-item active" data-category="food">饭食饭</button>
+            <button class="platform-nav-item" data-category="travel">旅行椰饭</button>
+            <button class="platform-nav-item" data-category="words">饭所言</button>
           </div>
 
             <!-- ===== 内容区 ===== -->
@@ -6716,7 +6717,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- ===== 设置面板 ===== -->
   <div class="settings-panel" id="settingsPanel">
     <div class="panel-title">
-      <span>⚙️ 页面设置</span>
+      <span>页面设置</span>
     </div>
 
     <!-- 色相 -->
