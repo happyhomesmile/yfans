@@ -14,6 +14,15 @@
     /* ===== 主布局 ===== */
     .main-page { display: flex; flex-direction: column; width: 100vw; min-height: 100vh; background: transparent; }
 
+    :root {
+      --theme-hue: 265;
+      --theme-color: hsl(var(--theme-hue), 80%, 55%);
+      --theme-light: hsl(var(--theme-hue), 70%, 94%);
+      --bg-opacity: 1;
+      --blur-amount: 0px;
+      --card-opacity: 1;
+    }
+
     /* ===== 顶部导航栏 ===== */
     .top-nav {
       position: sticky;
@@ -885,6 +894,202 @@
         padding: 4px 12px;
       }
     }
+
+    /* ===== 设置面板样式 ===== */
+    
+    /* 导航栏中的调色盘按钮 */
+    .top-nav .menu-item.palette-nav {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1.5px solid rgba(0, 0, 0, 0.06);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .top-nav .menu-item.palette-nav:hover {
+      background: rgba(36, 104, 168, 0.12);
+      border-color: rgba(36, 104, 168, 0.2);
+    }
+    .top-nav .menu-item.palette-nav.active {
+      background: var(--theme-color);
+      color: #fff;
+      border-color: var(--theme-color);
+    }
+    .top-nav .menu-item.palette-nav.active:hover {
+      background: var(--theme-color);
+    }
+    
+    /* 设置面板 - 弹出层 */
+    .settings-panel {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      z-index: 998;
+      width: 340px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(32px) saturate(1.3);
+      -webkit-backdrop-filter: blur(32px) saturate(1.3);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.10);
+      padding: 20px 22px 24px;
+      transform: translateY(-12px) scale(0.96);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .settings-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .settings-panel::-webkit-scrollbar { width: 4px; }
+    .settings-panel::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.12); border-radius: 10px; }
+    
+    .panel-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #88889a;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .panel-title .badge {
+      font-size: 0.6rem;
+      background: rgba(0, 0, 0, 0.04);
+      padding: 2px 12px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #88889a;
+    }
+    
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 10px 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .control-row label {
+      font-weight: 500;
+      font-size: 0.78rem;
+      color: #1a1a2e;
+      min-width: 56px;
+      white-space: nowrap;
+    }
+    
+    /* 色相颜色条 */
+    .control-row .hue-track {
+      flex: 1;
+      min-width: 100px;
+      height: 26px;
+      border-radius: 40px;
+      background: linear-gradient(to right,
+        hsl(0, 80%, 55%),
+        hsl(30, 80%, 55%),
+        hsl(60, 80%, 55%),
+        hsl(120, 80%, 55%),
+        hsl(180, 80%, 55%),
+        hsl(240, 80%, 55%),
+        hsl(300, 80%, 55%),
+        hsl(360, 80%, 55%)
+      );
+      position: relative;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      flex-shrink: 0;
+    }
+    .control-row .hue-track .thumb {
+      position: absolute;
+      top: -5px;
+      width: 18px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 40px;
+      border: 2px solid #1a1a2e;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+      transform: translateX(-50%);
+      transition: left 0.05s;
+    }
+    .control-row .hue-value {
+      font-weight: 700;
+      font-size: 0.78rem;
+      min-width: 38px;
+      color: var(--theme-color);
+      text-align: center;
+    }
+    
+    /* 小按钮组 */
+    .btn-group-sm {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .btn-sm {
+      padding: 4px 12px;
+      border-radius: 30px;
+      border: 1.5px solid rgba(0, 0, 0, 0.06);
+      background: transparent;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-sm:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+    .btn-sm.active {
+      background: var(--theme-color);
+      color: #fff;
+      border-color: var(--theme-color);
+    }
+    
+    /* 滑块 */
+    .slider-sm {
+      flex: 1;
+      min-width: 70px;
+      accent-color: var(--theme-color);
+      cursor: pointer;
+      height: 4px;
+    }
+    .slider-val {
+      font-size: 0.72rem;
+      color: #1a1a2e;
+      min-width: 34px;
+      text-align: right;
+      font-weight: 500;
+    }
+    
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin: 12px 0 14px;
+    }
+    
+    /* 响应式 */
+    @media (max-width: 480px) {
+      .settings-panel {
+        top: 60px;
+        right: 12px;
+        left: 12px;
+        width: auto;
+        max-height: calc(100vh - 80px);
+        padding: 16px 16px 20px;
+      }
+      .control-row label {
+        min-width: 48px;
+        font-size: 0.7rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -925,6 +1130,10 @@
       <div class="menu-item" data-page="today"><span class="icon">📅</span> 那年今日</div>
       <div class="menu-item" data-page="dream"><span class="icon">💪</span> 梦想汗水坚持</div>
       <div class="menu-item" data-page="wait"><span class="icon">⏳</span> 关于本站</div>
+      <!-- 👇 新增调色盘 -->
+      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
+        <span class="icon">🎨</span> 调色盘
+      </div>
     </div>
 
     <!-- ===== 内容区 ===== -->
@@ -5341,7 +5550,332 @@
         closeModal();
       }
     });
+
+    (function() {
+      const root = document.documentElement;
+      const paletteToggle = document.getElementById('paletteToggle');
+      const settingsPanel = document.getElementById('settingsPanel');
+  
+      const hueTrack = document.getElementById('hueTrack');
+      const hueThumb = document.getElementById('hueThumb');
+      const hueDisplay = document.getElementById('hueDisplay');
+      const wallpaperBtns = document.querySelectorAll('#wallpaperBtns .btn-sm');
+      const layoutBtns = document.querySelectorAll('#layoutBtns .btn-sm');
+  
+      const bgOpacity = document.getElementById('bgOpacity');
+      const bgOpacityVal = document.getElementById('bgOpacityVal');
+      const blurAmount = document.getElementById('blurAmount');
+      const blurVal = document.getElementById('blurVal');
+      const cardOpacity = document.getElementById('cardOpacity');
+      const cardOpacityVal = document.getElementById('cardOpacityVal');
+  
+      // ----- 面板展开/收起 -----
+      let panelOpen = false;
+  
+      if (paletteToggle && settingsPanel) {
+        paletteToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          panelOpen = !panelOpen;
+          this.classList.toggle('active', panelOpen);
+          settingsPanel.classList.toggle('open', panelOpen);
+        });
+  
+        document.addEventListener('click', function(e) {
+          if (panelOpen &&
+            !settingsPanel.contains(e.target) &&
+            !paletteToggle.contains(e.target)) {
+            panelOpen = false;
+            paletteToggle.classList.remove('active');
+            settingsPanel.classList.remove('open');
+          }
+        });
+      }
+  
+      // ----- 色相颜色条 -----
+      let isDragging = false;
+  
+      function getHueFromClick(e) {
+        if (!hueTrack) return 265;
+        const rect = hueTrack.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        return Math.round(Math.max(0, Math.min(1, x)) * 360);
+      }
+  
+      function setHue(hue) {
+        const clamped = Math.max(0, Math.min(360, hue));
+        const pct = (clamped / 360) * 100;
+        if (hueThumb) hueThumb.style.left = pct + '%';
+        if (hueDisplay) hueDisplay.textContent = clamped + '°';
+        root.style.setProperty('--theme-hue', clamped);
+  
+      function setHue(hue) {
+        const clamped = Math.max(0, Math.min(360, hue));
+        const pct = (clamped / 360) * 100;
+        if (hueThumb) hueThumb.style.left = pct + '%';
+        if (hueDisplay) hueDisplay.textContent = clamped + '°';
+        root.style.setProperty('--theme-hue', clamped);
+      
+        // ===== 只有这些会变色 =====
+        // 1. 设置面板里的 active 按钮
+        document.querySelectorAll('#wallpaperBtns .btn-sm.active, #layoutBtns .btn-sm.active').forEach(function(btn) {
+          btn.style.background = 'hsl(' + clamped + ', 80%, 55%)';
+          btn.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
+        });
+      
+        // 2. 调色盘导航按钮的边框
+        if (paletteToggle && paletteToggle.classList.contains('active')) {
+          paletteToggle.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
+        }
+      
+        // 3. 色相值显示文字
+        if (hueDisplay) {
+          hueDisplay.style.color = 'hsl(' + clamped + ', 80%, 55%)';
+        }
+      
+        // 4. 纯色模式背景跟随色相
+        const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
+        if (wallpaperLayer) {
+          const isSolid = wallpaperLayer.className.includes('solid');
+          if (isSolid) {
+            wallpaperLayer.style.background = 'hsl(' + clamped + ', 60%, 85%)';
+          }
+        }
+      
+        // ===== 其他所有元素的颜色都不变 =====
+      }
+  
+        // 纯色模式跟随色相
+        const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
+        if (wallpaperLayer) {
+          const currentMode = wallpaperLayer.className.includes('solid') ? 'solid' : 'full';
+          if (currentMode === 'solid') {
+            wallpaperLayer.style.background = 'hsl(' + clamped + ', 60%, 85%)';
+          }
+          // 全屏模式下的壁纸也要更新
+          if (currentMode === 'full') {
+            // 保持图片不变
+          }
+        }
+  
+        if (paletteToggle && paletteToggle.classList.contains('active')) {
+          paletteToggle.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
+        }
+      }
+  
+      if (hueTrack) {
+        hueTrack.addEventListener('mousedown', function(e) {
+          isDragging = true;
+          setHue(getHueFromClick(e));
+        });
+        document.addEventListener('mousemove', function(e) {
+          if (isDragging) setHue(getHueFromClick(e));
+        });
+        document.addEventListener('mouseup', function() { isDragging = false; });
+  
+        hueTrack.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          setHue(getHueFromClick(e.touches[0]));
+        }, { passive: false });
+        hueTrack.addEventListener('touchmove', function(e) {
+          e.preventDefault();
+          setHue(getHueFromClick(e.touches[0]));
+        }, { passive: false });
+      }
+  
+      // ----- 壁纸模式切换 -----
+      let currentMode = 'full';
+      const wallpaperLayer = document.getElementById('wallpaperLayer') || document.querySelector('.wallpaper-layer');
+  
+      function setWallpaper(mode) {
+        currentMode = mode;
+        if (!wallpaperLayer) return;
+  
+        // 先移除所有模式类
+        wallpaperLayer.className = 'wallpaper-layer';
+  
+        if (mode === 'full') {
+          wallpaperLayer.classList.add('full');
+          // 使用你原有的壁纸图片
+          wallpaperLayer.style.backgroundImage = "url('https://wsrv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101215361.jpg')";
+          wallpaperLayer.style.backgroundSize = 'cover';
+          wallpaperLayer.style.backgroundPosition = 'center 30%';
+          wallpaperLayer.style.opacity = '0.5';
+          wallpaperLayer.style.filter = 'blur(3px)';
+        } else if (mode === 'solid') {
+          wallpaperLayer.classList.add('solid');
+          const hue = parseInt(root.style.getPropertyValue('--theme-hue')) || 265;
+          wallpaperLayer.style.background = 'hsl(' + hue + ', 60%, 85%)';
+          wallpaperLayer.style.opacity = '1';
+          wallpaperLayer.style.filter = 'none';
+        }
+  
+        // 更新按钮状态
+        wallpaperBtns.forEach(function(btn) {
+          btn.classList.toggle('active', btn.dataset.mode === mode);
+          if (btn.classList.contains('active')) {
+            const hue = parseInt(root.style.getPropertyValue('--theme-hue')) || 265;
+            btn.style.background = 'hsl(' + hue + ', 80%, 55%)';
+            btn.style.borderColor = 'hsl(' + hue + ', 80%, 55%)';
+            btn.style.color = '#fff';
+          } else {
+            btn.style.background = 'transparent';
+            btn.style.borderColor = 'rgba(0,0,0,0.06)';
+            btn.style.color = '#1a1a2e';
+          }
+        });
+      }
+  
+      wallpaperBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setWallpaper(this.dataset.mode);
+        });
+      });
+  
+      // ----- 滑块控制 -----
+      if (bgOpacity) {
+        bgOpacity.addEventListener('input', function() {
+          var val = this.value / 100;
+          bgOpacityVal.textContent = this.value + '%';
+          root.style.setProperty('--bg-opacity', val);
+          if (wallpaperLayer) {
+            wallpaperLayer.style.opacity = val * 0.5;
+          }
+        });
+      }
+  
+      if (blurAmount) {
+        blurAmount.addEventListener('input', function() {
+          var val = this.value + 'px';
+          blurVal.textContent = val;
+          root.style.setProperty('--blur-amount', val);
+          if (wallpaperLayer) {
+            wallpaperLayer.style.filter = 'blur(' + val + ')';
+          }
+        });
+      }
+  
+      if (cardOpacity) {
+        cardOpacity.addEventListener('input', function() {
+          var val = this.value / 100;
+          cardOpacityVal.textContent = this.value + '%';
+          root.style.setProperty('--card-opacity', val);
+          document.querySelectorAll('.info-box, .weibo-card, .xiaohongshu-card, .article-card, .video-card, .miracle-card, .link-card, .welcome-header, .stage-nav-item, .category-tab, .timeline-sidebar, .popup-box').forEach(function(el) {
+            el.style.background = 'rgba(255, 255, 255, ' + val + ')';
+          });
+        });
+      }
+  
+      // ----- 布局切换 -----
+      function setLayout(mode) {
+        var articlesContainer = document.getElementById('weiboFeed') || document.querySelector('.stage-grid') || document.querySelector('.articles');
+        if (!articlesContainer) return;
+  
+        if (mode === 'grid') {
+          articlesContainer.style.display = 'grid';
+          articlesContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+          articlesContainer.style.gap = '16px';
+        } else {
+          articlesContainer.style.display = 'block';
+          articlesContainer.style.gridTemplateColumns = 'none';
+          articlesContainer.style.gap = '0';
+        }
+  
+        layoutBtns.forEach(function(btn) {
+          btn.classList.toggle('active', btn.dataset.layout === mode);
+          if (btn.classList.contains('active')) {
+            var hue = parseInt(root.style.getPropertyValue('--theme-hue')) || 265;
+            btn.style.background = 'hsl(' + hue + ', 80%, 55%)';
+            btn.style.borderColor = 'hsl(' + hue + ', 80%, 55%)';
+            btn.style.color = '#fff';
+          } else {
+            btn.style.background = 'transparent';
+            btn.style.borderColor = 'rgba(0,0,0,0.06)';
+            btn.style.color = '#1a1a2e';
+          }
+        });
+      }
+  
+      layoutBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLayout(this.dataset.layout);
+        });
+      });
+  
+      // ----- 初始化 -----
+      // 默认色相 265
+      setHue(265);
+      // 默认壁纸全屏
+      setWallpaper('full');
+      // 默认网格布局
+      setLayout('grid');
+  
+      // 如果已经有背景元素，应用初始透明度/模糊
+      if (wallpaperLayer) {
+        wallpaperLayer.style.opacity = '0.5';
+        wallpaperLayer.style.filter = 'blur(3px)';
+      }
+  
+    })();
   </script>
+    <!-- ===== 设置面板 ===== -->
+    <div class="settings-panel" id="settingsPanel">
+      <div class="panel-title">
+        <span>⚙️ 页面设置</span>
+        <span class="badge">实时预览</span>
+      </div>
+  
+      <!-- 色相 -->
+      <div class="control-row">
+        <label>🎨 色相</label>
+        <div class="hue-track" id="hueTrack">
+          <div class="thumb" id="hueThumb" style="left:73.6%"></div>
+        </div>
+        <span class="hue-value" id="hueDisplay">265°</span>
+      </div>
+  
+      <!-- 壁纸模式 -->
+      <div class="control-row">
+        <label>🖼️ 壁纸</label>
+        <div class="btn-group-sm" id="wallpaperBtns">
+          <button class="btn-sm active" data-mode="full">全屏</button>
+          <button class="btn-sm" data-mode="solid">纯色</button>
+        </div>
+      </div>
+  
+      <hr class="divider" />
+  
+      <!-- 背景透明度 -->
+      <div class="control-row">
+        <label>🔆 背景透明度</label>
+        <input type="range" class="slider-sm" id="bgOpacity" min="0" max="100" value="100" />
+        <span class="slider-val" id="bgOpacityVal">100%</span>
+      </div>
+  
+      <!-- 背景模糊 -->
+      <div class="control-row">
+        <label>🌫️ 背景模糊</label>
+        <input type="range" class="slider-sm" id="blurAmount" min="0" max="20" value="0" step="0.5" />
+        <span class="slider-val" id="blurVal">0px</span>
+      </div>
+  
+      <!-- 卡片透明度 -->
+      <div class="control-row">
+        <label>📇 卡片透明度</label>
+        <input type="range" class="slider-sm" id="cardOpacity" min="30" max="100" value="100" />
+        <span class="slider-val" id="cardOpacityVal">100%</span>
+      </div>
+  
+      <hr class="divider" />
+  
+      <!-- 布局 -->
+      <div class="control-row">
+        <label>📄 布局</label>
+        <div class="btn-group-sm" id="layoutBtns">
+          <button class="btn-sm active" data-layout="grid">网格</button>
+          <button class="btn-sm" data-layout="list">列表</button>
+        </div>
+      </div>
+    </div>
 
 </body>
 </html>
