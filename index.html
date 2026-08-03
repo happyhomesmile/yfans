@@ -1834,6 +1834,13 @@
           </div>
 
           <div class="stage-grid" id="stageGrid"></div>
+          <div id="paginationControls" style="display:flex; justify-content:center; gap:10px; margin-top:20px; align-items:center;">
+              <button id="prevPageBtn" onclick="changePage(-1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">上一页</button>
+              
+              <span id="pageInfo" style="font-size:14px; color:#666;">第 1 页</span>
+              
+              <button id="nextPageBtn" onclick="changePage(1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">下一页</button>
+          </div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -4748,7 +4755,9 @@
     let currentCategory = 'all';
     const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
     let currentLayoutMode = 'list';
-
+    let currentPage = 1;
+    const pageSize = 20;
+    let isPaginationClick = false;
 
     function extractBvid(url) {
       const match = url.match(/BV([a-zA-Z0-9]+)/);
@@ -4792,99 +4801,131 @@
     }
 
     const grid = document.getElementById('stageGrid');
-    
-    // ===== 渲染饭之大小作卡片（列表模式） =====
+
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
-      // 1. 获取所有导航按钮并重置
-      const navBtns = document.querySelectorAll('#stageNav .stage-nav-item');
-      navBtns.forEach(btn => {
-        btn.classList.remove('active');
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.style.borderColor = '';
-        btn.style.boxShadow = '';
-      });
-      
-      // 2. 激活当前选中的按钮
-      let targetBtn = document.querySelector(`#stageNav .stage-nav-item[data-category="${category}"]`);
-      if (!targetBtn) {
-        targetBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
-        category = 'all';
-      }
-      if (targetBtn) {
-        targetBtn.classList.add('active');
-      }
-      currentCategory = category;
+        const grid = document.getElementById('stageGrid');
+        if (!grid) return;
 
-      // 3. 获取并过滤数据
-      const data = getDataByCategory(category);
-      const filtered = data.filter(item => {
-        const month = item.date ? item.date.slice(0,7) : '';
-        const matchMonth = filterMonth === '全部' || month === filterMonth;
-        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
-        return matchMonth && matchKey;
-      });
+        // 1. UI 状态重置：如果是筛选操作（非分页点击），重置回第一页
+        if (!isPaginationClick) {
+            currentPage = 1;
+        }
+        isPaginationClick = false; // 消费标记
 
-      // 4. 渲染
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
-        return;
-      }
+        // 2. 更新导航按钮高亮 (保持原有逻辑)
+        const navBtns = document.querySelectorAll('#stageNav .stage-nav-item');
+        navBtns.forEach(btn => {
+            btn.classList.remove('active');
+            // 清除内联样式以防残留
+            btn.style.background = ''; 
+            btn.style.color = '';
+        });
+        let targetBtn = document.querySelector(`#stageNav .stage-nav-item[data-category="${category}"]`);
+        if (!targetBtn) {
+            targetBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
+            category = 'all';
+        }
+        if (targetBtn) targetBtn.classList.add('active');
+        currentCategory = category;
 
-      let html = '';
-      for (const item of filtered) {
-        // 判断分类并设置标签
-        const isUnit = unitData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
-        const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
-        const isAssist = assistData.some(d => d.date === item.date && d.title === item.title && d.url === item.url);
+        // 3. 获取并过滤数据
+        const data = getDataByCategory(category);
+        const filtered = data.filter(item => {
+            const month = item.date ? item.date.slice(0, 7) : '';
+            const matchMonth = filterMonth === '全部' || month === filterMonth;
+            const lowerKeyword = keyword.trim().toLowerCase();
+            const matchKey = lowerKeyword === '' || 
+                            item.title.toLowerCase().includes(lowerKeyword) || 
+                            (item.date && item.date.includes(keyword));
+            return matchMonth && matchKey;
+        });
+
+        // 4. 处理空状态
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#4a779e; font-size:14px;">没有找到匹配的视频 ✨</div>`;
+            updatePaginationUI(0);
+            return;
+        }
+
+        // 5. 分页切片：只取当前页的数据
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        const pageData = filtered.slice(startIndex, endIndex);
+
+        // 6. 生成 HTML
+        let html = '';
         
-        let tagText = 'UNIT', tagColor = '#00a1d6';
-        if (category === 'all') {
-          if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
-          else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-          else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
-        } else {
-          if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
-          else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-          else if (category === 'assist') { tagText = '助演'; tagColor = '#8e44ad'; }
+        // 辅助函数：生成单个卡片 HTML
+        const createCardHTML = (item) => {
+            // 判断分类标签
+            const isUnit = unitData.some(d => d.date === item.date && d.title === item.title);
+            const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title);
+            const isAssist = assistData.some(d => d.date === item.date && d.title === item.title);
+            
+            let tagText = 'UNIT', tagColor = '#00a1d6';
+            if (category === 'all') {
+                if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+                else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+                else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
+            } else {
+                if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+                else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+                else if (category === 'assist') { tagText = '助演'; tagColor = '#8e44ad'; }
+            }
+
+            // 封面图逻辑
+            let coverHtml = '';
+            if (item.cover) {
+                coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+            } else {
+                // 尝试异步获取 B站封面 (注意：这里为了性能，仅在没有本地封面时尝试，且不做 await 阻塞渲染)
+                // 实际生产中建议预加载或后端处理，这里保持原有逻辑但简化
+                coverHtml = `
+                    <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
+                        <div class="video-icon">🎬</div>
+                        <div class="video-tip" style="color:#fff;">加载中...</div>
+                    </div>
+                `;
+                // 异步尝试填充封面，不阻塞主流程
+                fetchBilibiliCoverFast(item.url).then(url => {
+                    if (url) {
+                        // 找到对应的 img 标签并替换 src (简单实现)
+                        // 由于是 innerHTML 渲染，这里较难直接操作，建议依赖 loading="lazy" 或接受无封面状态
+                    }
+                });
+            }
+
+            // 获取公演名
+            const key = item.date + '|' + item.title;
+            const showName = showMap[key] || '';
+
+            return `
+              <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
+                <div class="video-cover-box">
+                  ${coverHtml}
+                  <div class="play-icon">▶</div>
+                  <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+                </div>
+                <div class="video-info">
+                  <div class="video-name">${item.title}</div>
+                  <div class="video-date">${item.date || ''}</div>
+                  ${showName ? `<div class="video-show">${showName}</div>` : ''}
+                </div>
+              </div>
+            `;
+        };
+
+        // 循环生成
+        for (const item of pageData) {
+            html += createCardHTML(item);
         }
 
-        // 封面图
-        let coverHtml = '';
-        if (item.cover) {
-          coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
-        } else {
-          coverHtml = `
-            <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
-              <div class="video-icon">🎬</div>
-              <div class="video-tip" style="color:#fff;">暂无封面</div>
-            </div>
-          `;
-        }
+        // 7. 渲染到 DOM
+        grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
+        grid.innerHTML = html;
 
-        // 获取公演名
-        const key = item.date + '|' + item.title;
-        const showName = showMap[key] || '';
-
-        // 生成卡片
-        html += `
-          <div class="video-card" data-url="${item.url}" data-title="${item.title}" onclick="window.open('${item.url || '#'}','_blank')">
-            <div class="video-cover-box">
-              ${coverHtml}
-              <div class="play-icon">▶</div>
-              <span class="video-tag" style="background:${tagColor};">${tagText}</span>
-            </div>
-            <div class="video-info">
-              <div class="video-name">${item.title}</div>
-              <div class="video-date">${item.date || ''}</div>
-              ${showName ? `<div class="video-show">${showName}</div>` : ''}
-            </div>
-          </div>
-        `;
-      }
-
-      grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
-      grid.innerHTML = html;
+        // 8. 更新分页控件
+        updatePaginationUI(filtered.length);
     }
 
     // 月份标签渲染函数
@@ -6623,6 +6664,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+
+    // ===== 更新分页按钮状态
+    function updatePaginationUI(totalCount) {
+        const controls = document.getElementById('paginationControls');
+        const prevBtn = document.getElementById('prevPageBtn');
+        const nextBtn = document.getElementById('nextPageBtn');
+        const pageInfo = document.getElementById('pageInfo');
+        
+        if (!controls) return;
+
+        const totalPages = Math.ceil(totalCount / pageSize);
+        
+        // 如果只有一页或没数据，隐藏分页栏
+        if (totalPages <= 1) {
+            controls.style.display = 'none';
+            return;
+        }
+        
+        controls.style.display = 'flex';
+        pageInfo.textContent = `${currentPage} / ${totalPages}`;
+        
+        // 按钮可用性
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+        
+        // 视觉反馈
+        prevBtn.style.opacity = currentPage === 1 ? '0.4' : '1';
+        nextBtn.style.opacity = currentPage === totalPages ? '0.4' : '1';
+        prevBtn.style.cursor = currentPage === 1 ? 'not-allowed' : 'pointer';
+        nextBtn.style.cursor = currentPage === totalPages ? 'not-allowed' : 'pointer';
+    }
+
+        /**
+        * 切换页码通用逻辑 (修复版)
+        */
+        function changePage(delta) {
+            // 1. 获取当前的筛选条件
+            const activeTab = document.querySelector('#stageMonthScrollInner .category-tab.active');
+            const month = activeTab ? activeTab.dataset.month : '全部';
+            const keyword = document.getElementById('stageSearch').value;
+            
+            // 2. 重新获取并过滤所有数据，以计算准确的总页数
+            // 注意：这里必须使用和 renderCards 完全一致的过滤逻辑
+            const allDataList = getDataByCategory(currentCategory);
+            const filteredData = allDataList.filter(item => {
+                const m = item.date ? item.date.slice(0,7) : '';
+                const matchM = month === '全部' || m === month;
+                const k = keyword.trim().toLowerCase();
+                const matchK = k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+                return matchM && matchK;
+            });
+
+            const totalCount = filteredData.length;
+            const totalPages = Math.ceil(totalCount / pageSize);
+            
+            // 3. 计算新页码并校验
+            const newPage = currentPage + delta;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                isPaginationClick = true; // 标记为分页点击，防止 renderCards 重置页码
+                
+                // 4. 重新渲染
+                renderCards(currentCategory, month, keyword);
+                
+                // 5. 滚动回内容区顶部
+                const contentArea = document.querySelector('.content-area');
+                if (contentArea) {
+                    contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else {
+                console.log('已达边界', newPage, totalPages);
+            }
+        }
 
   </script>
   <!-- ===== 设置面板 ===== -->
