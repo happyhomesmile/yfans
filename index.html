@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
   <meta name="referrer" content="no-referrer" />
   <title>一颗椰饭饲养指南</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
+
   <style>
     /* ===== 全局重置 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,15 +21,6 @@
         flex-direction: column; 
         overflow: hidden;
     }
-        flex-direction: column; 
-        width: 100vw; 
-        height: 100vh; 
-        background: transparent; 
-        overflow: hidden;
-    }
-
-
-    /* ===== 主布局 ===== */
     .main-page { display: flex; flex-direction: column; width: 100vw; min-height: 100vh; background: transparent; }
 
     :root {
@@ -43,7 +32,7 @@
       --card-opacity: 1;
     }
 
-    /* ===== 顶部导航栏 ===== */
+    /* ===== 顶部导航栏（含下拉菜单） ===== */
     .top-nav {
         position: sticky;
         top: 0;
@@ -63,28 +52,30 @@
         justify-content: center;
         gap: 4px;
         overflow-x: auto;
-        overflow-y: hidden;
+        overflow-y: visible;
         flex-wrap: nowrap;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
+        position: relative;
     }
     .top-nav::-webkit-scrollbar { display: none; }
 
     .top-nav .menu-item {
-          font-size: 16px;
-          font-weight: 700;
-          color: #2c5a7a;
-          padding: 8px 18px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          border: 1px solid transparent;
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          white-space: nowrap;
-          flex-shrink: 0;
-        }
+      font-size: 16px;
+      font-weight: 700;
+      color: #2c5a7a;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+    }
     .top-nav .menu-item.active {
       background: hsla(var(--theme-hue), 60%, 50%, 0.12) !important;
       border-color: hsla(var(--theme-hue), 60%, 50%, 0.20) !important;
@@ -92,15 +83,15 @@
       font-weight: 600 !important;
       box-shadow: 0 2px 8px hsla(var(--theme-hue), 60%, 40%, 0.08) !important;
     }
-    
     .top-nav .menu-item:hover {
-          background: hsla(var(--theme-hue), 60%, 50%, 0.10);
-          border-color: hsla(var(--theme-hue), 60%, 50%, 0.15);
-          color: hsl(var(--theme-hue), 60%, 30%);
-          box-shadow: 0 2px 12px hsla(var(--theme-hue), 60%, 40%, 0.08);
-          transform: translateY(-1px);
-        }
+      background: hsla(var(--theme-hue), 60%, 50%, 0.10);
+      border-color: hsla(var(--theme-hue), 60%, 50%, 0.15);
+      color: hsl(var(--theme-hue), 60%, 30%);
+      box-shadow: 0 2px 12px hsla(var(--theme-hue), 60%, 40%, 0.08);
+      transform: translateY(-1px);
+    }
     .top-nav .menu-item .icon { font-size: 16px; }
+
     /* ===== 内容区 ===== */
     .content-area {
         flex: 1;
@@ -143,7 +134,7 @@
           padding: 18px 22px;
         }
 
-    /* ===== 首页（饭记） ===== */
+    /* ===== 首页（原饭记） ===== */
     .welcome-header {
               text-align: left;
               padding: 20px 20px 16px 20px;
@@ -186,11 +177,6 @@
     transform: translateY(-1px);
     box-shadow: 0 3px 12px hsla(var(--theme-hue), 70%, 40%, 0.18);
 }
-    .welcome-header .links a:hover {
-          background: rgba(26, 74, 111, 0.10);
-          transform: translateY(-1px);
-          box-shadow: 0 3px 12px hsla(var(--theme-hue), 70%, 40%, 0.18);
-        } 
 
     .info-title {
           font-size: 16px;
@@ -263,7 +249,7 @@
           transition: all 0.2s ease;
           z-index: 2;
         }
-    .timeline-item .timeline-dot.no-link { cursor: default; background: #b8d4e8; }    .timeline-item .timeline-dot.no-link:hover { transform: none; background: #b8d4e8; box-shadow: 0 0 0 2px rgba(36,104,168,0.08); }
+    .timeline-item .timeline-dot.no-link { cursor: default; background: #b8d4e8; }
     .timeline-date {
           font-size: 12px;
           color: #1f5a8a;
@@ -310,12 +296,7 @@
       border-color: hsl(var(--theme-hue), 70%, 45%);
       box-shadow: 0 2px 10px hsla(var(--theme-hue), 70%, 45%, 0.3);
     }
-  .stage-nav-item:hover {
-      background: rgba(255,255,255,0.6);
-      border-color: #8ab3d0;
-  }
 
-    /* ===== 饭之啵 导航按钮样式 ===== */
     #boboNav .stage-nav-item {
       padding: 5px 14px;
       border-radius: 24px;
@@ -434,7 +415,7 @@
     .video-card .video-info {
       display: flex;
       flex-direction: column;
-      gap: 8px;          /* 调大间距 */
+      gap: 8px;
       padding: 6px 10px;
     }
     .video-date,.video-show { font-size: 11px; color: #689888; margin-top: 1px; }
@@ -620,74 +601,6 @@
     .modal-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
     .modal-dot.active { background: #ffffff; }
     .close-hint { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 1px; z-index: 10; }
-
-    /* ===== 响应式 ===== */
-    @media (max-width: 1024px) {
-      .fancam-wrap { flex-direction: column; align-items: center; }
-      .fancam-wrap .timeline-sidebar {
-        position: relative; top: 0; flex-direction: row; flex-wrap: wrap;
-        width: 100%; padding: 8px 12px; gap: 4px; max-height: none;
-        overflow-y: visible; justify-content: center; border-radius: 12px;
-        margin-top: 12px;
-      }
-      .fancam-wrap .timeline-sidebar .tl-item { width: auto; padding: 4px 10px; font-size: 0.7rem; }
-      .fancam-wrap .timeline-sidebar .tl-line { display: none; }
-      .fancam-wrap .timeline-sidebar .tl-year-label { width: auto; border-bottom: none; padding: 4px 8px; font-size: 0.65rem; }
-      .fancam-wrap .info-box { max-width: 100%; width: 100%; }
-      .info-box { max-width: 100%; }
-      .stage-wrap { max-width: 100%; }
-    }
-    @media (max-width: 768px) {
-      .modal-btn { width: 36px; height: 36px; font-size: 18px; }
-      .modal-btn.prev { left: 4px; }
-      .modal-btn.next { right: 4px; }
-      .image-modal { padding: 0.5rem; }
-      .modal-image-container { max-height: 70vh; }
-      .modal-image-container img { max-height: 70vh; }
-      .close-hint { bottom: 0.8rem; font-size: 0.6rem; }
-      .stage-grid { grid-template-columns: repeat(2, 1fr); }
-      .content-area { padding: 12px; }
-      .avatar { width: 48px; height: 48px; }
-      .avatar-name { font-size: 13px; }
-      .inline-calendar { width: 260px; height: 260px; min-width: 220px; min-height: 220px; padding: 14px 16px; }
-    }
-    @media (max-width: 480px) {
-      .top-nav {
-        padding: 6px 10px;
-        gap: 2px;
-        justify-content: flex-start;
-      }
-      .top-nav .menu-item {
-        font-size: 12px;
-        padding: 5px 10px;
-        gap: 3px;
-      }
-      .top-nav .menu-item .icon {
-        font-size: 13px;
-      }
-      .stage-grid { 
-        grid-template-columns: repeat(2, 1fr) !important; 
-        gap: 8px !important;
-      }
-      .content-area { padding: 8px 8px 60px 8px !important; max-height: none !important; height: calc(100vh - 50px) !important; }
-      .content-area::before { left: 0 !important; }
-      
-      .weibo-card .weibo-media-grid.cols-2,
-      .weibo-card .weibo-media-grid.cols-3,
-      .xiaohongshu-card .weibo-media-grid.cols-2,
-      .xiaohongshu-card .weibo-media-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
-      
-      .inline-calendar { width: 220px; height: 220px; min-width: 180px; min-height: 180px; padding: 10px 12px; }
-      .inline-calendar .cal-days-grid > div { font-size: 0.65rem; }
-      
-      .fancam-wrap .timeline-sidebar { display: none !important; }
-      .fancam-wrap { gap: 0 !important; }
-      .fancam-wrap .info-box { padding: 12px 14px !important; }
-      
-      .video-card .video-title-bar { padding: 4px 8px; }
-      .video-card .video-name { font-size: 11px; }
-      .video-card .video-date { font-size: 10px; }
-    }
 
     /* ===== 弹窗样式 ===== */
     .popup-overlay {
@@ -1046,8 +959,6 @@
     }
 
     /* ===== 设置面板样式 ===== */
-    
-    /* 导航栏中的调色盘按钮 */
     .top-nav .menu-item.palette-nav {
       background: rgba(255, 255, 255, 0.3);
       border: 1.5px solid rgba(0, 0, 0, 0.06);
@@ -1067,7 +978,6 @@
       background: var(--theme-color);
     }
     
-    /* 设置面板 - 弹出层 */
     .settings-panel {
       position: fixed;
       top: 70px;
@@ -1133,7 +1043,6 @@
       white-space: nowrap;
     }
     
-    /* 色相颜色条 */
     .control-row .hue-track {
       flex: 1;
       min-width: 100px;
@@ -1175,7 +1084,6 @@
       text-align: center;
     }
     
-    /* 小按钮组 */
     .btn-group-sm {
       display: flex;
       gap: 4px;
@@ -1203,7 +1111,6 @@
       border-color: var(--theme-color);
     }
     
-    /* 滑块 */
     .slider-sm {
       flex: 1;
       min-width: 70px;
@@ -1225,7 +1132,6 @@
       margin: 12px 0 14px;
     }
     
-    /* 响应式 */
     @media (max-width: 480px) {
       .settings-panel {
         top: 60px;
@@ -1241,13 +1147,11 @@
       }
     }
 
-    /* ===== 暗色模式核心样式 ===== */
+    /* ===== 暗色模式 ===== */
     body.dark-mode {
-      background: #000000 !important; /* 强制纯黑背景 */
+      background: #000000 !important;
       color: #e0e0e0;
     }
-
-    /* 1. 主内容区、卡片、导航栏背景变黑 */
     body.dark-mode .info-box,
     body.dark-mode .weibo-card,
     body.dark-mode .xiaohongshu-card,
@@ -1264,21 +1168,18 @@
     body.dark-mode .category-tab,
     body.dark-mode .platform-nav-item,
     body.dark-mode .search-box,
-    body.dark-mode .modal-image-container {
-      background: rgba(20, 20, 20, 0.85) !important; /* 深灰色半透明背景 */
+    body.dark-mode .modal-image-container,
+    body.dark-mode .dropdown-menu {
+      background: rgba(20, 20, 20, 0.85) !important;
       backdrop-filter: blur(10px);
       border-color: rgba(255, 255, 255, 0.1) !important;
       color: #e0e0e0 !important;
     }
-
-    /* 2. 特殊卡片背景（如信息格） */
     body.dark-mode .info-card,
     body.dark-mode .video-cover-box {
       background: rgba(40, 40, 40, 0.6) !important;
       border-color: rgba(255, 255, 255, 0.05) !important;
     }
-
-    /* 3. 文字颜色调整 */
     body.dark-mode h1, 
     body.dark-mode h2, 
     body.dark-mode h3, 
@@ -1288,26 +1189,22 @@
     body.dark-mode .weibo-text, 
     body.dark-mode .timeline-date,
     body.dark-mode .card-footer,
-    body.dark-mode .menu-item {
+    body.dark-mode .menu-item,
+    body.dark-mode .dropdown-item {
       color: #e0e0e0 !important;
     }
-    
     body.dark-mode .info-label,
     body.dark-mode .video-date,
     body.dark-mode .weibo-time,
     body.dark-mode .sub {
       color: #a0a0a0 !important;
     }
-
-    /* 4. 输入框和搜索框 */
     body.dark-mode input,
     body.dark-mode textarea {
       background: rgba(40, 40, 40, 0.8) !important;
       color: #fff !important;
       border-color: rgba(255, 255, 255, 0.1) !important;
     }
-    
-    /* 5. 按钮和标签 */
     body.dark-mode .btn-sm,
     body.dark-mode .stage-nav-item,
     body.dark-mode .category-tab {
@@ -1315,21 +1212,17 @@
       color: #ccc !important;
       border-color: rgba(255, 255, 255, 0.1) !important;
     }
-    
     body.dark-mode .btn-sm.active,
     body.dark-mode .stage-nav-item.active,
     body.dark-mode .category-tab.active {
-      background: var(--theme-color) !important; /* 保持主题色高亮 */
+      background: var(--theme-color) !important;
       color: #fff !important;
       border-color: var(--theme-color) !important;
     }
-
-    /* 6. 弹窗遮罩层内的元素 */
     body.dark-mode .popup-overlay .popup-box {
       background: #1a1a1a !important;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
     body.dark-mode .welcome-header h1,
     body.dark-mode .info-title,
     body.dark-mode .info-value,
@@ -1360,14 +1253,12 @@
     body.dark-mode .timeline-sidebar .tl-item {
       color: #c8d8e8 !important;
     }
-
     body.dark-mode .welcome-header {
       background: transparent !important;
       backdrop-filter: none !important;
       box-shadow: none !important;
       border: none !important;
     }
-    
     body.dark-mode .welcome-header .links a {
       background: rgba(255, 255, 255, 0.06);
       color: #c8d8e8;
@@ -1376,12 +1267,10 @@
     body.dark-mode .welcome-header .links a:hover {
       background: rgba(66, 153, 225, 0.15);
     }
-    
     body.dark-mode .info-card {
       background: rgba(255, 255, 255, 0.04);
       border-color: rgba(255, 255, 255, 0.05);
     }
-    
     body.dark-mode .search-box {
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(255, 255, 255, 0.06);
@@ -1392,25 +1281,21 @@
     body.dark-mode .search-box input::placeholder {
       color: #6a8a9a;
     }
-    
     body.dark-mode .weibo-card.pinned,
     body.dark-mode .xiaohongshu-card.pinned {
       border: 2px solid rgba(66, 153, 225, 0.25) !important;
       background: rgba(20, 30, 45, 0.85) !important;
     }
-    
     body.dark-mode .settings-panel {
       background: rgba(20, 30, 45, 0.9) !important;
       border-color: rgba(255, 255, 255, 0.06) !important;
     }
-    
     body.dark-mode .palette-toggle {
       background: rgba(255, 255, 255, 0.08);
     }
     body.dark-mode .palette-toggle:hover {
       background: rgba(66, 153, 225, 0.15);
     }
-    
     body.dark-mode .popup-box {
       background: rgba(20, 30, 45, 0.95) !important;
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1438,11 +1323,9 @@
     body.dark-mode .popup-emoji {
       background: rgba(66, 153, 225, 0.08);
     }
-    
     body.dark-mode .timeline-wrap::before {
       background: linear-gradient(to bottom, #4299e1, #1a4a6f);
     }
-    
     body.dark-mode .timeline-item .timeline-dot {
       background: #4299e1;
       border-color: #1a4a6f;
@@ -1451,16 +1334,13 @@
     body.dark-mode .timeline-item .timeline-dot.no-link {
       background: #4a6a8a;
     }
-    
     body.dark-mode .platform-tag.weibo { background: #4299e1; }
     body.dark-mode .platform-tag.xiaohongshu { background: #ff2d55; }
     body.dark-mode .platform-tag.douyin { background: #f97316; }
     body.dark-mode .platform-tag.bilibili { background: #fb7299; }
-    
     body.dark-mode .video-tag {
       color: #fff;
     }
-    
     body.dark-mode .stage-nav-item.active,
     body.dark-mode .category-tab.active {
         background: hsl(var(--theme-hue), 70%, 50%) !important;  
@@ -1472,7 +1352,6 @@
     body.dark-mode .category-tab:hover {
       background: rgba(66, 153, 225, 0.15);
     }
-    
     body.dark-mode .miracle-card .card-footer {
       background: rgba(255, 255, 255, 0.04);
       border-top-color: rgba(255, 255, 255, 0.04);
@@ -1485,15 +1364,12 @@
     body.dark-mode .miracle-card .cover-badge {
       background: rgba(0, 0, 0, 0.7);
     }
-    
     body.dark-mode .contact-card .timeline-wrap > div > div {
       color: #c8d8e8 !important;
     }
-    
     body.dark-mode .divider {
       border-top-color: rgba(255, 255, 255, 0.05);
     }
-    
     body.dark-mode .inline-calendar {
       background: rgba(20, 30, 45, 0.95) !important;
       border-color: rgba(255, 255, 255, 0.06) !important;
@@ -1510,7 +1386,6 @@
     body.dark-mode .inline-calendar .cal-nav:hover {
       background: rgba(66, 153, 225, 0.1) !important;
     }
-    /* ===== 平台图标 ===== */
     .platform-icon {
         width: 16px;
         height: 16px;
@@ -1518,8 +1393,6 @@
         vertical-align: middle;
         margin-right: 4px;
     }
-
-    /* ===== 标题图标 ===== */
     .title-icon {
         width: 16px;
         height: 16px;
@@ -1528,8 +1401,6 @@
         flex-shrink: 0;
         filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
-
-    /* ===== 暗色切换图标 ===== */
     .dark-toggle-icon {
         width: 20px;
         height: 20px;
@@ -1537,15 +1408,12 @@
         transition: filter 0.3s ease;
         filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
-
-    /* ===== 列表模式（饭之大小作 & 饭之啵） ===== */
     .stage-grid.list-mode {
       display: flex;
       flex-direction: column;
       gap: 14px;
       margin-top: 10px;
     }
-
     .stage-grid.list-mode .video-card {
       display: flex;
       flex-direction: row;
@@ -1562,14 +1430,11 @@
       position: relative;
       overflow: visible;
     }
-
     .stage-grid.list-mode .video-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(36, 104, 168, 0.10);
       background: rgba(255, 255, 255, 0.85);
     }
-
-    /* 封面图 - 左侧 */
     .stage-grid.list-mode .video-card .video-cover-box {
       width: 200px;
       min-width: 200px;
@@ -1580,7 +1445,6 @@
       flex-shrink: 0;
       background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
     }
-
     .stage-grid.list-mode .video-card .video-cover-box img {
       width: 100%;
       height: 100%;
@@ -1588,11 +1452,9 @@
       display: block;
       transition: transform 0.3s ease;
     }
-
     .stage-grid.list-mode .video-card:hover .video-cover-box img {
       transform: scale(1.04);
     }
-
     .stage-grid.list-mode .video-card .video-cover-box .play-icon {
       position: absolute;
       top: 50%;
@@ -1605,12 +1467,9 @@
       opacity: 0.8;
       transition: opacity 0.3s ease;
     }
-
     .stage-grid.list-mode .video-card:hover .video-cover-box .play-icon {
       opacity: 1;
     }
-
-    /* 标签 - 左上角 */
     .stage-grid.list-mode .video-card .video-tag {
       position: absolute;
       top: 6px;
@@ -1623,8 +1482,6 @@
       letter-spacing: 0.3px;
       z-index: 2;
     }
-
-    /* 右侧信息区 */
     .stage-grid.list-mode .video-card .video-info {
       flex: 1;
       display: flex;
@@ -1634,7 +1491,6 @@
       padding: 4px 0;
       min-width: 0;
     }
-
     .stage-grid.list-mode .video-card .video-info .video-name {
       font-size: 16px;
       font-weight: 600;
@@ -1643,14 +1499,12 @@
       line-height: 1.4;
       word-break: break-word;
     }
-
     .stage-grid.list-mode .video-card .video-info .video-date,
     .stage-grid.list-mode .video-card .video-info .video-show {
       font-size: 13px;
       color: #6a8fa8;
       font-weight: 500;
     }
-
     .stage-grid.list-mode .video-card .video-info .video-desc {
       font-size: 13px;
       color: #4a779e;
@@ -1661,7 +1515,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .stage-grid.list-mode .video-card .video-info .video-meta {
       display: flex;
       align-items: center;
@@ -1670,14 +1523,11 @@
       color: #7a9ab0;
       margin-top: 2px;
     }
-
     .stage-grid.list-mode .video-card .video-info .video-meta span {
       display: flex;
       align-items: center;
       gap: 4px;
     }
-
-    /* 封面图 fallback */
     .stage-grid.list-mode .video-card .cover-fallback {
       display: flex;
       flex-direction: column;
@@ -1688,48 +1538,19 @@
       background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
       color: #1a4a6f;
     }
-
     .stage-grid.list-mode .video-card .cover-fallback .video-icon {
       font-size: 28px;
       margin-bottom: 4px;
     }
-
     .stage-grid.list-mode .video-card .cover-fallback .video-tip {
       font-size: 11px;
       color: #4a779e;
     }
-
-    /* 响应式：小屏幕改为上下布局 */
-    @media (max-width: 640px) {
-      .stage-grid.list-mode .video-card {
-        flex-direction: column;
-        padding: 10px;
-      }
-      .stage-grid.list-mode .video-card .video-cover-box {
-        width: 100%;
-        min-width: unset;
-        aspect-ratio: 16 / 9;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-name {
-        font-size: 14px;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-date {
-        font-size: 12px;
-      }
-      .stage-grid.list-mode .video-card .video-info .video-desc {
-        font-size: 12px;
-        -webkit-line-clamp: 1;
-      }
-    }
-
-    /* ===== 纯色模式下彻底隐藏背景图 ===== */
     body.pure-mode .content-area::before {
         display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
     }
-
-    /* 纯色模式背景色 - 根据暗色模式自动切换 */
     body.pure-mode:not(.dark-mode) {
         background-color: #ffffff !important;
         background-image: none !important;
@@ -1738,15 +1559,12 @@
         background-color: #000000 !important;
         background-image: none !important;
     }
-
     html.pure-mode:not(.dark-mode) {
         background-color: #ffffff !important;
     }
     html.pure-mode.dark-mode {
         background-color: #000000 !important;
     }
-
-    /* 设置面板分区标题 */
     .section-title {
       font-size: 0.75rem;
       font-weight: 700;
@@ -1756,18 +1574,15 @@
       letter-spacing: 0.5px;
       text-transform: uppercase; 
     }
-    
     body.dark-mode .section-title {
       color: #e0e0e0 !important;
     }
-    /* ===== 设置面板标题与分割线 ===== */
     .section-header {
       display: flex;
       align-items: center;
       margin-bottom: 5px;
       width: 100%;
     }
-
     .section-title {
       font-size: 0.8rem;
       font-weight: 700;
@@ -1775,11 +1590,9 @@
       white-space: nowrap; 
       padding-right: 10px;
     }
-
     body.dark-mode .section-title {
       color: #e0e0e0 !important;
     }
-
     .header-line {
       flex: 1; 
       height: 1px; 
@@ -1788,9 +1601,55 @@
       border-radius: 2px;
       margin-top: -15px; 
     }
-
     body.dark-mode .header-line {
       opacity: 0.6 !important;
+    }
+
+    /* ===== 导航下拉菜单（紧贴按钮） ===== */
+    .nav-dropdown {
+      position: fixed;
+      top: calc(100% + 6px);
+      left: 0;
+      transform: none;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border-radius: 14px;
+      padding: 6px 0;
+      min-width: 140px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      z-index: 200;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+    .nav-dropdown.open {
+      visibility: visible;
+      opacity: 1;
+    }
+    .nav-dropdown-item {
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2c5a7a;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+      border-radius: 6px;
+      margin: 2px 8px;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover {
+      background: rgba(36, 104, 168, 0.08);
+      color: hsl(var(--theme-hue), 60%, 30%);
+    }
+    .nav-dropdown-item.active {
+      background: hsla(var(--theme-hue), 60%, 50%, 0.12);
+      color: hsl(var(--theme-hue), 60%, 30%);
+    }
+    @keyframes dropIn {
+      0% { transform: translateX(-50%) translateY(-6px); opacity: 0; }
+      100% { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
   </style>
 </head>
@@ -1825,17 +1684,35 @@
   </button>
 
   <div class="main-page">
+
+    <!-- 饭记 下拉菜单（放在导航栏外面） -->
+    <div class="nav-dropdown" id="foodNotesDropdown">
+      <div class="nav-dropdown-item" data-page="contact">饭言饭语</div>
+      <div class="nav-dropdown-item" data-page="dream">梦想汗水坚持</div>
+    </div>
+
+    <!-- 饭作 下拉菜单（放在导航栏外面） -->
+    <div class="nav-dropdown" id="foodWorksDropdown">
+      <div class="nav-dropdown-item" data-page="stage">饭之大小作</div>
+      <div class="nav-dropdown-item" data-page="fancam">饭之拍</div>
+      <div class="nav-dropdown-item" data-page="bobo">饭之啵</div>
+    </div>
     
-    <!-- ===== 顶部导航栏 ===== -->
+    <!-- ===== 顶部导航栏（精简版） ===== -->
     <div class="top-nav">
-      <div class="menu-item active" data-page="diary">饭记</div>
-      <div class="menu-item" data-page="stage">饭之大小作</div>
-      <div class="menu-item" data-page="fancam">饭之拍</div>
-      <div class="menu-item" data-page="bobo">饭之啵</div>
-      <div class="menu-item" data-page="contact">饭言饭语</div>
-      <div class="menu-item" data-page="today">那年今日</div>
-      <div class="menu-item" data-page="dream">梦想汗水坚持</div>
-      <div class="menu-item" data-page="wait">关于本站</div>
+    <!-- 首页 -->
+    <div class="menu-item active" data-page="home">首页</div>
+    
+    <!-- 饭记（弹窗） -->
+    <div class="menu-item" id="foodNotesBtn">饭记 ▼</div>
+
+    <!-- 饭作（弹窗） -->
+    <div class="menu-item" id="foodWorksBtn">饭作 ▼</div>
+    
+    <!-- 关于本站 -->
+    <div class="menu-item" data-page="wait">关于本站</div>
+      
+      <!-- 调色盘和暗色模式（保持不变） -->
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;display:flex;align-items:center;justify-content:center;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" 
             alt="调色盘" 
@@ -1845,12 +1722,12 @@
         <img id="darkIcon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" alt="切换主题" class="dark-toggle-icon" />
       </div>
     </div>
+
     <!-- ===== 内容区 ===== -->
     <div class="content-area" id="contentWrap">
       
-      <!-- ==================== 饭记 ==================== -->
-
-      <div class="page-box active" id="diary">
+      <!-- ==================== 首页 ==================== -->
+      <div class="page-box active" id="home">
         <div class="info-box">
           <div class="welcome-header">
             <h1>欢迎使用一颗椰饭的饲养指南</h1>
@@ -1858,6 +1735,7 @@
             <div class="links">
               <a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a>
               <a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a>
+              <a href="https://b23.tv/sCndNaE">星系放映厅</a>
             </div>
           </div>
             <div class="info-title">
@@ -3980,14 +3858,12 @@
       <!-- ==================== 饭之啵 ==================== -->
       <div class="page-box" id="bobo">
         <div class="info-box stage-wrap">
-          <!-- 分类导航 -->
           <div class="stage-nav" id="boboNav">
             <button class="stage-nav-item active" data-category="all">全部</button>
             <button class="stage-nav-item" data-category="single">单播</button>
             <button class="stage-nav-item" data-category="special">特殊直播</button>
           </div>
 
-          <!-- 搜索栏 -->
           <div class="filter-search-row">
           <div class="search-box">
           <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
@@ -3998,7 +3874,6 @@
           </div>
           </div>
 
-          <!-- 月份分类标签 -->
           <div class="filter-tabs-row" id="boboTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
             <button class="month-nav-btn" id="boboMonthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
             <div id="boboMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
@@ -4007,7 +3882,6 @@
             <button class="month-nav-btn" id="boboMonthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
           </div>
 
-          <!-- 视频卡片网格 -->
           <div class="stage-grid" id="boboGrid"></div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
@@ -4024,14 +3898,11 @@
             <button class="platform-nav-item" data-category="words">饭所言</button>
           </div>
 
-            <!-- ===== 内容区 ===== -->
             <div id="contactFeed">
-            <!-- ====== 饭食饭 ====== -->
             <div class="contact-card" data-category="food" data-sub="water">
               <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
                 <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
     
-                <!-- 2026.07 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
                   <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
@@ -4042,7 +3913,6 @@
                   </div>
                 </div>
     
-                <!-- 2026.06 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
                   <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
@@ -4053,7 +3923,6 @@
                   </div>
                 </div>
     
-                <!-- 2026.05 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
                   <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
@@ -4068,7 +3937,6 @@
                   </div>
                 </div>
     
-                <!-- 2026.04 -->
                 <div style="position:relative; padding-left:24px; margin-bottom:4px;">
                   <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
                   <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
@@ -4080,7 +3948,6 @@
               </div>
             </div>
     
-            <!-- ====== 旅行椰饭 ====== -->
             <div class="contact-card" data-category="travel" data-sub="miracle" style="display:none;">
               <div class="miracle-card-grid">
                 <div class="miracle-card" data-month="2026-08">
@@ -4122,7 +3989,6 @@
               </div>
             </div>
 
-            <!-- ====== 饭所言 ====== -->
             <div class="contact-card" data-category="words" data-sub="all">
               <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
             </div>
@@ -4133,15 +3999,6 @@
         </div>
       </div>
     </div>
-
-      <!-- 那年今日 -->
-      <div class="page-box" id="today">
-        <div class="info-box">
-          <div class="info-title"><span class="deco">✦</span> 那年今日</div>
-          <div class="empty-state">内容待更新</div>
-          <div class="footer-slogan">-All For YeFan-</div>
-        </div>
-      </div>
 
       <!-- 梦想汗水坚持 -->
       <div class="page-box" id="dream">
@@ -4218,7 +4075,6 @@
     </div>
   </div>
   
-  <!-- 弹窗 - 西瓜冰柠茶霸王杯 -->
   <div class="popup-overlay" id="popupOverlayTea">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4246,7 +4102,6 @@
     </div>
   </div>
   
-  <!-- 弹窗 - 幽兰拿铁 -->
   <div class="popup-overlay" id="popupOverlayTea2">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4265,7 +4120,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 现煮绿豆木薯冰 -->
   <div class="popup-overlay" id="popupOverlayMungBean">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4305,7 +4159,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 蒸馏饮用水 -->
   <div class="popup-overlay" id="popupOverlayWater">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4328,7 +4181,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 轻因·伯牙绝弦 -->
   <div class="popup-overlay" id="popupOverlayLight">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4352,7 +4204,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 5.31 伯牙绝弦 -->
   <div class="popup-overlay" id="popupOverlayMay">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4377,7 +4228,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 玫瑰20抹茶拿铁 -->
   <div class="popup-overlay" id="popupOverlayRose">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4404,7 +4254,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 多肉芒芒 -->
   <div class="popup-overlay" id="popupOverlayMango">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4430,29 +4279,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 薏米水 -->
-  <div class="popup-overlay" id="popupOverlayBarley">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.25 <span style="font-size:13px; font-weight:500;">元气森林·红豆薏米水</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">椰饭之最爱</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727215035692.jpg?width=300" alt="薏米水" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727215035692.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">先喝两口自带的薏米水</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-25 12:43:02</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 小黄油美式 -->
   <div class="popup-overlay" id="popupOverlayButter">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4477,7 +4303,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 小黄油美式 (05.19) -->
   <div class="popup-overlay" id="popupOverlayButter2">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4502,7 +4327,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 山竹荔枝冰茶 -->
   <div class="popup-overlay" id="popupOverlayLychee">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4532,31 +4356,6 @@
     </div>
   </div>
 
-  <!-- 弹窗 - 5.3 轻因·伯牙绝弦 -->
-  <div class="popup-overlay" id="popupOverlayLight2">
-    <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
-        2026.05.03 <span style="font-size:13px; font-weight:500;">霸王茶姬·轻因 伯牙绝弦</span>
-      </div>
-      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">大杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准冰</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">半糖</span>
-      </div>
-      <div style="margin-bottom:8px;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727224958231.jpg?width=300" alt="轻因·伯牙绝弦" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727224958231.jpg')" />
-      </div>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
-        <div style="display:flex; justify-content:flex-start; align-items:flex-end; gap:6px;">
-          <div style="background:#ffffff; padding:5px 12px; border-radius:4px 12px 12px 12px; font-size:14px; font-weight:400; color:#1a1a1a; max-width:fit-content; border:1px solid #e5e5e5; box-shadow:0 1px 2px rgba(0,0,0,0.04);">喝这个╭( ･ㅂ･)و ̑̑ ＂</div>
-          <span style="font-size:9px; color:#b0b0b0; flex-shrink:0; padding-bottom:2px;">2026-05-03 16:02:28</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗 - 4.25 伯牙绝弦 -->
   <div class="popup-overlay" id="popupOverlayAprMay">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4581,7 +4380,6 @@
     </div>
   </div>
   
-  <!-- 弹窗 - 冰摇红莓黑加仑 -->
   <div class="popup-overlay" id="popupOverlayBerry">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
       <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
@@ -4604,7 +4402,6 @@
     </div>
   </div>
 
-  <!-- ===== 旅行椰饭 弹窗 ===== -->
   <div class="popup-overlay" id="popupOverlayMiracle">
     <div class="popup-box" style="max-width:560px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
       <button class="popup-close" id="miraclePopupClose">✕</button>
@@ -4615,6 +4412,8 @@
       </div>
     </div>
   </div>
+
+
   <script>
     
     // ===== 返回顶部按钮 =====
@@ -4629,135 +4428,219 @@
       });
     }
 
-    // ===== 导航栏切换 =====
-    const menuItems = document.querySelectorAll('.menu-item[data-page]');
-    const allPages = document.querySelectorAll('.page-box');
-    menuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const pageId = item.getAttribute('data-page');
-        allPages.forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
+    // ===== 导航下拉菜单控制（悬停触发） =====
+    (function() {
+      const foodNotesBtn = document.getElementById('foodNotesBtn');
+      const foodWorksBtn = document.getElementById('foodWorksBtn');
+      const foodNotesDropdown = document.getElementById('foodNotesDropdown');
+      const foodWorksDropdown = document.getElementById('foodWorksDropdown');
+      
+      let activeDropdown = null; // 当前打开的菜单
+      let closeTimer = null;
 
-        menuItems.forEach(m => m.classList.remove('active'));
-        item.classList.add('active');
-        // 如果切换到饭之拍页面，重置所有筛选条件并重新显示卡片
-        if (pageId === 'fancam') {
-          const searchInput = document.getElementById('weiboSearch');
-          if (searchInput) {
-            searchInput.value = '';
-          }
-          const platformItems = document.querySelectorAll('.platform-nav-item');
-          platformItems.forEach(p => p.classList.remove('active'));
-          const allPlatform = document.querySelector('.platform-nav-item[data-platform="all"]');
-          if (allPlatform) allPlatform.classList.add('active');
-          
-          // 重新渲染月份标签
-          if (typeof renderMonthTabs === 'function') {
-            renderMonthTabs();
-          }
-          
-          setTimeout(() => {
-            const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
-            allCards.forEach(card => {
-              card.style.display = '';
-            });
-            // 重置筛选
-            const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
-            if (allTab) {
-              document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
-              allTab.classList.add('active');
-            }
-            if (typeof filterWeiboFeed === 'function') {
-              filterWeiboFeed();
-            }
-            setTimeout(updateTimelineHighlight, 100);
-          }, 50);
-        }
-    
-        // 如果切换到饭之大小作页面，强制重置到"全部"分类并重新渲染
-        if (pageId === 'stage') {
-          // 重置导航按钮状态
-          const navItems = document.querySelectorAll('#stageNav .stage-nav-item');
-          navItems.forEach(b => b.classList.remove('active'));
-          const allBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
-          if (allBtn) allBtn.classList.add('active');
-          
-          // 重置变量
-          currentCategory = 'all';
-          
-          // 重置搜索框
-          const searchInput = document.getElementById('stageSearch');
-          if (searchInput) {
-            searchInput.value = '';
-          }
-          
-          // 重置月份标签
-          const tabs = document.querySelectorAll('#stageMonthScrollInner .category-tab');
-          tabs.forEach(t => t.classList.remove('active'));
-          const allTab = document.querySelector('#stageMonthScrollInner .category-tab[data-month="全部"]');
-          if (allTab) allTab.classList.add('active');
-          
-          // 重新渲染
-          setTimeout(() => {
-            if (typeof renderCards === 'function') {
-              renderCards('all', '全部', ''); 
-            }
-          }, 50);
-        }
+      function closeAllDropdowns() {
+        clearTimeout(closeTimer);
+        document.querySelectorAll('.nav-dropdown').forEach(d => {
+          d.classList.remove('open');
+          d.style.visibility = '';
+          d.style.opacity = '';
+          d.style.left = '';
+          d.style.top = '';
+        });
+        activeDropdown = null;
+      }
+
+      function openDropdown(btn, dropdown) {
+        clearTimeout(closeTimer);
+        const rect = btn.getBoundingClientRect();
+        dropdown.style.position = 'fixed';
+        dropdown.style.top = (rect.bottom + 6) + 'px';
         
-        // 如果切换到饭之啵页面，强制重置到"全部"分类并重新渲染
-        if (pageId === 'bobo') {
-          // 重置导航按钮状态
-          const navItems = document.querySelectorAll('#boboNav .stage-nav-item');
-          navItems.forEach(b => b.classList.remove('active'));
-          const allBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]');
-          if (allBtn) allBtn.classList.add('active');
-          
-          // 重置变量
-          currentBoboCategory = 'all';
-          
-          // 重置搜索框
-          const searchInput = document.getElementById('boboSearch');
-          if (searchInput) {
-            searchInput.value = '';
-          }
-          
-          // 重置月份标签
-          const tabs = document.querySelectorAll('#boboMonthScrollInner .category-tab');
-          tabs.forEach(t => t.classList.remove('active'));
-          const allTab = document.querySelector('#boboMonthScrollInner .category-tab[data-month="全部"]');
-          if (allTab) allTab.classList.add('active');
-          
-          // 重新渲染
-          setTimeout(() => {
-            if (typeof renderBoboCards === 'function') {
-              renderBoboCards('all', '全部', '');
+        requestAnimationFrame(() => {
+          const menuWidth = dropdown.offsetWidth || 140;
+          dropdown.style.left = (rect.left + rect.width / 2 - menuWidth / 2) + 'px';
+          dropdown.classList.add('open');
+        });
+        activeDropdown = dropdown;
+      }
+
+      // 判断鼠标是否在按钮或菜单上
+      function isHovering(btn, dropdown) {
+        return btn.matches(':hover') || dropdown.matches(':hover');
+      }
+
+      // ---- 饭记 ----
+      if (foodNotesBtn && foodNotesDropdown) {
+        const closeNotes = () => {
+          clearTimeout(closeTimer);
+          closeTimer = setTimeout(() => {
+            if (!isHovering(foodNotesBtn, foodNotesDropdown)) {
+              closeAllDropdowns();
             }
           }, 50);
-        }
-    
-          // 如果切换到饭言饭语页面，重置到饭食饭
-          if (pageId === 'contact') {
-            setTimeout(() => {
-              // 重置导航按钮到"饭食饭"
-              const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
-              navBtns.forEach(b => b.classList.remove('active'));
-              const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
-              if (foodBtn) foodBtn.classList.add('active');
-              
-              // 只显示饭食饭的内容
-              const cards = document.querySelectorAll('#contactFeed .contact-card');
-              cards.forEach(card => {
-                card.style.display = card.dataset.category === 'food' ? '' : 'none';
-              });
-            }, 50);
+        };
+
+        foodNotesBtn.addEventListener('mouseenter', function() {
+          clearTimeout(closeTimer);
+          // 如果当前打开的是饭作，先关闭它
+          if (activeDropdown && activeDropdown !== foodNotesDropdown) {
+            activeDropdown.classList.remove('open');
           }
+          openDropdown(this, foodNotesDropdown);
+        });
+        foodNotesBtn.addEventListener('mouseleave', closeNotes);
+        foodNotesDropdown.addEventListener('mouseenter', function() {
+          clearTimeout(closeTimer);
+        });
+        foodNotesDropdown.addEventListener('mouseleave', closeNotes);
+      }
+
+      // ---- 饭作 ----
+      if (foodWorksBtn && foodWorksDropdown) {
+        const closeWorks = () => {
+          clearTimeout(closeTimer);
+          closeTimer = setTimeout(() => {
+            if (!isHovering(foodWorksBtn, foodWorksDropdown)) {
+              closeAllDropdowns();
+            }
+          }, 50);
+        };
+
+        foodWorksBtn.addEventListener('mouseenter', function() {
+          clearTimeout(closeTimer);
+          if (activeDropdown && activeDropdown !== foodWorksDropdown) {
+            activeDropdown.classList.remove('open');
+          }
+          openDropdown(this, foodWorksDropdown);
+        });
+        foodWorksBtn.addEventListener('mouseleave', closeWorks);
+        foodWorksDropdown.addEventListener('mouseenter', function() {
+          clearTimeout(closeTimer);
+        });
+        foodWorksDropdown.addEventListener('mouseleave', closeWorks);
+      }
+
+      // 点击选项切换页面
+      document.querySelectorAll('.nav-dropdown-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const pageId = this.dataset.page;
+          if (pageId) switchPage(pageId);
+          closeAllDropdowns();
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAllDropdowns();
+      });
+    })();
+    // ===== 导航切换函数 =====
+    function switchPage(pageId) {
+      const allPages = document.querySelectorAll('.page-box');
+      allPages.forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active');
+
+      // 更新导航高亮
+      const menuItems = document.querySelectorAll('.top-nav .menu-item[data-page]');
+      menuItems.forEach(m => m.classList.remove('active'));
+      const activeItem = document.querySelector(`.top-nav .menu-item[data-page="${pageId}"]`);
+      if (activeItem) activeItem.classList.add('active');
+      
+      // 页面切换后的逻辑（保持不变）
+      if (pageId === 'fancam') {
+        const searchInput = document.getElementById('weiboSearch');
+        if (searchInput) searchInput.value = '';
+        const platformItems = document.querySelectorAll('.platform-nav-item');
+        platformItems.forEach(p => p.classList.remove('active'));
+        const allPlatform = document.querySelector('.platform-nav-item[data-platform="all"]');
+        if (allPlatform) allPlatform.classList.add('active');
+        if (typeof renderMonthTabs === 'function') renderMonthTabs();
+        setTimeout(() => {
+          const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+          allCards.forEach(card => card.style.display = '');
+          const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
+          if (allTab) {
+            document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
+            allTab.classList.add('active');
+          }
+          if (typeof filterWeiboFeed === 'function') filterWeiboFeed();
+          setTimeout(updateTimelineHighlight, 100);
+        }, 50);
+      }
+      if (pageId === 'stage') {
+        const navItems = document.querySelectorAll('#stageNav .stage-nav-item');
+        navItems.forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        currentCategory = 'all';
+        const searchInput = document.getElementById('stageSearch');
+        if (searchInput) searchInput.value = '';
+        const tabs = document.querySelectorAll('#stageMonthScrollInner .category-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        const allTab = document.querySelector('#stageMonthScrollInner .category-tab[data-month="全部"]');
+        if (allTab) allTab.classList.add('active');
+        setTimeout(() => {
+          if (typeof renderCards === 'function') renderCards('all', '全部', '');
+        }, 50);
+      }
+      if (pageId === 'bobo') {
+        const navItems = document.querySelectorAll('#boboNav .stage-nav-item');
+        navItems.forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        currentBoboCategory = 'all';
+        const searchInput = document.getElementById('boboSearch');
+        if (searchInput) searchInput.value = '';
+        const tabs = document.querySelectorAll('#boboMonthScrollInner .category-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        const allTab = document.querySelector('#boboMonthScrollInner .category-tab[data-month="全部"]');
+        if (allTab) allTab.classList.add('active');
+        setTimeout(() => {
+          if (typeof renderBoboCards === 'function') renderBoboCards('all', '全部', '');
+        }, 50);
+      }
+      if (pageId === 'contact') {
+        setTimeout(() => {
+          const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
+          navBtns.forEach(b => b.classList.remove('active'));
+          const foodBtn = document.querySelector('#contactNav .platform-nav-item[data-category="food"]');
+          if (foodBtn) foodBtn.classList.add('active');
+          const cards = document.querySelectorAll('#contactFeed .contact-card');
+          cards.forEach(card => {
+            card.style.display = card.dataset.category === 'food' ? '' : 'none';
+          });
+        }, 50);
+      }
+    }
+
+    // ===== 导航点击事件（顶层菜单） =====
+    const menuItems = document.querySelectorAll('.top-nav .menu-item[data-page]');
+    menuItems.forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const pageId = this.dataset.page;
+        switchPage(pageId);
       });
     });
-    
+
+    // ===== 下拉菜单点击事件 =====
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const pageId = this.dataset.page;
+        switchPage(pageId);
+        // 关闭下拉菜单（点击后自动隐藏）
+        const dropdown = this.closest('.dropdown');
+        if (dropdown) dropdown.querySelector('.dropdown-menu').style.display = 'none';
+        setTimeout(() => {
+          if (dropdown) dropdown.querySelector('.dropdown-menu').style.display = '';
+        }, 100);
+      });
+    });
+
     // ===== 舞台数据 =====
     const unitData = [
-      // ===== 不空因果 =====
       { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
       { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
       { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg', show: '【SNH48】TEAM NII《肆时墟》钟亚男生日公演' },
@@ -4767,15 +4650,11 @@
       { date: '2026.07.04', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg', show: '【SNH48】TEAM NII《肆时墟》重庆巡演' },
       { date: '2026.06.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.jpg', show: '【SNH48】TEAM NII《肆时墟》首演（第二场）' },
       { date: '2026.06.27', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg', show: '【SNH48】TEAM NII《肆时墟》首演' },
-
-      // ===== 等价交换 =====
       { date: '2026.06.12', title: '等价交换', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.06.07', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.05.05', title: '等价交换', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.04.24', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.03.01', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-
-      // ===== High Light（合并进来） =====
       { date: '2026.05.24', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
       { date: '2026.05.14', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.05.03', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
@@ -4787,14 +4666,10 @@
       { date: '2026.01.25', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
       { date: '2026.01.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
       { date: '2026.01.17', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
-
-      // ===== 浅呼吸（Axis Kiss） =====
       { date: '2026.06.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
       { date: '2026.04.05', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.03.21', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.03.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-
-      // ===== 再见制服 =====
       { date: '2026.05.30', title: '再见制服', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》钟亚男季度MVP公演' },
       { date: '2026.05.28', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
       { date: '2026.05.17', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
@@ -4868,7 +4743,6 @@
       }
     }
 
-    // ===== 舞台数据渲染与导航逻辑修复 =====
     function getDataByCategory(category) {
       let data = [];
       if (category === 'all') data = [...unitData, ...specialData, ...assistData];
@@ -4881,18 +4755,11 @@
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
         const grid = document.getElementById('stageGrid');
         if (!grid) return;
-
-        // 1. UI 状态重置：如果是筛选操作（非分页点击），重置回第一页
-        if (!isPaginationClick) {
-            currentPage = 1;
-        }
-        isPaginationClick = false; // 消费标记
-
-        // 2. 更新导航按钮高亮 (保持原有逻辑)
+        if (!isPaginationClick) currentPage = 1;
+        isPaginationClick = false;
         const navBtns = document.querySelectorAll('#stageNav .stage-nav-item');
         navBtns.forEach(btn => {
             btn.classList.remove('active');
-            // 清除内联样式以防残留
             btn.style.background = ''; 
             btn.style.color = '';
             btn.style.borderColor = '';
@@ -4905,8 +4772,6 @@
         }
         if (targetBtn) targetBtn.classList.add('active');
         currentCategory = category;
-
-        // 3. 获取并过滤数据
         const data = getDataByCategory(category);
         const filtered = data.filter(item => {
             const month = item.date ? item.date.slice(0, 7) : '';
@@ -4917,29 +4782,19 @@
                             (item.date && item.date.includes(keyword));
             return matchMonth && matchKey;
         });
-
-        // 4. 处理空状态
         if (filtered.length === 0) {
             grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#4a779e; font-size:14px;">没有找到匹配的视频 ✨</div>`;
             updatePaginationUI(0);
             return;
         }
-
-        // 5. 分页切片：只取当前页的数据
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         const pageData = filtered.slice(startIndex, endIndex);
-
-        // 6. 生成 HTML
         let html = '';
-        
-        // 辅助函数：生成单个卡片 HTML
         const createCardHTML = (item) => {
-            // 判断分类标签
             const isUnit = unitData.some(d => d.date === item.date && d.title === item.title);
             const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title);
             const isAssist = assistData.some(d => d.date === item.date && d.title === item.title);
-            
             let tagText = 'UNIT', tagColor = '#00a1d6';
             if (category === 'all') {
                 if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
@@ -4950,32 +4805,19 @@
                 else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
                 else if (category === 'assist') { tagText = '助演'; tagColor = '#FFD700'; }
             }
-
-            // 封面图逻辑
             let coverHtml = '';
             if (item.cover) {
                 coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
             } else {
-                // 尝试异步获取 B站封面 (注意：这里为了性能，仅在没有本地封面时尝试，且不做 await 阻塞渲染)
-                // 实际生产中建议预加载或后端处理，这里保持原有逻辑但简化
                 coverHtml = `
                     <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
                         <div class="video-icon">🎬</div>
                         <div class="video-tip" style="color:#fff;">加载中...</div>
                     </div>
                 `;
-                // 异步尝试填充封面，不阻塞主流程
-                fetchBilibiliCoverFast(item.url).then(url => {
-                    if (url) {
-                        // 找到对应的 img 标签并替换 src (简单实现)
-                        // 由于是 innerHTML 渲染，这里较难直接操作，建议依赖 loading="lazy" 或接受无封面状态
-                    }
-                });
+                fetchBilibiliCoverFast(item.url).then(url => {});
             }
-
-            // 获取公演名
             const showName = item.show || '';
-
             return `
               <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
                 <div class="video-cover-box">
@@ -4991,21 +4833,12 @@
               </div>
             `;
         };
-
-        // 循环生成
-        for (const item of pageData) {
-            html += createCardHTML(item);
-        }
-
-        // 7. 渲染到 DOM
+        for (const item of pageData) html += createCardHTML(item);
         grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
         grid.innerHTML = html;
-
-        // 8. 更新分页控件
         updatePaginationUI(filtered.length);
     }
 
-    // 月份标签渲染函数
     function getMonthList(category) {
       let data = [];
       if (category === 'all') data = [...unitData, ...specialData, ...assistData];
@@ -5018,23 +4851,17 @@
     function renderTabs(category, activeMonth = '全部') {
       const scrollInner = document.getElementById('stageMonthScrollInner');
       if (!scrollInner) return;
-      
       const months = getMonthList(category);
-      // 【修复】生成 HTML 时，只保留 flex-shrink 样式，不添加背景色内联样式，让 CSS 控制
       let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
       months.forEach(m => {
         const active = activeMonth === m ? 'active' : '';
         html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
       });
       scrollInner.innerHTML = html;
-    
-      // 重新绑定月份点击事件
       scrollInner.querySelectorAll('.category-tab').forEach(tab => {
         tab.addEventListener('click', function() {
           const month = this.dataset.month;
           const keyword = document.getElementById('stageSearch').value;
-          
-          // 【核心修复】切换月份时，彻底清除所有标签的内联样式（背景、边框、阴影、文字颜色）
           scrollInner.querySelectorAll('.category-tab').forEach(t => {
             t.classList.remove('active');
             t.style.background = ''; 
@@ -5042,44 +4869,31 @@
             t.style.boxShadow = '';
             t.style.color = '';
           });
-          
           this.classList.add('active');
-          
-          // 重新渲染卡片
           renderCards(currentCategory, month, keyword);
         });
       });
-    
-      // 左右滚动逻辑保持不变...
       const prevBtn = document.getElementById('stageMonthPrev');
       const nextBtn = document.getElementById('stageMonthNext');
       const wrapper = document.getElementById('stageMonthScrollWrapper');
       let scrollPosition = 0;
       const step = 120;
-    
       if (prevBtn && nextBtn && scrollInner && wrapper) {
         scrollPosition = 0;
         scrollInner.style.transform = 'translateX(0px)';
         scrollInner.style.cursor = 'grab';
-        
         prevBtn.onclick = function(e) {
           e.stopPropagation();
           scrollPosition = Math.min(scrollPosition + step, 0);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
         };
-        
         nextBtn.onclick = function(e) {
           e.stopPropagation();
           const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
           scrollPosition = Math.max(scrollPosition - step, maxScroll);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
         };
-        
-        // 触摸滑动逻辑保持不变...
-        let startX = 0;
-        let currentTranslate = 0;
-        let isDragging = false;
-
+        let startX = 0, currentTranslate = 0, isDragging = false;
         scrollInner.addEventListener('touchstart', function(e) {
           startX = e.touches[0].clientX;
           currentTranslate = scrollPosition;
@@ -5087,7 +4901,6 @@
           this.style.cursor = 'grabbing';
           this.style.transition = 'none';
         }, { passive: true });
-
         scrollInner.addEventListener('touchmove', function(e) {
           if (!isDragging) return;
           const moveX = e.touches[0].clientX - startX;
@@ -5096,7 +4909,6 @@
           const clamped = Math.min(Math.max(newPos, maxScroll), 0);
           this.style.transform = 'translateX(' + clamped + 'px)';
         }, { passive: true });
-
         scrollInner.addEventListener('touchend', function(e) {
           if (!isDragging) return;
           isDragging = false;
@@ -5109,7 +4921,6 @@
           else scrollPosition = currentPos;
           this.style.transform = 'translateX(' + scrollPosition + 'px)';
         }, { passive: true });
-        
         wrapper.addEventListener('wheel', function(e) {
           e.preventDefault();
           const delta = e.deltaX || e.deltaY;
@@ -5120,26 +4931,17 @@
       }
     }
 
-    // ===== 导航按钮点击事件修复 =====
     const navItems = document.querySelectorAll('.stage-nav-item');
     navItems.forEach(btn => {
       btn.addEventListener('click', function() {
-        // 1. 获取目标分类
         const targetCategory = this.dataset.category;
-        
-        // 2. 重置搜索框
         const searchInput = document.getElementById('stageSearch');
         if (searchInput) searchInput.value = '';
-        
-        // 3. 重置月份标签到"全部"
         renderTabs(targetCategory, '全部');
-        
-        // 4. 渲染卡片（内部会处理 active 类的切换和内联样式的清除）
         renderCards(targetCategory, '全部', '');
       });
     });
 
-    // 搜索框监听
     const searchInput = document.getElementById('stageSearch');
     if (searchInput) {
       searchInput.addEventListener('input', function() {
@@ -5150,7 +4952,6 @@
       });
     }
 
-    // 初始化
     renderTabs('all', '全部');
     renderCards('all', '全部', '');
 
@@ -5170,7 +4971,6 @@
     
     let currentBoboCategory = 'all';
     
-    // 获取月份列表
     function getBoboMonthList(category) {
       let data = [];
       if (category === 'all') data = boboData;
@@ -5180,21 +4980,15 @@
       return Array.from(set).sort((a,b) => b.localeCompare(a));
     }
     
-    // 获取分类数据
     function getBoboDataByCategory(category) {
       if (category === 'all') return boboData;
       return boboData.filter(item => item.category === category);
     }
     
-    // 渲染卡片（饭之啵专用）
     const boboGrid = document.getElementById('boboGrid');
     
-    // 【核心修复】渲染函数：确保清除所有按钮的内联样式，只保留 active 类的 CSS 样式
     function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
-      // 1. 获取所有导航按钮
       const navBtns = document.querySelectorAll('#boboNav .stage-nav-item');
-      
-      // 2. 【关键】清除所有按钮的内联样式和 active 类，防止残留
       navBtns.forEach(btn => {
         btn.classList.remove('active');
         btn.style.background = ''; 
@@ -5202,21 +4996,13 @@
         btn.style.borderColor = '';
         btn.style.boxShadow = '';
       });
-      
-      // 3. 激活当前选中的按钮
       let targetBtn = document.querySelector(`#boboNav .stage-nav-item[data-category="${category}"]`);
       if (!targetBtn) {
         targetBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]');
         category = 'all';
       }
-      if (targetBtn) {
-        targetBtn.classList.add('active');
-      }
-
-      // 更新全局变量
+      if (targetBtn) targetBtn.classList.add('active');
       currentBoboCategory = category;
-
-      // 获取并过滤数据
       const data = getBoboDataByCategory(category);
       const filtered = data.filter(item => {
         const month = item.date ? item.date.slice(0,7) : '';
@@ -5224,20 +5010,16 @@
         const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
         return matchMonth && matchKey;
       });
-
-      // 渲染空状态或内容
       if (filtered.length === 0) {
         boboGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
         return;
       }
-      
       let html = '';
       for (const item of filtered) {
         let tagColor = '#4299e1';
         let tagText = '单播';
         if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
         else if (item.category === 'special') { tagColor = '#e67e22'; tagText = '特殊直播'; }
-        
         let coverHtml = '';
         if (item.cover) {
           coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
@@ -5249,11 +5031,9 @@
             </div>
           `;
         }
-        
         const descText = (category === 'all') 
           ? (item.category === 'single' ? '单播 · ' + item.date : '特殊直播 · ' + item.date)
           : item.date;
-
         html += `
           <div class="video-card" data-url="${item.url}" data-title="${item.title}" onclick="window.open('${item.url || '#'}','_blank')">
             <div class="video-cover-box">
@@ -5277,26 +5057,20 @@
       boboGrid.innerHTML = html;
     }
     
-    // 渲染月份标签（饭之啵专用）
     function renderBoboTabs(category, activeMonth = '全部') {
       const container = document.getElementById('boboMonthScrollInner');
       if (!container) return;
       const months = getBoboMonthList(category);
-      // 【修复】生成 HTML 时，只保留 flex-shrink 样式，不添加背景色内联样式
       let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
       months.forEach(m => {
         const active = activeMonth === m ? 'active' : '';
         html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
       });
       container.innerHTML = html;
-    
-      // 重新绑定月份点击事件
       container.querySelectorAll('.category-tab').forEach(tab => {
         tab.addEventListener('click', function() {
           const month = this.dataset.month;
           const keyword = document.getElementById('boboSearch').value;
-          
-          // 【核心修复】切换月份时，彻底清除所有标签的内联样式（背景、边框、阴影、文字颜色）
           container.querySelectorAll('.category-tab').forEach(t => {
             t.classList.remove('active');
             t.style.background = ''; 
@@ -5304,32 +5078,24 @@
             t.style.boxShadow = '';
             t.style.color = '';
           });
-          
           this.classList.add('active');
-          
-          // 重新渲染卡片
           renderBoboCards(currentBoboCategory, month, keyword);
         });
       });
-    
-      // 左右滚动逻辑
       const prevBtn = document.getElementById('boboMonthPrev');
       const nextBtn = document.getElementById('boboMonthNext');
       const wrapper = document.getElementById('boboMonthScrollWrapper');
       let scrollPosition = 0;
       const step = 120;
-    
       if (prevBtn && nextBtn && container && wrapper) {
         scrollPosition = 0;
         container.style.transform = 'translateX(0px)';
         container.style.cursor = 'grab';
-        
         prevBtn.onclick = function(e) {
           e.stopPropagation();
           scrollPosition = Math.min(scrollPosition + step, 0);
           container.style.transform = 'translateX(' + scrollPosition + 'px)';
         };
-        
         nextBtn.onclick = function(e) {
           e.stopPropagation();
           const maxScroll = -(container.scrollWidth - wrapper.clientWidth + 20);
@@ -5339,26 +5105,17 @@
       }
     }
     
-    // 【核心修复】分类导航切换事件绑定
     const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
     boboNavItems.forEach(btn => {
       btn.addEventListener('click', function() {
-        // 1. 获取目标分类
         const targetCategory = this.dataset.category;
-        
-        // 2. 重置搜索框
         const searchInput = document.getElementById('boboSearch');
         if (searchInput) searchInput.value = '';
-        
-        // 3. 重置月份标签到"全部"
         renderBoboTabs(targetCategory, '全部');
-        
-        // 4. 渲染卡片（内部会处理 active 类的切换和内联样式的清除）
         renderBoboCards(targetCategory, '全部', '');
       });
     });
     
-    // 搜索框监听（饭之啵专用）
     const boboSearchInput = document.getElementById('boboSearch');
     if (boboSearchInput) {
       boboSearchInput.addEventListener('input', function() {
@@ -5369,7 +5126,6 @@
       });
     }
     
-    // 初始化饭之啵
     renderBoboTabs('all', '全部');
     renderBoboCards('all', '全部', '');
 
@@ -5381,7 +5137,6 @@
       bilibili: ['2026-07', '2026-01', '2025-12', '2025-06', '2025-03', '2025-01', '2024-07', '2024-06', '2023-11']
     };
 
-    // ---- 小日历 ----
     function buildUpdateMap() {
       const map = {};
       const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
@@ -5401,7 +5156,6 @@
     function createInlineCalendar(year) {
       const container = document.createElement('div');
       container.className = 'inline-calendar';
-      
       const label = document.querySelector(`.tl-year-label[data-year="${year}"]`);
       if (label) {
         const rect = label.getBoundingClientRect();
@@ -5412,7 +5166,6 @@
         container.style.transform = 'translate(-50%, -50%) scale(0.3)';
         container.style.transformOrigin = 'center center';
       }
-      
       container.style.position = 'fixed';
       container.style.opacity = '0';
       container.style.transition = 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
@@ -5430,17 +5183,14 @@
       container.style.border = '1px solid rgba(26,74,111,0.12)';
       container.style.boxShadow = '0 20px 60px rgba(26,74,111,0.3)';
       container.style.zIndex = '9999';
-      
       const today = new Date();
       let currentMonth = today.getMonth(); 
       const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-      
       function renderMonth(monthIndex) {
         const updateMap = buildUpdateMap();
         const monthStr = String(monthIndex + 1).padStart(2, '0');
         const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
         const firstDay = new Date(year, monthIndex, 1).getDay();
-        
         let html = `
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0;">
             <button class="cal-nav" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:1px 8px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">‹</button>
@@ -5452,17 +5202,12 @@
           </div>
           <div class="cal-days-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;flex:1;align-content:center;">
         `;
-        
-        for (let i = 0; i < firstDay; i++) {
-          html += `<div></div>`;
-        }
-        
+        for (let i = 0; i < firstDay; i++) html += `<div></div>`;
         for (let d = 1; d <= daysInMonth; d++) {
           const dayStr = String(d).padStart(2, '0');
           const key = `${year}-${monthStr}-${dayStr}`;
           const platforms = updateMap[key] || [];
           const platformSet = new Set(platforms);
-          
           let borderStyle = '';
           let platformNames = [];
           if (platformSet.size > 0) {
@@ -5471,7 +5216,6 @@
             if (platformSet.has('xiaohongshu')) { platformNames.push('小红书'); colors.push('#ff2d55'); }
             if (platformSet.has('douyin')) { platformNames.push('抖音'); colors.push('#f97316'); }
             if (platformSet.has('bilibili')) { platformNames.push('B站'); colors.push('#fb7299'); }
-            
             if (platformSet.size > 1) {
               const colorStops = colors.map((c, i) => {
                 const percent = (i / (colors.length - 1)) * 100;
@@ -5482,7 +5226,6 @@
               borderStyle = `border: 2.5px solid ${colors[0]}; border-radius: 50%;`;
             }
           }
-          
           let badgeHtml = '';
           if (platformSet.size > 0) {
             const tagColorMap = {'微博':'#4299e1','小红书':'#ff2d55','抖音':'#f97316','B站':'#fb7299'};
@@ -5491,7 +5234,6 @@
             }).join('');
             badgeHtml = `<span class="tooltip-badge" style="display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);padding:4px 8px;border-radius:8px;z-index:100;white-space:nowrap;gap:3px;flex-wrap:wrap;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);backdrop-filter:blur(4px);">${tags}</span>`;
           }
-          
           html += `
             <div data-date="${key}" 
                  data-month="${monthStr}" 
@@ -5504,10 +5246,8 @@
             </div>
           `;
         }
-        
         html += `</div>`;
         container.innerHTML = html;
-        
         const prevBtn = container.querySelector('.cal-nav:first-child');
         const nextBtn = container.querySelector('.cal-nav:last-child');
         if (prevBtn) {
@@ -5524,7 +5264,6 @@
             renderMonth(currentMonth);
           });
         }
-        
         container.querySelectorAll('[data-date]').forEach(day => {
           day.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -5547,14 +5286,11 @@
           });
         });
       }
-      
       renderMonth(currentMonth);
-      
       requestAnimationFrame(() => {
         container.style.transform = 'translate(-50%, -50%) scale(1)';
         container.style.opacity = '1';
       });
-      
       setTimeout(() => {
         document.addEventListener('click', function outsideClick(e) {
           if (!container.contains(e.target)) {
@@ -5563,19 +5299,16 @@
           }
         });
       }, 50);
-      
       document.addEventListener('keydown', function escClose(e) {
         if (e.key === 'Escape') {
           closeCalendarPopup(container);
           document.removeEventListener('keydown', escClose);
         }
       });
-      
       window.addEventListener('scroll', function scrollClose() {
         closeCalendarPopup(container);
         window.removeEventListener('scroll', scrollClose);
       });
-      
       return container;
     }
     
@@ -5593,7 +5326,6 @@
       const activePlatform = document.querySelector('.platform-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const timelineContainer = document.getElementById('timelineSidebar');
-      
       let months = [];
       if (currentPlatform === 'all') {
         const allMonths = new Set();
@@ -5604,14 +5336,12 @@
         months = [...months].sort((a, b) => b.localeCompare(a));
       }
       timelineContainer.style.display = 'flex';
-      
       const yearGroups = {};
       months.forEach(m => {
         const year = m.split('-')[0];
         if (!yearGroups[year]) yearGroups[year] = [];
         yearGroups[year].push(m);
       });
-      
       let html = '';
       const sortedYears = Object.keys(yearGroups).sort((a, b) => b.localeCompare(a));
       sortedYears.forEach((year, yearIndex) => {
@@ -5621,14 +5351,10 @@
         yearMonths.forEach((m, index) => {
           const monthNum = m.split('-')[1];
           html += `<div class="tl-item" data-month="${m}">${monthNum}</div>`;
-          if (index < yearMonths.length - 1) {
-            html += `<div class="tl-line"></div>`;
-          }
+          if (index < yearMonths.length - 1) html += `<div class="tl-line"></div>`;
         });
       });
-      
       timelineContainer.innerHTML = html;
-      
       timelineContainer.querySelectorAll('.tl-year-label').forEach(label => {
         label.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -5642,7 +5368,6 @@
           document.body.appendChild(cal);
         });
       });
-      
       timelineContainer.querySelectorAll('.tl-item').forEach(function(item) {
         item.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -5666,7 +5391,6 @@
           }
         });
       });
-      
       setTimeout(updateTimelineHighlight, 100);
     }
 
@@ -5675,7 +5399,6 @@
       const activePlatform = document.querySelector('.platform-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const tabsContainer = document.getElementById('weiboTabs');
-      
       let months = [];
       if (currentPlatform === 'all') {
         const allMonths = new Set();
@@ -5685,12 +5408,10 @@
         months = platformMonths[currentPlatform] || [];
         months = [...months].sort((a, b) => b.localeCompare(a));
       }
-      
       if (months.length === 0) {
         tabsContainer.innerHTML = `<span style="font-size:12px;color:#7a9ab0;padding:4px 0;">暂无数据</span>`;
         return;
       }
-      
       let html = `
         <div style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
           <button class="month-nav-btn" id="weiboMonthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
@@ -5707,39 +5428,29 @@
           <button class="month-nav-btn" id="weiboMonthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
         </div>
       `;
-      
       tabsContainer.innerHTML = html;
-      
       const scrollInner = document.getElementById('weiboMonthScrollInner');
       const scrollWrapper = document.getElementById('weiboMonthScrollWrapper');
       const prevBtn = document.getElementById('weiboMonthPrev');
       const nextBtn = document.getElementById('weiboMonthNext');
-      
       let scrollPosition = 0;
       const step = 120;
-      
       if (prevBtn && nextBtn && scrollInner && scrollWrapper) {
         scrollPosition = 0;
         scrollInner.style.transform = 'translateX(0px)';
         scrollInner.style.cursor = 'grab';
-        
         prevBtn.onclick = function(e) {
           e.stopPropagation();
           scrollPosition = Math.min(scrollPosition + step, 0);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
         };
-        
         nextBtn.onclick = function(e) {
           e.stopPropagation();
           const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
           scrollPosition = Math.max(scrollPosition - step, maxScroll);
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
         };
-    
-        let startX = 0;
-        let currentTranslate = 0;
-        let isDragging = false;
-    
+        let startX = 0, currentTranslate = 0, isDragging = false;
         scrollInner.addEventListener('touchstart', function(e) {
           startX = e.touches[0].clientX;
           currentTranslate = scrollPosition;
@@ -5747,7 +5458,6 @@
           this.style.cursor = 'grabbing';
           this.style.transition = 'none';
         }, { passive: true });
-    
         scrollInner.addEventListener('touchmove', function(e) {
           if (!isDragging) return;
           const moveX = e.touches[0].clientX - startX;
@@ -5756,7 +5466,6 @@
           const clamped = Math.min(Math.max(newPos, maxScroll), 0);
           this.style.transform = 'translateX(' + clamped + 'px)';
         }, { passive: true });
-    
         scrollInner.addEventListener('touchend', function(e) {
           if (!isDragging) return;
           isDragging = false;
@@ -5764,16 +5473,11 @@
           this.style.transition = 'transform 0.3s ease';
           const currentPos = parseFloat(this.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
           const maxScroll = -(scrollInner.scrollWidth - scrollWrapper.clientWidth + 20);
-          if (currentPos > 0) {
-            scrollPosition = 0;
-          } else if (currentPos < maxScroll) {
-            scrollPosition = maxScroll;
-          } else {
-            scrollPosition = currentPos;
-          }
+          if (currentPos > 0) scrollPosition = 0;
+          else if (currentPos < maxScroll) scrollPosition = maxScroll;
+          else scrollPosition = currentPos;
           this.style.transform = 'translateX(' + scrollPosition + 'px)';
         }, { passive: true });
-    
         scrollWrapper.addEventListener('wheel', function(e) {
           e.preventDefault();
           const delta = e.deltaX || e.deltaY;
@@ -5782,7 +5486,6 @@
           scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
         }, { passive: false });
       }
-      
       tabsContainer.querySelectorAll('.category-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
           tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
@@ -5791,7 +5494,6 @@
           setTimeout(updateTimelineHighlight, 100);
         });
       });
-      
       renderTimeline();
     }
 
@@ -5810,19 +5512,15 @@
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
-    
       const showPinned = (currentPlatform === 'weibo' || currentPlatform === 'xiaohongshu') && currentDate === '全部';
-    
       allCards.forEach(card => {
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         const isPinned = card.classList.contains('pinned');
-    
         const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
         const dateMatch = currentDate === '全部' || cardMonth === currentDate;
         const cardText = card.textContent.toLowerCase();
         const textMatch = keyword === '' || cardText.includes(keyword);
-    
         let shouldShow = false;
         if (isPinned) {
           shouldShow = showPinned && cardPlatform === currentPlatform;
@@ -5831,38 +5529,25 @@
         }
         card.style.display = shouldShow ? '' : 'none';
       });
-    
       if (showPinned) {
         const feedWrap = document.getElementById('weiboFeed');
         const pinnedCards = feedWrap.querySelectorAll('.weibo-card.pinned, .xiaohongshu-card.pinned');
         pinnedCards.forEach(card => {
           const cardPlatform = card.dataset.platform || 'weibo';
-          if (cardPlatform === currentPlatform) {
-            feedWrap.prepend(card);
-          }
+          if (cardPlatform === currentPlatform) feedWrap.prepend(card);
         });
       }
       const feedWrap = document.getElementById('weiboFeed');
-      // 只选择卡片，排除 .footer-slogan
       const visibleCards = Array.from(feedWrap.querySelectorAll('.weibo-card:not(.pinned), .xiaohongshu-card:not(.pinned)'))
         .filter(card => card.style.display !== 'none');
-
       visibleCards.sort((a, b) => {
         const dateA = a.dataset.month + '-' + a.dataset.day.padStart(2, '0');
         const dateB = b.dataset.month + '-' + b.dataset.day.padStart(2, '0');
         return dateB.localeCompare(dateA);
       });
-
-      // 重新插入排序后的卡片
-      visibleCards.forEach(card => {
-        feedWrap.appendChild(card);
-      });
-
-      // 确保 footer-slogan 在最后
+      visibleCards.forEach(card => feedWrap.appendChild(card));
       const footer = feedWrap.querySelector('.footer-slogan');
-      if (footer) {
-        feedWrap.appendChild(footer);
-      }
+      if (footer) feedWrap.appendChild(footer);
       setTimeout(updateTimelineHighlight, 50);
     }
 
@@ -6065,7 +5750,6 @@
         'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108281.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.jpg'
       ],
-      
       xhs_slider1: [
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.jpg',
         'https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.jpg'
@@ -6216,7 +5900,6 @@
       const tlItems = document.querySelectorAll('.timeline-sidebar .tl-item');
       let activeMonth = null;
       const offset = 120;
-
       cards.forEach(card => {
         if (card.style.display === 'none') return;
         const rect = card.getBoundingClientRect();
@@ -6226,7 +5909,6 @@
           activeMonth = card.dataset.month;
         }
       });
-
       tlItems.forEach(item => {
         item.classList.toggle('active', item.dataset.month === activeMonth);
       });
@@ -6243,17 +5925,13 @@
     (function() {
       const navBtns = document.querySelectorAll('#contactNav .platform-nav-item');
       const cards = document.querySelectorAll('#contactFeed .contact-card');
-    
       function filterContact(category) {
         cards.forEach(card => {
           const match = card.dataset.category === category;
           card.style.display = match ? '' : 'none';
         });
       }
-    
-      // 默认显示 food（饭食饭）
       filterContact('food');
-    
       navBtns.forEach(btn => {
         btn.addEventListener('click', function() {
           navBtns.forEach(b => b.classList.remove('active'));
@@ -6263,56 +5941,38 @@
       });
     })();
 
-// ===== 饭言饭语弹窗控制 =====
-document.addEventListener('DOMContentLoaded', function() {
-    const clickableItems = document.querySelectorAll('[data-target]');
-    
-    clickableItems.forEach(item => {
+    // ===== 饭言饭语弹窗控制 =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const clickableItems = document.querySelectorAll('[data-target]');
+      clickableItems.forEach(item => {
         item.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('data-target');
-            const popup = document.getElementById(targetId);
-            
-            if (popup) {
-                // 关闭所有已打开的弹窗
-                document.querySelectorAll('.popup-overlay.open').forEach(p => {
-                    p.classList.remove('open');
-                });
-                
-                // 打开目标弹窗
-                popup.classList.add('open');
-            }
+          const targetId = this.getAttribute('data-target');
+          const popup = document.getElementById(targetId);
+          if (popup) {
+            document.querySelectorAll('.popup-overlay.open').forEach(p => p.classList.remove('open'));
+            popup.classList.add('open');
+          }
         });
-    });
-    
-    // 为所有弹窗的关闭按钮添加点击事件
-    document.querySelectorAll('.popup-close').forEach(btn => {
+      });
+      document.querySelectorAll('.popup-close').forEach(btn => {
         btn.addEventListener('click', function() {
-            const popup = this.closest('.popup-overlay');
-            if (popup) {
-                popup.classList.remove('open');
-            }
+          const popup = this.closest('.popup-overlay');
+          if (popup) popup.classList.remove('open');
         });
-    });
-    
-    // 点击弹窗背景关闭弹窗
-    document.querySelectorAll('.popup-overlay').forEach(overlay => {
+      });
+      document.querySelectorAll('.popup-overlay').forEach(overlay => {
         overlay.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('open');
-            }
+          if (e.target === this) this.classList.remove('open');
         });
+      });
     });
-});
 
     // ===== 调色盘设置面板控制 =====
     document.addEventListener('DOMContentLoaded', function() {
         const root = document.documentElement;
         const paletteToggle = document.getElementById('paletteToggle');
         const settingsPanel = document.getElementById('settingsPanel');
-        
-        // ----- 面板展开/收起 -----
         let panelOpen = false;
-        
         if (paletteToggle && settingsPanel) {
             paletteToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -6320,7 +5980,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.classList.toggle('active', panelOpen);
                 settingsPanel.classList.toggle('open', panelOpen);
             });
-        
             document.addEventListener('click', function(e) {
                 if (panelOpen &&
                     !settingsPanel.contains(e.target) &&
@@ -6331,20 +5990,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
-        // ----- 色相颜色条 -----
         const hueTrack = document.getElementById('hueTrack');
         const hueThumb = document.getElementById('hueThumb');
         const hueDisplay = document.getElementById('hueDisplay');
         let isDragging = false;
-        
         function getHueFromClick(e) {
           if (!hueTrack) return 265;
           const rect = hueTrack.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width;
           return Math.round(Math.max(0, Math.min(1, x)) * 360);
         }
-        
         function setHue(hue) {
           const clamped = Math.max(0, Math.min(360, hue));
           const pct = (clamped / 360) * 100;
@@ -6354,8 +6009,6 @@ document.addEventListener('DOMContentLoaded', function() {
             hueDisplay.style.color = 'hsl(' + clamped + ', 80%, 55%)';
           }
           root.style.setProperty('--theme-hue', clamped);
-        
-          // 更新纯色背景（如果是纯色模式）
           const activeMode = document.querySelector('#wallpaperBtns .btn-sm.active');
           if (activeMode && activeMode.dataset.mode === 'solid') {
             const contentArea = document.querySelector('.content-area');
@@ -6363,8 +6016,6 @@ document.addEventListener('DOMContentLoaded', function() {
               contentArea.style.backgroundColor = 'hsl(' + clamped + ', 60%, 85%)';
             }
           }
-        
-          // 更新 active 按钮颜色
           document.querySelectorAll('#wallpaperBtns .btn-sm.active, #layoutBtns .btn-sm.active').forEach(function(btn) {
             btn.style.background = 'hsl(' + clamped + ', 80%, 55%)';
             btn.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
@@ -6375,7 +6026,6 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.boxShadow = '0 2px 10px hsla(' + clamped + ', 70%, 45%, 0.3)';
           });
         }
-        
         if (hueTrack) {
           hueTrack.addEventListener('mousedown', function(e) {
             isDragging = true;
@@ -6385,7 +6035,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isDragging) setHue(getHueFromClick(e));
           });
           document.addEventListener('mouseup', function() { isDragging = false; });
-        
           hueTrack.addEventListener('touchstart', function(e) {
             e.preventDefault();
             setHue(getHueFromClick(e.touches[0]));
@@ -6395,24 +6044,18 @@ document.addEventListener('DOMContentLoaded', function() {
             setHue(getHueFromClick(e.touches[0]));
           }, { passive: false });
         }
-        
-        // ----- 壁纸模式切换 -----
         const wallpaperBtns = document.querySelectorAll('#wallpaperBtns .btn-sm');
         const contentArea = document.querySelector('.content-area');
-        
         function setWallpaper(mode) {
           if (!contentArea) return;
-
           if (mode === 'full') {
             document.body.classList.remove('pure-mode');
             const bgSlider = document.getElementById('bgOpacity');
             const currentOpacity = bgSlider ? bgSlider.value / 100 : 0.8;
             root.style.setProperty('--bg-opacity', currentOpacity);
-        
             const blurSlider = document.getElementById('blurAmount');
             const currentBlur = blurSlider ? blurSlider.value + 'px' : '0px';
             root.style.setProperty('--blur-amount', currentBlur);
-            
             contentArea.style.backgroundColor = 'transparent';
             contentArea.style.backgroundImage = 'none';
             document.body.style.background = '';
@@ -6420,25 +6063,19 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.style.setProperty('--page-bg', '');
             root.style.setProperty('--bg-opacity', 0.8);
             root.style.setProperty('--blur-amount', '0px');
-            
           } 
           else if (mode === 'solid') {
             document.body.classList.add('pure-mode');
-
             const isDark = document.body.classList.contains('dark-mode');
             const color = isDark ? '#000000' : '#ffffff';
-            
             contentArea.style.backgroundColor = 'transparent';
             contentArea.style.backgroundImage = 'none';
-            
             document.body.style.background = color;
             document.documentElement.style.background = color;
-            
             document.documentElement.style.setProperty('--page-bg', color);
             root.style.setProperty('--bg-opacity', 0);
             root.style.setProperty('--blur-amount', '0px');
           }
-
           wallpaperBtns.forEach(function(btn) {
             btn.classList.toggle('active', btn.dataset.mode === mode);
             if (btn.classList.contains('active')) {
@@ -6453,56 +6090,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           });
         }
-        
         wallpaperBtns.forEach(function(btn) {
           btn.addEventListener('click', function() {
             setWallpaper(this.dataset.mode);
           });
         });
-        
-        // ----- 滑块控制 -----
         const bgOpacity = document.getElementById('bgOpacity');
         const bgOpacityVal = document.getElementById('bgOpacityVal');
         const blurAmount = document.getElementById('blurAmount');
         const blurVal = document.getElementById('blurVal');
         const cardOpacity = document.getElementById('cardOpacity');
         const cardOpacityVal = document.getElementById('cardOpacityVal');
-        
-        // 设置默认值
         if (bgOpacity) {
           bgOpacity.value = 80;
           bgOpacityVal.textContent = '80%';
           root.style.setProperty('--bg-opacity', 0.8);
-          
           bgOpacity.addEventListener('input', function() {
             const val = this.value / 100;
             bgOpacityVal.textContent = this.value + '%';
             root.style.setProperty('--bg-opacity', val);
           });
         }
-        
         if (blurAmount) {
           blurAmount.value = 0;
           blurVal.textContent = '0px';
           root.style.setProperty('--blur-amount', '0px');
-          
           blurAmount.addEventListener('input', function() {
             const val = this.value + 'px';
             blurVal.textContent = val;
             root.style.setProperty('--blur-amount', val);
           });
         }
-        
         if (cardOpacity) {
           cardOpacity.value = 72;
           cardOpacityVal.textContent = '72%';
           root.style.setProperty('--card-opacity', 0.72);
-          
           cardOpacity.addEventListener('input', function() {
             const val = this.value / 100;
             cardOpacityVal.textContent = this.value + '%';
             root.style.setProperty('--card-opacity', val);
-            
             document.querySelectorAll('.info-box, .weibo-card, .xiaohongshu-card, .video-card, .miracle-card, .welcome-header, .stage-nav-item, .category-tab, .timeline-sidebar, .popup-box, .settings-panel, .welcome-header .links a').forEach(function(el) {
               el.style.setProperty('--card-opacity', val);
               if (el.classList.contains('info-box') || el.classList.contains('weibo-card') || 
@@ -6514,19 +6140,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.style.background = 'rgba(255, 255, 255, ' + val + ')';
               }
             });
-            
             document.querySelectorAll('.info-card, .link-card, .welcome-header .links a').forEach(function(el) {
               el.style.setProperty('--card-opacity', val);
             });
           });
         }
-        
-        // ----- 布局切换 -----
         const layoutBtns = document.querySelectorAll('#layoutBtns .btn-sm');
-        
         function setLayout(mode) {
         currentLayoutMode = mode;
-          // 控制饭之拍
           const feed = document.getElementById('weiboFeed');
           if (feed) {
             if (mode === 'grid') {
@@ -6539,20 +6160,14 @@ document.addEventListener('DOMContentLoaded', function() {
               feed.style.gap = '0';
             }
           }
-
-          // 控制饭之大小作
           const stageGrid = document.getElementById('stageGrid');
           if (stageGrid) {
             stageGrid.className = 'stage-grid' + (mode === 'list' ? ' list-mode' : '');
           }
-
-          // 控制饭之啵
           const boboGrid = document.getElementById('boboGrid');
           if (boboGrid) {
             boboGrid.className = 'stage-grid' + (mode === 'list' ? ' list-mode' : '');
           }
-
-          // 更新按钮激活状态
           layoutBtns.forEach(function(btn) {
             btn.classList.toggle('active', btn.dataset.layout === mode);
             if (btn.classList.contains('active')) {
@@ -6567,14 +6182,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           });
         }
-        
         layoutBtns.forEach(function(btn) {
           btn.addEventListener('click', function() {
             setLayout(this.dataset.layout);
           });
         });
-        
-        // ----- 初始化 -----
         setHue(210);
         setWallpaper('full');
         setLayout('list');
@@ -6584,27 +6196,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function() {
       const darkToggle = document.getElementById('darkToggle');
       const darkIcon = document.getElementById('darkIcon');
-
       const lightIcon = 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png';
       const darkIconUrl = 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917434.png';
-
       const savedMode = localStorage.getItem('darkMode');
-
       if (savedMode === 'dark') {
         document.body.classList.add('dark-mode');
-        if (darkIcon) {
-          darkIcon.src = darkIconUrl;
-        }
+        if (darkIcon) darkIcon.src = darkIconUrl;
       } else {
-        if (darkIcon) {
-          darkIcon.src = lightIcon;
-        }
+        if (darkIcon) darkIcon.src = lightIcon;
       }
-
       if (darkToggle && darkIcon) {
       darkToggle.addEventListener('click', function() {
         const isDark = document.body.classList.toggle('dark-mode');
-      
         if (isDark) {
           darkIcon.src = darkIconUrl;
           localStorage.setItem('darkMode', 'dark');
@@ -6612,27 +6215,22 @@ document.addEventListener('DOMContentLoaded', function() {
           darkIcon.src = lightIcon;
           localStorage.setItem('darkMode', 'light');
         }
-      
         const activeWallpaper = document.querySelector('#wallpaperBtns .btn-sm.active');
         if (activeWallpaper && activeWallpaper.dataset.mode === 'solid') {
           setWallpaper('solid'); 
         }
-
       });
       }
      });
     
-
     // ===== 大图预览功能（全局） =====
     window.previewImage = function(src) {
       var modal = document.getElementById('imageModal');
       var modalImg = document.getElementById('modalImage');
       var dateBadge = document.getElementById('modalDateBadge') || document.querySelector('.modal-date-badge');
-      
       if (modal && modalImg) {
         modalImg.src = src;
         modalImg.style.opacity = '1';
-        
         var dateMatch = src.match(/(\d{4}\.\d{2}\.\d{2})/);
         if (dateMatch && dateBadge) {
           dateBadge.textContent = dateMatch[0];
@@ -6640,17 +6238,14 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (dateBadge) {
           dateBadge.style.display = 'none';
         }
-        
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        
         var prevBtn = document.getElementById('modalPrev');
         var nextBtn = document.getElementById('modalNext');
         var dots = document.getElementById('modalDots');
         if (prevBtn) prevBtn.style.display = 'none';
         if (nextBtn) nextBtn.style.display = 'none';
         if (dots) dots.innerHTML = '';
-        
         modalImg.onclick = function(e) {
           e.stopPropagation();
           closeModal();
@@ -6684,18 +6279,15 @@ document.addEventListener('DOMContentLoaded', function() {
         '2026-05': [],
         '2026-04': []
       };
-
       const popup = document.getElementById('popupOverlayMiracle');
       const popupTitle = document.getElementById('miraclePopupTitle');
       const popupGrid = document.getElementById('miraclePopupGrid');
       const popupClose = document.getElementById('miraclePopupClose');
-
       function openMiraclePopup(month) {
         if (!popup) return;
         const images = monthImages[month] || [];
         const monthName = month.replace('-', '年') + '月';
         popupTitle.textContent = monthName;
-
         if (images.length === 0) {
           popupGrid.innerHTML = `
             <div style="text-align:center; padding:40px 0; color:#7a9ab0; font-size:14px;">
@@ -6715,17 +6307,14 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
           }).join('');
         }
-
         popup.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
-
       function closeMiraclePopup() {
         if (!popup) return;
         popup.classList.remove('open');
         document.body.style.overflow = '';
       }
-
       const grid = document.querySelector('.miracle-card-grid');
       if (grid) {
         grid.addEventListener('click', function(e) {
@@ -6738,19 +6327,12 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
       }
-
-      if (popupClose) {
-        popupClose.addEventListener('click', closeMiraclePopup);
-      }
-
+      if (popupClose) popupClose.addEventListener('click', closeMiraclePopup);
       if (popup) {
         popup.addEventListener('click', function(e) {
-          if (e.target === this) {
-            closeMiraclePopup();
-          }
+          if (e.target === this) closeMiraclePopup();
         });
       }
-
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && popup && popup.classList.contains('open')) {
           closeMiraclePopup();
@@ -6764,42 +6346,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevBtn = document.getElementById('prevPageBtn');
         const nextBtn = document.getElementById('nextPageBtn');
         const pageInfo = document.getElementById('pageInfo');
-        
         if (!controls) return;
-
         const totalPages = Math.ceil(totalCount / pageSize);
-        
-        // 如果只有一页或没数据，隐藏分页栏
         if (totalPages <= 1) {
             controls.style.display = 'none';
             return;
         }
-        
         controls.style.display = 'flex';
         pageInfo.textContent = `${currentPage} / ${totalPages}`;
-        
-        // 按钮可用性
         prevBtn.disabled = currentPage === 1;
         nextBtn.disabled = currentPage === totalPages;
-        
-        // 视觉反馈
         prevBtn.style.opacity = currentPage === 1 ? '0.4' : '1';
         nextBtn.style.opacity = currentPage === totalPages ? '0.4' : '1';
         prevBtn.style.cursor = currentPage === 1 ? 'not-allowed' : 'pointer';
         nextBtn.style.cursor = currentPage === totalPages ? 'not-allowed' : 'pointer';
     }
 
-        /**
-        * 切换页码通用逻辑 (修复版)
-        */
         function changePage(delta) {
-            // 1. 获取当前的筛选条件
             const activeTab = document.querySelector('#stageMonthScrollInner .category-tab.active');
             const month = activeTab ? activeTab.dataset.month : '全部';
             const keyword = document.getElementById('stageSearch').value;
-            
-            // 2. 重新获取并过滤所有数据，以计算准确的总页数
-            // 注意：这里必须使用和 renderCards 完全一致的过滤逻辑
             const allDataList = getDataByCategory(currentCategory);
             const filteredData = allDataList.filter(item => {
                 const m = item.date ? item.date.slice(0,7) : '';
@@ -6808,43 +6374,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 const matchK = k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
                 return matchM && matchK;
             });
-
             const totalCount = filteredData.length;
             const totalPages = Math.ceil(totalCount / pageSize);
-            
-            // 3. 计算新页码并校验
             const newPage = currentPage + delta;
-            
             if (newPage >= 1 && newPage <= totalPages) {
                 currentPage = newPage;
-                isPaginationClick = true; // 标记为分页点击，防止 renderCards 重置页码
-                
-                // 4. 重新渲染
+                isPaginationClick = true;
                 renderCards(currentCategory, month, keyword);
-                
-                // 5. 滚动回内容区顶部
                 const contentArea = document.querySelector('.content-area');
-                if (contentArea) {
-                    contentArea.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            } else {
-                console.log('已达边界', newPage, totalPages);
+                if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
   </script>
   <!-- ===== 设置面板 ===== -->
   <div class="settings-panel" id="settingsPanel">
-    
-    <!-- 第一部分：主题设置 -->
     <div class="panel-section">
-      <!-- 带分割线的标题 -->
       <div class="section-header">
         <span class="section-title">主题设置</span>
         <div class="header-line"></div>
       </div>
-      
-      <!-- 色相 -->
       <div class="control-row">
         <label>色相</label>
         <div class="hue-track" id="hueTrack">
@@ -6852,8 +6401,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <span class="hue-value" id="hueDisplay">265°</span>
       </div>
-
-      <!-- 壁纸 -->
       <div class="control-row">
         <label>壁纸</label>
         <div class="btn-group-sm" id="wallpaperBtns">
@@ -6862,46 +6409,32 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     </div>
-
-    <!-- 第二部分：背景设置 -->
     <div class="panel-section">
-      <!-- 带分割线的标题 -->
       <div class="section-header">
         <span class="section-title">背景设置</span>
         <div class="header-line"></div>
       </div>
-
-      <!-- 背景透明度 -->
       <div class="control-row">
         <label>背景透明度</label>
         <input type="range" class="slider-sm" id="bgOpacity" min="0" max="100" value="80" />
         <span class="slider-val" id="bgOpacityVal">80%</span>
       </div>
-
-      <!-- 背景模糊 -->
       <div class="control-row">
         <label>背景模糊</label>
         <input type="range" class="slider-sm" id="blurAmount" min="0" max="20" value="0" step="0.5" />
         <span class="slider-val" id="blurVal">0px</span>
       </div>
-
-      <!-- 卡片透明度 -->
       <div class="control-row">
         <label>卡片透明度</label>
         <input type="range" class="slider-sm" id="cardOpacity" min="30" max="100" value="100" />
         <span class="slider-val" id="cardOpacityVal">100%</span>
       </div>
     </div>
-
-    <!-- 第三部分：布局设置 -->
     <div class="panel-section">
-      <!-- 带分割线的标题 -->
       <div class="section-header">
         <span class="section-title">布局设置</span>
         <div class="header-line"></div>
       </div>
-
-      <!-- 布局 -->
       <div class="control-row">
         <label>布局</label>
         <div class="btn-group-sm" id="layoutBtns">
@@ -6910,8 +6443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     </div>
-
   </div>
+
 </body>
 </html>
-
