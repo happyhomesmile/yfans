@@ -63,7 +63,7 @@
     .top-nav .menu-item {
       font-size: 16px;
       font-weight: 700;
-      color: #2c5a7a;
+      color: #2a5a7a;
       padding: 8px 18px;
       border-radius: 8px;
       cursor: pointer;
@@ -77,25 +77,15 @@
       position: relative;
     }
     .top-nav .menu-item.active {
-      background: hsla(var(--theme-hue), 60%, 50%, 0.12) !important;
-      border-color: hsla(var(--theme-hue), 60%, 50%, 0.20) !important;
-      color: hsl(var(--theme-hue), 60%, 30%) !important;
+      color: #2a5a7a !important;
       font-weight: 600 !important;
-      box-shadow: 0 2px 8px hsla(var(--theme-hue), 60%, 40%, 0.08) !important;
-    }
-    .top-nav .menu-item:hover {
-      background: hsla(var(--theme-hue), 60%, 50%, 0.10);
-      border-color: hsla(var(--theme-hue), 60%, 50%, 0.15);
-      color: hsl(var(--theme-hue), 60%, 30%);
-      box-shadow: 0 2px 12px hsla(var(--theme-hue), 60%, 40%, 0.08);
-      transform: translateY(-1px);
     }
     .top-nav .menu-item .icon { font-size: 16px; }
 
     /* ===== 内容区 ===== */
     .content-area {
         flex: 1;
-        padding: 16px 24px 20px 24px;
+        padding: 50px 24px 20px 24px;
         overflow-y: auto;
         background: transparent;
         position: relative;
@@ -129,12 +119,11 @@
           max-width: 780px;
           margin: 0 auto;
           background: rgba(255,255,255, var(--card-opacity, 0.72));
-          backdrop-filter: blur(8px);
           border-radius: 8px;
           padding: 18px 22px;
         }
 
-    /* ===== 首页（原饭记） ===== */
+    /* ===== 首页 ===== */
     .welcome-header {
               text-align: left;
               padding: 20px 20px 16px 20px;
@@ -960,8 +949,8 @@
 
     /* ===== 设置面板样式 ===== */
     .top-nav .menu-item.palette-nav {
-      background: rgba(255, 255, 255, 0.3);
-      border: 1.5px solid rgba(0, 0, 0, 0.06);
+      background: transparent !important; 
+      border: none;     
       border-radius: 8px;
       transition: all 0.3s ease;
     }
@@ -991,7 +980,7 @@
       -webkit-backdrop-filter: blur(32px) saturate(1.3);
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.10);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.10), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3); 
       padding: 20px 22px 24px;
       transform: translateY(-12px) scale(0.96);
       opacity: 0;
@@ -1171,7 +1160,6 @@
     body.dark-mode .modal-image-container,
     body.dark-mode .dropdown-menu {
       background: rgba(20, 20, 20, 0.85) !important;
-      backdrop-filter: blur(10px);
       border-color: rgba(255, 255, 255, 0.1) !important;
       color: #e0e0e0 !important;
     }
@@ -1386,6 +1374,26 @@
     body.dark-mode .inline-calendar .cal-nav:hover {
       background: rgba(66, 153, 225, 0.1) !important;
     }
+
+    body.dark-mode .nav-dropdown {
+      background: #000000 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3) !important;
+    }
+
+    body.dark-mode .nav-dropdown-item {
+      color: #c8d8e8 !important;
+    }
+
+    body.dark-mode .nav-dropdown-item:hover {
+      background: rgba(42, 90, 122, 0.15) !important;
+      color: #2a5a7a !important;
+    }
+
+    body.dark-mode .nav-dropdown-item.active {
+      background: rgba(42, 90, 122, 0.2) !important;
+      color: #2a5a7a !important;
+    }
     .platform-icon {
         width: 16px;
         height: 16px;
@@ -1565,6 +1573,12 @@
     html.pure-mode.dark-mode {
         background-color: #000000 !important;
     }
+    body.pure-mode .info-box {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
     .section-title {
       font-size: 0.75rem;
       font-weight: 700;
@@ -1604,7 +1618,9 @@
     body.dark-mode .header-line {
       opacity: 0.6 !important;
     }
-
+    body.pure-mode.dark-mode #home .info-box {
+      background: #000000 !important;
+    }
     /* ===== 导航下拉菜单（紧贴按钮） ===== */
     .nav-dropdown {
       position: fixed;
@@ -1616,8 +1632,9 @@
       border-radius: 14px;
       padding: 6px 0;
       min-width: 140px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: none; 
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3) !important;  /* 细边框同步调色盘 */
       z-index: 200;
       visibility: hidden;
       opacity: 0;
@@ -1641,15 +1658,39 @@
     }
     .nav-dropdown-item:hover {
       background: rgba(36, 104, 168, 0.08);
-      color: hsl(var(--theme-hue), 60%, 30%);
+      color: #2c5a7a!important;
     }
     .nav-dropdown-item.active {
       background: hsla(var(--theme-hue), 60%, 50%, 0.12);
-      color: hsl(var(--theme-hue), 60%, 30%);
+      color: #2c5a7a!important;
     }
     @keyframes dropIn {
       0% { transform: translateX(-50%) translateY(-6px); opacity: 0; }
       100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    .dropdown-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 2px;
+      transition: filter 0.25s ease, transform 0.25s ease;
+      filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(500%) hue-rotate(175deg);
+    }
+
+    /* 菜单项 hover 时，图标变为调色板主色 */
+    .top-nav .menu-item:hover .dropdown-icon {
+      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
+    }
+
+    /* 暗色模式默认 */
+    body.dark-mode .dropdown-icon {
+      filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
+    }
+
+    body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
+      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
   </style>
 </head>
@@ -1702,13 +1743,22 @@
     <div class="top-nav">
     <!-- 首页 -->
     <div class="menu-item active" data-page="home">首页</div>
-    
-    <!-- 饭记（弹窗） -->
-    <div class="menu-item" id="foodNotesBtn">饭记 ▼</div>
-
-    <!-- 饭作（弹窗） -->
-    <div class="menu-item" id="foodWorksBtn">饭作 ▼</div>
-    
+      
+    <div class="menu-item" data-page="stage" id="foodWorksBtn">
+      饭作
+      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png"
+           alt="下拉"
+           class="dropdown-icon"
+           id="foodWorksIcon" />
+    </div>
+    <div class="menu-item" data-page="contact" id="foodNotesBtn">
+      饭记
+      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png"
+           alt="下拉"
+           class="dropdown-icon"
+           id="foodNotesIcon" />
+    </div>
+      
     <!-- 关于本站 -->
     <div class="menu-item" data-page="wait">关于本站</div>
       
@@ -4541,13 +4591,24 @@
       const target = document.getElementById(pageId);
       if (target) target.classList.add('active');
 
-      // 更新导航高亮
-      const menuItems = document.querySelectorAll('.top-nav .menu-item[data-page]');
-      menuItems.forEach(m => m.classList.remove('active'));
-      const activeItem = document.querySelector(`.top-nav .menu-item[data-page="${pageId}"]`);
-      if (activeItem) activeItem.classList.add('active');
+      let targetPageId = pageId;
+      if (pageId === 'stage' || pageId === 'fancam' || pageId === 'bobo') {
+        targetPageId = 'stage';
+      }
       
-      // 页面切换后的逻辑（保持不变）
+      window.activePage = targetPageId;
+      
+      const targetItem = document.querySelector(`.top-nav .menu-item[data-page="${targetPageId}"]`);
+      if (targetItem) {
+        document.querySelectorAll('.top-nav .menu-item[data-page]').forEach(m => m.classList.remove('active'));
+        targetItem.classList.add('active');
+        // 触发滑块移动到目标位置
+        const event = new Event('navUpdate');
+        event.targetPage = targetPageId;
+        document.dispatchEvent(event);
+      }
+
+      // 页面切换后的业务逻辑
       if (pageId === 'fancam') {
         const searchInput = document.getElementById('weiboSearch');
         if (searchInput) searchInput.value = '';
@@ -4638,6 +4699,130 @@
         }, 100);
       });
     });
+
+    // ===== 导航栏高亮跟随鼠标滑动 =====
+    (function() {
+        const nav = document.querySelector('.top-nav');
+        const menuItems = nav.querySelectorAll('.menu-item[data-page]');
+        let activePage = 'home'; // 当前页面
+        let hoveredItem = null;
+        let slideTimer = null;
+
+        // 创建高亮滑块
+        const slider = document.createElement('div');
+        slider.className = 'nav-slider';
+        slider.style.cssText = `
+            position: absolute;
+            top: 4px;
+            height: calc(100% - 20px); top: 10px;
+            border-radius: 30px;
+            background: rgba(42, 90, 122, 0.25);
+            transition: left 0.3s ease, width 0.3s ease;
+            pointer-events: none;
+            z-index: 0;
+        `;
+        nav.style.position = 'relative';
+        nav.insertBefore(slider, nav.firstChild);
+
+        // 更新滑块位置到指定菜单项
+        function moveSliderToItem(item, animate = true) {
+            if (!item) return;
+            const rect = item.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+            slider.style.left = (rect.left - navRect.left + 4) + 'px';
+            slider.style.width = (rect.width - 8) + 'px';
+            slider.style.transition = animate ? 'left 0.3s ease, width 0.3s ease' : 'none';
+        }
+
+        // 高亮回到当前页面
+        function returnToActive() {
+            const activeItem = nav.querySelector(`.menu-item[data-page="${activePage}"]`);
+            if (activeItem) {
+                moveSliderToItem(activeItem, true);
+            }
+            hoveredItem = null;
+        }
+
+        // 初始化：高亮到当前页面
+        function initSlider() {
+            const activeItem = nav.querySelector('.menu-item.active');
+            if (activeItem) {
+                activePage = activeItem.dataset.page;
+                window.activePage = activePage;
+                moveSliderToItem(activeItem, false);
+            }
+        }
+
+        // 监听自定义事件，更新滑块
+        document.addEventListener('navUpdate', function(e) {
+            const targetPage = e.targetPage || 'home';
+            const targetItem = nav.querySelector(`.menu-item[data-page="${targetPage}"]`);
+            if (targetItem) {
+                activePage = targetPage;
+                moveSliderToItem(targetItem, true);
+            }
+        });
+
+        // 鼠标进入菜单项
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                clearTimeout(slideTimer);
+                hoveredItem = this;
+                moveSliderToItem(this, true);
+            });
+        item.addEventListener('click', function() {
+            const page = this.dataset.page;
+            if (page) {
+                // 先切换页面
+                switchPage(page);
+                // 从 switchPage 中获取真正应该高亮的页面
+                const targetPage = window.activePage || page;
+                const targetItem = nav.querySelector(`.menu-item[data-page="${targetPage}"]`);
+                if (targetItem) {
+                    activePage = targetPage;
+                    menuItems.forEach(m => m.classList.remove('active'));
+                    targetItem.classList.add('active');
+                    moveSliderToItem(targetItem, true);
+                }
+                hoveredItem = null;
+            }
+        });
+       });
+
+        // 鼠标离开导航栏
+        nav.addEventListener('mouseleave', function() {
+            // 延迟一点再回去，避免移到下拉菜单时闪烁
+            slideTimer = setTimeout(() => {
+                returnToActive();
+            }, 80);
+        });
+
+        // 下拉菜单悬停时不收回高亮
+        document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            dropdown.addEventListener('mouseenter', function() {
+                clearTimeout(slideTimer);
+            });
+            dropdown.addEventListener('mouseleave', function() {
+                slideTimer = setTimeout(() => {
+                    returnToActive();
+                }, 80);
+            });
+        });
+
+        // 暴露给 switchPage 使用
+        window.updateNavHighlight = function(pageId) {
+            activePage = pageId;
+            const targetItem = nav.querySelector(`.menu-item[data-page="${pageId}"]`);
+            if (targetItem) {
+                menuItems.forEach(m => m.classList.remove('active'));
+                targetItem.classList.add('active');
+                moveSliderToItem(targetItem, true);
+            }
+        };
+
+        // 初始化
+        initSlider();
+    })();
 
     // ===== 舞台数据 =====
     const unitData = [
@@ -6013,7 +6198,6 @@
           if (activeMode && activeMode.dataset.mode === 'solid') {
             const contentArea = document.querySelector('.content-area');
             if (contentArea) {
-              contentArea.style.backgroundColor = 'hsl(' + clamped + ', 60%, 85%)';
             }
           }
           document.querySelectorAll('#wallpaperBtns .btn-sm.active, #layoutBtns .btn-sm.active').forEach(function(btn) {
@@ -6386,6 +6570,7 @@
             }
         }
 
+        
   </script>
   <!-- ===== 设置面板 ===== -->
   <div class="settings-panel" id="settingsPanel">
