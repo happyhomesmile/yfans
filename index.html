@@ -1234,54 +1234,93 @@
       }
     }
 
-    /* ===== 暗色模式 ===== */
+    /* ===== 暗色模式核心样式 ===== */
     body.dark-mode {
-      background: linear-gradient(145deg, #1a2a3a 0%, #0d1b2a 100%);
+      background: #000000 !important; /* 强制纯黑背景 */
+      color: #e0e0e0;
     }
-    
-    body.dark-mode .top-nav {
-      background: rgba(20, 30, 45, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    body.dark-mode .top-nav .menu-item {
-      color: #b0c4de;
-    }
-    body.dark-mode .top-nav .menu-item:hover {
-      background: rgba(66, 153, 225, 0.15);
-      border-color: rgba(66, 153, 225, 0.3);
-    }
-    body.dark-mode .top-nav .menu-item.active {
-      background: rgba(66, 153, 225, 0.25) !important;
-      border-color: rgba(66, 153, 225, 0.3) !important;
-      color: #ffffff !important;
-      box-shadow: 0 2px 8px rgba(66, 153, 225, 0.15) !important;
-    }
-    
-    body.dark-mode .content-area::before {
-      opacity: 0.15;
-    }
-    
+
+    /* 1. 主内容区、卡片、导航栏背景变黑 */
     body.dark-mode .info-box,
     body.dark-mode .weibo-card,
     body.dark-mode .xiaohongshu-card,
-    body.dark-mode .miracle-card,
     body.dark-mode .video-card,
+    body.dark-mode .miracle-card,
     body.dark-mode .link-card,
     body.dark-mode .welcome-header,
-    body.dark-mode .stage-nav-item,
-    body.dark-mode .category-tab,
+    body.dark-mode .top-nav,
     body.dark-mode .timeline-sidebar,
     body.dark-mode .popup-box,
-    body.dark-mode .settings-panel {
-      background: rgba(20, 30, 45, 0.75) !important;
-      backdrop-filter: blur(12px);
-      border-color: rgba(255, 255, 255, 0.06) !important;
+    body.dark-mode .settings-panel,
+    body.dark-mode .inline-calendar,
+    body.dark-mode .stage-nav-item,
+    body.dark-mode .category-tab,
+    body.dark-mode .platform-nav-item,
+    body.dark-mode .search-box,
+    body.dark-mode .modal-image-container {
+      background: rgba(20, 20, 20, 0.85) !important; /* 深灰色半透明背景 */
+      backdrop-filter: blur(10px);
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: #e0e0e0 !important;
+    }
+
+    /* 2. 特殊卡片背景（如信息格） */
+    body.dark-mode .info-card,
+    body.dark-mode .video-cover-box {
+      background: rgba(40, 40, 40, 0.6) !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* 3. 文字颜色调整 */
+    body.dark-mode h1, 
+    body.dark-mode h2, 
+    body.dark-mode h3, 
+    body.dark-mode .info-title, 
+    body.dark-mode .info-value, 
+    body.dark-mode .video-name, 
+    body.dark-mode .weibo-text, 
+    body.dark-mode .timeline-date,
+    body.dark-mode .card-footer,
+    body.dark-mode .menu-item {
+      color: #e0e0e0 !important;
     }
     
-    body.dark-mode .info-box {
-      background: rgba(20, 30, 45, 0.7) !important;
+    body.dark-mode .info-label,
+    body.dark-mode .video-date,
+    body.dark-mode .weibo-time,
+    body.dark-mode .sub {
+      color: #a0a0a0 !important;
+    }
+
+    /* 4. 输入框和搜索框 */
+    body.dark-mode input,
+    body.dark-mode textarea {
+      background: rgba(40, 40, 40, 0.8) !important;
+      color: #fff !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* 5. 按钮和标签 */
+    body.dark-mode .btn-sm,
+    body.dark-mode .stage-nav-item,
+    body.dark-mode .category-tab {
+      background: rgba(40, 40, 40, 0.6) !important;
+      color: #ccc !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    body.dark-mode .btn-sm.active,
+    body.dark-mode .stage-nav-item.active,
+    body.dark-mode .category-tab.active {
+      background: var(--theme-color) !important; /* 保持主题色高亮 */
+      color: #fff !important;
+      border-color: var(--theme-color) !important;
+    }
+
+    /* 6. 弹窗遮罩层内的元素 */
+    body.dark-mode .popup-overlay .popup-box {
+      background: #1a1a1a !important;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     body.dark-mode .welcome-header h1,
@@ -1313,6 +1352,13 @@
     body.dark-mode .timeline-sidebar .tl-year-label,
     body.dark-mode .timeline-sidebar .tl-item {
       color: #c8d8e8 !important;
+    }
+
+    body.dark-mode .welcome-header {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      box-shadow: none !important;
+      border: none !important;
     }
     
     body.dark-mode .welcome-header .links a {
@@ -1669,6 +1715,29 @@
       }
     }
 
+    /* ===== 纯色模式下彻底隐藏背景图 ===== */
+    body.pure-mode .content-area::before {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    /* 纯色模式背景色 - 根据暗色模式自动切换 */
+    body.pure-mode:not(.dark-mode) {
+        background-color: #ffffff !important;
+        background-image: none !important;
+    }
+    body.pure-mode.dark-mode {
+        background-color: #000000 !important;
+        background-image: none !important;
+    }
+
+    html.pure-mode:not(.dark-mode) {
+        background-color: #ffffff !important;
+    }
+    html.pure-mode.dark-mode {
+        background-color: #000000 !important;
+    }
   </style>
 </head>
 <body>
@@ -4630,134 +4699,75 @@
     // ===== 舞台数据 =====
     const unitData = [
       // ===== 不空因果 =====
-      { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg' },
-      { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg' },
-      { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg' },
-      { date: '2026.07.18', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141019316.jpg' },
-      { date: '2026.07.12', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141022013.jpg' },
-      { date: '2026.07.11', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141015276.jpg' },
-      { date: '2026.07.04', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg' },
-      { date: '2026.06.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.jpg' },
-      { date: '2026.06.27', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg' },
-    
+      { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
+      { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
+      { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg', show: '【SNH48】TEAM NII《肆时墟》钟亚男生日公演' },
+      { date: '2026.07.18', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141019316.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
+      { date: '2026.07.12', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141022013.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.11', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141015276.jpg', show: '【SNH48】TEAM NII 胡晓慧《一小部分我》生日公演' },
+      { date: '2026.07.04', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.jpg', show: '【SNH48】TEAM NII《肆时墟》重庆巡演' },
+      { date: '2026.06.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.jpg', show: '【SNH48】TEAM NII《肆时墟》首演（第二场）' },
+      { date: '2026.06.27', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.jpg', show: '【SNH48】TEAM NII《肆时墟》首演' },
+
       // ===== 等价交换 =====
-      { date: '2026.06.12', title: '等价交换', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.06.07', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.05.05', title: '等价交换', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.04.24', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-      { date: '2026.03.01', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png' },
-    
-      // ===== High Light =====
-      { date: '2026.05.24', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.14', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.05.03', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.23', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.04.05', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.20', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.03.01', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.31', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.25', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-      { date: '2026.01.17', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg' },
-    
+      { date: '2026.06.12', title: '等价交换', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.06.07', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.05.05', title: '等价交换', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.04.24', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.01', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+
+      // ===== High Light（合并进来） =====
+      { date: '2026.05.24', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
+      { date: '2026.05.14', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.05.03', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.04.23', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.04.05', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.20', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.01', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.01.31', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
+      { date: '2026.01.25', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
+      { date: '2026.01.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
+      { date: '2026.01.17', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
+
       // ===== 浅呼吸（Axis Kiss） =====
-      { date: '2026.06.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg' },
-      { date: '2026.04.05', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg' },
-      { date: '2026.03.21', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg' },
-      { date: '2026.03.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg' },
-    
+      { date: '2026.06.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
+      { date: '2026.04.05', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.21', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+
       // ===== 再见制服 =====
-      { date: '2026.05.30', title: '再见制服', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.28', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.05.17', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
-      { date: '2026.01.25', title: '再见制服', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png' },
+      { date: '2026.05.30', title: '再见制服', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》钟亚男季度MVP公演' },
+      { date: '2026.05.28', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.05.17', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.01.25', title: '再见制服', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.png', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
     ];
     const specialData = [
-      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg' },
-      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.jpg' },
-      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.jpg' },
-      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225558911.jpg' },
-      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg' },
-      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
-      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731125148967.jpg' },
-      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg' },
-      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg' },
-      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg' },
-      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.jpg' },
-      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg' },
-      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg' }
+      { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225558911.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731125148967.jpg', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
+      { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
+      { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.jpg', show: '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场' },
+      { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.jpg', show: '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场' },
+      { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.jpg', show: '【SNH48】新春特别公演 Team NII &Team X 联合公演' },
+      { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.jpg', show: '【SNH48】TEAM HII《赫兹共振》声动星河淘汰赛' },
+      { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg', show: '【SNH48】《声动星河之匿声唱将》特别公演' },
     ];
     const assistData = [
-      { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg' },
-      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg' },
-      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg' },
-      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg' },
-      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png' },
-      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg' },
-      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg' },
-      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg' },
-      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg' }
+      { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
+      { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
+      { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
+      { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
+      { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
+      { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg', show: '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演' },
+      { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg', show: '【SNH48】TEAM NII《Plan B》刘洁毕业公演' },
+      { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
+      { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg', show: '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演' },
     ];
-    const showMap = {
-      '2026.07.28|不空因果': '【SNH48】TEAM NII《肆时墟》公演',
-      '2026.07.24|花园舞曲': '【SNH48】TEAM NII《肆时墟》公演',
-      '2026.07.24|不空因果': '【SNH48】TEAM NII《肆时墟》公演',
-      '2026.07.19|不空因果': '【SNH48】TEAM NII《肆时墟》钟亚男生日公演',
-      '2026.07.18|不空因果': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
-      '2026.07.18|One Life': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
-      '2026.07.18|新目的地&星光环绕的孤岛': '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演',
-      '2026.07.12|不空因果': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|致明天': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|HAKUNAMATATA': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|七点钟（7 o\'clock）': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|白昼街灯': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|Dream up': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|初日': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.12|悬铃木&因为喜欢你&钻石呐喊': '【SNH48】TEAM NII《肆时墟》叶凡生日公演',
-      '2026.07.11|不空因果': '【SNH48】TEAM NII 胡晓慧《一小部分我》生日公演',
-      '2026.07.04|不空因果': '【SNH48】TEAM NII《肆时墟》重庆巡演',
-      '2026.06.28|不空因果': '【SNH48】TEAM NII《肆时墟》首演（第二场）',
-      '2026.06.27|不空因果': '【SNH48】TEAM NII《肆时墟》首演',
-      '2026.06.20|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演',
-      '2026.06.20|睡衣兜风': '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演',
-      '2026.06.12|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.06.07|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.05.30|再见制服': '【SNH48】TEAM NII《Nice to meet you II》钟亚男季度MVP公演',
-      '2026.05.28|再见制服': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.05.24|High Light': '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演',
-      '2026.05.24|不可阻挡': '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演',
-      '2026.05.17|再见制服': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.05.14|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.05.05|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.05.03|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.04.24|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.04.23|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.04.23|青春的约定': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.04.18|High Light': '【SNH48】20260418 Team NII《Nice to Meet You II》北京巡演',
-      '2026.04.05|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.04.05|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.28|最后的曙光': '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演',
-      '2026.03.21|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.21|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.20|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.20|浅呼吸（Axis Kiss）': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.07|月': '【SNH48】TEAM NII《Plan B》刘洁毕业公演',
-      '2026.03.04|人鱼': '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场',
-      '2026.03.04|Mad World': '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场',
-      '2026.03.01|High Light': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.03.01|等价交换': '【SNH48】TEAM NII《Nice to meet you II》公演',
-      '2026.02.07|返校日': '【SNH48】新春特别公演 Team NII &Team X 联合公演',
-      '2026.01.31|乐曜日': '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演',
-      '2026.01.31|High Light': '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演',
-      '2026.01.25|再见制服': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
-      '2026.01.25|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
-      '2026.01.18|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
-      '2026.01.17|High Light': '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛',
-      '2026.01.16|叹云兮': '【SNH48】TEAM HII《赫兹共振》声动星河淘汰赛',
-      '2026.01.10|Miss Victouria': '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演',
-      '2026.01.03|梦之河': '【SNH48】《声动星河之匿声唱将》特别公演'
-    };
     const allData = { unit: unitData, special: specialData, assist: assistData };
     let currentCategory = 'all';
     const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
@@ -4826,6 +4836,8 @@
             // 清除内联样式以防残留
             btn.style.background = ''; 
             btn.style.color = '';
+            btn.style.borderColor = '';
+            btn.style.boxShadow = '';
         });
         let targetBtn = document.querySelector(`#stageNav .stage-nav-item[data-category="${category}"]`);
         if (!targetBtn) {
@@ -4873,11 +4885,11 @@
             if (category === 'all') {
                 if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
                 else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-                else if (isAssist) { tagText = '助演'; tagColor = '#8e44ad'; }
+                else if (isAssist) { tagText = '助演'; tagColor = '#FFD700'; }
             } else {
                 if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
                 else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-                else if (category === 'assist') { tagText = '助演'; tagColor = '#8e44ad'; }
+                else if (category === 'assist') { tagText = '助演'; tagColor = '#FFD700'; }
             }
 
             // 封面图逻辑
@@ -4903,8 +4915,7 @@
             }
 
             // 获取公演名
-            const key = item.date + '|' + item.title;
-            const showName = showMap[key] || '';
+            const showName = item.show || '';
 
             return `
               <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
@@ -5307,7 +5318,7 @@
     const platformMonths = {
       weibo: ['2026-08','2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
       xiaohongshu: ['2026-08','2025-07', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      douyin: ['2026-08','2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
+      douyin: ['2026-08','2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01','2025-12','2025-11','2025-10','2025-09'],
       bilibili: ['2026-07', '2026-01', '2025-12', '2025-06', '2025-03', '2025-01', '2024-07', '2024-06', '2023-11']
     };
 
@@ -6334,26 +6345,34 @@ document.addEventListener('DOMContentLoaded', function() {
           if (!contentArea) return;
 
           if (mode === 'full') {
+            document.body.classList.remove('pure-mode');
+            
             contentArea.style.backgroundColor = 'transparent';
             contentArea.style.backgroundImage = 'none';
             document.body.style.background = '';
+            document.documentElement.style.background = '';
             document.documentElement.style.setProperty('--page-bg', '');
             root.style.setProperty('--bg-opacity', 0.5);
             root.style.setProperty('--blur-amount', '0px');
             
           } 
-            else if (mode === 'solid') {
-              // 根据当前暗色模式决定纯色背景
-              const isDark = document.body.classList.contains('dark-mode');
-              const color = isDark ? '#000000' : '#ffffff';  // 暗色→黑，亮色→白
-              contentArea.style.backgroundColor = 'transparent';
-              contentArea.style.backgroundImage = 'none';
-              document.body.style.background = color;
-              document.documentElement.style.setProperty('--page-bg', color);
-              root.style.setProperty('--bg-opacity', 0);
-              root.style.setProperty('--blur-amount', '0px');
-            }
-        
+          else if (mode === 'solid') {
+            document.body.classList.add('pure-mode');
+
+            const isDark = document.body.classList.contains('dark-mode');
+            const color = isDark ? '#000000' : '#ffffff';
+            
+            contentArea.style.backgroundColor = 'transparent';
+            contentArea.style.backgroundImage = 'none';
+            
+            document.body.style.background = color;
+            document.documentElement.style.background = color;
+            
+            document.documentElement.style.setProperty('--page-bg', color);
+            root.style.setProperty('--bg-opacity', 0);
+            root.style.setProperty('--blur-amount', '0px');
+          }
+
           wallpaperBtns.forEach(function(btn) {
             btn.classList.toggle('active', btn.dataset.mode === mode);
             if (btn.classList.contains('active')) {
@@ -6530,8 +6549,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
         const activeWallpaper = document.querySelector('#wallpaperBtns .btn-sm.active');
         if (activeWallpaper && activeWallpaper.dataset.mode === 'solid') {
-          setWallpaper('solid');
+          setWallpaper('solid'); 
         }
+
       });
       }
      });
