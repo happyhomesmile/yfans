@@ -46,11 +46,11 @@
         border-radius: 30px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(36, 104, 168, 0.04);
-        padding: 6px 16px;
+        padding: 8px 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2px;
+        gap: 4px;
         overflow-x: auto;
         overflow-y: visible;
         flex-wrap: nowrap;
@@ -64,7 +64,7 @@
       font-size: 16px;
       font-weight: 700;
       color: #2a5a7a;
-      padding: 4px 14px;
+      padding: 8px 18px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -1681,41 +1681,45 @@
       filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
 
+    /* ===== 导航栏 ===== */
+    .top-nav {
+      /* 保持现有样式，确保是 flex 布局 */
+      display: flex;
+      align-items: center;
+      justify-content: center;  /* 菜单项居中 */
+      /* ... 其他样式保持不变 */
+    }
 
-    /* ===== 右侧独立框（和导航栏分开） ===== */
-    .nav-actions {
-      position: fixed;
-      top: 12px;
-      right: 5%;
+    /* ===== 右侧独立矩形框（在导航栏内部右侧） ===== */
+    .top-nav .nav-actions {
       display: flex;
       align-items: center;
       gap: 2px;
-      padding: 6px 16px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      z-index: 101;
+      margin-left: auto;        /* 推到最右侧 */
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
     }
 
-    .nav-actions .menu-item {
-      padding: 5px 8px;
+    .top-nav .nav-actions .menu-item {
+      padding: 4px 8px;
       border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .nav-actions .menu-item:hover {
+    .top-nav .nav-actions .menu-item:hover {
       background: rgba(36, 104, 168, 0.08);
     }
 
     /* 暗色模式 */
-    body.dark-mode .nav-actions {
-      background: rgba(20, 20, 20, 0.9);
-      border-color: rgba(255, 255, 255, 0.1);
+    body.dark-mode .top-nav .nav-actions {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark-mode .top-nav .nav-actions .menu-item:hover {
+      background: rgba(66, 153, 225, 0.15);
     }
   </style>
 </head>
@@ -1786,7 +1790,6 @@
       
     <!-- 关于本站 -->
     <div class="menu-item" data-page="wait">关于本站</div>
-    </div>
       
     <!-- ===== 右侧独立矩形框 ===== -->
     <div class="nav-actions">
@@ -4742,7 +4745,7 @@
         slider.style.cssText = `
             position: absolute;
             top: 4px;
-            height: calc(100% - 8px); top: 4px;
+            height: calc(100% - 20px); top: 10px;
             border-radius: 30px;
             background: rgba(42, 90, 122, 0.25);
             transition: left 0.3s ease, width 0.3s ease;
@@ -4757,8 +4760,8 @@
             if (!item) return;
             const rect = item.getBoundingClientRect();
             const navRect = nav.getBoundingClientRect();
-            slider.style.left = (rect.left - navRect.left + 1) + 'px';
-            slider.style.width = (rect.width - 4) + 'px';
+            slider.style.left = (rect.left - navRect.left + 4) + 'px';
+            slider.style.width = (rect.width - 8) + 'px';
             slider.style.transition = animate ? 'left 0.3s ease, width 0.3s ease' : 'none';
         }
 
