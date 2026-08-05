@@ -1721,6 +1721,46 @@
     body.dark-mode .top-nav .nav-actions .menu-item:hover {
       background: rgba(66, 153, 225, 0.15);
     }
+
+    /* ===== 页面右上角功能框 ===== */
+    .page-actions {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 101;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 暗色模式下的页面右上角功能框 */
+    body.dark-mode .page-actions {
+      background: rgba(20, 30, 45, 0.85);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* 调整按钮样式 */
+    .page-actions .menu-item {
+      padding: 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-actions .menu-item:hover {
+      background: rgba(36, 104, 168, 0.12);
+    }
+
+    body.dark-mode .page-actions .menu-item:hover {
+      background: rgba(66, 153, 225, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -1770,39 +1810,29 @@
     
     <!-- ===== 顶部导航栏（精简版） ===== -->
     <div class="top-nav">
-    <!-- 首页 -->
-    <div class="menu-item active" data-page="home">首页</div>
-      
-    <div class="menu-item" data-page="stage" id="foodWorksBtn">
-      饭作
-      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png"
-           alt="下拉"
-           class="dropdown-icon"
-           id="foodWorksIcon" />
+      <!-- 首页 -->
+      <div class="menu-item active" data-page="home">首页</div>
+      <div class="menu-item" data-page="stage" id="foodWorksBtn">
+        饭作
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png" alt="下拉" class="dropdown-icon" id="foodWorksIcon" />
+      </div>
+      <div class="menu-item" data-page="contact" id="foodNotesBtn">
+        饭记
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png" alt="下拉" class="dropdown-icon" id="foodNotesIcon" />
+      </div>
+      <!-- 关于本站 -->
+      <div class="menu-item" data-page="wait">关于本站</div>
     </div>
-    <div class="menu-item" data-page="contact" id="foodNotesBtn">
-      饭记
-      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png"
-           alt="下拉"
-           class="dropdown-icon"
-           id="foodNotesIcon" />
-    </div>
-      
-    <!-- 关于本站 -->
-    <div class="menu-item" data-page="wait">关于本站</div>
-      
-    <!-- ===== 右侧独立矩形框 ===== -->
-    <div class="nav-actions">
-      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;display:flex;align-items:center;justify-content:center;">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" 
-            alt="调色盘" 
-            style="width:20px; height:20px; display:block; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+
+    <!-- 新增：页面右上角的独立功能框 -->
+    <div class="page-actions">
+      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" alt="调色盘" style="width:20px; height:20px; display:block; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </div>
       <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
         <img id="darkIcon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" alt="切换主题" class="dark-toggle-icon" />
       </div>
     </div>
-  </div>
 
     <!-- ===== 内容区 ===== -->
     <div class="content-area" id="contentWrap">
