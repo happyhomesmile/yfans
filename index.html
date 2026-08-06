@@ -12,17 +12,20 @@
     html, body { 
         width: 100%; 
         height: 100vh; 
-        overflow: hidden;
+        overflow-y: auto;
         font-family: "Chiron GoRound TC", "M PLUS Rounded 1c", "PingFang SC", "Microsoft YaHei", sans-serif;
         background: #f0f7fe; 
         margin: 0;
         padding: 0;
         display: flex; 
         flex-direction: column; 
-        overflow: hidden;
     }
-    .main-page { display: flex; flex-direction: column; width: 100vw; min-height: 100vh; background: transparent; }
-
+    .main-page { 
+        width: 100%; 
+        min-height: 100vh; 
+        position: relative; 
+        z-index: 1;
+    }
     :root {
       --theme-hue: 210;
       --theme-color: hsl(var(--theme-hue), 80%, 55%);
@@ -34,19 +37,20 @@
 
     /* ===== 顶部导航栏（含下拉菜单） ===== */
     .top-nav {
-        position: sticky;
-        top: 0;
-        z-index: 100;
+        position: fixed !important; 
+        top: 12px !important;     
+        left: 50% !important;       
+        transform: translateX(-50%) !important; 
+        z-index: 9999!important;
         flex-shrink: 0;
         width: auto;
-        max-width: 90%;
-        margin: 12px auto 0 auto;
+        max-width: 60%;
+        margin: 0px auto 0 auto;
         background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(20px);
         border-radius: 30px;
         border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(36, 104, 168, 0.04);
-        padding: 8px 16px;
+        padding: 5px 16px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -56,7 +60,6 @@
         flex-wrap: nowrap;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
-        position: relative;
     }
     .top-nav::-webkit-scrollbar { display: none; }
 
@@ -85,11 +88,11 @@
     /* ===== 内容区 ===== */
     .content-area {
         flex: 1;
-        padding: 50px 24px 20px 24px;
-        overflow-y: auto;
+        padding: 120px 24px 20px 24px;
+        overflow-y: visible;
         background: transparent;
         position: relative;
-        height: calc(100vh - 80px);
+        height: auto;
         scroll-behavior: smooth;
     }
     .content-area::-webkit-scrollbar { width: 4px; }
@@ -107,7 +110,7 @@
         background-position: center 30%;
         opacity: var(--bg-opacity, 0.5);
         filter: blur(var(--blur-amount, 0px));
-        z-index: 0;
+        z-index: -1;
         pointer-events: none;
         transition: opacity 0.3s ease, filter 0.3s ease;
     }
@@ -119,91 +122,137 @@
           max-width: 780px;
           margin: 0 auto;
           background: rgba(255,255,255, var(--card-opacity, 0.72));
-          border-radius: 8px;
+          border-radius: 2px;
           padding: 18px 22px;
         }
 
     /* ===== 首页 ===== */
     .welcome-header {
-              text-align: left;
-              padding: 20px 20px 16px 20px;
-              margin-bottom: 16px;
-              border-radius: 0;
-              background: transparent !important;
-              backdrop-filter: none;
-              max-width: 100%;
-              margin-left: 0;
-              margin-right: 0;
-            }
-    .welcome-header h1 {
-          font-size: 26px;
-          font-weight: 600;
-          color: #1a4a6f;
-          letter-spacing: 1px;
-          margin-bottom: 8px;
-        }
-    .welcome-header .sub { font-size: 15px; color: #2a5a7a; margin-bottom: 12px; }
-    .welcome-header .links {
-          display: flex;
-          justify-content: flex-start;
-          gap: 16px;
-          flex-wrap: wrap;
-          margin-top: 4px;
-        }
-    .welcome-header .links a {
-        font-size: 14px;
-        font-weight: 500;
-        color: #1a4a6f;
-        text-decoration: none;
-        padding: 4px 16px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
-        transition: all 0.25s ease;
-        box-shadow: 0 2px 6px hsla(var(--theme-hue), 60%, 30%, 0.10);
+      text-align: left;
+      padding: 20px 20px 16px 20px;
+      margin-bottom: 16px;
+      border-radius: 0;
+      background: transparent !important;
+      backdrop-filter: none;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
     }
-.welcome-header .links a:hover {
-    background: rgba(26, 74, 111, 0.10);
-    transform: translateY(-1px);
-    box-shadow: 0 3px 12px hsla(var(--theme-hue), 70%, 40%, 0.18);
-}
+    .welcome-subtitle {
+      font-size: 14px;     
+      font-weight: 550; 
+      opacity: 0.5;     
+      color: var(--theme-color);       
+      letter-spacing: 1px;  
+      margin-bottom: 8px;   
+      text-transform: uppercase; 
+    }
+    .welcome-header h1 {
+       font-size: 38px;
+       font-weight: 600;
+       color: #1a4a6f;
+       letter-spacing: 1px;
+       margin-bottom: 8px;
+    }
+    .welcome-header .sub { 
+      font-size: 15px; 
+      color: #1a4a6f; 
+      opacity: 0.5; 
+      margin-bottom: 12px; 
+    }
+    .welcome-header .links {
+      display: flex;
+      justify-content: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .welcome-header .links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1a4a6f;
+      text-decoration: none;
+      padding: 4px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px hsla(var(--theme-hue), 60%, 30%, 0.10);
+    }
+    .welcome-header .links a:hover {
+      background: rgba(26, 74, 111, 0.10);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 12px hsla(var(--theme-hue), 70%, 40%, 0.18);
+    }
 
+    .header-divider {
+      width: 103%;
+      height: 1px;
+      background: var(--theme-color);
+      opacity: 0.1; 
+      border-radius: 2px; 
+      margin-top: 16px; 
+      margin-bottom: 1px; 
+    }
+    .intro-text {
+      font-size: 13px;       
+      color: #5a7a9a;
+      opacity: 0.5;           
+      margin-top: 8px;          
+      margin-bottom: 0px;   
+      letter-spacing: 1px;      
+      font-weight: 500;       
+    }
     .info-title {
-          font-size: 16px;
-          color: #1f5a8a;
-          font-weight: 600;
-          letter-spacing: 0.5px;
-          padding-bottom: 8px;
-          margin-bottom: 12px;
-          border-bottom: 1px solid rgba(184,224,255,0.25);
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 6px;
-        }
-    .info-title .deco { font-size: 14px; opacity: 0.5; }
+      font-size: 16px;
+      color: #1f5a8a;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+    }
+    .info-title::after {
+      content: '';
+      flex: 1;
+      border-radius: 2px; 
+      height: 2px;
+      background: #1f5a8a;
+      margin-left: 12px;
+    }
+
+    .info-title .deco { 
+      font-size: 14px; 
+      opacity: 0.5; 
+    }
 
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .info-card {
-        background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
-        border-radius: 10px;
-        padding: 8px 12px;
-        box-shadow: 0 2px 8px hsla(var(--theme-hue), 60%, 30%, 0.12);
+    
+      background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
+      border-radius: 10px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.1);
     }
     .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
     .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; }
 
     .link-card {
-        background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
-        border-radius: 10px;
-        padding: 8px 12px;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        box-shadow: 0 2px 8px hsla(var(--theme-hue), 60%, 30%, 0.12);
+      background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.1);
     }
     .link-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px hsla(var(--theme-hue), 70%, 35%, 0.25);
-          background: rgba(230, 244, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px hsla(var(--theme-hue), 70%, 35%, 0.25);
+      background: rgba(230, 244, 255, 0.35);
         }
     .link-card .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
     .link-card .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; display: flex; align-items: center; gap: 4px; }
@@ -1402,8 +1451,8 @@
         margin-right: 4px;
     }
     .title-icon {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         display: inline-block;
         vertical-align: middle;
         flex-shrink: 0;
@@ -1609,10 +1658,10 @@
     body.pure-mode.dark-mode #home .info-box {
       background: #000000 !important;
     }
-    /* ===== 导航下拉菜单（紧贴按钮） ===== */
+    /* ===== 导航下拉菜单 ===== */
     .nav-dropdown {
       position: fixed;
-      top: calc(100% + 6px);
+      top: calc(100% + 20px);
       left: 0;
       transform: none;
       background: rgba(255, 255, 255, 0.96);
@@ -1681,47 +1730,6 @@
       filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
 
-    /* ===== 导航栏 ===== */
-    .top-nav {
-      /* 保持现有样式，确保是 flex 布局 */
-      display: flex;
-      align-items: center;
-      justify-content: center;  /* 菜单项居中 */
-      /* ... 其他样式保持不变 */
-    }
-
-    /* ===== 右侧独立矩形框（在导航栏内部右侧） ===== */
-    .top-nav .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      margin-left: auto;        /* 推到最右侧 */
-      padding: 4px 10px;
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 20px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      flex-shrink: 0;
-    }
-
-    .top-nav .nav-actions .menu-item {
-      padding: 4px 8px;
-      border-radius: 8px;
-    }
-
-    .top-nav .nav-actions .menu-item:hover {
-      background: rgba(36, 104, 168, 0.08);
-    }
-
-    /* 暗色模式 */
-    body.dark-mode .top-nav .nav-actions {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    body.dark-mode .top-nav .nav-actions .menu-item:hover {
-      background: rgba(66, 153, 225, 0.15);
-    }
-
     /* ===== 页面右上角功能框 ===== */
     .page-actions {
       position: fixed;
@@ -1761,6 +1769,7 @@
     body.dark-mode .page-actions .menu-item:hover {
       background: rgba(66, 153, 225, 0.15);
     }
+
   </style>
 </head>
 <body>
@@ -1841,14 +1850,17 @@
       <div class="page-box active" id="home">
         <div class="info-box">
           <div class="welcome-header">
-            <h1>欢迎使用一颗椰饭的饲养指南</h1>
+            <div class="welcome-subtitle">Welcome!</div>
+            <h1>欢迎使用椰饭饲养指南</h1>
             <div class="sub">椰丝之家：933624308</div>
             <div class="links">
               <a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a>
               <a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a>
-              <a href="https://b23.tv/sCndNaE">星系放映厅</a>
+              <a href="https://b23.tv/sCndNaE">星系放映厅</a></div>
+              <div class="header-divider"></div>
+              <div class="intro-text">想要了解叶凡？这里是介绍区</div>
             </div>
-          </div>
+            
             <div class="info-title">
               <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.png" alt="" class="title-icon" />
               椰饭的自我介绍
@@ -4565,7 +4577,7 @@
         clearTimeout(closeTimer);
         const rect = btn.getBoundingClientRect();
         dropdown.style.position = 'fixed';
-        dropdown.style.top = (rect.bottom + 6) + 'px';
+        dropdown.style.top = (rect.bottom + 12) + 'px';
         
         requestAnimationFrame(() => {
           const menuWidth = dropdown.offsetWidth || 140;
@@ -4775,7 +4787,7 @@
         slider.style.cssText = `
             position: absolute;
             top: 4px;
-            height: calc(100% - 20px); top: 10px;
+            height: calc(100% - 10px); top: 5px;
             border-radius: 30px;
             background: rgba(42, 90, 122, 0.25);
             transition: left 0.3s ease, width 0.3s ease;
@@ -4790,8 +4802,8 @@
             if (!item) return;
             const rect = item.getBoundingClientRect();
             const navRect = nav.getBoundingClientRect();
-            slider.style.left = (rect.left - navRect.left + 4) + 'px';
-            slider.style.width = (rect.width - 8) + 'px';
+            slider.style.left = (rect.left - navRect.left + 0) + 'px';
+            slider.style.width = (rect.width - 2) + 'px';
             slider.style.transition = animate ? 'left 0.3s ease, width 0.3s ease' : 'none';
         }
 
@@ -4938,14 +4950,32 @@
       { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg', show: '【SNH48】《声动星河之匿声唱将》特别公演' },
     ];
     const assistData = [
+      // 2026年7月
       { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
       { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
       { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
+
+      // 2026年6月（从新到旧）
+      { date: '2026.06.21', title: '+-(正负)', url: 'https://www.bilibili.com/video/BV1E6MC65ECw/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张倩生日公演及作品展演' },
       { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
+      { date: '2026.06.07', title: 'Be my poi', url: 'https://www.bilibili.com/video/BV1B6MC6VEXh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张雷雷生日公演及作品展演' },
+
+      // 2026年5月
       { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
+      { date: '2026.05.23', title: '梦与星光的海上', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
+      { date: '2026.05.02', title: 'Sweet Chemistry', url: 'https://www.bilibili.com/video/BV1Z6MC6VESz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM SII《INTO THE LIGHT》宁轲生日公演' },
+
+      // 2026年4月
+      { date: '2026.04.25', title: 'Like it（随机碰撞）', url: 'https://www.bilibili.com/video/BV1f6MC6VEM5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》公演' },
+      { date: '2026.04.11', title: '金色海岸', url: 'https://www.bilibili.com/video/BV1B6MC6VEjj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
+
+      // 2026年3月
       { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg', show: '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演' },
       { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg', show: '【SNH48】TEAM NII《Plan B》刘洁毕业公演' },
+
+      // 2026年1月
       { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
+      { date: '2026.01.24', title: 'BLackrain', url: 'https://www.bilibili.com/video/BV1B6MC6VEzu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM HII《赫兹共振》蒋舒婷季度MVP公演' },
       { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg', show: '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演' },
     ];
     const allData = { unit: unitData, special: specialData, assist: assistData };
@@ -6367,9 +6397,9 @@
           });
         }
         if (cardOpacity) {
-          cardOpacity.value = 72;
-          cardOpacityVal.textContent = '72%';
-          root.style.setProperty('--card-opacity', 0.72);
+          cardOpacity.value = 80;
+          cardOpacityVal.textContent = '80%';
+          root.style.setProperty('--card-opacity', 0.80);
           cardOpacity.addEventListener('input', function() {
             const val = this.value / 100;
             cardOpacityVal.textContent = this.value + '%';
@@ -6631,7 +6661,6 @@
             }
         }
 
-        
   </script>
   <!-- ===== 设置面板 ===== -->
   <div class="settings-panel" id="settingsPanel">
@@ -6672,8 +6701,8 @@
       </div>
       <div class="control-row">
         <label>卡片透明度</label>
-        <input type="range" class="slider-sm" id="cardOpacity" min="30" max="100" value="100" />
-        <span class="slider-val" id="cardOpacityVal">100%</span>
+        <input type="range" class="slider-sm" id="cardOpacity" min="0" max="100" value="80" />
+        <span class="slider-val" id="cardOpacityVal">80%</span>
       </div>
     </div>
     <div class="panel-section">
