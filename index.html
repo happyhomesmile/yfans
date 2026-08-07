@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
   <meta name="referrer" content="no-referrer" />
   <title>一颗椰饭饲养指南</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
   <style>
     /* ===== 全局重置 ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +16,7 @@
         height: 100vh; 
         overflow-y: auto;
         font-family: "Chiron GoRound TC", "M PLUS Rounded 1c", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: #f0f7fe; 
+        background: #ffffff; 
         margin: 0;
         padding: 0;
         display: flex; 
@@ -28,7 +30,7 @@
     }
     :root {
       --theme-hue: 210;
-      --theme-color: hsl(var(--theme-hue), 80%, 55%);
+      --theme-color: hsl(var(--theme-hue), 50%, 55%);
       --theme-light: hsl(var(--theme-hue), 70%, 94%);
       --bg-opacity: 1;
       --blur-amount: 0px;
@@ -37,36 +39,36 @@
 
     /* ===== 顶部导航栏（含下拉菜单） ===== */
     .top-nav {
-        position: fixed !important; 
-        top: 12px !important;     
-        left: 50% !important;       
-        transform: translateX(-50%) !important; 
-        z-index: 9999!important;
-        flex-shrink: 0;
-        width: auto;
-        max-width: 60%;
-        margin: 0px auto 0 auto;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(20px);
-        border-radius: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 5px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        overflow-x: auto;
-        overflow-y: visible;
-        flex-wrap: nowrap;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
+      position: fixed !important; 
+      top: 12px !important;     
+      left: 50% !important;       
+      transform: translateX(-50%) !important; 
+      z-index: 9999!important;
+      flex-shrink: 0;
+      width: 28%;
+      margin: 0px auto 0 auto;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      overflow-x: auto;
+      overflow-y: visible;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
     .top-nav::-webkit-scrollbar { display: none; }
 
     .top-nav .menu-item {
       font-size: 16px;
       font-weight: 700;
-      color: #2a5a7a;
+      color: #000000;
+      opacity: 0.7;  
       padding: 8px 18px;
       border-radius: 8px;
       cursor: pointer;
@@ -80,7 +82,8 @@
       position: relative;
     }
     .top-nav .menu-item.active {
-      color: #2a5a7a !important;
+      color: #000000;
+      opacity: 0.7;  
       font-weight: 600 !important;
     }
     .top-nav .menu-item .icon { font-size: 16px; }
@@ -88,7 +91,7 @@
     /* ===== 内容区 ===== */
     .content-area {
         flex: 1;
-        padding: 120px 24px 20px 24px;
+        padding: 80px 24px 20px 24px;
         overflow-y: visible;
         background: transparent;
         position: relative;
@@ -105,7 +108,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url("https://wsrv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260722101215361.jpg");
+        background-image: url("https://wsrv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260807200934097.jpg");
         background-size: cover;
         background-position: center 30%;
         opacity: var(--bg-opacity, 0.5);
@@ -150,7 +153,7 @@
     .welcome-header h1 {
        font-size: 38px;
        font-weight: 600;
-       color: #1a4a6f;
+       color: #000000;
        letter-spacing: 1px;
        margin-bottom: 8px;
     }
@@ -170,18 +173,18 @@
     .welcome-header .links a {
       font-size: 14px;
       font-weight: 500;
-      color: #1a4a6f;
+      color: #000000;
       text-decoration: none;
       padding: 4px 16px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
       transition: all 0.25s ease;
-      box-shadow: 0 2px 6px hsla(var(--theme-hue), 60%, 30%, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.08) ;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
     }
     .welcome-header .links a:hover {
-      background: rgba(26, 74, 111, 0.10);
-      transform: translateY(-1px);
-      box-shadow: 0 3px 12px hsla(var(--theme-hue), 70%, 40%, 0.18);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
     }
 
     .header-divider {
@@ -204,9 +207,9 @@
     }
     .info-title {
       font-size: 16px;
-      color: #1f5a8a;
+      color: #000000;
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: 0px;
       padding-bottom: 8px;
       margin-bottom: 10px;
       display: flex;
@@ -219,8 +222,13 @@
       flex: 1;
       border-radius: 2px; 
       height: 2px;
-      background: #1f5a8a;
+      background: #000000;
       margin-left: 12px;
+    }
+
+    body.dark-mode .info-title::after {
+      background: #e0e0e0 !important;
+      opacity: 0.3;
     }
 
     .info-title .deco { 
@@ -230,69 +238,54 @@
 
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .info-card {
-    
-      background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
       border-radius: 10px;
       padding: 8px 12px;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      box-shadow: 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.1);
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
     }
-    .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
-    .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; }
+    .info-label { font-size: 11px; color: #000000; opacity: 0.5; margin-bottom: 1px; }
+    .info-value { font-size: 14px; color: #000000; font-weight: 500; }
 
     .link-card {
-      background: rgba(230, 244, 255, calc(var(--card-opacity, 0.72) * 0.2));
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
       border-radius: 10px;
       padding: 8px 12px;
       cursor: pointer;
       transition: all 0.25s ease;
       border: 1px solid rgba(255, 255, 255, 0.08) ;
-      box-shadow: 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.1);
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
     }
     .link-card:hover {
-      background: rgba(230, 244, 255, 0.35);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
       border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
         }
-    .link-card .info-label { font-size: 11px; color: #4a779e; margin-bottom: 1px; }
-    .link-card .info-value { font-size: 14px; color: #1a4a6f; font-weight: 500; display: flex; align-items: center; gap: 4px; }
 
     /* ===== 时间线 ===== */
     .timeline-wrap { margin-top: 10px; padding-left: 14px; position: relative; }
     .timeline-wrap::before {
           content: '';
           position: absolute;
-          left: 4px;
+          left: 24px;
           top: 0;
           bottom: 0;
           width: 2px;
-          background: linear-gradient(to bottom, #4299e1, #1f5a8a);
+          background: #1a4a6f;  
+          opacity: 0.5;
           border-radius: 2px;
         }
     .timeline-item {
       position: relative; padding-left: 24px; margin-bottom: 12px;
       cursor: default;
     }
-    .timeline-item .timeline-dot {
-          position: absolute;
-          left: -6px;
-          top: 2px;
-          width: 14px;
-          height: 14px;
-          border-radius: 50%;
-          background: #1f5a8a;
-          border: 2px solid #b8e0ff;
-          box-shadow: 0 0 0 2px rgba(36,104,168,0.08);
-          cursor: default;
-          transition: all 0.2s ease;
-          z-index: 2;
-        }
     .timeline-item .timeline-dot.no-link { cursor: default; background: #b8d4e8; }
     .timeline-date {
           font-size: 12px;
-          color: #1f5a8a;
+          color: #1a4a6f;
+          opacity: 0.5;
           font-weight: 600;
         }
-    .timeline-text { font-size: 13px; color: #4a779e; line-height: 1.5; }
+    .timeline-text { font-size: 13px; color: #000000; line-height: 1.5; }
 
     .footer-slogan {
       text-align: center;
@@ -312,55 +305,64 @@
       display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
       margin-bottom: 14px;
     }
-    #stageNav .stage-nav-item {
+    #stageNav .stage-nav-item,
+    #boboNav .stage-nav-item,
+    #platformNav .stage-nav-item {
       padding: 5px 14px;
       border-radius: 24px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 500;
-      color: #2c5a7a;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(184, 224, 255, 0.20);
+      color: #000000;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.5)); 
+      border: none !important;
       cursor: pointer;
-      transition: all 0.2s;
+      outline: none;
+      box-shadow: none !important;
     }
-    #stageNav .stage-nav-item:hover {
-      background: rgba(255,255,255,0.6);
-      border-color: #8ab3d0;
-    }
-    #stageNav .stage-nav-item.active {
-      background: hsl(var(--theme-hue), 70%, 45%);
-      color: #fff;
-      border-color: hsl(var(--theme-hue), 70%, 45%);
-      box-shadow: 0 2px 10px hsla(var(--theme-hue), 70%, 45%, 0.3);
+    #stageNav .stage-nav-item.active,
+    #boboNav .stage-nav-item.active,
+    #platformNav .stage-nav-item.active {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: none !important;
+      box-shadow: none !important;
     }
 
-    #boboNav .stage-nav-item {
-      padding: 5px 14px;
-      border-radius: 24px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #2c5a7a;
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(184, 224, 255, 0.20);
-      cursor: pointer;
-      transition: all 0.2s;
+    #stageNav .stage-nav-item span[id$="Count"],
+    #boboNav .stage-nav-item span[id$="Count"],
+    #platformNav .stage-nav-item span[id$="Count"] {
+      display: inline-block;
+      border-radius: 40px;
+      padding: 2px 10px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      margin-left: 4px;
+      line-height: 1.4;
+      background: #e8e8e8;
+      color: #666666;
     }
-    #boboNav .stage-nav-item:hover {
-      background: rgba(255,255,255,0.6);
-      border-color: #8ab3d0;
+
+    #stageNav .stage-nav-item.active span[id$="Count"],
+    #boboNav .stage-nav-item.active span[id$="Count"],
+    #platformNav .stage-nav-item.active span[id$="Count"] {
+      background: #555555 !important;
+      color: #ffffff !important;
     }
-    #boboNav .stage-nav-item.active {
-      background: hsl(var(--theme-hue), 70%, 45%);
-      color: #fff;
-      border-color: hsl(var(--theme-hue), 70%, 45%);
-      box-shadow: 0 2px 10px hsla(var(--theme-hue), 70%, 45%, 0.3);
+
+    #stageNav .stage-nav-item.active[data-category="all"],
+    #boboNav .stage-nav-item.active[data-category="all"],
+    #platformNav .stage-nav-item.active[data-category="all"] {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border-color: #000000 !important;
     }
 
     .filter-search-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .search-box {
-      flex: 1; display: flex; align-items: center; background: rgba(255,255,255,0.50);
+      flex: 1; display: flex; align-items: center; background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
       border-radius: 24px; padding: 0 12px;
-      border: 1px solid rgba(184,224,255,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
       max-width: 360px;
       backdrop-filter: blur(4px);
     }
@@ -394,21 +396,25 @@
         border-color: hsl(var(--theme-hue), 70%, 45%) !important;
         box-shadow: 0 2px 10px hsla(var(--theme-hue), 70%, 45%, 0.3) !important;
     }
-    .stage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 10px; }
+    .stage-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 12px; 
+      margin-top: 10px; }
     .video-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px; 
-      overflow: hidden; 
+      background: rgba(255, 255, 255, var(--card-opacity, 0.72));
+      border-radius: 12px;
+      overflow: hidden;
       position: relative;
-      cursor: pointer; 
+      cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
-      border: 1px solid rgba(255,255,255,0.3);
-      box-shadow: 0 2px 8px rgba(36,104,168,0.03);
-      will-change: transform; 
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
+      will-change: transform;
     }
     .video-card:hover { 
-      transform: translateY(-2px) scale(1.02); 
-      box-shadow: 0 6px 20px rgba(36,104,168,0.06); 
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
     }
     .video-tag {
       position: absolute; top: 8px; left: 8px;
@@ -422,13 +428,6 @@
     }
     .video-cover-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
     .video-card:hover .video-cover-box img { transform: scale(1.03); }
-    .video-cover-box .play-icon {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-size: 32px; color: rgba(255,255,255,0.85);
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-      pointer-events: none; opacity: 0.8; transition: opacity 0.3s ease;
-    }
-    .video-card:hover .play-icon { opacity: 1; }
     .video-cover-box .cover-fallback {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       width: 100%; height: 100%;
@@ -443,7 +442,7 @@
     }
     .video-name { 
       font-size: 13px; 
-      color: #1f5a8a;
+      color: #000000;
       font-weight: 600; 
       white-space: nowrap; 
       overflow: hidden; 
@@ -455,34 +454,164 @@
       gap: 8px;
       padding: 6px 10px;
     }
-    .video-date,.video-show { font-size: 11px; color: #689888; margin-top: 1px; }
+    .video-date,.video-show { 
+      font-size: 11px; 
+      color: var(--theme-color); 
+      opacity: 0.5;
+      margin-top: 1px; }
 
+    .stage-grid.list-mode .video-card {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      align-items: stretch;
+      background: rgba(255, 255, 255, var(--card-opacity, 0.72));
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08) ;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+    }
+    .stage-grid.list-mode {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .stage-grid.list-mode .video-card:hover {
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
+    }
+    .stage-grid.list-mode .video-card .video-cover-box {
+      width: 200px;
+      min-width: 200px;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
+    }
+    .stage-grid.list-mode .video-card .video-cover-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .stage-grid.list-mode .video-card:hover .video-cover-box img {
+      transform: scale(1.04);
+    }
+
+    .stage-grid.list-mode .video-card .video-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      color: #fff;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      letter-spacing: 0.3px;
+      z-index: 2;
+    }
+    .stage-grid.list-mode .video-card .video-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 0;
+      min-width: 0;
+    }
+    .stage-grid.list-mode .video-card .video-info .video-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000000;
+      white-space: normal;
+      line-height: 1.4;
+      word-break: break-word;
+      margin-top: -15px; 
+    }
+    .stage-grid.list-mode .video-card .video-info .video-date,
+    .stage-grid.list-mode .video-card .video-info .video-show {
+      font-size: 13px;
+      color: var(--theme-color); 
+      opacity: 0.5;
+      font-weight: 500;
+    }
+    .stage-grid.list-mode .video-card .video-info .video-desc {
+      font-size: 13px;
+      color: #4a779e;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .stage-grid.list-mode .video-card .video-info .video-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #7a9ab0;
+      margin-top: 2px;
+    }
+    .stage-grid.list-mode .video-card .video-info .video-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stage-grid.list-mode .video-card .cover-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
+      color: #1a4a6f;
+    }
+    .stage-grid.list-mode .video-card .cover-fallback .video-icon {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+    .stage-grid.list-mode .video-card .cover-fallback .video-tip {
+      font-size: 11px;
+      color: #4a779e;
+    }
     .empty-state { text-align: center; padding: 30px 0; color: #4a779e; font-size: 14px; }
 
     /* ===== 微博 & 小红书卡片 ===== */
     .weibo-card, .xiaohongshu-card {
       background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(4px);
-      border-radius: 14px;
-      border: 1px solid rgba(26,74,111,0.08);
+      border-radius: 10px;
       padding: 1.2rem 1.2rem 1rem;
-      box-shadow: 0 2px 8px rgba(36,104,168,0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
       margin-bottom: 0.8rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .weibo-card:hover, .xiaohongshu-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(36,104,168,0.08); }
     .weibo-card.pinned, .xiaohongshu-card.pinned {
       border: 2px solid rgba(26,74,111,0.15);
       background: rgba(255,255,255,0.75);
     }
     .weibo-card .weibo-time, .xiaohongshu-card .weibo-time {
-      font-size: 0.8rem; color: #4a779e;
-      margin-bottom: 0.6rem; padding-bottom: 0.3rem;
+      font-size: 0.8rem; 
+      font-weight:550;
+      color: hsla(var(--theme-hue), 80%, 40%, 0.5); 
+      margin-bottom: 0.6rem; 
+      padding-bottom: 0.3rem;
       border-bottom: 1px dashed rgba(184,224,255,0.25);
     }
     .weibo-card .weibo-text, .xiaohongshu-card .weibo-text {
-      font-size: 0.95rem; line-height: 1.7; color: #1a2f3f;
+      font-size: 1.05rem; line-height: 1.7; color: #1a2f3f;
       margin-bottom: 0.8rem; word-break: break-word;
+      padding-top: 16px;
     }
     .weibo-card .weibo-text .line, .xiaohongshu-card .weibo-text .line { display: block; }
     .weibo-card .weibo-comment-bottom, .xiaohongshu-card .weibo-comment-bottom {
@@ -507,17 +636,16 @@
     .weibo-card .weibo-link-button, .xiaohongshu-card .weibo-link-button {
       display: inline-block; margin: 0.5rem 0 0.2rem 0;
       padding: 0.3rem 1.2rem;
-      background: rgba(26, 74, 111, 0.08);
-      border: 1px solid rgba(26, 74, 111, 0.15);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
       border-radius: 20px;
       color: #1a4a6f; font-size: 0.85rem; font-weight: 500;
       text-decoration: none; transition: all 0.2s ease; cursor: pointer;
     }
     .weibo-card .weibo-link-button:hover, .xiaohongshu-card .weibo-link-button:hover {
-      background: rgba(26, 74, 111, 0.15);
-      border-color: rgba(26, 74, 111, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(26, 74, 111, 0.08);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8)) !important;
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8) !important;
     }
 
     /* ===== 平台标签 ===== */
@@ -531,90 +659,12 @@
     .platform-tag.douyin { background: #f97316; }
     .platform-tag.bilibili { background: #fb7299; }
 
-    /* ===== 时间轴 - 独立在右侧 ===== */
-    .timeline-sidebar {
-      position: sticky; top: 24px; flex-shrink: 0;
-      width: 64px; display: flex; flex-direction: column; align-items: center; gap: 2px;
-      padding: 12px 4px;
-      background: rgba(255,255,255,0.5); backdrop-filter: blur(8px);
-      border-radius: 12px; border: 1px solid rgba(26,74,111,0.08);
-      max-height: calc(100vh - 140px); overflow-y: auto; z-index: 5;
-    }
-    .timeline-sidebar::-webkit-scrollbar { width: 2px; }
-    .timeline-sidebar::-webkit-scrollbar-thumb { background: #b8d4e8; border-radius: 99px; }
-
-    .timeline-sidebar .tl-year-label {
-      font-size: 0.55rem; font-weight: 700; color: #1f5a8a;
-      padding: 4px 0 2px 0; letter-spacing: 1px; opacity: 0.7;
-      border-bottom: 1px solid rgba(26,74,111,0.10);
-      margin-bottom: 2px; width: 100%; text-align: center;
-      cursor: pointer; transition: all 0.2s ease; border-radius: 4px;
-    }
-    .timeline-sidebar .tl-year-label:hover { background: rgba(36,104,168,0.08); opacity: 1; }
-    .timeline-sidebar .tl-item {
-      font-size: 0.6rem; font-weight: 600; color: #7a9ab0;
-      padding: 4px 6px; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;
-      text-align: center; width: 44px; letter-spacing: 0.3px;
-      border: 1px solid transparent; user-select: none;
-    }
-    .timeline-sidebar .tl-item:hover { background: rgba(36,104,168,0.08); color: #1f5a8a; border-color: rgba(36,104,168,0.10); }
-    .timeline-sidebar .tl-item.active { background: #1f5a8a; color: #fff; border-color: #1f5a8a; box-shadow: 0 2px 8px rgba(36,104,168,0.15); }
-    .timeline-sidebar .tl-line { width: 2px; height: 8px; background: rgba(184,224,255,0.3); flex-shrink: 0; }
-
-    /* ===== 内联日历 ===== */
-    .inline-calendar {
-      position: fixed; z-index: 20;
-      width: 280px; height: 280px; min-width: 260px; min-height: 260px;
-      overflow: hidden; display: flex; flex-direction: column;
-      padding: 18px 20px;
-      background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
-      border-radius: 18px; border: 1px solid rgba(26,74,111,0.12);
-      box-shadow: 0 12px 48px rgba(26,74,111,0.20);
-      font-size: 0.85rem;
-    }
-    .inline-calendar .cal-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; flex: 1; align-content: center; }
-    .inline-calendar .cal-days-grid > div {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; border-radius: 50%; position: relative;
-      color: #1a2f3f; cursor: default; font-weight: 500;
-    }
-    .inline-calendar .cal-days-grid > div[data-date] { cursor: pointer; font-weight: 700; }
-    .inline-calendar .cal-days-grid > div[data-date]:hover { background: rgba(36,104,168,0.10); }
-    .inline-calendar .cal-days-grid > div.has-update { border: 2px solid #4299e1; border-radius: 50%; background: rgba(66,153,225,0.05); }
-    .inline-calendar .cal-days-grid > div.has-update.platform-weibo { border-color: #4299e1; }
-    .inline-calendar .cal-days-grid > div.has-update.platform-xiaohongshu { border-color: #ff2d55; }
-    .inline-calendar .cal-days-grid > div.has-update.platform-douyin { border-color: #f97316; }
-    .inline-calendar .cal-days-grid > div.has-update.platform-bilibili { border-color: #fb7299; }
-    .inline-calendar .cal-days-grid > div.has-update.multi-platform { border-color: #8b5cf6; border-width: 2.5px; }
-    .inline-calendar .cal-days-grid > div .dot-indicator {
-      position: absolute; bottom: 2px; width: 5px; height: 5px; border-radius: 50%; background: #4299e1;
-    }
-
-    .tooltip-badge {
-      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8); padding: 4px 8px; border-radius: 8px; z-index: 100;
-      white-space: nowrap; gap: 4px; flex-wrap: wrap; justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2); backdrop-filter: blur(4px);
-    }
-    .tooltip-badge span { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 0.55rem; font-weight: 600; color: #fff; letter-spacing: 0.5px; }
-
     /* ===== 饭之拍布局 ===== */
     .fancam-wrap { display: flex; justify-content: center; gap: 24px; max-width: 780px; margin: 0 auto; align-items: flex-start; }
     .fancam-wrap .info-box { max-width: 780px; width: 100%; margin: 0; padding: 18px 22px; flex-shrink: 0; }
     .fancam-wrap .timeline-sidebar { position: sticky; top: 24px; flex-shrink: 0; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 4px; background: rgba(255,255,255,0.5); backdrop-filter: blur(8px); border-radius: 12px; border: 1px solid rgba(26,74,111,0.08); max-height: calc(100vh - 140px); overflow-y: auto; z-index: 5; }
     .platform-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 14px; }
-    .platform-nav-item {
-      padding: 5px 14px; border-radius: 24px; font-size: 12px; font-weight: 500;
-      color: #2c5a7a; background: rgba(255,255,255,0.35);
-      border: 1px solid rgba(184,224,255,0.20); cursor: pointer; transition: all 0.2s;
-    }
-    .platform-nav-item:hover { background: rgba(255,255,255,0.6); border-color: #8ab3d0; }
-    .platform-nav-item.active {
-      background: hsl(var(--theme-hue), 70%, 45%);
-      color: #fff;
-      border-color: hsl(var(--theme-hue), 70%, 45%);
-      box-shadow: 0 2px 10px hsla(var(--theme-hue), 70%, 45%, 0.3);
-    }
+
     /* ===== 大图预览 Modal ===== */
     .image-modal {
       display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -752,18 +802,16 @@
     }
 
     .miracle-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(6px);
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(26, 74, 111, 0.08);
-      border: 1px solid rgba(26, 74, 111, 0.06);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08) ;
+      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s;
     }
     .miracle-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(26, 74, 111, 0.14);
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
     }
 
     .miracle-card .cover-image {
@@ -803,7 +851,7 @@
       padding: 8px 0;
       font-size: 13px;
       font-weight: 600;
-      color: #1f5a8a;
+      color: #000000;
       letter-spacing: 0.5px;
       background: rgba(255, 255, 255, 0.5);
       border-top: 1px solid rgba(184, 224, 255, 0.15);
@@ -1023,10 +1071,8 @@
       width: 340px;
       max-height: calc(100vh - 100px);
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(32px) saturate(1.3);
-      -webkit-backdrop-filter: blur(32px) saturate(1.3);
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 2px;
       border: 1px solid rgba(255, 255, 255, 0.4);
       box-shadow: 0 12px 48px rgba(0, 0, 0, 0.10), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3); 
       padding: 20px 22px 24px;
@@ -1084,7 +1130,7 @@
       flex: 1;
       min-width: 100px;
       height: 26px;
-      border-radius: 40px;
+      border-radius: 20px;
       background: linear-gradient(to right,
         hsl(0, 80%, 55%),
         hsl(30, 80%, 55%),
@@ -1097,6 +1143,7 @@
       );
       position: relative;
       cursor: pointer;
+      opacity: 0.7;
       border: 2px solid rgba(255, 255, 255, 0.5);
       flex-shrink: 0;
     }
@@ -1119,6 +1166,8 @@
       min-width: 38px;
       color: var(--theme-color);
       text-align: center;
+        opacity: 0.7;
+
     }
     
     .btn-group-sm {
@@ -1146,6 +1195,7 @@
       background: var(--theme-color);
       color: #fff;
       border-color: var(--theme-color);
+      opacity: 0.7;
     }
     
     .slider-sm {
@@ -1153,7 +1203,7 @@
       min-width: 70px;
       accent-color: var(--theme-color);
       cursor: pointer;
-      height: 4px;
+      height: 8px;
     }
     .slider-val {
       font-size: 0.72rem;
@@ -1194,7 +1244,6 @@
     body.dark-mode .xiaohongshu-card,
     body.dark-mode .video-card,
     body.dark-mode .miracle-card,
-    body.dark-mode .link-card,
     body.dark-mode .welcome-header,
     body.dark-mode .top-nav,
     body.dark-mode .timeline-sidebar,
@@ -1211,6 +1260,7 @@
       border-color: rgba(255, 255, 255, 0.1) !important;
       color: #e0e0e0 !important;
     }
+    body.dark-mode .link-card,
     body.dark-mode .info-card,
     body.dark-mode .video-cover-box {
       background: rgba(40, 40, 40, 0.6) !important;
@@ -1301,12 +1351,13 @@
       border-color: rgba(255, 255, 255, 0.08);
     }
     body.dark-mode .welcome-header .links a:hover {
-      background: rgba(66, 153, 225, 0.15);
+      background: 000000;
     }
-    body.dark-mode .info-card {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.05);
+
+    body.dark-mode .link-card:hover {
+      background: 000000 !important;
     }
+
     body.dark-mode .search-box {
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(255, 255, 255, 0.06);
@@ -1362,11 +1413,6 @@
     body.dark-mode .timeline-wrap::before {
       background: linear-gradient(to bottom, #4299e1, #1a4a6f);
     }
-    body.dark-mode .timeline-item .timeline-dot {
-      background: #4299e1;
-      border-color: #1a4a6f;
-      box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.15);
-    }
     body.dark-mode .timeline-item .timeline-dot.no-link {
       background: #4a6a8a;
     }
@@ -1406,22 +1452,6 @@
     body.dark-mode .divider {
       border-top-color: rgba(255, 255, 255, 0.05);
     }
-    body.dark-mode .inline-calendar {
-      background: rgba(20, 30, 45, 0.95) !important;
-      border-color: rgba(255, 255, 255, 0.06) !important;
-    }
-    body.dark-mode .inline-calendar .cal-days-grid > div {
-      color: #c8d8e8 !important;
-    }
-    body.dark-mode .inline-calendar .cal-days-grid > div[data-date]:hover {
-      background: rgba(66, 153, 225, 0.15);
-    }
-    body.dark-mode .inline-calendar .cal-nav {
-      color: #8aa8c8 !important;
-    }
-    body.dark-mode .inline-calendar .cal-nav:hover {
-      background: rgba(66, 153, 225, 0.1) !important;
-    }
 
     body.dark-mode .nav-dropdown {
       background: #000000 !important;
@@ -1455,6 +1485,7 @@
         display: inline-block;
         vertical-align: middle;
         flex-shrink: 0;
+        opacity: 0.5;
         filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
     .dark-toggle-icon {
@@ -1464,144 +1495,7 @@
         transition: filter 0.3s ease;
         filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
     }
-    .stage-grid.list-mode {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 10px;
-    }
-    .stage-grid.list-mode .video-card {
-      display: flex;
-      flex-direction: row;
-      gap: 16px;
-      align-items: stretch;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(8px);
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid rgba(26, 74, 111, 0.08);
-      box-shadow: 0 2px 8px rgba(36, 104, 168, 0.04);
-      transition: all 0.25s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: visible;
-    }
-    .stage-grid.list-mode .video-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(36, 104, 168, 0.10);
-      background: rgba(255, 255, 255, 0.85);
-    }
-    .stage-grid.list-mode .video-card .video-cover-box {
-      width: 200px;
-      min-width: 200px;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
-    }
-    .stage-grid.list-mode .video-card .video-cover-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-    .stage-grid.list-mode .video-card:hover .video-cover-box img {
-      transform: scale(1.04);
-    }
-    .stage-grid.list-mode .video-card .video-cover-box .play-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 36px;
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
-      pointer-events: none;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-    .stage-grid.list-mode .video-card:hover .video-cover-box .play-icon {
-      opacity: 1;
-    }
-    .stage-grid.list-mode .video-card .video-tag {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      color: #fff;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 4px;
-      font-size: 10px;
-      letter-spacing: 0.3px;
-      z-index: 2;
-    }
-    .stage-grid.list-mode .video-card .video-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-      padding: 4px 0;
-      min-width: 0;
-    }
-    .stage-grid.list-mode .video-card .video-info .video-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1f5a8a;
-      white-space: normal;
-      line-height: 1.4;
-      word-break: break-word;
-    }
-    .stage-grid.list-mode .video-card .video-info .video-date,
-    .stage-grid.list-mode .video-card .video-info .video-show {
-      font-size: 13px;
-      color: #6a8fa8;
-      font-weight: 500;
-    }
-    .stage-grid.list-mode .video-card .video-info .video-desc {
-      font-size: 13px;
-      color: #4a779e;
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .stage-grid.list-mode .video-card .video-info .video-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 12px;
-      color: #7a9ab0;
-      margin-top: 2px;
-    }
-    .stage-grid.list-mode .video-card .video-info .video-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .stage-grid.list-mode .video-card .cover-fallback {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #c5e0f5, #a3c8e8);
-      color: #1a4a6f;
-    }
-    .stage-grid.list-mode .video-card .cover-fallback .video-icon {
-      font-size: 28px;
-      margin-bottom: 4px;
-    }
-    .stage-grid.list-mode .video-card .cover-fallback .video-tip {
-      font-size: 11px;
-      color: #4a779e;
-    }
+
     body.pure-mode .content-area::before {
         display: none !important;
         opacity: 0 !important;
@@ -1636,7 +1530,7 @@
     .section-title {
       font-size: 1rem;
       font-weight: 900;
-      color: #1a1a2e;
+      color: #000000;
       white-space: nowrap; 
       padding-right: 10px;
     }
@@ -1656,6 +1550,10 @@
     }
     body.pure-mode.dark-mode #home .info-box {
       background: #000000 !important;
+    }
+
+    #food .timeline-wrap::before {
+      left: 4px !important;
     }
     /* ===== 导航下拉菜单 ===== */
     .nav-dropdown {
@@ -1681,10 +1579,10 @@
       opacity: 1;
     }
     .nav-dropdown-item {
-      padding: 10px 28px;
-      font-size: 14px;
+      padding: 6px 28px;
+      font-size: 16px;
       font-weight: 600;
-      color: #2c5a7a;
+      color: #444444;
       cursor: pointer;
       transition: all 0.15s ease;
       text-align: center;
@@ -1711,13 +1609,16 @@
       display: inline-block;
       vertical-align: middle;
       margin-left: 2px;
-      transition: filter 0.25s ease, transform 0.25s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(500%) hue-rotate(175deg);
     }
 
-    /* 菜单项 hover 时，图标变为调色板主色 */
     .top-nav .menu-item:hover .dropdown-icon {
-      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
+      transform: rotate(180deg);
+    }
+
+    .top-nav .menu-item:hover .dropdown-icon {
+      filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(500%) hue-rotate(175deg);
     }
 
     /* 暗色模式默认 */
@@ -1726,7 +1627,7 @@
     }
 
     body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
-      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
+      filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
     }
 
     /* ===== 页面右上角功能框 ===== */
@@ -1803,20 +1704,22 @@
 
   <div class="main-page">
 
-    <!-- 饭记 下拉菜单（放在导航栏外面） -->
+    <!-- 饭记 下拉菜单） -->
     <div class="nav-dropdown" id="foodNotesDropdown">
-      <div class="nav-dropdown-item" data-page="contact">饭言饭语</div>
-      <div class="nav-dropdown-item" data-page="dream">梦想汗水坚持</div>
+      <div class="nav-dropdown-item" data-page="food">每日一杯</div>
+      <div class="nav-dropdown-item" data-page="travel">口袋图集</div>
+      <div class="nav-dropdown-item" data-page="words">饭言饭语</div>
+      <div class="nav-dropdown-item" data-page="dream">zx相关</div>
     </div>
 
-    <!-- 饭作 下拉菜单（放在导航栏外面） -->
+    <!-- 饭作 下拉菜单 -->
     <div class="nav-dropdown" id="foodWorksDropdown">
-      <div class="nav-dropdown-item" data-page="stage">饭之大小作</div>
-      <div class="nav-dropdown-item" data-page="fancam">饭之拍</div>
-      <div class="nav-dropdown-item" data-page="bobo">饭之啵</div>
+      <div class="nav-dropdown-item" data-page="stage">舞台</div>
+      <div class="nav-dropdown-item" data-page="bobo">直播</div>
+      <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
     </div>
     
-    <!-- ===== 顶部导航栏（精简版） ===== -->
+    <!-- ===== 顶部导航栏 ===== -->
     <div class="top-nav">
       <!-- 首页 -->
       <div class="menu-item active" data-page="home">首页</div>
@@ -1824,7 +1727,7 @@
         饭作
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png" alt="下拉" class="dropdown-icon" id="foodWorksIcon" />
       </div>
-      <div class="menu-item" data-page="contact" id="foodNotesBtn">
+      <div class="menu-item" data-page="food" id="foodNotesBtn">
         饭记
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png" alt="下拉" class="dropdown-icon" id="foodNotesIcon" />
       </div>
@@ -1832,7 +1735,6 @@
       <div class="menu-item" data-page="wait">关于本站</div>
     </div>
 
-    <!-- 新增：页面右上角的独立功能框 -->
     <div class="page-actions">
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" alt="调色盘" style="width:20px; height:20px; display:block; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
@@ -1850,14 +1752,18 @@
         <div class="info-box">
           <div class="welcome-header">
             <div class="welcome-subtitle">Welcome!</div>
-            <h1>欢迎使用椰饭饲养指南</h1>
+            <h1> 
+              <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260807105640925.png" 
+              alt="图标" 
+              style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform: translateY(-2px); filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity: 0.5;" />
+              欢迎使用椰饭饲养指南</h1>
             <div class="sub">椰丝之家：933624308</div>
             <div class="links">
               <a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a>
               <a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a>
               <a href="https://b23.tv/sCndNaE">星系放映厅</a></div>
               <div class="header-divider"></div>
-              <div class="intro-text">想要了解叶凡？这里是介绍区</div>
+              <div class="intro-text">想要了解叶凡？这里是介绍区~</div>
             </div>
             
             <div class="info-title">
@@ -1938,32 +1844,36 @@
       <!-- ==================== 饭之大小作 ==================== -->
       <div class="page-box" id="stage">
         <div class="info-box stage-wrap">
-          <div class="stage-nav" id="stageNav">
-            <button class="stage-nav-item active" data-category="all">全部</button>
-            <button class="stage-nav-item" data-category="unit">UNIT</button>
-            <button class="stage-nav-item" data-category="special">特殊舞台</button>
-            <button class="stage-nav-item" data-category="assist">助演</button>
+        <div class="welcome-header" style="padding: 20px 20px 16px 20px; margin-bottom: 16px; background: transparent !important; border-radius: 0; max-width: 100%; margin-left: 0; margin-right: 0;">
+          <div class="welcome-subtitle" style="font-size: 14px; font-weight: 550; opacity: 0.5; color: var(--theme-color); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">STAGE</div>
+          <h1 style="font-size: 38px; font-weight: 600; color: #000000; letter-spacing: 1px; margin-bottom: 8px;">饭之大小作</h1>
+          <div class="header-divider" style="width: 103%; height: 1px; background: var(--theme-color); opacity: 0.1; border-radius: 2px; margin-top: 16px; margin-bottom: 1px;"></div>
+          <div class="intro-text" style="font-size: 13px; color: #5a7a9a; opacity: 0.5; margin-top: 8px; margin-bottom: 0px; letter-spacing: 1px; font-weight: 500;">收录yf舞台切片</div>
+        </div>
+        
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; margin-left: 20px; flex-wrap: wrap;">
+        <div style="border: 2px solid #000000; border-radius: 20px; padding: 6px 10px; display: inline-block;">
+          <div class="stage-nav" id="stageNav" style="justify-content: flex-start; gap: 6px; margin-bottom: 0; display: flex; flex-wrap: wrap;">
+            <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageTotalCount"></span></button>
+            <button class="stage-nav-item" data-category="unit">UNIT <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageUnitCount"></span></button>
+            <button class="stage-nav-item" data-category="special">特殊舞台 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageSpecialCount"></span></button>
+            <button class="stage-nav-item" data-category="assist">助演 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageAssistCount"></span></button>
+            <button class="stage-nav-item" data-category="substitute">代役 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageSubstituteCount"></span></button>
           </div>
-
-          <div class="filter-search-row">
-          <div class="search-box">
+        </div>
+        <div class="search-box" style="flex-shrink: 0; max-width: 280px;">
           <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
-               alt="搜索" 
-               class="search-icon" 
-               style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
-            <input type="text" id="stageSearch" placeholder="搜索歌名 / 日期..." />
-          </div>
-          </div>
+              alt="搜索" 
+              class="search-icon" 
+              style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+          <input type="text" id="stageSearch" placeholder="搜索..." />
+        </div>
+      </div>
 
-          <div class="filter-tabs-row" id="categoryTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
-            <button class="month-nav-btn" id="stageMonthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
-            <div id="stageMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
-              <div id="stageMonthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;"></div>
-            </div>
-            <button class="month-nav-btn" id="stageMonthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
+          <div class="stage-grid" id="stageGrid">
+          <div id="placeholder"></div>
+          <div id="content"></div>
           </div>
-
-          <div class="stage-grid" id="stageGrid"></div>
           <div id="paginationControls" style="display:flex; justify-content:center; gap:10px; margin-top:20px; align-items:center;">
               <button id="prevPageBtn" onclick="changePage(-1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">上一页</button>
               
@@ -1975,30 +1885,72 @@
         </div>
       </div>
 
-      <!-- ==================== 饭之拍 ==================== -->
+      <!-- ==================== 饭之啵 ==================== -->
+      <div class="page-box" id="bobo">
+        <div class="info-box stage-wrap">
+        <div class="welcome-header" style="padding: 20px 20px 16px 20px; margin-bottom: 16px; background: transparent !important; border-radius: 0; max-width: 100%; margin-left: 0; margin-right: 0;">
+          <div class="welcome-subtitle" style="font-size: 14px; font-weight: 550; opacity: 0.5; color: var(--theme-color); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">STAGE</div>
+          <h1 style="font-size: 38px; font-weight: 600; color: #000000; letter-spacing: 1px; margin-bottom: 8px;">饭之啵</h1>
+          <div class="header-divider" style="width: 103%; height: 1px; background: var(--theme-color); opacity: 0.1; border-radius: 2px; margin-top: 16px; margin-bottom: 1px;"></div>
+          <div class="intro-text" style="font-size: 13px; color: #5a7a9a; opacity: 0.5; margin-top: 8px; margin-bottom: 0px; letter-spacing: 1px; font-weight: 500;">收录yf直播回放</div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; margin-left: 20px; flex-wrap: wrap;">
+          
+          <div style="border: 2px solid #000000; border-radius: 20px; padding: 6px 10px; display: inline-block;">
+            <div class="stage-nav" id="boboNav" style="justify-content: flex-start; gap: 6px; margin-bottom: 0; display: flex; flex-wrap: wrap;">
+              <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboTotalCount"></span></button>
+              <button class="stage-nav-item" data-category="single">单播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSingleCount"></span></button>
+              <button class="stage-nav-item" data-category="special">特殊直播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSpecialCount"></span></button>
+            </div>
+          </div>
+
+        <div class="search-box" style="flex-shrink: 0; max-width: 280px;">
+            <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+                alt="搜索" 
+                class="search-icon" 
+                style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+            <input type="text" id="boboSearch" placeholder="搜索..." />
+          </div>
+
+        </div>
+
+          <div class="stage-grid" id="boboGrid"></div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+      
+      <!-- ===== 饭之拍 ===== -->
       <div class="page-box" id="fancam">
         <div class="fancam-wrap">
           <div class="info-box" style="padding:18px 22px;">
-            <div class="platform-nav" id="platformNav">
-              <button class="platform-nav-item active" data-platform="all">全部</button>
-              <button class="platform-nav-item" data-platform="weibo">微博</button>
-              <button class="platform-nav-item" data-platform="xiaohongshu">小红书</button>
-              <button class="platform-nav-item" data-platform="douyin">抖音</button>
-              <button class="platform-nav-item" data-platform="bilibili">B站</button>
+            <div class="welcome-header" style="padding: 20px 20px 16px 20px; margin-bottom: 16px; background: transparent !important; border-radius: 0; max-width: 100%; margin-left: 0; margin-right: 0;">
+              <div class="welcome-subtitle" style="font-size: 14px; font-weight: 550; opacity: 0.5; color: var(--theme-color); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">PHOTO</div>
+              <h1 style="font-size: 38px; font-weight: 600; color: #000000; letter-spacing: 1px; margin-bottom: 8px;">饭之拍</h1>
+              <div class="header-divider" style="width: 103%; height: 1px; background: var(--theme-color); opacity: 0.1; border-radius: 2px; margin-top: 16px; margin-bottom: 1px;"></div>
+              <div class="intro-text" style="font-size: 13px; color: #5a7a9a; opacity: 0.5; margin-top: 8px; margin-bottom: 0px; letter-spacing: 1px; font-weight: 500;">收录yf平台更新内容</div>
             </div>
 
-            <div class="filter-search-row">
-              <div class="search-box">
-              <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
-                   alt="搜索" 
-                   class="search-icon" 
-                   style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
-                <input type="text" id="weiboSearch" placeholder="搜索内容..." />
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; margin-left: 20px; flex-wrap: wrap;">
+
+              <div style="border: 2px solid #000000; border-radius: 20px; padding: 6px 10px; display: inline-block;">
+                <div class="stage-nav" id="platformNav" style="justify-content: flex-start; gap: 6px; margin-bottom: 0; display: flex; flex-wrap: wrap;">
+                    <button class="stage-nav-item active" data-platform="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformTotalCount"></span></button>
+                    <button class="stage-nav-item" data-platform="weibo">微博 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformWeiboCount"></span></button>
+                    <button class="stage-nav-item" data-platform="xiaohongshu">小红书 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformXiaohongshuCount"></span></button>
+                    <button class="stage-nav-item" data-platform="douyin">抖音 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformDouyinCount"></span></button>
+                    <button class="stage-nav-item" data-platform="bilibili">B站 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformBilibiliCount"></span></button>
+                </div>
               </div>
-            </div>
 
-            <div class="filter-tabs-row" id="weiboTabs">
-              <span class="category-tab active" data-month="全部">全部</span>
+              <div class="search-box" style="flex-shrink: 0; max-width: 280px;">
+                <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+                    alt="搜索" 
+                    class="search-icon" 
+                    style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+                <input type="text" id="weiboSearch" placeholder="搜索..." />
+              </div>
+
             </div>
 
           <div id="weiboFeed">
@@ -2014,7 +1966,7 @@
               2026-01-05 20:46 · 发布于 上海
             </div>
             <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" style="text-decoration:none;color:inherit;display:block;">
-              <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.5);border-radius:10px;padding:10px 14px;border:1px solid rgba(66,153,225,0.2);transition:all 0.2s ease;cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='#4299e1'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(66,153,225,0.2)'">
+                <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.5);border-radius:10px;padding:10px 14px;border:1px solid rgba(66,153,225,0.2);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='#4299e1'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(66,153,225,0.2)'">
                 <span style="font-size:0.95rem;color:#1a2f3f;line-height:1.5;">冬！2026！吉！</span>
                 <span style="color:#4299e1;font-size:1.1rem;font-weight:600;flex-shrink:0;">→</span>
               </div>
@@ -2494,7 +2446,7 @@
               2026-01-05 20:46 · 发布于 上海
             </div>
             <a href="https://weibo.com/7901094930/QlKk4Cr0J" target="_blank" style="text-decoration:none;color:inherit;display:block;">
-              <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.5);border-radius:10px;padding:10px 14px;border:1px solid rgba(66,153,225,0.2);transition:all 0.2s ease;cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='#4299e1'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(66,153,225,0.2)'">
+              <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.5);border-radius:10px;padding:10px 14px;border:1px solid rgba(66,153,225,0.2);transition:all 0.2s ease;cursor:pointer;" >
                 <span style="font-size:0.95rem;color:#1a2f3f;line-height:1.5;">冬！2026！吉！</span>
                 <span style="color:#4299e1;font-size:1.1rem;font-weight:600;flex-shrink:0;">→</span>
               </div>
@@ -3973,154 +3925,134 @@
           </div>
         </div>
           
-          <div class="timeline-sidebar" id="timelineSidebar"></div>
+          <div class="timeline-sidebar" id="timelineSidebar" style="display:none;"></div>
         </div>
       </div>
 
-      <!-- ==================== 饭之啵 ==================== -->
-      <div class="page-box" id="bobo">
-        <div class="info-box stage-wrap">
-          <div class="stage-nav" id="boboNav">
-            <button class="stage-nav-item active" data-category="all">全部</button>
-            <button class="stage-nav-item" data-category="single">单播</button>
-            <button class="stage-nav-item" data-category="special">特殊直播</button>
+      <!-- ===== 饭食饭 ===== -->
+      <div class="page-box" id="food">
+        <div class="fancam-wrap">
+          <div class="info-box" style="padding:18px 22px;">
+          <div class="welcome-header" style="padding: 20px 20px 16px 20px; margin-bottom: 16px; background: transparent !important; border-radius: 0; max-width: 100%; margin-left: 0; margin-right: 0;">
+            <div class="welcome-subtitle" style="font-size: 14px; font-weight: 550; opacity: 0.5; color: var(--theme-color); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">PATATION</div>
+            <h1 style="font-size: 38px; font-weight: 600; color: #000000; letter-spacing: 1px; margin-bottom: 8px;">每日一杯</h1>
+            <div class="header-divider" style="width: 103%; height: 1px; background: var(--theme-color); opacity: 0.1; border-radius: 2px; margin-top: 16px; margin-bottom: 1px;"></div>
+            <div class="intro-text" style="font-size: 13px; color: #5a7a9a; opacity: 0.5; margin-top: 8px; margin-bottom: 0px; letter-spacing: 1px; font-weight: 500;">收录yf口袋房间饮品分享</div>
           </div>
 
-          <div class="filter-search-row">
-          <div class="search-box">
-          <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
-               alt="搜索" 
-               class="search-icon" 
-               style="width:16px; height:16px; display:inline-block; flex-shrink:0; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
-            <input type="text" id="boboSearch" placeholder="搜索内容 / 日期..." />
-          </div>
-          </div>
+            <div class="timeline-wrap" style="margin-top:4px; padding-left:-10px; position:relative;">
 
-          <div class="filter-tabs-row" id="boboTabs" style="display:flex;align-items:center;gap:6px;width:100%;position:relative;">
-            <button class="month-nav-btn" id="boboMonthPrev" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">‹</button>
-            <div id="boboMonthScrollWrapper" style="flex:1;overflow:hidden;position:relative;">
-              <div id="boboMonthScrollInner" style="display:flex;gap:6px;transition:transform 0.3s ease;white-space:nowrap;"></div>
-            </div>
-            <button class="month-nav-btn" id="boboMonthNext" style="background:rgba(255,255,255,0.6);border:1px solid rgba(184,224,255,0.2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:14px;color:#1f5a8a;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='rgba(36,104,168,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.6)'">›</button>
-          </div>
-
-          <div class="stage-grid" id="boboGrid"></div>
-          <div class="footer-slogan">-All For YeFan-</div>
-        </div>
-      </div>
-      
-      <!-- ===== 饭言饭语 ===== -->
-    <div class="page-box" id="contact">
-      <div class="fancam-wrap">
-        <div class="info-box" style="padding:18px 22px;">
-    
-          <div class="platform-nav" id="contactNav">
-            <button class="platform-nav-item active" data-category="food">饭食饭</button>
-            <button class="platform-nav-item" data-category="travel">旅行椰饭</button>
-            <button class="platform-nav-item" data-category="words">饭所言</button>
-          </div>
-
-            <div id="contactFeed">
-            <div class="contact-card" data-category="food" data-sub="water">
-              <div class="timeline-wrap" style="margin-top:4px; padding-left:14px; position:relative;">
-                <div style="position:absolute; left:4px; top:6px; bottom:10px; width:2px; background:linear-gradient(to bottom,#4299e1,#1f5a8a); border-radius:2px;"></div>
-    
-                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.07</div>
-                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.24 伯牙绝弦</div>
-                    <div data-target="popupOverlayTea" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.16 西瓜冰柠茶霸王杯</div>
-                    <div data-target="popupOverlayTea2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">07.05 幽兰拿铁</div>
-                  </div>
-                </div>
-    
-                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.06</div>
-                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    <div data-target="popupOverlayMungBean" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.11 现煮绿豆木薯冰</div>
-                    <div data-target="popupOverlayWater" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.08 蒸馏饮用水</div>
-                    <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">06.05 轻因·伯牙绝弦</div>
-                  </div>
-                </div>
-    
-                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.05</div>
-                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    <div data-target="popupOverlayMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.31 伯牙绝弦</div>
-                    <div data-target="popupOverlayRose" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.30 玫瑰20抹茶拿铁</div>
-                    <div data-target="popupOverlayMango" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.28 多肉芒芒</div>
-                    <div data-target="popupOverlayButter" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.20 小黄油美式</div>
-                    <div data-target="popupOverlayButter2" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.19 小黄油美式</div>
-                    <div data-target="popupOverlayLychee" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.13 山竹荔枝冰茶</div>
-                    <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">05.03 轻因·伯牙绝弦</div>
-                  </div>
-                </div>
-    
-                <div style="position:relative; padding-left:24px; margin-bottom:4px;">
-                  <span style="position:absolute; left:-6px; top:2px; width:14px; height:14px; border-radius:50%; background:#1f5a8a; border:2px solid #b8e0ff; box-shadow:0 0 0 2px rgba(36,104,168,0.08); z-index:2;"></span>
-                  <div style="font-size:15px; font-weight:700; color:#1f5a8a;">2026.04</div>
-                  <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0; border-bottom:1px solid rgba(184,224,255,0.08);">
-                    <div data-target="popupOverlayAprMay" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">04.25 伯牙绝弦</div>
-                    <div data-target="popupOverlayBerry" style="display:inline-block; background:rgba(255,255,255,0.5); border-radius:8px; border:1px solid rgba(26,74,111,0.10); padding:4px 14px; cursor:pointer; transition:all 0.2s ease; font-size:13px; font-weight:500; color:#1f5a8a;" onmouseover="this.style.background='rgba(255,255,255,0.8)';this.style.borderColor='rgba(26,74,111,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.5)';this.style.borderColor='rgba(26,74,111,0.10)'">04.19 冰摇红莓黑加仑</div>
-                  </div>
+              <!-- 2026.07 -->
+              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+                <div style="font-size:15px; font-weight:700; color:#000000;">2026.07</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                  <div data-target="popupOverlay" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.24 伯牙绝弦</div>
+                  <div data-target="popupOverlayTea" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.16 西瓜冰柠茶霸王杯</div>
+                  <div data-target="popupOverlayTea2" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.05 幽兰拿铁</div>
                 </div>
               </div>
-            </div>
-    
-            <div class="contact-card" data-category="travel" data-sub="miracle" style="display:none;">
-              <div class="miracle-card-grid">
-                <div class="miracle-card" data-month="2026-08">
-                  <div class="cover-image">
-                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802171214258.jpg" alt="2026年8月" loading="lazy" />
-                    <div class="cover-badge">8月</div>
-                  </div>
-                  <div class="card-footer">2026.08</div>
-                </div>
-                
-                <div class="miracle-card" data-month="2026-07">
-                  <div class="cover-image">
-                    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802172750062.jpg" alt="2026年7月" loading="lazy" />
-                    <div class="cover-badge">7月</div>
-                  </div>
-                  <div class="card-footer">2026.07</div>
-                </div>
-                
-                <div class="miracle-card" data-month="2026-06" style="background:rgba(255,255,255,0.4);">
-                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                    <span style="font-size:42px;opacity:0.4;"></span>
-                  </div>
-                  <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
-                </div>
-                
-                <div class="miracle-card" data-month="2026-05" style="background:rgba(255,255,255,0.4);">
-                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                    <span style="font-size:42px;opacity:0.4;"></span>
-                  </div>
-                  <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
-                </div>
-                
-                <div class="miracle-card" data-month="2026-04" style="background:rgba(255,255,255,0.4);">
-                  <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                    <span style="font-size:42px;opacity:0.4;"></span>
-                  </div>
-                  <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
+
+              <!-- 2026.06 -->
+              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+                <div style="font-size:15px; font-weight:700; color:#000000;">2026.06</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                  <div data-target="popupOverlayMungBean" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.11 现煮绿豆木薯冰</div>
+                  <div data-target="popupOverlayWater" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.08 蒸馏饮用水</div>
+                  <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.05 轻因·伯牙绝弦</div>
                 </div>
               </div>
-            </div>
 
-            <div class="contact-card" data-category="words" data-sub="all">
-              <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
-            </div>
+              <!-- 2026.05 -->
+              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+                <div style="font-size:15px; font-weight:700; color:#000000;">2026.05</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                  <div data-target="popupOverlayMay" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.31 伯牙绝弦</div>
+                  <div data-target="popupOverlayRose" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.30 玫瑰20抹茶拿铁</div>
+                  <div data-target="popupOverlayMango" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.28 多肉芒芒</div>
+                  <div data-target="popupOverlayButter" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.20 小黄油美式</div>
+                  <div data-target="popupOverlayButter2" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.19 小黄油美式</div>
+                  <div data-target="popupOverlayLychee" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.13 山竹荔枝冰茶</div>
+                  <div data-target="popupOverlayLight" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.03 轻因·伯牙绝弦</div>
+                </div>
+              </div>
 
+              <!-- 2026.04 -->
+              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+                <div style="font-size:15px; font-weight:700; color:#000000;">2026.04</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                  <div data-target="popupOverlayAprMay" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">04.25 伯牙绝弦</div>
+                  <div data-target="popupOverlayBerry" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">04.19 冰摇红莓黑加仑</div>
+                </div>
+              </div>
+
+            </div>
             <div class="footer-slogan">-All For YeFan-</div>
-
           </div>
         </div>
       </div>
-    </div>
+
+      <!-- ===== 旅行椰饭 ===== -->
+      <div class="page-box" id="travel">
+        <div class="fancam-wrap">
+          <div class="info-box" style="padding:18px 22px;">
+          <div class="welcome-header" style="padding: 20px 20px 16px 20px; margin-bottom: 16px; background: transparent !important; border-radius: 0; max-width: 100%; margin-left: 0; margin-right: 0;">
+            <div class="welcome-subtitle" style="font-size: 14px; font-weight: 550; opacity: 0.5; color: var(--theme-color); letter-spacing: 1px; margin-bottom: 8px; text-transform: uppercase;">SELFIE</div>
+            <h1 style="font-size: 38px; font-weight: 600; color: #000000; letter-spacing: 1px; margin-bottom: 8px;">旅行椰饭</h1>
+            <div class="header-divider" style="width: 103%; height: 1px; background: var(--theme-color); opacity: 0.1; border-radius: 2px; margin-top: 16px; margin-bottom: 1px;"></div>
+            <div class="intro-text" style="font-size: 13px; color: #5a7a9a; opacity: 0.5; margin-top: 8px; margin-bottom: 0px; letter-spacing: 1px; font-weight: 500;">收录yf口袋房间自拍</div>
+          </div>
+            <div class="miracle-card-grid">
+              <div class="miracle-card" data-month="2026-08">
+                <div class="cover-image">
+                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802171214258.jpg" alt="2026年8月" loading="lazy" />
+                  <div class="cover-badge">8月</div>
+                </div>
+                <div class="card-footer">2026.08</div>
+              </div>
+              
+              <div class="miracle-card" data-month="2026-07">
+                <div class="cover-image">
+                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802172750062.jpg" alt="2026年7月" loading="lazy" />
+                  <div class="cover-badge">7月</div>
+                </div>
+                <div class="card-footer">2026.07</div>
+              </div>
+              
+              <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
+                <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                  <span style="font-size:42px;opacity:0.4;"></span>
+                </div>
+                <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
+              </div>
+              
+              <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
+                <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                  <span style="font-size:42px;opacity:0.4;"></span>
+                </div>
+                <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
+              </div>
+              
+              <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
+                <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
+                  <span style="font-size:42px;opacity:0.4;"></span>
+                </div>
+                <div class="card-footer" style="color:#7a9ab0;">2026.04</div>
+              </div>
+            </div>
+            <div class="footer-slogan">-All For YeFan-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 饭所言 ===== -->
+      <div class="page-box" id="words">
+        <div class="fancam-wrap">
+          <div class="info-box" style="padding:18px 22px;">
+            <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+            <div class="footer-slogan">-All For YeFan-</div>
+          </div>
+        </div>
+      </div>
 
       <!-- 梦想汗水坚持 -->
       <div class="page-box" id="dream">
@@ -4175,15 +4107,15 @@
   <!-- 弹窗 - 伯牙绝弦 -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.07.24 <span style="font-size:13px; font-weight:500;">霸王茶姬·伯牙绝弦</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">中杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">花香款</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准冰</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">中杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">花香款</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准糖</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423290.jpg?width=300" alt="伯牙绝弦" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423290.jpg')" />
@@ -4199,14 +4131,14 @@
   
   <div class="popup-overlay" id="popupOverlayTea">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.07.16 <span style="font-size:13px; font-weight:500;">林里柠檬茶·西瓜冰柠茶霸王杯</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">正常冰</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">3分糖</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">去脆波波</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">正常冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">3分糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">去脆波波</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727203423296.jpg?width=300" alt="西瓜冰柠茶霸王杯" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727203423296.jpg')" />
@@ -4226,8 +4158,8 @@
   
   <div class="popup-overlay" id="popupOverlayTea2">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.07.05 <span style="font-size:13px; font-weight:500;">茶颜悦色·幽兰拿铁</span>
       </div>
       <div style="margin-bottom:8px;">
@@ -4244,14 +4176,14 @@
 
   <div class="popup-overlay" id="popupOverlayMungBean">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.06.11 <span style="font-size:13px; font-weight:500;">CoCo都可·现煮绿豆木薯冰</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">原味版</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">冰沙</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">3分糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">原味版</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">冰沙</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">3分糖</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727211330808.jpg?width=300" alt="现煮绿豆木薯冰" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727211330808.jpg')" />
@@ -4283,8 +4215,8 @@
 
   <div class="popup-overlay" id="popupOverlayWater">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.06.08 <span style="font-size:13px; font-weight:500;">屈臣氏·蒸馏饮用水</span>
       </div>
       <div style="margin-bottom:8px;">
@@ -4305,14 +4237,14 @@
 
   <div class="popup-overlay" id="popupOverlayLight">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.06.05 <span style="font-size:13px; font-weight:500;">霸王茶姬·轻因 伯牙绝弦</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">大杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">去冰</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">微糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">大杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">去冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">微糖</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.jpg?width=300" alt="轻因·伯牙绝弦" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.jpg')" />
@@ -4328,15 +4260,15 @@
 
   <div class="popup-overlay" id="popupOverlayMay">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.31 <span style="font-size:13px; font-weight:500;">霸王茶姬·伯牙绝弦</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">大杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">花香款</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准糖</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">大杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">花香款</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准冰</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727212938704.jpg?width=300" alt="伯牙绝弦" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727212938704.jpg')" />
@@ -4352,13 +4284,13 @@
 
   <div class="popup-overlay" id="popupOverlayRose">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.30 <span style="font-size:13px; font-weight:500;">星巴克·玫瑰20抹茶拿铁</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">中杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">热</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">中杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">热</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727213100883.jpg?width=300" alt="玫瑰20抹茶拿铁" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727213100883.jpg')" />
@@ -4378,16 +4310,16 @@
 
   <div class="popup-overlay" id="popupOverlayMango">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.28 <span style="font-size:13px; font-weight:500;">喜茶·多肉芒芒</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">冰沙</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">加倍芒果果肉</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">纯粹真冰糖</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">少少少甜</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">加轻芝芝云顶</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">冰沙</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">加倍芒果果肉</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">纯粹真冰糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">少少少甜</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">加轻芝芝云顶</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727213857354.jpg?width=300" alt="多肉芒芒" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727213857354.jpg')" />
@@ -4403,15 +4335,15 @@
 
   <div class="popup-overlay" id="popupOverlayButter">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.20 <span style="font-size:13px; font-weight:500;">瑞幸·小黄油美式</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">全冰去水</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">大杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">不另外加糖</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">深烘豆001</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">全冰去水</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">大杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">不另外加糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">深烘豆001</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727222334081.jpg?width=300" alt="小黄油美式" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727222334081.jpg')" />
@@ -4427,15 +4359,15 @@
 
   <div class="popup-overlay" id="popupOverlayButter2">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.19 <span style="font-size:13px; font-weight:500;">瑞幸·小黄油美式</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">全冰去水</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">超大24</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">不另外加糖</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">深烘豆010</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">全冰去水</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">超大24</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">不另外加糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">深烘豆010</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727222640951.jpg?width=300" alt="小黄油美式" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727222640951.jpg')" />
@@ -4451,12 +4383,12 @@
 
   <div class="popup-overlay" id="popupOverlayLychee">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.05.13 <span style="font-size:13px; font-weight:500;">Tulipkoko泰茶公司·山竹荔枝冰茶</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">少糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">少糖</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727223040936.jpg?width=300" alt="山竹荔枝冰茶" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727223040936.jpg')" />
@@ -4480,15 +4412,15 @@
 
   <div class="popup-overlay" id="popupOverlayAprMay">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.04.25 <span style="font-size:13px; font-weight:500;">霸王茶姬·伯牙绝弦</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">中杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">茶香款</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准冰</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">标准糖</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">中杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">茶香款</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">标准糖</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727230856180.jpg?width=300" alt="伯牙绝弦" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727230856180.jpg')" />
@@ -4504,13 +4436,13 @@
   
   <div class="popup-overlay" id="popupOverlayBerry">
     <div class="popup-box" style="max-width:340px; padding:20px 18px 18px; border-radius:20px; max-height:90vh; overflow-y:auto;">
-      <button class="popup-close" style="top:8px; right:12px; font-size:20px;">✕</button>
-      <div style="font-size:15px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <button class="popup-close" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+<div style="font-size:15px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:10px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         2026.04.19 <span style="font-size:13px; font-weight:500;">星巴克·冰摇红莓黑加仑</span>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">大杯</span>
-        <span style="background:rgba(36,104,168,0.08); padding:2px 10px; border-radius:12px; font-size:12px; font-weight:500; color:#1a4a6f; border:1px solid rgba(36,104,168,0.06);">冰</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">大杯</span>
+        <span style="background:rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.95)); padding:2px 10px; border-radius:10px; font-size:12px; font-weight:500; color:#000000; border:1px solid rgba(255, 255, 255, 0.08) !important; box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1);">冰</span>
       </div>
       <div style="margin-bottom:8px;">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260727231607195.jpg?width=300" alt="冰摇红莓黑加仑" style="width:100%; height:auto; display:block; border-radius:12px; cursor:pointer;" onclick="previewImage('https://gitee.com/a1814747459/img-bed/raw/master/20260727231607195.jpg')" />
@@ -4527,7 +4459,7 @@
   <div class="popup-overlay" id="popupOverlayMiracle">
     <div class="popup-box" style="max-width:560px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
       <button class="popup-close" id="miraclePopupClose">✕</button>
-      <div style="font-size:16px; font-weight:600; color:#1a4a6f; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid rgba(184,224,255,0.2);">
+      <div style="font-size:16px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
         <span id="miraclePopupTitle">2026年7月</span>
       </div>
       <div id="miraclePopupGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-height:65vh; overflow-y:auto; padding:4px;">
@@ -4574,6 +4506,13 @@
 
       function openDropdown(btn, dropdown) {
         clearTimeout(closeTimer);
+        
+        // 恢复所有菜单项的图标
+        document.querySelectorAll('.menu-item[data-page]').forEach(item => {
+          const icon = item.querySelector('.dropdown-icon');
+          if (icon) icon.src = 'https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png';
+        });
+        
         const rect = btn.getBoundingClientRect();
         dropdown.style.position = 'fixed';
         dropdown.style.top = (rect.bottom + 12) + 'px';
@@ -4592,24 +4531,27 @@
       }
 
       // ---- 饭记 ----
-      if (foodNotesBtn && foodNotesDropdown) {
-        const closeNotes = () => {
-          clearTimeout(closeTimer);
-          closeTimer = setTimeout(() => {
-            if (!isHovering(foodNotesBtn, foodNotesDropdown)) {
-              closeAllDropdowns();
-            }
-          }, 50);
-        };
-
-        foodNotesBtn.addEventListener('mouseenter', function() {
-          clearTimeout(closeTimer);
-          // 如果当前打开的是饭作，先关闭它
-          if (activeDropdown && activeDropdown !== foodNotesDropdown) {
-            activeDropdown.classList.remove('open');
+      if (foodWorksBtn && foodWorksDropdown) {
+      const closeNotes = () => {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          if (!isHovering(foodNotesBtn, foodNotesDropdown)) {
+            closeAllDropdowns();
+            const icon = foodNotesBtn.querySelector('.dropdown-icon');
+            if (icon) icon.src = 'https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png';
           }
-          openDropdown(this, foodNotesDropdown);
-        });
+        }, 50);
+      };
+
+      foodNotesBtn.addEventListener('mouseenter', function() {
+        clearTimeout(closeTimer);
+        if (activeDropdown && activeDropdown !== foodNotesDropdown) {
+          activeDropdown.classList.remove('open');
+        }
+        openDropdown(this, foodNotesDropdown);
+        const icon = this.querySelector('.dropdown-icon');
+        if (icon) icon.src = 'https://gitee.com/a1814747459/img-bed/raw/master/20260804151930254.png';
+      });
         foodNotesBtn.addEventListener('mouseleave', closeNotes);
         foodNotesDropdown.addEventListener('mouseenter', function() {
           clearTimeout(closeTimer);
@@ -4619,22 +4561,26 @@
 
       // ---- 饭作 ----
       if (foodWorksBtn && foodWorksDropdown) {
-        const closeWorks = () => {
-          clearTimeout(closeTimer);
-          closeTimer = setTimeout(() => {
-            if (!isHovering(foodWorksBtn, foodWorksDropdown)) {
-              closeAllDropdowns();
-            }
-          }, 50);
-        };
-
-        foodWorksBtn.addEventListener('mouseenter', function() {
-          clearTimeout(closeTimer);
-          if (activeDropdown && activeDropdown !== foodWorksDropdown) {
-            activeDropdown.classList.remove('open');
+      const closeWorks = () => {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          if (!isHovering(foodWorksBtn, foodWorksDropdown)) {
+            closeAllDropdowns();
+            const icon = foodWorksBtn.querySelector('.dropdown-icon');
+            if (icon) icon.src = 'https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.png';
           }
-          openDropdown(this, foodWorksDropdown);
-        });
+        }, 50);
+      };
+
+      foodWorksBtn.addEventListener('mouseenter', function() {
+        clearTimeout(closeTimer);
+        if (activeDropdown && activeDropdown !== foodWorksDropdown) {
+          activeDropdown.classList.remove('open');
+        }
+        openDropdown(this, foodWorksDropdown);
+        const icon = this.querySelector('.dropdown-icon');
+        if (icon) icon.src = 'https://gitee.com/a1814747459/img-bed/raw/master/20260804151930254.png';
+      });
         foodWorksBtn.addEventListener('mouseleave', closeWorks);
         foodWorksDropdown.addEventListener('mouseenter', function() {
           clearTimeout(closeTimer);
@@ -4663,11 +4609,13 @@
       const target = document.getElementById(pageId);
       if (target) target.classList.add('active');
 
-      let targetPageId = pageId;
-      if (pageId === 'stage' || pageId === 'fancam' || pageId === 'bobo') {
-        targetPageId = 'stage';
-      }
-      
+    let targetPageId = pageId;
+    if (pageId === 'stage' || pageId === 'fancam' || pageId === 'bobo') {
+      targetPageId = 'stage';
+    }
+    if (pageId === 'food' || pageId === 'travel' || pageId === 'words' || pageId === 'dream') {
+      targetPageId = 'food';
+    }      
       window.activePage = targetPageId;
       
       const targetItem = document.querySelector(`.top-nav .menu-item[data-page="${targetPageId}"]`);
@@ -4684,11 +4632,10 @@
       if (pageId === 'fancam') {
         const searchInput = document.getElementById('weiboSearch');
         if (searchInput) searchInput.value = '';
-        const platformItems = document.querySelectorAll('.platform-nav-item');
+        const platformItems = document.querySelectorAll('#platformNav .stage-nav-item');
         platformItems.forEach(p => p.classList.remove('active'));
-        const allPlatform = document.querySelector('.platform-nav-item[data-platform="all"]');
+        const allPlatform = document.querySelector('#platformNav .stage-nav-item[data-platform="all"]');
         if (allPlatform) allPlatform.classList.add('active');
-        if (typeof renderMonthTabs === 'function') renderMonthTabs();
         setTimeout(() => {
           const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
           allCards.forEach(card => card.style.display = '');
@@ -4698,7 +4645,6 @@
             allTab.classList.add('active');
           }
           if (typeof filterWeiboFeed === 'function') filterWeiboFeed();
-          setTimeout(updateTimelineHighlight, 100);
         }, 50);
       }
       if (pageId === 'stage') {
@@ -4709,10 +4655,6 @@
         currentCategory = 'all';
         const searchInput = document.getElementById('stageSearch');
         if (searchInput) searchInput.value = '';
-        const tabs = document.querySelectorAll('#stageMonthScrollInner .category-tab');
-        tabs.forEach(t => t.classList.remove('active'));
-        const allTab = document.querySelector('#stageMonthScrollInner .category-tab[data-month="全部"]');
-        if (allTab) allTab.classList.add('active');
         setTimeout(() => {
           if (typeof renderCards === 'function') renderCards('all', '全部', '');
         }, 50);
@@ -4725,12 +4667,8 @@
         currentBoboCategory = 'all';
         const searchInput = document.getElementById('boboSearch');
         if (searchInput) searchInput.value = '';
-        const tabs = document.querySelectorAll('#boboMonthScrollInner .category-tab');
-        tabs.forEach(t => t.classList.remove('active'));
-        const allTab = document.querySelector('#boboMonthScrollInner .category-tab[data-month="全部"]');
-        if (allTab) allTab.classList.add('active');
         setTimeout(() => {
-          if (typeof renderBoboCards === 'function') renderBoboCards('all', '全部', '');
+          if (typeof renderBoboCards === 'function') renderBoboCards('all', '');
         }, 50);
       }
       if (pageId === 'contact') {
@@ -4747,12 +4685,12 @@
       }
     }
 
-    // ===== 导航点击事件（顶层菜单） =====
     const menuItems = document.querySelectorAll('.top-nav .menu-item[data-page]');
     menuItems.forEach(item => {
       item.addEventListener('click', function(e) {
         e.stopPropagation();
         const pageId = this.dataset.page;
+        // 所有菜单项都调用 switchPage 来更新高亮
         switchPage(pageId);
       });
     });
@@ -4949,35 +4887,28 @@
       { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.jpg', show: '【SNH48】《声动星河之匿声唱将》特别公演' },
     ];
     const assistData = [
-      // 2026年7月
       { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
       { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
       { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.jpg', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
-
-      // 2026年6月（从新到旧）
-      { date: '2026.06.21', title: '+-(正负)', url: 'https://www.bilibili.com/video/BV1E6MC65ECw/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张倩生日公演及作品展演' },
+      { date: '2026.06.21', title: '+-(正负)', url: 'https://www.bilibili.com/video/BV1E6MC65ECw/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701604.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张倩生日公演及作品展演' },
       { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
-      { date: '2026.06.07', title: 'Be my poi', url: 'https://www.bilibili.com/video/BV1B6MC6VEXh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张雷雷生日公演及作品展演' },
-
-      // 2026年5月
+      { date: '2026.06.07', title: 'Be my poi', url: 'https://www.bilibili.com/video/BV1B6MC6VEXh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701601.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》张雷雷生日公演及作品展演' },
       { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.png', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
-      { date: '2026.05.23', title: '梦与星光的海上', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
-      { date: '2026.05.02', title: 'Sweet Chemistry', url: 'https://www.bilibili.com/video/BV1Z6MC6VESz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM SII《INTO THE LIGHT》宁轲生日公演' },
-
-      // 2026年4月
-      { date: '2026.04.25', title: 'Like it（随机碰撞）', url: 'https://www.bilibili.com/video/BV1f6MC6VEM5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》公演' },
-      { date: '2026.04.11', title: '金色海岸', url: 'https://www.bilibili.com/video/BV1B6MC6VEjj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
-
-      // 2026年3月
+      { date: '2026.05.23', title: '梦与星光的海上', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701602.jpg', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
+      { date: '2026.05.02', title: 'Sweet Chemistry', url: 'https://www.bilibili.com/video/BV1Z6MC6VESz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701607.jpg', show: '【SNH48】TEAM SII《INTO THE LIGHT》宁轲生日公演' },
+      { date: '2026.04.25', title: 'Like it（随机碰撞）', url: 'https://www.bilibili.com/video/BV1f6MC6VEM5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701598.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》公演' },
+      { date: '2026.04.11', title: '金色海岸', url: 'https://www.bilibili.com/video/BV1B6MC6VEjj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701603.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
       { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.jpg', show: '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演' },
       { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.jpg', show: '【SNH48】TEAM NII《Plan B》刘洁毕业公演' },
-
-      // 2026年1月
       { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.jpg', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
-      { date: '2026.01.24', title: 'BLackrain', url: 'https://www.bilibili.com/video/BV1B6MC6VEzu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.jpg', show: '【SNH48】TEAM HII《赫兹共振》蒋舒婷季度MVP公演' },
+      { date: '2026.01.24', title: 'BLackrain', url: 'https://www.bilibili.com/video/BV1B6MC6VEzu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701605.jpg', show: '【SNH48】TEAM HII《赫兹共振》蒋舒婷季度MVP公演' },
       { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.jpg', show: '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演' },
     ];
-    const allData = { unit: unitData, special: specialData, assist: assistData };
+    const substituteData = [
+      { date: '2026.05.23', title: '回响（Calling when I\'m gone）', url: 'https://www.bilibili.com/video/BV1B6MC6VEjf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701600.jpg', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
+      { date: '2026.05.23', title: 'Crazy for you', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701599.jpg', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
+    ];
+    const allData = { unit: unitData, special: specialData, assist: assistData, substitute: substituteData };
     let currentCategory = 'all';
     const MY_PROXY = 'https://flaky-hare-7469.happyhomesmile.deno.net';
     let currentLayoutMode = 'list';
@@ -4991,36 +4922,53 @@
     }
 
     const coverCache = new Map();
+    
     async function fetchBilibiliCoverFast(url) {
       const bvid = extractBvid(url);
       if (!bvid) return null;
       if (coverCache.has(url)) return coverCache.get(url);
+      if (coverCache.has(url + '_loading')) return null;
+      coverCache.set(url + '_loading', true);
+
       try {
         const response = await fetch(`${MY_PROXY}?bvid=${bvid}`);
         if (response.ok) {
           const data = await response.json();
           if (data.code === 0 && data.data && data.data.pic) {
             const coverUrl = data.data.pic;
-            await new Promise((resolve) => {
-              const img = new Image();
-              img.onload = () => resolve();
-              img.onerror = () => resolve();
-              img.src = coverUrl;
-            });
             coverCache.set(url, coverUrl);
+            coverCache.delete(url + '_loading');
+            updateCardCover(url, coverUrl);
             return coverUrl;
           }
         }
+        coverCache.delete(url + '_loading');
         return null;
       } catch (e) {
         console.warn('获取封面失败:', e);
+        coverCache.delete(url + '_loading');
         return null;
       }
     }
 
+    function updateCardCover(url, coverUrl) {
+      const cards = document.querySelectorAll(`.video-card[data-url="${url}"]`);
+      cards.forEach(card => {
+        const imgBox = card.querySelector('.video-cover-box img');
+        const fallback = card.querySelector('.cover-fallback');
+        if (imgBox) {
+          imgBox.src = coverUrl;
+          imgBox.style.opacity = '1';
+        }
+        if (fallback) {
+          fallback.style.display = 'none';
+        }
+      });
+    }
+
     function getDataByCategory(category) {
       let data = [];
-      if (category === 'all') data = [...unitData, ...specialData, ...assistData];
+      if (category === 'all') data = [...unitData, ...specialData, ...assistData, ...substituteData];
       else data = allData[category] || [];
       return data.sort((a, b) => b.date.localeCompare(a.date));
     }
@@ -5030,8 +4978,10 @@
     async function renderCards(category = currentCategory, filterMonth = '全部', keyword = '') {
         const grid = document.getElementById('stageGrid');
         if (!grid) return;
+        
         if (!isPaginationClick) currentPage = 1;
         isPaginationClick = false;
+
         const navBtns = document.querySelectorAll('#stageNav .stage-nav-item');
         navBtns.forEach(btn => {
             btn.classList.remove('active');
@@ -5040,6 +4990,7 @@
             btn.style.borderColor = '';
             btn.style.boxShadow = '';
         });
+        
         let targetBtn = document.querySelector(`#stageNav .stage-nav-item[data-category="${category}"]`);
         if (!targetBtn) {
             targetBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]');
@@ -5047,42 +4998,51 @@
         }
         if (targetBtn) targetBtn.classList.add('active');
         currentCategory = category;
+
         const data = getDataByCategory(category);
         const filtered = data.filter(item => {
-            const month = item.date ? item.date.slice(0, 7) : '';
-            const matchMonth = filterMonth === '全部' || month === filterMonth;
             const lowerKeyword = keyword.trim().toLowerCase();
-            const matchKey = lowerKeyword === '' || 
-                            item.title.toLowerCase().includes(lowerKeyword) || 
-                            (item.date && item.date.includes(keyword));
-            return matchMonth && matchKey;
+            return lowerKeyword === '' || 
+                  item.title.toLowerCase().includes(lowerKeyword) || 
+                  (item.date && item.date.includes(keyword));
         });
+
         if (filtered.length === 0) {
             grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#4a779e; font-size:14px;">没有找到匹配的视频 ✨</div>`;
             updatePaginationUI(0);
             return;
         }
+
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         const pageData = filtered.slice(startIndex, endIndex);
+
         let html = '';
-        const createCardHTML = (item) => {
+        
+        for (const item of pageData) {
             const isUnit = unitData.some(d => d.date === item.date && d.title === item.title);
             const isSpecial = specialData.some(d => d.date === item.date && d.title === item.title);
             const isAssist = assistData.some(d => d.date === item.date && d.title === item.title);
-            let tagText = 'UNIT', tagColor = '#00a1d6';
-            if (category === 'all') {
-                if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
-                else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-                else if (isAssist) { tagText = '助演'; tagColor = '#FFD700'; }
-            } else {
-                if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
-                else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
-                else if (category === 'assist') { tagText = '助演'; tagColor = '#FFD700'; }
-            }
+            const isSubstitute = substituteData.some(d => d.date === item.date && d.title === item.title);
+            
+        let tagText = 'UNIT', tagColor = '#00a1d6';
+        if (category === 'all') {
+            if (isUnit) { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+            else if (isSpecial) { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+            else if (isAssist) { tagText = '助演'; tagColor = '#FFD700'; }
+            else if (isSubstitute) { tagText = '代役'; tagColor = '#9b59b6'; }
+        } else {
+            if (category === 'unit') { tagText = 'UNIT'; tagColor = '#00a1d6'; }
+            else if (category === 'special') { tagText = '特殊舞台'; tagColor = '#e67e22'; }
+            else if (category === 'assist') { tagText = '助演'; tagColor = '#FFD700'; }
+            else if (category === 'substitute') { tagText = '代役'; tagColor = '#9b59b6'; }
+        }
+
             let coverHtml = '';
-            if (item.cover) {
-                coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
+            let hasCover = !!item.cover;
+            
+            if (hasCover) {
+                coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" style="opacity:1;" />`;
             } else {
                 coverHtml = `
                     <div class="cover-fallback" style="background: linear-gradient(135deg, #b8d4e8, #8ab3d0);">
@@ -5090,14 +5050,16 @@
                         <div class="video-tip" style="color:#fff;">加载中...</div>
                     </div>
                 `;
-                fetchBilibiliCoverFast(item.url).then(url => {});
+                fetchBilibiliCoverFast(item.url);
             }
+
             const showName = item.show || '';
-            return `
-              <div class="video-card" onclick="window.open('${item.url || '#'}','_blank')">
+            
+            html += `
+              <div class="video-card" data-url="${item.url}" 
+              onclick="window.open('${item.url || '#'}','_blank')">
                 <div class="video-cover-box">
                   ${coverHtml}
-                  <div class="play-icon">▶</div>
                   <span class="video-tag" style="background:${tagColor};">${tagText}</span>
                 </div>
                 <div class="video-info">
@@ -5107,103 +5069,41 @@
                 </div>
               </div>
             `;
-        };
-        for (const item of pageData) html += createCardHTML(item);
+        }
+
         grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
         grid.innerHTML = html;
+        
+        var totalCountSpan = document.getElementById('stageTotalCount');
+        if (totalCountSpan) {
+            var allDataCount = getDataByCategory('all');
+            totalCountSpan.textContent = allDataCount.length;
+        }
+
+        var unitCountSpan = document.getElementById('stageUnitCount');
+        if (unitCountSpan) {
+            var unitDataCount = getDataByCategory('unit');
+            unitCountSpan.textContent = unitDataCount.length;
+        }
+
+        var specialCountSpan = document.getElementById('stageSpecialCount');
+        if (specialCountSpan) {
+            var specialDataCount = getDataByCategory('special');
+            specialCountSpan.textContent = specialDataCount.length;
+        }
+
+        var assistCountSpan = document.getElementById('stageAssistCount');
+        if (assistCountSpan) {
+            var assistDataCount = getDataByCategory('assist');
+            assistCountSpan.textContent = assistDataCount.length;
+        }
+
+        var substituteCountSpan = document.getElementById('stageSubstituteCount');
+        if (substituteCountSpan) {
+            var substituteDataCount = getDataByCategory('substitute');
+            substituteCountSpan.textContent = substituteDataCount.length;
+        }
         updatePaginationUI(filtered.length);
-    }
-
-    function getMonthList(category) {
-      let data = [];
-      if (category === 'all') data = [...unitData, ...specialData, ...assistData];
-      else data = allData[category] || [];
-      const set = new Set();
-      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
-      return Array.from(set).sort((a,b) => b.localeCompare(a));
-    }
-
-    function renderTabs(category, activeMonth = '全部') {
-      const scrollInner = document.getElementById('stageMonthScrollInner');
-      if (!scrollInner) return;
-      const months = getMonthList(category);
-      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
-      months.forEach(m => {
-        const active = activeMonth === m ? 'active' : '';
-        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
-      });
-      scrollInner.innerHTML = html;
-      scrollInner.querySelectorAll('.category-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          const month = this.dataset.month;
-          const keyword = document.getElementById('stageSearch').value;
-          scrollInner.querySelectorAll('.category-tab').forEach(t => {
-            t.classList.remove('active');
-            t.style.background = ''; 
-            t.style.borderColor = '';
-            t.style.boxShadow = '';
-            t.style.color = '';
-          });
-          this.classList.add('active');
-          renderCards(currentCategory, month, keyword);
-        });
-      });
-      const prevBtn = document.getElementById('stageMonthPrev');
-      const nextBtn = document.getElementById('stageMonthNext');
-      const wrapper = document.getElementById('stageMonthScrollWrapper');
-      let scrollPosition = 0;
-      const step = 120;
-      if (prevBtn && nextBtn && scrollInner && wrapper) {
-        scrollPosition = 0;
-        scrollInner.style.transform = 'translateX(0px)';
-        scrollInner.style.cursor = 'grab';
-        prevBtn.onclick = function(e) {
-          e.stopPropagation();
-          scrollPosition = Math.min(scrollPosition + step, 0);
-          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
-        nextBtn.onclick = function(e) {
-          e.stopPropagation();
-          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
-          scrollPosition = Math.max(scrollPosition - step, maxScroll);
-          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
-        let startX = 0, currentTranslate = 0, isDragging = false;
-        scrollInner.addEventListener('touchstart', function(e) {
-          startX = e.touches[0].clientX;
-          currentTranslate = scrollPosition;
-          isDragging = true;
-          this.style.cursor = 'grabbing';
-          this.style.transition = 'none';
-        }, { passive: true });
-        scrollInner.addEventListener('touchmove', function(e) {
-          if (!isDragging) return;
-          const moveX = e.touches[0].clientX - startX;
-          const newPos = currentTranslate + moveX;
-          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
-          const clamped = Math.min(Math.max(newPos, maxScroll), 0);
-          this.style.transform = 'translateX(' + clamped + 'px)';
-        }, { passive: true });
-        scrollInner.addEventListener('touchend', function(e) {
-          if (!isDragging) return;
-          isDragging = false;
-          this.style.cursor = 'grab';
-          this.style.transition = 'transform 0.3s ease';
-          const currentPos = parseFloat(this.style.transform.replace('translateX(', '').replace('px)', '')) || 0;
-          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
-          if (currentPos > 0) scrollPosition = 0;
-          else if (currentPos < maxScroll) scrollPosition = maxScroll;
-          else scrollPosition = currentPos;
-          this.style.transform = 'translateX(' + scrollPosition + 'px)';
-        }, { passive: true });
-        wrapper.addEventListener('wheel', function(e) {
-          e.preventDefault();
-          const delta = e.deltaX || e.deltaY;
-          const maxScroll = -(scrollInner.scrollWidth - wrapper.clientWidth + 20);
-          scrollPosition = Math.min(Math.max(scrollPosition - delta * 0.5, maxScroll), 0);
-          scrollInner.style.transform = 'translateX(' + scrollPosition + 'px)';
-        }, { passive: false });
-      }
     }
 
     const navItems = document.querySelectorAll('.stage-nav-item');
@@ -5212,8 +5112,7 @@
         const targetCategory = this.dataset.category;
         const searchInput = document.getElementById('stageSearch');
         if (searchInput) searchInput.value = '';
-        renderTabs(targetCategory, '全部');
-        renderCards(targetCategory, '全部', '');
+        renderCards(targetCategory, '');
       });
     });
 
@@ -5221,14 +5120,12 @@
     if (searchInput) {
       searchInput.addEventListener('input', function() {
         const keyword = this.value;
-        const activeTab = document.querySelector('#stageMonthScrollInner .category-tab.active');
-        const month = activeTab ? activeTab.dataset.month : '全部';
-        renderCards(currentCategory, month, keyword);
+        renderCards(currentCategory, keyword);
       });
     }
 
-    renderTabs('all', '全部');
-    renderCards('all', '全部', '');
+    renderCards('all', '');
+
 
     // ===== 饭之啵数据 =====
     const boboData = [
@@ -5246,15 +5143,6 @@
     
     let currentBoboCategory = 'all';
     
-    function getBoboMonthList(category) {
-      let data = [];
-      if (category === 'all') data = boboData;
-      else data = boboData.filter(item => item.category === category);
-      const set = new Set();
-      data.forEach(d => { if (d.date) set.add(d.date.slice(0,7)); });
-      return Array.from(set).sort((a,b) => b.localeCompare(a));
-    }
-    
     function getBoboDataByCategory(category) {
       if (category === 'all') return boboData;
       return boboData.filter(item => item.category === category);
@@ -5262,15 +5150,16 @@
     
     const boboGrid = document.getElementById('boboGrid');
     
-    function renderBoboCards(category = currentBoboCategory, filterMonth = '全部', keyword = '') {
+    function renderBoboCards(category = currentBoboCategory, keyword = '') {
       const navBtns = document.querySelectorAll('#boboNav .stage-nav-item');
       navBtns.forEach(btn => {
         btn.classList.remove('active');
-        btn.style.background = ''; 
+        btn.style.background = '';
         btn.style.color = '';
         btn.style.borderColor = '';
         btn.style.boxShadow = '';
       });
+      
       let targetBtn = document.querySelector(`#boboNav .stage-nav-item[data-category="${category}"]`);
       if (!targetBtn) {
         targetBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]');
@@ -5278,23 +5167,37 @@
       }
       if (targetBtn) targetBtn.classList.add('active');
       currentBoboCategory = category;
+      
       const data = getBoboDataByCategory(category);
       const filtered = data.filter(item => {
-        const month = item.date ? item.date.slice(0,7) : '';
-        const matchMonth = filterMonth === '全部' || month === filterMonth;
-        const matchKey = keyword.trim() === '' || item.title.includes(keyword) || (item.date && item.date.includes(keyword));
-        return matchMonth && matchKey;
+        const matchKey = keyword.trim() === '' ||
+                        item.title.includes(keyword) ||
+                        (item.date && item.date.includes(keyword));
+        return matchKey;
       });
+      
+      // ===== 更新计数 =====
+      const allData = getBoboDataByCategory('all');
+      document.getElementById('boboTotalCount').textContent = allData.length;
+      
+      const singleData = getBoboDataByCategory('single');
+      document.getElementById('boboSingleCount').textContent = singleData.length;
+      
+      const specialData = getBoboDataByCategory('special');
+      document.getElementById('boboSpecialCount').textContent = specialData.length;
+      
       if (filtered.length === 0) {
         boboGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px 0; color:#4a779e; font-size:13px;">没有找到匹配的视频 ✨</div>`;
         return;
       }
+      
       let html = '';
       for (const item of filtered) {
         let tagColor = '#4299e1';
         let tagText = '单播';
         if (item.category === 'single') { tagColor = '#4299e1'; tagText = '单播'; }
         else if (item.category === 'special') { tagColor = '#e67e22'; tagText = '特殊直播'; }
+        
         let coverHtml = '';
         if (item.cover) {
           coverHtml = `<img src="${item.cover}" alt="${item.title}" loading="lazy" />`;
@@ -5306,299 +5209,47 @@
             </div>
           `;
         }
-        const descText = (category === 'all') 
-          ? (item.category === 'single' ? '单播 · ' + item.date : '特殊直播 · ' + item.date)
-          : item.date;
+        
         html += `
           <div class="video-card" data-url="${item.url}" data-title="${item.title}" onclick="window.open('${item.url || '#'}','_blank')">
             <div class="video-cover-box">
               ${coverHtml}
-              <div class="play-icon">▶</div>
               <span class="video-tag" style="background:${tagColor};">${tagText}</span>
             </div>
             <div class="video-info">
               <div class="video-name">${item.title}</div>
               <div class="video-date">${item.date || ''}</div>
-              <div class="video-desc">${descText}</div>
-              <div class="video-meta">
-                <span>👁️ ${Math.floor(Math.random() * 300 + 20)}</span>
-                <span>📅 ${item.date || ''}</span>
-              </div>
             </div>
           </div>
         `;
       }
+      
       boboGrid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
       boboGrid.innerHTML = html;
     }
     
-    function renderBoboTabs(category, activeMonth = '全部') {
-      const container = document.getElementById('boboMonthScrollInner');
-      if (!container) return;
-      const months = getBoboMonthList(category);
-      let html = `<span class="category-tab ${activeMonth === '全部' ? 'active' : ''}" data-month="全部" style="flex-shrink:0;">全部</span>`;
-      months.forEach(m => {
-        const active = activeMonth === m ? 'active' : '';
-        html += `<span class="category-tab ${active}" data-month="${m}" style="flex-shrink:0;">${m}</span>`;
-      });
-      container.innerHTML = html;
-      container.querySelectorAll('.category-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          const month = this.dataset.month;
-          const keyword = document.getElementById('boboSearch').value;
-          container.querySelectorAll('.category-tab').forEach(t => {
-            t.classList.remove('active');
-            t.style.background = ''; 
-            t.style.borderColor = '';
-            t.style.boxShadow = '';
-            t.style.color = '';
-          });
-          this.classList.add('active');
-          renderBoboCards(currentBoboCategory, month, keyword);
+      const boboSearchInput = document.getElementById('boboSearch');
+      if (boboSearchInput) {
+        boboSearchInput.addEventListener('input', function() {
+          const keyword = this.value;
+          renderBoboCards(currentBoboCategory, keyword);
         });
-      });
-      const prevBtn = document.getElementById('boboMonthPrev');
-      const nextBtn = document.getElementById('boboMonthNext');
-      const wrapper = document.getElementById('boboMonthScrollWrapper');
-      let scrollPosition = 0;
-      const step = 120;
-      if (prevBtn && nextBtn && container && wrapper) {
-        scrollPosition = 0;
-        container.style.transform = 'translateX(0px)';
-        container.style.cursor = 'grab';
-        prevBtn.onclick = function(e) {
-          e.stopPropagation();
-          scrollPosition = Math.min(scrollPosition + step, 0);
-          container.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
-        nextBtn.onclick = function(e) {
-          e.stopPropagation();
-          const maxScroll = -(container.scrollWidth - wrapper.clientWidth + 20);
-          scrollPosition = Math.max(scrollPosition - step, maxScroll);
-          container.style.transform = 'translateX(' + scrollPosition + 'px)';
-        };
       }
-    }
     
+    renderBoboCards('all', '');
+
     const boboNavItems = document.querySelectorAll('#boboNav .stage-nav-item');
     boboNavItems.forEach(btn => {
       btn.addEventListener('click', function() {
         const targetCategory = this.dataset.category;
         const searchInput = document.getElementById('boboSearch');
-        if (searchInput) searchInput.value = '';
-        renderBoboTabs(targetCategory, '全部');
-        renderBoboCards(targetCategory, '全部', '');
+        if (searchInput) searchInput.value = '';   
+        renderBoboCards(targetCategory, '');     
       });
     });
-    
-    const boboSearchInput = document.getElementById('boboSearch');
-    if (boboSearchInput) {
-      boboSearchInput.addEventListener('input', function() {
-        const keyword = this.value;
-        const activeTab = document.querySelector('#boboMonthScrollInner .category-tab.active');
-        const month = activeTab ? activeTab.dataset.month : '全部';
-        renderBoboCards(currentBoboCategory, month, keyword);
-      });
-    }
-    
-    renderBoboTabs('all', '全部');
-    renderBoboCards('all', '全部', '');
-
-    // ---- 平台月份数据 ----
-    const platformMonths = {
-      weibo: ['2026-08','2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      xiaohongshu: ['2026-08','2025-07', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-      douyin: ['2026-08','2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01','2025-12','2025-11','2025-10','2025-09'],
-      bilibili: ['2026-07', '2026-01', '2025-12', '2025-06', '2025-03', '2025-01', '2024-07', '2024-06', '2023-11']
-    };
-
-    function buildUpdateMap() {
-      const map = {};
-      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
-      cards.forEach(card => {
-        if (card.classList.contains('pinned')) return;
-        const month = card.dataset.month;
-        const day = card.dataset.day;
-        const platform = card.dataset.platform || 'weibo';
-        if (!month || !day) return;
-        const key = month + '-' + day.padStart(2, '0');
-        if (!map[key]) map[key] = [];
-        if (!map[key].includes(platform)) map[key].push(platform);
-      });
-      return map;
-    }
-
-    function createInlineCalendar(year) {
-      const container = document.createElement('div');
-      container.className = 'inline-calendar';
-      const label = document.querySelector(`.tl-year-label[data-year="${year}"]`);
-      if (label) {
-        const rect = label.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2 + 50;
-        const centerY = rect.top + rect.height / 2 + 80;
-        container.style.left = centerX + 'px';
-        container.style.top = centerY + 'px';
-        container.style.transform = 'translate(-50%, -50%) scale(0.3)';
-        container.style.transformOrigin = 'center center';
-      }
-      container.style.position = 'fixed';
-      container.style.opacity = '0';
-      container.style.transition = 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      container.style.width = '280px';
-      container.style.height = '280px';
-      container.style.minWidth = '260px';
-      container.style.minHeight = '260px';
-      container.style.overflow = 'hidden';
-      container.style.display = 'flex';
-      container.style.flexDirection = 'column';
-      container.style.padding = '18px 20px';
-      container.style.background = 'rgba(255,255,255,0.98)';
-      container.style.backdropFilter = 'blur(16px)';
-      container.style.borderRadius = '18px';
-      container.style.border = '1px solid rgba(26,74,111,0.12)';
-      container.style.boxShadow = '0 20px 60px rgba(26,74,111,0.3)';
-      container.style.zIndex = '9999';
-      const today = new Date();
-      let currentMonth = today.getMonth(); 
-      const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
-      function renderMonth(monthIndex) {
-        const updateMap = buildUpdateMap();
-        const monthStr = String(monthIndex + 1).padStart(2, '0');
-        const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-        const firstDay = new Date(year, monthIndex, 1).getDay();
-        let html = `
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0;">
-            <button class="cal-nav" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:1px 8px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">‹</button>
-            <span style="font-size:0.85rem;font-weight:700;color:#1a4a6f;letter-spacing:1px;">${year}年 ${monthNames[monthIndex]}</span>
-            <button class="cal-nav" style="background:none;border:none;font-size:1rem;cursor:pointer;padding:1px 8px;border-radius:4px;color:#4a779e;transition:background 0.2s;" onmouseover="this.style.background='rgba(26,74,111,0.06)'" onmouseout="this.style.background='none'">›</button>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);font-size:0.55rem;color:#7a9ab0;text-align:center;margin-bottom:4px;flex-shrink:0;">
-            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
-          </div>
-          <div class="cal-days-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;flex:1;align-content:center;">
-        `;
-        for (let i = 0; i < firstDay; i++) html += `<div></div>`;
-        for (let d = 1; d <= daysInMonth; d++) {
-          const dayStr = String(d).padStart(2, '0');
-          const key = `${year}-${monthStr}-${dayStr}`;
-          const platforms = updateMap[key] || [];
-          const platformSet = new Set(platforms);
-          let borderStyle = '';
-          let platformNames = [];
-          if (platformSet.size > 0) {
-            const colors = [];
-            if (platformSet.has('weibo')) { platformNames.push('微博'); colors.push('#4299e1'); }
-            if (platformSet.has('xiaohongshu')) { platformNames.push('小红书'); colors.push('#ff2d55'); }
-            if (platformSet.has('douyin')) { platformNames.push('抖音'); colors.push('#f97316'); }
-            if (platformSet.has('bilibili')) { platformNames.push('B站'); colors.push('#fb7299'); }
-            if (platformSet.size > 1) {
-              const colorStops = colors.map((c, i) => {
-                const percent = (i / (colors.length - 1)) * 100;
-                return `${c} ${percent}%`;
-              }).join(', ');
-              borderStyle = `border: 2.5px solid transparent;border-radius: 50%;background-image: linear-gradient(135deg, ${colorStops}), linear-gradient(white, white);background-origin: border-box;background-clip: padding-box, border-box;`;
-            } else {
-              borderStyle = `border: 2.5px solid ${colors[0]}; border-radius: 50%;`;
-            }
-          }
-          let badgeHtml = '';
-          if (platformSet.size > 0) {
-            const tagColorMap = {'微博':'#4299e1','小红书':'#ff2d55','抖音':'#f97316','B站':'#fb7299'};
-            const tags = platformNames.map(name => {
-              return `<span style="display:inline-block;background:${tagColorMap[name]};color:#fff;padding:2px 10px;border-radius:4px;font-size:0.55rem;font-weight:600;margin:1px;letter-spacing:0.3px;">${name}</span>`;
-            }).join('');
-            badgeHtml = `<span class="tooltip-badge" style="display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);padding:4px 8px;border-radius:8px;z-index:100;white-space:nowrap;gap:3px;flex-wrap:wrap;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);backdrop-filter:blur(4px);">${tags}</span>`;
-          }
-          html += `
-            <div data-date="${key}" 
-                 data-month="${monthStr}" 
-                 data-day="${dayStr}" 
-                 style="font-weight:${platformSet.size > 0 ? '700' : '400'};cursor:${platformSet.size > 0 ? 'pointer' : 'default'};${borderStyle}position:relative;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#1a2f3f;aspect-ratio:1;${platformSet.size > 1 ? 'background-clip: padding-box;' : ''}"
-                 onmouseover="this.style.backgroundColor='rgba(36,104,168,0.10)';this.querySelector('.tooltip-badge').style.display='flex'" 
-                 onmouseout="this.style.backgroundColor='transparent';this.querySelector('.tooltip-badge').style.display='none'">
-              ${d}
-              ${badgeHtml}
-            </div>
-          `;
-        }
-        html += `</div>`;
-        container.innerHTML = html;
-        const prevBtn = container.querySelector('.cal-nav:first-child');
-        const nextBtn = container.querySelector('.cal-nav:last-child');
-        if (prevBtn) {
-          prevBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            currentMonth = (currentMonth - 1 + 12) % 12;
-            renderMonth(currentMonth);
-          });
-        }
-        if (nextBtn) {
-          nextBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            currentMonth = (currentMonth + 1) % 12;
-            renderMonth(currentMonth);
-          });
-        }
-        container.querySelectorAll('[data-date]').forEach(day => {
-          day.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const month = this.dataset.month;
-            const dayStr = this.dataset.day;
-            const monthKey = `${year}-${month}`;
-            const tab = document.querySelector(`#weiboTabs .category-tab[data-month="${monthKey}"]`);
-            if (tab) {
-              document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
-              tab.classList.add('active');
-              filterWeiboFeed();
-            }
-            setTimeout(() => {
-              const targetCard = document.querySelector(`#weiboFeed .weibo-card[data-month="${monthKey}"][data-day="${dayStr}"], #weiboFeed .xiaohongshu-card[data-month="${monthKey}"][data-day="${dayStr}"]`);
-              if (targetCard && targetCard.style.display !== 'none') {
-                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-              closeCalendarPopup(container);
-            }, 150);
-          });
-        });
-      }
-      renderMonth(currentMonth);
-      requestAnimationFrame(() => {
-        container.style.transform = 'translate(-50%, -50%) scale(1)';
-        container.style.opacity = '1';
-      });
-      setTimeout(() => {
-        document.addEventListener('click', function outsideClick(e) {
-          if (!container.contains(e.target)) {
-            closeCalendarPopup(container);
-            document.removeEventListener('click', outsideClick);
-          }
-        });
-      }, 50);
-      document.addEventListener('keydown', function escClose(e) {
-        if (e.key === 'Escape') {
-          closeCalendarPopup(container);
-          document.removeEventListener('keydown', escClose);
-        }
-      });
-      window.addEventListener('scroll', function scrollClose() {
-        closeCalendarPopup(container);
-        window.removeEventListener('scroll', scrollClose);
-      });
-      return container;
-    }
-    
-    function closeCalendarPopup(container) {
-      if (!container) return;
-      container.style.transform = 'translate(-50%, -50%) scale(0.3)';
-      container.style.opacity = '0';
-      setTimeout(() => {
-        if (container.parentNode) container.remove();
-      }, 350);
-    }
-
     // ---- 时间轴渲染 ----
     function renderTimeline() {
-      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const activePlatform = document.querySelector('#platformNav .stage-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const timelineContainer = document.getElementById('timelineSidebar');
       let months = [];
@@ -5666,12 +5317,11 @@
           }
         });
       });
-      setTimeout(updateTimelineHighlight, 100);
     }
 
     // ---- 月份筛选标签 ----
     function renderMonthTabs() {
-      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const activePlatform = document.querySelector('#platformNav .stage-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
       const tabsContainer = document.getElementById('weiboTabs');
       let months = [];
@@ -5766,34 +5416,38 @@
           tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
           this.classList.add('active');
           filterWeiboFeed();
-          setTimeout(updateTimelineHighlight, 100);
         });
       });
-      renderTimeline();
     }
 
     // ---- 饭之拍筛选 ----
-    const platformItems = document.querySelectorAll('.platform-nav-item');
+    const platformItems = document.querySelectorAll('#platformNav .stage-nav-item');
     const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
     const weiboSearchInput = document.getElementById('weiboSearch');
 
-    function getActiveDate() {
-      const active = document.querySelector('#weiboTabs .category-tab.active');
-      return active ? active.dataset.month : '全部';
-    }
-
     function filterWeiboFeed() {
-      const activePlatform = document.querySelector('.platform-nav-item.active');
+      const allCards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      const nonPinned = Array.from(allCards).filter(c => !c.classList.contains('pinned'));
+      const weiboData = nonPinned.filter(c => c.dataset.platform === 'weibo');
+      const xiaohongshuData = nonPinned.filter(c => c.dataset.platform === 'xiaohongshu');
+      const douyinData = nonPinned.filter(c => c.dataset.platform === 'douyin');
+      const bilibiliData = nonPinned.filter(c => c.dataset.platform === 'bilibili');
+      
+      document.getElementById('platformTotalCount').textContent = nonPinned.length;
+      document.getElementById('platformWeiboCount').textContent = weiboData.length;
+      document.getElementById('platformXiaohongshuCount').textContent = xiaohongshuData.length;
+      document.getElementById('platformDouyinCount').textContent = douyinData.length;
+      document.getElementById('platformBilibiliCount').textContent = bilibiliData.length;
+      const activePlatform = document.querySelector('#platformNav .stage-nav-item.active');
       const currentPlatform = activePlatform ? activePlatform.dataset.platform : 'all';
-      const currentDate = getActiveDate();
       const keyword = weiboSearchInput.value.trim().toLowerCase();
-      const showPinned = (currentPlatform === 'weibo' || currentPlatform === 'xiaohongshu') && currentDate === '全部';
+      const showPinned = (currentPlatform === 'weibo' || currentPlatform === 'xiaohongshu');
       allCards.forEach(card => {
         const cardPlatform = card.dataset.platform || 'weibo';
         const cardMonth = card.dataset.month || '';
         const isPinned = card.classList.contains('pinned');
         const platformMatch = currentPlatform === 'all' || cardPlatform === currentPlatform;
-        const dateMatch = currentDate === '全部' || cardMonth === currentDate;
+        const dateMatch = true;
         const cardText = card.textContent.toLowerCase();
         const textMatch = keyword === '' || cardText.includes(keyword);
         let shouldShow = false;
@@ -5823,7 +5477,6 @@
       visibleCards.forEach(card => feedWrap.appendChild(card));
       const footer = feedWrap.querySelector('.footer-slogan');
       if (footer) feedWrap.appendChild(footer);
-      setTimeout(updateTimelineHighlight, 50);
     }
 
     platformItems.forEach(btn => {
@@ -5831,16 +5484,7 @@
         platformItems.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         const tabsContainer = document.getElementById('weiboTabs');
-        tabsContainer.innerHTML = '';
-        renderMonthTabs();
-        const allTab = document.querySelector('#weiboTabs .category-tab[data-month="全部"]');
-        if (allTab) {
-          document.querySelectorAll('#weiboTabs .category-tab').forEach(t => t.classList.remove('active'));
-          allTab.classList.add('active');
-        }
         filterWeiboFeed();
-        renderTimeline();
-        setTimeout(updateTimelineHighlight, 100);
       });
     });
 
@@ -5848,7 +5492,6 @@
       filterWeiboFeed();
     });
 
-    renderMonthTabs();
 
     // ---- 大图预览 ----
     const imageSets = {
@@ -6294,7 +5937,7 @@
             btn.style.background = 'hsl(' + clamped + ', 80%, 55%)';
             btn.style.borderColor = 'hsl(' + clamped + ', 80%, 55%)';
           });
-          document.querySelectorAll('.stage-nav-item.active, .category-tab.active').forEach(function(el) {
+          document.querySelectorAll('.stage-nav-item.active:not(#platformNav .stage-nav-item), .category-tab.active').forEach(function(el) {
             el.style.background = 'hsl(' + clamped + ', 70%, 45%)';
             el.style.borderColor = 'hsl(' + clamped + ', 70%, 45%)';
             el.style.boxShadow = '0 2px 10px hsla(' + clamped + ', 70%, 45%, 0.3)';
@@ -6396,9 +6039,9 @@
           });
         }
         if (cardOpacity) {
-          cardOpacity.value = 80;
-          cardOpacityVal.textContent = '80%';
-          root.style.setProperty('--card-opacity', 0.80);
+          cardOpacity.value = 100;
+          cardOpacityVal.textContent = '100%';
+          root.style.setProperty('--card-opacity', 1.0);
           cardOpacity.addEventListener('input', function() {
             const val = this.value / 100;
             cardOpacityVal.textContent = this.value + '%';
@@ -6565,7 +6208,7 @@
         if (images.length === 0) {
           popupGrid.innerHTML = `
             <div style="text-align:center; padding:40px 0; color:#7a9ab0; font-size:14px;">
-              📸 暂无图片
+              暂无图片
             </div>
           `;
         } else {
@@ -6636,30 +6279,24 @@
         nextBtn.style.cursor = currentPage === totalPages ? 'not-allowed' : 'pointer';
     }
 
-        function changePage(delta) {
-            const activeTab = document.querySelector('#stageMonthScrollInner .category-tab.active');
-            const month = activeTab ? activeTab.dataset.month : '全部';
-            const keyword = document.getElementById('stageSearch').value;
-            const allDataList = getDataByCategory(currentCategory);
-            const filteredData = allDataList.filter(item => {
-                const m = item.date ? item.date.slice(0,7) : '';
-                const matchM = month === '全部' || m === month;
-                const k = keyword.trim().toLowerCase();
-                const matchK = k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
-                return matchM && matchK;
-            });
-            const totalCount = filteredData.length;
-            const totalPages = Math.ceil(totalCount / pageSize);
-            const newPage = currentPage + delta;
-            if (newPage >= 1 && newPage <= totalPages) {
-                currentPage = newPage;
-                isPaginationClick = true;
-                renderCards(currentCategory, month, keyword);
-                const contentArea = document.querySelector('.content-area');
-                if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+    function changePage(delta) {
+        const keyword = document.getElementById('stageSearch').value;
+        const allDataList = getDataByCategory(currentCategory);
+        const filteredData = allDataList.filter(item => {
+            const k = keyword.trim().toLowerCase();
+            return k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+        });
+        const totalCount = filteredData.length;
+        const totalPages = Math.ceil(totalCount / pageSize);
+        const newPage = currentPage + delta;
+        if (newPage >= 1 && newPage <= totalPages) {
+            currentPage = newPage;
+            isPaginationClick = true;
+            renderCards(currentCategory, keyword);
+            const contentArea = document.querySelector('.content-area');
+            if (contentArea) contentArea.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
+    }
   </script>
   <!-- ===== 设置面板 ===== -->
   <div class="settings-panel" id="settingsPanel">
