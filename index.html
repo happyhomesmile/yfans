@@ -2771,7 +2771,80 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       font-size: 14px;
       padding: 40px 0;
     }
-    
+
+   /* ===== 饭作/饭记/饭之拍 页面标题靠右（副标题靠左） ===== */
+    .page-box#stage .welcome-header,
+    .page-box#bobo .welcome-header,
+    .page-box#fancam .welcome-header {
+      text-align: right !important;
+      padding-right: 8px !important;
+    }
+  
+    .page-box#stage .welcome-header .welcome-subtitle,
+    .page-box#bobo .welcome-header .welcome-subtitle,
+    .page-box#fancam .welcome-header .welcome-subtitle {
+      text-align: right !important;
+    }
+  
+    .page-box#stage .welcome-header h1,
+    .page-box#bobo .welcome-header h1,
+    .page-box#fancam .welcome-header h1 {
+      text-align: right !important;
+      font-size: 24px !important;
+    }
+  
+    /* 副标题（intro-text）保持靠左 */
+    .page-box#stage .welcome-header .intro-text,
+    .page-box#bobo .welcome-header .intro-text,
+    .page-box#fancam .welcome-header .intro-text {
+      text-align: left !important;
+    }
+  }
+
+    /* ===== 饭作/饭之啵/饭之拍 标签栏横向滚动 ===== */
+    .page-box#stage .stage-nav,
+    .page-box#bobo .stage-nav,
+    .page-box#fancam .stage-nav {
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      justify-content: flex-start !important;
+      gap: 4px !important;
+      padding: 4px 2px 8px 2px !important;
+      scrollbar-width: none !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+  
+    .page-box#stage .stage-nav::-webkit-scrollbar,
+    .page-box#bobo .stage-nav::-webkit-scrollbar,
+    .page-box#fancam .stage-nav::-webkit-scrollbar {
+      display: none !important;
+    }
+  
+    .page-box#stage .stage-nav .stage-nav-item,
+    .page-box#bobo .stage-nav .stage-nav-item,
+    .page-box#fancam .stage-nav .stage-nav-item {
+      flex-shrink: 0 !important;
+      font-size: 12px !important;
+      padding: 4px 12px !important;
+      white-space: nowrap !important;
+    }
+  
+    .page-box#stage .stage-nav .stage-nav-item span[id$="Count"],
+    .page-box#bobo .stage-nav .stage-nav-item span[id$="Count"],
+    .page-box#fancam .stage-nav .stage-nav-item span[id$="Count"] {
+      font-size: 0.6rem !important;
+      padding: 1px 6px !important;
+    }
+  
+    /* 把外面的边框也去掉，让标签栏更清爽 */
+    .page-box#stage > .info-box > div:first-of-type,
+    .page-box#bobo > .info-box > div:first-of-type,
+    .page-box#fancam > .info-box > div:first-of-type {
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
     /* 暗色模式适配 */
     body.dark-mode .mobile-search-overlay {
       background: rgba(20, 20, 30, 0.98) !important;
