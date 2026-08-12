@@ -2627,22 +2627,20 @@
       }
 
       /* ===== 导航标签筛选 ===== */
-      @media (max-width: 1024px) {
-        /* ===== 导航标签筛选 - 与PC端统一 ===== */
         #stageNav,
         #boboNav,
         #platformNav {
           justify-content: flex-start !important;
           gap: 6px !important;
-          flex-wrap: wrap !important;  /* 改为 wrap，允许换行 */
+          flex-wrap: wrap !important;  
           padding: 4px !important;
           position: relative !important;
-          overflow-x: visible !important;  /* 取消横向滚动 */
+          overflow-x: visible !important; 
           overflow-y: visible !important;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: none !important;
         }
-        /* 黑色高亮指示条 - 与PC端一致 */
+        /* 黑色高亮指示条 - 修复宽度显示 */
         #stageNav .nav-indicator,
         #boboNav .nav-indicator,
         #platformNav .nav-indicator {
@@ -2656,17 +2654,18 @@
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
           z-index: 0 !important;
           opacity: 1 !important;
-          width: 0px !important;
+          width: auto !important;
           min-width: 0px !important;
+          transform: translateX(0px) !important;
         }
-
+      }
         /* 导航标签文字 - 与PC端一致 */
         #stageNav .stage-nav-item,
         #boboNav .stage-nav-item,
         #platformNav .stage-nav-item {
-          font-size: 14px !important;  /* 与PC端一致 */
-          font-weight: 500 !important; /* 与PC端一致 */
-          padding: 5px 14px !important; /* 与PC端一致 */
+          font-size: 14px !important; 
+          font-weight: 500 !important; 
+          padding: 5px 14px !important; 
           white-space: nowrap !important;
           flex-shrink: 0 !important;
           position: relative !important;
@@ -2675,7 +2674,7 @@
           border: none !important;
           cursor: pointer !important;
           transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          color: #000000 !important;  /* PC端默认黑色 */
+          color: #000000 !important; 
           opacity: 1 !important;
           border-radius: 24px !important;
           outline: none !important;
@@ -2683,7 +2682,6 @@
           appearance: none !important;
         }
 
-        /* 未激活状态 - 与PC端一致 */
         #stageNav .stage-nav-item:not(.active),
         #boboNav .stage-nav-item:not(.active),
         #platformNav .stage-nav-item:not(.active) {
@@ -2691,7 +2689,6 @@
           opacity: 0.7 !important;
         }
 
-        /* 未激活悬停 - 与PC端一致 */
         #stageNav .stage-nav-item:not(.active):hover,
         #boboNav .stage-nav-item:not(.active):hover,
         #platformNav .stage-nav-item:not(.active):hover {
@@ -2699,7 +2696,6 @@
           transform: scale(0.95) !important;
         }
 
-        /* 激活状态 - 文字变白，与PC端一致 */
         #stageNav .stage-nav-item.active,
         #boboNav .stage-nav-item.active,
         #platformNav .stage-nav-item.active {
@@ -2711,7 +2707,6 @@
           opacity: 1 !important;
         }
 
-        /* 数量标签 - 与PC端一致 */
         #stageNav .stage-nav-item span[id$="Count"],
         #boboNav .stage-nav-item span[id$="Count"],
         #platformNav .stage-nav-item span[id$="Count"] {
@@ -2726,7 +2721,6 @@
           color: #666666 !important;
         }
 
-        /* 激活状态的数量标签 - 与PC端一致 */
         #stageNav .stage-nav-item.active span[id$="Count"],
         #boboNav .stage-nav-item.active span[id$="Count"],
         #platformNav .stage-nav-item.active span[id$="Count"] {
@@ -2734,13 +2728,11 @@
           color: #ffffff !important;
         }
 
-        /* 移除之前的覆盖样式 */
         #stageNav .stage-nav-item,
         #boboNav .stage-nav-item,
         #platformNav .stage-nav-item {
           color: #000000 !important;
         }
-      }
       /* ===== 分页 ===== */
       #paginationControls {
         gap: 6px !important;
@@ -7528,16 +7520,25 @@
         if (!nav || !indicator) return;
 
         const activeItem = nav.querySelector('.stage-nav-item.active');
-        if (!activeItem) return;
+        if (!activeItem) {
+          indicator.style.opacity = '0';
+          indicator.style.width = '0px';
+          return;
+        }
 
         const navRect = nav.getBoundingClientRect();
         const itemRect = activeItem.getBoundingClientRect();
 
-        const left = itemRect.left - navRect.left;
-        const width = itemRect.width;
+        let left = itemRect.left - navRect.left;
+        let width = itemRect.width;
+
+        if (window.innerWidth <= 1024) {
+          left = left - 2;
+          width = width + 4;
+        }
 
         indicator.style.width = width + 'px';
-        indicator.style.transform = `translateX(${left}px)`;
+        indicator.style.transform = 'translateX(' + left + 'px)';
         indicator.style.opacity = '1';
       }
 
