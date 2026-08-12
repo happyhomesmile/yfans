@@ -2627,36 +2627,87 @@
       }
 
       /* ===== 导航标签筛选 ===== */
-      #stageNav,
-      #boboNav,
-      #platformNav {
-        justify-content: flex-start !important;
-        gap: 3px !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none !important;
-        padding: 2px 0 !important;
-      }
-      #stageNav::-webkit-scrollbar,
-      #boboNav::-webkit-scrollbar,
-      #platformNav::-webkit-scrollbar {
-        display: none !important;
-      }
-      #stageNav .stage-nav-item,
-      #boboNav .stage-nav-item,
-      #platformNav .stage-nav-item {
-        font-size: 11px !important;
-        padding: 3px 8px !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-      }
-      #stageNav .stage-nav-item span[id$="Count"],
-      #boboNav .stage-nav-item span[id$="Count"],
-      #platformNav .stage-nav-item span[id$="Count"] {
-        font-size: 9px !important;
-        padding: 1px 5px !important;
-        margin-left: 2px !important;
+      @media (max-width: 1024px) {
+        /* 导航标签筛选 - 显示黑色高亮指示条 */
+        #stageNav,
+        #boboNav,
+        #platformNav {
+          justify-content: flex-start !important;
+          gap: 3px !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none !important;
+          padding: 2px 0 !important;
+          position: relative !important;
+        }
+        #stageNav::-webkit-scrollbar,
+        #boboNav::-webkit-scrollbar,
+        #platformNav::-webkit-scrollbar {
+          display: none !important;
+        }
+
+        /* 黑色高亮指示条 - 显示并左移 */
+        #stageNav .nav-indicator,
+        #boboNav .nav-indicator,
+        #platformNav .nav-indicator {
+          display: block !important;  /* 从 none 改成 block */
+          position: absolute !important;
+          top: 2px !important;
+          left: 0 !important;
+          height: calc(100% - 4px) !important;
+          background: #000000 !important;
+          border-radius: 24px !important;
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          z-index: 0 !important;
+          opacity: 1 !important;
+          width: 0px !important;  /* 初始宽度为0，由JS控制 */
+          min-width: 0px !important;
+        }
+
+        /* 导航标签文字 - 在指示条上方 */
+        #stageNav .stage-nav-item,
+        #boboNav .stage-nav-item,
+        #platformNav .stage-nav-item {
+          font-size: 11px !important;
+          padding: 4px 10px !important;
+          white-space: nowrap !important;
+          flex-shrink: 0 !important;
+          position: relative !important;
+          z-index: 1 !important;
+          background: transparent !important;
+          border: none !important;
+          cursor: pointer !important;
+          transition: color 0.3s ease !important;
+          color: #888 !important;
+        }
+
+        /* 激活状态 - 文字变白 */
+        #stageNav .stage-nav-item.active,
+        #boboNav .stage-nav-item.active,
+        #platformNav .stage-nav-item.active {
+          color: #ffffff !important;
+          background: transparent !important;
+        }
+
+        /* 数量标签 */
+        #stageNav .stage-nav-item span[id$="Count"],
+        #boboNav .stage-nav-item span[id$="Count"],
+        #platformNav .stage-nav-item span[id$="Count"] {
+          font-size: 9px !important;
+          padding: 1px 5px !important;
+          margin-left: 2px !important;
+          background: rgba(255,255,255,0.15) !important;
+          color: #999 !important;
+          border-radius: 40px !important;
+        }
+
+        #stageNav .stage-nav-item.active span[id$="Count"],
+        #boboNav .stage-nav-item.active span[id$="Count"],
+        #platformNav .stage-nav-item.active span[id$="Count"] {
+          background: rgba(255,255,255,0.25) !important;
+          color: #ffffff !important;
+        }
       }
       .stage-nav .nav-indicator {
         display: none !important;
