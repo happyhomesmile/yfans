@@ -809,11 +809,15 @@
     }
 
     /* ===== 时间线 ===== */
-    .timeline-wrap { margin-top: 10px; padding-left: 14px; position: relative; }
+    .timeline-wrap { 
+      margin-top: 10px; 
+      padding-left: 4px; 
+      position: relative; 
+    }
     .timeline-wrap::before {
       content: '';
       position: absolute;
-      left: 24px;
+      left: 10px;
       top: 0;
       bottom: 0;
       width: 2px;
@@ -822,7 +826,9 @@
       border-radius: 2px;
     }
     .timeline-item {
-      position: relative; padding-left: 24px; margin-bottom: 12px;
+      position: relative; 
+      padding-left: 24px; 
+      margin-bottom: 12px;
       cursor: default;
     }
     .timeline-item .timeline-dot.no-link { cursor: default; background: #b8d4e8; }
@@ -2193,31 +2199,6 @@ body.dark-mode .page-actions .menu-item:hover {
   background: rgba(66, 153, 225, 0.15);
 }
 
-/* 移动端底部导航暗色模式 */
-body.dark-mode .mobile-bottom-nav {
-  background: rgba(20, 30, 45, 0.95);
-  border-top-color: rgba(255, 255, 255, 0.06);
-}
-body.dark-mode .mobile-bottom-nav .nav-item {
-  color: #999;
-}
-body.dark-mode .mobile-bottom-nav .nav-item.active {
-  color: var(--theme-color, #4a90e2);
-}
-body.dark-mode .mobile-submenu {
-  background: rgba(20, 30, 45, 0.98);
-  border-color: rgba(255, 255, 255, 0.06);
-}
-body.dark-mode .mobile-submenu .sub-item {
-  color: #ddd;
-}
-body.dark-mode .mobile-submenu .sub-item:hover {
-  background: rgba(66, 153, 225, 0.15);
-}
-body.dark-mode .mobile-overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-
 /* 返回顶部按钮 */
 body.dark-mode #backToTop {
   background: rgba(30, 40, 60, 0.85);
@@ -2371,266 +2352,689 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
 
     #food .timeline-wrap::before { left: 4px !important; }
 
-    /* ===== 移动端底部导航 ===== */
-    .mobile-bottom-nav {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      z-index: 9999;
-      padding-bottom: env(safe-area-inset-bottom);
-      box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.06);
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .mobile-bottom-nav .nav-items {
-      display: flex;
-      height: 100%;
-      align-items: center;
-      justify-content: space-around;
-    }
-    .mobile-bottom-nav .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      padding: 6px 4px;
-      gap: 2px;
-      position: relative;
-      transition: all 0.2s ease;
-      color: #666;
-      font-size: 11px;
-      font-weight: 500;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
-    .mobile-bottom-nav .nav-item .nav-icon {
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-    .mobile-bottom-nav .nav-item.active {
-      color: var(--theme-color, #4a779e);
-      font-weight: 700;
-    }
-    .mobile-bottom-nav .nav-item.active .nav-icon {
-      transform: scale(1.1);
-    }
-    .mobile-bottom-nav .nav-item .sub-indicator {
-      position: absolute;
-      top: 4px;
-      right: calc(50% - 16px);
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--theme-color, #4a779e);
-      display: none;
-    }
+    @media (max-width: 1024px) {
+      /* ===== 导航栏移到底部 ===== */
+      .top-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        top: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 6px 8px !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 9999 !important;
+        gap: 2px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-around !important;
+        padding-bottom: env(safe-area-inset-bottom, 8px) !important;
+        box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.06) !important;
+      }
 
-    /* 移动端子菜单弹出层 */
-    .mobile-submenu {
-      display: none;
-      position: fixed;
-      bottom: 72px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 16px;
-      padding: 12px 8px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-      z-index: 9998;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      animation: submenuUp 0.2s ease;
-      min-width: 200px;
-      max-width: calc(100vw - 32px);
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .mobile-submenu.show { display: block; }
-    .mobile-submenu .sub-item {
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 14px;
-      color: #333;
-      transition: all 0.2s;
-      margin: 2px 0;
-    }
-    .mobile-submenu .sub-item:hover {
-      background: rgba(74, 119, 158, 0.1);
-      color: var(--theme-color, #4a779e);
-    }
-    .mobile-submenu .sub-item.active {
-      background: var(--theme-color, #4a779e);
-      color: #fff;
-    }
-    @keyframes submenuUp {
-      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
+      .top-nav .menu-item {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        padding: 6px 12px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        border-radius: 8px !important;
+        opacity: 0.5 !important;
+        border: none !important;
+        background: transparent !important;
+        min-width: 44px !important;
+        text-align: center !important;
+      }
 
-    /* 移动端遮罩 */
-    .mobile-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 9997;
-    }
-    .mobile-overlay.show { display: block; }
+      .top-nav .menu-item .dropdown-icon {
+        display: none !important;
+      }
 
-    /* ===== 移动端媒体查询 ===== */
-    @media (max-width: 768px) {
-      .top-nav { display: none !important; }
-      .page-actions { display: none !important; }
-      .left-profile-card { display: none !important; }
-      .sidebar-calendar { display: none !important; }
+      .top-nav .menu-item.active {
+        opacity: 1 !important;
+        color: var(--theme-color) !important;
+        background: rgba(var(--theme-hue), 80%, 55%, 0.12) !important;
+      }
+
+      /* 导航滑动指示器 - 移动端隐藏 */
+      .top-nav .nav-slider {
+        display: none !important;
+      }
+
+      /* ===== 下拉菜单 - 从底部弹出 ===== */
+      .nav-dropdown {
+        position: fixed !important;
+        bottom: 60px !important;
+        top: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 85% !important;
+        max-width: 300px !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 14px !important;
+        padding: 8px 0 !important;
+        box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12) !important;
+        z-index: 10000 !important;
+      }
+      .nav-dropdown.open {
+        display: block !important;
+        animation: dropUp 0.2s ease !important;
+      }
+      @keyframes dropUp {
+        0% { transform: translateX(-50%) translateY(16px); opacity: 0; }
+        100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      }
+      .nav-dropdown-item {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        text-align: center !important;
+        border-radius: 8px !important;
+        margin: 2px 8px !important;
+      }
+
+      /* ===== 页面右侧按钮 - 移到左下角 ===== */
+      .page-actions {
+        position: fixed !important;
+        bottom: 68px !important;
+        right: 10px !important;
+        z-index: 1001 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+        padding: 6px !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      }
+      .page-actions .menu-item {
+        padding: 5px !important;
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 6px !important;
+      }
+      .page-actions .menu-item img {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      /* ===== 内容区 ===== */
       .content-area {
-        padding: 12px 12px 80px 12px !important;
+        padding: 12px 12px 76px 12px !important;
       }
-      .content-area::before {
-        background-position: center !important;
-      }
-      .mobile-bottom-nav { display: flex; }
 
-      /* 卡片适配 */
-      .page-box { padding-bottom: 20px; }
+      /* ===== 左侧个人信息卡 ===== */
+      .left-profile-card {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 10px 0 !important;
+        padding: 14px 12px !important;
+        border-radius: 12px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 6px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .left-profile-card .profile-avatar {
+        width: 48px !important;
+        height: 48px !important;
+        flex-shrink: 0;
+      }
+      .left-profile-card .profile-subtitle {
+        font-size: 12px !important;
+        margin-top: 0 !important;
+        text-align: left !important;
+        flex: 1;
+        min-width: 100px;
+      }
+      .left-profile-card .profile-subtitle br {
+        display: none !important;
+      }
+      .left-profile-card .profile-divider {
+        display: none !important;
+      }
+      .left-profile-card .profile-countdown {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 2px 8px !important;
+        margin-top: 4px !important;
+      }
+      .left-profile-card .countdown-item {
+        font-size: 12px !important;
+        padding: 2px 0 !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+      }
+      .left-profile-card .countdown-header {
+        font-size: 13px !important;
+        grid-column: 1 / -1 !important;
+        justify-content: center !important;
+        padding-bottom: 2px !important;
+        margin-bottom: 0 !important;
+      }
+      .left-profile-card .countdown-days {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+      }
+      .left-profile-card .countdown-label {
+        font-size: 10px !important;
+      }
+
+      /* ===== 右侧日历 ===== */
+      .sidebar-calendar {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px 0 0 0 !important;
+        padding: 14px 12px !important;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      .sidebar-calendar .cal-header {
+        font-size: 15px !important;
+      }
+      .sidebar-calendar .cal-days .day {
+        font-size: 13px !important;
+      }
+      .sidebar-calendar .cal-update-list-wrap {
+        max-height: 160px !important;
+      }
+      .sidebar-calendar .cal-update-item {
+        padding: 6px 2px !important;
+        gap: 6px !important;
+      }
+      .sidebar-calendar .cal-update-item .update-date {
+        font-size: 12px !important;
+        min-width: 36px !important;
+      }
+      .sidebar-calendar .cal-update-item .update-type {
+        font-size: 10px !important;
+        padding: 2px 6px !important;
+      }
+      .sidebar-calendar .cal-update-item .update-title-text {
+        font-size: 12px !important;
+      }
+
+      /* ===== 信息卡片 ===== */
+      .info-box {
+        padding: 12px 12px !important;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
       .info-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-      }
-      .info-card {
-        padding: 8px 10px !important;
-      }
-      .info-value { font-size: 13px !important; }
-      .info-label { font-size: 11px !important; }
-      .info-title {
-        font-size: 16px !important;
-      }
-
-      /* 舞台/直播/平台卡片网格适配 */
-      .stage-grid, #stageGrid, #boboGrid, #weiboFeed {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-      }
-
-      /* 导航标签适配 */
-      .stage-nav {
-        flex-wrap: wrap;
+        grid-template-columns: 1fr 1fr !important;
         gap: 4px !important;
       }
-      .stage-nav .stage-nav-item {
-        padding: 6px 10px !important;
-        font-size: 13px !important;
+      .info-card {
+        padding: 6px 8px !important;
       }
-
-      /* 搜索框适配 */
-      .search-input, input[type="text"] {
-        font-size: 16px !important;
-      }
-
-      /* 返回顶部按钮 */
-      #backToTop {
-        bottom: 72px !important;
-        right: 12px !important;
-        width: 40px !important;
-        height: 40px !important;
-      }
-
-      /* 图片网格适配 */
-      .weibo-media-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-      }
-
-      /* 欢迎头部适配 */
-      .welcome-header {
-        padding: 16px 12px !important;
-      }
-
-      /* 下拉菜单（饭作/饭记）不显示 */
-      .nav-dropdown { display: none !important; }
-
-      /* 信息卡片适配 */
-      .info-box {
-        padding: 12px 14px !important;
-      }
-
-      /* 舞台/直播/平台卡片适配 */
-      .stage-grid, #stageGrid, #boboGrid {
-        gap: 8px !important;
-      }
-      .stage-grid .video-card, #stageGrid .video-card, #boboGrid .video-card {
-        font-size: 12px;
-      }
-
-      /* 平台卡片（微博等）适配 */
-      .weibo-card, .xiaohongshu-card {
-        padding: 12px !important;
-        font-size: 13px;
-      }
-      .weibo-card .weibo-time {
+      .info-label {
         font-size: 11px !important;
       }
-      .weibo-card .weibo-text .line {
+      .info-value {
+        font-size: 12px !important;
+      }
+      .info-title {
+        font-size: 17px !important;
+      }
+      .info-title .title-en {
+        font-size: 11px !important;
+      }
+      .info-title .title-icon {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      /* ===== 欢迎头部 ===== */
+      .welcome-header {
+        padding: 10px 0 8px 0 !important;
+        margin-bottom: 8px !important;
+      }
+      .welcome-header h1 {
+        font-size: 22px !important;
+      }
+      .welcome-header h1 img {
+        width: 20px !important;
+        height: 32px !important;
+        margin-right: -8px !important;
+        margin-left: -16px !important;
+      }
+      .welcome-header .welcome-subtitle {
+        font-size: 11px !important;
+      }
+      .welcome-header .links {
+        gap: 8px !important;
+      }
+      .welcome-header .links a {
+        font-size: 11px !important;
+        padding: 2px 10px !important;
+      }
+      .welcome-header .sub {
+        font-size: 12px !important;
+      }
+      .welcome-header .intro-text {
+        font-size: 12px !important;
+      }
+
+      /* ===== 时间线 ===== */
+      .timeline-wrap {
+        padding-left: 2px !important;
+      }
+      .timeline-wrap::before {
+        left: 6px !important;
+      }
+      .timeline-item {
+        padding-left: 18px !important;
+        margin-bottom: 8px !important;
+      }
+      .timeline-date {
+        font-size: 11px !important;
+      }
+      .timeline-text {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+      }
+
+      /* ===== 舞台卡片 ===== */
+      .stage-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+      }
+      .stage-grid.list-mode {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      .stage-grid.list-mode .video-card {
+        grid-template-columns: 120px 1fr !important;
+        gap: 10px !important;
+        padding: 8px !important;
+      }
+      .stage-grid.list-mode .video-card .video-info .video-name {
+        font-size: 14px !important;
+        margin-top: -8px !important;
+      }
+      .stage-grid.list-mode .video-card .video-info .video-date,
+      .stage-grid.list-mode .video-card .video-info .video-show {
+        font-size: 11px !important;
+      }
+
+      .video-card {
+        border-radius: 10px !important;
+      }
+      .video-cover-box {
+        aspect-ratio: 16/9 !important;
+      }
+      .video-name {
+        font-size: 12px !important;
+      }
+      .video-date, .video-show {
+        font-size: 10px !important;
+      }
+      .video-tag {
+        font-size: 9px !important;
+        padding: 1px 6px !important;
+      }
+      .video-card .video-info {
+        padding: 4px 8px !important;
+        gap: 4px !important;
+      }
+
+      /* ===== 筛选和搜索 ===== */
+      .filter-search-row {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+      }
+      .search-box {
+        max-width: 100% !important;
+        flex: 1 !important;
+        min-width: 120px !important;
+        padding: 0 8px !important;
+      }
+      .search-box input {
+        font-size: 12px !important;
+        padding: 4px 2px !important;
+      }
+      .search-box .search-icon {
+        width: 14px !important;
+        height: 14px !important;
+      }
+
+      /* ===== 导航标签筛选 ===== */
+      #stageNav,
+      #boboNav,
+      #platformNav {
+        justify-content: flex-start !important;
+        gap: 3px !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none !important;
+        padding: 2px 0 !important;
+      }
+      #stageNav::-webkit-scrollbar,
+      #boboNav::-webkit-scrollbar,
+      #platformNav::-webkit-scrollbar {
+        display: none !important;
+      }
+      #stageNav .stage-nav-item,
+      #boboNav .stage-nav-item,
+      #platformNav .stage-nav-item {
+        font-size: 11px !important;
+        padding: 3px 8px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+      #stageNav .stage-nav-item span[id$="Count"],
+      #boboNav .stage-nav-item span[id$="Count"],
+      #platformNav .stage-nav-item span[id$="Count"] {
+        font-size: 9px !important;
+        padding: 1px 5px !important;
+        margin-left: 2px !important;
+      }
+      .stage-nav .nav-indicator {
+        display: none !important;
+      }
+
+      /* ===== 分页 ===== */
+      #paginationControls {
+        gap: 6px !important;
+        margin-top: 12px !important;
+      }
+      #paginationControls button {
+        font-size: 12px !important;
+        padding: 4px 12px !important;
+      }
+      #paginationControls #pageInfo {
+        font-size: 12px !important;
+      }
+
+      /* ===== 平台更新卡片 ===== */
+      .weibo-card,
+      .xiaohongshu-card {
+        padding: 12px 12px 10px !important;
+        margin-bottom: 6px !important;
+        border-radius: 10px !important;
+      }
+      .weibo-card .weibo-time,
+      .xiaohongshu-card .weibo-time {
+        font-size: 11px !important;
+      }
+      .weibo-card .weibo-text,
+      .xiaohongshu-card .weibo-text {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        padding-top: 10px !important;
+      }
+      .weibo-card .weibo-media-grid,
+      .xiaohongshu-card .weibo-media-grid {
+        gap: 4px !important;
+      }
+      .weibo-card .weibo-media-grid.cols-2,
+      .xiaohongshu-card .weibo-media-grid.cols-2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .weibo-card .weibo-media-grid.cols-3,
+      .xiaohongshu-card .weibo-media-grid.cols-3 {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+      .video-desc-box {
+        padding: 8px 12px !important;
+      }
+      .video-desc-box .text {
         font-size: 13px !important;
       }
 
-      /* 分页控件适配 */
-      #paginationControls {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4px;
+      /* ===== 旅行椰饭 ===== */
+      .miracle-card-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+      }
+      .miracle-card .card-footer {
+        font-size: 11px !important;
+        padding: 6px 0 !important;
+      }
+      .miracle-card .cover-badge {
+        font-size: 10px !important;
+        padding: 1px 8px !important;
       }
 
-      /* 时间线适配（饭记等） */
-      .timeline-wrap {
-        padding-left: 16px !important;
+      /* ===== 公式照 ===== */
+      .formal-btn-group .drink-btn {
+        font-size: 11px !important;
+        padding: 4px 10px !important;
+      }
+      .formal-display-area .single-mode .img-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 4px !important;
+      }
+      .formal-display-area .scroll-inner .scroll-item img {
+        height: 100px !important;
+      }
+      .formal-display-area .scroll-inner .scroll-item .scroll-label {
+        font-size: 9px !important;
+        max-width: 80px !important;
       }
 
-      /* 正式照片横滑区域适配 */
-      .scroll-mode, #formalScroll {
-        width: 100% !important;
+      /* ===== 每日一杯 ===== */
+      #food .timeline-wrap > div > div {
+        gap: 4px !important;
+      }
+      #food .drink-btn {
+        font-size: 11px !important;
+        padding: 3px 10px !important;
+      }
+
+      /* ===== 关于本站 ===== */
+      #wait .timeline-text {
+        font-size: 13px !important;
+      }
+      #wait .timeline-text span {
+        font-size: 11px !important;
+      }
+      #wait > .info-box > div:first-of-type {
+        font-size: 13px !important;
+      }
+
+      /* ===== 页脚 ===== */
+      .footer-slogan {
+        font-size: 11px !important;
+        margin-top: 14px !important;
+        padding-top: 10px !important;
+      }
+
+      /* ===== 返回顶部按钮 ===== */
+      #backToTop {
+        bottom: 78px !important;
+        right: 10px !important;
+        width: 38px !important;
+        height: 38px !important;
+      }
+      #backToTop img {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      /* ===== 弹窗 ===== */
+      .popup-box {
+        max-width: 95% !important;
+        padding: 16px 14px 14px !important;
+        border-radius: 16px !important;
+      }
+      .popup-dialog {
+        font-size: 18px !important;
+        padding: 10px 16px !important;
+      }
+      .popup-keywords {
+        font-size: 14px !important;
+      }
+      .popup-keywords span {
+        padding: 2px 10px !important;
+      }
+      .popup-emoji {
+        font-size: 40px !important;
+        padding: 10px 0 8px !important;
+      }
+
+      /* ===== 设置面板 ===== */
+      .settings-panel {
+        position: fixed !important;
+        bottom: 68px !important;
+        right: 10px !important;
+        left: 10px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        border-radius: 16px !important;
+        padding: 16px 16px 20px !important;
+        max-height: calc(100vh - 150px) !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        transform: translateY(0) scale(1) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.3s ease, transform 0.3s ease !important;
+      }
+      .settings-panel.open {
+        opacity: 1 !important;
+        pointer-events: all !important;
+      }
+      .settings-panel .control-row {
+        gap: 10px !important;
+      }
+      .settings-panel .control-row label {
+        font-size: 12px !important;
+        min-width: 50px !important;
+      }
+
+      /* ===== 月份选择器 ===== */
+      .month-picker {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) scale(0.95) !important;
+        width: 85% !important;
+        max-width: 280px !important;
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
+      }
+      .month-picker.open {
+        transform: translate(-50%, -50%) scale(1) !important;
+      }
+      .month-picker-item {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 12px !important;
+      }
+
+      /* ===== 暗色模式 - 移动端 ===== */
+      body.dark-mode .top-nav {
+        background: rgba(20, 20, 20, 0.95) !important;
+        border-top-color: rgba(255, 255, 255, 0.06) !important;
+      }
+      body.dark-mode .left-profile-card,
+      body.dark-mode .sidebar-calendar,
+      body.dark-mode .info-box {
+        background: rgba(20, 20, 20, 0.9) !important;
+      }
+      body.dark-mode .page-actions {
+        background: rgba(20, 20, 20, 0.9) !important;
+      }
+      body.dark-mode .settings-panel {
+        background: rgba(20, 20, 20, 0.95) !important;
+      }
+      body.dark-mode .nav-dropdown {
+        background: rgba(20, 20, 20, 0.96) !important;
+      }
+      body.dark-mode .top-nav .menu-item.active {
+        background: rgba(66, 153, 225, 0.2) !important;
       }
     }
 
+    /* ===== 极小屏 (手机竖屏) ===== */
     @media (max-width: 480px) {
-      .content-area {
-        padding: 8px 8px 80px 8px !important;
+      .top-nav .menu-item {
+        font-size: 11px !important;
+        padding: 5px 8px !important;
+        min-width: 36px !important;
       }
+
+      .left-profile-card .profile-countdown {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .stage-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .stage-grid.list-mode .video-card {
+        grid-template-columns: 1fr !important;
+      }
+      .stage-grid.list-mode .video-card .video-cover-box {
+        grid-row: auto !important;
+        aspect-ratio: 16/9 !important;
+      }
+      .stage-grid.list-mode .video-card .video-info {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
+      .stage-grid.list-mode .video-card .video-info .video-name {
+        margin-top: 0 !important;
+        font-size: 13px !important;
+      }
+
+      .miracle-card-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .formal-display-area .single-mode .img-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
       .info-grid {
         grid-template-columns: 1fr !important;
       }
-      .stage-grid, #stageGrid, #boboGrid, #weiboFeed {
-        grid-template-columns: 1fr !important;
+
+      .sidebar-calendar .cal-days .day {
+        font-size: 12px !important;
       }
-      .mobile-bottom-nav .nav-item {
-        font-size: 10px;
+
+      #stageNav .stage-nav-item,
+      #boboNav .stage-nav-item,
+      #platformNav .stage-nav-item {
+        font-size: 10px !important;
+        padding: 2px 6px !important;
       }
-      .mobile-bottom-nav .nav-item .nav-icon {
-        width: 24px;
-        height: 24px;
-        font-size: 18px;
+
+      .welcome-header h1 {
+        font-size: 18px !important;
       }
     }
-
   </style>
 </head>
 <body>
@@ -7432,188 +7836,6 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
         }, { passive: false });
       }
     });
-  </script>
-
-  <!-- ===== 移动端底部导航 ===== -->
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-
-  <!-- 饭作 子菜单 -->
-  <div class="mobile-submenu" id="mobileStageSubmenu">
-    <div class="sub-item active" data-page="stage">🎭 舞台</div>
-    <div class="sub-item" data-page="bobo">📺 直播</div>
-    <div class="sub-item" data-page="fancam">📷 平台更新</div>
-  </div>
-
-  <!-- 饭记 子菜单 -->
-  <div class="mobile-submenu" id="mobileFoodSubmenu">
-    <div class="sub-item" data-page="food">🍰 日常分享</div>
-    <div class="sub-item" data-page="travel">✈️ 口袋图集</div>
-    <div class="sub-item" data-page="words">💬 饭言饭语</div>
-  </div>
-
-  <!-- 移动端底部导航栏 -->
-  <nav class="mobile-bottom-nav" id="mobileBottomNav">
-    <div class="nav-items">
-      <div class="nav-item active" data-page="home">
-        <div class="nav-icon">🏠</div>
-        <div>首页</div>
-      </div>
-      <div class="nav-item" data-page="stage" data-has-submenu="stage">
-        <div class="nav-icon">🎭</div>
-        <div>饭作</div>
-      </div>
-      <div class="nav-item" data-page="food" data-has-submenu="food">
-        <div class="nav-icon">🍰</div>
-        <div>饭记</div>
-      </div>
-      <div class="nav-item" id="mobileDarkToggle">
-        <div class="nav-icon" id="mobileDarkIcon">🌙</div>
-        <div>主题</div>
-      </div>
-      <div class="nav-item" id="mobilePaletteToggle">
-        <div class="nav-icon" style="filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));">🎨</div>
-        <div>调色</div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ===== 移动端交互脚本 ===== -->
-  <script>
-  (function() {
-    const overlay = document.getElementById('mobileOverlay');
-    const stageSubmenu = document.getElementById('mobileStageSubmenu');
-    const foodSubmenu = document.getElementById('mobileFoodSubmenu');
-    const mobileNav = document.getElementById('mobileBottomNav');
-
-    function closeAllSubmenus() {
-      stageSubmenu.classList.remove('show');
-      foodSubmenu.classList.remove('show');
-      overlay.classList.remove('show');
-    }
-
-    function updateMobileNavActive(pageId) {
-      const items = mobileNav.querySelectorAll('.nav-item');
-      items.forEach(item => {
-        const itemPage = item.dataset.page;
-        const submenuKey = item.dataset.hasSubmenu;
-        item.classList.remove('active');
-        
-        if (submenuKey === 'stage') {
-          if (pageId === 'stage' || pageId === 'bobo' || pageId === 'fancam') {
-            item.classList.add('active');
-          }
-        } else if (submenuKey === 'food') {
-          if (pageId === 'food' || pageId === 'travel' || pageId === 'words') {
-            item.classList.add('active');
-          }
-        } else if (itemPage === pageId) {
-          item.classList.add('active');
-        }
-      });
-    }
-
-    function updateSubmenuActive(submenu, pageId) {
-      const items = submenu.querySelectorAll('.sub-item');
-      items.forEach(item => {
-        if (item.dataset.page === pageId) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
-        }
-      });
-    }
-
-    // 点击导航项
-    mobileNav.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', function(e) {
-        e.preventDefault();
-        const page = this.dataset.page;
-        const submenuKey = this.dataset.hasSubmenu;
-
-        // 调色盘按钮
-        if (this.id === 'mobilePaletteToggle') {
-          const palette = document.getElementById('paletteToggle');
-          if (palette) palette.click();
-          return;
-        }
-
-        // 暗色模式按钮
-        if (this.id === 'mobileDarkToggle') {
-          const darkBtn = document.getElementById('darkToggle');
-          if (darkBtn) darkBtn.click();
-          const icon = document.getElementById('mobileDarkIcon');
-          if (icon) {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            icon.textContent = isDark ? '☀️' : '🌙';
-          }
-          return;
-        }
-
-        // 有子菜单的项
-        if (submenuKey === 'stage') {
-          if (stageSubmenu.classList.contains('show')) {
-            closeAllSubmenus();
-          } else {
-            foodSubmenu.classList.remove('show');
-            stageSubmenu.classList.add('show');
-            overlay.classList.add('show');
-          }
-          return;
-        }
-        if (submenuKey === 'food') {
-          if (foodSubmenu.classList.contains('show')) {
-            closeAllSubmenus();
-          } else {
-            stageSubmenu.classList.remove('show');
-            foodSubmenu.classList.add('show');
-            overlay.classList.add('show');
-          }
-          return;
-        }
-
-        // 直接跳转的项
-        if (page && typeof switchPage === 'function') {
-          switchPage(page);
-          updateMobileNavActive(page);
-          closeAllSubmenus();
-        }
-      });
-    });
-
-    // 子菜单项点击
-    document.querySelectorAll('.mobile-submenu .sub-item').forEach(item => {
-      item.addEventListener('click', function(e) {
-        e.preventDefault();
-        const page = this.dataset.page;
-        if (page && typeof switchPage === 'function') {
-          switchPage(page);
-          updateMobileNavActive(page);
-        }
-        closeAllSubmenus();
-      });
-    });
-
-    // 点击遮罩关闭子菜单
-    overlay.addEventListener('click', closeAllSubmenus);
-
-    // 监听页面切换事件，更新移动端导航状态
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(() => {
-        const activePage = document.querySelector('.page-box.active');
-        if (activePage) {
-          updateMobileNavActive(activePage.id);
-        }
-      }, 500);
-    });
-
-    // 监听navUpdate事件
-    document.addEventListener('navUpdate', function(e) {
-      if (e.targetPage) {
-        updateMobileNavActive(e.targetPage);
-      }
-    });
-  })();
   </script>
 </body>
 </html>
