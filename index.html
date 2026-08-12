@@ -189,6 +189,117 @@
     .page-box { position: relative; z-index: 1; display: none; width: 100%; }
     .page-box.active { display: block; }
 
+    /* ===== 左侧个人信息卡 ===== */
+    .left-profile-card {
+      position: absolute;
+      left: 15px;
+      top: 85px;
+      width: 300px;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
+      border-radius: 10px;
+      padding: 20px 12px 16px;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .left-profile-card .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid hsla(var(--theme-hue), 80%, 55%, 0.2);
+      flex-shrink: 0;
+    }
+
+    .left-profile-card .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.3);
+    }
+
+    /* ===== 左侧个人信息卡 ===== */
+    .left-profile-card .profile-subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1a1a2e;
+      opacity: 0.7;
+      letter-spacing: 1px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .left-profile-card .profile-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--theme-color);
+      opacity: 0.15;
+      border-radius: 2px;
+      margin: 10px 0 8px;
+    }
+
+    .left-profile-card .profile-countdown {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 2px;
+    }
+
+    .left-profile-card .countdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      padding: 2px 0;
+      width: 100%;            
+      box-sizing: border-box;   
+    }
+
+    .left-profile-card .countdown-label {
+      color: #1a1a2e;
+      opacity: 0.5;
+      font-weight: 500;
+    }
+
+    .left-profile-card .countdown-days {
+      color: var(--theme-color);
+      opacity: 0.5;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .left-profile-card .countdown-header {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: -1px;
+      text-align: left; 
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; 
+      gap: 6px;
+      width: 100%;
+    }
+
+    .left-profile-card .countdown-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      flex-shrink: 0;
+      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
+      opacity: 0.6;
+    }
+
     /* ===== 卡片 ===== */
     .info-box {
       max-width: 780px;
@@ -199,15 +310,14 @@
     }
     /* ===== 日历 ===== */
     .sidebar-calendar {
-      position: fixed;
-      right: 24px;
+      position: absolute;
+      right: 15px;
       top: 85px;
       width: 290px;
       background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
       border-radius: 10px;
       padding: 24px 28px;
       border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
       z-index: 999;
       transition: all 0.2s;
       font-size: 16px;
@@ -221,6 +331,16 @@
       margin-bottom: 14px;
       font-size: 18px;
     }
+    .sidebar-calendar .cal-header #calMonthYear {
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .sidebar-calendar .cal-header #calMonthYear:hover {
+      background: rgba(36, 104, 168, 0.1);
+    }
     .sidebar-calendar .cal-header button {
       background: none;
       border: none;
@@ -229,6 +349,95 @@
       color: #4a779e;
       padding: 0 8px;
       line-height: 1;
+    }
+    
+    /* ===== 月份选择器 ===== */
+    .month-picker {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      width: 210px;
+      aspect-ratio: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.95);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      backdrop-filter: blur(12px);
+    }
+    .month-picker.open {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+    .month-picker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .month-picker-year {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      user-select: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .month-picker-nav {
+      display: flex;
+      gap: 6px;
+    }
+    .month-picker-nav button {
+      background: rgba(36, 104, 168, 0.08);
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      color: #4a779e;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .month-picker-nav button:hover {
+      background: rgba(36, 104, 168, 0.2);
+      transform: scale(1.1);
+    }
+    .month-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .month-picker-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a5568;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      background: transparent;
+      width: 36px;  
+      height: 36px;
+    }
+    .month-picker-item:hover {
+      color: hsla(var(--theme-hue), 80%, 55%, 0.5);
+      transform: scale(1.08);
+    }
+    .month-picker-item.active {
+      background: hsla(var(--theme-hue), 80%, 55%, 0.5);
+      color: #ffffff;
+      font-weight: 600;
     }
     .sidebar-calendar .cal-weekdays {
       display: grid;
@@ -270,9 +479,6 @@
       color: #fff;
       font-weight: 700;
       border-radius: 4px;
-    }
-    @media (max-width: 1024px) {
-      .sidebar-calendar { display: none; }
     }
 
     .cal-days .day .stage-dot {
@@ -356,6 +562,12 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+    .sidebar-calendar .cal-update-header .update-title:hover {
+      background: rgba(74, 119, 158, 0.12);
     }
     .sidebar-calendar .cal-update-header .cal-reset-icon {
       width: 16px;
@@ -495,7 +707,7 @@
       text-transform: uppercase;
     }
     .welcome-header h1 {
-      font-size: 38px;
+      font-size: 42px;
       font-weight: 600;
       color: #000000;
       letter-spacing: 1px;
@@ -539,7 +751,7 @@
       margin-bottom: 1px;
     }
     .welcome-header .intro-text {
-      font-size: 13px;
+      font-size: 14px;
       color: #5a7a9a;
       opacity: 0.5;
       margin-top: 8px;
@@ -549,34 +761,30 @@
     }
 
     .info-title {
-      font-size: 16px;
+      font-size: 20px;
       color: #000000;
       font-weight: 600;
       letter-spacing: 0px;
       padding-bottom: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       gap: 6px;
     }
-    .info-title::after {
-      content: '';
-      flex: 1;
-      border-radius: 2px;
-      height: 2px;
-      background: #000000;
-      margin-left: 12px;
-    }
-    body.dark-mode .info-title::after {
-      background: #e0e0e0 !important;
-      opacity: 0.3;
-    }
     .info-title .deco {
       font-size: 14px;
       opacity: 0.5;
     }
-
+    .info-title .title-en {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--theme-color);
+      opacity: 0.5;
+      margin-left: 5px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase; 
+    }
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .info-card {
       background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
@@ -584,8 +792,8 @@
       padding: 8px 12px;
       border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15) !important;
     }
-    .info-label { font-size: 11px; color: #000000; opacity: 0.5; margin-bottom: 1px; }
-    .info-value { font-size: 14px; color: #000000; font-weight: 500; }
+    .info-label { font-size: 13px; color: #000000; opacity: 0.5; margin-bottom: 1px; }
+    .info-value { font-size: 15px; color: #000000; font-weight: 500; }
 
     .link-card {
       background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
@@ -624,7 +832,11 @@
       opacity: 0.5;
       font-weight: 600;
     }
-    .timeline-text { font-size: 13px; color: #000000; line-height: 1.5; }
+    .timeline-text { 
+      font-size: 15px;
+      font-weight: 600; 
+      color: #000000; 
+      line-height: 2; }
 
     .footer-slogan {
       text-align: center;
@@ -644,7 +856,22 @@
       display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
       margin-bottom: 14px;
       position: relative;
+      padding: 4px;
     }
+
+    .stage-nav .nav-indicator {
+      position: absolute;
+      top: 2px;
+      left: 0px;
+      height: calc(100% - 4px);
+      background:#000000 ;
+      border-radius: 24px;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
+      width: 0;
+      opacity: 0;
+    }
+
     #stageNav .stage-nav-item,
     #boboNav .stage-nav-item,
     #platformNav .stage-nav-item {
@@ -652,35 +879,38 @@
       border-radius: 24px;
       font-size: 14px;
       font-weight: 500;
-      color: #000000;
       background: transparent !important;
       border: none !important;
       cursor: pointer;
       outline: none;
-      box-shadow: none !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-appearance: none;
+      appearance: none;
       position: relative;
+      z-index: 1;
+      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+
     #stageNav .stage-nav-item.active,
     #boboNav .stage-nav-item.active,
     #platformNav .stage-nav-item.active {
-      background: #000000 !important;
       color: #ffffff !important;
-      border: none !important;
       box-shadow: none !important;
-      transform: scale(1.05);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none !important;
+      transform: scale(1);
     }
-    #stageNav .stage-nav-item:not(.active),
-    #boboNav .stage-nav-item:not(.active),
-    #platformNav .stage-nav-item:not(.active) {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+
     #stageNav .stage-nav-item:not(.active):hover,
     #boboNav .stage-nav-item:not(.active):hover,
     #platformNav .stage-nav-item:not(.active):hover {
-      background: rgba(0,0,0,0.08) !important;
-      transform: scale(1.02);
+      color: #777;
+      transform: scale(0.95);
+    }
+    #stageNav .stage-nav-item:focus-visible,
+    #boboNav .stage-nav-item:focus-visible,
+    #platformNav .stage-nav-item:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
     }
     #stageNav .stage-nav-item span[id$="Count"],
     #boboNav .stage-nav-item span[id$="Count"],
@@ -704,11 +934,8 @@
     #stageNav .stage-nav-item.active[data-category="all"],
     #boboNav .stage-nav-item.active[data-category="all"],
     #platformNav .stage-nav-item.active[data-category="all"] {
-      background: #000000 !important;
       color: #ffffff !important;
-      border-color: #000000 !important;
     }
-
     .filter-search-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .search-box {
       flex: 1; display: flex; align-items: center; background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
@@ -761,7 +988,6 @@
       transition: background 0.25s ease;
       contain: layout;
       border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
       padding: 0; 
     }
     .video-card:hover {
@@ -779,7 +1005,6 @@
       background: linear-gradient(135deg, #d4e6f5, #b8d4e8);
     }
     .video-cover-box img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
-    .video-card:hover .video-cover-box img { transform: scale(1.03); }
     .video-cover-box .cover-fallback {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       width: 100%; height: 100%;
@@ -821,8 +1046,6 @@
       padding: 10px 14px;
       background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 0.5));
       border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-      transition: all 0.2s ease;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
@@ -831,8 +1054,6 @@
     .video-desc-box:hover {
       background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 0.8));
       border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
-      box-shadow: 0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.8);
-      transform: translateY(-2px);
     }
 
     .video-desc-box .arrow {
@@ -853,37 +1074,16 @@
       line-height: 1.5;
     }
 
-    .video-desc-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-radius: 10px;
-      padding: 10px 14px;
-      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 0.5));
-      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
-    }
-
-    .video-desc-box:hover {
-      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 0.8));
-      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
-    }
-
-    .video-desc-box .arrow {
-      color: var(--theme-color);
-      font-size: 1.1rem;
+    .video-tag-label {
+      display: inline-block;
+      background: rgba(161, 217, 155, 0.85);
+      color: #fff;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 0.65rem;
       font-weight: 600;
-      flex-shrink: 0;
-      transition: transform 0.2s ease;
-    }
-
-    .video-desc-box:hover .arrow {
-      transform: translateX(2px);
-    }
-
-    .video-desc-box .text {
-      font-size: 0.95rem;
-      color: #1a2f3f;
-      line-height: 1.5;
+      line-height: 22px;
+      margin-right: 6px;
     }
     /* ===== 列表模式 ===== */
     .stage-grid.list-mode {
@@ -1163,6 +1363,23 @@
       transform: rotate(-6deg);
     }
     .popup-dialog .drink-text { display: inline-block; position: relative; z-index: 2; }
+    /* ===== 每日一杯 ===== */
+    .drink-btn {
+      display: inline-block;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border-radius: 10px;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 13px;
+      font-weight: 500;
+      color: #000000;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+    }
+
+    .drink-btn:hover {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
+    }
 
     /* ===== 旅行椰饭 ===== */
     .miracle-card-grid {
@@ -1321,34 +1538,172 @@
       pointer-events: none;
     }
 
-    @media (max-width: 768px) {
-      .miracle-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
-      .floating-box { max-width: 95%; max-height: 85vh; padding: 18px 16px 16px; }
-      .floating-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
-      .top-nav { width: 90%; padding: 2px 8px; }
-      .top-nav .menu-item { font-size: 13px; padding: 6px 10px; }
-      .stage-grid { grid-template-columns: repeat(2, 1fr); }
-      .stage-grid.list-mode .video-card .video-cover-box { width: 120px; min-width: 120px; }
-      .stage-grid.list-mode .video-card .video-info .video-name { font-size: 15px; margin-top: 0; }
-      .fancam-wrap { flex-direction: column; align-items: center; }
-      .fancam-wrap .timeline-sidebar { display: none !important; }
-      .welcome-header h1 { font-size: 26px; }
-      .info-grid { grid-template-columns: 1fr; }
+    /* ===== 公式照切换 ===== */
+    .formal-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 6px 0 12px 0;
+    }
+    .formal-btn-group .drink-btn {
+      font-size: 13px;
+      padding: 5px 14px;
+    }
+    .formal-btn-group .drink-btn.active {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
+      background: hsla(var(--theme-hue), 80%, 55%, 0.15);
+    }
+    .formal-display-area {
+      width: 100%;
+      min-height: 200px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .formal-display-area .single-mode {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .formal-display-area .single-mode.active {
+      display: flex;
+    }
+    .formal-display-area .single-mode .img-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 780px;
+    }
+    .formal-display-area .single-mode .img-grid img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      cursor: pointer;
+    }
+    .formal-display-area .single-mode .img-grid img:hover {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.6);
+    }
+    .formal-display-area .scroll-mode {
+      display: none;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 10px;
+      scroll-behavior: smooth;
+    }
+    .formal-display-area .scroll-mode.active {
+      display: block;
+    }
+    .formal-display-area .scroll-mode {
+      scroll-snap-type: x mandatory;
+    }
+    .formal-display-area .scroll-inner .scroll-item {
+      scroll-snap-align: start;
+    }
+    .formal-display-area .scroll-mode::-webkit-scrollbar {
+      height: 4px;
+    }
+    .formal-display-area .scroll-mode::-webkit-scrollbar-thumb {
+      background: hsla(var(--theme-hue), 80%, 55%, 0.3);
+      border-radius: 10px;
+    }
+    .formal-display-area .scroll-mode::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.04);
+      border-radius: 10px;
+    }
+    .formal-display-area .scroll-inner {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      padding: 4px 2px;
+    }
+    .formal-display-area .scroll-inner .scroll-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .formal-display-area .scroll-inner .scroll-item img {
+      height: 160px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .formal-display-area .scroll-inner .scroll-item img:hover {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.6);
+    }
+    .formal-display-area .scroll-inner .scroll-item .scroll-label {
+      font-size: 11px;
+      color: #7a9ab0;
+      font-weight: 500;
+      text-align: center;
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .formal-display-area .empty-hint {
+      color: #7a9ab0;
+      font-size: 14px;
+      opacity: 0.5;
+      display: none;
+    }
+    .formal-display-area .empty-hint.active {
+      display: block;
     }
 
-    @media (max-width: 480px) {
-      .floating-box { padding: 16px; border-radius: 20px; max-height: 90vh; max-width: 98%; }
-      .floating-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; max-height: 50vh; }
-      .floating-title { font-size: 15px; }
-      .modal-close-btn { top: 12px; right: 16px; width: 40px; height: 40px; font-size: 22px; }
-      .modal-date-badge { top: 12px; left: 12px; font-size: 0.7rem; padding: 4px 12px; }
-      .stage-grid { grid-template-columns: 1fr; }
-      .stage-grid.list-mode .video-card { flex-direction: column; }
-      .stage-grid.list-mode .video-card .video-cover-box { width: 100%; min-width: unset; }
-      .top-nav .menu-item { font-size: 11px; padding: 4px 8px; }
-      .search-box { max-width: 100%; }
+    /* ===== 返回顶部按钮 ===== */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 25px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+      display: none;  /* 默认隐藏 */
+      opacity: 0;
+      pointer-events: none;
     }
-
+    #backToTop.visible {
+      display: flex;   /* 显示时用 flex 居中 */
+      opacity: 1;
+      pointer-events: all;
+    }
+    #backToTop:hover {
+      transform: scale(1.08);
+    }
+    #backToTop img {
+      width: 24px;
+      height: 24px;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
+      opacity: 0.6;
+    }
     /* ===== 设置面板样式 ===== */
     .settings-panel {
       position: fixed;
@@ -1509,279 +1864,372 @@
       margin-top: 0px;
     }
 
-    /* ===== 暗色模式 ===== */
-    body.dark-mode {
-      background: #000000 !important;
-      color: #e0e0e0;
-    }
-    body.dark-mode .weibo-card .weibo-link-button,
-    body.dark-mode .xiaohongshu-card .weibo-link-button,
-    body.dark-mode .info-box,
-    body.dark-mode .weibo-card,
-    body.dark-mode .xiaohongshu-card,
-    body.dark-mode .video-card,
-    body.dark-mode .miracle-card,
-    body.dark-mode .welcome-header,
-    body.dark-mode .top-nav,
-    body.dark-mode .timeline-sidebar,
-    body.dark-mode .popup-box,
-    body.dark-mode .settings-panel,
-    body.dark-mode .inline-calendar,
-    body.dark-mode .stage-nav-item,
-    body.dark-mode .category-tab,
-    body.dark-mode .platform-nav-item,
-    body.dark-mode .search-box,
-    body.dark-mode .modal-image-container,
-    body.dark-mode .dropdown-menu {
-      background: rgba(20, 20, 20, 0.85) !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-      color: #e0e0e0 !important;
-    }
-    body.dark-mode .sidebar-calendar {
-      background: rgba(20,20,20,0.85) !important;
-      border-color: rgba(255,255,255,0.08) !important;
-      color: #e0e0e0 !important;
-    }
-    body.dark-mode .sidebar-calendar .cal-days .day {
-      color: #d0d8e0;
-    }
-    body.dark-mode .sidebar-calendar .cal-days .day.other-month {
-      color: #6a7a8a;
-    }
-    body.dark-mode .sidebar-calendar .cal-header button {
-      color: #8aa8c8;
-    }
-    /* 日历更新 - 深色模式 */
-    body.dark-mode .sidebar-calendar .cal-update-list-wrap {
-      border-top-color: rgba(255,255,255,0.1);
-    }
-    body.dark-mode .sidebar-calendar .cal-update-header {
-      color: #8aa8c8;
-      border-bottom-color: rgba(255,255,255,0.15);
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item {
-      border-bottom-color: rgba(255,255,255,0.05);
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item:hover {
-      background: rgba(74, 119, 158, 0.2);
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-date {
-      color: #8aa8c8;
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-title-text {
-      color: #d0d8e0;
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item.platform-only .update-title-text {
-      color: #a0b0c0;
-    }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.unit { background: rgba(0,161,214,0.25); color: #6cd8f5; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.special { background: rgba(230,126,34,0.22); color: #ffb44a; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.assist { background: rgba(255,215,0,0.22); color: #ffd64a; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.substitute { background: rgba(155,89,182,0.22); color: #c488e8; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.bobo-single { background: rgba(66,153,225,0.25); color: #9bb8ff; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.bobo-special { background: rgba(230,126,34,0.22); color: #ffb44a; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.weibo { background: rgba(66,153,225,0.25); color: #9bb8ff; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.xiaohongshu { background: rgba(255,45,85,0.22); color: #ff6b8a; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.douyin { background: rgba(249,115,22,0.22); color: #ffb090; }
-    body.dark-mode .sidebar-calendar .cal-update-item .update-type.bilibili { background: rgba(251,114,153,0.22); color: #ffb0d0; }
-    body.dark-mode .sidebar-calendar .cal-update-back {
-      background: rgba(74, 119, 158, 0.25);
-      border-color: rgba(74, 119, 158, 0.4);
-      color: #8aa8c8;
-    }
-    body.dark-mode .sidebar-calendar .cal-update-back:hover {
-      background: rgba(74, 119, 158, 0.35);
-    }
-    body.dark-mode .sidebar-calendar .cal-update-empty {
-      color: #6a7a8a;
-    }
-    body.dark-mode .sidebar-calendar .cal-group-date {
-      color: #8aa8c8;
-    }
-    body.dark-mode .sidebar-calendar .cal-update-list-wrap::-webkit-scrollbar-thumb {
-      background: #556677;
-    }
-    body.dark-mode .sidebar-calendar .cal-reset-icon {
-      filter: hue-rotate(calc(var(--theme-hue) * 1deg)) saturate(1.5) invert(0.3);
-    }
-    body.dark-mode .link-card,
-    body.dark-mode .info-card,
-    body.dark-mode .video-cover-box,
-    body.dark-mode .video-desc-box {
-      background: rgba(40, 40, 40, 0.6) !important;
-      border-color: rgba(255, 255, 255, 0.05) !important;
-    }
-    body.dark-mode h1,
-    body.dark-mode h2,
-    body.dark-mode h3,
-    body.dark-mode .info-title,
-    body.dark-mode .info-value,
-    body.dark-mode .video-name,
-    body.dark-mode .weibo-text,
-    body.dark-mode .timeline-date,
-    body.dark-mode .card-footer,
-    body.dark-mode .menu-item,
-    body.dark-mode .dropdown-item {
-      color: #e0e0e0 !important;
-    }
-    body.dark-mode .info-label,
-    body.dark-mode .video-date,
-    body.dark-mode .weibo-time,
-    body.dark-mode .sub {
-      color: #a0a0a0 !important;
-    }
-    body.dark-mode input,
-    body.dark-mode textarea {
-      background: rgba(40, 40, 40, 0.8) !important;
-      color: #fff !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-    }
-    body.dark-mode .btn-sm,
-    body.dark-mode .stage-nav-item,
-    body.dark-mode .category-tab {
-      background: rgba(40, 40, 40, 0.6) !important;
-      color: #ccc !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-    }
-    body.dark-mode .btn-sm.active,
-    body.dark-mode .stage-nav-item.active,
-    body.dark-mode .category-tab.active {
-      background: var(--theme-color) !important;
-      color: #fff !important;
-      border-color: var(--theme-color) !important;
-    }
-    body.dark-mode .popup-overlay .popup-box {
-      background: #1a1a1a !important;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    body.dark-mode .welcome-header h1,
-    body.dark-mode .info-title,
-    body.dark-mode .info-value,
-    body.dark-mode .timeline-date,
-    body.dark-mode .video-name,
-    body.dark-mode .card-footer,
-    body.dark-mode .weibo-text,
-    body.dark-mode .timeline-text,
-    body.dark-mode .footer-slogan,
-    body.dark-mode .weibo-time,
-    body.dark-mode .weibo-comment-bottom,
-    body.dark-mode .comment-label,
-    body.dark-mode .weibo-link-button,
-    body.dark-mode .empty-state,
-    body.dark-mode .info-label,
-    body.dark-mode .sub,
-    body.dark-mode .panel-title,
-    body.dark-mode .control-row label,
-    body.dark-mode .slider-val,
-    body.dark-mode .hue-value,
-    body.dark-mode .btn-sm,
-    body.dark-mode .stage-nav-item,
-    body.dark-mode .category-tab,
-    body.dark-mode .platform-nav-item,
-    body.dark-mode .search-box input,
-    body.dark-mode .search-box .search-icon,
-    body.dark-mode .timeline-sidebar .tl-year-label,
-    body.dark-mode .timeline-sidebar .tl-item,
-    body.dark-mode .video-desc-box .text {
-      color: #c8d8e8 !important;
-    }
-    body.dark-mode .welcome-header {
-      background: transparent !important;
-      backdrop-filter: none !important;
-      box-shadow: none !important;
-      border: none !important;
-    }
-    body.dark-mode .welcome-header .links a {
-      background: rgba(255, 255, 255, 0.06);
-      color: #c8d8e8;
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-    body.dark-mode .weibo-card .weibo-link-button:hover,
-    body.dark-mode .xiaohongshu-card .weibo-link-button:hover,
-    body.dark-mode .link-card:hover,
-    body.dark-mode .welcome-header .links a:hover,
-    body.dark-mode .video-desc-box:hover {
-      background: #000000 !important; 
-    }
-    body.dark-mode .search-box {
-      background: transparent;
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-    body.dark-mode .search-box input { color: transparent; }
-    body.dark-mode .search-box input::placeholder { color: #6a8a9a; }
+/* ===== 暗色模式 ===== */
+body.dark-mode {
+  background: #000000 !important;
+  color: #e0e0e0;
+}
 
-    body.dark-mode .settings-panel {
-      background: rgba(20, 30, 45, 0.9) !important;
-      border-color: rgba(255, 255, 255, 0.06) !important;
-    }
-    body.dark-mode .palette-toggle { background: rgba(255, 255, 255, 0.08); }
-    body.dark-mode .palette-toggle:hover { background: rgba(66, 153, 225, 0.15); }
-    body.dark-mode .popup-box {
-      background: rgba(20, 30, 45, 0.95) !important;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    body.dark-mode .popup-box .popup-close { color: #8aa8c8; }
-    body.dark-mode .popup-box .popup-close:hover { color: #fff; }
-    body.dark-mode .popup-dialog {
-      background: rgba(66, 153, 225, 0.15);
-      color: #c8d8e8;
-    }
-    body.dark-mode .popup-dialog::before { background: rgba(66, 153, 225, 0.15); }
-    body.dark-mode .popup-keywords { color: #c8d8e8; }
-    body.dark-mode .popup-keywords span {
-      background: rgba(66, 153, 225, 0.1);
-      border-color: rgba(66, 153, 225, 0.15);
-    }
-    body.dark-mode .popup-emoji { background: rgba(66, 153, 225, 0.08); }
-    body.dark-mode .timeline-wrap::before {
-      background: linear-gradient(to bottom, #4299e1, #1a4a6f);
-    }
-    body.dark-mode .timeline-item .timeline-dot.no-link { background: #4a6a8a; }
-    body.dark-mode .platform-tag.weibo { background: #4299e1; }
-    body.dark-mode .platform-tag.xiaohongshu { background: #ff2d55; }
-    body.dark-mode .platform-tag.douyin { background: #f97316; }
-    body.dark-mode .platform-tag.bilibili { background: #fb7299; }
-    body.dark-mode .video-tag { color: #fff; }
-    body.dark-mode .stage-nav-item.active,
-    body.dark-mode .category-tab.active {
-      background: hsl(var(--theme-hue), 70%, 50%) !important;
-      color: #fff !important;
-      border-color: hsl(var(--theme-hue), 70%, 50%) !important;
-    }
-    body.dark-mode .stage-nav-item:hover,
-    body.dark-mode .platform-nav-item:hover,
-    body.dark-mode .category-tab:hover {
-      background: rgba(66, 153, 225, 0.15);
-    }
-    body.dark-mode .miracle-card .card-footer {
-      background: rgba(255, 255, 255, 0.04);
-      border-top-color: rgba(255, 255, 255, 0.04);
-      color: #c8d8e8 !important;
-    }
-    body.dark-mode .miracle-card {
-      background: rgba(20, 30, 45, 0.6) !important;
-      border-color: rgba(255, 255, 255, 0.04) !important;
-    }
-    body.dark-mode .miracle-card .cover-badge { background: rgba(0, 0, 0, 0.7); }
-    body.dark-mode .contact-card .timeline-wrap > div > div { color: #c8d8e8 !important; }
-    body.dark-mode .divider { border-top-color: rgba(255, 255, 255, 0.05); }
-    body.dark-mode .nav-dropdown {
-      background: #000000 !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3) !important;
-    }
-    body.dark-mode .nav-dropdown-item { color: #c8d8e8 !important; }
-    body.dark-mode .nav-dropdown-item:hover {
-      background: rgba(42, 90, 122, 0.15) !important;
-      color: #2a5a7a !important;
-    }
-    body.dark-mode .nav-dropdown-item.active {
-      background: rgba(42, 90, 122, 0.2) !important;
-      color: #2a5a7a !important;
-    }
-    body.dark-mode .section-title { color: #e0e0e0 !important; }
-    body.dark-mode .header-line { opacity: 0.6 !important; }
-    body.dark-mode .info-title::after { background: #e0e0e0 !important; opacity: 0.3; }
+/* 卡片容器 */
+body.dark-mode .left-profile-card,
+body.dark-mode .weibo-card .weibo-link-button,
+body.dark-mode .xiaohongshu-card .weibo-link-button,
+body.dark-mode .info-box,
+body.dark-mode .weibo-card,
+body.dark-mode .xiaohongshu-card,
+body.dark-mode .video-card,
+body.dark-mode .miracle-card,
+body.dark-mode .welcome-header,
+body.dark-mode .top-nav,
+body.dark-mode .timeline-sidebar,
+body.dark-mode .popup-box,
+body.dark-mode .settings-panel,
+body.dark-mode .inline-calendar,
+body.dark-mode .stage-nav-item,
+body.dark-mode .category-tab,
+body.dark-mode .platform-nav-item,
+body.dark-mode .search-box,
+body.dark-mode .modal-image-container,
+body.dark-mode .dropdown-menu,
+body.dark-mode .link-card,
+body.dark-mode .info-card,
+body.dark-mode .video-cover-box,
+body.dark-mode .video-desc-box,
+body.dark-mode .drink-btn {
+  background: rgba(20, 20, 20, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e0e0e0 !important;
+}
+
+/* 日历 */
+body.dark-mode .sidebar-calendar {
+  background: rgba(20, 20, 20, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .sidebar-calendar .cal-days .day {
+  color: #d0d8e0;
+}
+body.dark-mode .sidebar-calendar .cal-days .day.other-month {
+  color: #6a7a8a;
+}
+body.dark-mode .sidebar-calendar .cal-header {
+  color: #8aa8c8;
+}
+body.dark-mode .sidebar-calendar .cal-header button {
+  color: #8aa8c8;
+}
+body.dark-mode .sidebar-calendar .cal-header #calMonthYear:hover {
+  background: rgba(74, 119, 158, 0.2);
+}
+body.dark-mode .sidebar-calendar .cal-update-list-wrap {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+body.dark-mode .sidebar-calendar .cal-update-header {
+  color: #8aa8c8;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+body.dark-mode .sidebar-calendar .cal-update-item,
+body.dark-mode .sidebar-calendar .cal-update-header .update-title:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+body.dark-mode .sidebar-calendar .cal-update-item:hover {
+  background: rgba(74, 119, 158, 0.2);
+}
+body.dark-mode .sidebar-calendar .cal-update-item .update-date {
+  color: #8aa8c8;
+}
+body.dark-mode .sidebar-calendar .cal-update-item .update-title-text {
+  color: #d0d8e0;
+}
+body.dark-mode .sidebar-calendar .cal-update-item.platform-only .update-title-text {
+  color: #a0b0c0;
+}
+body.dark-mode .sidebar-calendar .cal-update-back {
+  background: rgba(74, 119, 158, 0.25);
+  border-color: rgba(74, 119, 158, 0.4);
+  color: #8aa8c8;
+}
+body.dark-mode .sidebar-calendar .cal-update-back:hover {
+  background: rgba(74, 119, 158, 0.35);
+}
+body.dark-mode .sidebar-calendar .cal-update-empty {
+  color: #6a7a8a;
+}
+body.dark-mode .sidebar-calendar .cal-group-date {
+  color: #8aa8c8;
+}
+body.dark-mode .sidebar-calendar .cal-update-list-wrap::-webkit-scrollbar-thumb {
+  background: #556677;
+}
+body.dark-mode .sidebar-calendar .cal-reset-icon {
+  filter: hue-rotate(calc(var(--theme-hue) * 1deg)) saturate(1.5) invert(0.3);
+}
+
+/* 日历更新子类颜色 */
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.unit { background: rgba(0, 161, 214, 0.25); color: #6cd8f5; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.special { background: rgba(230, 126, 34, 0.22); color: #ffb44a; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.assist { background: rgba(255, 215, 0, 0.22); color: #ffd64a; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.substitute { background: rgba(155, 89, 182, 0.22); color: #c488e8; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.bobo-single { background: rgba(66, 153, 225, 0.25); color: #9bb8ff; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.bobo-special { background: rgba(230, 126, 34, 0.22); color: #ffb44a; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.weibo { background: rgba(66, 153, 225, 0.25); color: #9bb8ff; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.xiaohongshu { background: rgba(255, 45, 85, 0.22); color: #ff6b8a; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.douyin { background: rgba(249, 115, 22, 0.22); color: #ffb090; }
+body.dark-mode .sidebar-calendar .cal-update-item .update-type.bilibili { background: rgba(251, 114, 153, 0.22); color: #ffb0d0; }
+
+/* 月份选择器 */
+body.dark-mode .month-picker {
+  background: rgba(30, 35, 50, 0.98);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .month-picker-year {
+  color: #e0e8f0;
+}
+body.dark-mode .month-picker-year:hover {
+  background: rgba(74, 119, 158, 0.2);
+}
+body.dark-mode .month-picker-nav button {
+  background: rgba(74, 119, 158, 0.15);
+  color: #8aa8c8;
+}
+body.dark-mode .month-picker-nav button:hover {
+  background: rgba(74, 119, 158, 0.3);
+}
+body.dark-mode .month-picker-item {
+  color: #b0c0d0;
+  background: rgba(74, 119, 158, 0.08);
+}
+body.dark-mode .month-picker-item:hover {
+  background: rgba(74, 119, 158, 0.2);
+  color: #fff;
+}
+body.dark-mode .month-picker-item.active {
+  background: var(--theme-color);
+  color: #fff;
+}
+
+/* 文字颜色 */
+body.dark-mode .left-profile-card .profile-name,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode .info-title,
+body.dark-mode .info-value,
+body.dark-mode .video-name,
+body.dark-mode .weibo-text,
+body.dark-mode .timeline-date,
+body.dark-mode .card-footer,
+body.dark-mode .menu-item,
+body.dark-mode .dropdown-item,
+body.dark-mode .welcome-header h1,
+body.dark-mode .timeline-text,
+body.dark-mode .footer-slogan,
+body.dark-mode .weibo-comment-bottom,
+body.dark-mode .comment-label,
+body.dark-mode .weibo-link-button,
+body.dark-mode .empty-state,
+body.dark-mode .panel-title,
+body.dark-mode .control-row label,
+body.dark-mode .slider-val,
+body.dark-mode .hue-value,
+body.dark-mode .btn-sm,
+body.dark-mode .stage-nav-item,
+body.dark-mode .category-tab,
+body.dark-mode .platform-nav-item,
+body.dark-mode .search-box input,
+body.dark-mode .search-box .search-icon,
+body.dark-mode .timeline-sidebar .tl-year-label,
+body.dark-mode .timeline-sidebar .tl-item,
+body.dark-mode .video-desc-box .text,
+body.dark-mode .section-title {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .info-label,
+body.dark-mode .video-date,
+body.dark-mode .weibo-time,
+body.dark-mode .sub {
+  color: #a0a0a0 !important;
+}
+
+/* 背景/边框/输入 */
+body.dark-mode input,
+body.dark-mode textarea {
+  background: rgba(40, 40, 40, 0.8) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+body.dark-mode .btn-sm,
+body.dark-mode .stage-nav-item,
+body.dark-mode .category-tab {
+  background: transparent !important;
+  color: #ccc !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+body.dark-mode .btn-sm.active,
+body.dark-mode .stage-nav-item.active,
+body.dark-mode .category-tab.active {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+body.dark-mode .welcome-header {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+body.dark-mode .welcome-header .links a {
+  background: rgba(255, 255, 255, 0.06);
+  color: #c8d8e8;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode .welcome-header .links a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .search-box {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+body.dark-mode .search-box input {
+  color: #e0e0e0 !important;
+}
+body.dark-mode .search-box input::placeholder {
+  color: #6a8a9a;
+}
+
+body.dark-mode .settings-panel {
+  background: rgba(20, 30, 45, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+body.dark-mode .stage-nav .nav-indicator {
+  background: var(--theme-color) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .palette-toggle { background: rgba(255, 255, 255, 0.08); }
+body.dark-mode .palette-toggle:hover { background: rgba(66, 153, 225, 0.15); }
+
+/* 弹窗 */
+body.dark-mode .popup-box {
+  background: rgba(20, 30, 45, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+body.dark-mode .popup-box .popup-close { color: #8aa8c8; }
+body.dark-mode .popup-box .popup-close:hover { color: #fff; }
+body.dark-mode .popup-dialog {
+  background: rgba(66, 153, 225, 0.15);
+  color: #c8d8e8;
+}
+body.dark-mode .popup-dialog::before { background: rgba(66, 153, 225, 0.15); }
+body.dark-mode .popup-keywords { color: #c8d8e8; }
+body.dark-mode .popup-keywords span {
+  background: rgba(66, 153, 225, 0.1);
+  border-color: rgba(66, 153, 225, 0.15);
+}
+body.dark-mode .popup-emoji { background: rgba(66, 153, 225, 0.08); }
+
+/* 时间线 */
+body.dark-mode .timeline-wrap::before {
+  background: linear-gradient(to bottom, #4299e1, #1a4a6f);
+}
+body.dark-mode .timeline-item .timeline-dot.no-link { background: #4a6a8a; }
+
+/* 平台标签 */
+body.dark-mode .platform-tag.weibo { background: #4299e1; }
+body.dark-mode .platform-tag.xiaohongshu { background: #ff2d55; }
+body.dark-mode .platform-tag.douyin { background: #f97316; }
+body.dark-mode .platform-tag.bilibili { background: #fb7299; }
+
+body.dark-mode .video-tag { color: #fff; }
+body.dark-mode .stage-nav-item:hover,
+body.dark-mode .platform-nav-item:hover,
+body.dark-mode .category-tab:hover,
+body.dark-mode .drink-btn:hover {
+  background: rgba(66, 153, 225, 0.15);
+}
+
+/* 旅行椰饭 */
+body.dark-mode .miracle-card .card-footer {
+  background: rgba(255, 255, 255, 0.04);
+  border-top-color: rgba(255, 255, 255, 0.04);
+  color: #c8d8e8 !important;
+}
+body.dark-mode .miracle-card {
+  background: rgba(20, 30, 45, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+body.dark-mode .miracle-card .cover-badge { background: rgba(0, 0, 0, 0.7); }
+
+body.dark-mode .divider { border-top-color: rgba(255, 255, 255, 0.05); }
+body.dark-mode .header-line { opacity: 0.6 !important; }
+body.dark-mode .info-title::after { background: #e0e0e0 !important; opacity: 0.3; }
+
+/* 导航下拉菜单 */
+body.dark-mode .nav-dropdown {
+  background: rgba(20, 20, 20, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.3) !important;
+}
+body.dark-mode .nav-dropdown-item {
+  color: #c8d8e8 !important;
+}
+body.dark-mode .nav-dropdown-item:hover {
+  background: rgba(66, 153, 225, 0.15) !important;
+}
+body.dark-mode .nav-dropdown-item.active {
+  background: rgba(66, 153, 225, 0.2) !important;
+}
+
+/* 页面动作按钮 */
+body.dark-mode .page-actions {
+  background: rgba(20, 30, 45, 0.85);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+body.dark-mode .page-actions .menu-item:hover {
+  background: rgba(66, 153, 225, 0.15);
+}
+
+/* 返回顶部按钮 */
+body.dark-mode #backToTop {
+  background: rgba(30, 40, 60, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode #backToTop img {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
+  opacity: 0.7;
+}
+
+/* 头像边框 */
+body.dark-mode .left-profile-card .profile-avatar {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 左侧个人信息卡文字 */
+body.dark-mode .left-profile-card .countdown-header {
+  color: #e0e0e0;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+body.dark-mode .left-profile-card .profile-subtitle {
+  color: #e0e0e0;
+}
+body.dark-mode .left-profile-card .countdown-label {
+  color: #e0e0e0;
+}
+body.dark-mode .left-profile-card .countdown-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 下拉图标 */
+body.dark-mode .dropdown-icon {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
+}
+body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
+  filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
+}
 
     .platform-icon {
       width: 16px;
@@ -1825,11 +2273,10 @@
     html.pure-mode.dark-mode { background-color: #000000 !important; }
     body.pure-mode .info-box {
       background: transparent !important;
-      backdrop-filter: none !important;
-      border: none !important;
-      box-shadow: none !important;
     }
-
+    body.dark-mode .left-profile-card .profile-avatar {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
     /* ===== 导航下拉菜单 ===== */
     .nav-dropdown {
       position: fixed;
@@ -1891,12 +2338,6 @@
     .top-nav .menu-item:hover .dropdown-icon {
       filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(500%) hue-rotate(175deg);
     }
-    body.dark-mode .dropdown-icon {
-      filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
-    }
-    body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
-      filter: brightness(0) saturate(100%) invert(85%) sepia(5%) saturate(100%);
-    }
 
     /* ===== 页面右上角功能框 ===== */
     .page-actions {
@@ -1914,10 +2355,7 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     }
-    body.dark-mode .page-actions {
-      background: rgba(20, 30, 45, 0.85);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
+
     .page-actions .menu-item {
       padding: 8px;
       border-radius: 8px;
@@ -1926,9 +2364,334 @@
       justify-content: center;
     }
     .page-actions .menu-item:hover { background: rgba(36, 104, 168, 0.12); }
-    body.dark-mode .page-actions .menu-item:hover { background: rgba(66, 153, 225, 0.15); }
 
     #food .timeline-wrap::before { left: 4px !important; }
+
+    /* ===== 移动端适配 ===== */
+    @media (max-width: 1024px) {
+      .left-profile-card {
+        display: none;
+      }
+      .sidebar-calendar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* 顶部导航 */
+      .top-nav {
+        width: 90%;
+        padding: 2px 8px;
+      }
+      .top-nav .menu-item {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+
+      /* 页面动作按钮 */
+      .page-actions {
+        bottom: 20px;
+        right: 10px;
+        padding: 8px;
+        gap: 4px;
+      }
+      .page-actions .menu-item {
+        padding: 6px;
+      }
+      .page-actions .menu-item img {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      /* 返回顶部 */
+      #backToTop {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 80px;
+      }
+      #backToTop img {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* 内容区 */
+      .content-area {
+        padding: 70px 12px 12px 12px;
+      }
+
+      /* 首页 */
+      .welcome-header h1 {
+        font-size: 26px;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* 舞台/直播网格 */
+      .stage-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stage-grid.list-mode .video-card {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 8px;
+      }
+      .stage-grid.list-mode .video-card .video-cover-box {
+        width: 100%;
+        min-width: unset;
+        aspect-ratio: 16/9;
+      }
+      .stage-grid.list-mode .video-card .video-info .video-name {
+        font-size: 15px;
+        margin-top: 0;
+      }
+
+      /* 导航标签 */
+      .stage-nav {
+        gap: 4px;
+      }
+      .stage-nav .stage-nav-item {
+        font-size: 12px;
+        padding: 4px 10px;
+      }
+
+      /* 搜索框 */
+      .filter-search-row {
+        flex-wrap: wrap;
+      }
+      .search-box {
+        max-width: 100%;
+        flex: 1;
+      }
+
+      /* 旅行椰饭 */
+      .miracle-card-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+      }
+
+      /* 饭之拍 */
+      .fancam-wrap {
+        flex-direction: column;
+        align-items: center;
+      }
+      .fancam-wrap .timeline-sidebar {
+        display: none !important;
+      }
+
+      /* 公式照 */
+      .formal-display-area .single-mode .img-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .formal-display-area .scroll-inner .scroll-item img {
+        height: 120px;
+      }
+      .formal-btn-group .drink-btn {
+        font-size: 12px;
+        padding: 4px 10px;
+      }
+
+      /* 设置面板 */
+      .settings-panel {
+        width: 280px;
+        right: 10px;
+        bottom: 80px;
+        padding: 14px 16px 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* 顶部导航 */
+      .top-nav {
+        width: 96%;
+        padding: 2px 4px;
+        gap: 2px;
+        top: 8px !important;
+      }
+      .top-nav .menu-item {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+      .top-nav .menu-item .icon {
+        font-size: 12px;
+      }
+
+      /* 页面动作按钮 */
+      .page-actions {
+        bottom: 16px;
+        right: 6px;
+        padding: 6px;
+        gap: 2px;
+        border-radius: 12px;
+      }
+      .page-actions .menu-item {
+        padding: 5px;
+      }
+      .page-actions .menu-item img {
+        width: 14px !important;
+        height: 14px !important;
+      }
+
+      /* 返回顶部 */
+      #backToTop {
+        width: 36px;
+        height: 36px;
+        bottom: 16px;
+        right: 60px;
+      }
+      #backToTop img {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* 内容区 */
+      .content-area {
+        padding: 60px 8px 8px 8px;
+      }
+
+      /* 首页 */
+      .welcome-header h1 {
+        font-size: 20px;
+      }
+      .welcome-header .welcome-subtitle {
+        font-size: 12px;
+      }
+      .welcome-header .links a {
+        font-size: 12px;
+        padding: 3px 12px;
+      }
+      .info-title {
+        font-size: 17px;
+      }
+      .info-title .title-en {
+        font-size: 12px;
+      }
+      .info-card {
+        padding: 6px 10px;
+      }
+      .info-value {
+        font-size: 13px;
+      }
+
+      /* 舞台/直播网格 */
+      .stage-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .stage-grid.list-mode .video-card {
+        padding: 6px;
+      }
+      .stage-grid.list-mode .video-card .video-info .video-name {
+        font-size: 14px;
+      }
+
+      /* 导航标签 */
+      .stage-nav .stage-nav-item {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+      .stage-nav .stage-nav-item span {
+        font-size: 0.6rem;
+        padding: 1px 6px;
+      }
+
+      /* 搜索框 */
+      .search-box {
+        max-width: 100%;
+      }
+      .search-box input {
+        font-size: 12px;
+        padding: 4px 2px;
+      }
+
+      /* 旅行椰饭 */
+      .miracle-card-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+      }
+      .miracle-card .card-footer {
+        font-size: 11px;
+        padding: 6px 0;
+      }
+      .miracle-card .cover-badge {
+        font-size: 10px;
+        padding: 1px 8px;
+      }
+
+      /* 平台更新卡片 */
+      .weibo-card, .xiaohongshu-card {
+        padding: 10px 10px 8px;
+      }
+      .weibo-card .weibo-text, .xiaohongshu-card .weibo-text {
+        font-size: 14px;
+        padding-top: 10px;
+      }
+      .weibo-card .weibo-media-grid, .xiaohongshu-card .weibo-media-grid {
+        gap: 4px;
+      }
+
+      /* 公式照 */
+      .formal-display-area .single-mode .img-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+      }
+      .formal-display-area .scroll-inner .scroll-item img {
+        height: 80px;
+      }
+      .formal-btn-group {
+        gap: 4px;
+      }
+      .formal-btn-group .drink-btn {
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+
+      /* 设置面板 */
+      .settings-panel {
+        width: 240px;
+        right: 6px;
+        bottom: 70px;
+        padding: 12px 14px 16px;
+        border-radius: 16px;
+      }
+      .settings-panel .section-title {
+        font-size: 13px;
+      }
+      .control-row {
+        gap: 10px;
+      }
+      .control-row label {
+        font-size: 12px;
+        min-width: 30px;
+      }
+      .btn-sm {
+        font-size: 11px;
+        padding: 2px 8px;
+      }
+
+      /* 弹窗 */
+      .popup-box {
+        padding: 16px 14px 14px;
+        border-radius: 16px;
+        max-width: 98%;
+        max-height: 90vh;
+      }
+      .modal-close-btn {
+        top: 12px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+      }
+      .modal-date-badge {
+        top: 12px;
+        left: 12px;
+        font-size: 0.7rem;
+        padding: 4px 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1945,30 +2708,57 @@
   </div>
 
   <!-- ===== 返回顶部按钮 ===== -->
-  <button id="backToTop" style="
-    position: fixed; bottom: 30px; right: 30px;
-    width: 48px; height: 48px; border-radius: 50%;
-    background: rgba(31, 90, 138, 0.85); backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(31,90,138,0.3);
-    transition: all 0.3s ease; display: none; z-index: 999;
-    align-items: center; justify-content: center;
-    padding: 0; overflow: hidden;
-  " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png"
-        alt="返回顶部"
-        style="width:28px; height:28px; display:block; filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg);" />
+  <button id="backToTop">
+    <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.png" alt="返回顶部" />
   </button>
+
+  <!-- ===== 左侧个人信息卡 ===== -->
+  <div class="left-profile-card">
+    <div class="profile-avatar">
+      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260810211321362.gif" alt="椰饭" />
+    </div>
+    <div class="profile-subtitle">
+      <span style="font-weight: 700; font-size: 16px; color: #000000;">叶凡言：</span><br>
+      “前路有风也有浪，<br>但永远有奔赴光亮挑战未知的勇气。”
+    </div>
+    <div class="profile-divider"></div>
+    <div class="profile-countdown">
+      <div class="countdown-header">
+      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260810222040309.png" alt="倒数日图标" class="countdown-icon" />倒数日</div>
+      <div class="countdown-item">
+        <span class="countdown-label">距离出道四周年还有</span>
+        <span class="countdown-days" id="daysToDebutAnniversary">--</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-label">距离升格四周年还有</span>
+        <span class="countdown-days" id="daysToPromotionAnniversary">--</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-label">距离凡诞还有</span>
+        <span class="countdown-days" id="daysToBirthday">--</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-label">出道已经</span>
+        <span class="countdown-days" id="daysSinceDebut">--</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-label">升格已经</span>
+        <span class="countdown-days" id="daysSincePromotion">--</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-label">破壳已经</span>
+        <span class="countdown-days" id="daysSinceBirth">--</span>
+      </div>
+    </div>
+  </div>
 
   <div class="main-page">
 
     <!-- 饭记 下拉菜单 -->
     <div class="nav-dropdown" id="foodNotesDropdown">
-      <div class="nav-dropdown-item" data-page="food">每日一杯</div>
       <div class="nav-dropdown-item" data-page="travel">口袋图集</div>
       <div class="nav-dropdown-item" data-page="words">饭言饭语</div>
-      <div class="nav-dropdown-item" data-page="dream">zx相关</div>
+      <div class="nav-dropdown-item" data-page="food">日常分享</div>
     </div>
 
     <!-- 饭作 下拉菜单 -->
@@ -2019,6 +2809,17 @@
         <div class="cal-update-list" id="calUpdateList"></div>
         <button class="cal-update-back" id="calUpdateBack">← 返回全部</button>
       </div>
+      <!-- 月份选择器 -->
+      <div class="month-picker" id="monthPicker">
+        <div class="month-picker-header">
+          <div class="month-picker-year" id="monthPickerYear">2026年</div>
+          <div class="month-picker-nav">
+            <button id="monthPickerPrev" title="上一年">‹</button>
+            <button id="monthPickerNext" title="下一年">›</button>
+          </div>
+        </div>
+        <div class="month-picker-grid" id="monthPickerGrid"></div>
+      </div>
     </div>
 
       <div class="page-box active" id="home">
@@ -2027,22 +2828,27 @@
           <div class="info-title">
             <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.png" alt="" class="title-icon" />
             椰饭的自我介绍
+            <span class="title-en">introduction</span>
           </div>
           <div class="info-grid">
-            <div class="info-card"><div class="info-label">姓名</div><div class="info-value">叶凡</div></div>
             <div class="info-card"><div class="info-label">昵称</div><div class="info-value">小晞、晞宝</div></div>
-            <div class="info-card"><div class="info-label">生日</div><div class="info-value">0723</div></div>
             <div class="info-card"><div class="info-label">身高</div><div class="info-value">166</div></div>
+            <div class="info-card"><div class="info-label">血型</div><div class="info-value">O</div></div>
+            <div class="info-card"><div class="info-label">生日</div><div class="info-value">07.23</div></div>
             <div class="info-card"><div class="info-label">星座</div><div class="info-value">狮子座</div></div>
-            <div class="info-card"><div class="info-label">家乡</div><div class="info-value">安徽</div></div>
-            <div class="info-card"><div class="info-label">特长</div><div class="info-value">睡觉时间特长、其他待发掘</div></div>
+            <div class="info-card"><div class="info-label">出生地</div><div class="info-value">中国 安徽</div></div>
+            <div class="info-card"><div class="info-label">个人特长</div><div class="info-value">睡觉时间特长、其他待发掘</div></div>
             <div class="info-card"><div class="info-label">兴趣爱好</div><div class="info-value">追剧、旅游、打游戏</div></div>
+            <div class="info-card"><div class="info-label">加入时间</div><div class="info-value">2023-09-30</div></div>
+            <div class="info-card"><div class="info-label">加入所属</div><div class="info-value">SNH48 十九期生</div></div>
+            <div class="info-card"><div class="info-label">最终所属</div><div class="info-value">SNH48 N队（TEAM NII）</div></div>
+            <div class="info-card"><div class="info-label">所属公司</div><div class="info-value">上海丝芭文化传媒集团有限公司</div></div>
           </div>
-
-          <div style="height:16px;"></div>
+          <div style="height:24px;"></div>
           <div class="info-title">
             <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.png" alt="" class="title-icon" />
             椰饭的联系方式
+            <span class="title-en">contact</span>
           </div>
           <div class="info-grid">
             <div class="link-card" onclick="window.open('https://weibo.com/u/7901094930','_blank')">
@@ -2082,10 +2888,11 @@
             </div>
           </div>
 
-          <div style="height:16px;"></div>
+          <div style="height:24px;"></div>
           <div class="info-title">
             <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.png" alt="" class="title-icon" />
             椰饭的里程日记
+            <span class="title-en">Timeline</span>
           </div>
           <div class="timeline-wrap">
             <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2023.09.30</div><div class="timeline-text">十九期生亮相新生公演《命运的X号》</div></div>
@@ -2093,7 +2900,37 @@
             <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2024.02.02</div><div class="timeline-text">正式升格为SNH48 Team NII的成员</div></div>
             <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2024.08.03</div><div class="timeline-text">第十一届青春盛典取得年度新人潜力奖第4名</div></div>
             <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2025.08.02</div><div class="timeline-text">第十二届青春盛典取得年度梦想成员奖第38名</div></div>
+            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2026.08.08</div><div class="timeline-text">第十三届青春盛典取得年度梦想成员奖第45名</div></div>
             <div class="timeline-item"><span class="timeline-dot no-link"></span><div class="timeline-text">未完待续…</div></div>
+          </div>
+
+          <!-- 历年公式照 -->
+          <div style="height:24px;"></div>
+          <div class="info-title">
+            <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.png" alt="" class="title-icon" />
+            历年公式照
+            <span class="title-en">Gallery</span>
+          </div>
+          <div class="formal-btn-group" id="formalBtnGroup">
+            <div class="drink-btn active" data-key="all" onclick="switchFormal('all')" style="cursor:pointer;">全部</div>
+            <div class="drink-btn" data-key="2026-newyear" onclick="switchFormal('2026-newyear')" style="cursor:pointer;">2026年新年公式照</div>
+            <div class="drink-btn" data-key="2025-autumn" onclick="switchFormal('2025-autumn')" style="cursor:pointer;">2025年秋季队服公式照</div>
+            <div class="drink-btn" data-key="2025-newyear" onclick="switchFormal('2025-newyear')" style="cursor:pointer;">2025年新年公式照</div>
+            <div class="drink-btn" data-key="2024-autumn" onclick="switchFormal('2024-autumn')" style="cursor:pointer;">2024年秋季队服公式照</div>
+            <div class="drink-btn" data-key="2024-spring" onclick="switchFormal('2024-spring')" style="cursor:pointer;">2024年春季队服公式照</div>
+            <div class="drink-btn" data-key="2023-2024" onclick="switchFormal('2023-2024')" style="cursor:pointer;">2023-2024年度青春盛典公式照</div>
+          </div>
+
+          <div class="formal-display-area" id="formalDisplay">
+            <!-- 单图模式 -->
+            <div class="single-mode" id="formalSingle">
+              <div class="img-grid" id="formalGrid"></div>
+              <div class="empty-hint">暂无图片</div>
+            </div>
+            <!-- 滚动模式（全部） -->
+            <div class="scroll-mode" id="formalScroll">
+              <div class="scroll-inner"></div>
+            </div>
           </div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
@@ -2107,6 +2944,7 @@
           <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; margin-left:20px; flex-wrap:wrap;">
             <div style="border:2px solid #000000; border-radius:20px; padding:6px 10px; display:inline-block;">
               <div class="stage-nav" id="stageNav" style="justify-content:flex-start; gap:6px; margin-bottom:0; display:flex; flex-wrap:wrap;">
+                <div class="nav-indicator" id="stageNavIndicator"></div>
                 <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageTotalCount"></span></button>
                 <button class="stage-nav-item" data-category="unit">UNIT <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageUnitCount"></span></button>
                 <button class="stage-nav-item" data-category="special">特殊舞台 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageSpecialCount"></span></button>
@@ -2142,6 +2980,7 @@
           <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; margin-left:20px; flex-wrap:wrap;">
             <div style="border:2px solid #000000; border-radius:20px; padding:6px 10px; display:inline-block;">
               <div class="stage-nav" id="boboNav" style="justify-content:flex-start; gap:6px; margin-bottom:0; display:flex; flex-wrap:wrap;">
+                <div class="nav-indicator" id="boboNavIndicator"></div>
                 <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboTotalCount"></span></button>
                 <button class="stage-nav-item" data-category="single">单播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSingleCount"></span></button>
                 <button class="stage-nav-item" data-category="special">特殊直播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSpecialCount"></span></button>
@@ -2170,6 +3009,7 @@
             <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; margin-left:20px; flex-wrap:wrap;">
               <div style="border:2px solid #000000; border-radius:20px; padding:6px 10px; display:inline-block;">
                 <div class="stage-nav" id="platformNav" style="justify-content:flex-start; gap:6px; margin-bottom:0; display:flex; flex-wrap:wrap;">
+                  <div class="nav-indicator" id="platformNavIndicator"></div>
                   <button class="stage-nav-item active" data-platform="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformTotalCount"></span></button>
                   <button class="stage-nav-item" data-platform="weibo">微博 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformWeiboCount"></span></button>
                   <button class="stage-nav-item" data-platform="xiaohongshu">小红书 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformXiaohongshuCount"></span></button>
@@ -2187,7 +3027,32 @@
             </div>
 
             <div id="weiboFeed">
-
+        <!-- ====== 8.11 微博 ====== -->
+        <div class="weibo-card" data-platform="weibo" data-month="2026-08" data-day="11">
+          <div class="weibo-time">
+            <span class="platform-tag weibo">微博</span>
+            2026-08-11 23:17 · 发布于 上海
+          </div>
+          <div class="weibo-text"><span class="line">📸</span></div>
+          <a href="https://weibo.com/7901094930/RcX18nRQU" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <div class="weibo-media-grid cols-3">
+            <div class="media-item" onclick="openModalWithImages('slider27', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155984.jpg" alt="配图1" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155985.jpg" alt="配图2" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 2)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155986.jpg" alt="配图3" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 3)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155987.jpg" alt="配图4" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 4)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155988.jpg" alt="配图5" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 5)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155989.jpg" alt="配图6" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 6)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155990.jpg" alt="配图7" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 7)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155991.jpg" alt="配图8" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 8)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155992.jpg" alt="配图9" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 9)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155993.jpg" alt="配图10" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 10)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155994.jpg" alt="配图11" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 11)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155995.jpg" alt="配图12" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 12)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155996.jpg" alt="配图13" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 13)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155997.jpg" alt="配图14" loading="lazy" /></div>
+            <div class="media-item" onclick="openModalWithImages('slider27', 14)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155998.jpg" alt="配图15" loading="lazy" /></div>
+          </div>
+        </div>
         <!-- ====== 8.01 微博 ====== -->
         <div class="weibo-card" data-platform="weibo" data-month="2026-08" data-day="01">
           <div class="weibo-time">
@@ -2649,7 +3514,6 @@
         </div>
 
         <!-- ====== 1.05 微博（视频） ====== -->
-        <!-- ====== 1.05 微博（视频） ====== -->
         <div class="weibo-card" data-platform="weibo" data-month="2026-01" data-day="05">
           <div class="weibo-time">
             <span class="platform-tag weibo">微博</span>
@@ -2664,6 +3528,21 @@
             <span class="comment-label">评论</span>
             <span>第一百条微博[期待]</span>
             <span style="font-size:0.7rem; color:#7a9ab0; margin-left:0.5rem;">26-1-5 20:47 来自上海</span>
+          </div>
+        </div>
+
+        <!-- ====== 8.09 小红书 ====== -->
+        <div class="xiaohongshu-card" data-platform="xiaohongshu" data-month="2026-08" data-day="09">
+          <div class="weibo-time">
+            <span class="platform-tag xiaohongshu">小红书</span>
+            2026-08-09 · 发布于 江苏
+          </div>
+          <div class="weibo-text"><span class="line">做我自己 #王子礼</span></div>
+          <a href="https://www.xiaohongshu.com/discovery/item/6a788b7b0000000028002b6a?source=webshare&xhsshare=pc_web&xsec_token=AB77RXJUajTY6SRoFi8YPnjuIu89UwRCRuKOryUHQSqDQ=&xsec_source=pc_share" target="_blank" class="weibo-link-button">🔗 点击跳转查看原文</a>
+          <div class="weibo-media-grid cols-1" style="max-width:300px;">
+            <div class="media-item" onclick="openModalWithImages('xhs_slider13', 0)">
+              <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260810205234738.jpg" alt="配图1" loading="lazy" />
+            </div>
           </div>
         </div>
 
@@ -2935,6 +3814,19 @@
 
           <!-- ====== 抖音 ====== -->
 
+          <!-- ====== 8.11 抖音 ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="11">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-08-11 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/R6gRVrjQZn4/" target="_blank" class="video-desc-box">
+              <span class="text">冻结这一刻#直拍现场</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+
           <!-- ====== 8.10 抖音 ====== -->
           <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="10">
             <div class="weibo-time">
@@ -2953,7 +3845,7 @@
             <div class="weibo-time">
               <span class="platform-tag douyin">抖音</span>
               <span class="video-tag-label">视频</span>
-              2026-08-10 · 发布于 上海
+              2026-08-10 · 发布于 江苏
             </div>
             <a href="https://v.douyin.com/EVX1LyvpKpU/" target="_blank" class="video-desc-box">
               <span class="text">做我自己 #王子礼</span>
@@ -2961,12 +3853,12 @@
             </a>
           </div>
 
-          <!-- ====== 8.09 抖音 ====== -->
-          <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="09">
+          <!-- ====== 8.08 抖音 ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="08">
             <div class="weibo-time">
               <span class="platform-tag douyin">抖音</span>
               <span class="video-tag-label">视频</span>
-              2026-08-09 · 发布于 上海
+              2026-08-08 · 发布于 江苏
             </div>
             <a href="https://v.douyin.com/2eXVCz8P4I0/" target="_blank" class="video-desc-box">
               <span class="text">#是不是嘛对不对嘛</span>
@@ -3116,6 +4008,19 @@
               <span class="arrow">→</span>
             </a>
           </div>
+          
+          <!-- ====== 5.25 抖音（第二条） ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-05" data-day="25">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-05-25 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/Vu0GB07FQR8/" target="_blank" class="video-desc-box">
+              <span class="text">温柔的巴掌# 31摇# 少年感</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
 
           <!-- ====== 5.24 抖音 ====== -->
           <div class="weibo-card" data-platform="douyin" data-month="2026-05" data-day="24">
@@ -3130,6 +4035,18 @@
             </a>
           </div>
 
+          <!-- ====== 5.20 抖音 ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-05" data-day="20">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-05-20 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/yjM-ozGjF-g/" target="_blank" class="video-desc-box">
+              <span class="text">玻璃 #爱你宝贝❤❤❤</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
           <!-- ====== 5.16 抖音 ====== -->
           <div class="weibo-card" data-platform="douyin" data-month="2026-05" data-day="16">
             <div class="weibo-time">
@@ -3321,6 +4238,19 @@
             </div>
             <a href="https://v.douyin.com/FDmP882gnF0/" target="_blank" class="video-desc-box">
               <span class="text">没错👍 #黑色系</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+
+          <!-- ====== 3.21 抖音（第二条） ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-03" data-day="21">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-03-21 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/_NFj1pu-i4o/" target="_blank" class="video-desc-box">
+              <span class="text">装。# 忧郁</span>
               <span class="arrow">→</span>
             </a>
           </div>
@@ -3965,62 +4895,63 @@
       </div>
     </div>
 
-      <!-- ===== 饭食饭 ===== -->
-      <div class="page-box" id="food">
-        <div class="fancam-wrap">
-          <div class="info-box" style="padding:18px 22px;">
-            <div class="welcome-header" data-page="food"></div>
+    <!-- ===== 饭食饭 ===== -->
+    <div class="page-box" id="food">
+      <div class="fancam-wrap">
+        <div class="info-box" style="padding:18px 22px;">
+          <div class="welcome-header" data-page="food"></div>
 
-            <div class="timeline-wrap" style="margin-top:4px; padding-left:-10px; position:relative;">
+          <div class="timeline-wrap" style="margin-top:4px; padding-left:-10px; position:relative;">
 
-              <!-- 2026.07 -->
-              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-                <div style="font-size:15px; font-weight:700; color:#000000;">2026.07</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                  <div data-drink="drink_0724" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.24 伯牙绝弦</div>
-                  <div data-drink="drink_0716" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.16 西瓜冰柠茶霸王杯</div>
-                  <div data-drink="drink_0705" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">07.05 幽兰拿铁</div>
-                </div>
+            <!-- 2026.07 -->
+            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+              <div style="font-size:15px; font-weight:700; color:#000000;">2026.07</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                <div data-drink="drink_0724" class="drink-btn">07.24 伯牙绝弦</div>
+                <div data-drink="drink_0716" class="drink-btn">07.16 西瓜冰柠茶霸王杯</div>
+                <div data-drink="drink_0706" class="drink-btn">07.06 大颗芒果冰茶</div>
+                <div data-drink="drink_0705" class="drink-btn">07.05 幽兰拿铁</div>
               </div>
-
-              <!-- 2026.06 -->
-              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-                <div style="font-size:15px; font-weight:700; color:#000000;">2026.06</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                  <div data-drink="drink_0611" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.11 现煮绿豆木薯冰</div>
-                  <div data-drink="drink_0608" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.08 蒸馏饮用水</div>
-                  <div data-drink="drink_0605" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">06.05 轻因·伯牙绝弦</div>
-                </div>
-              </div>
-
-              <!-- 2026.05 -->
-              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-                <div style="font-size:15px; font-weight:700; color:#000000;">2026.05</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                  <div data-drink="drink_0531" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.31 伯牙绝弦</div>
-                  <div data-drink="drink_0530" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.30 玫瑰20抹茶拿铁</div>
-                  <div data-drink="drink_0528" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.28 多肉芒芒</div>
-                  <div data-drink="drink_0520" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.20 小黄油美式</div>
-                  <div data-drink="drink_0519" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.19 小黄油美式</div>
-                  <div data-drink="drink_0513" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.13 山竹荔枝冰茶</div>
-                  <div data-drink="drink_0503" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">05.03 轻因·伯牙绝弦</div>
-                </div>
-              </div>
-
-              <!-- 2026.04 -->
-              <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-                <div style="font-size:15px; font-weight:700; color:#000000;">2026.04</div>
-                <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                  <div data-drink="drink_0425" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">04.25 伯牙绝弦</div>
-                  <div data-drink="drink_0419" style="display:inline-block; background:rgba(255,255,255,calc(var(--card-opacity, 0.72) * 0.8)); border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 0 0 1px hsla(var(--theme-hue), 80%, 55%, 0.1); padding:6px 16px; cursor:pointer; transition:all 0.25s ease; font-size:13px; font-weight:500; color:#000000;" onmouseover="this.style.borderColor='hsla(var(--theme-hue), 80%, 55%, 0.8)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">04.19 冰摇红莓黑加仑</div>
-                </div>
-              </div>
-
             </div>
-            <div class="footer-slogan">-All For YeFan-</div>
+
+            <!-- 2026.06 -->
+            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+              <div style="font-size:15px; font-weight:700; color:#000000;">2026.06</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                <div data-drink="drink_0611" class="drink-btn">06.11 现煮绿豆木薯冰</div>
+                <div data-drink="drink_0608" class="drink-btn">06.08 蒸馏饮用水</div>
+                <div data-drink="drink_0605" class="drink-btn">06.05 轻因·伯牙绝弦</div>
+              </div>
+            </div>
+
+            <!-- 2026.05 -->
+            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+              <div style="font-size:15px; font-weight:700; color:#000000;">2026.05</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                <div data-drink="drink_0531" class="drink-btn">05.31 伯牙绝弦</div>
+                <div data-drink="drink_0530" class="drink-btn">05.30 玫瑰20抹茶拿铁</div>
+                <div data-drink="drink_0528" class="drink-btn">05.28 多肉芒芒</div>
+                <div data-drink="drink_0520" class="drink-btn">05.20 小黄油美式</div>
+                <div data-drink="drink_0519" class="drink-btn">05.19 小黄油美式</div>
+                <div data-drink="drink_0513" class="drink-btn">05.13 山竹荔枝冰茶</div>
+                <div data-drink="drink_0503" class="drink-btn">05.03 轻因·伯牙绝弦</div>
+              </div>
+            </div>
+
+            <!-- 2026.04 -->
+            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
+              <div style="font-size:15px; font-weight:700; color:#000000;">2026.04</div>
+              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
+                <div data-drink="drink_0425" class="drink-btn">04.25 伯牙绝弦</div>
+                <div data-drink="drink_0419" class="drink-btn">04.19 冰摇红莓黑加仑</div>
+              </div>
+            </div>
+
           </div>
+          <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
+    </div>
 
       <!-- ===== 旅行椰饭 ===== -->
       <div class="page-box" id="travel">
@@ -4074,15 +5005,6 @@
             <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
             <div class="footer-slogan">-All For YeFan-</div>
           </div>
-        </div>
-      </div>
-
-      <!-- 梦想汗水坚持 -->
-      <div class="page-box" id="dream">
-        <div class="info-box">
-          <div class="welcome-header" data-page="dream"></div>
-          <div class="empty-state">支持一颗小凡达成目标……🥉</div>
-          <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
 
@@ -4219,6 +5141,15 @@
         messages: [
           { text: '喝一口醒醒神', time: '2026-07-16 23:29:13' },
           { text: '我三分糖居然还甜', time: '2026-07-16 23:31:09' }
+        ]
+      },
+      'drink_0706': {
+        title: '2026.07.06 太犇牛手作茶铺·大颗芒果冰茶',
+        tags: ['双倍芒果版','少冰','正常糖'],
+        image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260810144524161.jpg',
+        messages: [
+          { text: '喝一杯恢复能量[奋斗]', time: '2026-07-06 17:01:46' },
+          { text: '像桃子芒果罐头', time: '2026-07-06 17:02:15' }
         ]
       },
       'drink_0705': {
@@ -4392,7 +5323,6 @@
         food: { subtitle: 'PATATION', title: '每日一杯', desc: '收录yf口袋房间饮品分享' },
         travel: { subtitle: 'SELFIE', title: '旅行椰饭', desc: '收录yf口袋房间自拍' },
         words: { subtitle: 'WORDS', title: '饭言饭语', desc: '收录yf经典语录' },
-        dream: { subtitle: 'DREAM', title: '梦想汗水坚持', desc: '支持一颗小凡达成目标' },
         wait: { subtitle: 'ABOUT', title: '关于本站', desc: '' }
       };
 
@@ -4481,7 +5411,7 @@
       }
 
       const foodWorksPages = ['stage', 'fancam', 'bobo'];
-      const foodNotesPages = ['food', 'travel', 'words', 'dream'];
+      const foodNotesPages = ['food', 'travel', 'words'];
       
       let navPageId = pageId;
       if (foodWorksPages.includes(pageId)) navPageId = 'stage';
@@ -4509,6 +5439,13 @@
       document.dispatchEvent(event);
       
       setTimeout(() => {
+        // 页面切换后更新导航滑块位置（确保进入页面时黑色高亮在"全部"上）
+        if (window.updateNavIndicator) {
+          window.updateNavIndicator('stageNav', 'stageNavIndicator');
+          window.updateNavIndicator('boboNav', 'boboNavIndicator');
+          window.updateNavIndicator('platformNav', 'platformNavIndicator');
+        }
+        
         document.querySelectorAll('.page-box.active .welcome-header[data-page]').forEach(header => {
            
            const pageId = header.dataset.page;
@@ -4520,7 +5457,6 @@
                 food: { subtitle: 'PATATION', title: '每日一杯', desc: '收录yf口袋房间饮品分享' },
                 travel: { subtitle: 'SELFIE', title: '旅行椰饭', desc: '收录yf口袋房间自拍' },
                 words: { subtitle: 'WORDS', title: '饭言饭语', desc: '收录yf经典语录' },
-                dream: { subtitle: 'DREAM', title: '梦想汗水坚持', desc: '支持一颗小凡达成目标' },
                 wait: { subtitle: 'ABOUT', title: '关于本站', desc: '' }
             };
             
@@ -4644,13 +5580,19 @@
     // ===== 返回顶部按钮 =====
     (function() {
       const backBtn = document.getElementById('backToTop');
-      const contentArea = document.querySelector('.content-area');
-      if (backBtn && contentArea) {
-        contentArea.addEventListener('scroll', function() {
-          backBtn.style.display = contentArea.scrollTop > 300 ? 'flex' : 'none';
+
+      if (backBtn) {
+        // 监听 window 滚动
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 300) {
+            backBtn.classList.add('visible');
+          } else {
+            backBtn.classList.remove('visible');
+          }
         });
+
         backBtn.addEventListener('click', function() {
-          contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
     })();
@@ -4851,6 +5793,7 @@
       if (!targetBtn) { targetBtn = document.querySelector('#stageNav .stage-nav-item[data-category="all"]'); category = 'all'; }
       if (targetBtn) targetBtn.classList.add('active');
       currentCategory = category;
+      if (window.updateNavIndicator) window.updateNavIndicator('stageNav', 'stageNavIndicator');
 
       const data = getDataByCategory(category);
       let filtered = data.filter(item => {
@@ -4870,9 +5813,11 @@
         });
       }
 
-      // 日期筛选：只显示当天卡片
+      // 日期筛选
       if (calFilteredDay) {
-        filtered = filtered.filter(item => item.date === calFilteredDay);
+        const parts = calFilteredDay.split('.');
+        const formattedDay = parts[0] + '.' + parts[1].padStart(2, '0') + '.' + parts[2].padStart(2, '0');
+        filtered = filtered.filter(item => item.date && item.date.startsWith(formattedDay));
       }
 
       if (filtered.length === 0) {
@@ -4980,7 +5925,12 @@
         currentPage = newPage;
         isPaginationClick = true;
         renderCards(currentCategory, keyword);
-        document.querySelector('.content-area')?.scrollTo({ top: 0, behavior: 'smooth' });
+        // 滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const contentArea = document.querySelector('.content-area');
+        if (contentArea) {
+          contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     }
 
@@ -5009,13 +5959,31 @@
       { date: '2026.07.18', title: '杨宇馨生日会', category: 'special', url: 'https://www.bilibili.com/video/BV18uKP65EQR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802191148353.jpg' },
       { date: '2026.07.12', title: '叶凡生日会', category: 'special', url: 'https://www.bilibili.com/video/BV1kVNG6SE3M/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802191148352.jpg' },
       { date: '2026.06.20', title: '潘瑛琪生日会', category: 'special', url: 'https://www.bilibili.com/video/BV1Ghjt6CERY/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802193914463.jpg' },
+      { date: '2026.08.02凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1Vg3X6iEQ3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.04凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1GEu96AEyH/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.05晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV19Lu96PE7Y/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.05凌晨', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1RVu96iEb6/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.07凌晨', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1eLu96NEd4/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.08晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1HFu96LEne/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.08凌晨', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1wZuX62EmG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+      { date: '2026.08.09晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV19ju96YEVz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
     ];
 
     let currentBoboCategory = 'all';
 
     function getBoboDataByCategory(category) {
-      if (category === 'all') return boboData;
-      return boboData.filter(item => item.category === category);
+      let data = [];
+      if (category === 'all') {
+        data = [...boboData];
+      } else {
+        data = boboData.filter(item => item.category === category);
+      }
+      // 按日期从新到旧排序（忽略中文后缀）
+      return data.sort((a, b) => {
+        const dateA = a.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+        const dateB = b.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+        return dateB.localeCompare(dateA);
+      });
     }
 
     function renderBoboCards(category = currentBoboCategory, keyword = '') {
@@ -5028,6 +5996,7 @@
       if (!targetBtn) { targetBtn = document.querySelector('#boboNav .stage-nav-item[data-category="all"]'); category = 'all'; }
       if (targetBtn) targetBtn.classList.add('active');
       currentBoboCategory = category;
+      if (window.updateNavIndicator) window.updateNavIndicator('boboNav', 'boboNavIndicator');
 
       const data = getBoboDataByCategory(category);
       let filtered = data.filter(item => {
@@ -5049,7 +6018,9 @@
 
       // 日期筛选
       if (calFilteredDay) {
-        filtered = filtered.filter(item => item.date === calFilteredDay);
+        const parts = calFilteredDay.split('.');
+        const formattedDay = parts[0] + '.' + parts[1].padStart(2, '0') + '.' + parts[2].padStart(2, '0');
+        filtered = filtered.filter(item => item.date && item.date.startsWith(formattedDay));
       }
 
       document.getElementById('boboTotalCount').textContent = getBoboDataByCategory('all').length;
@@ -5066,7 +6037,7 @@
       let html = '';
       for (const item of filtered) {
         const tagColor = item.category === 'single' ? '#f0a0a0' : '#d4b0b8';
-        const tagText = item.category === 'single' ? '直播' : '特殊直播';
+        const tagText = item.category === 'single' ? '单播' : '特殊直播';
 
         let coverHtml = item.cover ?
           `<img src="${item.cover}" alt="${item.title}" loading="lazy" />` :
@@ -5184,6 +6155,7 @@
         document.querySelectorAll('#platformNav .stage-nav-item').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         filterWeiboFeed();
+        if (window.updateNavIndicator) window.updateNavIndicator('platformNav', 'platformNavIndicator');
       });
     });
 
@@ -5216,6 +6188,7 @@
       slider24: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151933091.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933092.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933093.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933094.jpg'],
       slider25: ['https://gitee.com/a1814747459/img-bed/raw/master/20260723164108151.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108152.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108153.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108154.jpg'],
       slider26: ['https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108280.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108281.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.jpg'],
+            slider27: ['https://gitee.com/a1814747459/img-bed/raw/master/20260812105155984.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155985.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155986.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155987.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155988.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155989.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155990.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155991.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155992.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155993.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155994.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155995.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155996.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155997.jpg','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155998.jpg'],
       xhs_slider1: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.jpg'],
       xhs_slider2: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153956753.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153956751.jpg'],
       xhs_slider3: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722121042728.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042729.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042731.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042730.jpg'],
@@ -5227,7 +6200,8 @@
       xhs_slider9: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145959261.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722191346348.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145959262.jpg'],
       xhs_slider10: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722191554137.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722191554138.jpg'],
       xhs_slider11: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151732487.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732488.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732489.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732490.jpg'],
-      xhs_slider12: ['https://gitee.com/a1814747459/img-bed/raw/master/20260802111525767.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpg']
+      xhs_slider12: ['https://gitee.com/a1814747459/img-bed/raw/master/20260802111525767.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.jpg', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpg'],
+      xhs_slider13: ['https://gitee.com/a1814747459/img-bed/raw/master/20260810205234738.jpg'],
     };
 
     let currentSetId = 'slider1';
@@ -5489,8 +6463,10 @@
 
       layoutBtns.forEach(btn => btn.addEventListener('click', function() { setLayout(this.dataset.layout); }));
 
+      setLayout('list');
+
       setHue(210);
-      setWallpaper('full');
+      setWallpaper('solid');
     })();
 
     // ===== 暗色模式切换 =====
@@ -5511,6 +6487,13 @@
           const isDark = document.body.classList.toggle('dark-mode');
           darkIcon.src = isDark ? darkIconUrl : lightIcon;
           localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
+          if (window.updateNavIndicator) {
+            setTimeout(() => {
+              window.updateNavIndicator('stageNav', 'stageNavIndicator');
+              window.updateNavIndicator('boboNav', 'boboNavIndicator');
+              window.updateNavIndicator('platformNav', 'platformNavIndicator');
+            }, 50);
+          }
         });
       }
     })();
@@ -5519,6 +6502,12 @@
     renderCards('all', '');
     renderBoboCards('all', '');
     filterWeiboFeed();
+
+    setTimeout(function() {
+        updateNavIndicator('stageNav', 'stageNavIndicator');
+        updateNavIndicator('boboNav', 'boboNavIndicator');
+        updateNavIndicator('platformNav', 'platformNavIndicator');
+      }, 100);
 
     // ===== 舞台日期-颜色映射 =====
     function getStageDateColors() {
@@ -5625,6 +6614,7 @@
     function getUpdateTypesForPage(pageId) {
       const typeMap = {
         'home': ['stage', 'bobo', 'fancam'],
+        'wait': ['stage', 'bobo', 'fancam'], 
         'stage': ['stage'],
         'bobo': ['bobo'],
         'fancam': ['fancam']
@@ -5670,7 +6660,7 @@
 
       // 2. 直播数据
       if (typeFilter.includes('bobo')) {
-        const boboTypeLabels = { single: '直播', special: '特殊直播' };
+        const boboTypeLabels = { single: '单播', special: '特殊直播' };
         boboData.forEach(item => {
           if (item.date) {
             const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
@@ -5683,7 +6673,7 @@
                 day: day,
                 type: 'bobo',
                 typeClass: 'bobo-' + subType,
-                typeLabel: boboTypeLabels[subType] || '直播',
+                typeLabel: boboTypeLabels[subType] || '单播',
                 subType: subType,
                 title: item.title,
                 subtitle: timeSuffix || '',
@@ -5714,6 +6704,19 @@
             if (dateKey.startsWith(datePrefix)) {
               const day = parseInt(cardDay);
               const label = platformNames[platform] || '平台';
+              
+              let url = '#';
+              const descBox = card.querySelector('.video-desc-box');
+              if (descBox && descBox.href) {
+                url = descBox.href;
+              }
+              if (!url || url === '#') {
+                const linkBtn = card.querySelector('.weibo-link-button');
+                if (linkBtn && linkBtn.href) {
+                  url = linkBtn.href;
+                }
+              }
+              
               results.push({
                 dateKey: dateKey,
                 day: day,
@@ -5723,7 +6726,7 @@
                 subType: platform,
                 title: label + '更新',
                 subtitle: '',
-                url: card.querySelector('.weibo-link-button, .xiaohongshu-link')?.href || '#',
+                url: url,
                 cover: '',
                 displayDate: `${monthStr}月${cardDay}日`
               });
@@ -5750,26 +6753,26 @@
       const listEl = document.getElementById('calUpdateList');
       const headerEl = document.getElementById('calUpdateHeader');
       const backBtn = document.getElementById('calUpdateBack');
+      const wrapEl = document.getElementById('calUpdateListWrap');
       const types = getUpdateTypesForPage(pageId || calCurrentPage);
-      const isNoSummaryPage = (pageId === 'food' || pageId === 'wait' || pageId === 'travel' || pageId === 'murmur' || pageId === 'recommend');
+      const isNoSummaryPage = (pageId === 'food' || pageId === 'travel' || pageId === 'words' || pageId === 'dream' || pageId === 'murmur' || pageId === 'recommend');
 
+      // 如果是无需汇总的页面，隐藏整个区域
       if (isNoSummaryPage) {
-        listEl.innerHTML = '';
-        headerEl.innerHTML = '';
-        backBtn.style.display = 'none';
+        if (wrapEl) wrapEl.style.display = 'none';
         return;
       }
+
+      // 其他页面正常显示
+      if (wrapEl) wrapEl.style.display = '';
 
       const allUpdates = getMonthUpdates(year, month, types);
 
       let filteredUpdates = allUpdates;
-      let headerText;
-      headerText = '本月更新汇总';
 
       if (filterDateKey) {
         filteredUpdates = allUpdates.filter(u => u.dateKey === filterDateKey);
         const dayStr = filterDateKey.substring(filterDateKey.lastIndexOf('.') + 1);
-        headerText = `${month + 1}月${dayStr}日更新`;
         backBtn.style.display = 'block';
       } else {
         backBtn.style.display = 'none';
@@ -5778,8 +6781,7 @@
 
       if (filteredUpdates.length === 0) {
         listEl.innerHTML = '<div class="cal-update-empty">暂无更新</div>';
-        const monthLabel = `${year}年${month + 1}月`;
-        headerEl.innerHTML = `<span class="update-title">${monthLabel}更新汇总</span><img id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.png" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
+        headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.png" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
         return;
       }
 
@@ -5816,10 +6818,8 @@
 
       listEl.innerHTML = html;
       const count = filteredUpdates.length;
-      const monthLabel = `${year}年${month + 1}月`;
-      headerEl.innerHTML = `<span class="update-title">${monthLabel}更新汇总</span><img id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.png" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
+      headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.png" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
     }
-
     function renderUpdateItem(item) {
       const typeClass = item.typeClass || item.type;
       const isPlatform = item.type === 'fancam';
@@ -5915,24 +6915,55 @@
       // 绑定日期点击事件
       calDays.querySelectorAll('.day.clickable').forEach(dayEl => {
         dayEl.addEventListener('click', function() {
+          const activePageId = document.querySelector('.page-box.active')?.id || calCurrentPage;
           const dateKey = this.dataset.date;
+
+          // 格式化为两位数月份和日期
+          const parts = dateKey.split('.');
+          const formattedDay = parts[0] + '.' + parts[1].padStart(2, '0') + '.' + parts[2].padStart(2, '0');
+
+          if (activePageId === 'home') {
+            if (calSelectedDate === dateKey) {
+              calSelectedDate = null;
+              calFilteredDay = null;
+              calFilteredMonth = null;
+            } else {
+              calSelectedDate = dateKey;
+              calFilteredDay = formattedDay;
+              calFilteredMonth = null;
+            }
+            calDays.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
+            if (calSelectedDate) {
+              this.classList.add('selected');
+            }
+            renderUpdateList(year, month, calSelectedDate, activePageId);
+            return;
+          }
+
+          // 非首页：筛选内容区
           if (calSelectedDate === dateKey) {
             calSelectedDate = null;
             calFilteredDay = null;
+            calFilteredMonth = null;
             renderUpdateList(year, month, null, activePageId);
           } else {
             calSelectedDate = dateKey;
             calFilteredDay = dateKey;
-            calFilteredMonth = null; // 日期筛选时取消月份筛选
+            calFilteredMonth = null;
             renderUpdateList(year, month, dateKey, activePageId);
           }
-          // 更新选中状态
           calDays.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
           if (calSelectedDate) {
             this.classList.add('selected');
           }
-          // 重新渲染卡片
-          rerenderCardsForPage(activePageId);
+          // 直接刷新卡片内容
+          if (activePageId === 'stage') {
+            renderCards(currentCategory, document.getElementById('stageSearch')?.value || '');
+          } else if (activePageId === 'bobo') {
+            renderBoboCards(currentBoboCategory, document.getElementById('boboSearch')?.value || '');
+          } else if (activePageId === 'fancam') {
+            filterWeiboFeed();
+          }
         });
       });
     }
@@ -5960,6 +6991,104 @@
         calSelectedDate = null;
         renderCalendar(currentYear, currentMonth);
         renderUpdateList(currentYear, currentMonth, null, calCurrentPage);
+      });
+
+      // ===== 月份选择器 =====
+      const monthPicker = document.getElementById('monthPicker');
+      const monthPickerYear = document.getElementById('monthPickerYear');
+      const monthPickerGrid = document.getElementById('monthPickerGrid');
+      const calMonthYear = document.getElementById('calMonthYear');
+      let pickerYear = currentYear;
+
+      function renderMonthPicker(year) {
+        monthPickerYear.textContent = year + '年';
+        const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+        let html = '';
+        for (let i = 0; i < 12; i++) {
+          const isActive = (year === currentYear && i === currentMonth);
+          html += `<div class="month-picker-item ${isActive ? 'active' : ''}" data-month="${i}">${months[i]}</div>`;
+        }
+        monthPickerGrid.innerHTML = html;
+      }
+
+      function positionMonthPicker() {
+        const sidebar = document.querySelector('.sidebar-calendar');
+        const rect = sidebar ? sidebar.getBoundingClientRect() : calMonthYear.getBoundingClientRect();
+        const pickerRect = monthPicker.getBoundingClientRect();
+        let left = rect.left - pickerRect.width + 50; 
+        let top = rect.top + 20;
+        // 检查是否超出视窗
+        if (left < 10) left = 10;
+        if (left + pickerRect.width > window.innerWidth - 10) {
+          left = window.innerWidth - pickerRect.width - 10;
+        }
+        if (top < 10) top = 10;
+        if (top + pickerRect.height > window.innerHeight - 10) {
+          top = window.innerHeight - pickerRect.height - 10;
+        }
+        monthPicker.style.left = left + 'px';
+        monthPicker.style.top = top + 'px';
+      }
+
+      function openMonthPicker() {
+        pickerYear = currentYear;
+        renderMonthPicker(pickerYear);
+        monthPicker.classList.add('open');
+        setTimeout(positionMonthPicker, 0);
+      }
+
+      function closeMonthPicker() {
+        monthPicker.classList.remove('open');
+      }
+
+      function selectMonth(year, month) {
+        currentYear = year;
+        currentMonth = month;
+        calSelectedDate = null;
+        calFilteredMonth = null;
+        calFilteredDay = null;
+        renderCalendar(currentYear, currentMonth);
+        renderUpdateList(currentYear, currentMonth, null, calCurrentPage);
+        closeMonthPicker();
+      }
+
+      // 点击标题打开/关闭月份选择器
+      calMonthYear.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (monthPicker.classList.contains('open')) {
+          closeMonthPicker();
+        } else {
+          openMonthPicker();
+        }
+      });
+
+      // 点击其他地方关闭
+      document.addEventListener('click', function(e) {
+        if (monthPicker.classList.contains('open') && 
+            !monthPicker.contains(e.target) && 
+            e.target !== calMonthYear) {
+          closeMonthPicker();
+        }
+      });
+
+      // 点击月份选择器内的月份
+      monthPickerGrid.addEventListener('click', function(e) {
+        const item = e.target.closest('.month-picker-item');
+        if (!item) return;
+        const month = parseInt(item.dataset.month);
+        selectMonth(pickerYear, month);
+      });
+
+      // 年份切换
+      document.getElementById('monthPickerPrev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        pickerYear--;
+        renderMonthPicker(pickerYear);
+      });
+      document.getElementById('monthPickerNext').addEventListener('click', function(e) {
+        e.stopPropagation();
+        pickerYear++;
+        renderMonthPicker(pickerYear);
       });
 
       // ===== 平台卡片按日期排序 =====
@@ -6074,6 +7203,292 @@
       });
     });
 
+    // ===== 导航指示条滑动动画 =====
+    (function() {
+      function updateNavIndicator(navId, indicatorId) {
+        const nav = document.getElementById(navId);
+        const indicator = document.getElementById(indicatorId);
+        if (!nav || !indicator) return;
+
+        const activeItem = nav.querySelector('.stage-nav-item.active');
+        if (!activeItem) return;
+
+        const navRect = nav.getBoundingClientRect();
+        const itemRect = activeItem.getBoundingClientRect();
+
+        const left = itemRect.left - navRect.left;
+        const width = itemRect.width;
+
+        indicator.style.width = width + 'px';
+        indicator.style.transform = `translateX(${left}px)`;
+        indicator.style.opacity = '1';
+      }
+
+      function initNavIndicator(navId, indicatorId) {
+        // 使用 requestAnimationFrame 确保布局完成
+        requestAnimationFrame(() => {
+          updateNavIndicator(navId, indicatorId);
+        });
+
+        const nav = document.getElementById(navId);
+        if (!nav) return;
+
+        const items = nav.querySelectorAll('.stage-nav-item');
+        items.forEach(item => {
+          item.addEventListener('click', function() {
+            requestAnimationFrame(() => {
+              updateNavIndicator(navId, indicatorId);
+            });
+          });
+        });
+      }
+
+      // 初始化三个导航指示条
+      initNavIndicator('stageNav', 'stageNavIndicator');
+      initNavIndicator('boboNav', 'boboNavIndicator');
+      initNavIndicator('platformNav', 'platformNavIndicator');
+
+      // 延迟多次重试初始化（确保布局完成）
+      [50, 150, 300, 600].forEach(delay => {
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            updateNavIndicator('stageNav', 'stageNavIndicator');
+            updateNavIndicator('boboNav', 'boboNavIndicator');
+            updateNavIndicator('platformNav', 'platformNavIndicator');
+          });
+        }, delay);
+      });
+
+      // 窗口大小变化时重新定位
+      window.addEventListener('resize', function() {
+        requestAnimationFrame(() => {
+          updateNavIndicator('stageNav', 'stageNavIndicator');
+          updateNavIndicator('boboNav', 'boboNavIndicator');
+          updateNavIndicator('platformNav', 'platformNavIndicator');
+        });
+        if (monthPicker.classList.contains('open')) {
+          positionMonthPicker();
+        }
+      });
+
+      // 页面加载完成后初始化（确保字体等资源加载完毕）
+      window.addEventListener('load', function() {
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            updateNavIndicator('stageNav', 'stageNavIndicator');
+            updateNavIndicator('boboNav', 'boboNavIndicator');
+            updateNavIndicator('platformNav', 'platformNavIndicator');
+          });
+        }, 300);
+      });
+
+      // 暴露到全局，供其他函数调用
+      window.updateNavIndicator = function(navId, indicatorId) {
+        requestAnimationFrame(() => {
+          updateNavIndicator(navId, indicatorId);
+        });
+      };
+    })();
+    
+    // ===== 计算倒数日 =====
+    function updateCountdown() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth() + 1;
+      const currentDate = now.getDate();
+      
+      function daysSince(year, month, day) {
+        const start = new Date(year, month - 1, day);
+        const diff = now - start;
+        return Math.floor(diff / (1000 * 60 * 60 * 24));
+      }
+      
+      function daysUntil(year, month, day) {
+        const target = new Date(year, month - 1, day);
+        const diff = target - now;
+        return Math.ceil(diff / (1000 * 60 * 60 * 24));
+      }
+      
+      const debutDate = { year: 2023, month: 9, day: 30 }; 
+      const promotionDate = { year: 2024, month: 2, day: 2 };  
+      const birthDate = { year: 2002, month: 7, day: 23 };  
+      
+      const debutAnniversary = new Date(2027, 8, 30);
+      const daysToDebutAnniv = daysUntil(2027, 9, 30);
+      
+      const daysToPromotionAnniv = daysUntil(2028, 2, 2);
+      
+      let birthdayYear = currentYear;
+      if (currentMonth > 7 || (currentMonth === 7 && currentDate > 23)) {
+        birthdayYear = currentYear + 1;
+      }
+      const daysToBirthday = daysUntil(birthdayYear, 7, 23);
+      
+      const daysSinceDebut = daysSince(2023, 9, 30);
+      
+      const daysSincePromotion = daysSince(2024, 2, 2);
+      
+      const daysSinceBirth = daysSince(2004, 7, 23);
+      
+      document.getElementById('daysToDebutAnniversary').textContent = daysToDebutAnniv + '天';
+      document.getElementById('daysToPromotionAnniversary').textContent = daysToPromotionAnniv + '天';
+      document.getElementById('daysToBirthday').textContent = daysToBirthday + '天';
+      document.getElementById('daysSinceDebut').textContent = daysSinceDebut + '天';
+      document.getElementById('daysSincePromotion').textContent = daysSincePromotion + '天';
+      document.getElementById('daysSinceBirth').textContent = daysSinceBirth + '天';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCountdown();
+      setInterval(updateCountdown, 86400000);
+    });
+
+    // ===== 公式照数据 =====
+    const formalData = {
+      '2026-newyear': {
+        label: '2026年新年公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554738.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554745.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554751.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554757.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554732.jpg'
+        ]
+      },
+      '2025-autumn': {
+        label: '2025年秋季队服公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554737.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554744.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554750.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554756.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554731.jpg'
+        ]
+      },
+      '2025-newyear': {
+        label: '2025年新年公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554736.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554743.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554749.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554755.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554761.jpg'
+        ]
+      },
+      '2024-autumn': {
+        label: '2024年秋季队服公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554735.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554742.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554748.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554754.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554760.jpg'
+        ]
+      },
+      '2024-spring': {
+        label: '2024年春季队服公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554734.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554740.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554747.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554753.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554759.jpg'
+        ]
+      },
+      '2023-2024': {
+        label: '2023-2024年度青春盛典公式照',
+        images: [
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554739.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554746.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554752.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554758.jpg',
+          'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554733.jpg'
+        ]
+      }
+    };
+
+    // 按钮顺序（从新到旧）
+    const formalKeys = ['2026-newyear', '2025-autumn', '2025-newyear', '2024-autumn', '2024-spring', '2023-2024'];
+
+    // ===== 渲染公式照 =====
+    function renderFormal(key) {
+      const single = document.getElementById('formalSingle');
+      const scroll = document.getElementById('formalScroll');
+
+      if (key === 'all') {
+        // 全部：渲染滚动模式
+        single.classList.remove('active');
+        scroll.classList.add('active');
+        renderScrollMode();
+        return;
+      }
+
+      // 单图模式
+      single.classList.add('active');
+      scroll.classList.remove('active');
+      renderGridMode(key);
+    }
+
+    function renderScrollMode() {
+      const container = document.querySelector('#formalScroll .scroll-inner');
+      if (!container) return;
+      let html = '';
+      formalKeys.forEach(k => {
+        const data = formalData[k];
+        const shortLabel = data.label.replace(/公式照$/, '').replace(/年度/, '');
+        data.images.forEach(img => {
+          html += `
+            <div class="scroll-item">
+              <img src="${img}" alt="${data.label}" loading="lazy" onclick="previewImage('${img}')" />
+              <span class="scroll-label">${shortLabel}</span>
+            </div>
+          `;
+        });
+      });
+      container.innerHTML = html;
+    }
+
+    function renderGridMode(key) {
+      const data = formalData[key];
+      if (!data) return;
+      const container = document.querySelector('#formalSingle .img-grid');
+      if (!container) return;
+      let html = '';
+      data.images.forEach(img => {
+        html += `
+          <img src="${img}" alt="${data.label}" loading="lazy" onclick="previewImage('${img}')" />
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // ===== 切换公式照 =====
+    function switchFormal(key) {
+      document.querySelectorAll('#formalBtnGroup .drink-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.key === key);
+      });
+      renderFormal(key);
+    }
+
+    // ===== 初始化 =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // 默认选中"全部"
+      const allBtn = document.querySelector('#formalBtnGroup .drink-btn[data-key="all"]');
+      if (allBtn) allBtn.classList.add('active');
+      renderFormal('all');
+    });
+        // ===== 图片区域滚轮滚动 =====
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollContainer = document.querySelector('#formalScroll');
+      if (scrollContainer) {
+        scrollContainer.addEventListener('wheel', function(e) {
+          // 阻止页面滚动，改为左右滚动
+          e.preventDefault();
+          const delta = (e.deltaY || e.deltaX) * 2;
+          this.scrollLeft += delta;
+        }, { passive: false });
+      }
+    });
   </script>
 </body>
 </html>
