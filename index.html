@@ -2619,6 +2619,160 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
         right: 0 !important;
       }
     }
+
+    /* ===== 移动端全屏搜索 ===== */
+    .mobile-search-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.97);
+      z-index: 10001;
+      flex-direction: column;
+      padding: 16px 16px 100px 16px;
+    }
+    
+    .mobile-search-overlay.open {
+      display: flex;
+    }
+    
+    .mobile-search-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    
+    .mobile-search-header .search-icon {
+      font-size: 20px;
+      color: #888;
+    }
+    
+    .mobile-search-header input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      font-weight: 500;
+      color: #1a1a2e;
+      background: transparent;
+      font-family: inherit;
+    }
+    
+    .mobile-search-header input::placeholder {
+      color: #bbb;
+    }
+    
+    .mobile-search-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #888;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    
+    .mobile-search-close:active {
+      color: #333;
+    }
+    
+    .mobile-search-results {
+      flex: 1;
+      overflow-y: auto;
+      padding-top: 16px;
+    }
+    
+    .mobile-search-results .search-hint {
+      text-align: center;
+      color: #bbb;
+      font-size: 15px;
+      padding: 40px 0;
+    }
+    
+    .mobile-search-results .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .mobile-search-results .search-result-item:active {
+      background: rgba(0, 0, 0, 0.04);
+    }
+    
+    .mobile-search-results .search-result-item .result-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    
+    .mobile-search-results .search-result-item .result-info {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .mobile-search-results .search-result-item .result-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    
+    .mobile-search-results .search-result-item .result-meta {
+      font-size: 12px;
+      color: #999;
+      margin-top: 2px;
+    }
+    
+    .mobile-search-results .search-result-item .result-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 12px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    
+    .mobile-search-results .search-empty {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      padding: 40px 0;
+    }
+    
+    /* 暗色模式适配 */
+    body.dark-mode .mobile-search-overlay {
+      background: rgba(20, 20, 30, 0.98) !important;
+    }
+    body.dark-mode .mobile-search-header {
+      border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    body.dark-mode .mobile-search-header input {
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode .mobile-search-header input::placeholder {
+      color: #666 !important;
+    }
+    body.dark-mode .mobile-search-results .search-hint {
+      color: #666 !important;
+    }
+    body.dark-mode .mobile-search-results .search-result-item {
+      border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    body.dark-mode .mobile-search-results .search-result-item:active {
+      background: rgba(255, 255, 255, 0.06) !important;
+    }
+    body.dark-mode .mobile-search-results .search-result-item .result-title {
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode .mobile-search-results .search-result-item .result-meta {
+      color: #777 !important;
+    }
   </style>
 </head>
 <body>
@@ -2652,23 +2806,59 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       <a class="menu-item-link sub-item" data-page="wait">关于本站</a>
     </div>
   </div>
-
+  
+  <!-- ===== 移动端全屏搜索 ===== -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay">
+    <div class="mobile-search-header">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="mobileSearchInput" placeholder="搜索舞台、直播、平台更新..." autofocus />
+      <button class="mobile-search-close" id="mobileSearchClose">✕</button>
+    </div>
+    <div class="mobile-search-results" id="mobileSearchResults">
+      <div class="search-hint">输入关键词开始搜索</div>
+    </div>
+  </div>
   <!-- ===== 移动端底部导航栏 ===== -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
     <button class="nav-item active" data-action="home">
-      <span class="nav-icon">🏠</span>
+      <span class="nav-icon">
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812135245694.png" 
+             alt="首页" 
+             style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+      </span>
       <span>首页</span>
     </button>
     <button class="nav-item" data-action="palette">
-      <span class="nav-icon">🎨</span>
-      <span>调色盘</span>
+      <span class="nav-icon">
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" 
+             alt="调色盘" 
+             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+      </span>
+      <span>主题设置</span>
     </button>
     <button class="nav-item" data-action="menu" id="menuToggleBtn">
-      <span class="nav-icon">☰</span>
+      <span class="nav-icon">
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812135245697.png" 
+             alt="菜单" 
+             style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+      </span>
       <span>菜单</span>
     </button>
+      <button class="nav-item" data-action="search" id="mobileSearchBtn">
+    <span class="nav-icon">
+      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" 
+           alt="搜索" 
+           style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+    </span>
+    <span>搜索</span>
+  </button>
     <button class="nav-item" data-action="dark" id="mobileDarkToggle">
-      <span class="nav-icon" id="mobileDarkIcon">🌙</span>
+      <span class="nav-icon">
+        <img id="mobileDarkIconImg" 
+             src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" 
+             alt="暗色模式" 
+             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+      </span>
       <span>暗色</span>
     </button>
   </nav>
@@ -7599,6 +7789,186 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
         }
       });
     })();
+// ===== 移动端全屏搜索 =====
+(function() {
+  const overlay = document.getElementById('mobileSearchOverlay');
+  const input = document.getElementById('mobileSearchInput');
+  const results = document.getElementById('mobileSearchResults');
+  const closeBtn = document.getElementById('mobileSearchClose');
+  const searchBtn = document.getElementById('mobileSearchBtn');
+
+  // ===== 收集所有可搜索数据 =====
+  function collectAllData() {
+    const items = [];
+
+    // 1. 舞台数据
+    const allStageData = [
+      ...unitData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'unit' })),
+      ...specialData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'special' })),
+      ...assistData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'assist' })),
+      ...substituteData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'substitute' }))
+    ];
+    allStageData.forEach(item => {
+      items.push({
+        title: item.title,
+        date: item.date || '',
+        show: item.show || '',
+        url: item.url || '#',
+        type: 'stage',
+        typeLabel: '舞台',
+        tag: item.category || 'unit',
+        tagLabel: { unit: 'UNIT', special: '特殊', assist: '助演', substitute: '代役' }[item.category] || '舞台',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.show || '')).toLowerCase()
+      });
+    });
+
+    // 2. 直播数据
+    boboData.forEach(item => {
+      const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+      items.push({
+        title: item.title,
+        date: pureDate || item.date || '',
+        show: '',
+        url: item.url || '#',
+        type: 'bobo',
+        typeLabel: '直播',
+        tag: item.category || 'single',
+        tagLabel: item.category === 'single' ? '单播' : '特殊直播',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.category || '')).toLowerCase()
+      });
+    });
+
+    // 3. 平台更新（从 DOM 读取）
+    document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card').forEach(card => {
+      const platform = card.dataset.platform || 'weibo';
+      const platformNames = { weibo: '微博', xiaohongshu: '小红书', douyin: '抖音', bilibili: 'B站' };
+      const timeEl = card.querySelector('.weibo-time');
+      let dateText = timeEl ? timeEl.textContent.trim() : '';
+      const textEl = card.querySelector('.weibo-text');
+      let textContent = textEl ? textEl.textContent.trim() : '';
+      
+      let url = '#';
+      const linkBtn = card.querySelector('.weibo-link-button');
+      if (linkBtn) url = linkBtn.href || '#';
+      const descBox = card.querySelector('.video-desc-box');
+      if (descBox) url = descBox.href || '#';
+
+      items.push({
+        title: platformNames[platform] || platform + '更新',
+        date: dateText,
+        show: textContent.substring(0, 30),
+        url: url,
+        type: 'fancam',
+        typeLabel: '平台',
+        tag: platform,
+        tagLabel: platformNames[platform] || platform,
+        searchText: (dateText + ' ' + textContent + ' ' + (platformNames[platform] || '')).toLowerCase()
+      });
+    });
+
+    return items;
+  }
+
+    // ===== 搜索 =====
+    function doSearch(keyword) {
+      const trimmed = keyword.trim().toLowerCase();
+      if (!trimmed) {
+        results.innerHTML = '<div class="search-hint">输入关键词开始搜索</div>';
+        return;
+      }
+  
+      const allData = collectAllData();
+      const matched = allData.filter(item => item.searchText.includes(trimmed));
+  
+      if (matched.length === 0) {
+        results.innerHTML = `<div class="search-empty">没有找到 "<strong>${keyword}</strong>" 相关内容</div>`;
+        return;
+      }
+  
+      const tagColors = {
+        unit: '#7fb5d0',
+        special: '#e8b88a',
+        assist: '#e8d48a',
+        substitute: '#a8d4c8',
+        single: '#f0a0a0',
+        'bobo-special': '#d4b0b8',
+        weibo: '#4299e1',
+        xiaohongshu: '#ff2d55',
+        douyin: '#f97316',
+        bilibili: '#fb7299'
+      };
+  
+      let html = `<div style="font-size:13px;color:#999;margin-bottom:12px;">共 ${matched.length} 个结果</div>`;
+      matched.slice(0, 30).forEach(item => {
+        const iconMap = { stage: '🎬', bobo: '🎙️', fancam: '📱' };
+        const color = tagColors[item.tag] || '#888';
+        html += `
+          <a class="search-result-item" href="${item.url}" target="_blank">
+            <span class="result-icon">${iconMap[item.type] || '📄'}</span>
+            <div class="result-info">
+              <div class="result-title">${item.title}</div>
+              <div class="result-meta">${item.date || ''}${item.show ? ' · ' + item.show : ''}</div>
+            </div>
+            <span class="result-tag" style="background:${color};">${item.tagLabel}</span>
+          </a>
+        `;
+      });
+      if (matched.length > 30) {
+        html += `<div style="text-align:center;color:#999;font-size:13px;padding:12px 0;">仅显示前 30 个结果</div>`;
+      }
+      results.innerHTML = html;
+    }
+  
+    // ===== 打开/关闭搜索 =====
+    function openSearch() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => input.focus(), 100);
+      // 清空旧结果
+      results.innerHTML = '<div class="search-hint">输入关键词开始搜索</div>';
+      input.value = '';
+    }
+  
+    function closeSearch() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      input.blur();
+    }
+  
+    // ===== 事件绑定 =====
+    if (searchBtn) {
+      searchBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openSearch();
+      });
+    }
+  
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeSearch);
+    }
+  
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) closeSearch();
+      });
+    }
+  
+    if (input) {
+      input.addEventListener('input', function() {
+        doSearch(this.value);
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeSearch();
+      });
+    }
+  
+    // ESC 关闭
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) {
+        closeSearch();
+      }
+    });
+  })();
   </script>
 </body>
 </html>
