@@ -2634,19 +2634,14 @@
         #platformNav {
           justify-content: flex-start !important;
           gap: 6px !important;
-          flex-wrap: nowrap !important;
-          overflow-x: auto !important;
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: none !important;
+          flex-wrap: wrap !important;  /* 改为 wrap，允许换行 */
           padding: 4px !important;
           position: relative !important;
+          overflow-x: visible !important;  /* 取消横向滚动 */
+          overflow-y: visible !important;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none !important;
         }
-        #stageNav::-webkit-scrollbar,
-        #boboNav::-webkit-scrollbar,
-        #platformNav::-webkit-scrollbar {
-          display: none !important;
-        }
-
         /* 黑色高亮指示条 - 与PC端一致 */
         #stageNav .nav-indicator,
         #boboNav .nav-indicator,
