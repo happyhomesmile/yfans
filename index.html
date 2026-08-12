@@ -2609,6 +2609,16 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
         right: 12px !important;
         width: calc(100% - 24px) !important;
         bottom: 130px !important;
+        display: block !important; 
+        opacity: 0 !important;  
+        pointer-events: none !important;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      }
+    
+      .settings-panel.open {
+        opacity: 1 !important;
+        pointer-events: all !important;
+        transform: translateY(0) scale(1) !important;
       }
 
       .mobile-side-menu {
@@ -2810,7 +2820,6 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
   <!-- ===== 移动端全屏搜索 ===== -->
   <div class="mobile-search-overlay" id="mobileSearchOverlay">
     <div class="mobile-search-header">
-      <span class="search-icon">🔍</span>
       <input type="text" id="mobileSearchInput" placeholder="搜索舞台、直播、平台更新..." autofocus />
       <button class="mobile-search-close" id="mobileSearchClose">✕</button>
     </div>
@@ -7869,6 +7878,166 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
     return items;
   }
 
+// ===== 移动端全屏搜索 =====
+(function() {
+  const overlay = document.getElementById('mobileSearchOverlay');
+  const input = document.getElementById('mobileSearchInput');
+  const results = document.getElementById('mobileSearchResults');
+  const closeBtn = document.getElementById('mobileSearchClose');
+  const searchBtn = document.getElementById('mobileSearchBtn');
+
+  // ===== 收集所有可搜索数据 =====
+  function collectAllData() {
+    const items = [];
+
+    // 1. 舞台数据
+    const allStageData = [
+      ...unitData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'unit' })),
+      ...specialData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'special' })),
+      ...assistData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'assist' })),
+      ...substituteData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'substitute' }))
+    ];
+    allStageData.forEach(item => {
+      items.push({
+        title: item.title,
+        date: item.date || '',
+        show: item.show || '',
+        url: item.url || '#',
+        type: 'stage',
+        typeLabel: '舞台',
+        tag: item.category || 'unit',
+        tagLabel: { unit: 'UNIT', special: '特殊', assist: '助演', substitute: '代役' }[item.category] || '舞台',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.show || '')).toLowerCase()
+      });
+    });
+
+    // 2. 直播数据
+    boboData.forEach(item => {
+      const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+      items.push({
+        title: item.title,
+        date: pureDate || item.date || '',
+        show: '',
+        url: item.url || '#',
+        type: 'bobo',
+        typeLabel: '直播',
+        tag: item.category || 'single',
+        tagLabel: item.category === 'single' ? '单播' : '特殊直播',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.category || '')).toLowerCase()
+      });
+    });
+
+    // 3. 平台更新（从 DOM 读取）
+    document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card').forEach(card => {
+      const platform = card.dataset.platform || 'weibo';
+      const platformNames = { weibo: '微博', xiaohongshu: '小红书', douyin: '抖音', bilibili: 'B站' };
+      const timeEl = card.querySelector('.weibo-time');
+      let dateText = timeEl ? timeEl.textContent.trim() : '';
+      const textEl = card.querySelector('.weibo-text');
+      let textContent = textEl ? textEl.textContent.trim() : '';
+      
+      let url = '#';
+      const linkBtn = card.querySelector('.weibo-link-button');
+      if (linkBtn) url = linkBtn.href || '#';
+      const descBox = card.querySelector('.video-desc-box');
+      if (descBox) url = descBox.href || '#';
+
+      items.push({
+        title: platformNames[platform] || platform + '更新',
+        date: dateText,
+        show: textContent.substring(0, 30),
+        url: url,
+        type: 'fancam',
+        typeLabel: '平台',
+        tag: platform,
+        tagLabel: platformNames[platform] || platform,
+        searchText: (dateText + ' ' + textContent + ' ' + (platformNames[platform] || '')).toLowerCase()
+      });
+    });
+
+    return items;
+  }
+
+// ===== 移动端全屏搜索 =====
+(function() {
+  const overlay = document.getElementById('mobileSearchOverlay');
+  const input = document.getElementById('mobileSearchInput');
+  const results = document.getElementById('mobileSearchResults');
+  const closeBtn = document.getElementById('mobileSearchClose');
+  const searchBtn = document.getElementById('mobileSearchBtn');
+
+  // ===== 收集所有可搜索数据 =====
+  function collectAllData() {
+    const items = [];
+
+    // 1. 舞台数据
+    const allStageData = [
+      ...unitData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'unit' })),
+      ...specialData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'special' })),
+      ...assistData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'assist' })),
+      ...substituteData.map(d => ({ ...d, type: 'stage', typeLabel: '舞台', category: 'substitute' }))
+    ];
+    allStageData.forEach(item => {
+      items.push({
+        title: item.title,
+        date: item.date || '',
+        show: item.show || '',
+        url: item.url || '#',
+        type: 'stage',
+        typeLabel: '舞台',
+        tag: item.category || 'unit',
+        tagLabel: { unit: 'UNIT', special: '特殊', assist: '助演', substitute: '代役' }[item.category] || '舞台',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.show || '')).toLowerCase()
+      });
+    });
+
+    // 2. 直播数据
+    boboData.forEach(item => {
+      const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+      items.push({
+        title: item.title,
+        date: pureDate || item.date || '',
+        show: '',
+        url: item.url || '#',
+        type: 'bobo',
+        typeLabel: '直播',
+        tag: item.category || 'single',
+        tagLabel: item.category === 'single' ? '单播' : '特殊直播',
+        searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.category || '')).toLowerCase()
+      });
+    });
+
+    // 3. 平台更新（从 DOM 读取）
+    document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card').forEach(card => {
+      const platform = card.dataset.platform || 'weibo';
+      const platformNames = { weibo: '微博', xiaohongshu: '小红书', douyin: '抖音', bilibili: 'B站' };
+      const timeEl = card.querySelector('.weibo-time');
+      let dateText = timeEl ? timeEl.textContent.trim() : '';
+      const textEl = card.querySelector('.weibo-text');
+      let textContent = textEl ? textEl.textContent.trim() : '';
+      
+      let url = '#';
+      const linkBtn = card.querySelector('.weibo-link-button');
+      if (linkBtn) url = linkBtn.href || '#';
+      const descBox = card.querySelector('.video-desc-box');
+      if (descBox) url = descBox.href || '#';
+
+      items.push({
+        title: platformNames[platform] || platform + '更新',
+        date: dateText,
+        show: textContent.substring(0, 30),
+        url: url,
+        type: 'fancam',
+        typeLabel: '平台',
+        tag: platform,
+        tagLabel: platformNames[platform] || platform,
+        searchText: (dateText + ' ' + textContent + ' ' + (platformNames[platform] || '')).toLowerCase()
+      });
+    });
+
+    return items;
+  }
+
     // ===== 搜索 =====
     function doSearch(keyword) {
       const trimmed = keyword.trim().toLowerCase();
@@ -7900,11 +8069,9 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
   
       let html = `<div style="font-size:13px;color:#999;margin-bottom:12px;">共 ${matched.length} 个结果</div>`;
       matched.slice(0, 30).forEach(item => {
-        const iconMap = { stage: '🎬', bobo: '🎙️', fancam: '📱' };
         const color = tagColors[item.tag] || '#888';
         html += `
           <a class="search-result-item" href="${item.url}" target="_blank">
-            <span class="result-icon">${iconMap[item.type] || '📄'}</span>
             <div class="result-info">
               <div class="result-title">${item.title}</div>
               <div class="result-meta">${item.date || ''}${item.show ? ' · ' + item.show : ''}</div>
@@ -7924,7 +8091,6 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       setTimeout(() => input.focus(), 100);
-      // 清空旧结果
       results.innerHTML = '<div class="search-hint">输入关键词开始搜索</div>';
       input.value = '';
     }
@@ -7947,12 +8113,6 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       closeBtn.addEventListener('click', closeSearch);
     }
   
-    if (overlay) {
-      overlay.addEventListener('click', function(e) {
-        if (e.target === this) closeSearch();
-      });
-    }
-  
     if (input) {
       input.addEventListener('input', function() {
         doSearch(this.value);
@@ -7962,7 +8122,6 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       });
     }
   
-    // ESC 关闭
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && overlay.classList.contains('open')) {
         closeSearch();
