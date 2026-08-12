@@ -2606,11 +2606,20 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       }
 
       .settings-panel {
-        right: 12px !important;
+        position: fixed !important;
+        bottom: 90px !important;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(12px) !important;
         width: calc(100% - 24px) !important;
-        bottom: 130px !important;
-        display: block !important; 
-        opacity: 0 !important;  
+        max-height: 55vh !important;
+        border-radius: 16px !important;
+        background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1)) !important;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12), 0 0 0 0.5px hsla(var(--theme-hue), 80%, 55%, 0.25) !important;
+        padding: 20px 22px 24px !important;
+        overflow-y: auto !important;
+        z-index: 1002 !important;
+        display: block !important;
+        opacity: 0 !important;
         pointer-events: none !important;
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
       }
@@ -2618,7 +2627,15 @@ body.dark-mode .top-nav .menu-item:hover .dropdown-icon {
       .settings-panel.open {
         opacity: 1 !important;
         pointer-events: all !important;
-        transform: translateY(0) scale(1) !important;
+        transform: translateX(-50%) translateY(0) !important;
+      }
+    
+      .settings-panel::-webkit-scrollbar {
+        width: 3px !important;
+      }
+      .settings-panel::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15) !important;
+        border-radius: 10px !important;
       }
 
       .mobile-side-menu {
