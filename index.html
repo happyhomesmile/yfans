@@ -276,7 +276,7 @@
     }
 
     .left-profile-card .countdown-header {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       color: #000000;
       letter-spacing: -1px;
@@ -291,6 +291,15 @@
       width: 100%;
     }
 
+    .left-profile-card .countdown-header .countdown-en {
+      font-size: 14px;
+      color: var(--theme-color); 
+      font-weight: 500;
+      opacity: 0.5;
+      letter-spacing: -1px;
+      margin-left: -1px;
+    }
+
     .left-profile-card .countdown-icon {
       width: 20px;
       height: 20px;
@@ -298,6 +307,103 @@
       flex-shrink: 0;
       filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));
       opacity: 0.6;
+    }
+
+    /* ===== 左侧目录卡片（独立卡片） ===== */
+    .left-toc-card {
+      position: absolute;
+      left: 15px;
+      top: 540px;
+      width: 300px;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
+      border-radius: 10px;
+      padding: 16px 14px 14px;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      z-index: 998;
+    }
+    .left-toc-card.fixed {
+      position: fixed;
+      top: 3px;
+      left: 15px;
+      width: 300px;
+    }
+
+    .left-toc-card .toc-header {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000000;
+      opacity: 0.8;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      letter-spacing: -1px;
+    }
+    .left-toc-card .toc-header .toc-en {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.5;
+      letter-spacing: -1px;
+      margin-left: 0px;
+      color:var(--theme-color); 
+    }
+
+    .left-toc-card .toc-item {
+      display: block;
+      padding: 8px 0 8px 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #1a1a2e;
+      opacity: 0.8;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .left-toc-card .toc-item:hover {
+      opacity: 0.9;
+      background: rgba(36, 104, 168, 0.06);
+      border-left-color: var(--theme-color);
+    }
+
+    .left-toc-card .toc-item.active {
+      opacity: 1;
+      border-left-color: var(--theme-color);
+      background: rgba(36, 104, 168, 0.06);
+    }
+
+    .left-toc-card .toc-item .toc-icon {
+      margin-right: 6px;
+      font-size: 13px;
+    }
+
+    /* 暗色模式适配 */
+    body.dark-mode .left-toc-card {
+      background: rgba(20, 20, 20, 0.85) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    body.dark-mode .left-toc-card .toc-header {
+      color: #e0e0e0;
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+
+    body.dark-mode .left-toc-card .toc-item {
+      color: #d0d8e0;
+    }
+
+    body.dark-mode .left-toc-card .toc-item:hover,
+    body.dark-mode .left-toc-card .toc-item.active {
+      background: rgba(66, 153, 225, 0.12);
+    }
+
+    /* ===== 移动端隐藏 ===== */
+    @media (max-width: 768px) {
+      .left-profile-card,
+      .left-toc-card {
+        display: none !important;
+      }
     }
 
     /* ===== 卡片 ===== */
@@ -308,11 +414,25 @@
       border-radius: 10px;
       padding: 18px 22px;
     }
-    /* ===== 日历 ===== */
-    .sidebar-calendar {
+    .page-box:not(#home) .info-box {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .sidebar-wrapper {
       position: absolute;
       right: 15px;
       top: 85px;
+      width: 290px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px; 
+      z-index: 999;
+    }
+    /* ===== 日历 ===== */
+    .sidebar-calendar {
+      position: relative;
       width: 290px;
       background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
       border-radius: 10px;
@@ -687,6 +807,101 @@
       margin-top: 6px;
       padding: 4px 4px 2px;
     }
+
+    /* ===== 每日一杯 ===== */
+    .daily-drink-card {
+      padding: 16px 20px 20px;
+      width: 290px;
+      position: relative;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
+      border-radius: 10px;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      pointer-events: auto !important; 
+      display: block !important;  
+      z-index: 1000 !important; 
+    }
+  
+    /* ===== 每日一杯 - 固定状态 ===== */
+    .daily-drink-card.fixed {
+      position: fixed !important;
+      top: 4px !important;
+      right: 15px !important;
+      z-index: 998 !important;
+    }
+
+    .daily-drink-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .daily-drink-header .icon {
+      font-size: 18px;
+    }
+
+    .daily-drink-header .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+      
+    }
+
+    .daily-drink-header .badge {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--theme-color);
+      opacity: 0.5;
+      margin-left: -2px;
+      letter-spacing: -1px;
+    }
+
+    .daily-drink-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .daily-drink-btn:hover {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
+    }
+
+    /* 暗色模式适配 */
+    body.dark-mode .daily-drink-card {
+      background: rgba(20, 20, 20, 0.85) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    body.dark-mode .daily-drink-header .title {
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .daily-drink-btn {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .daily-drink-btn:hover {
+      border-color: hsla(var(--theme-hue), 80%, 55%, 0.6) !important;
+    }
+    @media (max-width: 768px) {
+      .daily-drink-card {
+        display: none !important;
+      }
+    }
+    
     /* ===== 通用欢迎头部 ===== */
     .welcome-header {
       padding: 20px 20px 16px 20px;
@@ -698,19 +913,19 @@
       margin-right: 0;
     }
     .welcome-header .welcome-subtitle {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 550;
       opacity: 0.5;
       color: var(--theme-color);
-      letter-spacing: 1px;
+      letter-spacing: -1px;
       margin-bottom: 8px;
       text-transform: uppercase;
     }
     .welcome-header h1 {
-      font-size: 42px;
+      font-size: 43px;
       font-weight: 600;
       color: #000000;
-      letter-spacing: 1px;
+      letter-spacing: -2px;
       margin-bottom: 8px;
     }
     .welcome-header .sub {
@@ -752,19 +967,19 @@
     }
     .welcome-header .intro-text {
       font-size: 14px;
-      color: #5a7a9a;
-      opacity: 0.5;
+      color: #000000;
       margin-top: 8px;
       margin-bottom: 0px;
       letter-spacing: 1px;
       font-weight: 500;
+      text-align: left !important;
     }
 
     .info-title {
       font-size: 20px;
       color: #000000;
       font-weight: 600;
-      letter-spacing: 0px;
+      letter-spacing: -1px;
       padding-bottom: 8px;
       margin-bottom: 16px;
       display: flex;
@@ -782,7 +997,7 @@
       color: var(--theme-color);
       opacity: 0.5;
       margin-left: 5px;
-      letter-spacing: 0.5px;
+      letter-spacing: -0.5px;
       text-transform: uppercase; 
     }
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -811,7 +1026,7 @@
     /* ===== 时间线 ===== */
     .timeline-wrap { 
       margin-top: 10px; 
-      padding-left: 4px; 
+      padding-left: 12px; 
       position: relative; 
     }
     .timeline-wrap::before {
@@ -896,7 +1111,6 @@
       transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-
     #stageNav .stage-nav-item.active,
     #boboNav .stage-nav-item.active,
     #platformNav .stage-nav-item.active {
@@ -944,9 +1158,11 @@
     }
     .filter-search-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
     .search-box {
-      flex: 1; display: flex; align-items: center; background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.7));
+      flex: 1; display: flex; 
+      align-items: center; 
+      background: transparent;
       border-radius: 24px; padding: 0 12px;
-      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15) !important;
+      border: 2px solid hsla(var(--theme-hue), 80%, 55%, 0.15) !important;
       max-width: 360px;
     }
     .search-box input { border: none; outline: none; background: transparent; padding: 6px 4px; font-size: 13px; width: 100%; color: #1a3a4f; }
@@ -1163,27 +1379,6 @@
       display: block;
     }
 
-    /* ===== 羽化蒙版：封面右侧淡出 ===== */
-    .stage-grid.list-mode .video-card .video-cover-box::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      background: linear-gradient(
-        to right,
-        transparent 35%,
-        rgba(255, 255, 255, 0.05) 50%,
-        rgba(255, 255, 255, 0.2) 65%,
-        rgba(255, 255, 255, 0.5) 80%,
-        rgba(255, 255, 255, 0.85) 93%,
-        #ffffff 100%
-      );
-    }
-
     .stage-grid.list-mode .video-card:hover {
       background: rgba(255, 255, 255, calc(var(--card-opacity, 0.72) * 0.8));
     }
@@ -1223,7 +1418,6 @@
       color: #4a779e;
       line-height: 1.5;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2448,8 +2642,6 @@
     }
     .page-actions .menu-item:hover { background: rgba(36, 104, 168, 0.12); }
 
-    #food .timeline-wrap::before { left: 4px !important; }
-
     /* ===== 移动端底部导航栏 ===== */
     .mobile-bottom-nav {
       display: none;
@@ -2640,6 +2832,7 @@
       }
 
       .left-profile-card,
+      .left-toc-card,
       .sidebar-calendar {
         display: none !important;
       }
@@ -2668,8 +2861,73 @@
         grid-template-columns: repeat(3, 1fr) !important;
       }
 
-      .welcome-header h1 {
-        font-size: 24px !important;
+      #stage .welcome-header .welcome-subtitle,
+      #bobo .welcome-header .welcome-subtitle,
+      #fancam .welcome-header .welcome-subtitle,
+      .page-box:not(#home) .welcome-header .intro-text {
+        text-align: right !important;
+      }
+      #home .welcome-header .links a {
+        font-size: 12px !important;
+        padding: 2px 12px !important;
+      }
+
+      /* ===== 移动端 - 口袋图集弹窗 ===== */
+      #popupOverlayMiracle .popup-box {
+        max-width: 95% !important;
+        width: 95% !important;
+        max-height: 85vh !important;
+        padding: 16px 12px 14px !important;
+        border-radius: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+      }
+
+      #popupOverlayMiracle .popup-box .popup-close {
+        flex-shrink: 0 !important;
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        text-align: right !important;
+        margin-bottom: 4px !important;
+      }
+
+      #popupOverlayMiracle .popup-box > div:first-of-type {
+        flex-shrink: 0 !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 10px !important;
+      }
+
+      #popupOverlayMiracle #miraclePopupGrid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        overflow-y: auto !important;
+        padding: 2px 2px 4px 2px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      #popupOverlayMiracle #miraclePopupGrid::-webkit-scrollbar {
+        width: 3px !important;
+      }
+
+      #popupOverlayMiracle #miraclePopupGrid::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.12) !important;
+        border-radius: 10px !important;
+      }
+
+      #popupOverlayMiracle #miraclePopupGrid > div {
+        aspect-ratio: 1 / 1 !important;
+        border-radius: 6px !important;
+      }
+
+      #popupOverlayMiracle #miraclePopupGrid > div .date-overlay {
+        font-size: 9px !important;
+        padding: 4px 4px 2px !important;
       }
 
       #backToTop {
@@ -2721,32 +2979,22 @@
       }
 
     /* ===== 饭作/饭记/饭之拍 页面标题靠右（副标题靠左） ===== */
-      .page-box#stage .welcome-header,
-      .page-box#bobo .welcome-header,
-      .page-box#fancam .welcome-header {
-        text-align: right !important;
-        padding-right: 8px !important;
-      }
+    .page-box#stage .welcome-header,
+    .page-box#bobo .welcome-header,
+    .page-box#fancam .welcome-header,
+    .page-box#travel .welcome-header,
+    .page-box#words .welcome-header {
+      text-align: right !important;
+      padding-right: 8px !important;
+    }
     
-      .page-box#stage .welcome-header .welcome-subtitle,
-      .page-box#bobo .welcome-header .welcome-subtitle,
-      .page-box#fancam .welcome-header .welcome-subtitle {
-        text-align: right !important;
-      }
-    
-      .page-box#stage .welcome-header h1,
-      .page-box#bobo .welcome-header h1,
-      .page-box#fancam .welcome-header h1 {
-        text-align: right !important;
-        font-size: 24px !important;
-      }
-    
-      /* 副标题（intro-text）保持靠左 */
-      .page-box#stage .welcome-header .intro-text,
-      .page-box#bobo .welcome-header .intro-text,
-      .page-box#fancam .welcome-header .intro-text {
-        text-align: left !important;
-      }
+    .page-box#stage .welcome-header h1,
+    .page-box#bobo .welcome-header h1,
+    .page-box#fancam .welcome-header h1,
+    .page-box#travel .welcome-header h1,
+    .page-box#words .welcome-header h1 {
+      text-align: right !important;
+    }
 
       /* ===== 饭作/饭之啵/饭之拍 ===== */
       .page-box#stage .stage-nav,
@@ -2852,7 +3100,6 @@
     .stage-grid.list-mode .video-card .video-info .video-show {
       font-size: 11px;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -2867,6 +3114,8 @@
       position: relative;
       overflow: hidden;
       border-radius: 0;
+      -webkit-mask-image: linear-gradient(to left, #000 0%, #000 35%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.15) 72%, transparent 85%, transparent 90%);
+      mask-image: linear-gradient(to left, #000 0%, #000 35%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0.15) 72%, transparent 85%, transparent 90%);
     }
 
     .stage-grid.list-mode .video-card .video-cover-box img {
@@ -2874,41 +3123,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    /* ===== 羽化蒙版：从右到左（封面左侧淡出） ===== */
-    .stage-grid.list-mode .video-card .video-cover-box::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      background: linear-gradient(
-        to left,
-        transparent 15%,
-        rgba(255, 255, 255, 0.03) 30%,
-        rgba(255, 255, 255, 0.1) 48%,
-        rgba(255, 255, 255, 0.35) 65%,
-        rgba(255, 255, 255, 0.65) 80%,
-        rgba(255, 255, 255, 0.9) 93%,
-        #ffffff 100%
-      );
-    }
-
-    /* 暗色模式 - 羽化从右到左 */
-    body.dark-mode .stage-grid.list-mode .video-card .video-cover-box::after {
-      background: linear-gradient(
-        to left,
-        transparent 30%,
-        rgba(0, 0, 0, 0.05) 50%,
-        rgba(0, 0, 0, 0.2) 68%,
-        rgba(0, 0, 0, 0.5) 83%,
-        rgba(0, 0, 0, 0.85) 94%,
-        #000000 100%
-      );
     }
 
     /* 视频标签 - 右上角 */
@@ -3155,7 +3369,6 @@
     <!-- 饭记 -->
     <div class="menu-group">
       <div class="menu-group-title">饭记</div>
-      <a class="menu-item-link sub-item" data-page="food">日常分享</a>
       <a class="menu-item-link sub-item" data-page="travel">口袋图集</a>
       <a class="menu-item-link sub-item" data-page="words">饭言饭语</a>
     </div>
@@ -3181,26 +3394,26 @@
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
     <button class="nav-item active" data-action="home">
       <span class="nav-icon">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812135245694.png" 
-             alt="首页" 
-             style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812180249546.png" 
+            alt="首页" 
+            style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
       <span>首页</span>
     </button>
     <button class="nav-item" data-action="palette">
       <span class="nav-icon">
         <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.png" 
-             alt="调色盘" 
-             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+            alt="调色盘" 
+            style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
       <span>主题设置</span>
     </button>
     <button class="nav-item" data-action="menu" id="menuToggleBtn">
       <span class="nav-icon">
-        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812135245697.png" 
-             alt="菜单" 
-             style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
-      </span>
+        <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812180249547.png" 
+          alt="菜单" 
+          style="width:22px; height:22px; display:block; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+          </span>
       <span>菜单</span>
     </button>
     <button class="nav-item" data-action="search" id="mobileSearchBtn">
@@ -3211,16 +3424,16 @@
       </span>
       <span>搜索</span>
     </button>
-      <button class="nav-item" data-action="dark" id="mobileDarkToggle">
-        <span class="nav-icon">
-          <img id="mobileDarkIconImg" 
-              src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" 
-              alt="暗色模式" 
-              style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
-        </span>
-        <span id="mobileDarkLabel">暗色</span>
-      </button>
-  </nav>
+    <button class="nav-item" data-action="dark" id="mobileDarkToggle">
+      <span class="nav-icon">
+        <img id="mobileDarkIconImg" 
+            src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.png" 
+            alt="暗色模式" 
+            style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+      </span>
+      <span id="mobileDarkLabel">暗色</span>
+    </button>
+  </nav>  
   <!-- ===== 大图预览 Modal ===== -->
   <div class="image-modal" id="imageModal">
     <div class="modal-image-container" id="modalImageContainer">
@@ -3248,8 +3461,9 @@
     </div>
     <div class="profile-divider"></div>
     <div class="profile-countdown">
-      <div class="countdown-header">
-      <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260810222040309.png" alt="倒数日图标" class="countdown-icon" />倒数日</div>
+      <div class="countdown-header">倒数日
+        <span class="countdown-en">COUNTDOWN</span>
+      </div>
       <div class="countdown-item">
         <span class="countdown-label">距离出道四周年还有</span>
         <span class="countdown-days" id="daysToDebutAnniversary">--</span>
@@ -3277,13 +3491,22 @@
     </div>
   </div>
 
+  <!-- ===== 左侧目录卡片 ===== -->
+  <div class="left-toc-card">
+    <div class="toc-header">
+      <span>目录</span>
+      <span class="toc-en">CONTENTS</span>
+    </div>
+    <div class="toc-list" id="tocList">
+    </div>
+  </div>
+
   <div class="main-page">
 
     <!-- 饭记 下拉菜单 -->
     <div class="nav-dropdown" id="foodNotesDropdown">
       <div class="nav-dropdown-item" data-page="travel">口袋图集</div>
       <div class="nav-dropdown-item" data-page="words">饭言饭语</div>
-      <div class="nav-dropdown-item" data-page="food">日常分享</div>
     </div>
 
     <!-- 饭作 下拉菜单 -->
@@ -3319,6 +3542,8 @@
     <!-- ===== 内容区 ===== -->
     <div class="content-area" id="contentWrap">
 
+    <!-- ===== 日历 ===== -->
+     <div class="sidebar-wrapper">
     <div class="sidebar-calendar" id="miniCalendar">
       <div class="cal-header">
         <button id="calPrev">‹</button>
@@ -3347,6 +3572,18 @@
       </div>
     </div>
 
+    <!-- ===== 每日一杯 ===== -->
+    <div class="daily-drink-card">
+      <div class="daily-drink-header">
+        <span class="title">每日一杯</span>
+        <span class="badge">RANDOM</span>
+      </div>
+      <div class="daily-drink-btn" id="randomDrinkBtn">
+        <span>今天喝什么</span>
+      </div>
+    </div>
+  </div>
+    <!-- ===== 首页 ===== -->
       <div class="page-box active" id="home">
         <div class="info-box">
           <div class="welcome-header" data-page="home"></div>
@@ -3521,8 +3758,7 @@
 
       <!-- ===== 饭之拍 ===== -->
       <div class="page-box" id="fancam">
-        <div class="fancam-wrap">
-          <div class="info-box" style="padding:18px 22px;">
+        <div class="info-box stage-wrap">
             <div class="welcome-header" data-page="fancam"></div>
 
             <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
@@ -5409,70 +5645,10 @@
           <div class="timeline-sidebar" id="timelineSidebar" style="display:none;"></div>
         </div>
       </div>
-    </div>
-
-    <!-- ===== 饭食饭 ===== -->
-    <div class="page-box" id="food">
-      <div class="fancam-wrap">
-        <div class="info-box" style="padding:18px 22px;">
-          <div class="welcome-header" data-page="food"></div>
-
-          <div class="timeline-wrap" style="margin-top:4px; padding-left:-10px; position:relative;">
-
-            <!-- 2026.07 -->
-            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-              <div style="font-size:15px; font-weight:700; color:#000000;">2026.07</div>
-              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                <div data-drink="drink_0724" class="drink-btn">07.24 伯牙绝弦</div>
-                <div data-drink="drink_0716" class="drink-btn">07.16 西瓜冰柠茶霸王杯</div>
-                <div data-drink="drink_0706" class="drink-btn">07.06 大颗芒果冰茶</div>
-                <div data-drink="drink_0705" class="drink-btn">07.05 幽兰拿铁</div>
-              </div>
-            </div>
-
-            <!-- 2026.06 -->
-            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-              <div style="font-size:15px; font-weight:700; color:#000000;">2026.06</div>
-              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                <div data-drink="drink_0611" class="drink-btn">06.11 现煮绿豆木薯冰</div>
-                <div data-drink="drink_0608" class="drink-btn">06.08 蒸馏饮用水</div>
-                <div data-drink="drink_0605" class="drink-btn">06.05 轻因·伯牙绝弦</div>
-              </div>
-            </div>
-
-            <!-- 2026.05 -->
-            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-              <div style="font-size:15px; font-weight:700; color:#000000;">2026.05</div>
-              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                <div data-drink="drink_0531" class="drink-btn">05.31 伯牙绝弦</div>
-                <div data-drink="drink_0530" class="drink-btn">05.30 玫瑰20抹茶拿铁</div>
-                <div data-drink="drink_0528" class="drink-btn">05.28 多肉芒芒</div>
-                <div data-drink="drink_0520" class="drink-btn">05.20 小黄油美式</div>
-                <div data-drink="drink_0519" class="drink-btn">05.19 小黄油美式</div>
-                <div data-drink="drink_0513" class="drink-btn">05.13 山竹荔枝冰茶</div>
-                <div data-drink="drink_0503" class="drink-btn">05.03 轻因·伯牙绝弦</div>
-              </div>
-            </div>
-
-            <!-- 2026.04 -->
-            <div style="position:relative; padding-left:0px; margin-bottom:4px;">
-              <div style="font-size:15px; font-weight:700; color:#000000;">2026.04</div>
-              <div style="display:flex; flex-wrap:wrap; gap:8px; padding:6px 0 10px 0;">
-                <div data-drink="drink_0425" class="drink-btn">04.25 伯牙绝弦</div>
-                <div data-drink="drink_0419" class="drink-btn">04.19 冰摇红莓黑加仑</div>
-              </div>
-            </div>
-
-          </div>
-          <div class="footer-slogan">-All For YeFan-</div>
-        </div>
-      </div>
-    </div>
 
       <!-- ===== 旅行椰饭 ===== -->
-      <div class="page-box" id="travel">
-        <div class="fancam-wrap">
-          <div class="info-box" style="padding:18px 22px;">
+        <div class="page-box" id="travel">
+          <div class="info-box stage-wrap">
             <div class="welcome-header" data-page="travel"></div>
             <div class="miracle-card-grid">
               <div class="miracle-card" data-month="2026-08">
@@ -5489,17 +5665,19 @@
                 </div>
                 <div class="card-footer">2026.07</div>
               </div>
-              <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
-                <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                  <span style="font-size:42px;opacity:0.4;"></span>
+              <div class="miracle-card" data-month="2026-06">
+                <div class="cover-image">
+                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812220323221.jpg" alt="2026年6月" loading="lazy" />
+                  <div class="cover-badge">6月</div>
                 </div>
-                <div class="card-footer" style="color:#7a9ab0;">2026.06</div>
+                <div class="card-footer">2026.06</div>
               </div>
-              <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
-                <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
-                  <span style="font-size:42px;opacity:0.4;"></span>
+              <div class="miracle-card" data-month="2026-05">
+                <div class="cover-image">
+                  <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812221428462.jpg" alt="2026年5月" loading="lazy" />
+                  <div class="cover-badge">5月</div>
                 </div>
-                <div class="card-footer" style="color:#7a9ab0;">2026.05</div>
+                <div class="card-footer">2026.05</div>
               </div>
               <div class="miracle-card" style="background:rgba(255,255,255,0.4);">
                 <div class="cover-image" style="display:flex;align-items:center;justify-content:center;background:#eaf3fa;">
@@ -5511,16 +5689,13 @@
             <div class="footer-slogan">-All For YeFan-</div>
           </div>
         </div>
-      </div>
 
       <!-- ===== 饭所言 ===== -->
       <div class="page-box" id="words">
-        <div class="fancam-wrap">
-          <div class="info-box" style="padding:18px 22px;">
-            <div class="welcome-header" data-page="words"></div>
-            <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
-            <div class="footer-slogan">-All For YeFan-</div>
-          </div>
+        <div class="info-box stage-wrap">
+          <div class="welcome-header" data-page="words"></div>
+          <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+          <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
 
@@ -5529,11 +5704,6 @@
         <div class="info-box">
           <div class="welcome-header" data-page="wait"></div>
           <div style="font-size:14px; color:#2c5a7a; line-height:1.8; padding:4px 0 12px 0;">
-            <p>欢迎来到椰饭的饲养指南～</p>
-            <p>因为在补档时发现很多东西都需要挨个寻找很麻烦，所以诞生了给yf做一个网站，把所有东西整合起来的想法，然后这个饲养指南就诞生了。</p>
-            <p>又因为我并不是计算机出身，所以很多东西都一知半解，并没有做到能够真的把物料都整理好，但也许这是个养成系网站呢（x）</p>
-            <p>目前这个网站所有的数据都是我一个人手动寻找各种链接的，所以会一点点更新以前的内容。</p>
-            <p>本人审美很差，尽力排版后得到的产物看起来很简陋T-T欢迎大家提出意见和建议，我都会认真修改的！</p>
             <p>有任何好的建议和问题都可以wb小窗我！@除号好耶耶耶</p>
             <p>祝大家在看这个小凡的旅途中开心幸福，祝这个小凡万事顺遂！</p>
           </div>
@@ -5547,7 +5717,7 @@
             <div class="timeline-item">
               <span class="timeline-dot no-link" style="background:#4299e1;"></span>
               <div class="timeline-date">2026.07.23</div>
-              <div class="timeline-text">网站建立 更新2026相关内容<br><span style="font-size:12px;color:#6a8fa8;">祝叶凡生日快乐！</span></div>
+              <div class="timeline-text">网站建立 更新2026相关内容</div>
             </div>
             <div class="timeline-item">
               <span class="timeline-dot no-link"></span>
@@ -5574,13 +5744,13 @@
 
   <!-- ===== 旅行椰饭弹窗 ===== -->
   <div class="popup-overlay" id="popupOverlayMiracle">
-    <div class="popup-box" style="max-width:560px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; overflow-y:auto;">
-      <button class="popup-close" id="miraclePopupClose" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
-      <div style="font-size:16px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);">
-        <span id="miraclePopupTitle">2026年7月</span>
+      <div class="popup-box" style="max-width:560px; padding:20px 18px 18px; border-radius:20px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden;">
+          <button class="popup-close" id="miraclePopupClose" style="top:8px; right:12px; font-size:20px; color:hsla(var(--theme-hue), 80%, 40%, 0.5); background:none; border:none; cursor:pointer; transition:color 0.2s; flex-shrink:0;" onmouseover="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.9)'" onmouseout="this.style.color='hsla(var(--theme-hue), 80%, 40%, 0.5)'">✕</button>
+          <div style="font-size:16px; font-weight:600; color:#000000; text-align:left; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25); flex-shrink:0;">
+              <span id="miraclePopupTitle">2026年7月</span>
+          </div>
+          <div id="miraclePopupGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; overflow-y:auto; padding:4px; flex:1; min-height:0;"></div>
       </div>
-      <div id="miraclePopupGrid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-height:65vh; overflow-y:auto; padding:4px;"></div>
-    </div>
   </div>
 
   <!-- ===== 设置面板 ===== -->
@@ -5815,6 +5985,35 @@
     });
   });
 
+// ===== 每日一杯 - 随机抽取 =====
+(function() {
+  const randomBtn = document.getElementById('randomDrinkBtn');
+  if (!randomBtn) return;
+
+  randomBtn.addEventListener('click', function() {
+    const keys = Object.keys(drinkData);
+    if (keys.length === 0) return;
+    
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const data = drinkData[randomKey];
+    if (!data) return;
+
+    document.getElementById('popupTitle').textContent = data.title;
+    document.getElementById('popupTags').innerHTML = data.tags.map(t =>
+      `<span style="background:rgba(255,255,255,calc(var(--card-opacity,0.72)*0.95));padding:2px 10px;border-radius:10px;font-size:12px;font-weight:500;color:#000000;border:1px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px hsla(var(--theme-hue),80%,55%,0.1);">${t}</span>`
+    ).join('');
+    document.getElementById('popupImage').innerHTML = `<img src="${data.image}" style="width:100%;height:auto;display:block;border-radius:12px;cursor:pointer;" onclick="previewImage('${data.image}')" />`;
+    document.getElementById('popupMessages').innerHTML = data.messages.map(m =>
+      `<div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="background:#ffffff;padding:5px 12px;border-radius:4px 12px 12px 12px;font-size:14px;font-weight:400;color:#1a1a1a;max-width:fit-content;border:1px solid #e5e5e5;box-shadow:0 1px 2px rgba(0,0,0,0.04);">${m.text}</div>
+        <span style="font-size:9px;color:#b0b0b0;flex-shrink:0;padding-bottom:2px;">${m.time}</span>
+      </div>`
+    ).join('');
+
+    document.getElementById('popupOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+})();
   // ===== 平台月份数据 =====
   const platformMonths = {
     weibo: ['2026-08', '2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
@@ -5859,10 +6058,10 @@
         const h1 = document.createElement('h1');
         if (pageId === 'home') {
           h1.innerHTML = `
-            <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260807105640925.png"
-                alt="图标"
-                style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" />
-            ${config.title}
+          <img src="https://gitee.com/a1814747459/img-bed/raw/master/20260807105640925.png"
+            alt="图标"
+            style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" />
+               ${config.title}
           `;
         } else {
           h1.textContent = config.title;
@@ -6474,6 +6673,10 @@
     { date: '2026.08.08晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1HFu96LEne/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
     { date: '2026.08.08凌晨', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1wZuX62EmG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
     { date: '2026.08.09晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV19ju96YEVz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.08.10晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1uquz6QE7z/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.08.11晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1youC6xE2v/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.08.12晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV176gH6QEPj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.08.13凌晨', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV1i6gH6DEDU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
   ];
 
   let currentBoboCategory = 'all';
@@ -6713,57 +6916,85 @@
   const prevBtnModal = document.getElementById('modalPrev');
   const nextBtnModal = document.getElementById('modalNext');
 
+  // ===== 大图预览 - 移动端修复 =====
   window.openModalWithImages = function(setId, index) {
-    const images = imageSets[setId];
-    if (!images || images.length === 0) return;
-    currentSetId = setId;
-    currentImages = images;
-    currentIndex = index;
-    updateModal();
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  function updateModal() {
-    if (!currentImages.length) return;
-    modalImg.src = currentImages[currentIndex];
-    modalDots.innerHTML = '';
-    currentImages.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
-      dot.addEventListener('click', (e) => { e.stopPropagation(); currentIndex = i; updateModal(); });
-      modalDots.appendChild(dot);
-    });
-    prevBtnModal.style.display = currentImages.length > 1 ? 'flex' : 'none';
-    nextBtnModal.style.display = currentImages.length > 1 ? 'flex' : 'none';
-  }
-
-  function goToPrev() { if (currentImages.length <= 1) return; currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; updateModal(); }
-  function goToNext() { if (currentImages.length <= 1) return; currentIndex = (currentIndex + 1) % currentImages.length; updateModal(); }
-  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
-
-  prevBtnModal.addEventListener('click', (e) => { e.stopPropagation(); goToPrev(); });
-  nextBtnModal.addEventListener('click', (e) => { e.stopPropagation(); goToNext(); });
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (!modal.classList.contains('open')) return;
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowLeft') goToPrev();
-    if (e.key === 'ArrowRight') goToNext();
-  });
-
-  window.previewImage = function(src) {
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    if (modal && modalImg) {
-      modalImg.src = src;
+      var images = imageSets[setId];
+      if (!images || images.length === 0) return;
+      
+      currentSetId = setId;
+      currentImages = images;
+      currentIndex = index;
+      updateModal();
+      
+      var modal = document.getElementById('imageModal');
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
-      document.getElementById('modalPrev').style.display = 'none';
-      document.getElementById('modalNext').style.display = 'none';
-      document.getElementById('modalDots').innerHTML = '';
-    }
+      
+      // 移动端阻止滚动穿透
+      modal.addEventListener('touchmove', function(e) {
+          e.preventDefault();
+      }, { passive: false });
   };
+
+      window.previewImage = function(src) {
+          var modal = document.getElementById('imageModal');
+          var modalImg = document.getElementById('modalImage');
+          if (modal && modalImg) {
+              modalImg.src = src;
+              modal.classList.add('open');
+              document.body.style.overflow = 'hidden';
+              document.getElementById('modalPrev').style.display = 'none';
+              document.getElementById('modalNext').style.display = 'none';
+              document.getElementById('modalDots').innerHTML = '';
+              
+              modal.onclick = function(e) {
+                  if (e.target === modal) {
+                      closeModal();
+                  }
+              };
+          }
+      };
+
+  function closeModal() {
+      var modal = document.getElementById('imageModal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+  }
+
+  function goToPrev() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateModal();
+  }
+
+  function goToNext() {
+      if (currentImages.length <= 1) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateModal();
+  }
+
+  function updateModal() {
+      if (!currentImages.length) return;
+      var modalImg = document.getElementById('modalImage');
+      var modalDots = document.getElementById('modalDots');
+      var prevBtn = document.getElementById('modalPrev');
+      var nextBtn = document.getElementById('modalNext');
+      
+      modalImg.src = currentImages[currentIndex];
+      modalDots.innerHTML = '';
+      currentImages.forEach(function(_, i) {
+          var dot = document.createElement('button');
+          dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
+          dot.addEventListener('click', function(e) {
+              e.stopPropagation();
+              currentIndex = i;
+              updateModal();
+          });
+          modalDots.appendChild(dot);
+      });
+      prevBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+      nextBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+    };
 
   // ===== 旅行椰饭弹窗 =====
   (function() {
@@ -6791,7 +7022,45 @@
         { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.jpg' },
         { date: '2026.07.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731123249578.jpg' },
         { date: '2026.07.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171233465.jpg' },
-      ]
+      ],
+      '2026-06': [
+        { date: '2026.06.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220323221.jpg' },
+        { date: '2026.06.08', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220134257.jpg' },
+        { date: '2026.06.11', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220048229.jpg' },
+        { date: '2026.06.13', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220023540.jpg' },
+        { date: '2026.06.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215955813.jpg' },
+        { date: '2026.06.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215936354.jpg' },
+        { date: '2026.06.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215827606.jpg' },
+        { date: '2026.06.18', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215803228.jpg' },
+      ],
+      '2026-05': [
+        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428462.jpg' },
+        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428463.jpg' },
+        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428464.jpg' },
+        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428465.jpg' },
+        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313820.jpg' },
+        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313821.jpg' },
+        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313822.jpg' },
+        { date: '2026.05.03', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221243317.jpg' },
+        { date: '2026.05.05', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221152788.jpg' },
+        { date: '2026.05.11', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221041751.jpg' },
+        { date: '2026.05.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221021501.jpg' },
+        { date: '2026.05.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220904274.jpg' },
+        { date: '2026.05.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220858937.jpg' },
+        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220854491.jpg' },
+        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220847435.jpg' },
+        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220843752.jpg' },
+        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220808771.jpg' },
+        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220803157.jpg' },
+        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220745537.jpg' },
+        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220701781.jpg' },
+        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220650056.jpg' },
+        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220633900.jpg' },
+        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220523572.jpg' },
+        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220418772.jpg' },
+        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220438230.jpg' },
+        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220453055.jpg' },
+      ],
     };
 
     const popup = document.getElementById('popupOverlayMiracle');
@@ -6937,9 +7206,9 @@
     const cardOpacityVal = document.getElementById('cardOpacityVal');
 
     if (cardOpacity) {
-      cardOpacity.value = 100;
-      cardOpacityVal.textContent = '100%';
-      document.documentElement.style.setProperty('--card-opacity', 1);
+      cardOpacity.value = 80;
+      cardOpacityVal.textContent = '80%';
+      document.documentElement.style.setProperty('--card-opacity', 0.8);
       cardOpacity.addEventListener('input', function() {
         const val = this.value / 100;
         cardOpacityVal.textContent = this.value + '%';
@@ -8203,8 +8472,18 @@
         }
 
         if (action === 'palette') {
+          const panel = document.getElementById('settingsPanel');
           const toggle = document.getElementById('paletteToggle');
-          if (toggle) toggle.click();
+          if (panel) {
+            const isOpen = panel.classList.contains('open');
+            if (isOpen) {
+              panel.classList.remove('open');
+              if (toggle) toggle.classList.remove('active');
+            } else {
+              panel.classList.add('open');
+              if (toggle) toggle.classList.add('active');
+            }
+          }
         }
 
         if (action === 'dark') {
@@ -8248,6 +8527,271 @@
       }
     });
   })();
+
+    // ===== 目录栏 + 每日一杯固定功能 =====
+    (function() {
+      const tocList = document.getElementById('tocList');
+      if (!tocList) return;
+
+      const tocConfig = [
+        { label: '椰饭的自我介绍' },
+        { label: '椰饭的联系方式' },
+        { label: '椰饭的里程日记' },
+        { label: '历年公式照' }
+      ];
+
+      function findTitleElement(label) {
+        const titles = document.querySelectorAll('.info-title');
+        for (const el of titles) {
+          if (el.textContent.includes(label)) {
+            return el;
+          }
+        }
+        return null;
+      }
+
+  function renderToc() {
+    const tocList = document.getElementById('tocList');
+    if (!tocList) return;
+
+    const activePage = document.querySelector('.page-box.active')?.id || 'home';
+    
+    let config = [];
+    
+    if (activePage === 'home') {
+      config = [
+        { label: '椰饭的自我介绍' },
+        { label: '椰饭的联系方式' },
+        { label: '椰饭的里程日记' },
+        { label: '历年公式照' }
+      ];
+    } else if (activePage === 'fancam') {
+      const months = [
+        '2026年8月', '2026年7月', '2026年6月', '2026年5月',
+        '2026年4月', '2026年3月', '2026年2月', '2026年1月',
+        '2025年12月', '2025年11月', '2025年10月', '2025年9月'
+      ];
+      config = months.map(m => ({ label: m }));
+    } else {
+      config = [{ label: '暂无目录', disabled: true }];
+    }
+
+    let html = '';
+    config.forEach((item, index) => {
+      if (item.disabled) {
+        html += `<div class="toc-item" style="opacity:0.4;cursor:default;pointer-events:none;">${item.label}</div>`;
+      } else if (activePage === 'home') {
+        const targetEl = findTitleElement(item.label);
+        if (targetEl) {
+          const id = 'toc-section-' + index;
+          if (!targetEl.id) targetEl.id = id;
+          html += `<a class="toc-item" data-target="${id}">${item.label}</a>`;
+        }
+      } else if (activePage === 'fancam') {
+        const monthKey = item.label.replace('年', '-').replace('月', '');
+        html += `<a class="toc-item" data-month="${monthKey}">${item.label}</a>`;
+      }
+    });
+    
+    tocList.innerHTML = html;
+
+    // 点击事件
+    tocList.querySelectorAll('.toc-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.dataset.target;
+        if (targetId) {
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            const offset = 100;
+            const top = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            tocList.querySelectorAll('.toc-item').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+          }
+          return;
+        }
+        
+        const month = this.dataset.month;
+        if (month && activePage === 'fancam') {
+          const [year, monthNum] = month.split('-').map(Number);
+          const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+          let targetCard = null;
+          for (const card of cards) {
+            if (card.style.display === 'none') continue;
+            const cardMonth = card.dataset?.month;
+            if (cardMonth) {
+              const [cy, cm] = cardMonth.split('-').map(Number);
+              if (cy === year && cm === monthNum) {
+                targetCard = card;
+                break;
+              }
+            }
+          }
+          if (targetCard) {
+            const offset = 120;
+            const top = targetCard.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  }
+    function updateActiveOnScroll() {
+      const items = tocList.querySelectorAll('.toc-item');
+      if (!items.length) return;
+
+      const activePage = document.querySelector('.page-box.active')?.id || 'home';
+      const scrollY = window.pageYOffset + 120;
+
+      if (activePage === 'home') {
+        let activeIndex = 0;
+        items.forEach((item, index) => {
+          const targetId = item.dataset.target;
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            const rect = targetEl.getBoundingClientRect();
+            const top = rect.top + window.pageYOffset;
+            if (top <= scrollY) {
+              activeIndex = index;
+            }
+          }
+        });
+        items.forEach((item, index) => {
+          item.classList.toggle('active', index === activeIndex);
+        });
+      }
+    }
+
+  // ===== 每日一杯 - 设置初始位置（只在加载/切换/resize时调用） =====
+  function setDrinkPosition() {
+    const drinkCard = document.querySelector('.daily-drink-card');
+    const calendar = document.querySelector('.sidebar-calendar');
+    if (!drinkCard || !calendar) return;
+
+    const calendarRect = calendar.getBoundingClientRect();
+    const calendarBottom = calendarRect.bottom + window.pageYOffset;
+    const gap = 6;
+    const expectedTop = calendarBottom + gap;
+
+  }
+
+  // ===== 每日一杯 - 固定判断（只在滚动时调用） =====
+  function updateDrinkFixed() {
+    const drinkCard = document.querySelector('.daily-drink-card');
+    if (!drinkCard) return;
+    
+    if (drinkCard.style.display === 'none') {
+      drinkCard.classList.remove('fixed');
+      return;
+    }
+
+    // 如果还没记录初始位置，记录一次（相对于文档顶部的偏移）
+    if (!drinkCard.dataset.initialTop) {
+      const rect = drinkCard.getBoundingClientRect();
+      drinkCard.dataset.initialTop = rect.top + window.pageYOffset;
+    }
+
+    const initialTop = parseFloat(drinkCard.dataset.initialTop);
+    const scrollY = window.pageYOffset;
+
+    // 滚动超过卡片初始位置 → 固定；滚动回到初始位置以上 → 取消固定
+    if (scrollY >= initialTop) {
+      drinkCard.classList.add('fixed');
+    } else {
+      drinkCard.classList.remove('fixed');
+      // 取消固定后清除缓存，下次重新计算位置（防止布局变化）
+      delete drinkCard.dataset.initialTop;
+    }
+  }
+
+  // ===== 目录固定 =====
+  function updateTocFixed() {
+    const tocCard = document.querySelector('.left-toc-card');
+    if (!tocCard) return;
+
+    if (tocCard.style.display === 'none') {
+      tocCard.classList.remove('fixed');
+    } else {
+      const scrollY = window.pageYOffset;
+      if (scrollY >= 540) {
+        tocCard.classList.add('fixed');
+      } else {
+        tocCard.classList.remove('fixed');
+      }
+    }
+
+    updateDrinkFixed();
+  }
+
+  // ===== 渲染目录 =====
+  renderToc();
+
+  // ===== 页面切换时重置 =====
+  document.addEventListener('navUpdate', function(e) {
+    const pageId = e.targetPage || 'home';
+    const card = document.querySelector('.left-toc-card');
+    const drinkCard = document.querySelector('.daily-drink-card');
+    
+    // 目录卡片在所有页面都显示
+    card.style.display = '';
+    renderToc();
+    
+    // 清除所有目录高亮
+    setTimeout(function() {
+      document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
+      setDrinkPosition();
+      updateActiveOnScroll();
+      updateTocFixed();
+    }, 150);
+    
+    if (pageId !== 'home') {
+      card.classList.remove('fixed');
+      if (drinkCard) {
+        drinkCard.classList.remove('fixed');
+        delete drinkCard.dataset.initialTop;
+      }
+    }
+  });
+
+    // ===== 初始状态 =====
+    const tocCard = document.querySelector('.left-toc-card');
+    if (tocCard) {
+      tocCard.style.display = '';
+      tocCard.classList.remove('fixed');
+    }
+  
+  setTimeout(function() {
+    setDrinkPosition();
+    updateTocFixed();
+  }, 200);
+
+  // ===== 滚动监听 =====
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        updateActiveOnScroll();
+        updateTocFixed();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // ===== 窗口大小变化 =====
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      setDrinkPosition();
+      updateTocFixed();
+    }, 200);
+  });
+
+})();
+
   </script>
 </body>
 </html>
