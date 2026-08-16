@@ -406,6 +406,118 @@
       }
     }
 
+    /* ===== 快速安利区 ===== */
+    .left-promo-card {
+      position: absolute;
+      left: 15px;
+      width: 300px;
+      background: rgba(255, 255, 255, calc(var(--card-opacity, 1) * 1));
+      border-radius: 10px;
+      padding: 14px 16px 16px;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.15);
+      z-index: 997;
+    }
+
+    .left-promo-card.fixed {
+      position: fixed;
+      top: 3px;
+      left: 15px;
+      width: 300px;
+    }
+
+    .left-promo-card .promo-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .left-promo-card .promo-header .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: -1px;
+    }
+
+    .left-promo-card .promo-header .badge {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--theme-color);
+      opacity: 0.5;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
+
+    .left-promo-card .promo-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      gap: 10px;
+    }
+
+    .left-promo-card .promo-item:hover {
+      background: rgba(36, 104, 168, 0.06);
+    }
+
+    .left-promo-card .promo-item .promo-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .left-promo-card .promo-item .promo-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a2e;
+      opacity: 0.8;
+      flex: 1;
+    }
+
+    .left-promo-card .promo-item .promo-arrow {
+      font-size: 14px;
+      color: var(--theme-color);
+      opacity: 0.3;
+      transition: transform 0.2s ease;
+    }
+
+    .left-promo-card .promo-item:hover .promo-arrow {
+      transform: translateX(4px);
+      opacity: 0.8;
+    }
+
+    /* 暗色模式适配 */
+    body.dark-mode .left-promo-card {
+      background: rgba(20, 20, 20, 0.85) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    body.dark-mode .left-promo-card .promo-header .title {
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .left-promo-card .promo-item .promo-text {
+      color: #d0d8e0 !important;
+    }
+
+    body.dark-mode .left-promo-card .promo-item:hover {
+      background: rgba(66, 153, 225, 0.12) !important;
+    }
+
+    /* 移动端隐藏 */
+    @media (max-width: 768px) {
+      .left-promo-card {
+        display: none !important;
+      }
+    }
+
     /* ===== 卡片 ===== */
     .info-box {
       max-width: 780px;
@@ -2900,15 +3012,10 @@
       }
 
       #popupOverlayMiracle #miraclePopupGrid {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
         gap: 6px !important;
-        overflow-y: auto !important;
-        padding: 2px 2px 4px 2px !important;
-        flex: 1 !important;
-        min-height: 0 !important;
-        max-height: none !important;
-        -webkit-overflow-scrolling: touch !important;
+        justify-content: flex-start !important;
       }
 
       #popupOverlayMiracle #miraclePopupGrid::-webkit-scrollbar {
@@ -2921,8 +3028,10 @@
       }
 
       #popupOverlayMiracle #miraclePopupGrid > div {
+        width: calc(33.33% - 6px) !important;
         aspect-ratio: 1 / 1 !important;
         border-radius: 6px !important;
+        overflow: hidden !important;
       }
 
       #popupOverlayMiracle #miraclePopupGrid > div .date-overlay {
@@ -2978,7 +3087,7 @@
         right: 0 !important;
       }
 
-    /* ===== 饭作/饭记/饭之拍 页面标题靠右（副标题靠左） ===== */
+    /* ===== 饭作/饭记/饭之拍 页面标题靠右 ===== */
     .page-box#stage .welcome-header,
     .page-box#bobo .welcome-header,
     .page-box#fancam .welcome-header,
@@ -3370,7 +3479,7 @@
     <div class="menu-group">
       <div class="menu-group-title">饭记</div>
       <a class="menu-item-link sub-item" data-page="travel">口袋图集</a>
-      <a class="menu-item-link sub-item" data-page="words">饭言饭语</a>
+      <a class="menu-item-link sub-item" data-page="words">演讲</a>
     </div>
 
     <!-- 关于本站 -->
@@ -3501,12 +3610,34 @@
     </div>
   </div>
 
+  <!-- ===== 快速安利区 ===== -->
+  <div class="left-promo-card">
+    <div class="promo-header">
+      <span class="title">快速安利</span>
+      <span class="badge">Quick Picks</span>
+    </div>
+      <div class="promo-content">
+        <div class="promo-item" onclick="randomJump('stage')">
+          <span class="promo-text">随机舞台</span>
+          <span class="promo-arrow">→</span>
+        </div>
+        <div class="promo-item" onclick="randomJump('bobo')">
+          <span class="promo-text">随机直播</span>
+          <span class="promo-arrow">→</span>
+        </div>
+        <div class="promo-item" onclick="randomJump('fancam')">
+          <span class="promo-text">随机平台更新</span>
+          <span class="promo-arrow">→</span>
+        </div>
+      </div>
+    </div>
+
   <div class="main-page">
 
     <!-- 饭记 下拉菜单 -->
     <div class="nav-dropdown" id="foodNotesDropdown">
       <div class="nav-dropdown-item" data-page="travel">口袋图集</div>
-      <div class="nav-dropdown-item" data-page="words">饭言饭语</div>
+      <div class="nav-dropdown-item" data-page="words">演讲</div>
     </div>
 
     <!-- 饭作 下拉菜单 -->
@@ -3557,7 +3688,6 @@
       <div class="cal-update-list-wrap" id="calUpdateListWrap">
         <div class="cal-update-header" id="calUpdateHeader"></div>
         <div class="cal-update-list" id="calUpdateList"></div>
-        <button class="cal-update-back" id="calUpdateBack">← 返回全部</button>
       </div>
       <!-- 月份选择器 -->
       <div class="month-picker" id="monthPicker">
@@ -3786,7 +3916,7 @@
             2026-08-11 23:17 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">📸</span></div>
-          <a href="https://weibo.com/7901094930/RcX18nRQU" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/RcX18nRQU" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider27', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155984.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider27', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260812105155985.jpg" alt="配图2" loading="lazy" /></div>
@@ -3812,7 +3942,7 @@
             2026-08-01 02:13 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">该想我了！ </span></div>
-          <a href="https://weibo.com/7901094930/Rbit5qAu8" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/Rbit5qAu8" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider26', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider26', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260802111108280.jpg" alt="配图2" loading="lazy" /></div>
@@ -3828,7 +3958,7 @@
             2026-07-23 12:33 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">分享图片</span></div>
-          <a href="https://weibo.com/7901094930/R9ZGvhtrz" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R9ZGvhtrz" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2" style="max-width:300px;">
             <div class="media-item" onclick="openModalWithImages('slider25', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260723164108151.jpg" alt="配图1" loading="lazy" /></div>
           </div>
@@ -3851,7 +3981,7 @@
             2026-07-18 22:52 · 发布于 上海
           </div>
           <div class="weibo-text">哼！</div>
-          <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R9iAZ3VaE" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider1', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider1', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.jpg" alt="配图2" loading="lazy" /></div>
@@ -3872,7 +4002,7 @@
             2026-07-14 18:06 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">青春燃烧的盛夏</span><span class="line">并肩就绝无惧怕</span><span class="line">谢谢你们</span></div>
-          <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R8F17szrM" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider3', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider3', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.jpg" alt="配图2" loading="lazy" /></div>
@@ -3894,7 +4024,7 @@
             2026-07-05 16:02 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">❤️‍🔥</span></div>
-          <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R7hmfhSMp" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider4', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider4', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.jpg" alt="配图2" loading="lazy" /></div>
@@ -3910,7 +4040,7 @@
             2026-06-01 18:23 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">可以一直当个小朋友咩 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R27KslKkh" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider5', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416589.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider5', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722113416590.jpg" alt="配图2" loading="lazy" /></div>
@@ -3926,7 +4056,7 @@
             2026-05-20 15:14 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">我說幸福就是在你身邊˚₊ ᦒ ♡ ᦒ ₊˚ ​​​</span></div>
-          <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/R0hnQbEW0" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider6', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider6', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.jpg" alt="配图2" loading="lazy" /></div>
@@ -3947,7 +4077,7 @@
             2026-05-17 17:40 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">🌟</span></div>
-          <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QFNw3kLNY" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider7', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider7', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.jpg" alt="配图2" loading="lazy" /></div>
@@ -3965,7 +4095,7 @@
             2026-05-14 13:01 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">今天是😺😺 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QFjpfsn0e" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider8', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118189.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider8', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123118190.jpg" alt="配图2" loading="lazy" /></div>
@@ -3984,7 +4114,7 @@
             2026-04-29 06:25 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">美好的一天从看到美丽的人开始 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QCZp0zTXE" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider9', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441826.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider9', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123441827.jpg" alt="配图2" loading="lazy" /></div>
@@ -4000,7 +4130,7 @@
             2026-04-10 22:28 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">⸝⸝⸝˘◡˘♡你宝宝 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QAcAyn5Zk" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider10', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620238.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider10', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123620239.jpg" alt="配图2" loading="lazy" /></div>
@@ -4015,7 +4145,7 @@
             2026-04-04 00:04 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">🌬️</span></div>
-          <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/Qz9dVcYvv" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider11', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider11', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.jpg" alt="配图2" loading="lazy" /></div>
@@ -4029,7 +4159,7 @@
             2026-03-29 12:40 · 发布于 广东
           </div>
           <div class="weibo-text"><span class="line">📷 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QyjBYrbcD" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QyjBYrbcD" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider12', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145444669.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider12', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145444670.jpg" alt="配图2" loading="lazy" /></div>
@@ -4045,7 +4175,7 @@
             2026-03-17 19:47 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">9️⃣0️⃣0️⃣ ​​​</span></div>
-          <a href="https://weibo.com/7901094930/Qwxhb7N8r" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/Qwxhb7N8r" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider13', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145537337.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider13', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145537338.jpg" alt="配图2" loading="lazy" /></div>
@@ -4061,7 +4191,7 @@
             2026-03-07 15:03 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">周六 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QuZ95ADAh" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QuZ95ADAh" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider14', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145637196.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider14', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145637197.jpg" alt="配图2" loading="lazy" /></div>
@@ -4075,7 +4205,7 @@
             2026-03-04 22:42 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">我这辈子还要再流多少次眼泪[泪奔]可恶呀！！！ ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QuzRMftGQ" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QuzRMftGQ" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-comment-bottom">
             <span class="comment-label">评论</span>
             <span>下次流幸福的眼泪[泪奔]</span>
@@ -4090,7 +4220,7 @@
             2026-02-28 16:48 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">叫我什么 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QtVQj7Fgl" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QtVQj7Fgl" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider15', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145926259.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider15', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145926260.jpg" alt="配图2" loading="lazy" /></div>
@@ -4108,7 +4238,7 @@
             2026-02-26 10:18 · 发布于 河北
           </div>
           <div class="weibo-text"><span class="line">🏂 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QtAqNcTYW" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QtAqNcTYW" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider16', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145959261.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider16', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722145959262.jpg" alt="配图2" loading="lazy" /></div>
@@ -4122,7 +4252,7 @@
             2026-02-19 22:21 · 发布于 黑龙江
           </div>
           <div class="weibo-text"><span class="line">我便毁你整个天堂👾@SNH48-唐程成 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QsBaT6ZFe" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QsBaT6ZFe" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider17', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722150814512.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider17', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722150814513.jpg" alt="配图2" loading="lazy" /></div>
@@ -4153,7 +4283,7 @@
             2026-02-17 02:13 · 发布于 安徽
           </div>
           <div class="weibo-text"><span class="line">新年快乐！！[柯基]新的一年也要和我在一起了！！</span></div>
-          <a href="https://weibo.com/7901094930/QsapsnMxk" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QsapsnMxk" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
         </div>
 
         <!-- ====== 2.09 微博 ====== -->
@@ -4163,7 +4293,7 @@
             2026-02-09 08:07 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">碎片🧩 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QqZjsD98R" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QqZjsD98R" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider18', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151234647.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider18', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151234648.jpg" alt="配图2" loading="lazy" /></div>
@@ -4184,7 +4314,7 @@
             2026-02-02 20:56 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">升格两周年，有你们陪着真好[来抱抱] ​​​</span></div>
-          <a href="https://weibo.com/7901094930/Qq0lJ3YtO" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/Qq0lJ3YtO" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2" style="max-width:300px;">
             <div class="media-item" onclick="openModalWithImages('slider20', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321626.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider20', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151321627.jpg" alt="配图2" loading="lazy" /></div>
@@ -4208,7 +4338,7 @@
             2026-01-31 16:26 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">🤤🥯 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QpFJf1Hmj" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QpFJf1Hmj" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-3">
             <div class="media-item" onclick="openModalWithImages('slider21', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151654273.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider21', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151654274.jpg" alt="配图2" loading="lazy" /></div>
@@ -4226,7 +4356,7 @@
             2026-01-28 18:26 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">🦋 ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QpeeD8eFz" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QpeeD8eFz" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider22', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151732487.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider22', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151732488.jpg" alt="配图2" loading="lazy" /></div>
@@ -4242,7 +4372,7 @@
             2026-01-21 22:51 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">[期待] ​​​</span></div>
-          <a href="https://weibo.com/7901094930/QobYOk81c" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/QobYOk81c" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider23', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151814050.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider23', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151832928.jpg" alt="配图2" loading="lazy" /></div>
@@ -4256,7 +4386,7 @@
             2026-01-08 16:46 · 发布于 上海
           </div>
           <div class="weibo-text"><span class="line">嗷[柯基] ​​​</span></div>
-          <a href="https://weibo.com/7901094930/Qmb29fF21" target="_blank" class="weibo-link-button">🔗 点击跳转查看原微博</a>
+          <a href="https://weibo.com/7901094930/Qmb29fF21" target="_blank" class="weibo-link-button">点击跳转查看原微博</a>
           <div class="weibo-media-grid cols-2">
             <div class="media-item" onclick="openModalWithImages('slider24', 0)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151933091.jpg" alt="配图1" loading="lazy" /></div>
             <div class="media-item" onclick="openModalWithImages('slider24', 1)"><img src="https://gitee.com/a1814747459/img-bed/raw/master/20260722151933092.jpg" alt="配图2" loading="lazy" /></div>
@@ -4565,6 +4695,32 @@
         </div>
 
           <!-- ====== 抖音 ====== -->
+
+          <!-- ====== 8.14 抖音 ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="14">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-08-14 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/QWTEXFNM7jM/" target="_blank" class="video-desc-box">
+              <span class="text">镜头定格的不止是奖项，还有岁岁不肯停下的热爱</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+
+          <!-- ====== 8.15 抖音 ====== -->
+          <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="15">
+            <div class="weibo-time">
+              <span class="platform-tag douyin">抖音</span>
+              <span class="video-tag-label">视频</span>
+              2026-08-15 · 发布于 上海
+            </div>
+            <a href="https://v.douyin.com/6NGMrYVRlTU/" target="_blank" class="video-desc-box">
+              <span class="text">#萌 #小萌</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
 
           <!-- ====== 8.11 抖音 ====== -->
           <div class="weibo-card" data-platform="douyin" data-month="2026-08" data-day="11">
@@ -5694,7 +5850,7 @@
       <div class="page-box" id="words">
         <div class="info-box stage-wrap">
           <div class="welcome-header" data-page="words"></div>
-          <div class="weibo-text" style="text-align:center; padding:20px 0; color:#4a779e; font-size:14px;">🚧 持续施工中</div>
+                <div class="stage-grid" id="wordsGrid" style="margin-top:10px;"></div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -5704,7 +5860,7 @@
         <div class="info-box">
           <div class="welcome-header" data-page="wait"></div>
           <div style="font-size:14px; color:#2c5a7a; line-height:1.8; padding:4px 0 12px 0;">
-            <p>有任何好的建议和问题都可以wb小窗我！@除号好耶耶耶</p>
+            <p>有任何好的建议和问题都可以wb小窗我！<a href="https://weibo.com/u/7973958238" target="_blank" style="color:var(--theme-color); text-decoration:none; font-weight:600;">@除号好耶耶耶</a></p>
             <p>祝大家在看这个小凡的旅途中开心幸福，祝这个小凡万事顺遂！</p>
           </div>
 
@@ -6032,12 +6188,11 @@
         extra: '<div class="sub">椰丝之家：933624308</div><div class="links"><a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a><a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a><a href="https://b23.tv/sCndNaE" target="_blank">星系放映厅</a></div>',
         desc: '想要了解叶凡？这里是介绍区~'
       },
-      stage: { subtitle: 'STAGE', title: '饭之大小作', desc: '收录yf舞台切片' },
-      bobo: { subtitle: 'STAGE', title: '饭之啵', desc: '收录yf直播回放' },
-      fancam: { subtitle: 'PHOTO', title: '饭之拍', desc: '收录yf平台更新内容' },
-      food: { subtitle: 'PATATION', title: '每日一杯', desc: '收录yf口袋房间饮品分享' },
-      travel: { subtitle: 'SELFIE', title: '旅行椰饭', desc: '收录yf口袋房间自拍' },
-      words: { subtitle: 'WORDS', title: '饭言饭语', desc: '收录yf经典语录' },
+      stage: { subtitle: 'STAGE', title: '饭之大小作', desc: '收录舞台切片' },
+      bobo: { subtitle: 'STAGE', title: '饭之啵', desc: '收录直播回放' },
+      fancam: { subtitle: 'PHOTO', title: '饭之拍', desc: '收录平台更新内容' },
+      travel: { subtitle: 'SELFIE', title: '旅行椰饭', desc: '收录口袋房间自拍' },
+      words: { subtitle: 'WORDS', title: '饭之信', desc: '收录演讲文字版' },
       wait: { subtitle: 'ABOUT', title: '关于本站', desc: '' }
     };
 
@@ -6101,8 +6256,12 @@
         document.querySelectorAll('.page-box.active .welcome-header[data-page]').forEach(header => {
           renderWelcomeHeader(header.dataset.page);
         });
-      }, 10);
-    };
+      if (pageId === 'words') {
+        renderWordsCards();
+      }
+
+    }, 10);
+  }
   })();
 
   let showStageMarkers = false;
@@ -6400,6 +6559,7 @@
 
   // ===== 舞台数据 =====
   const unitData = [
+    { date: '2026.08.14', title: '不空因果', url: 'https://www.bilibili.com/video/BV1gAbd6SEoP/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816222800093.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
     { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
     { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.jpg', show: '【SNH48】TEAM NII《肆时墟》公演' },
     { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.jpg', show: '【SNH48】TEAM NII《肆时墟》钟亚男生日公演' },
@@ -6920,22 +7080,22 @@
 
   // ===== 大图预览 - 移动端修复 =====
   window.openModalWithImages = function(setId, index) {
-      var images = imageSets[setId];
-      if (!images || images.length === 0) return;
-      
-      currentSetId = setId;
-      currentImages = images;
-      currentIndex = index;
-      updateModal();
-      
-      var modal = document.getElementById('imageModal');
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      
-      // 移动端阻止滚动穿透
-      modal.addEventListener('touchmove', function(e) {
-          e.preventDefault();
-      }, { passive: false });
+    var images = imageSets[setId];
+    if (!images || images.length === 0) return;
+    
+    currentSetId = setId;
+    currentImages = images;
+    currentIndex = index;
+    updateModal();
+    
+    var modal = document.getElementById('imageModal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    
+    // 移动端阻止滚动穿透
+    modal.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
   };
 
       window.previewImage = function(src) {
@@ -6962,6 +7122,11 @@
       modal.classList.remove('open');
       document.body.style.overflow = '';
   }
+  document.getElementById('imageModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
 
   function goToPrev() {
       if (currentImages.length <= 1) return;
@@ -6976,27 +7141,37 @@
   }
 
   function updateModal() {
-      if (!currentImages.length) return;
-      var modalImg = document.getElementById('modalImage');
-      var modalDots = document.getElementById('modalDots');
-      var prevBtn = document.getElementById('modalPrev');
-      var nextBtn = document.getElementById('modalNext');
-      
-      modalImg.src = currentImages[currentIndex];
-      modalDots.innerHTML = '';
-      currentImages.forEach(function(_, i) {
-          var dot = document.createElement('button');
-          dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
-          dot.addEventListener('click', function(e) {
-              e.stopPropagation();
-              currentIndex = i;
-              updateModal();
-          });
-          modalDots.appendChild(dot);
+    if (!currentImages.length) return;
+    var modalImg = document.getElementById('modalImage');
+    var modalDots = document.getElementById('modalDots');
+    var prevBtn = document.getElementById('modalPrev');
+    var nextBtn = document.getElementById('modalNext');
+    
+    modalImg.src = currentImages[currentIndex];
+    modalDots.innerHTML = '';
+    currentImages.forEach(function(_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'modal-dot' + (i === currentIndex ? ' active' : '');
+      dot.addEventListener('click', function(e) {
+        e.stopPropagation();
+        currentIndex = i;
+        updateModal();
       });
-      prevBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
-      nextBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+      modalDots.appendChild(dot);
+    });
+    prevBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+    nextBtn.style.display = currentImages.length > 1 ? 'flex' : 'none';
+    
+    // 确保按钮有事件
+    prevBtn.onclick = function(e) {
+      e.stopPropagation();
+      goToPrev();
     };
+    nextBtn.onclick = function(e) {
+      e.stopPropagation();
+      goToNext();
+    };
+  }
 
   // ===== 旅行椰饭弹窗 =====
   (function() {
@@ -7078,12 +7253,20 @@
     function openMiraclePopup(month) {
       const images = monthImages[month] || [];
       popupTitle.textContent = month.replace('-', '年') + '月';
+      
+      // 改为使用 flex 布局 + 固定尺寸，避免 grid 兼容性问题
+      popupGrid.style.display = 'flex';
+      popupGrid.style.flexWrap = 'wrap';
+      popupGrid.style.gap = '10px';
+      popupGrid.style.justifyContent = 'flex-start';
+      
       popupGrid.innerHTML = images.length ? images.map(item =>
-        `<div onclick="window.previewImage && window.previewImage('${item.url}')">
-          <img src="${item.url}" loading="lazy" />
-          <div class="date-overlay">${item.date}</div>
+        `<div style="width:calc(25% - 10px); aspect-ratio:1/1; border-radius:6px; overflow:hidden; position:relative; cursor:pointer;" onclick="window.previewImage && window.previewImage('${item.url}')">
+          <img src="${item.url}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.6));color:#fff;font-size:10px;font-weight:600;padding:16px 8px 6px;text-align:center;">${item.date}</div>
         </div>`
-      ).join('') : `<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">暂无图片</div>`;
+      ).join('') : `<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;width:100%;">暂无图片</div>`;
+      
       popup.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -7541,9 +7724,7 @@
     if (filterDateKey) {
       filteredUpdates = allUpdates.filter(u => u.dateKey === filterDateKey);
       const dayStr = filterDateKey.substring(filterDateKey.lastIndexOf('.') + 1);
-      backBtn.style.display = 'block';
     } else {
-      backBtn.style.display = 'none';
       calSelectedDate = null;
     }
 
@@ -7733,12 +7914,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     renderCalendar(currentYear, currentMonth);
     renderUpdateList(currentYear, currentMonth, null, calCurrentPage);
-
-    document.getElementById('calUpdateBack').addEventListener('click', function() {
-      calSelectedDate = null;
-      renderCalendar(currentYear, currentMonth);
-      renderUpdateList(currentYear, currentMonth, null, calCurrentPage);
-    });
 
     document.getElementById('calPrev').addEventListener('click', function() {
       currentMonth--;
@@ -8402,6 +8577,162 @@
     });
   })();
 
+  // ===== 饭言饭语数据 =====
+  const wordsData = [
+    {
+      date: '2026.08.11',
+      title: '总选后碎碎念',
+      content: `111这里有话说
+
+说实话这两天我一直在调节自己的情绪，和自己的所有和解，我也知道大家在默默陪伴我担忧我。
+
+今年我们厉害吗，毋庸置疑，我们就是很厉害，我们一点一点用时间用努力堆起来了这个45的名次，熬了几乎一整个夏天的夜，我很感谢你们一直陪着我支持我选择我，让我每时每刻都不是一个人，让我感觉从未被放弃。
+
+你们对我来说是无比珍贵的礼物，是我想要用尽全力去守护去爱护的存在，我想看你们因为我而露出微笑，想要你们因为我获得一些动力去面对未知的挑战。
+
+值得吗，有你们就值得！我常说有个好结果多辛苦都值得，但真到了结果不如意的时候就不值得了吗，也值得，我全力以赴就值得。
+
+我经常告诉自己努力不一定有回报，但不努力肯定没有，这也是我可以快速调整好自己的方式的一种。
+
+难过吗，也难过，我难过的要死，得到结果的那一刻我无法接受，我脑袋里的那根弦一下就断了，整个脑袋都在嗡嗡作响，想要微笑但微笑不出来，背在脑海里的词全都化为了一腔不甘。
+
+我是一个认定一件事就很固执的人，我既然获得了站上舞台的机会，那我必然不会辜负不会轻易放弃，在这里有且只有一件已经认定的目标。
+
+我很早就说过我没办法接受今年的自己比去年差，也许没人记得，但我说出口的话都是我深思熟虑后的，我知道这不应该用名次去定义，但在这里名次是最直接，是证明一整年的努力被看见的结晶，我就是想要在这短暂而又漫长的两个月转化成实质性的结果。
+
+我也明白这个结果不单单只是一个名次，是大家对我的认可和肯定，我非常渴望得到认可，这可以让我有更多的底气去选择自己想要做的事情，让我接触从未接触过的事物，让我变得更好，让我可以更自信更坚定的走接下来的路，有了支撑才能更有动力的前进。
+
+其实后退带给我的挫败也让我一直在质疑自己，我知道没有谁一定有义务要支持我给我投票，我所收到的全来自大家最诚挚的爱。
+
+爱很伟大可以建立起两个陌生人之间的羁绊，爱也促使着我想成为更好的自己回应你们。
+
+未知的明天。
+
+等以后某一个瞬间想起来会觉得，喜欢叶凡真是最幸福的事情了，那这一刻，就是我所有努力的具象化。
+
+当然我也有颓废的时候，这个时候我会觉得这个世界都对我很差，努力就会被看到吗，就算我付出了时间和精力去做自己想做的事，那也不会如愿得到我想要的结果，又有什么意义呢，我会想就这样吧，反正也不会怎样，也不会有人在意，可能转身我就会被别人替代，现实好残酷吧对不对……
+
+我不甘又能改变什么呢，我是渺小的，渺小的我真的能做到我想要的样子吗，我不是那么好，我也不那么完美甚至很脆弱和敏感，还要面子不想让大家看到我流眼泪，只要眼泪不流下来那我就没哭，强撑着坚强好累，让自己懂事也好累，有熬不完的夜也好累，想到没做到自己想做到的也好累，说话也好累，时常想要不就放弃吧。
+
+但放弃更难更需要勇气，我没办法丢下那个带着不甘对未来向往的自己和一直默默守护我挂念我的人。
+
+你们的存在给了我不放弃自己的理由，因为你们对我很重要，当我这样告诉自己我就立马充满了做所有事的动力。
+
+我不是一只没有感情的电子蝴蝶，我珍惜所拥有的一切，请不要否定自己也不要否定我，陪着我坚定的选择我好吗，渺小的我有因你而勇敢的梦。
+
+我写那么多可能更多是想告诉现在的自己，难受不如接受现状继续前进，目标本就是用来奔赴的。
+
+也想告诉每一个关心我的你，对我的每一份支持都是支撑我走下去的动力。
+
+在名次上输了，但从某方面来说，勇敢的人本就立于不败之地，因为勇者从不会因为挫折而气馁，勇敢是当你还未开始无论如何都要把它坚持到底，你很少能赢，但有时也会。
+
+45名可以是起点，但绝对不是终点。`
+    },
+    {
+      date: '2026.07.12',
+      title: '26年青春宣言发言',
+      content: `没想到我先讲话吧对不对？因为一会儿跳的话，我肯定会出汗，然后又一直喘气，我觉得可能会影响大家听我讲话，加上有的时候我会说话有点不清晰。好的，我要开始了。
+
+大家好，我是SNH48 TeamNII的叶凡。
+
+其实最开始喜欢上舞台没有多么盛大的理由，只是偶然看到屏幕里前辈们站在舞台上闪闪发光的样子。那一刻我心里突然有了一个很清晰的向往。那时候的我很稚嫩也很胆怯，只会对着视频一遍一遍笨拙地跟跳，把喜欢藏在一次次默默的练习里。我一直都记得在一次和朋友散步回家，在公园随意跳着自己练的舞，意外得到了朋友的一句肯定，就是那句夸奖也给了我很大的勇气，让我第一次萌生了我也想站在舞台上试一试的念头。
+
+下定决心之后，我开始为了通过初试一遍遍地练习舞蹈，对着镜子练习，在不同的地方回忆动作。我还记得我一开始独自奔赴上海，坐火车面试的心情。当时虽然前路未知，心里忐忑到睡不着觉，但心里那束关于舞台的光一直支撑着我坚持到了初试结束。对，很幸运我的勇敢没有被辜负，我成功地踏入了这里，拥有了属于自己追逐舞台的机会。刚入团的我依旧不够自信，为了第一次登台拼尽全力地练习，真正站在出道舞台16号位的时候，我紧张到手足无措。
+
+第一次面对镜头的时候也是懵懂又局促，我有多紧张，我的眼睛就眨得有多快，所以有的时候我的眼睛就会出卖我紧张的心情。所以在后来的日子里，我从来不放过任何一次成长的机会，我会多多的接助演，并且珍惜每次登台的机会，在不同的舞台不同的风格里不断的打磨自己，让关注着我的每一个人都看到了从一开始很笨拙到现在站在舞台上越来越坦然面对每一个舞台的我，我努力地成就了现在的我。但我也知道走到今天我从来都不是一个人在前行。如果说最初支持着我出发的是一腔热爱，那一路陪我走到现在的就是身后无数份对我的支持和喜欢。练习确实很累，舞台不管什么情况，我坦然面对，但我也有紧张的时候，是你们的陪伴给了我坚持下去的理由，给了我没有那么害怕、那么紧张的理由。我很清我清楚知道自己现在也有很多成长的空间，可正是你们愿意包容我的稚嫩，相信我的成长，才让我敢一次次挑战新的舞台。前路有风也有浪，但因为有你们的陪伴，我便永远有奔赴光亮、挑战未知的勇气。我觉得舞台从来都不是一蹴而就的光芒，而是日复一日的热爱与坚持。
+
+未来我也会继续带着我的赤诚和勇敢，继续脚踏实地的练习，认认真真地对待每一次舞台，不辜负自己的热爱，也不辜负每一份给我的陪伴还有支持。我会继续努力，成为更耀眼更坚定的自己，谢谢每一个陪伴着我的你们。未来的路还很长，我的成长也永不停止。舞台教会我的从来都不是光芒，而是哪怕渺小也要频频发光，哪怕平凡也要全力以赴。所以我在这里想大声喊出我今年的目标，我今年的目标是第20名，然后也希望拿到队内前三的位置，谢谢大家。`
+    }
+  ];
+
+  // ===== 渲染饭言饭语卡片 =====
+  function renderWordsCards() {
+    const grid = document.getElementById('wordsGrid');
+    if (!grid) return;
+
+    if (wordsData.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#4a779e; font-size:14px;">暂无内容</div>`;
+      return;
+    }
+
+    let html = '';
+    wordsData.forEach((item, index) => {
+      html += `
+        <div class="video-card" onclick="openWordsPopup(${index})" style="cursor:pointer; padding:16px 20px; display:flex; flex-direction:column; justify-content:center; min-height:50px; grid-column:1 / -1;">
+          <div style="font-size:14px; font-weight:600; color:var(--theme-color); opacity:0.6; margin-bottom:6px;">${item.date}</div>
+          <div style="font-size:20px; font-weight:700; color:#000000;">${item.title}</div>
+          <div style="font-size:13px; color:#4a779e; opacity:0.5; margin-top:4px;">点击查看 →</div>
+        </div>
+      `;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // ===== 弹窗 =====
+  function openWordsPopup(index) {
+    const data = wordsData[index];
+    if (!data) return;
+
+    // 创建弹窗
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay open';
+    overlay.id = 'wordsPopupOverlay';
+    overlay.style.display = 'flex';
+
+    overlay.innerHTML = `
+      <div class="popup-box" style="max-width:600px; padding:32px 36px 28px; border-radius:2px; background:#fcf9f5; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+        <button class="popup-close" onclick="closeWordsPopup()" style="position:absolute; top:12px; right:16px; font-size:24px; background:none; border:none; cursor:pointer; color:#999;">✕</button>
+        
+        <!-- 信纸风格 -->
+        <div style="font-family: 'Chiron GoRound TC', 'PingFang SC', sans-serif; min-height:300px; padding:8px 4px;">
+          <div style="font-size:15px; line-height:2; color:#3a3a3a; white-space:pre-wrap; letter-spacing:0.5px; padding:0 8px;">
+${data.content}
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    // 点击外部关闭
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) closeWordsPopup();
+    });
+
+    // ESC 关闭
+    document.addEventListener('keydown', function handler(e) {
+      if (e.key === 'Escape') {
+        closeWordsPopup();
+        document.removeEventListener('keydown', handler);
+      }
+    });
+  }
+
+  function closeWordsPopup() {
+    const overlay = document.getElementById('wordsPopupOverlay');
+    if (overlay) {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }
+  }
+
+  // ===== 页面切换时渲染 =====
+  document.addEventListener('navUpdate', function(e) {
+    if (e.targetPage === 'words') {
+      setTimeout(renderWordsCards, 50);
+    }
+  });
+
+  // 初始加载时也渲染（如果当前是words页面）
+  document.addEventListener('DOMContentLoaded', function() {
+    const activePage = document.querySelector('.page-box.active')?.id;
+    if (activePage === 'words') {
+      setTimeout(renderWordsCards, 100);
+    }
+  });
+
   // ===== 移动端底部导航 + 右侧菜单 =====
   (function() {
     const overlay = document.getElementById('mobileOverlay');
@@ -8716,17 +9047,42 @@
   // ===== 目录固定 =====
   function updateTocFixed() {
     const tocCard = document.querySelector('.left-toc-card');
-    if (!tocCard) return;
+    const promoCard = document.querySelector('.left-promo-card');
+    if (!tocCard || !promoCard) return;
 
-    if (tocCard.style.display === 'none') {
-      tocCard.classList.remove('fixed');
+    // 如果隐藏则不处理
+    if (promoCard.style.display === 'none') {
+      promoCard.classList.remove('fixed');
+      return;
+    }
+
+    // 获取目录卡片底部相对于文档的绝对位置
+    const tocRect = tocCard.getBoundingClientRect();
+    const tocBottom = tocRect.bottom + window.pageYOffset;
+    const gap = 6;
+    const expectedTop = tocBottom + gap;
+
+    // 记录初始位置到 dataset（只在第一次记录）
+    if (!promoCard.dataset.initialTop) {
+      promoCard.dataset.initialTop = expectedTop;
+      // 设置初始位置
+      promoCard.style.position = 'absolute';
+      promoCard.style.top = expectedTop + 'px';
+      promoCard.style.left = '15px';
+    }
+
+    const initialTop = parseFloat(promoCard.dataset.initialTop);
+    const scrollY = window.pageYOffset;
+
+    // 滚动超过初始位置 → 固定；否则取消固定
+    if (scrollY >= initialTop) {
+      promoCard.classList.add('fixed');
+      promoCard.style.left = '15px';
     } else {
-      const scrollY = window.pageYOffset;
-      if (scrollY >= 540) {
-        tocCard.classList.add('fixed');
-      } else {
-        tocCard.classList.remove('fixed');
-      }
+      promoCard.classList.remove('fixed');
+      promoCard.style.position = 'absolute';
+      promoCard.style.top = initialTop + 'px';
+      promoCard.style.left = '15px';
     }
 
     updateDrinkFixed();
@@ -8737,30 +9093,42 @@
 
   // ===== 页面切换时重置 =====
   document.addEventListener('navUpdate', function(e) {
-    const pageId = e.targetPage || 'home';
-    const card = document.querySelector('.left-toc-card');
-    const drinkCard = document.querySelector('.daily-drink-card');
-    
-    // 目录卡片在所有页面都显示
-    card.style.display = '';
-    renderToc();
-    
-    // 清除所有目录高亮
-    setTimeout(function() {
-      document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
-      setDrinkPosition();
-      updateActiveOnScroll();
-      updateTocFixed();
-    }, 150);
-    
-    if (pageId !== 'home') {
-      card.classList.remove('fixed');
-      if (drinkCard) {
-        drinkCard.classList.remove('fixed');
-        delete drinkCard.dataset.initialTop;
-      }
+  const pageId = e.targetPage || 'home';
+  const card = document.querySelector('.left-toc-card');
+  const drinkCard = document.querySelector('.daily-drink-card');
+  const promoCard = document.querySelector('.left-promo-card');
+  
+  // 目录卡片在所有页面都显示
+  card.style.display = '';
+  renderToc();
+  
+  // 清除快速安利的位置缓存
+  if (promoCard) {
+    delete promoCard.dataset.initialTop;
+    if (pageId === 'home') {
+      promoCard.style.display = '';
+    } else {
+      promoCard.style.display = 'none';
+      promoCard.classList.remove('fixed');
     }
-  });
+  }
+  
+  // 清除所有目录高亮
+  setTimeout(function() {
+    document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
+    setDrinkPosition();
+    updateActiveOnScroll();
+    updateTocFixed();
+  }, 150);
+  
+  if (pageId !== 'home') {
+    card.classList.remove('fixed');
+    if (drinkCard) {
+      drinkCard.classList.remove('fixed');
+      delete drinkCard.dataset.initialTop;
+    }
+  }
+});
 
     // ===== 初始状态 =====
     const tocCard = document.querySelector('.left-toc-card');
@@ -8798,7 +9166,32 @@
   });
 
 })();
-
+  // ===== 随机跳转函数 =====
+  function randomJump(type) {
+    let data = [];
+    
+    if (type === 'stage') {
+      data = [...unitData, ...specialData, ...assistData, ...substituteData];
+    } else if (type === 'bobo') {
+      data = boboData;
+    } else if (type === 'fancam') {
+      // 收集所有平台更新的链接
+      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      cards.forEach(card => {
+        const link = card.querySelector('.weibo-link-button, .video-desc-box');
+        if (link && link.href) {
+          data.push({ url: link.href });
+        }
+      });
+    }
+    
+    if (data.length === 0) return;
+    
+    const randomItem = data[Math.floor(Math.random() * data.length)];
+    if (randomItem.url) {
+      window.open(randomItem.url, '_blank');
+    }
+  }
   </script>
 </body>
 </html>
