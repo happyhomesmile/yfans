@@ -504,6 +504,17 @@
       z-index: 999;
     }
 
+    .stage-nav-wrapper {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 6px;
+      padding: 6px 10px ;
+      border: 2px solid #000000;
+      border-radius: 20px;
+      background: transparent;
+    }
+
     /* 日历 */
     .sidebar-calendar {
       position: relative;
@@ -1368,7 +1379,6 @@
       flex-wrap: wrap; 
       justify-content: center; 
       gap: 6px;
-      margin-bottom: 14px;
       position: relative;
       padding: 4px;
     }
@@ -1467,7 +1477,7 @@
       align-items: center; 
       background: transparent;
       border-radius: 24px; padding: 0 12px;
-      border: 2px solid hsla(var(--theme-hue), 80%, 55%, 0.15) !important;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.3) !important;
       max-width: 360px;
     }
 
@@ -2298,15 +2308,70 @@
     }
 
     /* ===== 公式照切换 ===== */
+    .formal-btn-wrapper {
+      position: relative;
+      padding: 6px 0 12px 0;
+    }
     .formal-btn-group {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 8px;
-      padding: 6px 0 12px 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 4px;
+    }
+    .formal-btn-group::-webkit-scrollbar {
+      display: none;
     }
     .formal-btn-group .drink-btn {
       font-size: 13px;
       padding: 5px 14px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .formal-scroll-btn {
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.2);
+      background: rgba(255,255,255,0.9);
+      color: #1a3a4f;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 2;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: opacity 0.2s;
+    }
+    .formal-scroll-btn:hover {
+      background: var(--theme-color);
+      color: #fff;
+    }
+    .formal-scroll-btn.left { left: 0; }
+    .formal-scroll-btn.right { right: 0; }
+    .formal-scroll-btn.hidden { opacity: 0; pointer-events: none; }
+    @media (min-width: 769px) {
+      .formal-scroll-btn { display: flex; }
+      .formal-btn-group {
+        width: calc(100% - 64px);
+        margin: 0 auto;
+      }
+    }
+    body.dark-mode .formal-scroll-btn {
+      background: rgba(40,40,60,0.9);
+      color: #e0e0e0;
+      border-color: rgba(255,255,255,0.1);
     }
     .formal-btn-group .drink-btn.active {
       border-color: hsla(var(--theme-hue), 80%, 55%, 0.8);
@@ -2876,15 +2941,6 @@
       color: #333;
     }
 
-    .stage-nav-wrapper {
-      border: 2px solid #000000;
-      border-radius: 20px;
-      padding: 6px 10px;
-      display: inline-block;
-      height: 56px;  
-      min-height: 44px;
-    }
-
     /* ===== 移动端显示 ===== */
     @media (max-width: 768px) {
       .left-profile-card,
@@ -3103,7 +3159,7 @@
       .page-box#fancam .stage-nav .stage-nav-item {
         flex-shrink: 0 !important;
         font-size: 12px !important;
-        padding: 4px 12px !important;
+        padding: 4px 12px ;
         white-space: nowrap !important;
       }
     
@@ -3983,8 +4039,156 @@
     body.dark-mode .stage-nav-wrapper {
       border-color: #ffffff !important;
     }
+    
+    
+    /* ===== 移动端筛选按钮和弹窗 ===== */
+    .mobile-filter-btn {
+      display: none;
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid hsla(var(--theme-hue), 80%, 55%, 0.3);
+      background: rgba(255,255,255,0.8);
+      color: #1a3a4f;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mobile-filter-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-filter-overlay.open { display: none; }
+    .mobile-filter-panel {
+      background: #fff;
+      border-radius: 14px;
+      z-index: 1002;
+      padding: 18px 20px;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .mobile-filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .mobile-filter-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #999;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .mobile-filter-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mobile-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mobile-filter-row label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a2e;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .mobile-filter-row select {
+      flex: 1;
+      padding: 7px 8px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      background: #f8f8f8;
+      color: #1a1a2e;
+      outline: none;
+      min-width: 0;
+    }
+    .mobile-filter-row select:focus {
+      border-color: var(--theme-color);
+    }
+    .mobile-filter-tip {
+      font-size: 12px;
+      color: #999;
+      min-height: 16px;
+    }
+    .mobile-filter-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .mobile-filter-btn-clear,
+    .mobile-filter-btn-apply {
+      flex: 1;
+      padding: 9px 0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .mobile-filter-btn-clear {
+      background: #f0f0f0;
+      color: #666;
+    }
+    .mobile-filter-btn-apply {
+      background: var(--theme-color);
+      color: #fff;
+    }
+    body.dark-mode .mobile-filter-panel {
+      background: #1a1a2e;
+    }
+    body.dark-mode .mobile-filter-header,
+    body.dark-mode .mobile-filter-row label {
+      color: #e0e0e0;
+    }
+    body.dark-mode .mobile-filter-row select {
+      background: #2a2a3e;
+      border-color: #3a3a4e;
+      color: #e0e0e0;
+    }
+    body.dark-mode .mobile-filter-btn-clear {
+      background: #2a2a3e;
+      color: #aaa;
+    }
+    @media (max-width: 768px) {
+      .mobile-filter-btn { display: inline-flex; align-items: center; }
+      .mobile-filter-overlay.open { display: flex; }
+      .mobile-filter-selects-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .mobile-filter-selects-row .mobile-filter-row {
+        flex: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      .mobile-filter-selects-row .mobile-filter-row label {
+        font-size: 11px;
+        color: #888;
+      }
+    }
+
 </style>
-</head>
+  </head>
 <body>
 
   <!-- ===== 移动端遮罩层 ===== -->
@@ -4007,6 +4211,13 @@
       <div class="menu-group-title">饭记</div>
       <a class="menu-item-link sub-item" data-page="travel">口袋图集</a>
       <a class="menu-item-link sub-item" data-page="words">演讲</a>
+    </div>
+
+    <!-- 记录 -->
+    <div class="menu-group">
+      <div class="menu-group-title">记录</div>
+      <a class="menu-item-link sub-item" onclick="openDailyRecord('drink')">每日一杯</a>
+      <a class="menu-item-link sub-item" onclick="openDailyRecord('kaomoji')">颜文字大全</a>
     </div>
 
     <!-- 关于本站 -->
@@ -4158,6 +4369,60 @@
         </div>
       </div>
     </div>
+
+
+  <!-- ===== 移动端筛选面板 ===== -->
+  <div class="mobile-filter-overlay" id="mobileFilterOverlay" onclick="closeFilterPanel(event)">
+    <div class="mobile-filter-panel" id="mobileFilterPanel" onclick="event.stopPropagation()">
+      <div class="mobile-filter-header">
+        <span>按日期筛选</span>
+        <button class="mobile-filter-close" onclick="closeFilterPanel()">×</button>
+      </div>
+      <div class="mobile-filter-body">
+        <div class="mobile-filter-selects-row">
+          <div class="mobile-filter-row">
+            <label>年份</label>
+            <select id="filterYear">
+              <option value="">全部</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+            </select>
+          </div>
+          <div class="mobile-filter-row">
+            <label>月份</label>
+            <select id="filterMonth">
+              <option value="">全部</option>
+              <option value="1">1月</option>
+              <option value="2">2月</option>
+              <option value="3">3月</option>
+              <option value="4">4月</option>
+              <option value="5">5月</option>
+              <option value="6">6月</option>
+              <option value="7">7月</option>
+              <option value="8">8月</option>
+              <option value="9">9月</option>
+              <option value="10">10月</option>
+              <option value="11">11月</option>
+              <option value="12">12月</option>
+            </select>
+          </div>
+          <div class="mobile-filter-row">
+            <label>日期<span style="color:#999;font-size:10px;">选填</span></label>
+            <select id="filterDay">
+              <option value="">全部</option>
+            </select>
+          </div>
+        </div>
+        <div class="mobile-filter-tip" id="filterTip"></div>
+      </div>
+      <div class="mobile-filter-footer">
+        <button class="mobile-filter-btn-clear" onclick="clearFilter()">清除筛选</button>
+        <button class="mobile-filter-btn-apply" onclick="applyFilter()">确定</button>
+      </div>
+    </div>
+  </div>
 
   <div class="main-page">
 
@@ -4346,14 +4611,18 @@
             历年公式照
             <span class="title-en">Gallery</span>
           </div>
-          <div class="formal-btn-group" id="formalBtnGroup">
-            <div class="drink-btn active" data-key="all" onclick="switchFormal('all')" style="cursor:pointer;">全部</div>
-            <div class="drink-btn" data-key="2026-newyear" onclick="switchFormal('2026-newyear')" style="cursor:pointer;">2026年新年公式照</div>
-            <div class="drink-btn" data-key="2025-autumn" onclick="switchFormal('2025-autumn')" style="cursor:pointer;">2025年秋季队服公式照</div>
-            <div class="drink-btn" data-key="2025-newyear" onclick="switchFormal('2025-newyear')" style="cursor:pointer;">2025年新年公式照</div>
-            <div class="drink-btn" data-key="2024-autumn" onclick="switchFormal('2024-autumn')" style="cursor:pointer;">2024年秋季队服公式照</div>
-            <div class="drink-btn" data-key="2024-spring" onclick="switchFormal('2024-spring')" style="cursor:pointer;">2024年春季队服公式照</div>
-            <div class="drink-btn" data-key="2023-2024" onclick="switchFormal('2023-2024')" style="cursor:pointer;">2023-2024年度青春盛典公式照</div>
+          <div class="formal-btn-wrapper">
+            <button class="formal-scroll-btn left" id="formalScrollLeft" onclick="scrollFormalBtn(-1)">‹</button>
+            <div class="formal-btn-group" id="formalBtnGroup">
+              <div class="drink-btn active" data-key="all" onclick="switchFormal('all')" style="cursor:pointer;">全部</div>
+              <div class="drink-btn" data-key="2026-newyear" onclick="switchFormal('2026-newyear')" style="cursor:pointer;">2026年新年公式照</div>
+              <div class="drink-btn" data-key="2025-autumn" onclick="switchFormal('2025-autumn')" style="cursor:pointer;">2025年秋季队服公式照</div>
+              <div class="drink-btn" data-key="2025-newyear" onclick="switchFormal('2025-newyear')" style="cursor:pointer;">2025年新年公式照</div>
+              <div class="drink-btn" data-key="2024-autumn" onclick="switchFormal('2024-autumn')" style="cursor:pointer;">2024年秋季队服公式照</div>
+              <div class="drink-btn" data-key="2024-spring" onclick="switchFormal('2024-spring')" style="cursor:pointer;">2024年春季队服公式照</div>
+              <div class="drink-btn" data-key="2023-2024" onclick="switchFormal('2023-2024')" style="cursor:pointer;">2023-2024年度青春盛典公式照</div>
+            </div>
+            <button class="formal-scroll-btn right" id="formalScrollRight" onclick="scrollFormalBtn(1)">›</button>
           </div>
 
           <div class="formal-display-area" id="formalDisplay">
@@ -4376,21 +4645,23 @@
         <div class="info-box stage-wrap">
           <div class="welcome-header" data-page="stage"></div>
 
-          <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-bottom:14px;">
             <div class="stage-nav-wrapper">
               <div class="stage-nav" id="stageNav">
                 <div class="nav-indicator" id="stageNavIndicator"></div>
-                <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageTotalCount"></span></button>
-                <button class="stage-nav-item" data-category="unit">UNIT <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageUnitCount"></span></button>
-                <button class="stage-nav-item" data-category="special">特殊舞台 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageSpecialCount"></span></button>
-                <button class="stage-nav-item" data-category="assist">助演 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageAssistCount"></span></button>
-                <button class="stage-nav-item" data-category="substitute">代役 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="stageSubstituteCount"></span></button>
+                <button class="stage-nav-item active" data-category="all">全部 <span id="stageTotalCount"></span></button>
+                <button class="stage-nav-item" data-category="unit">UNIT <span id="stageUnitCount"></span></button>
+                <button class="stage-nav-item" data-category="special">特殊舞台 <span id="stageSpecialCount"></span></button>
+                <button class="stage-nav-item" data-category="assist">助演 <span id="stageAssistCount"></span></button>
+                <button class="stage-nav-item" data-category="substitute">代役 <span id="stageSubstituteCount"></span></button>
               </div>
             </div>
+            <!-- 搜索框在外面，独立 -->
             <div class="search-box" style="flex-shrink:0; max-width:280px;">
               <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
-              <input type="text" id="stageSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
+              <input type="text" id="stageSearch" placeholder="搜索..." />
             </div>
+            <button class="mobile-filter-btn" data-page="stage" onclick="openFilterPanel('stage')">筛选</button>
           </div>
 
           <div class="stage-grid" id="stageGrid"></div>
@@ -4409,19 +4680,20 @@
         <div class="info-box stage-wrap">
           <div class="welcome-header" data-page="bobo"></div>
 
-          <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-bottom:14px;">
             <div class="stage-nav-wrapper">
-              <div class="stage-nav" id="boboNav" style="justify-content:flex-start; gap:6px; margin-bottom:0; display:flex; flex-wrap:wrap;">
+              <div class="stage-nav" id="boboNav">
                 <div class="nav-indicator" id="boboNavIndicator"></div>
-                <button class="stage-nav-item active" data-category="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboTotalCount"></span></button>
-                <button class="stage-nav-item" data-category="single">单播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSingleCount"></span></button>
-                <button class="stage-nav-item" data-category="special">特殊直播 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="boboSpecialCount"></span></button>
+                <button class="stage-nav-item active" data-category="all">全部 <span id="boboTotalCount"></span></button>
+                <button class="stage-nav-item" data-category="single">单播 <span id="boboSingleCount"></span></button>
+                <button class="stage-nav-item" data-category="special">特殊直播 <span id="boboSpecialCount"></span></button>
               </div>
             </div>
             <div class="search-box" style="flex-shrink:0; max-width:280px;">
               <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="boboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
             </div>
+            <button class="mobile-filter-btn" data-page="bobo" onclick="openFilterPanel('bobo')">筛选</button>
           </div>
 
           <div class="stage-grid" id="boboGrid"></div>
@@ -4434,21 +4706,22 @@
         <div class="info-box stage-wrap">
             <div class="welcome-header" data-page="fancam"></div>
 
-            <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-bottom:14px;">
               <div class="stage-nav-wrapper">
-                <div class="stage-nav" id="platformNav" style="justify-content:flex-start; gap:6px; margin-bottom:0; display:flex; flex-wrap:wrap;">
+                <div class="stage-nav" id="platformNav">
                   <div class="nav-indicator" id="platformNavIndicator"></div>
-                  <button class="stage-nav-item active" data-platform="all">全部 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformTotalCount"></span></button>
-                  <button class="stage-nav-item" data-platform="weibo">微博 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformWeiboCount"></span></button>
-                  <button class="stage-nav-item" data-platform="xiaohongshu">小红书 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformXiaohongshuCount"></span></button>
-                  <button class="stage-nav-item" data-platform="douyin">抖音 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformDouyinCount"></span></button>
-                  <button class="stage-nav-item" data-platform="bilibili">B站 <span style="display:inline-block; border-radius:40px; padding:2px 10px; font-weight:600; font-size:0.75rem; margin-left:4px; line-height:1.4;" id="platformBilibiliCount"></span></button>
+                  <button class="stage-nav-item active" data-platform="all">全部 <span id="platformTotalCount"></span></button>
+                  <button class="stage-nav-item" data-platform="weibo">微博 <span id="platformWeiboCount"></span></button>
+                  <button class="stage-nav-item" data-platform="xiaohongshu">小红书 <span id="platformXiaohongshuCount"></span></button>
+                  <button class="stage-nav-item" data-platform="douyin">抖音 <span id="platformDouyinCount"></span></button>
+                  <button class="stage-nav-item" data-platform="bilibili">B站 <span id="platformBilibiliCount"></span></button>
                 </div>
               </div>
               <div class="search-box" style="flex-shrink:0; max-width:280px;">
                 <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.png" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
                 <input type="text" id="weiboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
               </div>
+              <button class="mobile-filter-btn" data-page="fancam" onclick="openFilterPanel('fancam')">筛选</button>
             </div>
 
             <div id="weiboFeed">
@@ -7545,6 +7818,37 @@
     });
   });
 
+
+// ===== 移动端菜单：打开每日一杯/颜文字记录 =====
+function openDailyRecord(type) {
+  // 关闭移动端菜单
+  const overlay = document.getElementById('mobileOverlay');
+  const sideMenu = document.getElementById('mobileSideMenu');
+  if (overlay) overlay.classList.remove('open');
+  if (sideMenu) sideMenu.classList.remove('open');
+  document.body.style.overflow = '';
+  
+  // 切换到对应模式
+  if (type === 'kaomoji' && !isKaomojiMode) {
+    isKaomojiMode = true;
+    if (cardTitle) cardTitle.textContent = '颜文字大全';
+    if (cardBadge) cardBadge.textContent = 'EMOJI';
+    if (cardBtnText) cardBtnText.textContent = '今天用什么';
+    if (switchBtn) switchBtn.textContent = '⏺ 切换到每日一杯';
+  } else if (type === 'drink' && isKaomojiMode) {
+    isKaomojiMode = false;
+    if (cardTitle) cardTitle.textContent = '每日一杯';
+    if (cardBadge) cardBadge.textContent = 'RANDOM';
+    if (cardBtnText) cardBtnText.textContent = '今天喝什么';
+    if (switchBtn) switchBtn.textContent = '⏺ 切换到颜文字';
+  }
+  
+  // 触发随机按钮
+  setTimeout(() => {
+    if (randomDrinkBtn) randomDrinkBtn.click();
+  }, 200);
+}
+
 // ===== 每日一杯 / 颜文字切换 =====
 let isKaomojiMode = false;
 
@@ -8178,6 +8482,163 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 
   // ===== 舞台渲染 =====
+
+  // ===== 移动端日期筛选 =====
+  let currentFilterPage = 'stage';
+
+  function openFilterPanel(page) {
+    currentFilterPage = page;
+    const overlay = document.getElementById('mobileFilterOverlay');
+    const panel = document.getElementById('mobileFilterPanel');
+    const yearSel = document.getElementById('filterYear');
+    const monthSel = document.getElementById('filterMonth');
+    const daySel = document.getElementById('filterDay');
+    
+    // 填充当前筛选状态
+    if (calFilteredDay) {
+      const parts = calFilteredDay.split('.');
+      yearSel.value = parts[0];
+      monthSel.value = parseInt(parts[1]).toString();
+      updateFilterDays();
+      daySel.value = parseInt(parts[2]).toString();
+    } else if (calFilteredMonth) {
+      yearSel.value = calFilteredMonth.year.toString();
+      monthSel.value = calFilteredMonth.month.toString();
+      updateFilterDays();
+      daySel.value = '';
+    } else {
+      yearSel.value = '';
+      monthSel.value = '';
+      daySel.value = '';
+      updateFilterDays();
+    }
+    
+    updateFilterTip();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFilterPanel(e) {
+    if (e && e.target !== e.currentTarget) return;
+    const overlay = document.getElementById('mobileFilterOverlay');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateFilterDays() {
+    const yearSel = document.getElementById('filterYear');
+    const monthSel = document.getElementById('filterMonth');
+    const daySel = document.getElementById('filterDay');
+    const currentDay = daySel.value;
+    
+    let maxDay = 31;
+    if (yearSel.value && monthSel.value) {
+      maxDay = new Date(parseInt(yearSel.value), parseInt(monthSel.value), 0).getDate();
+    }
+    
+    let html = '<option value="">全部</option>';
+    for (let d = 1; d <= maxDay; d++) {
+      html += `<option value="${d}">${d}日</option>`;
+    }
+    daySel.innerHTML = html;
+    if (currentDay && parseInt(currentDay) <= maxDay) {
+      daySel.value = currentDay;
+    }
+  }
+
+  function updateFilterTip() {
+    const yearSel = document.getElementById('filterYear');
+    const monthSel = document.getElementById('filterMonth');
+    const daySel = document.getElementById('filterDay');
+    const tip = document.getElementById('filterTip');
+    
+    if (daySel.value && yearSel.value && monthSel.value) {
+      tip.textContent = `已选：${yearSel.value}年${monthSel.value}月${daySel.value}日`;
+      tip.style.color = 'var(--theme-color)';
+    } else if (monthSel.value && yearSel.value) {
+      tip.textContent = `已选：${yearSel.value}年${monthSel.value}月（整月）`;
+      tip.style.color = 'var(--theme-color)';
+    } else if (yearSel.value) {
+      tip.textContent = `已选：${yearSel.value}年（请选择月份）`;
+      tip.style.color = '#f5a623';
+    } else {
+      tip.textContent = '选择年份和月份，日期可选';
+      tip.style.color = '#999';
+    }
+  }
+
+  function applyFilter() {
+    const yearSel = document.getElementById('filterYear');
+    const monthSel = document.getElementById('filterMonth');
+    const daySel = document.getElementById('filterDay');
+    
+    const year = yearSel.value ? parseInt(yearSel.value) : null;
+    const month = monthSel.value ? parseInt(monthSel.value) : null;
+    const day = daySel.value ? parseInt(daySel.value) : null;
+    
+    if (!year || !month) {
+      alert('请至少选择年份和月份');
+      return;
+    }
+    
+    if (day) {
+      const dayStr = year + '.' + String(month).padStart(2, '0') + '.' + String(day).padStart(2, '0');
+      calFilteredDay = dayStr;
+      calFilteredMonth = null;
+      calSelectedDate = year + '.' + month + '.' + day;
+    } else {
+      calFilteredMonth = { year, month };
+      calFilteredDay = null;
+      calSelectedDate = null;
+    }
+    
+    // 应用到对应页面
+    if (currentFilterPage === 'stage') {
+      renderCards(currentCategory, document.getElementById('stageSearch')?.value || '');
+    } else if (currentFilterPage === 'bobo') {
+      renderBoboCards(currentBoboCategory, document.getElementById('boboSearch')?.value || '');
+    } else if (currentFilterPage === 'fancam') {
+      filterWeiboFeed();
+    }
+    
+    closeFilterPanel();
+  }
+
+  function clearFilter() {
+    calFilteredMonth = null;
+    calFilteredDay = null;
+    calSelectedDate = null;
+    
+    document.getElementById('filterYear').value = '';
+    document.getElementById('filterMonth').value = '';
+    document.getElementById('filterDay').value = '';
+    updateFilterDays();
+    updateFilterTip();
+    
+    if (currentFilterPage === 'stage') {
+      renderCards(currentCategory, document.getElementById('stageSearch')?.value || '');
+    } else if (currentFilterPage === 'bobo') {
+      renderBoboCards(currentBoboCategory, document.getElementById('boboSearch')?.value || '');
+    } else if (currentFilterPage === 'fancam') {
+      filterWeiboFeed();
+    }
+    
+    closeFilterPanel();
+  }
+
+  // 监听年月变化，动态更新日期
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('filterYear')?.addEventListener('change', function() {
+      updateFilterDays();
+      updateFilterTip();
+    });
+    document.getElementById('filterMonth')?.addEventListener('change', function() {
+      updateFilterDays();
+      updateFilterTip();
+    });
+    document.getElementById('filterDay')?.addEventListener('change', updateFilterTip);
+  });
+
   let calFilteredMonth = null;
   let calFilteredDay = null;
 
@@ -10050,6 +10511,48 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     container.innerHTML = html;
   }
+
+
+  // ===== 公式照按钮组滚动 =====
+  function scrollFormalBtn(dir) {
+    const group = document.getElementById('formalBtnGroup');
+    if (!group) return;
+    const scrollAmount = 150;
+    group.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+  }
+
+  function updateFormalScrollBtns() {
+    const group = document.getElementById('formalBtnGroup');
+    const leftBtn = document.getElementById('formalScrollLeft');
+    const rightBtn = document.getElementById('formalScrollRight');
+    if (!group || !leftBtn || !rightBtn) return;
+    
+    const canScrollLeft = group.scrollLeft > 2;
+    const canScrollRight = group.scrollLeft + group.clientWidth < group.scrollWidth - 2;
+    
+    leftBtn.classList.toggle('hidden', !canScrollLeft);
+    rightBtn.classList.toggle('hidden', !canScrollRight);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const group = document.getElementById('formalBtnGroup');
+    if (group) {
+      // 滚轮转水平滚动
+      group.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          this.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+      
+      // 滚动时更新箭头显隐
+      group.addEventListener('scroll', updateFormalScrollBtns);
+      window.addEventListener('resize', updateFormalScrollBtns);
+      
+      // 初始化
+      setTimeout(updateFormalScrollBtns, 100);
+    }
+  });
 
   function switchFormal(key) {
     document.querySelectorAll('#formalBtnGroup .drink-btn').forEach(btn => {
