@@ -1320,6 +1320,10 @@ randomDrinkBtn?.addEventListener('click', function() {
   });
 
   const boboData = [
+    { date: '2026.07.18凌晨', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1mb8763EbZ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.07.18晚', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1tb876GEdM/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.07.21凌晨', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1z18768EYB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.07.21晚', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV16y876cEHF/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
     { date: '2025.12.07', title: '【SNH48】《王者夜宴》王者荣耀专场公演第二场', category: 'special', url: 'https://www.bilibili.com/video/BV1eWmcBkE5P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819122808681.webp' },
     { date: '2026.08.01凌晨', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1Vg3X6iEQ3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
     { date: '2026.07.31晚', title: '啵啵', category: 'single', url: 'https://www.bilibili.com/video/BV1W83X6XEU6/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
