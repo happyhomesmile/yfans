@@ -1320,7 +1320,7 @@ randomDrinkBtn?.addEventListener('click', function() {
   });
 
   const boboData = [
-    { date: '2026.08.19晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV14W8w68E8D', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.jpg' },
+    { date: '2026.08.19晚', title: '要开心', category: 'single', url: 'https://www.bilibili.com/video/BV14W8w68E8D', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
     { date: '2026.07.18凌晨', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1mb8763EbZ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
     { date: '2026.07.18晚', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1tb876GEdM/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
     { date: '2026.07.21凌晨', title: '冲冲冲੭ ˙ᗜ˙ ੭', category: 'single', url: 'https://www.bilibili.com/video/BV1z18768EYB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp' },
