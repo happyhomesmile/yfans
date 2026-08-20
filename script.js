@@ -607,7 +607,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     }
 
     const foodWorksPages = ['stage', 'fancam', 'bobo'];
-    const foodNotesPages = ['food', 'travel', 'words'];
+    const foodNotesPages = ['travel', 'words'];
     
     let navPageId = pageId;
     if (foodWorksPages.includes(pageId)) navPageId = 'stage';
