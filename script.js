@@ -2096,7 +2096,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     setLayout('list');
     setHue(210);
-    setWallpaper('solid');
+    setWallpaper('full');
   })();
 
   (function() {
