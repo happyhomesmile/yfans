@@ -611,7 +611,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     
     let navPageId = pageId;
     if (foodWorksPages.includes(pageId)) navPageId = 'stage';
-    else if (foodNotesPages.includes(pageId)) navPageId = 'food';
+    else if (foodNotesPages.includes(pageId)) navPageId = 'travel';
     
     window.activePage = navPageId;
 
