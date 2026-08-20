@@ -135,7 +135,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url("https://wsrv.nl/?url=https://gitee.com/a1814747459/img-bed/raw/master/20260807200934097.webp");
+      background-image: url("https://gitee.com/a1814747459/img-bed/raw/master/20260820173717440.webp");
       background-size: cover;
       background-position: center 30%;
       opacity: var(--bg-opacity, 0.5);
@@ -1126,7 +1126,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
 
