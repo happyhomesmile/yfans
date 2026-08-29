@@ -23,6 +23,7 @@
       <div class="menu-group-title">饭作</div>
       <a class="menu-item-link sub-item" data-page="stage">舞台</a>
       <a class="menu-item-link sub-item" data-page="bobo">直播</a>
+      <a class="menu-item-link sub-item" data-page="gongyan">公演</a>
       <a class="menu-item-link sub-item" data-page="fancam">平台更新</a>
     </div>
 
@@ -36,7 +37,7 @@
       <div class="menu-group-title">记录</div>
       <a class="menu-item-link sub-item" data-page="calendar">日历</a>
       <a class="menu-item-link sub-item" data-page="archive">归档</a>
-      <a class="menu-item-link sub-item" data-page="music">音乐</a>
+      <a class="menu-item-link sub-item" data-page="music">足迹</a>
       <a class="menu-item-link sub-item" data-page="fan-rec">粉丝安利</a>
       <a class="menu-item-link sub-item" data-page="card-collection">小卡合集</a>
     </div>
@@ -135,11 +136,11 @@
         <span class="countdown-en">COUNTDOWN</span>
       </div>
       <div class="countdown-item">
-        <span class="countdown-label">距离出道四周年还有</span>
+        <span class="countdown-label">距离出道三周年还有</span>
         <span class="countdown-days" id="daysToDebutAnniversary">--</span>
       </div>
       <div class="countdown-item">
-        <span class="countdown-label">距离升格四周年还有</span>
+        <span class="countdown-label">距离升格三周年还有</span>
         <span class="countdown-days" id="daysToPromotionAnniversary">--</span>
       </div>
       <div class="countdown-item">
@@ -158,23 +159,6 @@
     </div>
   </div>
 
-  <div class="left-promo-card">
-    <div class="promo-header">
-      <span class="title">快速安利</span>
-      <span class="badge">Quick Picks</span>
-    </div>
-      <div class="promo-content">
-        <div class="promo-item" onclick="randomJump('stage')">
-          <span class="promo-text">随机舞台</span>
-          <span class="promo-arrow">→</span>
-        </div>
-        <div class="promo-item" onclick="randomJump('fancam')">
-          <span class="promo-text">随机平台更新</span>
-          <span class="promo-arrow">→</span>
-        </div>
-      </div>
-    </div>
-
   <!-- 行程倒计时 -->
   <div class="left-countdown-card">
     <div class="countdown-header">
@@ -183,6 +167,81 @@
     </div>
     <div class="countdown-list" id="countdownList">
       <div class="countdown-empty">加载中...</div>
+    </div>
+  </div>
+
+  <!-- 快速安利区 -->
+  <div class="left-promo-card" id="leftPromoCard">
+    <div class="promo-header">
+      <span class="title">快速安利</span>
+      <span class="badge">PICK</span>
+    </div>
+    <div class="promo-carousel" id="promoCarousel">
+      <div class="promo-carousel-track" id="promoCarouselTrack">
+        <!-- Slide 1: 肆时墟 -->
+        <a href="https://www.bilibili.com/video/BV1UXNu6xE2y" target="_blank" class="promo-video-card promo-slide">
+          <div class="promo-video-cover">
+            <img decoding="async" src="http://i0.hdslb.com/bfs/archive/c85f6acbe3cbe946e0524bdb6f3866786f8e13c0.jpg" alt="肆时墟生日公演" loading="lazy" />
+            <span class="promo-video-duration">3:57:07</span>
+          </div>
+          <div class="promo-video-info">
+            <div class="promo-video-title">《肆时墟》叶凡生日公演</div>
+            <div class="promo-video-meta">SNH48官方账号 · 20260712</div>
+          </div>
+        </a>
+        <!-- Slide 2: 应许之地 -->
+        <a href="https://www.bilibili.com/video/BV1AY7DzyEf6" target="_blank" class="promo-video-card promo-slide">
+          <div class="promo-video-cover">
+            <img decoding="async" src="http://i0.hdslb.com/bfs/archive/acfa8436506936965ae17aceb267161bd62edb96.jpg" alt="应许之地生日公演" loading="lazy" />
+            <span class="promo-video-duration">4:02:39</span>
+          </div>
+          <div class="promo-video-info">
+            <div class="promo-video-title">《应许之地》叶凡生日公演</div>
+            <div class="promo-video-meta">SNH48官方账号 · 20250602</div>
+          </div>
+        </a>
+        <!-- Slide 3: Starlight -->
+        <a href="https://www.bilibili.com/video/BV132Nu6hEmy" target="_blank" class="promo-video-card promo-slide">
+          <div class="promo-video-cover">
+            <img decoding="async" src="http://i0.hdslb.com/bfs/archive/3679b049853234536e3268d1e86e1437d9aa8fb9.jpg" alt="Starlight" loading="lazy" />
+            <span class="promo-video-duration">1:40</span>
+          </div>
+          <div class="promo-video-info">
+            <div class="promo-video-title">《Starlight》叶凡青春盛典</div>
+            <div class="promo-video-meta">SNH48官方账号 · 20260712</div>
+          </div>
+        </a>
+        <!-- Slide 4: 不问将来 -->
+        <a href="https://www.bilibili.com/video/BV1gu72zyE1D" target="_blank" class="promo-video-card promo-slide">
+          <div class="promo-video-cover">
+            <img decoding="async" src="http://i0.hdslb.com/bfs/archive/187c290d177e5cb2ff86e664b8ad939babf53ce1.jpg" alt="不问将来" loading="lazy" />
+            <span class="promo-video-duration">3:01</span>
+          </div>
+          <div class="promo-video-info">
+            <div class="promo-video-title">《不问将来》叶凡青春盛典</div>
+            <div class="promo-video-meta">SNH48官方账号 · 20250602</div>
+          </div>
+        </a>
+        <!-- Slide 5: 无罪无我 -->
+        <a href="https://www.bilibili.com/video/BV1bS411P7SP" target="_blank" class="promo-video-card promo-slide">
+          <div class="promo-video-cover">
+            <img decoding="async" src="http://i0.hdslb.com/bfs/archive/c381f177a0f01b22d096953b6c2a823008af78bb.jpg" alt="无罪无我" loading="lazy" />
+            <span class="promo-video-duration">2:42</span>
+          </div>
+          <div class="promo-video-info">
+            <div class="promo-video-title">《无罪无我》叶凡青春盛典</div>
+            <div class="promo-video-meta">SNH48官方账号 · 20240608</div>
+          </div>
+        </a>
+      </div>
+      <!-- 指示器小点 -->
+      <div class="promo-carousel-dots" id="promoCarouselDots">
+        <span class="promo-dot active" data-index="0"></span>
+        <span class="promo-dot" data-index="1"></span>
+        <span class="promo-dot" data-index="2"></span>
+        <span class="promo-dot" data-index="3"></span>
+        <span class="promo-dot" data-index="4"></span>
+      </div>
     </div>
   </div>
 
@@ -250,12 +309,13 @@
       <div class="nav-dropdown-item" data-page="stage">舞台</div>
       <div class="nav-dropdown-item" data-page="bobo">直播</div>
       <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
+      <div class="nav-dropdown-item" data-page="gongyan">公演</div>
     </div>
 
     <div class="nav-dropdown" id="recordsDropdown">
       <div class="nav-dropdown-item" data-page="calendar">日历</div>
       <div class="nav-dropdown-item" data-page="archive">归档</div>
-      <div class="nav-dropdown-item" data-page="music">音乐</div>
+      <div class="nav-dropdown-item" data-page="music">足迹</div>
       <div class="nav-dropdown-item" data-page="fan-rec">粉丝安利</div>
       <div class="nav-dropdown-item" data-page="card-collection">小卡合集</div>
     </div>
@@ -321,13 +381,12 @@
         <span class="title" id="cardTitle">每日一杯</span>
         <span class="badge" id="cardBadge">RANDOM</span>
       </div>
-      <div class="daily-drink-btn" id="randomDrinkBtn">
-        <span id="cardBtnText">今天喝什么</span>
-      </div>
-      <div style="margin-top:8px; text-align:center;">
-        <button id="switchCardBtn" style="background:none; border:none; font-size:12px; color:var(--theme-color); opacity:0.5; cursor:pointer; padding:4px 8px; border-radius:12px; transition:all 0.2s; font-family:inherit;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.5'">
-          ⏺ 切换到颜文字
-        </button>
+      <div class="daily-drink-btn-wrapper">
+        <button class="card-nav-btn" id="cardPrevBtn">‹</button>
+        <div class="daily-drink-btn" id="randomDrinkBtn">
+          <span id="cardBtnText">今天喝什么</span>
+        </div>
+        <button class="card-nav-btn" id="cardNextBtn">›</button>
       </div>
     </div>
 
@@ -373,7 +432,7 @@
             <div class="info-card"><div class="info-label">加入时间</div><div class="info-value">2023-09-30</div></div>
             <div class="info-card"><div class="info-label">加入所属</div><div class="info-value">SNH48 十九期生</div></div>
             <div class="info-card"><div class="info-label">最终所属</div><div class="info-value">SNH48 N队（TEAM NII）</div></div>
-            <div class="info-card"><div class="info-label">所属公司</div><div class="info-value">上海丝芭文化传媒集团有限公司</div></div>
+            <div class="info-card"><div class="info-label">MBTI</div><div class="info-value">ISTP</div></div>
           </div>
           <div style="height:24px;"></div>
           <div class="info-title">
@@ -557,6 +616,31 @@
         </div>
       </div>
 
+      <div class="page-box" id="gongyan">
+        <div class="info-box stage-wrap">
+          <div class="welcome-header" data-page="gongyan"></div>
+
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-bottom:14px;">
+            <div class="stage-nav-wrapper">
+              <div class="stage-nav" id="gongyanNav">
+                <div class="nav-indicator" id="gongyanNavIndicator"></div>
+                <button class="stage-nav-item active" data-category="all">全部 <span id="gongyanTotalCount"></span></button>
+                <button class="stage-nav-item" data-category="gongyan">公演 <span id="gongyanGongyanCount"></span></button>
+                <button class="stage-nav-item" data-category="other">其他 <span id="gongyanOtherCount"></span></button>
+              </div>
+            </div>
+            <div class="search-box" style="flex-shrink:0; max-width:280px;">
+              <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
+              <input type="text" id="gongyanSearch" placeholder="搜索..." />
+            </div>
+            <button class="mobile-filter-btn" data-page="gongyan" onclick="openFilterPanel('gongyan')">筛选</button>
+          </div>
+
+          <div class="stage-grid" id="gongyanGrid"></div>
+          <div class="footer-slogan">-All For YeFan-</div>
+        </div>
+      </div>
+
         <div class="page-box" id="travel">
           <div class="info-box stage-wrap">
             <div class="welcome-header" data-page="travel"></div>
@@ -643,7 +727,7 @@
                 <p>总选过后有许多新粉加入椰丝的行列，该网站大概可以粗略地带你了解一下叶凡。</p>
                 <p>说说我的心路历程吧。某天在回顾叶凡舞台的时候发现需要手动去搜索整套公演，而且不清楚她是否有表演过自己心仪的曲目。又想到有些爱豆网站收录本人的相关内容方便粉丝补档，于是在七月末开始动手实施属于叶凡的个人网站。</p>
                 <p>网站直到现在也并不是完美的，每天都有新的灵感迸发、也总会有不满意的地方浮现，所以未完待续吧。</p>
-                <p>因为是纯静态网站，所有内容都是我手动更新。介于公演排期在星期二更新，所以本网站将在每周二进行固定更新。</p>
+                <p>因为是纯静态网站，所有内容都是我手动更新。介于公演排期在星期一更新，所以本网站将在每周一进行固定更新。</p>
                 <p>另外粉丝安利区接收大家的任何形式的投稿:视频、图、文等等，如果有任何好的作品可以小窗我、或发到提问箱中，我会添加到板块内。</p>
                 <p>有任何好的建议和问题都可以wb联系我！<a href="https://weibo.com/u/7973958238" target="_blank" style="color:var(--theme-color); text-decoration:none; font-weight:600;">@除号好耶耶耶</a></p>
                 <p>祝大家在看这个小凡的旅途中开心幸福，祝这个小凡万事顺遂！</p>
@@ -722,30 +806,40 @@
       <div class="page-box" id="archive">
         <div class="info-box">
           <div class="welcome-header" data-page="archive"></div>
-          <div class="archive-info-card">
-            <div class="archive-info-list">
-              <div class="archive-info-item">
-                <span class="archive-info-label">出道天数</span>
-                <span class="archive-info-value" id="archiveDebutDays">--</span>
-              </div>
-              <div class="archive-info-item">
-                <span class="archive-info-label">升格天数</span>
-                <span class="archive-info-value" id="archivePromotionDays">--</span>
-              </div>
-              <div class="archive-info-item">
-                <span class="archive-info-label">公演场次</span>
-                <span class="archive-info-value" id="archiveStageCount">--</span>
-              </div>
-              <div class="archive-info-item">
-                <span class="archive-info-label">UNIT数</span>
-                <span class="archive-info-value" id="archiveUnitCount">--</span>
-              </div>
-              <div class="archive-info-item">
-                <span class="archive-info-label">破壳天数</span>
-                <span class="archive-info-value" id="archiveBirthDays">--</span>
-              </div>
+          
+          <div class="archive-stats-grid">
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329355.webp" alt="出道" /></div>
+              <div class="archive-stat-value" id="archiveDebutDays">--</div>
+              <div class="archive-stat-label">出道天数</div>
+            </div>
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329355.webp" alt="升格" /></div>
+              <div class="archive-stat-value" id="archivePromotionDays">--</div>
+              <div class="archive-stat-label">升格天数</div>
+            </div>
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329356.webp" alt="公演场次" /></div>
+              <div class="archive-stat-value" id="archiveStageCount">--</div>
+              <div class="archive-stat-label">公演场次</div>
+            </div>
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331794.webp" alt="UNIT数" /></div>
+              <div class="archive-stat-value" id="archiveUnitCount">--</div>
+              <div class="archive-stat-label">UNIT数</div>
+            </div>
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331795.webp" alt="破壳天数" /></div>
+              <div class="archive-stat-value" id="archiveBirthDays">--</div>
+              <div class="archive-stat-label">破壳天数</div>
+            </div>
+            <div class="archive-stat-card">
+              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331793.webp" alt="公演数" /></div>
+              <div class="archive-stat-value" id="archiveShowCount">--</div>
+              <div class="archive-stat-label">公演数</div>
             </div>
           </div>
+          
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>

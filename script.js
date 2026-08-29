@@ -674,28 +674,37 @@ function openDailyRecord(type) {
   }, 200);
 }
 
-let isKaomojiMode = false;
+// 卡片模式数组
+const cardModes = [
+  { id: 'drink', title: '每日一杯', badge: 'RANDOM', btnText: '今天喝什么' },
+  { id: 'kaomoji', title: '颜文字大全', badge: 'EMOJI', btnText: '今天用什么' },
+  { id: 'stage', title: '随机舞台', badge: 'STAGE', btnText: '今天看什么' },
+  { id: 'fancam', title: '随机平台更新', badge: 'FANCAM', btnText: '今天看什么' },
+];
+let currentModeIndex = 0;
 
 const cardTitle = document.getElementById('cardTitle');
 const cardBadge = document.getElementById('cardBadge');
 const cardBtnText = document.getElementById('cardBtnText');
-const switchBtn = document.getElementById('switchCardBtn');
+const prevBtn = document.getElementById('cardPrevBtn');
+const nextBtn = document.getElementById('cardNextBtn');
 const randomDrinkBtn = document.getElementById('randomDrinkBtn');
 
-switchBtn?.addEventListener('click', function() {
-  isKaomojiMode = !isKaomojiMode;
-  
-  if (isKaomojiMode) {
-    cardTitle.textContent = '颜文字大全';
-    cardBadge.textContent = 'EMOJI';
-    cardBtnText.textContent = '今天用什么';
-    this.textContent = '⏺ 切换到每日一杯';
-  } else {
-    cardTitle.textContent = '每日一杯';
-    cardBadge.textContent = 'RANDOM';
-    cardBtnText.textContent = '今天喝什么';
-    this.textContent = '⏺ 切换到颜文字';
-  }
+function updateCardMode() {
+  const mode = cardModes[currentModeIndex];
+  if (cardTitle) cardTitle.textContent = mode.title;
+  if (cardBadge) cardBadge.textContent = mode.badge;
+  if (cardBtnText) cardBtnText.textContent = mode.btnText;
+}
+
+prevBtn?.addEventListener('click', function() {
+  currentModeIndex = (currentModeIndex - 1 + cardModes.length) % cardModes.length;
+  updateCardMode();
+});
+
+nextBtn?.addEventListener('click', function() {
+  currentModeIndex = (currentModeIndex + 1) % cardModes.length;
+  updateCardMode();
 });
 
 function getRandomKaomoji() {
@@ -752,8 +761,13 @@ function closeKaomojiPopup() {
 }
 
 randomDrinkBtn?.addEventListener('click', function() {
-  if (isKaomojiMode) {
+  const mode = cardModes[currentModeIndex];
+  if (mode.id === 'kaomoji') {
     showKaomojiPopup();
+  } else if (mode.id === 'stage') {
+    randomJump('stage');
+  } else if (mode.id === 'fancam') {
+    randomJump('fancam');
   } else {
     const keys = Object.keys(drinkData);
     if (keys.length === 0) return;
@@ -790,14 +804,15 @@ randomDrinkBtn?.addEventListener('click', function() {
     const headerConfig = {
       home: {
         subtitle: 'Welcome!',
-        title: '欢迎使用椰饭饲养指南',
+        title: '暂停更新，调整板块内容，不影响网站功能使用',
         extra: '<div class="sub">椰丝之家：933624308</div><div class="links"><a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a><a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a><a href="https://b23.tv/sCndNaE" target="_blank">星系放映厅</a></div>',
         desc: '想要了解叶凡？这里是介绍区~'
       },
       stage: { subtitle: 'STAGE', title: '饭之大小作', desc: '收录舞台切片' },
-      bobo: { subtitle: 'STAGE', title: '饭之啵', desc: '收录直播回放' },
+      bobo: { subtitle: 'LIVE', title: '饭之啵', desc: '收录直播回放' },
+      gongyan: { subtitle: 'PERFORM', title: '饭之演出', desc: '收录公演回放' },
       fancam: { subtitle: 'PHOTO', title: '饭之拍', desc: '收录平台更新内容' },
-      travel: { subtitle: 'SELFIE', title: '旅行椰饭', desc: '收录口袋房间自拍' },
+      travel: { subtitle: 'SELFIE', title: '奇迹饭饭', desc: '收录口袋房间自拍' },
       words: { subtitle: 'WORDS', title: '饭之信', desc: '收录演讲文字版' },
       wait: { subtitle: 'ABOUT', title: '关于本站', desc: '' }
     };
@@ -890,7 +905,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       return;
     }
 
-    const foodWorksPages = ['stage', 'fancam', 'bobo'];
+    const foodWorksPages = ['stage', 'fancam', 'gongyan','bobo'];
     const foodNotesPages = ['travel', 'words'];
     const recordsPages = ['calendar', 'archive', 'music', 'fan-rec', 'card-collection'];
     
@@ -941,6 +956,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         window.updateNavIndicator('stageNav', 'stageNavIndicator');
         window.updateNavIndicator('boboNav', 'boboNavIndicator');
         window.updateNavIndicator('platformNav', 'platformNavIndicator');
+        window.updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
       }
       
       document.querySelectorAll('.page-box.active .welcome-header[data-page]').forEach(header => {
@@ -949,7 +965,7 @@ randomDrinkBtn?.addEventListener('click', function() {
               home: { subtitle: 'Welcome!', title: '欢迎使用椰饭饲养指南', extra: '<div class="sub">椰丝之家：933624308</div><div class="links"><a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a><a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a><a href="https://b23.tv/sCndNaE" target="_blank">星系放映厅</a></div>', desc: '想要了解叶凡？这里是介绍区~' },
               calendar: { subtitle: 'CALENDAR', title: '日历', desc: '收录行程排期' },
               archive: { subtitle: 'ARCHIVE', title: '归档', desc: '记录' },
-              music: { subtitle: 'MUSIC', title: '音乐', desc: '' },
+              music: { subtitle: 'FOOTPRINT', title: '足迹', desc: '' },
               'fan-rec': { subtitle: 'FAN REC', title: '粉丝安利', desc: '' },
               'card-collection': { subtitle: 'CARDS', title: '小卡合集', desc: '' }
           };
@@ -1259,6 +1275,11 @@ randomDrinkBtn?.addEventListener('click', function() {
     { date: '2025.08.17', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1PM8v6SEcg/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151943.webp', show: '【SNH48】TEAM NII《至少还有星光落在我眼底》张笑盈毕业公演' },
     { date: '2025.08.14', title: 'Fire Touch', url: 'https://www.bilibili.com/video/BV1WM8v6SECu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151954.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
     { date: '2025.08.14', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1WM8v6SE3n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151953.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
+    { date: '2025.12.20', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Eo2/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141713996.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
+    { date: '2025.12.18', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Emy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141730957.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
+    { date: '2025.11.30', title: '乐曜日', url: 'https://www.bilibili.com/video/BV12V8E63ETm/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141756827.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
+    { date: '2025.11.27', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14V8E63Euh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819171352874.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
+    { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
   ];
 
   const specialData = [
@@ -1293,13 +1314,8 @@ randomDrinkBtn?.addEventListener('click', function() {
     { date: '2026.04.11', title: '金色海岸', url: 'https://www.bilibili.com/video/BV1B6MC6VEjj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701603.webp', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
     { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.webp', show: '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演' },
     { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.webp', show: '【SNH48】TEAM NII《Plan B》刘洁毕业公演' },
-    { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
     { date: '2026.01.24', title: 'BLackrain', url: 'https://www.bilibili.com/video/BV1B6MC6VEzu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701605.webp', show: '【SNH48】TEAM HII《赫兹共振》蒋舒婷季度MVP公演' },
     { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.webp', show: '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演' },
-    { date: '2025.12.20', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Eo2/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141713996.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.12.18', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Emy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141730957.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.30', title: '乐曜日', url: 'https://www.bilibili.com/video/BV12V8E63ETm/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141756827.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.27', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14V8E63Euh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819171352874.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
     { date: '2025.11.16', title: 'Battle Cry', url: 'https://www.bilibili.com/video/BV1PT8v6nEHD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824172327210.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
     { date: '2025.10.07', title: '因为喜欢你', url: 'https://www.bilibili.com/video/BV1yT8v6JECs/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824172341144.webp', show: '【SNH48】TEAM NII《应许之地》韩家乐季度MVP公演' },
   ];
@@ -1608,6 +1624,39 @@ randomDrinkBtn?.addEventListener('click', function() {
     const birthDaysEl = document.getElementById("archiveBirthDays");
     if (birthDaysEl) birthDaysEl.textContent = calcDaysFromDate('2002.07.23') + '天';
     
+    // 公演数（按公演名称去重）
+    const showCountEl = document.getElementById("archiveShowCount");
+    if (showCountEl) {
+      const allStages = [...(unitData || []), ...(specialData || []), ...(assistData || []), ...(substituteData || [])];
+      const uniqueShows = new Set();
+      allStages.forEach(s => {
+        if (s.show) uniqueShows.add(s.show);
+      });
+      showCountEl.textContent = uniqueShows.size + '套';
+    }
+    
+    // 网站相关统计
+    const siteDaysEl = document.getElementById("siteDays");
+    if (siteDaysEl) siteDaysEl.textContent = calcDaysFromDate('2026.01.01') + '天';
+    
+    const siteStageTotalEl = document.getElementById("siteStageTotal");
+    if (siteStageTotalEl) {
+      const stageTotal = (unitData ? unitData.length : 0) + (specialData ? specialData.length : 0) + (assistData ? assistData.length : 0) + (substituteData ? substituteData.length : 0);
+      siteStageTotalEl.textContent = stageTotal + '场';
+    }
+    
+    const siteLiveTotalEl = document.getElementById("siteLiveTotal");
+    if (siteLiveTotalEl) siteLiveTotalEl.textContent = (boboData ? boboData.length : 0) + '场';
+    
+    const sitePostTotalEl = document.getElementById("sitePostTotal");
+    if (sitePostTotalEl) {
+      const postTotal = (weiboPostsData ? weiboPostsData.length : 0) + (xiaohongshuPostsData ? xiaohongshuPostsData.length : 0) + (douyinPostsData ? douyinPostsData.length : 0) + (bilibiliPostsData ? bilibiliPostsData.length : 0);
+      sitePostTotalEl.textContent = postTotal + '条';
+    }
+    
+    const sitePocketTotalEl = document.getElementById("sitePocketTotal");
+    if (sitePocketTotalEl) sitePocketTotalEl.textContent = (pocketLivesData ? pocketLivesData.length : 0) + '组';
+    
     // 公演场次：UNIT(NII队公演) + 代役 + 特殊舞台，按日期+公演名称取不重复值
     const uniqueStageSet = new Set();
     
@@ -1854,6 +1903,12 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
     grid.innerHTML = html;
+    // 根据当前布局模式设置样式
+    if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
+      grid.className = 'stage-grid list-mode';
+    } else {
+      grid.className = 'stage-grid';
+    }
   }
 
   document.querySelectorAll('#boboNav .stage-nav-item').forEach(btn => {
@@ -2899,7 +2954,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     function setLayout(mode) {
       currentLayoutMode = mode;
-      ['stageGrid', 'boboGrid'].forEach(id => {
+      ['stageGrid', 'boboGrid', 'gongyanGrid'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.className = 'stage-grid' + (mode === 'list' ? ' list-mode' : '');
       });
@@ -3826,12 +3881,14 @@ randomDrinkBtn?.addEventListener('click', function() {
     initNavIndicator('stageNav', 'stageNavIndicator');
     initNavIndicator('boboNav', 'boboNavIndicator');
     initNavIndicator('platformNav', 'platformNavIndicator');
+    initNavIndicator('gongyanNav', 'gongyanNavIndicator');
 
     window.addEventListener('resize', function() {
       requestAnimationFrame(() => {
         updateNavIndicator('stageNav', 'stageNavIndicator');
         updateNavIndicator('boboNav', 'boboNavIndicator');
         updateNavIndicator('platformNav', 'platformNavIndicator');
+        updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
       });
     });
 
@@ -3870,8 +3927,8 @@ randomDrinkBtn?.addEventListener('click', function() {
       return Math.ceil(diff / (1000 * 60 * 60 * 24));
     }
     
-    const daysToDebutAnniv = daysUntil(2027, 9, 30);
-    const daysToPromotionAnniv = daysUntil(2028, 2, 2);
+    const daysToDebutAnniv = daysUntil(2026, 9, 30);
+    const daysToPromotionAnniv = daysUntil(2027, 2, 2);
     
     let birthdayYear = currentYear;
     if (currentMonth > 7 || (currentMonth === 7 && currentDate > 23)) {
@@ -4392,14 +4449,20 @@ hello大家好，我是SNH48 Team NII的叶凡。
     wordsData.forEach((item, index) => {
       html += `
         <div class="video-card" onclick="openWordsPopup(${index})" style="cursor:pointer; padding:16px 20px; display:flex; flex-direction:column; justify-content:center; min-height:50px; grid-column:1 / -1;">
-          <div style="font-size:14px; font-weight:600; color:var(--theme-color); opacity:0.6; margin-bottom:6px;">${item.date}</div>
-          <div style="font-size:20px; font-weight:700; color:#000000;">${item.title}</div>
-          <div style="font-size:13px; color:#4a779e; opacity:0.5; margin-top:4px;">点击查看 →</div>
+          <div class="words-card-date" style="font-size:14px; font-weight:600; color:var(--theme-color); opacity:0.6; margin-bottom:6px;">${item.date}</div>
+          <div class="words-card-title" style="font-size:20px; font-weight:700; color:#000000;">${item.title}</div>
+          <div class="words-card-link" style="font-size:13px; color:#4a779e; opacity:0.5; margin-top:4px;">点击查看 →</div>
         </div>
       `;
     });
 
     grid.innerHTML = html;
+    // 根据当前布局模式设置样式
+    if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
+      grid.className = 'stage-grid list-mode';
+    } else {
+      grid.className = 'stage-grid';
+    }
   }
 
   function openWordsPopup(index) {
@@ -4798,8 +4861,8 @@ ${data.content}
   
   function updateTocFixed() {
     const tocCard = document.querySelector('.left-toc-card');
-    const promoCard = document.querySelector('.left-promo-card');
     const countdownCard = document.querySelector('.left-countdown-card');
+    const promoCard = document.querySelector('.left-promo-card');
     const profileCard = document.querySelector('.left-profile-card');
     
     if (!tocCard) return;
@@ -4807,7 +4870,7 @@ ${data.content}
     const scrollY = window.pageYOffset;
     const cfg = TOC_CONFIG;
     const tocHeight = tocCard.offsetHeight || 200;
-    const promoHeight = promoCard ? promoCard.offsetHeight : 100;
+    const countdownHeight = countdownCard ? countdownCard.offsetHeight : 150;
     
     // 动态计算信息栏的底部位置（不固定时目录应该在信息栏下面）
     let topNormal = 500;
@@ -4827,18 +4890,20 @@ ${data.content}
       tocCard.style.left = '2px';
       tocCard.style.zIndex = '1000';
       
-      if (promoCard) {
-        promoCard.style.position = 'fixed';
-        promoCard.style.top = (cfg.topFixed + tocHeight + cfg.gap) + 'px';
-        promoCard.style.left = '2px';
-        promoCard.style.zIndex = '999';
-      }
-      
+      // 行程倒计时固定在目录下面
       if (countdownCard) {
         countdownCard.style.position = 'fixed';
-        countdownCard.style.top = (cfg.topFixed + tocHeight + cfg.gap + promoHeight + cfg.gap) + 'px';
+        countdownCard.style.top = (cfg.topFixed + tocHeight + cfg.gap) + 'px';
         countdownCard.style.left = '2px';
         countdownCard.style.zIndex = '998';
+      }
+      
+      // 快速安利区固定在行程倒计时下面
+      if (promoCard) {
+        promoCard.style.position = 'fixed';
+        promoCard.style.top = (cfg.topFixed + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
+        promoCard.style.left = '2px';
+        promoCard.style.zIndex = '997';
       }
     } else {
       tocCard.style.position = 'absolute';
@@ -4846,18 +4911,20 @@ ${data.content}
       tocCard.style.left = '2px';
       tocCard.style.zIndex = '998';
       
-      if (promoCard) {
-        promoCard.style.position = 'absolute';
-        promoCard.style.top = (topNormal + tocHeight + cfg.gap) + 'px';
-        promoCard.style.left = '2px';
-        promoCard.style.zIndex = '997';
-      }
-      
+      // 行程倒计时不固定时也在目录下面
       if (countdownCard) {
         countdownCard.style.position = 'absolute';
-        countdownCard.style.top = (topNormal + tocHeight + cfg.gap + promoHeight + cfg.gap) + 'px';
+        countdownCard.style.top = (topNormal + tocHeight + cfg.gap) + 'px';
         countdownCard.style.left = '2px';
         countdownCard.style.zIndex = '996';
+      }
+      
+      // 快速安利区不固定时在行程倒计时下面
+      if (promoCard) {
+        promoCard.style.position = 'absolute';
+        promoCard.style.top = (topNormal + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
+        promoCard.style.left = '2px';
+        promoCard.style.zIndex = '995';
       }
     }
 
@@ -5415,3 +5482,216 @@ document.addEventListener('DOMContentLoaded', function() {
     startCountdownTimer();
   }, 500);
 });
+
+
+// ========== 快速安利区轮播 ==========
+(function() {
+  const track = document.getElementById('promoCarouselTrack');
+  const dots = document.querySelectorAll('.promo-dot');
+  if (!track || dots.length === 0) return;
+  
+  let currentIndex = 0;
+  const totalSlides = dots.length;
+  
+  function goToSlide(index) {
+    currentIndex = index;
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', function() {
+      goToSlide(index);
+    });
+  });
+  
+  // 自动轮播（每5秒切换一次）
+  setInterval(function() {
+    const nextIndex = (currentIndex + 1) % totalSlides;
+    goToSlide(nextIndex);
+  }, 5000);
+})();
+
+// ========== 公演页面模块 ==========
+(function() {
+  let gongyanData = [];
+  let gongyanLoaded = false;
+  let currentGongyanCategory = 'all';
+
+  // 加载公演数据
+  async function loadGongyanData() {
+    if (gongyanLoaded) return;
+    try {
+      const res = await fetch('bilibili_nii_videos.json');
+      const data = await res.json();
+      gongyanData = data.videos || [];
+      gongyanLoaded = true;
+      console.log('公演数据加载完成，共' + gongyanData.length + '条');
+    } catch (e) {
+      console.log('公演数据加载失败:', e.message);
+      gongyanData = [];
+      gongyanLoaded = true;
+    }
+  }
+
+  // 判断是否是公演（有日期的）
+  function isGongyan(item) {
+    return item.pubdate && item.pubdate !== '';
+  }
+
+  // 获取分类数据
+  function getCategoryData(category) {
+    if (category === 'gongyan') {
+      return gongyanData.filter(isGongyan);
+    } else if (category === 'other') {
+      return gongyanData.filter(item => !isGongyan(item));
+    }
+    return gongyanData;
+  }
+
+  // 更新分类计数
+  function updateGongyanCounts() {
+    const allCount = gongyanData.length;
+    const gongyanCount = gongyanData.filter(isGongyan).length;
+    const otherCount = allCount - gongyanCount;
+    
+    const totalEl = document.getElementById('gongyanTotalCount');
+    const gongyanEl = document.getElementById('gongyanGongyanCount');
+    const otherEl = document.getElementById('gongyanOtherCount');
+    
+    if (totalEl) totalEl.textContent = allCount;
+    if (gongyanEl) gongyanEl.textContent = gongyanCount;
+    if (otherEl) otherEl.textContent = otherCount;
+  }
+
+  // 渲染公演卡片（和舞台同款）
+  function renderGongyanCards(category, searchText) {
+    const grid = document.getElementById('gongyanGrid');
+    if (!grid) return;
+    
+    let data = getCategoryData(category);
+    
+    // 搜索过滤
+    if (searchText && searchText.trim()) {
+      const keyword = searchText.trim().toLowerCase();
+      data = data.filter(item => 
+        item.title && item.title.toLowerCase().includes(keyword)
+      );
+    }
+    
+    if (data.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#999; font-size:14px;">暂无内容</div>';
+      return;
+    }
+    
+    let html = '';
+    data.forEach(item => {
+      const isGongyanItem = isGongyan(item);
+      const tagText = isGongyanItem ? '公演' : '其他';
+      const tagColor = isGongyanItem ? '#6bb8e8' : '#f5a0b8';
+      
+      // 封面：有封面图用封面图，否则用fallback
+      let coverHtml = '';
+      if (item.cover || item.pic) {
+        const coverUrl = item.cover || item.pic;
+        coverHtml = '<img decoding="async" src="' + coverUrl + '" alt="' + item.title + '" loading="lazy" fetchpriority="low" style="opacity:1;" />';
+      } else {
+        coverHtml = '<div class="cover-fallback" style="background:linear-gradient(135deg,#b8d4e8,#8ab3d0);"><div class="video-icon">🎬</div><div class="video-tip" style="color:#fff;">公演视频</div></div>';
+      }
+      
+      const dateMatch = item.pubdate ? item.pubdate.match(/(\d{4})-(\d{2})-(\d{2})/) : null;
+      const dataMonth = dateMatch ? dateMatch[1] + '-' + dateMatch[2] : '';
+      const dataDay = dateMatch ? dateMatch[3] : '';
+      
+      const showText = item.length ? '⏱ ' + item.length + ' · ▶ ' + formatPlayCount(item.play) : '';
+      
+      html += `
+        <div class="video-card" data-url="${item.url}" data-month="${dataMonth}" data-day="${dataDay}" onclick="window.open('${item.url || '#'}','_blank')">
+          <div class="video-cover-box">
+            ${coverHtml}
+            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+          </div>
+          <div class="video-info">
+            <div class="video-name">${item.title}</div>
+            <div class="video-date">${item.pubdate || '无日期'}</div>
+            ${showText ? `<div class="video-show">${showText}</div>` : ''}
+          </div>
+        </div>
+      `;
+    });
+    
+    grid.innerHTML = html;
+    // 根据当前布局模式设置样式
+    if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
+      grid.className = 'stage-grid list-mode';
+    } else {
+      grid.className = 'stage-grid';
+    }
+  }
+
+  // 格式化播放量
+  function formatPlayCount(count) {
+    if (!count) return '0';
+    if (count >= 10000) {
+      return (count / 10000).toFixed(1) + '万';
+    }
+    return count.toString();
+  }
+
+  // 初始化公演页面
+  async function initGongyanPage() {
+    await loadGongyanData();
+    updateGongyanCounts();
+    renderGongyanCards(currentGongyanCategory, document.getElementById('gongyanSearch')?.value || '');
+    
+    // 更新导航指示器
+    if (window.updateNavIndicator) {
+      window.updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
+    }
+  }
+
+  // 标签切换
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('#gongyanNav .stage-nav-item');
+    if (!btn) return;
+    
+    currentGongyanCategory = btn.dataset.category;
+    
+    document.querySelectorAll('#gongyanNav .stage-nav-item').forEach(b => {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    renderGongyanCards(currentGongyanCategory, document.getElementById('gongyanSearch')?.value || '');
+    
+    if (window.updateNavIndicator) {
+      window.updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
+    }
+  });
+
+  // 搜索
+  document.addEventListener('input', function(e) {
+    if (e.target.id === 'gongyanSearch') {
+      renderGongyanCards(currentGongyanCategory, e.target.value);
+    }
+  });
+
+  // 页面切换时初始化
+  const originalSwitchPage = window.switchPage;
+  window.switchPage = function(pageId) {
+    if (originalSwitchPage) originalSwitchPage(pageId);
+    if (pageId === 'gongyan') {
+      initGongyanPage();
+    }
+  };
+
+  // 暴露初始化函数
+  window.initGongyanPage = initGongyanPage;
+})();
