@@ -68,7 +68,7 @@
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
     <button class="nav-item active" data-action="home">
       <span class="nav-icon">
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260812180249546.webp" 
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/d01a3be1-4a3f-4354-8831-814e2104e804_1789006830291_shouye.webp" 
             alt="首页" 
             style="width:22px; height:22px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
@@ -76,7 +76,7 @@
     </button>
     <button class="nav-item" data-action="palette">
       <span class="nav-icon">
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.webp" 
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b63730ef-7695-4dd6-9897-0ba2a1703137_1789006832657_jiemianzujian_tiaosepan_platte.webp" 
             alt="调色盘" 
             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
@@ -84,7 +84,7 @@
     </button>
     <button class="nav-item" data-action="menu" id="menuToggleBtn">
       <span class="nav-icon">
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260812180249547.webp" 
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/2dfad7e6-e6db-4257-b01e-04a266381657_1789006833251_zuopin.webp" 
           alt="菜单" 
           style="width:22px; height:22px; display:block; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
           </span>
@@ -92,7 +92,7 @@
     </button>
     <button class="nav-item" data-action="search" id="mobileSearchBtn">
       <span class="nav-icon">
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" 
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" 
             alt="搜索" 
             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
@@ -101,7 +101,7 @@
     <button class="nav-item" data-action="dark" id="mobileDarkToggle">
       <span class="nav-icon">
         <img decoding="async" id="mobileDarkIconImg" 
-            src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.webp" 
+            src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp" 
             alt="暗色模式" 
             style="width:20px; height:20px; display:block; opacity:0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </span>
@@ -119,12 +119,12 @@
   </div>
 
   <button id="backToTop">
-    <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222435.webp" alt="返回顶部" />
+    <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b40c1ddf-ee92-42a5-b7da-13801baabb5f_1789006837946_huidaodingbu.webp" alt="返回顶部" />
   </button>
 
   <div class="left-profile-card">
     <div class="profile-avatar">
-      <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/webwxgetmsgimg.gif" alt="椰饭" />
+      <img decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/1789008303371_webwxgetmsgimg.gif" alt="椰饭" />
     </div>
     <div class="profile-subtitle">
       <span style="font-weight: 700; font-size: 16px; color: #000000;">叶凡言：</span><br>
@@ -234,13 +234,15 @@
           </div>
         </a>
       </div>
-      <!-- 指示器小点 -->
+      <!-- 指示器小点 + 左右切换 -->
       <div class="promo-carousel-dots" id="promoCarouselDots">
+        <button type="button" class="promo-carousel-arrow" id="promoPrevBtn" aria-label="上一个">‹</button>
         <span class="promo-dot active" data-index="0"></span>
         <span class="promo-dot" data-index="1"></span>
         <span class="promo-dot" data-index="2"></span>
         <span class="promo-dot" data-index="3"></span>
         <span class="promo-dot" data-index="4"></span>
+        <button type="button" class="promo-carousel-arrow" id="promoNextBtn" aria-label="下一个">›</button>
       </div>
     </div>
   </div>
@@ -308,8 +310,8 @@
     <div class="nav-dropdown" id="foodWorksDropdown">
       <div class="nav-dropdown-item" data-page="stage">舞台</div>
       <div class="nav-dropdown-item" data-page="bobo">直播</div>
-      <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
       <div class="nav-dropdown-item" data-page="gongyan">公演</div>
+      <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
     </div>
 
     <div class="nav-dropdown" id="recordsDropdown">
@@ -324,25 +326,25 @@
       <div class="menu-item active" data-page="home">首页</div>
       <div class="menu-item" data-page="stage" id="foodWorksBtn">
         饭作
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.webp" alt="下拉" class="dropdown-icon" id="foodWorksIcon" />
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/be1245fb-7c37-4bca-8307-9da1071e96af_1789006828488_a-sl-oa20-Direction-downward-outlined.webp" alt="下拉" class="dropdown-icon" id="foodWorksIcon" />
       </div>
       <div class="menu-item" data-page="travel" id="foodNotesBtn">
         饭记
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.webp" alt="下拉" class="dropdown-icon" id="foodNotesIcon" />
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/be1245fb-7c37-4bca-8307-9da1071e96af_1789006828488_a-sl-oa20-Direction-downward-outlined.webp" alt="下拉" class="dropdown-icon" id="foodNotesIcon" />
       </div>
       <div class="menu-item" data-page="calendar" id="recordsBtn">
         记录
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260804151930253.webp" alt="下拉" class="dropdown-icon" id="recordsIcon" />
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/be1245fb-7c37-4bca-8307-9da1071e96af_1789006828488_a-sl-oa20-Direction-downward-outlined.webp" alt="下拉" class="dropdown-icon" id="recordsIcon" />
       </div>
       <div class="menu-item" data-page="wait">关于本站</div>
     </div>
 
     <div class="page-actions">
       <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
-        <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222436.webp" alt="调色盘" style="width:20px; height:20px; display:block; opacity: 0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+        <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b63730ef-7695-4dd6-9897-0ba2a1703137_1789006832657_jiemianzujian_tiaosepan_platte.webp" alt="调色盘" style="width:20px; height:20px; display:block; opacity: 0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
       </div>
       <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
-        <img decoding="async" id="darkIcon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.webp" alt="切换主题" class="dark-toggle-icon" />
+        <img decoding="async" id="darkIcon" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp" alt="切换主题" class="dark-toggle-icon" />
       </div>
     </div>
 
@@ -416,8 +418,8 @@
         <div class="info-box">
           <div class="welcome-header" data-page="home"></div>
           <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
-            椰饭的自我介绍
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
+            个人简介
             <span class="title-en">introduction</span>
           </div>
           <div class="info-grid">
@@ -436,43 +438,43 @@
           </div>
           <div style="height:24px;"></div>
           <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
-            椰饭的联系方式
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
+            平台账号
             <span class="title-en">contact</span>
           </div>
           <div class="info-grid">
             <div class="link-card" onclick="window.open('https://weibo.com/u/7901094930','_blank')">
               <div class="info-label">微博</div>
               <div class="info-value">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803143000473.webp" alt="微博" class="platform-icon" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/d811dbd4-92c3-4661-93ca-94f4d9490671_1789006832933_weibo__1_.webp" alt="微博" class="platform-icon" />
                 SNH48-叶凡
               </div>
             </div>
             <div class="link-card" onclick="window.open('https://v.douyin.com/eHTaJ0FG-pU/','_blank')">
               <div class="info-label">抖音</div>
               <div class="info-value">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803143000476.webp" alt="抖音" class="platform-icon" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/99256360-2c7c-404d-9b42-1702460bbf31_1789006839694_douyin.webp" alt="抖音" class="platform-icon" />
                 Aok
               </div>
             </div>
             <div class="link-card" onclick="window.open('https://v.douyin.com/OymhX5fu7Go/','_blank')">
               <div class="info-label">抖音</div>
               <div class="info-value">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803143000476.webp" alt="抖音" class="platform-icon" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/99256360-2c7c-404d-9b42-1702460bbf31_1789006839694_douyin.webp" alt="抖音" class="platform-icon" />
                 Hhhhhdu
               </div>
             </div>
             <div class="link-card" onclick="window.open('https://b23.tv/GBgXhm7','_blank')">
               <div class="info-label">B站</div>
               <div class="info-value">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803143000475.webp" alt="B站" class="platform-icon" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/eb2533b3-d85c-4c58-a787-b9d2a8bc7637_1789006834505_bilibili.webp" alt="B站" class="platform-icon" />
                 Aoka
               </div>
             </div>
             <div class="link-card" onclick="window.open('https://xhslink.com/m/2k2G04DVjBy','_blank')">
               <div class="info-label">小红书</div>
               <div class="info-value">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803143000474.webp" alt="小红书" class="platform-icon" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/54cf469f-996f-4920-ba8a-2b301553dca1_1789006834338_xiaohongshu.webp" alt="小红书" class="platform-icon" />
                 Aok
               </div>
             </div>
@@ -480,23 +482,7 @@
 
           <div style="height:24px;"></div>
           <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
-            椰饭的里程日记
-            <span class="title-en">Timeline</span>
-          </div>
-          <div class="timeline-wrap">
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2023.09.30</div><div class="timeline-text">十九期生亮相新生公演《命运的X号》</div></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2023.11.25</div><div class="timeline-text">首次代役SNH48 Team NII《应许之地》</div></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2024.02.02</div><div class="timeline-text">正式升格为SNH48 Team NII的成员</div></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2024.08.03</div><div class="timeline-text">第十一届青春盛典取得年度新人潜力奖第4名</div></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2025.08.02</div><div class="timeline-text">第十二届青春盛典取得年度梦想成员奖第38名</div></div>
-            <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-date">2026.08.08</div><div class="timeline-text">第十三届青春盛典取得年度梦想成员奖第45名</div></div>
-            <div class="timeline-item"><span class="timeline-dot no-link"></span><div class="timeline-text">未完待续…</div></div>
-          </div>
-
-          <div style="height:24px;"></div>
-          <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
             历年公式照
             <span class="title-en">Gallery</span>
           </div>
@@ -525,6 +511,15 @@
               <div class="scroll-inner"></div>
             </div>
           </div>
+          <div style="height:24px;"></div>
+          <div class="info-title">
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
+            里程时间线
+            <span class="title-en">Timeline</span>
+          </div>
+          <div class="mileage-timeline" id="mileageTimeline">
+            <!-- 里程时间线由 script.js 中的 mileageTimelineNodes 渲染（数据来源：时间线.json，左右交错排版） -->
+          </div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -545,7 +540,7 @@
               </div>
             </div>
             <div class="search-box" style="flex-shrink:0; max-width:280px;">
-              <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
+              <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="stageSearch" placeholder="搜索..." />
             </div>
             <button class="mobile-filter-btn" data-page="stage" onclick="openFilterPanel('stage')">筛选</button>
@@ -571,18 +566,23 @@
               <div class="stage-nav" id="boboNav">
                 <div class="nav-indicator" id="boboNavIndicator"></div>
                 <button class="stage-nav-item active" data-category="all">全部 <span id="boboTotalCount"></span></button>
-                <button class="stage-nav-item" data-category="pocket">口袋回放 <span id="boboPocketCount"></span></button>
-                <button class="stage-nav-item" data-category="special">特殊直播 <span id="boboSpecialCount"></span></button>
+                <button class="stage-nav-item" data-category="video">视频 <span id="boboVideoCount"></span></button>
+                <button class="stage-nav-item" data-category="radio">电台 <span id="boboRadioCount"></span></button>
               </div>
             </div>
             <div class="search-box" style="flex-shrink:0; max-width:280px;">
-              <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
+              <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="boboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
             </div>
             <button class="mobile-filter-btn" data-page="bobo" onclick="openFilterPanel('bobo')">筛选</button>
           </div>
 
           <div class="stage-grid" id="boboGrid"></div>
+          <div id="boboPaginationControls" style="display:flex; justify-content:center; gap:10px; margin-top:20px; align-items:center;">
+            <button id="boboPrevBtn" onclick="changeBoboPage(-1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">上一页</button>
+            <span id="boboPageInfo" style="font-size:13px; color:#666;">第 1 页</span>
+            <button id="boboNextBtn" onclick="changeBoboPage(1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">下一页</button>
+          </div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -603,7 +603,7 @@
                 </div>
               </div>
               <div class="search-box" style="flex-shrink:0; max-width:280px;">
-                <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
+                <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
                 <input type="text" id="weiboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
               </div>
               <button class="mobile-filter-btn" data-page="fancam" onclick="openFilterPanel('fancam')">筛选</button>
@@ -630,13 +630,18 @@
               </div>
             </div>
             <div class="search-box" style="flex-shrink:0; max-width:280px;">
-              <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803195222437.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
+              <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="gongyanSearch" placeholder="搜索..." />
             </div>
             <button class="mobile-filter-btn" data-page="gongyan" onclick="openFilterPanel('gongyan')">筛选</button>
           </div>
 
           <div class="stage-grid" id="gongyanGrid"></div>
+          <div id="gongyanPaginationControls" style="display:flex; justify-content:center; gap:10px; margin-top:20px; align-items:center;">
+            <button id="gongyanPrevBtn" onclick="changeGongyanPage(-1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">上一页</button>
+            <span id="gongyanPageInfo" style="font-size:13px; color:#666;">第 1 页</span>
+            <button id="gongyanNextBtn" onclick="changeGongyanPage(1)" style="padding:6px 16px; border-radius:20px; border:1px solid #ccc; background:white; cursor:pointer;">下一页</button>
+          </div>
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
       </div>
@@ -718,7 +723,7 @@
         <div class="info-box">
           <div class="welcome-header" data-page="wait"></div>
           <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
             关于本站
             <span class="title-en">About</span>
           </div>
@@ -727,7 +732,7 @@
                 <p>总选过后有许多新粉加入椰丝的行列，该网站大概可以粗略地带你了解一下叶凡。</p>
                 <p>说说我的心路历程吧。某天在回顾叶凡舞台的时候发现需要手动去搜索整套公演，而且不清楚她是否有表演过自己心仪的曲目。又想到有些爱豆网站收录本人的相关内容方便粉丝补档，于是在七月末开始动手实施属于叶凡的个人网站。</p>
                 <p>网站直到现在也并不是完美的，每天都有新的灵感迸发、也总会有不满意的地方浮现，所以未完待续吧。</p>
-                <p>因为是纯静态网站，所有内容都是我手动更新。介于公演排期在星期一更新，所以本网站将在每周一进行固定更新。</p>
+                <p>因为是纯静态网站，所有内容都是我手动更新。介于公演排期在星期一更新，所以本网站将在每周二进行固定更新。</p>
                 <p>另外粉丝安利区接收大家的任何形式的投稿:视频、图、文等等，如果有任何好的作品可以小窗我、或发到提问箱中，我会添加到板块内。</p>
                 <p>有任何好的建议和问题都可以wb联系我！<a href="https://weibo.com/u/7973958238" target="_blank" style="color:var(--theme-color); text-decoration:none; font-weight:600;">@除号好耶耶耶</a></p>
                 <p>祝大家在看这个小凡的旅途中开心幸福，祝这个小凡万事顺遂！</p>
@@ -737,7 +742,7 @@
 
           <div style="height:24px;"></div>
           <div class="info-title">
-            <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260803144017285.webp" alt="" class="title-icon" />
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
             更新日记
             <span class="title-en">Changelog</span>
           </div>
@@ -807,38 +812,30 @@
         <div class="info-box">
           <div class="welcome-header" data-page="archive"></div>
           
-          <div class="archive-stats-grid">
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329355.webp" alt="出道" /></div>
-              <div class="archive-stat-value" id="archiveDebutDays">--</div>
-              <div class="archive-stat-label">出道天数</div>
-            </div>
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329355.webp" alt="升格" /></div>
-              <div class="archive-stat-value" id="archivePromotionDays">--</div>
-              <div class="archive-stat-label">升格天数</div>
-            </div>
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181329356.webp" alt="公演场次" /></div>
-              <div class="archive-stat-value" id="archiveStageCount">--</div>
-              <div class="archive-stat-label">公演场次</div>
-            </div>
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331794.webp" alt="UNIT数" /></div>
-              <div class="archive-stat-value" id="archiveUnitCount">--</div>
-              <div class="archive-stat-label">UNIT数</div>
-            </div>
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331795.webp" alt="破壳天数" /></div>
-              <div class="archive-stat-value" id="archiveBirthDays">--</div>
-              <div class="archive-stat-label">破壳天数</div>
-            </div>
-            <div class="archive-stat-card">
-              <div class="archive-stat-icon"><img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260825181331793.webp" alt="公演数" /></div>
-              <div class="archive-stat-value" id="archiveShowCount">--</div>
-              <div class="archive-stat-label">公演数</div>
-            </div>
+          <!-- 数据统计 · 文字 -->
+          <div class="info-title">
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
+            数据统计
+            <span class="title-en">Data Statistics</span>
           </div>
+          <div class="archive-summary-text" id="archiveSummaryText">加载中...</div>
+
+          <div style="height:28px;"></div>
+
+          <!-- 舞台数据 · 柱状图 -->
+          <div class="info-title">
+            <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/1eadaebf-8880-4a3e-97f6-58ae8a6967f4_1789006822835_a-sl-oa20-expand-right.svg" alt="" class="title-icon" />
+            舞台数据一览
+            <span class="title-en">Stage Data</span>
+          </div>
+          <div class="archive-chart-tabs">
+            <button type="button" class="archive-chart-tab active" data-chart="show">公演</button>
+            <button type="button" class="archive-chart-tab" data-chart="unit">UNIT</button>
+          </div>
+          <div class="archive-chart-scroll">
+            <div class="archive-chart-bars" id="archiveChartBars"><div class="archive-chart-loading">加载中...</div></div>
+          </div>
+          <div class="archive-chart-note" id="archiveChartNote"></div>
           
           <div class="footer-slogan">-All For YeFan-</div>
         </div>
@@ -948,6 +945,13 @@
     </div>
   </div>
 
+<script src="data/monthImages.js"></script>
+<script src="data/formalData.js"></script>
+<script src="data/wordsData.js"></script>
+<script src="data/drinkData.js"></script>
+<script src="data/kaomojiList.js"></script>
+<script src="data/performanceSchedule.js"></script>
+<script src="data/bgImages.js"></script>
 <script src="script.js"></script>
 
 
@@ -978,6 +982,5 @@
       </div>
     </div>
   </div>
-
 </body>
 </html>

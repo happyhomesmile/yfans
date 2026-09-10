@@ -2,12 +2,25 @@
   "uid": "2832224",
   "dateRange": {
     "start": "2023-09-30",
-    "end": "2026-08-29"
+    "end": "2026-09-03"
   },
-  "totalCollected": 205,
-  "niiVideoCount": 204,
-  "fetchTime": "2026-08-29T07:52:36.511Z",
+  "totalCollected": 208,
+  "niiVideoCount": 208,
+  "coverCount": 208,
+  "fetchTime": "2026-09-03T07:29:32.247Z",
   "videos": [
+    {
+      "bvid": "BV1QYtn6EEFw",
+      "title": "【SNH48】TEAM NII《肆时墟》公演20260830",
+      "pubdate": "2026-08-30",
+      "created": 1788019200,
+      "length": "03:13:25",
+      "play": 22000,
+      "url": "https://www.bilibili.com/video/BV1QYtn6EEFw",
+      "isNII": true,
+      "cover": "http://i2.hdslb.com/bfs/archive/9da3a14aca6ad998143afbb4fffccfed2f960d0e.jpg",
+      "pic": "http://i2.hdslb.com/bfs/archive/9da3a14aca6ad998143afbb4fffccfed2f960d0e.jpg"
+    },
     {
       "bvid": "BV1oo4d6dEbQ",
       "title": "【SNH48】TEAM NII《肆时墟》公演20260827",
@@ -1087,6 +1100,54 @@
       "isNII": true,
       "cover": "http://i0.hdslb.com/bfs/archive/6ef183857c86fc29b293e31d0ab416fcb7d690e6.png",
       "pic": "http://i0.hdslb.com/bfs/archive/6ef183857c86fc29b293e31d0ab416fcb7d690e6.png"
+    },
+    {
+      "bvid": "BV1QaCsYgEXb",
+      "title": "【SNH48】TEAM NII《应许之地》B版公演20241227",
+      "pubdate": "2024-12-27",
+      "created": 1735228800,
+      "length": "03:10:20",
+      "play": 110000,
+      "url": "https://www.bilibili.com/video/BV1QaCsYgEXb",
+      "isNII": true,
+      "cover": "http://i2.hdslb.com/bfs/archive/f7c312d8dba1507b0c038ee40c1ef087eb967a07.png",
+      "pic": "http://i2.hdslb.com/bfs/archive/f7c312d8dba1507b0c038ee40c1ef087eb967a07.png"
+    },
+    {
+      "bvid": "BV1m3qZY3Ep7",
+      "title": "【SNH48】TEAM NII《应许之地》B版首演20241215",
+      "pubdate": "2024-12-15",
+      "created": 1734192000,
+      "length": "03:08:48",
+      "play": 219000,
+      "url": "https://www.bilibili.com/video/BV1m3qZY3Ep7",
+      "isNII": true,
+      "cover": "http://i0.hdslb.com/bfs/archive/c62198a74728226e2dc85980596a892618f91563.png",
+      "pic": "http://i0.hdslb.com/bfs/archive/c62198a74728226e2dc85980596a892618f91563.png"
+    },
+    {
+      "bvid": "BV14qqLYWEK4",
+      "title": "【SNH48】TEAM NII《应许之地》金莹玥生日公演20241207",
+      "pubdate": "2024-12-07",
+      "created": 1733500800,
+      "length": "03:20:35",
+      "play": 91000,
+      "url": "https://www.bilibili.com/video/BV14qqLYWEK4",
+      "isNII": true,
+      "cover": "http://i1.hdslb.com/bfs/archive/299d3d12c830209d3e2ded09a2d81da2d02b55cf.png",
+      "pic": "http://i1.hdslb.com/bfs/archive/299d3d12c830209d3e2ded09a2d81da2d02b55cf.png"
+    },
+    {
+      "bvid": "BV1UdidYzECB",
+      "title": "【SNH48】TEAM NII《应许之地》公演20241205",
+      "pubdate": "2024-12-05",
+      "created": 1733328000,
+      "length": "03:03:19",
+      "play": 67000,
+      "url": "https://www.bilibili.com/video/BV1UdidYzECB",
+      "isNII": true,
+      "cover": "http://i2.hdslb.com/bfs/archive/fe7c62a30b2afc18d9266fd08409f58ae49a9dc7.png",
+      "pic": "http://i2.hdslb.com/bfs/archive/fe7c62a30b2afc18d9266fd08409f58ae49a9dc7.png"
     },
     {
       "bvid": "BV1LuiUYZEVd",
@@ -2326,7 +2387,7 @@
     },
     {
       "bvid": "BV1Si6UBWEBf",
-      "title": "【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演 20260110",
+      "title": "【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演 2026010",
       "pubdate": "2026-01-10",
       "created": null,
       "length": "03:29:49",
@@ -2347,18 +2408,6 @@
       "isNII": true,
       "cover": "http://i2.hdslb.com/bfs/archive/8023d077ad7b7dd5faa2d5772cd0c4acadf4af16.jpg",
       "pic": "http://i2.hdslb.com/bfs/archive/8023d077ad7b7dd5faa2d5772cd0c4acadf4af16.jpg"
-    },
-    {
-      "bvid": "BV1GufnYeEcF",
-      "title": "SNH48蛇年新春特别企划TEAM NII投壶游戏（上）",
-      "pubdate": "",
-      "created": null,
-      "length": "03:27",
-      "play": 21000,
-      "url": "https://www.bilibili.com/video/BV1GufnYeEcF",
-      "isNII": true,
-      "cover": "http://i2.hdslb.com/bfs/archive/7ea338af56cc6d57ad2be2f6ba42261682044029.jpg",
-      "pic": "http://i2.hdslb.com/bfs/archive/7ea338af56cc6d57ad2be2f6ba42261682044029.jpg"
     },
     {
       "bvid": "BV1NxfaYpEGs",
@@ -2421,42 +2470,40 @@
       "pic": "http://i2.hdslb.com/bfs/archive/98568d3aa0595876e122200493b397dfe1a53cff.png"
     },
     {
-      "bvid": "BV1j4dsBTEww",
-      "title": "【BEJ48】260418 TEAM NII《Nice to meet you II》北京巡演",
-      "pubdate": "2026-04-18",
+      "bvid": "BV1UaKU6TEoF",
+      "title": "【SNH48】TEAM NII原创公演 {肆时墟} 回顾VLOG（下）",
+      "pubdate": "",
       "created": null,
-      "length": "03:48:06",
-      "play": 16000,
-      "url": "https://www.bilibili.com/video/BV1j4dsBTEww",
+      "length": "17:57",
+      "play": 14000,
+      "url": "https://www.bilibili.com/video/BV1UaKU6TEoF",
       "isNII": true,
-      "cover": "http://i2.hdslb.com/bfs/archive/31e1eee02ffc7cd980b9196f250345335c402e9d.jpg",
-      "pic": "http://i2.hdslb.com/bfs/archive/31e1eee02ffc7cd980b9196f250345335c402e9d.jpg"
+      "cover": "http://i0.hdslb.com/bfs/archive/480f090748bbab14bed70bf88f785511b8c1107b.jpg",
+      "pic": "http://i0.hdslb.com/bfs/archive/480f090748bbab14bed70bf88f785511b8c1107b.jpg"
     },
     {
-      "bvid": "BV1PwkqY4E24",
-      "title": "【SNH48】241222 TEAM NII《应许之地》B版巡演·北京站第2场",
-      "pubdate": "2024-12-22",
+      "bvid": "BV1o5KU6UEHf",
+      "title": "【SNH48】TEAM NII原创公演 {肆时墟} 回顾VLOG（上）",
+      "pubdate": "",
       "created": null,
-      "length": "03:06:50",
-      "play": 38000,
-      "url": "https://www.bilibili.com/video/BV1PwkqY4E24",
+      "length": "20:44",
+      "play": 12000,
+      "url": "https://www.bilibili.com/video/BV1o5KU6UEHf",
       "isNII": true,
-      "cover": "http://i2.hdslb.com/bfs/archive/54c31dafaf163f02d6daa39afb822fd1183f5d7a.jpg",
-      "pic": "http://i2.hdslb.com/bfs/archive/54c31dafaf163f02d6daa39afb822fd1183f5d7a.jpg"
+      "cover": "http://i1.hdslb.com/bfs/archive/ee14303e1d1b506990c919750dacfc2ad10de598.jpg",
+      "pic": "http://i1.hdslb.com/bfs/archive/ee14303e1d1b506990c919750dacfc2ad10de598.jpg"
     },
     {
-      "bvid": "BV1atkUYTE47",
-      "title": "【SNH48】241220 TEAM NII《应许之地》B版巡演·北京站第1场",
-      "pubdate": "2024-12-20",
+      "bvid": "BV1bGjm6tEpe",
+      "title": "【SNH48 TEAM NII】第五套全新原创公演《肆时墟》6.27-6.28首演开启",
+      "pubdate": "",
       "created": null,
-      "length": "03:37:24",
-      "play": 72000,
-      "url": "https://www.bilibili.com/video/BV1atkUYTE47",
+      "length": "01:53",
+      "play": 19000,
+      "url": "https://www.bilibili.com/video/BV1bGjm6tEpe",
       "isNII": true,
-      "cover": "http://i1.hdslb.com/bfs/archive/154921279fe02c19ea5d1eff011a9961988f6c0e.png",
-      "pic": "http://i1.hdslb.com/bfs/archive/154921279fe02c19ea5d1eff011a9961988f6c0e.png"
+      "cover": "http://i1.hdslb.com/bfs/archive/c0bd2ea067f8d5623a655c6cdaa386224c8cbca7.jpg",
+      "pic": "http://i1.hdslb.com/bfs/archive/c0bd2ea067f8d5623a655c6cdaa386224c8cbca7.jpg"
     }
-  ],
-  "coverFetched": true,
-  "coverFetchTime": "2026-08-29T08:38:08.396Z"
+  ]
 }

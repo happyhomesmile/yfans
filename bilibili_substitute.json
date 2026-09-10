@@ -1,0 +1,94 @@
+{
+  "mid": "87358740",
+  "seasonId": "8964743",
+  "total": 3,
+  "parsedStats": {
+    "withDate": 3,
+    "withStageName": 3,
+    "withUnitName": 3
+  },
+  "fetchTime": "2026-08-30T09:36:13.565Z",
+  "videos": [
+    {
+      "bvid": "BV1f6MC6VEM5",
+      "aid": 117041281435329,
+      "title": "【SNH48-叶凡】20260425 Team SII《INTO THE LIGHT》公演 Like it（随机碰撞） CUT",
+      "date": "2026-04-25",
+      "stageName": "Team SII 《INTO THE LIGHT》公演",
+      "unitName": "Like it（随机碰撞）",
+      "cover": "http://i2.hdslb.com/bfs/archive/6253e2dbaf744de11eaf9febe496638db3b4cdfd.jpg",
+      "pic": "http://i2.hdslb.com/bfs/archive/6253e2dbaf744de11eaf9febe496638db3b4cdfd.jpg",
+      "length": "3:22",
+      "duration": 202,
+      "pubdate": "NaN-NaN-NaN",
+      "play": 74,
+      "danmaku": 0,
+      "comment": 0,
+      "like": 0,
+      "coin": 0,
+      "favorite": 0,
+      "share": 0,
+      "url": "https://www.bilibili.com/video/BV1f6MC6VEM5",
+      "desc": "",
+      "tname": "",
+      "owner": {
+        "mid": "87358740",
+        "name": ""
+      }
+    },
+    {
+      "bvid": "BV1f6MC6VEu8",
+      "aid": 117041281435320,
+      "title": "【SNH48-叶凡】20260523 Team SII《INTO THE LIGHT》田姝丽季度MVP公演 回响（Calling when I'm go）CUT",
+      "date": "2026-05-23",
+      "stageName": "Team SII 《INTO THE LIGHT》田姝丽季度MVP公演",
+      "unitName": "回响（Calling when I'm go）",
+      "cover": "http://i2.hdslb.com/bfs/archive/aac7eb5bac6b5de89199dfa1f1649e4582280ebe.jpg",
+      "pic": "http://i2.hdslb.com/bfs/archive/aac7eb5bac6b5de89199dfa1f1649e4582280ebe.jpg",
+      "length": "3:17",
+      "duration": 197,
+      "pubdate": "NaN-NaN-NaN",
+      "play": 61,
+      "danmaku": 0,
+      "comment": 0,
+      "like": 0,
+      "coin": 0,
+      "favorite": 0,
+      "share": 0,
+      "url": "https://www.bilibili.com/video/BV1f6MC6VEu8",
+      "desc": "",
+      "tname": "",
+      "owner": {
+        "mid": "87358740",
+        "name": ""
+      }
+    },
+    {
+      "bvid": "BV1B6MC6VEh2",
+      "aid": 117041281369278,
+      "title": "【SNH48-叶凡】20260523 Team HII 《赫兹共振》梁怀方生日公演 Crazy for you CUT",
+      "date": "2026-05-23",
+      "stageName": "Team HII 《赫兹共振》梁怀方生日公演",
+      "unitName": "Crazy for you",
+      "cover": "http://i1.hdslb.com/bfs/archive/aa43008f98d4e01def0c7abac75e3b05147719da.jpg",
+      "pic": "http://i1.hdslb.com/bfs/archive/aa43008f98d4e01def0c7abac75e3b05147719da.jpg",
+      "length": "4:22",
+      "duration": 262,
+      "pubdate": "NaN-NaN-NaN",
+      "play": 32,
+      "danmaku": 0,
+      "comment": 0,
+      "like": 0,
+      "coin": 0,
+      "favorite": 0,
+      "share": 0,
+      "url": "https://www.bilibili.com/video/BV1B6MC6VEh2",
+      "desc": "",
+      "tname": "",
+      "owner": {
+        "mid": "87358740",
+        "name": ""
+      }
+    }
+  ]
+}

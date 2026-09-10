@@ -87,6 +87,51 @@ function getShortFestival(year, month, day) {
   return name;
 }
 
+// ===== 里程时间线（历年公式照下方） =====
+// 数据来源：时间线.json 的 timeline.nodes（左右交错排版）
+const mileageTimelineNodes = [
+  { date: '2023年9月30日', summary: '十九期生亮相新生公演《命运的X号》', tags: ['出道'], importance: 'critical' },
+  { date: '2023年11月25日', summary: '首次代役SNH48 Team NII《应许之地》', tags: ['代役'], importance: 'normal' },
+  { date: '2024年2月2日', summary: '正式升格为SNH48 Team NII的成员', tags: ['升格'], importance: 'critical' },
+  { date: '2024年8月3日', summary: '第十一届青春盛典取得年度新人潜力奖第4名', tags: ['青春盛典'], importance: 'important' },
+  { date: '2025年8月2日', summary: '第十二届青春盛典取得年度梦想成员奖第38名', tags: ['青春盛典'], importance: 'important' },
+  { date: '2026年8月8日', summary: '第十三届青春盛典取得年度梦想成员奖第45名', tags: ['青春盛典'], importance: 'important' }
+];
+function renderMileageTimeline() {
+  const wrap = document.getElementById('mileageTimeline');
+  if (!wrap) return;
+  const badgeMap = {
+    critical: '\u25c6 KEY EVENT / \u5173\u952e\u4e8b\u4ef6',
+    important: '\u25cf IMPORTANT / \u91cd\u8981\u4e8b\u4ef6'
+  };
+  let html = '';
+  mileageTimelineNodes.forEach(function(node, idx) {
+    const rowClass = (idx % 2 === 0) ? 'left-date' : 'right-date';
+    const badge = badgeMap[node.importance] || '';
+    const badgeHtml = badge ? '<div class="mt-badge ' + (node.importance || 'normal') + '">' + badge + '</div>' : '';
+    const tagHtml = (node.tags && node.tags.length) ? node.tags.map(function(t) {
+      return '<span class="mt-tag">' + t + '</span>';
+    }).join('') : '';
+    const contentHtml = node.content ? '<div class="mt-content">' + node.content + '</div>' : '';
+    const imageHtml = node.image ? '<img class="mt-image" decoding="async" src="' + node.image + '" alt="" />' : '';
+    html += '<div class="mt-row ' + rowClass + '">' +
+      '<div class="mt-date">' + node.date + '</div>' +
+      '<div class="mt-card">' +
+        badgeHtml +
+        '<div class="mt-summary">' + node.summary + '</div>' +
+        contentHtml + imageHtml +
+        (tagHtml ? '<div class="mt-tags">' + tagHtml + '</div>' : '') +
+      '</div>' +
+    '</div>';
+  });
+  wrap.innerHTML = html;
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderMileageTimeline);
+} else {
+  renderMileageTimeline();
+}
+
 // ===== 大日历状态 =====
 let bigCalYear = 2026;
 let bigCalMonth = 7; // 0-indexed, 7=8月
@@ -276,324 +321,9 @@ if (typeof getDayUpdates !== 'function') {
   }
 }
 
-  const drinkData = {
-    'drink_0724': {
-      title: '2026.07.24 霸王茶姬·伯牙绝弦',
-      tags: ['中杯', '花香款', '标准冰', '标准糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423290.webp',
-      messages: [{ text: '喝！', time: '2026-07-24 16:30:49' }]
-    },
-    'drink_0716': {
-      title: '2026.07.16 林里柠檬茶·西瓜冰柠茶霸王杯',
-      tags: ['正常冰', '3分糖', '去脆波波'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423296.webp',
-      messages: [
-        { text: '喝一口醒醒神', time: '2026-07-16 23:29:13' },
-        { text: '我三分糖居然还甜', time: '2026-07-16 23:31:09' }
-      ]
-    },
-    'drink_0706': {
-      title: '2026.07.06 太犇牛手作茶铺·大颗芒果冰茶',
-      tags: ['双倍芒果版','少冰','正常糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260810144524161.webp',
-      messages: [
-        { text: '喝一杯恢复能量[奋斗]', time: '2026-07-06 17:01:46' },
-        { text: '像桃子芒果罐头', time: '2026-07-06 17:02:15' }
-      ]
-    },
-    'drink_0705': {
-      title: '2026.07.05 茶颜悦色·幽兰拿铁',
-      tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423293.webp',
-      messages: [{ text: '哇咔咔', time: '2026-07-05 11:11:07' }]
-    },
-    'drink_0611': {
-      title: '2026.06.11 CoCo都可·现煮绿豆木薯冰',
-      tags: ['原味版', '冰沙', '3分糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727211330808.webp',
-      messages: [
-        { text: '到了喝绿豆冰的季节啦！', time: '2026-06-11 14:14:36' },
-        { text: '米味！', time: '2026-06-11 14:14:51' },
-        { text: '但我喜欢那个', time: '2026-06-11 14:15:04' },
-        { text: '绿豆冰➕牛奶', time: '2026-06-11 14:15:08' },
-        { text: '好喝！', time: '2026-06-11 14:15:11' }
-      ]
-    },
-    'drink_0608': {
-      title: '2026.06.08 屈臣氏·蒸馏饮用水',
-      tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727211932900.webp',
-      messages: [
-        { text: '俺最近要转变成屈臣氏梦女了', time: '2026-06-08 21:05:25' },
-        { text: '虽然是简单的水', time: '2026-06-08 21:05:45' }
-      ]
-    },
-    'drink_0605': {
-      title: '2026.06.05 霸王茶姬·轻因 伯牙绝弦',
-      tags: ['大杯', '去冰', '微糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.webp',
-      messages: [{ text: '我喝', time: '2026-06-05 16:42:26' }]
-    },
-    'drink_0531': {
-      title: '2026.05.31 霸王茶姬·伯牙绝弦',
-      tags: ['大杯', '花香款', '标准糖', '标准冰'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212938704.webp',
-      messages: [{ text: '今天喝这个', time: '2026-05-31 14:52:21' }]
-    },
-    'drink_0530': {
-      title: '2026.05.30 星巴克·玫瑰20抹茶拿铁',
-      tags: ['中杯', '热'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727213100883.webp',
-      messages: [
-        { text: '谢谢好心人的咖啡', time: '2026-05-30 16:08:24' },
-        { text: '我提神了', time: '2026-05-30 16:08:27' }
-      ]
-    },
-    'drink_0528': {
-      title: '2026.05.28 喜茶·多肉芒芒',
-      tags: ['冰沙', '加倍芒果果肉', '纯粹真冰糖', '少少少甜', '加轻芝芝云顶'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727213857354.webp',
-      messages: [{ text: '芒果爱好者', time: '2026-05-28 16:28:34' }]
-    },
-    'drink_0520': {
-      title: '2026.05.20 瑞幸·小黄油美式',
-      tags: ['全冰去水', '大杯', '不另外加糖', '深烘豆001'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727222334081.webp',
-      messages: [{ text: '我又喝了', time: '2026-05-20 15:26:35' }]
-    },
-    'drink_0519': {
-      title: '2026.05.19 瑞幸·小黄油美式',
-      tags: ['全冰去水', '超大24', '不另外加糖', '深烘豆010'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727222640951.webp',
-      messages: [{ text: '米西米西', time: '2026-05-19 17:13:53' }]
-    },
-    'drink_0513': {
-      title: '2026.05.13 Tulipkoko泰茶公司·山竹荔枝冰茶',
-      tags: ['少糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727223040936.webp',
-      messages: [
-        { text: '味道还阔以', time: '2026-05-13 18:24:06' },
-        { text: '挺清爽的', time: '2026-05-13 18:24:27' },
-        { text: '🤤', time: '2026-05-13 18:24:35' }
-      ]
-    },
-    'drink_0503': {
-      title: '2026.05.03 霸王茶姬·轻因 伯牙绝弦',
-      tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.webp',
-      messages: [{ text: '我喝', time: '2026-05-03 16:42:26' }]
-    },
-    'drink_0425': {
-      title: '2026.04.25 霸王茶姬·伯牙绝弦',
-      tags: ['中杯', '茶香款', '标准冰', '标准糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727230856180.webp',
-      messages: [{ text: '今天喝这个🤤', time: '2026-04-25 11:50:54' }]
-    },
-    'drink_0419': {
-      title: '2026.04.19 星巴克·冰摇红莓黑加仑',
-      tags: ['大杯', '冰'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727231607195.webp',
-      messages: [{ text: '今天喝这个', time: '2026-04-19 20:35:38' }]
-    },
-    'drink_0416': {
-      title: '2026.04.16 星巴克·冰摇柠檬茶',
-      tags: ['少甜'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141311923.webp',
-      messages: [
-        { text: '今天喝这个', time: '2026-04-16 12:42:38' },
-        { text: '点了个少糖的柠檬茶', time: '2026-04-16 12:48:58' }]
-    },
-    'drink_0415': {
-      title: '2026.04.15 七分甜·青芒山竹冰',
-      tags: ['中杯', '少糖', '正常冰', '天然蔗糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141746501.webp',
-      messages: [
-        { text: '今天喝这个', time: '2026-04-15 18:37:39' },
-        { text: '也是酸酸的', time: '2026-04-15 18:37:43' },
-        { text: '好喝之', time: '2026-04-15 18:58:37' }]
-    },
-  'drink_0411': {
-    title: '2026.04.11 霸王茶姬·醒时春山',
-    tags: ['大杯', '少冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142341852.webp',
-    messages: [
-      { text: '今天喝这个🤤', time: '2026-04-11 18:08:54' },
-      { text: '还可以', time: '2026-04-11 18:12:15' },
-      { text: '第一次品尝这个', time: '2026-04-11 18:12:22' }]
-  },
-  'drink_0404': {
-    title: '2026.04.04 七分甜·青芒黄芒',
-    tags: ['中杯', '微糖', '正常冰', '天然蔗糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142656268.webp',
-    messages: [
-      { text: '今天喝这个', time: '2026-04-04 14:53:54' },
-      { text: '天老姨，也太酸了', time: '2026-04-04 14:54:08' }]
-  },
-  'drink_0329': {
-    title: '2026.03.29 混果汁·轻体小绿瓶',
-    tags: [],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143328907.webp',
-    messages: [
-      { text: '喝这个', time: '2026-03-29 21:43:09' },
-      { text: '酸酸的', time: '2026-03-29 21:43:14' }
-    ]
-  },
-  'drink_0328': {
-    title: '2026.03.28 霸王茶姬·归云南·云焦卡美罗',
-    tags: ['升运杯', '少冰', '不额外加糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143534571.webp',
-    messages: [
-      { text: '今天喝这个', time: '2026-03-28 13:20:59' }
-    ]
-  },
-  'drink_0327': {
-    title: '2026.03.27 瑞幸·拿铁',
-    tags: ['大杯', '不额外加糖', '纯牛奶', '意式拼配'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143807132.webp',
-    messages: [
-      { text: '今天喝这个', time: '2026-03-27 13:08:04' },
-      { text: '感觉我已经逐渐接受', time: '2026-03-27 13:08:07' },
-      { text: '苦苦的咖啡☕️', time: '2026-03-27 13:08:11' }
-    ]
-  },
-  'drink_0323': {
-    title: '2026.03.23 霸王茶姬·轻因·云栖梦',
-    tags: ['中杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144442726.webp',
-    messages: [
-      { text: '这个粉嫩嫩的', time: '2026-03-23 19:32:25' },
-      { text: '微糖木有味道[奋斗]', time: '2026-03-23 19:32:46' },
-      { text: '就是茉莉茶的味道', time: '2026-03-23 19:32:55' }
-    ]
-  },
-  'drink_0305': {
-    title: '2026.03.05 霸王茶姬·归云南·云漫普洱',
-    tags: ['升运杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144944081.webp',
-    messages: [
-      { text: '喝这个', time: '2026-03-05 14:25:00' }
-    ]
-  },
-  'drink_0126': {
-    title: '2026.01.26 霸王茶姬·归云南·云漫普洱',
-    tags: ['主题杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817152551362.webp',
-    messages: [
-      { text: '感觉这个', time: '2026-01-26 18:22:38' },
-      { text: '淡淡的', time: '2026-01-26 18:22:43' },
-      { text: '但是一点都不冰', time: '2026-01-26 18:23:41' },
-      { text: '这是小杯', time: '2026-01-26 18:23:47' },
-      { text: '感觉全是纯奶', time: '2026-01-26 18:23:54' },
-      { text: '[惊讶]我一开始以为是咖啡呢', time: '2026-01-26 18:24:06' }
-    ]
-  },
-};
+  
 
-  const kaomojiList = [
-    '( ੭•͈ω•͈)੭๐♡.๐',
-    '୧(๑•̀ɜ•́๑)૭✧',
-    '(‾^‾)ง⁼³₌₃',
-    '>ᴗoಣ',
-    '٩(*´◒`*)۶wohu~',
-    '˚₊⳻ ̫⳺੭˚',
-    '◝(⑅•ᴗ•⑅)◜..°♡',
-    'ദ്ദി˶ｰ̀֊ｰ́ )✧',
-    '( งᵒ̴̶̷᷅ωᵒ̴̶̷᷄)ง⁼³₌₃',
-    '(•ิ_•ิ)?',
-    '(゜。゜)',
-    '（๑•́ ₃ •̀๑)〃\'▽\'〃) 啾咪～～♡',
-    '(♡>𖥦<)/♥',
-    'ᕦ(ò_óˇ)ᕤ',
-    '(҂‾ ▵‾)︻デ═一',
-    '-`д´-',
-    '˃̣̣̥᷄⌓˂̣̣̥᷅',
-    '♡( ˃᷄˶˶̫˶˂᷅ )',
-    '৲( ᵒ ૩ᵕ )৴♡*৹',
-    '૮₍ ˶•‸•˶₎ა',
-    '(๑˃̵ᴗ˂̵)و',
-    'ദ്ദി˶˃ ᵕ ˂ )✧',
-    '(•͈⌔•͈⑅)♡',
-    '( •̅_•̅ )？',
-    '( •̅_•̅ )',
-    'ᔐဗိူᔑ╭ဗိူ╮╰ဗိူ╯╰ဗိူ╮⸝ဗိူ⸜⸕',
-    '₍ᐢ. ̫ .ᐢ₎',
-    '˃ 𖥦 ˂',
-    '(ᐢᴖ ·̫ ᴖᐢ)',
-    '❛˓◞˂̵✧',
-    '⁰̴̷̷ ˙̮ ⁰̴̷̷',
-    '(◍＞◡＜◍)',
-    'ʕ •́؈•̀ ₎',
-    '╭( ･ㅂ･)و ̑̑ "',
-    '(*￣m￣)',
-    '(p_q）',
-    '(｡•﹃•｡)',
-    '੭ ˙ᗜ˙ ੭',
-    'O_o',
-    'ʚ₍ ᐢ. ̫ .ᐢ ₎ɞ',
-    '૮₍˃̶ꇴ˂̶₎ა',
-    '૮₍◜ෆ◝.₎ა',
-    '૮₍˶ᵔᵕᵔ˶₎ა',
-    '୧〃•̀ꇴ•〃૭',
-    '꒰｡ › ·̮ ‹ ｡꒱',
-    '(・︡ω・︠)',
-    '工ｴｴｪｪ(;╹⌓╹)ｪｪｴｴ工',
-    'ε (๑> ₃ <) з',
-    '˶ˊᜊˋ˶',
-    '(´°̥̥̥̥̥̥̥̥ω°̥̥̥̥̥̥̥̥｀)',
-    '(ᵒ̤̑ ₀̑ ᵒ̤̑)wow!*',
-    '<(ToT)>',
-    '₍˄·͈༝·͈˄₎◞︎ ̑̑ෆ⃛',
-    '૮₍♡>𖥦<₎ა',
-    'p(´⌒｀｡q)',
-    '( ❛⃘ ∨ ❜⃘⃘ )੭⁂',
-    '(:3 っ)=≡=-･∴\'Σ[______]',
-    '⸝⸝⸝˘◡˘♡',
-    '๑⃙⃘´༥`๑⃙⃘',
-    'ʕÖʕÖʔ',
-    '٩(๑′0`๑)۶',
-    '(ᐡ ɞ̴̶̷ . ɞ̴̶̷ ᐡ)',
-    '(｡•o•｡∩)',
-    '(ͼ̤͂ ͜ ͽ̤͂)✧',
-    '૮₍ᵔ⤙ᵔ₎ა',
-    '꒰ঌ^•𖥦•^໒꒱',
-    '૮ •𖥦• აᐝ',
-    '୧₍˄·͈༝·͈˄₎୨',
-    'ᶘ ᵒᴥᵒᶅ',
-    '⸝⸝っ·̫ •⸝⸝',
-    '੭ ᐕ)੭',
-    '₍₍ ◟(∗˙ ꒵ ˙∗)◞ ₎₎',
-    '( •͈ᴗ⁃͈)ᓂ- - -♡﻿',
-    '- ̗̀(๑ᵔ⌔ᵔ๑)εïз',
-    '( *￣ 3￣*)♡',
-    '૮₍♡♡₎ა',
-    '（≥V≤）',
-    '(。 •ω -)ε・ ｡)',
-    '‘- ̗̀ ෆ( ˶\'ᵕ\'˶)ෆ ̖́-',
-    '₍ᐢ..ᐢ₎ ༘♡',
-    '(*Ü*)Ｉ Lᵒᵛᵉᵧₒᵤ♥',
-    '(*⌒∇⌒*)',
-    'ヾ(๑╹ヮ╹๑)ﾉ”',
-    '(｡・//ε//・｡)',
-    '՞˶･֊･˶՞',
-    '(♡,,• ₃ •,,♡)',
-    '╰_╯',
-    '٨ـﮩﮩ٨ـ♡ﮩ٨ـﮩﮩ٨',
-    '( °̥̥̥̥̥̥̥̥˟°̥̥̥̥̥̥̥̥ )',
-    '(　ﾟ∀ﾟ) ﾉ♡',
-    '(｡･ω･｡)ﾉ♡',
-    '(•̅灬•̅ )',
-    '（๑⃙⃘´༥`๑⃙⃘) 𐂐',
-    '(っ˘̩╭╮˘̩)っ',
-    '(」ﾟヘﾟ)」',
-    '(´･д･`)',
-    '(」・ω・)」',
-    '(⊙_◎)？',
-    '(?・・)σ',
-    'c( O.O )ɔ',
-    '⁰⃚⃙̴༝ ⁰⃚⃙̴',
-    '(`･ω･´)ゞ',
-    '໒꒰ྀིྀི ꜆ ⁰́꒳⁰̀ ꒱ྀིა'
-  ];
+  
   
   document.addEventListener('DOMContentLoaded', function() {
     // 加载微博数据
@@ -793,13 +523,6 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 });
 
-  const platformMonths = {
-    weibo: ['2026-08', '2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01'],
-    xiaohongshu: ['2026-08', '2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01', '2025-07'],
-    douyin: ['2026-08', '2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01', '2025-12', '2025-11', '2025-10', '2025-09', '2025-08', '2025-07', '2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11', '2024-10', '2024-09', '2024-06', '2024-04', '2024-03', '2023-10'],    bilibili: ['2026-07', '2026-06', '2026-05', '2026-03', '2026-01', '2025-12', '2025-06', '2024-07', '2024-06', '2023-11'],
-    all: ['2026-08', '2026-07', '2026-06', '2026-05', '2026-04', '2026-03', '2026-02', '2026-01', '2025-12', '2025-11', '2025-10', '2025-09', '2025-07', '2024-07', '2024-06', '2023-11']
-  };
-
   (function() {
     const headerConfig = {
       home: {
@@ -808,12 +531,12 @@ randomDrinkBtn?.addEventListener('click', function() {
         extra: '<div class="sub">椰丝之家：933624308</div><div class="links"><a href="https://m.weibo.cn/p/100808a0c51c684e7bc96f54000cf4d755d74b" target="_blank">饭之超话</a><a href="https://weibo.com/u/7874648338" target="_blank">超星系集团</a><a href="https://b23.tv/sCndNaE" target="_blank">星系放映厅</a></div>',
         desc: '想要了解叶凡？这里是介绍区~'
       },
-      stage: { subtitle: 'STAGE', title: '饭之大小作', desc: '收录舞台切片' },
-      bobo: { subtitle: 'LIVE', title: '饭之啵', desc: '收录直播回放' },
-      gongyan: { subtitle: 'PERFORM', title: '饭之演出', desc: '收录公演回放' },
-      fancam: { subtitle: 'PHOTO', title: '饭之拍', desc: '收录平台更新内容' },
-      travel: { subtitle: 'SELFIE', title: '奇迹饭饭', desc: '收录口袋房间自拍' },
-      words: { subtitle: 'WORDS', title: '饭之信', desc: '收录演讲文字版' },
+      stage: { subtitle: 'STAGE', title: '舞台', desc: '收录舞台切片' },
+      bobo: { subtitle: 'LIVE', title: '直播', desc: '收录直播回放' },
+      gongyan: { subtitle: 'PERFORM', title: '公演', desc: '收录公演回放' },
+      fancam: { subtitle: 'PHOTO', title: '平台更新', desc: '收录平台更新内容' },
+      travel: { subtitle: 'SELFIE', title: '口袋图集', desc: '收录口袋房间自拍' },
+      words: { subtitle: 'WORDS', title: '演讲', desc: '收录演讲文字版' },
       wait: { subtitle: 'ABOUT', title: '关于本站', desc: '' }
     };
 
@@ -834,7 +557,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         const h1 = document.createElement('h1');
         if (pageId === 'home') {
           h1.innerHTML = `
-          <img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260807105640925.webp"
+          <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp"
             alt="图标"
             style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" />
                ${config.title}
@@ -879,16 +602,55 @@ randomDrinkBtn?.addEventListener('click', function() {
       if (pageId === 'words') {
         renderWordsCards();
       }
+      if (pageId === 'gongyan' && window.initGongyanPage) {
+        window.initGongyanPage();
+      }
 
     }, 10);
   }
   })();
 
+  // ===== 前端路由：页面 ID 与 URL 路径映射 =====
+  var PAGE_ROUTES = {
+    'home': '/',
+    'stage': '/stage',
+    'bobo': '/bobo',
+    'gongyan': '/gongyan',
+    'fancam': '/fancam',
+    'travel': '/travel',
+    'words': '/words',
+    'calendar': '/calendar',
+    'archive': '/archive',
+    'music': '/music',
+    'fan-rec': '/fan-rec',
+    'card-collection': '/card-collection',
+    'wait': '/about'
+  };
+  var PATH_TO_PAGE = {};
+  Object.keys(PAGE_ROUTES).forEach(function(pid) { PATH_TO_PAGE[PAGE_ROUTES[pid]] = pid; });
+  var __isPoppingState = false;
+  function getPageFromUrl() {
+    var p = window.location.pathname;
+    if (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1);
+    return PATH_TO_PAGE[p] || 'home';
+  }
+
   let showStageMarkers = false;
-  let currentYear = 2026;
-  let currentMonth = 7;
+  let currentYear = new Date().getFullYear();
+  let currentMonth = new Date().getMonth();
 
   function switchPage(pageId) {
+    // 同步更新浏览器地址栏（用户点击导航时写入历史记录）
+    if (!__isPoppingState && PAGE_ROUTES[pageId]) {
+      var targetPath = PAGE_ROUTES[pageId];
+      if (window.location.pathname !== targetPath) {
+        try {
+          history.pushState({ page: pageId }, '', targetPath);
+        } catch (e) {
+          try { window.location.hash = '#' + pageId; } catch (e2) {}
+        }
+      }
+    }
     document.querySelectorAll('.page-box').forEach(p => p.classList.remove('active'));
     
     const target = document.getElementById(pageId);
@@ -927,11 +689,41 @@ randomDrinkBtn?.addEventListener('click', function() {
     const targetItem = document.querySelector(`.top-nav .menu-item[data-page="${navPageId}"]`);
     if (targetItem) targetItem.classList.add('active');
 
-    const showMarkers = pageId === 'stage' || pageId === 'bobo' || pageId === 'fancam';
+    const showMarkers = pageId === 'stage' || pageId === 'bobo' || pageId === 'fancam' || pageId === 'gongyan';
     if (typeof showStageMarkers !== 'undefined') {
       showStageMarkers = showMarkers;
     }
     
+    if (pageId === 'stage') {
+      if (stageDataLoaded) {
+        // 数据已加载，直接渲染
+        currentCategory = 'all';
+        currentPage = 1;
+        const keyword = document.getElementById('stageSearch')?.value || '';
+        renderCards('all', keyword);
+      } else {
+        // 数据还在加载，等加载完再渲染
+        loadStageData().then(() => {
+          const stagePage = document.getElementById('stage');
+          if (stagePage && stagePage.classList.contains('active')) {
+            currentCategory = 'all';
+            currentPage = 1;
+            const keyword = document.getElementById('stageSearch')?.value || '';
+            renderCards('all', keyword);
+          }
+        });
+      }
+    }
+    if (pageId === 'archive') {
+      if (typeof renderArchiveSections === 'function') renderArchiveSections();
+    }
+    if (pageId === 'gongyan') {
+      if (typeof initGongyanPage === 'function') {
+        initGongyanPage();
+      } else if (typeof window.initGongyanPage === 'function') {
+        window.initGongyanPage();
+      }
+    }
     if (pageId === 'bobo' && !pagesRendered.bobo) {
       renderBoboCards('all', '');
       pagesRendered.bobo = true;
@@ -982,7 +774,7 @@ randomDrinkBtn?.addEventListener('click', function() {
           }
           const h1 = document.createElement('h1');
           if (pageId === 'home') {
-              h1.innerHTML = `<img decoding="async" src="https://gitee.com/a1814747459/img-bed/raw/master/20260807105640925.webp" alt="图标" style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" /> ${config.title}`;
+              h1.innerHTML = `<img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp" alt="图标" style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" /> ${config.title}`;
           } else {
               h1.textContent = config.title;
           }
@@ -1215,133 +1007,120 @@ randomDrinkBtn?.addEventListener('click', function() {
     initSlider();
   })();
 
-  const unitData = [
-    { date: '2026.08.16', title: '不空因果', url: 'https://www.bilibili.com/video/BV1Jmbe6gEtx/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817173756344.webp', show: '【SNH48】TEAM NII《肆时墟》公演' },
-    { date: '2026.08.14', title: '不空因果', url: 'https://www.bilibili.com/video/BV1gAbd6SEoP/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816222800093.webp', show: '【SNH48】TEAM NII《肆时墟》公演' },
-    { date: '2026.07.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV15v3y67EJn/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729122843179.webp', show: '【SNH48】TEAM NII《肆时墟》公演' },
-    { date: '2026.07.24', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEKe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185759558.webp', show: '【SNH48】TEAM NII《肆时墟》公演' },
-    { date: '2026.07.19', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kEKy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141024815.webp', show: '【SNH48】TEAM NII《肆时墟》钟亚男生日公演' },
-    { date: '2026.07.18', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rE7X/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141019316.webp', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
-    { date: '2026.07.12', title: '不空因果', url: 'https://www.bilibili.com/video/BV1esga6kE3j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141022013.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.11', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEAz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141015276.webp', show: '【SNH48】TEAM NII 胡晓慧《一小部分我》生日公演' },
-    { date: '2026.07.04', title: '不空因果', url: 'https://www.bilibili.com/video/BV18j3E6eEBe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185425564.webp', show: '【SNH48】TEAM NII《肆时墟》重庆巡演' },
-    { date: '2026.06.28', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEMT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730141011197.webp', show: '【SNH48】TEAM NII《肆时墟》首演（第二场）' },
-    { date: '2026.06.27', title: '不空因果', url: 'https://www.bilibili.com/video/BV19sga6rEzd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225553790.webp', show: '【SNH48】TEAM NII《肆时墟》首演' },
-    { date: '2026.06.12', title: '等价交换', url: 'https://www.bilibili.com/video/BV1QXgY6GEBk/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.06.07', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEii/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.05.05', title: '等价交换', url: 'https://www.bilibili.com/video/BV1aXgY6GE56/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.04.24', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEiD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.01', title: '等价交换', url: 'https://www.bilibili.com/video/BV13XgY6GEY3/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723220840251.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.05.24', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
-    { date: '2026.05.14', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEpq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.05.03', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.04.23', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEvR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.04.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】Team NII《Nice to Meet You II》北京巡演' },
-    { date: '2026.04.05', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMe/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.21', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.20', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GEuE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.01', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEiG/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.01.31', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEho/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
-    { date: '2026.01.25', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEMU/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
-    { date: '2026.01.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1aXgY6GE3P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
-    { date: '2026.01.17', title: 'High Light', url: 'https://www.bilibili.com/video/BV13XgY6GEEN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
-    { date: '2026.06.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hXgY6GEqD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142911505.webp', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
-    { date: '2026.04.05', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhi/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142850074.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.21', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GEhC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142851970.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.20', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260730142853053.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.05.30', title: '再见制服', url: 'https://www.bilibili.com/video/BV1hXgY6GEBN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.webp', show: '【SNH48】TEAM NII《Nice to meet you II》钟亚男季度MVP公演' },
-    { date: '2026.05.28', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GEcA/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.05.17', title: '再见制服', url: 'https://www.bilibili.com/video/BV1aXgY6GENv/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.01.25', title: '再见制服', url: 'https://www.bilibili.com/video/BV13XgY6GE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723222515656.webp', show: '【SNH48】TEAM NII《Nice to meet you II》声动星河淘汰赛' },
-    { date: '2025.12.28', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1aP8E6EEMd/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141702697.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.12.28', title: 'High Light', url: 'https://www.bilibili.com/video/BV18N8E62EJb/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141710994.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.12.20', title: '等价交换', url: 'https://www.bilibili.com/video/BV1m38E6kE4j/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141728157.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.12.18', title: 'High Light', url: 'https://www.bilibili.com/video/BV1SN8E62EUg/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141741183.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.30', title: '等价交换', url: 'https://www.bilibili.com/video/BV1438E6kEfj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141802436.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.27', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hP8E67E2B/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141812404.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.23', title: 'High Light', url: 'https://www.bilibili.com/video/BV1DN8E62EeW/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141818641.webp', show: '【SNH48】Team NII《Nice to Meet You II》广州巡演' },
-    { date: '2025.11.16', title: 'High Light', url: 'https://www.bilibili.com/video/BV1SN8E62Eyr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141822094.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.16', title: '浅呼吸（Axis Kiss）', url: 'https://www.bilibili.com/video/BV1hP8E67Ect/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141825557.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.13', title: 'High Light', url: 'https://www.bilibili.com/video/BV1SN8E62Ey8/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141828690.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.09', title: 'High Light', url: 'https://www.bilibili.com/video/BV1gN8E6mE7U/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225556572.webp', show: '【SNH48】Team NII《Nice to Meet You II》首演' },
-    { date: '2025.11.02', title: 'Fire Touch', url: 'https://www.bilibili.com/video/BV1kg8v67Eim/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151952.webp', show: '【SNH48】Team NII《应许之地-B版》千秋乐公演' },
-    { date: '2025.11.02', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1Ag8v6EEcp/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151951.webp', show: '【SNH48】Team NII《应许之地-B版》千秋乐公演' },
-    { date: '2025.10.18', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1Wg8v6EEgo/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151950.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.10.16', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1CM8v6UEDc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151949.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.10.07', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1yM8v6UEPJ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151948.webp', show: '【SNH48】TEAM NII《应许之地》韩家乐季度MVP公演' },
-    { date: '2025.09.27', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1CM8v6UEpY/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151946.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.08.30', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1PM8v6SEEm/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151945.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.08.22', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1PM8v6SEYT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151944.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.08.17', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1PM8v6SEcg/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151943.webp', show: '【SNH48】TEAM NII《至少还有星光落在我眼底》张笑盈毕业公演' },
-    { date: '2025.08.14', title: 'Fire Touch', url: 'https://www.bilibili.com/video/BV1WM8v6SECu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151954.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.08.14', title: 'Feeling You', url: 'https://www.bilibili.com/video/BV1WM8v6SE3n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824155151953.webp', show: '【SNH48】Team NII《应许之地-B版》公演' },
-    { date: '2025.12.20', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Eo2/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141713996.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.12.18', title: '乐曜日', url: 'https://www.bilibili.com/video/BV1xV8E63Emy/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141730957.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.30', title: '乐曜日', url: 'https://www.bilibili.com/video/BV12V8E63ETm/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141756827.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2025.11.27', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14V8E63Euh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819171352874.webp', show: '【SNH48】Team NII《Nice to Meet You II》公演' },
-    { date: '2026.01.31', title: '乐曜日', url: 'https://www.bilibili.com/video/BV14x3u6iE7t/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726193115098.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
-  ];
+    // 舞台数据（由外部JSON加载）
+  let unitData = [];
+  let specialData = [];
+  let assistData = [];
+  let substituteData = [];
 
-  const specialData = [
-    { date: '2026.07.12', title: '致明天', url: 'https://www.bilibili.com/video/BV1SoKb6EENc/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048062.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: 'HAKUNAMATATA', url: 'https://www.bilibili.com/video/BV1boKb6EEi7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110830.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: '七点钟（7 o\'clock）', url: 'https://www.bilibili.com/video/BV1boKb6EEVJ/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048060.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: '白昼街灯', url: 'https://www.bilibili.com/video/BV1boKb6EEh9/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723225558911.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: 'Dream up', url: 'https://www.bilibili.com/video/BV1boKb6EEuN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223110831.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: '初日', url: 'https://www.bilibili.com/video/BV1aDKb6pEwf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: '悬铃木&因为喜欢你&钻石呐喊', url: 'https://www.bilibili.com/video/BV1QDKb6pES1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260723223048063.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.07.12', title: 'Dream up（今日之星）', url: 'https://www.bilibili.com/video/BV1zbgQ66ES5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731125148967.webp', show: '【SNH48】TEAM NII《肆时墟》叶凡生日公演' },
-    { date: '2026.04.23', title: '青春的约定', url: 'https://www.bilibili.com/video/BV1da3y6EEJK/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195339346.webp', show: '【SNH48】TEAM NII《Nice to meet you II》公演' },
-    { date: '2026.03.04', title: '人鱼', url: 'https://www.bilibili.com/video/BV13d3r6KE4i/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195346704.webp', show: '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场' },
-    { date: '2026.03.04', title: 'Mad World', url: 'https://www.bilibili.com/video/BV1bF3k6YE1N/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195343590.webp', show: '【SNH48】《声动星河之双声闪耀》第二阶段晋级赛第一场' },
-    { date: '2026.02.07', title: '返校日', url: 'https://www.bilibili.com/video/BV14x3u6iEH1/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195609306.webp', show: '【SNH48】新春特别公演 Team NII &Team X 联合公演' },
-    { date: '2026.01.16', title: '叹云兮', url: 'https://www.bilibili.com/video/BV1uF3k6YEjB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195349100.webp', show: '【SNH48】TEAM HII《赫兹共振》声动星河淘汰赛' },
-    { date: '2026.01.03', title: '梦之河', url: 'https://www.bilibili.com/video/BV13d3r6KEHB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260728195351735.webp', show: '【SNH48】《声动星河之匿声唱将》特别公演' },
-    { date: '2025.12.14', title: '预言', url: 'https://www.bilibili.com/video/BV1xV8E63E2Y/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819141743613.webp', show: '【SNH48】Team NII《12° Neo》十二周年庆特别公演' },
-  ];
-
-  const assistData = [
-    { date: '2026.08.22', title: 'Plan B', url: 'https://www.bilibili.com/video/BV17t8t6XEGT/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260823215656600.webp', show: '【SNH48】TEAM NII《肆时墟》金莹玥生日公演' },
-    { date: '2026.07.24', title: '花园舞曲', url: 'https://www.bilibili.com/video/BV1uj3E6eE2n/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417150.webp', show: '【SNH48】TEAM NII《肆时墟》公演' },
-    { date: '2026.07.18', title: 'One Life', url: 'https://www.bilibili.com/video/BV1gj3E6eEFE/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417149.webp', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
-    { date: '2026.07.18', title: '新目的地&星光环绕的孤岛', url: 'https://www.bilibili.com/video/BV1gj3E6eEVC/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185417148.webp', show: '【SNH48】TEAM NII《肆时墟》杨宇馨生日公演' },
-    { date: '2026.06.21', title: '+-(正负)', url: 'https://www.bilibili.com/video/BV1E6MC65ECw/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701604.webp', show: '【SNH48】Team SII《INTO THE LIGHT》张倩生日公演及作品展演' },
-    { date: '2026.06.20', title: '睡衣兜风', url: 'https://www.bilibili.com/video/BV1Pb3E6xEas/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726190836902.webp', show: '【SNH48】TEAM NII《Nice to meet you II》潘瑛琪生日公演' },
-    { date: '2026.06.07', title: 'Be my poi', url: 'https://www.bilibili.com/video/BV1B6MC6VEXh/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701601.webp', show: '【SNH48】Team SII《INTO THE LIGHT》张雷雷生日公演及作品展演' },
-    { date: '2026.05.24', title: '不可阻挡', url: 'https://www.bilibili.com/video/BV1Wb3E6xEbN/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726185705836.webp', show: '【SNH48】TEAM NII《Nice to meet you II》柏欣妤季度MVP公演' },
-    { date: '2026.05.23', title: '梦与星光的海上', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701602.webp', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
-    { date: '2026.05.02', title: 'Sweet Chemistry', url: 'https://www.bilibili.com/video/BV1Z6MC6VESz/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701607.webp', show: '【SNH48】TEAM SII《INTO THE LIGHT》宁轲生日公演' },
-    { date: '2026.04.11', title: '金色海岸', url: 'https://www.bilibili.com/video/BV1B6MC6VEjj/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701603.webp', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
-    { date: '2026.03.28', title: '最后的曙光', url: 'https://www.bilibili.com/video/BV14x3u6iEaq/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839359.webp', show: '【SNH48】TEAM NII《爱乐之城》韩家乐毕业公演' },
-    { date: '2026.03.07', title: '月', url: 'https://www.bilibili.com/video/BV14x3u6iEuB/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726195839360.webp', show: '【SNH48】TEAM NII《Plan B》刘洁毕业公演' },
-    { date: '2026.01.24', title: 'BLackrain', url: 'https://www.bilibili.com/video/BV1B6MC6VEzu/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701605.webp', show: '【SNH48】TEAM HII《赫兹共振》蒋舒婷季度MVP公演' },
-    { date: '2026.01.10', title: 'Miss Victouria', url: 'https://www.bilibili.com/video/BV15K3E63Ek7/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260726201306672.webp', show: '【SNH48】TEAM NII《平安喜乐》韩家乐年度MVP公演' },
-    { date: '2025.11.16', title: 'Battle Cry', url: 'https://www.bilibili.com/video/BV1PT8v6nEHD/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824172327210.webp', show: '【SNH48】TEAM NII《Nice to meet you II》韩家乐季度MVP公演' },
-    { date: '2025.10.07', title: '因为喜欢你', url: 'https://www.bilibili.com/video/BV1yT8v6JECs/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260824172341144.webp', show: '【SNH48】TEAM NII《应许之地》韩家乐季度MVP公演' },
-  ];
-
-  const substituteData = [
-    { date: '2026.04.25', title: 'Like it（随机碰撞）', url: 'https://www.bilibili.com/video/BV1f6MC6VEM5/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701598.webp', show: '【SNH48】Team SII《INTO THE LIGHT》公演' },
-    { date: '2026.05.23', title: '回响（Calling when I\'m gone）', url: 'https://www.bilibili.com/video/BV1B6MC6VEjf/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701600.webp', show: '【SNH48】Team SII《INTO THE LIGHT》田姝丽季度MVP公演' },
-    { date: '2026.05.23', title: 'Crazy for you', url: 'https://www.bilibili.com/video/BV1B6MC6VEhr/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260807122701599.webp', show: '【SNH48】Team HII 《赫兹共振》梁怀方生日公演' },
-  ];
-
-  const allData = { unit: unitData, special: specialData, assist: assistData, substitute: substituteData };
-  const stageTypeMap = new Map();
-  [['unit', unitData], ['special', specialData], ['assist', assistData], ['substitute', substituteData]].forEach(([type, arr]) => {
-    arr.forEach(d => {
-      const key = d.date + '|' + d.title;
-      if (!stageTypeMap.has(key)) stageTypeMap.set(key, type);
+  // 将JSON视频数据转换成舞台格式
+  function convertToStageFormat(videos) {
+    const result = [];
+    videos.forEach(v => {
+      let date = (v.date || v.pubdate || '').replace(/-/g, '.');
+      let title = v.unitName || v.title || '';
+      let show = v.stageName || v.title || '';
+      let cover = v.cover || v.pic || '';
+      let url = v.url || '';
+      let length = v.length || '';
+      result.push({ date, title, url, cover, show, length, rawTitle: v.title });
     });
-  });
-  const stageCategoryCache = {
+    result.sort((a, b) => b.date.localeCompare(a.date));
+    return result;
+  }
+
+  // 更新舞台缓存和计数
+  function updateStageCache() {
+    stageCategoryCache.all = [...unitData, ...specialData, ...assistData, ...substituteData].sort((a, b) => b.date.localeCompare(a.date));
+    stageCategoryCache.unit = [...unitData].sort((a, b) => b.date.localeCompare(a.date));
+    stageCategoryCache.special = [...specialData].sort((a, b) => b.date.localeCompare(a.date));
+    stageCategoryCache.assist = [...assistData].sort((a, b) => b.date.localeCompare(a.date));
+    stageCategoryCache.substitute = [...substituteData].sort((a, b) => b.date.localeCompare(a.date));
+
+    stageCategoryCounts.all = stageCategoryCache.all.length;
+    stageCategoryCounts.unit = stageCategoryCache.unit.length;
+    stageCategoryCounts.special = stageCategoryCache.special.length;
+    stageCategoryCounts.assist = stageCategoryCache.assist.length;
+    stageCategoryCounts.substitute = stageCategoryCache.substitute.length;
+
+    // 更新stageTypeMap
+    stageTypeMap.clear();
+    [['unit', unitData], ['special', specialData], ['assist', assistData], ['substitute', substituteData]].forEach(([type, arr]) => {
+      arr.forEach(d => {
+        const key = d.date + '|' + d.title;
+        if (!stageTypeMap.has(key)) stageTypeMap.set(key, type);
+      });
+    });
+
+    // 更新页面上的计数显示
+    const totalEl = document.getElementById('stageTotalCount');
+    const unitEl = document.getElementById('stageUnitCount');
+    const specialEl = document.getElementById('stageSpecialCount');
+    const assistEl = document.getElementById('stageAssistCount');
+    const subEl = document.getElementById('stageSubstituteCount');
+    if (totalEl) totalEl.textContent = stageCategoryCounts.all;
+    if (unitEl) unitEl.textContent = stageCategoryCounts.unit;
+    if (specialEl) specialEl.textContent = stageCategoryCounts.special;
+    if (assistEl) assistEl.textContent = stageCategoryCounts.assist;
+    if (subEl) subEl.textContent = stageCategoryCounts.substitute;
+  }
+
+  // 加载舞台数据（从外部JSON文件）
+  async function loadStageData() {
+    try {
+      console.log('正在加载舞台数据...');
+      const [unitRes, specialRes, assistRes, substituteRes] = await Promise.all([
+        fetch('bilibili_unit.json?_=' + Date.now()),
+        fetch('bilibili_special.json?_=' + Date.now()),
+        fetch('bilibili_assist.json?_=' + Date.now()),
+        fetch('bilibili_substitute.json?_=' + Date.now())
+      ]);
+
+      const [unitJson, specialJson, assistJson, substituteJson] = await Promise.all([
+        unitRes.json(),
+        specialRes.json(),
+        assistRes.json(),
+        substituteRes.json()
+      ]);
+
+      unitData = convertToStageFormat(unitJson.videos || []);
+      specialData = convertToStageFormat(specialJson.videos || []);
+      assistData = convertToStageFormat(assistJson.videos || []);
+      substituteData = convertToStageFormat(substituteJson.videos || []);
+
+      updateStageCache();
+
+      console.log('舞台数据加载完成:', {
+        unit: unitData.length,
+        special: specialData.length,
+        assist: assistData.length,
+        substitute: substituteData.length,
+        total: stageCategoryCache.all.length
+      });
+
+      // 数据加载完成后刷新右侧更新列表
+      if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
+        const activePage = document.querySelector('.page-box.active')?.id || 'home';
+        renderCalendar(currentYear, currentMonth);
+        renderUpdateList(currentYear, currentMonth, null, activePage);
+      }
+
+      return true;
+    } catch (e) {
+      console.error('舞台数据加载失败:', e);
+      return false;
+    }
+  }
+
+  let stageTypeMap = new Map();
+  let stageCategoryCache = {
     all: [...unitData, ...specialData, ...assistData, ...substituteData].sort((a, b) => b.date.localeCompare(a.date)),
     unit: [...unitData].sort((a, b) => b.date.localeCompare(a.date)),
     special: [...specialData].sort((a, b) => b.date.localeCompare(a.date)),
     assist: [...assistData].sort((a, b) => b.date.localeCompare(a.date)),
     substitute: [...substituteData].sort((a, b) => b.date.localeCompare(a.date)),
   };
-  const stageCategoryCounts = {
+  let stageCategoryCounts = {
     all: stageCategoryCache.all.length,
     unit: stageCategoryCache.unit.length,
     special: stageCategoryCache.special.length,
@@ -1351,7 +1130,7 @@ randomDrinkBtn?.addEventListener('click', function() {
   let currentCategory = 'all';
   let currentLayoutMode = 'grid';
   let currentPage = 1;
-  const pageSize = 10;
+  const pageSize = 20;
   let isPaginationClick = false;
 
   function getDataByCategory(category) {
@@ -1577,12 +1356,13 @@ randomDrinkBtn?.addEventListener('click', function() {
         <div class="video-card" data-url="${item.url}" data-month="${dataMonth}" data-day="${dataDay}" onclick="window.open('${item.url || '#'}','_blank')">
           <div class="video-cover-box">
             ${coverHtml}
-            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            ${item.length ? `<span class="video-duration-badge">${item.length}</span>` : ''}
           </div>
           <div class="video-info">
-            <div class="video-name">${item.title}</div>
-            <div class="video-date">${item.date || ''}</div>
-            ${item.show ? `<div class="video-show">${item.show}</div>` : ''}
+            <div class="video-name">${cleanUnitName(item.title)}</div>
+            ${stageFullTitle(item) ? `<div class="video-show">${stageFullTitle(item)}</div>` : (item.show ? `<div class="video-show">${item.show}</div>` : '')}
+            ${item.date ? `<div class="video-date">${item.date}</div>` : ''}
+            <div class="video-tag-bottom" style="background:${tagColor};">${tagText}</div>
           </div>
         </div>
       `;
@@ -1624,15 +1404,23 @@ randomDrinkBtn?.addEventListener('click', function() {
     const birthDaysEl = document.getElementById("archiveBirthDays");
     if (birthDaysEl) birthDaysEl.textContent = calcDaysFromDate('2002.07.23') + '天';
     
-    // 公演数（按公演名称去重）
+    // 公演数（只算公演数据，按《》标题 + 规则归并）
     const showCountEl = document.getElementById("archiveShowCount");
     if (showCountEl) {
-      const allStages = [...(unitData || []), ...(specialData || []), ...(assistData || []), ...(substituteData || [])];
-      const uniqueShows = new Set();
-      allStages.forEach(s => {
-        if (s.show) uniqueShows.add(s.show);
-      });
-      showCountEl.textContent = uniqueShows.size + '套';
+      const applyShow = function(arr) {
+        const st = computeShowStats((arr || []).filter(function(v) { return v && v.pubdate && v.pubdate !== ''; }));
+        showCountEl.textContent = st.showCount + '套';
+      };
+      if (window.gongyanData && window.gongyanData.length) {
+        applyShow(window.gongyanData);
+      } else {
+        try {
+          fetch('bilibili_nii_videos.json?_=' + Date.now())
+            .then(function(res) { return res.json(); })
+            .then(function(data) { applyShow(data.videos || []); })
+            .catch(function() {});
+        } catch (e) {}
+      }
     }
     
     // 网站相关统计
@@ -1657,34 +1445,33 @@ randomDrinkBtn?.addEventListener('click', function() {
     const sitePocketTotalEl = document.getElementById("sitePocketTotal");
     if (sitePocketTotalEl) sitePocketTotalEl.textContent = (pocketLivesData ? pocketLivesData.length : 0) + '组';
     
-    // 公演场次：UNIT(NII队公演) + 代役 + 特殊舞台，按日期+公演名称取不重复值
-    const uniqueStageSet = new Set();
+    // 公演场次：公演总数（只算 NII 队公演，不含代役/特殊舞台/助演，数据源 bilibili_nii_videos.json）
+    (function updateArchiveStageCount() {
+      const archiveStageEl = document.getElementById("archiveStageCount");
+      if (!archiveStageEl) return;
+      const isGongyanItem = function(item) { return item && item.pubdate && item.pubdate !== ''; };
+      const apply = function(arr) {
+        const n = Array.isArray(arr) ? arr.filter(isGongyanItem).length : 0;
+        archiveStageEl.textContent = n + '场';
+      };
+      if (window.gongyanData && window.gongyanData.length) {
+        apply(window.gongyanData);
+        return;
+      }
+      try {
+        fetch('bilibili_nii_videos.json?_=' + Date.now())
+          .then(function(res) { return res.json(); })
+          .then(function(data) { apply(data.videos || []); })
+          .catch(function() {});
+      } catch (e) {}
+    })();
     
-    // 1. UNIT - NII队的所有公演（unitData）
-    stageCategoryCache.unit.forEach(item => {
-      uniqueStageSet.add(item.date + '|' + item.show);
-    });
-    
-    // 2. 代役公演（substituteData），不重复的才算
-    stageCategoryCache.substitute.forEach(item => {
-      uniqueStageSet.add(item.date + '|' + item.show);
-    });
-    
-    // 3. 特殊舞台（specialData），不重复的才算
-    stageCategoryCache.special.forEach(item => {
-      uniqueStageSet.add(item.date + '|' + item.show);
-    });
-    
-    const archiveStageEl = document.getElementById("archiveStageCount");
-    if (archiveStageEl) archiveStageEl.textContent = (uniqueStageSet.size + 1) + '场';
-    
-    // unit数：所有舞台总和的不重复数据（按unit曲名去重）
-    const uniqueUnitSet = new Set();
-    stageCategoryCache.all.forEach(item => {
-      uniqueUnitSet.add(item.title);
-    });
+    // unit数：所有舞台总和的不重复数据（按unit曲名去重，排除今日之星/含&）
     const archiveUnitEl = document.getElementById("archiveUnitCount");
-    if (archiveUnitEl) archiveUnitEl.textContent = uniqueUnitSet.size + '首';
+    if (archiveUnitEl) {
+      const uu = (typeof getUnitStats === 'function') ? getUnitStats() : { uniqueCount: 0 };
+      archiveUnitEl.textContent = uu.uniqueCount + '首';
+    }
 
     if (calFilteredMonth || calFilteredDay) {
       const controls = document.getElementById('paginationControls');
@@ -1746,16 +1533,10 @@ randomDrinkBtn?.addEventListener('click', function() {
     stageSearchTimer = setTimeout(() => renderCards(currentCategory, val), 200);
   });
 
-  const boboData = [
-                        { date: '2025.12.07', title: '【SNH48】《王者夜宴》王者荣耀专场公演第二场', category: 'special', url: 'https://www.bilibili.com/video/BV1eWmcBkE5P/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260819122808681.webp' },
-                                { date: '2026.07.18', title: '杨宇馨生日会', category: 'special', url: 'https://www.bilibili.com/video/BV18uKP65EQR/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802191148353.webp' },
-    { date: '2026.07.12', title: '叶凡生日会', category: 'special', url: 'https://www.bilibili.com/video/BV1kVNG6SE3M/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802191148352.webp' },
-    { date: '2026.06.20', title: '潘瑛琪生日会', category: 'special', url: 'https://www.bilibili.com/video/BV1Ghjt6CERY/', cover: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802193914463.webp' },
-                                                              ];
+  const boboData = [];
 
   let currentBoboCategory = 'all';
   let pocketLivesData = [];
-  let pocketDanmakuEnabled = true;
   let pocketCurrentHls = null;
   let pocketDanmakuTimer = null;
   let pocketDanmakuList = [];
@@ -1781,8 +1562,22 @@ randomDrinkBtn?.addEventListener('click', function() {
         liveId: item.liveId
       }));
       // 更新计数
-      const pocketCountEl = document.getElementById('boboPocketCount');
-      if (pocketCountEl) pocketCountEl.textContent = pocketLivesData.length;
+      const totalCount = pocketLivesData.length;
+      const videoCount = pocketLivesData.filter(item => item.type === '直播').length;
+      const radioCount = pocketLivesData.filter(item => item.type === '电台').length;
+      const totalCountEl = document.getElementById('boboTotalCount');
+      const videoCountEl = document.getElementById('boboVideoCount');
+      const radioCountEl = document.getElementById('boboRadioCount');
+      if (totalCountEl) totalCountEl.textContent = totalCount;
+      if (videoCountEl) videoCountEl.textContent = videoCount;
+      if (radioCountEl) radioCountEl.textContent = radioCount;
+      
+      // 数据加载完成后刷新右侧更新列表
+      if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
+        const activePage = document.querySelector('.page-box.active')?.id || 'home';
+        renderCalendar(currentYear, currentMonth);
+        renderUpdateList(currentYear, currentMonth, null, activePage);
+      }
     } catch (e) {
       console.log('口袋回放数据加载失败:', e.message);
     }
@@ -1796,17 +1591,56 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 
   function getBoboCategoryCache() {
-    const allData = [...boboData, ...pocketLivesData];
     return {
-      all: allData.sort(sortByDateDesc),
-      special: boboData.filter(item => item.category === 'special').sort(sortByDateDesc),
-      pocket: pocketLivesData.sort(sortByDateDesc),
+      all: pocketLivesData.sort(sortByDateDesc),
+      video: pocketLivesData.filter(item => item.type === '直播').sort(sortByDateDesc),
+      radio: pocketLivesData.filter(item => item.type === '电台').sort(sortByDateDesc),
     };
   }
 
   function getBoboDataByCategory(category) {
     const cache = getBoboCategoryCache();
     return cache[category] || cache.all;
+  }
+
+  // 直播分页
+  let currentBoboPage = 1;
+  const boboPageSize = 20;
+  let isBoboPaginationClick = false;
+
+  function updateBoboPaginationUI(totalCount) {
+    const controls = document.getElementById('boboPaginationControls');
+    const prevBtn = document.getElementById('boboPrevBtn');
+    const nextBtn = document.getElementById('boboNextBtn');
+    const pageInfo = document.getElementById('boboPageInfo');
+    if (!controls) return;
+
+    const totalPages = Math.ceil(totalCount / boboPageSize);
+    if (totalPages <= 1) { controls.style.display = 'none'; return; }
+
+    controls.style.display = 'flex';
+    pageInfo.textContent = `第 ${currentBoboPage} / ${totalPages} 页`;
+    prevBtn.disabled = currentBoboPage === 1;
+    nextBtn.disabled = currentBoboPage === totalPages;
+    prevBtn.style.opacity = currentBoboPage === 1 ? '0.4' : '1';
+    nextBtn.style.opacity = currentBoboPage === totalPages ? '0.4' : '1';
+  }
+
+  function changeBoboPage(delta) {
+    const keyword = document.getElementById('boboSearch')?.value || '';
+    const data = getBoboDataByCategory(currentBoboCategory);
+    const filtered = data.filter(item => {
+      const k = keyword.trim().toLowerCase();
+      return k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+    });
+    const totalPages = Math.ceil(filtered.length / boboPageSize);
+    const newPage = currentBoboPage + delta;
+    if (newPage >= 1 && newPage <= totalPages) {
+      currentBoboPage = newPage;
+      isBoboPaginationClick = true;
+      renderBoboCards(currentBoboCategory, keyword);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   function renderBoboCards(category = currentBoboCategory, keyword = '') {
@@ -1864,16 +1698,21 @@ randomDrinkBtn?.addEventListener('click', function() {
     if (filtered.length === 0) {
       const searchKeyword = keyword.trim() || '空';
       grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 0; color:#4a779e; font-size:14px;">没有找到任何关于“${searchKeyword}”的视频 </div>`;
+      const controls = document.getElementById('boboPaginationControls');
+      if (controls) controls.style.display = 'none';
       return;
     }
 
+    // 分页
+    if (!isBoboPaginationClick) currentBoboPage = 1;
+    isBoboPaginationClick = false;
+    const pageData = filtered.slice((currentBoboPage - 1) * boboPageSize, currentBoboPage * boboPageSize);
+
     let html = '';
-    for (const item of filtered) {
+    for (const item of pageData) {
       const isPocket = item.category === 'pocket';
-      let tagColor, tagText;
-      if (isPocket) { tagColor = '#f0a0a0'; tagText = '口袋回放'; }
-      else if (item.category === 'pocket') { tagColor = '#f0a0a0'; tagText = '口袋回放'; }
-      else { tagColor = '#d4b0b8'; tagText = '特殊直播'; }
+      let tagText = '视频', tagColor = '#f0a0a0';
+      if (item.type === '电台') { tagText = '电台'; tagColor = '#d4b0b8'; }
 
       let coverHtml = item.cover ?
         `<img decoding="async" src="${item.cover}" alt="${item.title}" loading="lazy" fetchpriority="low" />` :
@@ -1891,11 +1730,12 @@ randomDrinkBtn?.addEventListener('click', function() {
         <div class="video-card ${isPocket ? 'pocket-card' : ''}" data-month="${dataMonth}" data-day="${dataDay}" onclick="${clickHandler}">
           <div class="video-cover-box">
             ${coverHtml}
-            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            ${item.duration ? `<span class="video-duration-badge">${item.duration}</span>` : ''}
           </div>
           <div class="video-info">
             <div class="video-name">${item.title}</div>
-            <div class="video-date">${item.date || ''}${item.duration ? ' · ' + item.duration : ''}</div>
+            <div class="video-date">${item.date || ''}</div>
+            <div class="video-tag-bottom" style="background:${tagColor};">${tagText}</div>
           </div>
         </div>
       `;
@@ -1909,6 +1749,8 @@ randomDrinkBtn?.addEventListener('click', function() {
     } else {
       grid.className = 'stage-grid';
     }
+
+    updateBoboPaginationUI(filtered.length);
   }
 
   document.querySelectorAll('#boboNav .stage-nav-item').forEach(btn => {
@@ -2102,7 +1944,7 @@ randomDrinkBtn?.addEventListener('click', function() {
           </div>
           <div class="weibo-text"><span class="line">${post.text || ''}</span></div>
           ${mediaHtml}
-          <a href="${'https://www.xiaohongshu.com/discovery/item/' + post.id + '?source=webshare&xhsshare=pc_web&xsec_token=' + (post.xsec_token || 'AB77RXJUajTY6SRoFi8YPnjsikfXsiUJRAbV752dNn-Uo=') + '&xsec_source=pc_share'}" target="_blank" class="weibo-link-button">点击跳转查看原文</a>
+          <a href="${post.url || ('https://www.xiaohongshu.com/explore/' + post.id)}" target="_blank" class="weibo-link-button">点击跳转查看原文</a>
         </div>`;
       } else {
         // 没有图片：用视频卡片样式
@@ -2112,7 +1954,7 @@ randomDrinkBtn?.addEventListener('click', function() {
             <span class="video-tag-label">图文</span>
             ${timeStr}
           </div>
-          <a href="${'https://www.xiaohongshu.com/discovery/item/' + post.id + '?source=webshare&xhsshare=pc_web&xsec_token=' + (post.xsec_token || 'AB77RXJUajTY6SRoFi8YPnjsikfXsiUJRAbV752dNn-Uo=') + '&xsec_source=pc_share'}" target="_blank" class="video-desc-box">
+          <a href="${post.url || ('https://www.xiaohongshu.com/explore/' + post.id)}" target="_blank" class="video-desc-box">
             <span class="text">${post.text || ''}</span>
             <span class="arrow">→</span>
           </a>
@@ -2336,6 +2178,13 @@ randomDrinkBtn?.addEventListener('click', function() {
     feed.insertBefore(fragment, insertBeforeNode);
     
     console.log('卡片按日期排序完成，共', allCards.length, '条');
+    
+    // 平台数据排序完成后刷新右侧更新列表
+    if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
+      const activePage = document.querySelector('.page-box.active')?.id || 'home';
+      renderCalendar(currentYear, currentMonth);
+      renderUpdateList(currentYear, currentMonth, null, activePage);
+    }
   }
   
   function filterWeiboFeed() {
@@ -2440,47 +2289,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     weiboSearchTimer = setTimeout(filterWeiboFeed, 200);
   });
 
-  const imageSets = {
-    slider1: ['https://gitee.com/a1814747459/img-bed/raw/master/20260721164426602.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426603.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426604.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721164426605.webp'],
-    slider3: ['https://gitee.com/a1814747459/img-bed/raw/master/20260721172259645.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259646.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259647.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259648.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259649.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259650.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259651.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721172259652.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.webp'],
-    slider4: ['https://gitee.com/a1814747459/img-bed/raw/master/20260721194836498.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836499.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836500.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721194836501.webp'],
-    slider5: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722113416589.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722113416590.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722113437300.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722113437301.webp'],
-    slider6: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021089.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021091.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021092.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021093.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021094.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021095.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021096.webp'],
-    slider7: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042728.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042729.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042730.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042731.webp'],
-    slider8: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123118189.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123118190.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123118191.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123118192.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260807212355290.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123118194.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123118195.webp'],
-    slider9: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123441826.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441827.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441828.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441829.webp'],
-    slider10: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123620238.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123620239.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123620240.webp'],
-    slider11: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.webp'],
-    slider12: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145444669.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444670.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444671.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444672.webp'],
-    slider13: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145537337.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145537338.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145600613.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145600614.webp'],
-    slider14: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145637196.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145637197.webp'],
-    slider15: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145926259.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145926260.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145926261.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145926262.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145926263.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145926264.webp'],
-    slider16: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145959261.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145959262.webp'],
-    slider17: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722150814512.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814513.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814514.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814515.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814516.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814517.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814518.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814519.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722150814520.webp'],
-    slider18: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151234647.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234648.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234649.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234650.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234651.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234652.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234653.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234654.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151234655.webp'],
-    slider19: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151528370.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151559256.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151559257.webp'],
-    slider20: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151321626.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151321627.webp'],
-    slider21: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151654273.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151654274.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151654275.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151654276.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151654277.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151654278.webp'],
-    slider22: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151732487.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732488.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732489.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732490.webp'],
-    slider23: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151814050.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151832928.webp'],
-    slider24: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151933091.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933092.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933093.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151933094.webp'],
-    slider25: ['https://gitee.com/a1814747459/img-bed/raw/master/20260723164108151.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108152.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108153.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260723164108154.webp'],
-    slider26: ['https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108280.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108281.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.webp'],
-    slider27: ['https://gitee.com/a1814747459/img-bed/raw/master/20260812105155984.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155985.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155986.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155987.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155988.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155989.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155990.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155991.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155992.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155993.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155994.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155995.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155996.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155997.webp','https://gitee.com/a1814747459/img-bed/raw/master/20260812105155998.webp'],
-    xhs_slider1: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722153825391.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153825392.webp'],
-    xhs_slider2: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722120021090.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722120021088.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153956753.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722153956751.webp'],
-    xhs_slider3: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722121042728.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042727.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042729.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042731.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260721174259903.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722121042730.webp'],
-    xhs_slider4: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123441826.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441829.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441827.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123441828.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722154242943.webp'],
-    xhs_slider5: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145444669.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444670.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444671.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145444672.webp'],
-    xhs_slider6: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722190952053.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722190952054.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722190952055.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722190952056.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722190952057.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722190952058.webp'],
-    xhs_slider7: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722123716221.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722123716222.webp'],
-    xhs_slider8: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722191224591.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145637196.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145637197.webp'],
-    xhs_slider9: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722145959261.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722191346348.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722145959262.webp'],
-    xhs_slider10: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722191554137.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722191554138.webp'],
-    xhs_slider11: ['https://gitee.com/a1814747459/img-bed/raw/master/20260722151732487.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732488.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732489.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260722151732490.webp'],
-    xhs_slider12: ['https://gitee.com/a1814747459/img-bed/raw/master/20260802111525767.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108282.webp', 'https://gitee.com/a1814747459/img-bed/raw/master/20260802111108279.webp'],
-    xhs_slider13: ['https://gitee.com/a1814747459/img-bed/raw/master/20260810205234738.webp'],
-  };
+  const imageSets = {};  // 图片集合：运行时由微博/小红书帖子数据动态写入
 
   let currentSetId = 'slider1';
   let currentIndex = 0;
@@ -2489,8 +2298,6 @@ randomDrinkBtn?.addEventListener('click', function() {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
   const modalDots = document.getElementById('modalDots');
-  const prevBtnModal = document.getElementById('modalPrev');
-  const nextBtnModal = document.getElementById('modalNext');
 
   window.openModalWithImages = function(setId, index) {
     var images = imageSets[setId];
@@ -2527,7 +2334,14 @@ randomDrinkBtn?.addEventListener('click', function() {
                   }
               };
           }
-      };
+      
+    // 平台数据渲染完成后，重新渲染右侧日历
+    if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
+      calCurrentPage = 'fancam';
+      renderCalendar(currentYear, currentMonth);
+      renderUpdateList(currentYear, currentMonth, null, 'fancam');
+    }
+};
 
   function clearFilter() {
     calFilteredMonth = null;
@@ -2609,187 +2423,7 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 
   (function() {
-    const monthImages = {
-      '2026-08': [
-        { date: '2026.08.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171214258.webp' },
-        { date: '2026.08.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171214259.webp' },
-        { date: '2026.08.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802170849752.webp' },
-        { date: '2026.08.04', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260809195822748.webp' },
-        { date: '2026.08.04', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260809195756521.webp' },
-        { date: '2026.08.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260809195545558.webp' },
-        { date: '2026.08.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260809195538358.webp' },
-        { date: '2026.08.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260809195526624.webp' },
-        { date: '2026.08.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816204245199.webp' },
-        { date: '2026.08.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816204209973.webp' },
-        { date: '2026.08.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816204209974.webp' },
-        { date: '2026.08.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816204209975.webp' },
-        { date: '2026.08.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260816204114988.webp' },
-        { date: '2026.08.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817093950415.webp' },
-        { date: '2026.08.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260818212917624.webp' },
-        { date: '2026.08.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260818212946999.webp' },
-        { date: '2026.08.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260818212947000.webp' },
-        { date: '2026.08.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820164516112.webp' },
-        { date: '2026.08.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820164516112.webp' },
-        { date: '2026.08.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260823203627879.webp' },
-        { date: '2026.08.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260823203627881.webp' },
-        { date: '2026.08.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260823203627882.webp' },
-      ],
-      '2026-07': [
-        { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172013616.webp' },
-        { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172711116.webp' },
-        { date: '2026.07.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172750062.webp' },
-        { date: '2026.07.07', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172318578.webp' },
-        { date: '2026.07.07', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172417394.webp' },
-        { date: '2026.07.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802172211663.webp' },
-        { date: '2026.07.18', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171946546.webp' },
-        { date: '2026.07.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120103376.webp' },
-        { date: '2026.07.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729120042227.webp' },
-        { date: '2026.07.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260729115916457.webp' },
-        { date: '2026.07.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260731123249578.webp' },
-        { date: '2026.07.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260802171233465.webp' },
-      ],
-      '2026-06': [
-        { date: '2026.06.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220323221.webp' },
-        { date: '2026.06.08', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220134257.webp' },
-        { date: '2026.06.11', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220048229.webp' },
-        { date: '2026.06.13', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220023540.webp' },
-        { date: '2026.06.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172019683.webp' },
-        { date: '2026.06.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215936354.webp' },
-        { date: '2026.06.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215827606.webp' },
-        { date: '2026.06.18', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812215803228.webp' },
-      ],
-      '2026-05': [
-        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428462.webp' },
-        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428463.webp' },
-        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428464.webp' },
-        { date: '2026.05.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221428465.webp' },
-        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313820.webp' },
-        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313821.webp' },
-        { date: '2026.05.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221313822.webp' },
-        { date: '2026.05.03', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221243317.webp' },
-        { date: '2026.05.05', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221152788.webp' },
-        { date: '2026.05.11', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221041751.webp' },
-        { date: '2026.05.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812221021501.webp' },
-        { date: '2026.05.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220904274.webp' },
-        { date: '2026.05.16', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220858937.webp' },
-        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220854491.webp' },
-        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220847435.webp' },
-        { date: '2026.05.17', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172123440.webp' },
-        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220808771.webp' },
-        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220803157.webp' },
-        { date: '2026.05.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220745537.webp' },
-        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220701781.webp' },
-        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220650056.webp' },
-        { date: '2026.05.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220633900.webp' },
-        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220523572.webp' },
-        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220418772.webp' },
-        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220438230.webp' },
-        { date: '2026.05.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260812220453055.webp' },
-      ],
-      '2026-04': [
-        { date: '2026.04.01', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143014861.webp' },
-        { date: '2026.04.04', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142937997.webp' },
-        { date: '2026.04.04', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142937998.webp' },
-        { date: '2026.04.10', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142532085.webp' },
-        { date: '2026.04.10', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142532086.webp' },
-        { date: '2026.04.10', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142506890.webp' },
-        { date: '2026.04.11', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142328352.webp' },
-        { date: '2026.04.19', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141231169.webp' },
-        { date: '2026.04.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141139853.webp' },
-        { date: '2026.04.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141108033.webp' },
-        { date: '2026.04.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141108035.webp' },
-        { date: '2026.04.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141037411.webp' },
-      ],
-      '2026-03': [
-        { date: '2026.03.07', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144927639.webp' },
-        { date: '2026.03.10', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172125864.webp' },
-        { date: '2026.03.12', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144843144.webp' },
-        { date: '2026.03.13', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144820754.webp' },
-        { date: '2026.03.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144756602.webp' },
-        { date: '2026.03.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144756603.webp' },
-        { date: '2026.03.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144756604.webp' },
-        { date: '2026.03.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144717107.webp' },
-        { date: '2026.03.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144636574.webp' },
-        { date: '2026.03.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144421763.webp' },
-        { date: '2026.03.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144421764.webp' },
-        { date: '2026.03.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144421765.webp' },
-        { date: '2026.03.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144331984.webp' },
-        { date: '2026.03.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144331985.webp' },
-        { date: '2026.03.25', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144331986.webp' },
-        { date: '2026.03.27', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143755026.webp' },
-        { date: '2026.03.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143516005.webp' },
-      ],
-      '2026-02': [
-        { date: '2026.02.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151107322.webp' },
-        { date: '2026.02.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151107323.webp' },
-        { date: '2026.02.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151107324.webp' },
-        { date: '2026.02.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151018059.webp' },
-        { date: '2026.02.08', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150739168.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348333.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348334.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348335.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348336.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348337.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348338.webp' },
-        { date: '2026.02.09', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150348339.webp' },
-        { date: '2026.02.18', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817150108438.webp' },
-        { date: '2026.02.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145949329.webp' },
-        { date: '2026.02.20', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145949330.webp' },
-        { date: '2026.02.21', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145842160.webp' },
-        { date: '2026.02.21', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145842161.webp' },
-        { date: '2026.02.21', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145842162.webp' },
-        { date: '2026.02.22', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145810100.webp' },
-        { date: '2026.02.22', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145810101.webp' },
-        { date: '2026.02.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145744648.webp' },
-        { date: '2026.02.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145744649.webp' },
-        { date: '2026.02.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145744650.webp' },
-        { date: '2026.02.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145705958.webp' },
-        { date: '2026.02.24', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145705959.webp' },
-        { date: '2026.02.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145623309.webp' },
-        { date: '2026.02.26', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145623310.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523961.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523962.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523963.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523964.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523965.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523966.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523967.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523968.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523969.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523970.webp' },
-        { date: '2026.02.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817145523971.webp' },
-      ],
-      '2026-01': [
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041109.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041110.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041111.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041112.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041113.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041114.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041115.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041116.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041117.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154041118.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154230161.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154230162.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154230163.webp' },
-        { date: '2026.01.02', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817154230164.webp' },
-        { date: '2026.01.03', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153902300.webp' },
-        { date: '2026.01.04', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172121280.webp' },
-        { date: '2026.01.08', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153730287.webp' },
-        { date: '2026.01.08', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153730288.webp' },
-        { date: '2026.01.12', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153554667.webp' },
-        { date: '2026.01.13', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153530745.webp' },
-        { date: '2026.01.14', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153515719.webp' },
-        { date: '2026.01.15', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817153342529.webp' },
-        { date: '2026.01.23', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172128268.webp' },
-        { date: '2026.01.28', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817152216241.webp' },
-        { date: '2026.01.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260820172026068.webp' },
-        { date: '2026.01.29', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817152107845.webp' },
-        { date: '2026.01.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151835179.webp' },
-        { date: '2026.01.31', url: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817151835180.webp' },
-      ],
-    };
+    
 
     const popup = document.getElementById('popupOverlayMiracle');
     const popupTitle = document.getElementById('miraclePopupTitle');
@@ -2971,8 +2605,8 @@ randomDrinkBtn?.addEventListener('click', function() {
   (function() {
     const darkToggle = document.getElementById('darkToggle');
     const darkIcon = document.getElementById('darkIcon');
-    const lightIcon = 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.webp';
-    const darkIconUrl = 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917434.webp';
+    const lightIcon = 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp';
+    const darkIconUrl = 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
 
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode === 'dark') {
@@ -2998,8 +2632,32 @@ randomDrinkBtn?.addEventListener('click', function() {
   })();
 
   let pagesRendered = { stage: false, bobo: false, fancam: false };
-  renderCards('all', '');
-  pagesRendered.stage = true;
+  let stageDataLoaded = false;
+
+  // 确保DOM加载完成后再初始化舞台
+  function initStage() {
+    // 绑定分页按钮点击事件
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    if (prevBtn) prevBtn.addEventListener('click', () => changePage(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => changePage(1));
+
+    // 加载舞台数据，完成后一定渲染（不检查active，因为DOM总是存在的）
+    loadStageData().then(() => {
+      stageDataLoaded = true;
+      pagesRendered.stage = true;
+      console.log('舞台数据加载完成，开始渲染，总条数:', stageCategoryCache.all.length);
+      renderCards('all', '');
+    }).catch(err => {
+      console.error('舞台数据加载失败:', err);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStage);
+  } else {
+    initStage();
+  }
   
   if (window.requestIdleCallback) {
     requestIdleCallback(function() {
@@ -3023,10 +2681,10 @@ randomDrinkBtn?.addEventListener('click', function() {
     const dateMap = new Map();
     
     const categoryColors = {
-      unit: '#00a1d6',
-      special: '#e67e22',
-      assist: '#ffd700',
-      substitute: '#9b59b6'
+      unit: '#7fb5d0',
+      special: '#e8b88a',
+      assist: '#e8d48a',
+      substitute: '#a8d4c8'
     };
     
     const allStageData = [
@@ -3037,6 +2695,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     ];
     
     allStageData.forEach(item => {
+      if (!item.date) return;
       const dateKey = item.date;
       if (!dateMap.has(dateKey)) {
         dateMap.set(dateKey, []);
@@ -3047,21 +2706,48 @@ randomDrinkBtn?.addEventListener('click', function() {
     return dateMap;
   }
 
-  function getBoboDateColors() {
+  function getGongyanDateColors() {
     const dateMap = new Map();
-    
-    const categoryColors = {
-      pocket: '#4299e1',
-      special: '#e67e22'
+
+    const typeColors = {
+      'gongyan': '#6bb8e8',
+      'other': '#f5a0b8'
     };
-    
-    const allBoboItems = [...boboData, ...pocketLivesData];
-    allBoboItems.forEach(item => {
-      const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '');
+
+    const gongyanDataRef = window.gongyanData || (typeof gongyanData !== 'undefined' ? gongyanData : []);
+    if (!gongyanDataRef || gongyanDataRef.length === 0) return dateMap;
+
+    gongyanDataRef.forEach(item => {
+      if (!item.pubdate) return;
+      const dateStr = item.pubdate.replace(/-/g, '.');
+      const pureDate = dateStr.replace(/[凌晨|晚|早|下午|中午].*$/, '').trim();
       if (!dateMap.has(pureDate)) {
         dateMap.set(pureDate, []);
       }
-      dateMap.get(pureDate).push(categoryColors[item.category] || '#888');
+      const isGongyanItem = item.pubdate && item.pubdate !== '';
+      const type = isGongyanItem ? 'gongyan' : 'other';
+      dateMap.get(pureDate).push(typeColors[type] || '#888');
+    });
+
+    return dateMap;
+  }
+
+function getBoboDateColors() {
+    const dateMap = new Map();
+
+    const typeColors = {
+      '直播': '#f0a0a0',
+      '电台': '#d4b0b8'
+    };
+
+    const allBoboItems = [...boboData, ...pocketLivesData];
+    allBoboItems.forEach(item => {
+      if (!item.date) return;
+      const pureDate = item.date.replace(/[凌晨|晚|早|下午|中午].*$/, '').trim();
+      if (!dateMap.has(pureDate)) {
+        dateMap.set(pureDate, []);
+      }
+      dateMap.get(pureDate).push(typeColors[item.type] || '#888');
     });
     
     return dateMap;
@@ -3071,13 +2757,13 @@ randomDrinkBtn?.addEventListener('click', function() {
     const dateMap = new Map();
     
     const platformColors = {
-      weibo: '#4299e1',
-      xiaohongshu: '#ff2d55',
-      douyin: '#f97316',
-      bilibili: '#fb7299'
+      weibo: '#d4b8a8',
+      xiaohongshu: '#f5b8a0',
+      douyin: '#c0b8d0',
+      bilibili: '#b0c8b8'
     };
     
-    const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+    const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card, #weiboFeed .douyin-card, #weiboFeed .bilibili-card');
     cards.forEach(card => {
       const platform = card.dataset.platform;
       const month = card.dataset.month;
@@ -3124,73 +2810,16 @@ randomDrinkBtn?.addEventListener('click', function() {
 
 
   // ===== 公演行程数据 =====
-  const performanceSchedule = [
-    { date: '2026.08.27', time: '19:30', title: 'TEAM NII全新原创公演《肆时墟》', type: 'performance' },
-    { date: '2026.08.30', time: '18:30', title: 'TEAM NII全新原创公演《肆时墟》', type: 'performance' },
-    { date: '2026.08.22', time: '13:30', title: 'TEAM NII全新原创公演《肆时墟》金莹玥生日公演', type: 'birthday' },
-    { date: '2026.08.14', time: '19:30', title: 'TEAM NII全新原创公演《肆时墟》', type: 'performance' },
-    { date: '2026.08.16', time: '18:30', title: 'TEAM NII全新原创公演《肆时墟》', type: 'performance' },
-    { date: '2026.07.28', time: '19:30', title: 'TEAM NII全新原创公演《肆时墟》', type: 'performance' },
-    { date: '2026.07.24', time: '19:30', title: 'TEAM NII全新原创公演《肆时墟》李继醇作品展演', type: 'special' },
-    { date: '2026.07.18', time: '13:30', title: 'TEAM NII全新原创公演《肆时墟》杨宇馨生日公演&作品展演', type: 'birthday' },
-    { date: '2026.07.19', time: '13:30', title: 'TEAM NII全新原创公演《肆时墟》钟亚男生日公演&作品展演', type: 'birthday' },
-    { date: '2026.07.11', time: '18:30', title: 'TEAM NII全新原创公演《肆时墟》胡晓慧"一小部分我"TOP16主题生日公演&作品展演', type: 'birthday' },
-    { date: '2026.07.12', time: '13:30', title: 'TEAM NII全新原创公演《肆时墟》叶凡生日公演&作品展演', type: 'birthday' },
-    { date: '2026.07.04', time: '19:00', title: 'TEAM NII《肆时墟》巡演·重庆站', type: 'tour' },
-    { date: '2026.06.27', time: '18:30', title: 'TEAM NII第五套全新原创公演《肆时墟》首演', type: 'premiere' },
-    { date: '2026.06.28', time: '18:30', title: 'TEAM NII第五套全新原创公演《肆时墟》首演第二场', type: 'premiere' },
-    { date: '2026.06.20', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》潘瑛琪生日公演&作品展演', type: 'birthday' },
-    { date: '2026.06.12', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》沈馨、唐程成作品展演', type: 'special' },
-    { date: '2026.06.07', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》黄紫怡、徐佳琳作品展演', type: 'special' },
-    { date: '2026.05.28', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.05.30', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》钟亚男季度MVP公演', type: 'mvp' },
-    { date: '2026.05.24', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.05.14', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.05.17', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.04.23', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.04.24', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.04.18', time: '14:00', title: 'SNH48 TEAM NII《Nice to meet you II》巡演•北京站', type: 'tour' },
-    { date: '2026.04.05', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.03.20', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.03.21', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.03.14', time: '19:00', title: '第十二届年度金曲大赏演唱会', type: 'concert' },
-    { date: '2026.03.04', time: '19:30', title: 'SNH48《声动星河》"双声闪耀"晋级赛第一场', type: 'special' },
-    { date: '2026.03.07', time: '13:30', title: '"TEAM NII《Plan B》刘洁毕业公演', type: 'graduation' },
-    { date: '2026.03.01', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.02.07', time: '18:30', title: '春晚特别公演第一场（NX联合）', type: 'special' },
-    { date: '2026.01.31', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》韩家乐季度MVP公演', type: 'mvp' },
-    { date: '2026.01.24', time: '18:30', title: 'TEAM HII焕新公演《赫兹共振》蒋舒婷季度MVP公演', type: 'mvp' },
-    { date: '2026.01.25', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.01.17', time: '13:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.01.18', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2026.01.03', time: '18:30', title: 'SNH48《声动星河》"匿声唱将"专场公演', type: 'special' },
-    { date: '2025.12.28', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2025.12.18', time: '19:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2025.12.20', time: '18:30', title: 'TEAM NII焕新公演《Nice to meet you II》', type: 'performance' },
-    { date: '2025.12.14', time: '13:30', title: 'TEAM NII《12°Neo》十二周年庆特别公演', type: 'special' },
-    { date: '2025.12.07', time: '18:30', title: 'SNH48王者荣耀专场《王者夜宴》', type: 'special' },
-    { date: '2025.12.04', time: '19:00', title: 'TEAM NII《Nice to meet you II》巡演·武汉站', type: 'tour' },
-  ];
-
-  // 公演行程颜色配置（非灰色）
-  const scheduleTypeColors = {
-    performance: '#4a90d9',   // 蓝色 - 常规公演
-    birthday: '#e878a2',      // 粉色 - 生日公演
-    special: '#9b6bb8',       // 紫色 - 特殊公演
-    tour: '#e8954a',          // 橙色 - 巡演
-    premiere: '#d94a4a',      // 红色 - 首演
-    mvp: '#4ab8a0',           // 青绿色 - MVP公演
-    concert: '#d9a44a',       // 金色 - 演唱会
-    graduation: '#7a7ad9'     // 蓝紫色 - 毕业公演
-  };
+  
 
   function getUpdateTypesForPage(pageId) {
     const typeMap = {
-      'home': ['stage', 'bobo', 'fancam'],
-      'wait': ['stage', 'bobo', 'fancam'], 
+      'home': ['stage', 'bobo', 'fancam', 'gongyan'],
+      'wait': ['stage', 'bobo', 'fancam', 'gongyan'], 
       'stage': ['stage'],
       'bobo': ['bobo'],
-      'fancam': ['fancam']
+      'fancam': ['fancam'],
+      'gongyan': ['gongyan']
     };
     return typeMap[pageId] || [];
   }
@@ -3230,7 +2859,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     }
 
     if (typeFilter.includes('bobo')) {
-      const boboTypeLabels = { pocket: '口袋回放', special: '特殊直播' };
+      const boboTypeLabels = { '直播': '视频', '电台': '电台' };
       const allBoboItems = [...boboData, ...pocketLivesData];
       allBoboItems.forEach(item => {
         if (item.date) {
@@ -3238,13 +2867,13 @@ randomDrinkBtn?.addEventListener('click', function() {
           if (pureDate.startsWith(datePrefix)) {
             const day = parseInt(pureDate.substring(datePrefix.length));
             const timeSuffix = item.date.substring(pureDate.length);
-            const subType = item.category || 'pocket';
+            const subType = item.type || '直播';
             results.push({
               dateKey: pureDate,
               day: day,
               type: 'bobo',
               typeClass: 'bobo-' + subType,
-              typeLabel: boboTypeLabels[subType] || '口袋回放',
+              typeLabel: boboTypeLabels[subType] || '视频',
               subType: subType,
               title: item.title,
               subtitle: timeSuffix || '',
@@ -3265,7 +2894,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         douyin: '抖音',
         bilibili: 'B站'
       };
-      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card, #weiboFeed .douyin-card, #weiboFeed .bilibili-card');
       cards.forEach(card => {
         const platform = card.dataset.platform;
         const cardMonth = card.dataset.month;
@@ -3306,9 +2935,36 @@ randomDrinkBtn?.addEventListener('click', function() {
       });
     }
 
+    if (typeFilter.includes('gongyan')) {
+      const gongyanDataRef = window.gongyanData || gongyanData || [];
+      gongyanDataRef.forEach(item => {
+        if (item.pubdate) {
+          // pubdate格式可能是 2025-08-14 或 2025.08.14
+          const dateStr = item.pubdate.replace(/-/g, '.');
+          if (dateStr.startsWith(datePrefix)) {
+            const day = parseInt(dateStr.substring(dateStr.lastIndexOf('.') + 1));
+            const isGongyanItem = item.pubdate && item.pubdate !== '';
+            results.push({
+              dateKey: dateStr,
+              day: day,
+              type: 'gongyan',
+              typeClass: isGongyanItem ? 'gongyan' : 'gongyan-other',
+              typeLabel: isGongyanItem ? '公演' : '其他',
+              subType: isGongyanItem ? 'gongyan' : 'other',
+              title: item.title || '',
+              subtitle: '',
+              url: item.url || ('https://www.bilibili.com/video/' + (item.bvid || '')),
+              cover: item.cover || item.pic || '',
+              displayDate: `${monthStr}月${String(day).padStart(2,'0')}日`
+            });
+          }
+        }
+      });
+    }
+
     results.sort((a, b) => {
       if (b.day !== a.day) return b.day - a.day;
-      const typeOrder = { stage: 0, bobo: 1, fancam: 2 };
+      const typeOrder = { stage: 0, bobo: 1, fancam: 2, gongyan: 3 };
       return (typeOrder[a.type] || 9) - (typeOrder[b.type] || 9);
     });
 
@@ -3346,7 +3002,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     if (filteredUpdates.length === 0) {
       listEl.innerHTML = '<div class="cal-update-empty">暂无更新</div>';
-      headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.webp" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
+      headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
       return;
     }
 
@@ -3382,7 +3038,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     listEl.innerHTML = html;
     const count = filteredUpdates.length;
-    headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://gitee.com/a1814747459/img-bed/raw/master/20260810101805930.webp" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
+    headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
     
     // 口袋回放点击弹出播放器
     listEl.querySelectorAll('.pocket-player-item').forEach(el => {
@@ -3426,13 +3082,22 @@ randomDrinkBtn?.addEventListener('click', function() {
     } else {
       const title = item.title.length > 14 ? item.title.substring(0, 14) + '…' : item.title;
       const subtitle = item.subtitle ? `<span style="font-size:11px;color:#888;margin-left:4px;">${item.subtitle}</span>` : '';
-      titleHtml = `<span class="update-title-text">${title}${subtitle}</span>`;
+      const fullTitle = item.title + (item.subtitle ? ' ' + item.subtitle : '');
+      titleHtml = `<span class="update-title-text" title="${fullTitle}">${title}${subtitle}</span>`;
     }
     
-    // 移动端舞台类型的标签也改成队伍颜色
+    // 类型标签颜色：和内容区卡片标签一致
     let typeLabelHtml = '';
+    let tagColor = '';
+    if (item.type === 'bobo') {
+      tagColor = item.subType === '电台' ? '#d4b0b8' : '#f0a0a0';
+    } else if (item.type === 'gongyan') {
+      tagColor = item.subType === 'other' ? '#f5a0b8' : '#6bb8e8';
+    }
     if (isMobile && isStage) {
       typeLabelHtml = `<span class="update-type ${typeClass}" style="background:${teamColor};color:#fff;">${teamLabel}</span>`;
+    } else if (item.type === 'bobo' || item.type === 'gongyan') {
+      typeLabelHtml = `<span class="update-type ${typeClass}" style="background:${tagColor};color:#fff;">${item.typeLabel}</span>`;
     } else {
       typeLabelHtml = `<span class="update-type ${typeClass}">${item.typeLabel}</span>`;
     }
@@ -3473,6 +3138,8 @@ randomDrinkBtn?.addEventListener('click', function() {
         dateColorMap = getBoboDateColors();
       } else if (activePageId === 'fancam') {
         dateColorMap = getFancamDateColors();
+      } else if (activePageId === 'gongyan') {
+        dateColorMap = getGongyanDateColors();
       } else {
         dateColorMap = getStageDateColors();
       }
@@ -3498,23 +3165,17 @@ randomDrinkBtn?.addEventListener('click', function() {
       }
       
       let dotHtml = '';
-      let badgeHtml = '';
       if (hasStage) {
         const colors = dateColorMap.get(dateKey);
-        const count = colors ? colors.length : 0;
         const mixedColor = mixColors(colors);
         dotHtml = `<span class="stage-dot" style="background:${mixedColor};"></span>`;
-        
-        if (activePageId === 'bobo' && count > 1) {
-          badgeHtml = `<span class="stage-badge" style="background:${mixedColor};">${count}</span>`;
-        }
       }
 
       const selectedClass = (calSelectedDate === dateKey) ? 'selected' : '';
       const clickableClass = hasUpdate ? 'clickable' : '';
       const updateDotHtml = !hasStage && hasUpdate ? `<span class="stage-dot" style="background:#4a779e;"></span>` : '';
       
-      html += `<div class="day ${isToday} ${hasStage ? 'has-stage' : ''} ${clickableClass} ${selectedClass}" data-date="${dateKey}">${d}${dotHtml || updateDotHtml}${badgeHtml}</div>`;      
+      html += `<div class="day ${isToday} ${hasStage ? 'has-stage' : ''} ${clickableClass} ${selectedClass}" data-date="${dateKey}">${d}${dotHtml || updateDotHtml}</div>`;      
     }
 
     const totalCells = firstDay + daysInMonth;
@@ -3577,7 +3238,11 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    // 确保年月为当前时间
+    currentYear = new Date().getFullYear();
+    currentMonth = new Date().getMonth();
     renderCalendar(currentYear, currentMonth);
+    renderUpdateList(currentYear, currentMonth, null, 'home');
     
     // 大日历初始化
     const now = new Date();
@@ -3940,12 +3605,16 @@ randomDrinkBtn?.addEventListener('click', function() {
     const daysSincePromotion = daysSince(2024, 2, 2);
     const daysSinceBirth = daysSince(2004, 7, 23);
     
-    document.getElementById('daysToDebutAnniversary').textContent = daysToDebutAnniv + '天';
-    document.getElementById('daysToPromotionAnniversary').textContent = daysToPromotionAnniv + '天';
-    document.getElementById('daysToBirthday').textContent = daysToBirthday + '天';
-    document.getElementById('daysSinceDebut').textContent = daysSinceDebut + '天';
-    document.getElementById('daysSincePromotion').textContent = daysSincePromotion + '天';
-    document.getElementById('daysSinceBirth').textContent = daysSinceBirth + '天';
+    const setText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
+    setText('daysToDebutAnniversary', daysToDebutAnniv + '天');
+    setText('daysToPromotionAnniversary', daysToPromotionAnniv + '天');
+    setText('daysToBirthday', daysToBirthday + '天');
+    setText('daysSinceDebut', daysSinceDebut + '天');
+    setText('daysSincePromotion', daysSincePromotion + '天');
+    setText('daysSinceBirth', daysSinceBirth + '天');
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -3953,68 +3622,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     setInterval(updateCountdown, 86400000);
   });
 
-  const formalData = {
-    '2026-newyear': {
-      label: '2026年新年公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554738.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554745.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554751.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554757.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554732.webp'
-      ]
-    },
-    '2025-autumn': {
-      label: '2025年秋季队服公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554737.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554744.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554750.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554756.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554731.webp'
-      ]
-    },
-    '2025-newyear': {
-      label: '2025年新年公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554736.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554743.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554749.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554755.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554761.webp'
-      ]
-    },
-    '2024-autumn': {
-      label: '2024年秋季队服公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554735.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554742.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554748.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554754.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554760.webp'
-      ]
-    },
-    '2024-spring': {
-      label: '2024年春季队服公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554734.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554740.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554747.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554753.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554759.webp'
-      ]
-    },
-    '2023-2024': {
-      label: '2023-2024年度青春盛典公式照',
-      images: [
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554739.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554746.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554752.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554758.webp',
-        'https://gitee.com/a1814747459/img-bed/raw/master/20260811215554733.webp'
-      ]
-    }
-  };
+  
 
   const formalKeys = ['2026-newyear', '2025-autumn', '2025-newyear', '2024-autumn', '2024-spring', '2023-2024'];
 
@@ -4352,89 +3960,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     });
   })();
 
-  const wordsData = [
-    {
-      date: '2026.08.11',
-      title: '总选后碎碎念',
-      content: `111这里有话说
-
-说实话这两天我一直在调节自己的情绪，和自己的所有和解，我也知道大家在默默陪伴我担忧我。
-
-今年我们厉害吗，毋庸置疑，我们就是很厉害，我们一点一点用时间用努力堆起来了这个45的名次，熬了几乎一整个夏天的夜，我很感谢你们一直陪着我支持我选择我，让我每时每刻都不是一个人，让我感觉从未被放弃。
-
-你们对我来说是无比珍贵的礼物，是我想要用尽全力去守护去爱护的存在，我想看你们因为我而露出微笑，想要你们因为我获得一些动力去面对未知的挑战。
-
-值得吗，有你们就值得！我常说有个好结果多辛苦都值得，但真到了结果不如意的时候就不值得了吗，也值得，我全力以赴就值得。
-
-我经常告诉自己努力不一定有回报，但不努力肯定没有，这也是我可以快速调整好自己的方式的一种。
-
-难过吗，也难过，我难过的要死，得到结果的那一刻我无法接受，我脑袋里的那根弦一下就断了，整个脑袋都在嗡嗡作响，想要微笑但微笑不出来，背在脑海里的词全都化为了一腔不甘。
-
-我是一个认定一件事就很固执的人，我既然获得了站上舞台的机会，那我必然不会辜负不会轻易放弃，在这里有且只有一件已经认定的目标。
-
-我很早就说过我没办法接受今年的自己比去年差，也许没人记得，但我说出口的话都是我深思熟虑后的，我知道这不应该用名次去定义，但在这里名次是最直接，是证明一整年的努力被看见的结晶，我就是想要在这短暂而又漫长的两个月转化成实质性的结果。
-
-我也明白这个结果不单单只是一个名次，是大家对我的认可和肯定，我非常渴望得到认可，这可以让我有更多的底气去选择自己想要做的事情，让我接触从未接触过的事物，让我变得更好，让我可以更自信更坚定的走接下来的路，有了支撑才能更有动力的前进。
-
-其实后退带给我的挫败也让我一直在质疑自己，我知道没有谁一定有义务要支持我给我投票，我所收到的全来自大家最诚挚的爱。
-
-爱很伟大可以建立起两个陌生人之间的羁绊，爱也促使着我想成为更好的自己回应你们。
-
-未知的明天。
-
-等以后某一个瞬间想起来会觉得，喜欢叶凡真是最幸福的事情了，那这一刻，就是我所有努力的具象化。
-
-当然我也有颓废的时候，这个时候我会觉得这个世界都对我很差，努力就会被看到吗，就算我付出了时间和精力去做自己想做的事，那也不会如愿得到我想要的结果，又有什么意义呢，我会想就这样吧，反正也不会怎样，也不会有人在意，可能转身我就会被别人替代，现实好残酷吧对不对……
-
-我不甘又能改变什么呢，我是渺小的，渺小的我真的能做到我想要的样子吗，我不是那么好，我也不那么完美甚至很脆弱和敏感，还要面子不想让大家看到我流眼泪，只要眼泪不流下来那我就没哭，强撑着坚强好累，让自己懂事也好累，有熬不完的夜也好累，想到没做到自己想做到的也好累，说话也好累，时常想要不就放弃吧。
-
-但放弃更难更需要勇气，我没办法丢下那个带着不甘对未来向往的自己和一直默默守护我挂念我的人。
-
-你们的存在给了我不放弃自己的理由，因为你们对我很重要，当我这样告诉自己我就立马充满了做所有事的动力。
-
-我不是一只没有感情的电子蝴蝶，我珍惜所拥有的一切，请不要否定自己也不要否定我，陪着我坚定的选择我好吗，渺小的我有因你而勇敢的梦。
-
-我写那么多可能更多是想告诉现在的自己，难受不如接受现状继续前进，目标本就是用来奔赴的。
-
-也想告诉每一个关心我的你，对我的每一份支持都是支撑我走下去的动力。
-
-在名次上输了，但从某方面来说，勇敢的人本就立于不败之地，因为勇者从不会因为挫折而气馁，勇敢是当你还未开始无论如何都要把它坚持到底，你很少能赢，但有时也会。
-
-45名可以是起点，但绝对不是终点。`
-    },
-    {
-      date: '2026.07.12',
-      title: '26年青春宣言发言',
-      content: `没想到我先讲话吧对不对？因为一会儿跳的话，我肯定会出汗，然后又一直喘气，我觉得可能会影响大家听我讲话，加上有的时候我会说话有点不清晰。好的，我要开始了。
-
-大家好，我是SNH48 TeamNII的叶凡。
-
-其实最开始喜欢上舞台没有多么盛大的理由，只是偶然看到屏幕里前辈们站在舞台上闪闪发光的样子。那一刻我心里突然有了一个很清晰的向往。那时候的我很稚嫩也很胆怯，只会对着视频一遍一遍笨拙地跟跳，把喜欢藏在一次次默默的练习里。我一直都记得在一次和朋友散步回家，在公园随意跳着自己练的舞，意外得到了朋友的一句肯定，就是那句夸奖也给了我很大的勇气，让我第一次萌生了我也想站在舞台上试一试的念头。
-
-下定决心之后，我开始为了通过初试一遍遍地练习舞蹈，对着镜子练习，在不同的地方回忆动作。我还记得我一开始独自奔赴上海，坐火车面试的心情。当时虽然前路未知，心里忐忑到睡不着觉，但心里那束关于舞台的光一直支撑着我坚持到了初试结束。对，很幸运我的勇敢没有被辜负，我成功地踏入了这里，拥有了属于自己追逐舞台的机会。刚入团的我依旧不够自信，为了第一次登台拼尽全力地练习，真正站在出道舞台16号位的时候，我紧张到手足无措。
-
-第一次面对镜头的时候也是懵懂又局促，我有多紧张，我的眼睛就眨得有多快，所以有的时候我的眼睛就会出卖我紧张的心情。所以在后来的日子里，我从来不放过任何一次成长的机会，我会多多的接助演，并且珍惜每次登台的机会，在不同的舞台不同的风格里不断的打磨自己，让关注着我的每一个人都看到了从一开始很笨拙到现在站在舞台上越来越坦然面对每一个舞台的我，我努力地成就了现在的我。但我也知道走到今天我从来都不是一个人在前行。如果说最初支持着我出发的是一腔热爱，那一路陪我走到现在的就是身后无数份对我的支持和喜欢。练习确实很累，舞台不管什么情况，我坦然面对，但我也有紧张的时候，是你们的陪伴给了我坚持下去的理由，给了我没有那么害怕、那么紧张的理由。我很清我清楚知道自己现在也有很多成长的空间，可正是你们愿意包容我的稚嫩，相信我的成长，才让我敢一次次挑战新的舞台。前路有风也有浪，但因为有你们的陪伴，我便永远有奔赴光亮、挑战未知的勇气。我觉得舞台从来都不是一蹴而就的光芒，而是日复一日的热爱与坚持。
-
-未来我也会继续带着我的赤诚和勇敢，继续脚踏实地的练习，认认真真地对待每一次舞台，不辜负自己的热爱，也不辜负每一份给我的陪伴还有支持。我会继续努力，成为更耀眼更坚定的自己，谢谢每一个陪伴着我的你们。未来的路还很长，我的成长也永不停止。舞台教会我的从来都不是光芒，而是哪怕渺小也要频频发光，哪怕平凡也要全力以赴。所以我在这里想大声喊出我今年的目标，我今年的目标是第20名，然后也希望拿到队内前三的位置，谢谢大家。`
-    },
-    {
-      date: '2025.06.02',
-      title: '25年青春宣言发言（不完整版）',
-      content: `好的，结束了，看看的还开心吗？谢谢大家。好的，我就先开始念我的这个发言吧。
-
-hello大家好，我是SNH48 Team NII的叶凡。
-
-欢迎大家来看今天的我的生日公演还有青春展演。不知不觉已经来到属于我们的第二次青春展演了，时间过得真的好快，今年我最大的感触就是感谢遇见，对，遇见这么好的你们，然后你们选择了我。然后呢，我选择了不问将来这首歌作为我的展演作品，因为我觉得无论过因为我最近很喜欢一句话，就是无论过去，因为我们不能改变过去不问将来，因为将来一定会因为我们而改变。
-
-感觉去年紧张的画面还历历在目，虽然今天也是很让我紧张的一天，不过我觉得真的很尽兴。因为在同样的六月，站在同样的舞台，不同的是比去年成长了许多的我，还有多了更多坐在观众席为我而来的大家和屏幕面前默默支持着我的你们。去年我说过，我希望对你们来说，喜欢我是一件很值得很骄傲的事情。今年也依旧如此，以后的每一年也是如此。
-
-其实因为我的名字，我听到很多声音说，如果我可以因为利用叶凡这个名字去一些梗或者之类的，就可以得到至少比现在要多一点的流量。但是这样的调侃，因为我的性格比较内敛，然后还有我觉得我的骄傲也不允许我、我也不想去做这样的事情。我从始至终都希望大家是因为我是我，所以才喜欢我，认识我。虽然我不能说我就是因为你们有人会因为我的名字去关注我的，这样不好，因为我的名字毕竟在这里，但是我还是想努力让大家在提起叶凡的时候，脑海里想的是我。
-
-当然在努力的过程中，放弃的心在不经意间出现过无数次，但无数次都被我否决。我就是不想放弃，我就是要做，别人可以，凭什么我不行？我既然已经站在这里，我就要拼尽全力去做我想做的事情。就算我会的东西没那么多，需要学习的东西很多，可那又怎么样呢？我就是想做，我就是想把我所想变成现实。如果我是一个那么轻易就被打倒的人，那现在站在你们面前的许就不是我了。就算属于我的那份蛋糕，因为摔倒掉在了地上，但是我依旧会倔强的擦掉眼泪，站起来继续向前，下一个转角我会遇到因我而存在的甜品店。我始终相信我可以并值得拥有一切美好的事物，不只是因为我觉得我值得，陪伴在我身边的大家，还有爱我的大家也告诉着我，我值得。我想站在你们更容易看到的地方，我想多多出现在你们的视野中，多多停留在你们的眼这个眼中。
-
-去年大家齐心协力，也是投到了新人第四的成绩。但是今年我想努力去触摸一下那个可以被抓到的奖杯、对我来说有着不同意义的奖杯。所以我今年我想说我的目标就是如果能进到48，就是这是我想说的目标。对。怎么说呢？就是相比于去年那个因为害怕而把自己想法不敢宣之于口的我，今年的我也许多了更多的勇气把我所想说给大家听，但我觉得懂我的你们应该也能猜到我的想法。其实我也害怕说出口德和最后收获的结果并不相同，但我觉得最重要的是这份向上的态度和勇敢面对未来和面对未知的勇气，在你们为我奔赴而来的时候，我会做好万全的准备，扑进你们的怀抱，我们一起一鼓作气，为了同一个目标努力的那份热血是这个夏天的限定，但也是我们的决心。也许我们的光远看很很薄弱，但近看...`
-    }
-  ];
+  
 
   function renderWordsCards() {
     const grid = document.getElementById('wordsGrid');
@@ -4577,8 +4103,8 @@ ${data.content}
       
       if (icon) {
         icon.src = isDark 
-          ? 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917434.webp'
-          : 'https://gitee.com/a1814747459/img-bed/raw/master/20260803145917435.webp';
+          ? 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp'
+          : 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
       }
       
       if (label) {
@@ -4654,13 +4180,6 @@ ${data.content}
       const tocList = document.getElementById('tocList');
       if (!tocList) return;
 
-      const tocConfig = [
-        { label: '椰饭的自我介绍' },
-        { label: '椰饭的联系方式' },
-        { label: '椰饭的里程日记' },
-        { label: '历年公式照' }
-      ];
-
       function findTitleElement(label) {
         const titles = document.querySelectorAll('.info-title');
         for (const el of titles) {
@@ -4681,22 +4200,13 @@ ${data.content}
     
     if (activePage === 'home') {
       config = [
-        { label: '椰饭的自我介绍' },
-        { label: '椰饭的联系方式' },
-        { label: '椰饭的里程日记' },
-        { label: '历年公式照' }
+        { label: '个人简介' },
+        { label: '平台账号' },
+        { label: '历年公式照' },
+        { label: '里程时间线' }
       ];
       } else if (activePage === 'fancam') {
-        const months = [
-          '2026年8月', '2026年7月', '2026年6月', '2026年5月',
-          '2026年4月', '2026年3月', '2026年2月', '2026年1月',
-          '2025年12月', '2025年11月', '2025年10月', '2025年9月',
-          '2025年8月', '2025年7月', '2025年6月', '2025年5月',
-          '2025年4月', '2025年3月', '2025年2月', '2025年1月',
-          '2024年12月', '2024年11月', '2024年10月', '2024年9月',
-          '2024年6月', '2024年4月', '2024年3月', '2023年10月'
-        ];
-        config = months.map(m => ({ label: m }));
+        config = [{ label: '暂无目录', disabled: true }];
     } else {
       config = [{ label: '暂无目录', disabled: true }];
     }
@@ -4800,7 +4310,6 @@ ${data.content}
     const calendarRect = calendar.getBoundingClientRect();
     const calendarBottom = calendarRect.bottom + window.pageYOffset;
     const gap = 6;
-    const expectedTop = calendarBottom + gap;
 
   }
 
@@ -4811,6 +4320,7 @@ ${data.content}
     
     if (drinkCard.style.display === 'none') {
       drinkCard.classList.remove('fixed');
+      drinkCard.style.top = '';
       if (onThisDayCard) {
         onThisDayCard.classList.remove('fixed');
         onThisDayCard.style.top = '';
@@ -4840,6 +4350,7 @@ ${data.content}
       }
     } else {
       drinkCard.classList.remove('fixed');
+      drinkCard.style.top = '';
       delete drinkCard.dataset.initialTop;
       if (onThisDayCard) {
         onThisDayCard.classList.remove('fixed');
@@ -4883,48 +4394,36 @@ ${data.content}
     
     const isFixed = scrollY >= threshold;
     
-    // 全部用JS控制位置，避免CSS和JS冲突
+    // 用 CSS .fixed 类控制固定定位（和右侧侧边栏一致），JS 只控制 top 堆叠
     if (isFixed) {
-      tocCard.style.position = 'fixed';
+      tocCard.classList.add('fixed');
       tocCard.style.top = cfg.topFixed + 'px';
-      tocCard.style.left = '2px';
-      tocCard.style.zIndex = '1000';
       
       // 行程倒计时固定在目录下面
       if (countdownCard) {
-        countdownCard.style.position = 'fixed';
+        countdownCard.classList.add('fixed');
         countdownCard.style.top = (cfg.topFixed + tocHeight + cfg.gap) + 'px';
-        countdownCard.style.left = '2px';
-        countdownCard.style.zIndex = '998';
       }
       
       // 快速安利区固定在行程倒计时下面
       if (promoCard) {
-        promoCard.style.position = 'fixed';
+        promoCard.classList.add('fixed');
         promoCard.style.top = (cfg.topFixed + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
-        promoCard.style.left = '2px';
-        promoCard.style.zIndex = '997';
       }
     } else {
-      tocCard.style.position = 'absolute';
+      tocCard.classList.remove('fixed');
       tocCard.style.top = topNormal + 'px';
-      tocCard.style.left = '2px';
-      tocCard.style.zIndex = '998';
       
       // 行程倒计时不固定时也在目录下面
       if (countdownCard) {
-        countdownCard.style.position = 'absolute';
+        countdownCard.classList.remove('fixed');
         countdownCard.style.top = (topNormal + tocHeight + cfg.gap) + 'px';
-        countdownCard.style.left = '2px';
-        countdownCard.style.zIndex = '996';
       }
       
       // 快速安利区不固定时在行程倒计时下面
       if (promoCard) {
-        promoCard.style.position = 'absolute';
+        promoCard.classList.remove('fixed');
         promoCard.style.top = (topNormal + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
-        promoCard.style.left = '2px';
-        promoCard.style.zIndex = '995';
       }
     }
 
@@ -4948,7 +4447,6 @@ ${data.content}
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
     const targetMMDD = month + '.' + day;
-    const targetMonthDay = month + '-' + day; 
 
     const items = [];
 
@@ -5035,29 +4533,30 @@ ${data.content}
   const pageId = e.targetPage || 'home';
   const card = document.querySelector('.left-toc-card');
   const promoCard = document.querySelector('.left-promo-card');
+  const countdownCard = document.querySelector('.left-countdown-card');
   const drinkCard = document.querySelector('.daily-drink-card');
 
-  
   card.style.display = '';
   renderToc();
   
+  // 左侧卡片是 absolute 定位：移除 fixed 但不清 top，由 updateTocFixed 同步重算
   if (promoCard) {
     delete promoCard.dataset.initialTop;
     promoCard.style.display = '';
     promoCard.classList.remove('fixed');
   }
-  
-  setTimeout(function() {
-    document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
-    setDrinkPosition();
-    updateActiveOnScroll();
-    updateTocFixed();
-  }, 150);
-  
+  if (countdownCard) {
+    countdownCard.classList.remove('fixed');
+  }
   if (pageId !== 'home') {
     card.classList.remove('fixed');
+  }
+  
+  // 右侧卡片在 sidebar-wrapper 正常流中：移除 fixed 并清 top，自动归位
+  if (pageId !== 'home') {
     if (drinkCard) {
       drinkCard.classList.remove('fixed');
+      drinkCard.style.top = '';
       delete drinkCard.dataset.initialTop;
     }
     const onThisDayCard = document.querySelector('.on-this-day-card');
@@ -5065,7 +4564,18 @@ ${data.content}
       onThisDayCard.classList.remove('fixed');
       onThisDayCard.style.top = '';
     }
+    const recentUpdateCard = document.querySelector('.recent-update-card');
+    if (recentUpdateCard) {
+      recentUpdateCard.classList.remove('fixed');
+      recentUpdateCard.style.top = '';
+    }
   }
+  
+  // 同步重算所有位置，浏览器只重绘一次，和右侧一样丝滑
+  document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
+  setDrinkPosition();
+  updateActiveOnScroll();
+  updateTocFixed();
 });
 
     const tocCard = document.querySelector('.left-toc-card');
@@ -5074,11 +4584,10 @@ ${data.content}
       tocCard.classList.remove('fixed');
     }
   
-  setTimeout(function() {
-    setDrinkPosition();
-    updateTocFixed();
-    renderOnThisDay();
-  }, 200);
+  // 同步初始化位置，避免跳动
+  setDrinkPosition();
+  updateTocFixed();
+  renderOnThisDay();
 
   let ticking = false;
   let lastScrollY = 0;
@@ -5099,9 +4608,26 @@ ${data.content}
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
+      // 重置右侧侧边栏卡片状态，避免窗口缩放后卡在顶部
+      const rDrinkCard = document.querySelector('.daily-drink-card');
+      const rOnThisDayCard = document.querySelector('.on-this-day-card');
+      const rRecentUpdateCard = document.querySelector('.recent-update-card');
+      if (rDrinkCard) {
+        rDrinkCard.classList.remove('fixed');
+        rDrinkCard.style.top = '';
+        delete rDrinkCard.dataset.initialTop;
+      }
+      if (rOnThisDayCard) {
+        rOnThisDayCard.classList.remove('fixed');
+        rOnThisDayCard.style.top = '';
+      }
+      if (rRecentUpdateCard) {
+        rRecentUpdateCard.classList.remove('fixed');
+        rRecentUpdateCard.style.top = '';
+      }
       setDrinkPosition();
       updateTocFixed();
-    }, 200);
+    }, 150);
   });
 
 })();
@@ -5114,7 +4640,7 @@ ${data.content}
     } else if (type === 'bobo') {
       data = boboData;
     } else if (type === 'fancam') {
-      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card');
+      const cards = document.querySelectorAll('#weiboFeed .weibo-card, #weiboFeed .xiaohongshu-card, #weiboFeed .douyin-card, #weiboFeed .bilibili-card');
       cards.forEach(card => {
         const link = card.querySelector('.weibo-link-button, .video-desc-box');
         if (link && link.href) {
@@ -5494,11 +5020,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const totalSlides = dots.length;
   
   function goToSlide(index) {
-    currentIndex = index;
-    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    currentIndex = (index + totalSlides) % totalSlides;
+    track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
     
     dots.forEach((dot, i) => {
-      if (i === index) {
+      if (i === currentIndex) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -5512,6 +5038,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // 左右切换箭头
+  const prevBtn = document.getElementById('promoPrevBtn');
+  const nextBtn = document.getElementById('promoNextBtn');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() {
+      goToSlide(currentIndex - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      goToSlide(currentIndex + 1);
+    });
+  }
   // 自动轮播（每5秒切换一次）
   setInterval(function() {
     const nextIndex = (currentIndex + 1) % totalSlides;
@@ -5532,7 +5071,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const res = await fetch('bilibili_nii_videos.json');
       const data = await res.json();
       gongyanData = data.videos || [];
+      // 按公演日期从新到旧排序（无日期排最后）
+      gongyanData.sort(function(a, b) {
+        return String(b.pubdate || '').localeCompare(String(a.pubdate || ''));
+      });
       gongyanLoaded = true;
+      window.gongyanData = gongyanData;  // 同步更新全局引用
       console.log('公演数据加载完成，共' + gongyanData.length + '条');
     } catch (e) {
       console.log('公演数据加载失败:', e.message);
@@ -5572,6 +5116,46 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // 渲染公演卡片（和舞台同款）
+  // 公演分页
+  let currentGongyanPage = 1;
+  const gongyanPageSize = 20;
+  let isGongyanPaginationClick = false;
+
+  function updateGongyanPaginationUI(totalCount) {
+    const controls = document.getElementById('gongyanPaginationControls');
+    const prevBtn = document.getElementById('gongyanPrevBtn');
+    const nextBtn = document.getElementById('gongyanNextBtn');
+    const pageInfo = document.getElementById('gongyanPageInfo');
+    if (!controls) return;
+
+    const totalPages = Math.ceil(totalCount / gongyanPageSize);
+    if (totalPages <= 1) { controls.style.display = 'none'; return; }
+
+    controls.style.display = 'flex';
+    pageInfo.textContent = `第 ${currentGongyanPage} / ${totalPages} 页`;
+    prevBtn.disabled = currentGongyanPage === 1;
+    nextBtn.disabled = currentGongyanPage === totalPages;
+    prevBtn.style.opacity = currentGongyanPage === 1 ? '0.4' : '1';
+    nextBtn.style.opacity = currentGongyanPage === totalPages ? '0.4' : '1';
+  }
+
+  function changeGongyanPage(delta) {
+    const keyword = document.getElementById('gongyanSearch')?.value || '';
+    const data = getCategoryData(currentGongyanCategory);
+    const filtered = data.filter(item => {
+      const k = keyword.trim().toLowerCase();
+      return k === '' || item.title.toLowerCase().includes(k);
+    });
+    const totalPages = Math.ceil(filtered.length / gongyanPageSize);
+    const newPage = currentGongyanPage + delta;
+    if (newPage >= 1 && newPage <= totalPages) {
+      currentGongyanPage = newPage;
+      isGongyanPaginationClick = true;
+      renderGongyanCards(currentGongyanCategory, keyword);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
   function renderGongyanCards(category, searchText) {
     const grid = document.getElementById('gongyanGrid');
     if (!grid) return;
@@ -5588,11 +5172,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (data.length === 0) {
       grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#999; font-size:14px;">暂无内容</div>';
+      const controls = document.getElementById('gongyanPaginationControls');
+      if (controls) controls.style.display = 'none';
       return;
     }
-    
+
+    // 分页
+    if (!isGongyanPaginationClick) currentGongyanPage = 1;
+    isGongyanPaginationClick = false;
+    const pageData = data.slice((currentGongyanPage - 1) * gongyanPageSize, currentGongyanPage * gongyanPageSize);
+
     let html = '';
-    data.forEach(item => {
+    pageData.forEach(item => {
       const isGongyanItem = isGongyan(item);
       const tagText = isGongyanItem ? '公演' : '其他';
       const tagColor = isGongyanItem ? '#6bb8e8' : '#f5a0b8';
@@ -5610,18 +5201,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const dataMonth = dateMatch ? dateMatch[1] + '-' + dateMatch[2] : '';
       const dataDay = dateMatch ? dateMatch[3] : '';
       
-      const showText = item.length ? '⏱ ' + item.length + ' · ▶ ' + formatPlayCount(item.play) : '';
-      
       html += `
         <div class="video-card" data-url="${item.url}" data-month="${dataMonth}" data-day="${dataDay}" onclick="window.open('${item.url || '#'}','_blank')">
           <div class="video-cover-box">
             ${coverHtml}
-            <span class="video-tag" style="background:${tagColor};">${tagText}</span>
+            ${item.length ? `<span class="video-duration-badge">${item.length}</span>` : ''}
           </div>
           <div class="video-info">
             <div class="video-name">${item.title}</div>
             <div class="video-date">${item.pubdate || '无日期'}</div>
-            ${showText ? `<div class="video-show">${showText}</div>` : ''}
+            <div class="video-tag-bottom" style="background:${tagColor};">${tagText}</div>
           </div>
         </div>
       `;
@@ -5634,6 +5223,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       grid.className = 'stage-grid';
     }
+
+    updateGongyanPaginationUI(data.length);
   }
 
   // 格式化播放量
@@ -5654,6 +5245,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 更新导航指示器
     if (window.updateNavIndicator) {
       window.updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
+    }
+    
+    // 重新渲染右侧日历（日期颜色标记 + 更新汇总列表）
+    if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
+      calCurrentPage = 'gongyan';
+      renderCalendar(currentYear, currentMonth);
+      renderUpdateList(currentYear, currentMonth, null, 'gongyan');
     }
   }
 
@@ -5684,14 +5282,336 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // 页面切换时初始化
-  const originalSwitchPage = window.switchPage;
-  window.switchPage = function(pageId) {
-    if (originalSwitchPage) originalSwitchPage(pageId);
-    if (pageId === 'gongyan') {
-      initGongyanPage();
-    }
-  };
-
   // 暴露初始化函数
   window.initGongyanPage = initGongyanPage;
+
+  // 暴露分页函数和数据到全局作用域，供HTML onclick和日历函数调用
+  window.changeGongyanPage = changeGongyanPage;
+  window.gongyanData = gongyanData;
+  window.isGongyan = isGongyan;
+  window.getCategoryData = getCategoryData;
+
+  // ===== 前端路由：浏览器前进/后退 + 页面初始化 =====
+  // 监听浏览器前进/后退按钮，根据地址栏同步切换页面
+  window.addEventListener('popstate', function() {
+    var pageId = getPageFromUrl();
+    __isPoppingState = true;
+    switchPage(pageId);
+    __isPoppingState = false;
+  });
+
+  // 页面首次加载时，根据地址栏中的路径直接显示对应页面
+  // （例如直接访问 /stage 或刷新 /stage 页面时）
+  function initRouteFromUrl() {
+    var pageId = getPageFromUrl();
+    if (pageId !== 'home') {
+      // 延迟执行，确保 DOM 和其他初始化脚本都已就绪
+      setTimeout(function() {
+        __isPoppingState = true; // 不重复写入历史记录
+        switchPage(pageId);
+        __isPoppingState = false;
+      }, 200);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRouteFromUrl);
+  } else {
+    initRouteFromUrl();
+  }
+  })();
+// ================= 归档年度报告弹窗 =================
+  function calcReportDays(dateStr) {
+    const parts = dateStr.split('.');
+    const target = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+    return Math.floor((new Date() - target) / (1000 * 60 * 60 * 24));
+  }
+
+  function extractShowName(title) {
+    const m = (title || '').match(/《(.+?)》/);
+    return m ? m[1].trim() : (title || '未命名公演');
+  }
+
+  function getGongyanItems() {
+    return new Promise(function(resolve) {
+      var items = (window.gongyanData || []).filter(function(v) { return v && v.pubdate && v.pubdate !== ''; });
+      if (items.length) { resolve(items); return; }
+      try {
+        fetch('bilibili_nii_videos.json?_=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(d) { resolve((d.videos || []).filter(function(v) { return v && v.pubdate && v.pubdate !== ''; })); })
+          .catch(function() { resolve([]); });
+      } catch (e) { resolve([]); }
+    });
+  }
+
+  function normalizeShowName(kuoName, fullText, dateStr) {
+    var t = fullText || '';
+    var d = (dateStr || '').replace(/-/g, '.');
+    var after = t.indexOf('》') !== -1 ? t.split('》').pop() : t;
+    var specialKw = ['毕业', '联合', '特别', '特殊'];
+    for (var i = 0; i < specialKw.length; i++) {
+      if (after.indexOf(specialKw[i]) !== -1) return '特别公演';
+    }
+    if (kuoName === '平安喜乐') return '特别公演';
+    if (kuoName && kuoName.indexOf('声动星河') !== -1) return '特别公演';
+    if (kuoName && (kuoName === '人生并不会完蛋' || kuoName === '褒美' || kuoName === '我们的夏天')) return '应许之地-b版';
+    if (d >= '2026.06.27') return '肆时墟';
+    if (kuoName && kuoName.indexOf('应许之地') !== -1) {
+      if (d >= '2024.12.15' && d <= '2025.11.02') return '应许之地-b版';
+      return '应许之地';
+    }
+    if (kuoName && kuoName.toLowerCase() === 'nice to meet you ii') return 'Nice to meet you II';
+    return kuoName || '未命名公演';
+  }
+
+  function computeShowStats(gongyanItems) {
+    var items = gongyanItems || [];
+    var showMap = {};
+    items.forEach(function(v) {
+      if (!v || !v.title) return;
+      var m = (v.title || '').match(/《(.+?)》/);
+      var kuo = m ? m[1].trim() : '';
+      var nn = normalizeShowName(kuo, v.title, v.pubdate || '');
+      showMap[nn] = (showMap[nn] || 0) + 1;
+    });
+    var entries = Object.keys(showMap).map(function(k) { return [k, showMap[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+    return { showCount: entries.length, top: entries[0] || null, showMap: showMap };
+  }
+
+  // 舞台小字标题：对 unit 名中混入公演名内容的特殊条目，从原始 title 解析出「完整公演标题」（不含 unit 名）；未命中返回 null
+  function stageFullTitle(item) {
+    const u = item.title || '';
+    const specialKeys = ['声动星河淘汰赛', '联合公演', '晋级赛', '及作品展演'];
+    if (!specialKeys.some(k => u.indexOf(k) !== -1)) return null;
+    let s = item.rawTitle || '';
+    if (!s) return null;
+    s = s.replace(/^【[^】]*】\s*/, '');
+    s = s.replace(/^\d{4}[\.\-]?\d{2}[\.\-]?\d{2}\s*/, '');
+    s = s.replace(/\s*CUT\s*$/i, '');
+    s = s.trim();
+    const un = cleanUnitName(u);
+    if (un && s.endsWith(un)) {
+      s = s.slice(0, s.length - un.length).trim();
+    }
+    return s || null;
+  }
+
+  // 剥离 unit 名中混入的公演名内容（&...联合公演、第X阶段晋级赛第X场）
+  function cleanUnitName(u) {
+    let s = u || '';
+    s = s.replace(/^&.*?联合公演\s*/, '');
+    s = s.replace(/^第[一二三四五六七八九十\d]+阶段晋级赛第[一二三四五六七八九十\d]+场\s*/, '');
+    s = s.replace(/^声动星河淘汰赛\s*/, '');
+    s = s.replace(/^及作品展演\s*/, '');
+    return s;
+  }
+
+  function getUnitStats() {
+    const src = (typeof stageCategoryCache !== 'undefined' && stageCategoryCache && stageCategoryCache.all) ? stageCategoryCache.all : (typeof unitData !== 'undefined' && unitData ? unitData : []);
+    const cleaned = src.filter(function(i) { return i && i.title; }).map(function(i) {
+      return { name: cleanUnitName(i.title), date: i.date || '' };
+    }).filter(function(o) { return o.name && o.name.indexOf('今日之星') === -1 && o.name.indexOf('&') === -1; });
+    const uniqueCount = new Set(cleaned.map(function(o) { return o.name; })).size;
+    const cnt = {};
+    cleaned.forEach(function(o) { cnt[o.name] = (cnt[o.name] || 0) + 1; });
+    const topArr = Object.entries(cnt).sort(function(a, b) { return b[1] - a[1]; });
+    const withDate = cleaned.filter(function(o) { return o.date; }).sort(function(a, b) { return (a.date || '').localeCompare(b.date || ''); });
+    return {
+      uniqueCount: uniqueCount,
+      totalCount: cleaned.length,
+      top: topArr.length ? { name: topArr[0][0], count: topArr[0][1] } : null,
+      first: withDate.length ? { title: withDate[0].name, date: withDate[0].date } : null
+    };
+  }
+
+  function fmtDate(d) {
+    return (d || '').replace(/-/g, '.');
+  }
+
+  // ===== 归档页内容区：年度盘点（文字） + 舞台数据（柱状图） =====
+  var archiveChartType = 'show';
+  var archiveChartBound = false;
+  var archiveSummaryCache = null;   // 公演统计缓存（computeShowStats 结果）
+  var archiveUnitCounts = null;     // unit 计数缓存（[name, count]）
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // unit 出现次数统计（口径与弹窗一致：所有舞台数据、去除今日之星/含&）
+  function getUnitCounts() {
+    if (archiveUnitCounts) return archiveUnitCounts;
+    var src = (typeof stageCategoryCache !== 'undefined' && stageCategoryCache && stageCategoryCache.all)
+      ? stageCategoryCache.all
+      : (typeof unitData !== 'undefined' && unitData ? unitData : []);
+    var cnt = {};
+    src.forEach(function(i) {
+      if (!i || !i.title) return;
+      var name = cleanUnitName(i.title);
+      if (!name || name.indexOf('今日之星') !== -1 || name.indexOf('&') !== -1) return;
+      cnt[name] = (cnt[name] || 0) + 1;
+    });
+    archiveUnitCounts = Object.keys(cnt).map(function(k) { return [k, cnt[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+    return archiveUnitCounts;
+  }
+
+  function drawArchiveBars(entries, unitLabel) {
+    const barsEl = document.getElementById('archiveChartBars');
+    const noteEl = document.getElementById('archiveChartNote');
+    if (!barsEl) return;
+    if (!entries || !entries.length) {
+      barsEl.innerHTML = '<div class="archive-chart-loading">暂无数据</div>';
+      if (noteEl) noteEl.textContent = '';
+      return;
+    }
+    const max = entries[0][1] || 1;
+    var html = '';
+    entries.forEach(function(e, idx) {
+      const h = Math.max(8, Math.round((e[1] / max) * 168));
+      const title = escapeHtml(e[0]) + '：' + e[1] + unitLabel;
+      const delay = Math.min(idx * 0.06, 0.6).toFixed(2);
+      html += '<div class="archive-chart-col">'
+        + '<div class="archive-chart-val">' + e[1] + '</div>'
+        + '<div class="archive-chart-bar" style="height:' + h + 'px; animation-delay:' + delay + 's" title="' + title + '"></div>'
+        + '<div class="archive-chart-label" title="' + title + '">' + escapeHtml(e[0]) + '</div>'
+        + '</div>';
+    });
+    barsEl.innerHTML = html;
+    if (noteEl) {
+      if (archiveChartType === 'unit' && entries.length >= 15) {
+        noteEl.textContent = '按出现次数从高到低，仅展示前 15 首';
+      } else {
+        noteEl.textContent = '按出现次数从高到低排列';
+      }
+    }
+  }
+
+  function renderArchiveChart() {
+    const barsEl = document.getElementById('archiveChartBars');
+    if (!barsEl) return;
+    barsEl.innerHTML = '<div class="archive-chart-loading">加载中...</div>';
+    if (archiveChartType === 'show') {
+      getGongyanItems().then(function(items) {
+        if (!archiveSummaryCache) archiveSummaryCache = computeShowStats(items);
+        const st = archiveSummaryCache;
+        const entries = Object.keys(st.showMap).map(function(k) { return [k, st.showMap[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+        drawArchiveBars(entries, '场');
+      });
+    } else {
+      var entries = getUnitCounts();
+      if (!entries.length) {
+        // 舞台数据还没加载完，等待后重试
+        if (typeof loadStageData === 'function' && typeof stageCategoryCache !== 'undefined' && (!stageCategoryCache.all || !stageCategoryCache.all.length)) {
+          loadStageData().then(function() {
+            archiveUnitCounts = null;
+            drawArchiveBars(getUnitCounts(), '次');
+          });
+        } else {
+          drawArchiveBars(entries, '次');
+        }
+      } else {
+        drawArchiveBars(entries.slice(0, 15), '次');
+      }
+    }
+  }
+
+  function renderArchiveSummary() {
+    const textEl = document.getElementById('archiveSummaryText');
+    if (!textEl) return;
+    textEl.textContent = '加载中...';
+    getGongyanItems().then(function(items) {
+      if (!archiveSummaryCache) archiveSummaryCache = computeShowStats(items);
+      const st = archiveSummaryCache;
+      const stageTotal = items.length;
+      const showCount = st.showCount;
+      const topShow = st.top ? st.top[0] : '暂无';
+      const topShowCount = st.top ? st.top[1] : 0;
+      const u = getUnitStats();
+      const unitCount = u.uniqueCount || 0;
+      const topUnit = u.top ? u.top.name : '暂无';
+      const topUnitCount = u.top ? u.top.count : 0;
+      const firstStage = (function() {
+        const sorted = items.slice().sort(function(a, b) { return (a.pubdate || '').localeCompare(b.pubdate || ''); });
+        return sorted[0] || null;
+      })();
+      const firstStageName = firstStage ? extractShowName(firstStage.title) : '暂无';
+      const firstStageDate = firstStage ? fmtDate(firstStage.pubdate) : '';
+      const firstUnit = u.first ? u.first.title : '暂无';
+      const firstUnitDate = u.first ? fmtDate(u.first.date) : '';
+
+      const debut = calcReportDays('2023.09.30');
+      const promo = calcReportDays('2024.02.02');
+
+      // 完整场次分布（降序）
+      const showEntries = Object.keys(st.showMap).map(function(k) { return [k, st.showMap[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+      const showDist = showEntries.map(function(e) { return '《' + escapeHtml(e[0]) + '》' + e[1] + '场'; }).join('、');
+      // 公演占比
+      const showPct = stageTotal ? Math.round((topShowCount / stageTotal) * 1000) / 10 : 0;
+      // UNIT 完整排序列表
+      const unitEntries = getUnitCounts();
+      const unitTotalTimes = unitEntries.reduce(function(s, e) { return s + e[1]; }, 0);
+      const unitTop3 = unitEntries.slice(0, 3).map(function(e) { return '《' + escapeHtml(e[0]) + '》' + e[1] + '次'; }).join('、');
+      const unitPct = unitTotalTimes ? Math.round((topUnitCount / unitTotalTimes) * 1000) / 10 : 0;
+
+      textEl.innerHTML =
+        '<div class="ar-stat-block">'
+        + '<div class="ar-stat-head">出道 · 升格</div>'
+        + '出道日期：2023.09.30，出道至今 <b>' + debut + '</b> 天；'
+        + '升格日期：2024.02.02，升格至今 <b>' + promo + '</b> 天。'
+        + '</div>'
+        + '<div class="ar-stat-block">'
+        + '<div class="ar-stat-head">公演统计</div>'
+        + '累计完成公演 <b>' + stageTotal + '</b> 场，覆盖 <b>' + showCount + '</b> 套公演；'
+        + '场次分布（降序）：' + showDist + '。'
+        + '单套登台最多：《' + escapeHtml(topShow) + '》<b>' + topShowCount + '</b> 场，'
+        + '占全部公演场次的 <b>' + showPct + '%</b>。'
+        + '</div>'
+        + '<div class="ar-stat-block">'
+        + '<div class="ar-stat-head">UNIT 统计</div>'
+        + '累计解锁 <b>' + unitCount + '</b> 首 UNIT，累计出演 <b>' + unitTotalTimes + '</b> 次；'
+        + '重复次数最多：《' + escapeHtml(topUnit) + '》<b>' + topUnitCount + '</b> 次，'
+        + '占全部 UNIT 出演的 <b>' + unitPct + '%</b>；'
+        + '高频前三：' + (unitTop3 || '暂无') + '。'
+        + '</div>'
+        + '<div class="ar-stat-block">'
+        + '<div class="ar-stat-head">首次记录</div>'
+        + '首次公演：《' + escapeHtml(firstStageName) + '》（' + firstStageDate + '）；'
+        + '首次 UNIT：《' + escapeHtml(firstUnit) + '》（' + firstUnitDate + '）。'
+        + '</div>';
+    });
+  }
+
+  function renderArchiveSections() {
+    if (!archiveChartBound) {
+      archiveChartBound = true;
+      document.querySelectorAll('.archive-chart-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.archive-chart-tab').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          archiveChartType = btn.getAttribute('data-chart');
+          renderArchiveChart();
+        });
+      });
+    }
+    renderArchiveSummary();
+    renderArchiveChart();
+  }
+
+
+
+// ===== 随机背景：进入页面时从 bgImages 随机选一张 =====
+(function () {
+  if (typeof bgImages === 'undefined' || !bgImages.length) return;
+  var pool = bgImages.slice().sort(function () { return Math.random() - 0.5; });
+  var i = 0;
+  function trySet() {
+    if (i >= pool.length) return; // 全部失败则不换背景，用 CSS 默认图
+    var img = new Image();
+    img.onload = function () {
+      document.documentElement.style.setProperty('--bg-image', 'url("' + pool[i] + '")');
+    };
+    img.onerror = function () { i++; trySet(); };
+    img.src = pool[i];
+  }
+  trySet();
 })();
