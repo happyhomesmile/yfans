@@ -2424,6 +2424,95 @@ randomDrinkBtn?.addEventListener('click', function() {
 
   (function() {
     
+    // ===== 从 Hugging Face 动态加载口袋图集 =====
+    const HF_DATASET = '156816SAFE/image-bed';
+    const HF_BASE_PATH = 'pocketphoto';
+    const HF_API_BASE = 'https://huggingface.co/api/datasets/' + HF_DATASET + '/tree/main/' + HF_BASE_PATH;
+    const HF_RESOLVE_BASE = 'https://huggingface.co/datasets/' + HF_DATASET + '/resolve/main/' + HF_BASE_PATH;
+
+    function extractDateFromFilename(filename) {
+      var m = filename.match(/_(\d{4}-\d{2}-\d{2})_/);
+      if (m) return m[1].replace(/-/g, '.');
+      return null;
+    }
+
+    async function fetchImagesInFolder(folderName) {
+      try {
+        var resp = await fetch(HF_API_BASE + '/' + folderName);
+        if (!resp.ok) return [];
+        var files = await resp.json();
+        return files
+          .filter(function(f) { return f.type === 'file' && /\.(webp|jpg|jpeg|png|gif)$/i.test(f.path); })
+          .map(function(f) {
+            var filename = f.path.split('/').pop();
+            var date = extractDateFromFilename(filename) || folderName.replace('-', '.') + '.01';
+            return { date: date, url: HF_RESOLVE_BASE + '/' + folderName + '/' + filename };
+          })
+          .sort(function(a, b) { return a.date.localeCompare(b.date); });
+      } catch (e) {
+        console.error('获取文件夹失败:', folderName, e);
+        return [];
+      }
+    }
+
+    async function loadPocketPhotosFromHF() {
+      var grid = document.querySelector('.miracle-card-grid');
+      if (!grid) return;
+      grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">加载中...</div>';
+      try {
+        var resp = await fetch(HF_API_BASE);
+        if (!resp.ok) throw new Error('API请求失败');
+        var folders = await resp.json();
+        var monthFolders = folders
+          .filter(function(f) { return f.type === 'directory' && /^\d{4}-\d{2}$/.test(f.path.split('/').pop()); })
+          .map(function(f) { return f.path.split('/').pop(); })
+          .sort(function(a, b) { return b.localeCompare(a); });
+        
+        if (monthFolders.length === 0) {
+          grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">暂无图片</div>';
+          return;
+        }
+
+        var results = await Promise.all(monthFolders.map(function(m) { return fetchImagesInFolder(m); }));
+        var newMonthImages = {};
+        monthFolders.forEach(function(m, i) {
+          if (results[i].length > 0) newMonthImages[m] = results[i];
+        });
+        
+        if (typeof monthImages !== 'undefined') {
+          Object.keys(newMonthImages).forEach(function(k) { monthImages[k] = newMonthImages[k]; });
+        } else {
+          window.monthImages = newMonthImages;
+        }
+
+        grid.innerHTML = monthFolders
+          .filter(function(m) { return newMonthImages[m] && newMonthImages[m].length > 0; })
+          .map(function(m) {
+            var monthNum = parseInt(m.substring(5, 7));
+            var yearMonth = m.replace('-', '.');
+            var coverUrl = newMonthImages[m][0].url;
+            return '              <div class="miracle-card" data-month="' + m + '">' +
+              '                <div class="cover-image">' +
+              '                  <img decoding="async" src="' + coverUrl + '" alt="' + yearMonth + '" loading="lazy" />' +
+              '                  <div class="cover-badge">' + newMonthImages[m].length + '张</div>' +
+              '                </div>' +
+              '                <div class="card-footer">' + yearMonth + '</div>' +
+              '              </div>';
+          })
+          .join('');
+
+        console.log('口袋图集加载完成：' + Object.keys(newMonthImages).length + '个月，共' + results.reduce(function(s, r) { return s + r.length; }, 0) + '张图片');
+      } catch (e) {
+        console.error('加载口袋图集失败:', e);
+        grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">加载失败，请刷新重试</div>';
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadPocketPhotosFromHF);
+    } else {
+      loadPocketPhotosFromHF();
+    }
 
     const popup = document.getElementById('popupOverlayMiracle');
     const popupTitle = document.getElementById('miraclePopupTitle');
@@ -5549,27 +5638,45 @@ document.addEventListener('DOMContentLoaded', function() {
       textEl.innerHTML =
         '<div class="ar-stat-block">'
         + '<div class="ar-stat-head">出道 · 升格</div>'
-        + '出道日期：2023.09.30，出道至今 <b>' + debut + '</b> 天；'
-        + '升格日期：2024.02.02，升格至今 <b>' + promo + '</b> 天。'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">出道日期：2023.09.30</span>'
+        + '<span class="ar-item">出道至今 <b>' + debut + '</b> 天</span>'
+        + '</div>'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">升格日期：2024.02.02</span>'
+        + '<span class="ar-item">升格至今 <b>' + promo + '</b> 天</span>'
+        + '</div>'
         + '</div>'
         + '<div class="ar-stat-block">'
         + '<div class="ar-stat-head">公演统计</div>'
-        + '累计完成公演 <b>' + stageTotal + '</b> 场，覆盖 <b>' + showCount + '</b> 套公演；'
-        + '场次分布（降序）：' + showDist + '。'
-        + '单套登台最多：《' + escapeHtml(topShow) + '》<b>' + topShowCount + '</b> 场，'
-        + '占全部公演场次的 <b>' + showPct + '%</b>。'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">累计完成公演 <b>' + stageTotal + '</b> 场</span>'
+        + '<span class="ar-item">覆盖 <b>' + showCount + '</b> 套公演</span>'
+        + '</div>'
+        + '<div style="margin:6px 0;line-height:1.8;">场次分布：' + showDist + '</div>'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">单套登台最多：《' + escapeHtml(topShow) + '》<b>' + topShowCount + '</b> 场</span>'
+        + '<span class="ar-item">占全部公演场次的 <b>' + showPct + '%</b></span>'
+        + '</div>'
         + '</div>'
         + '<div class="ar-stat-block">'
         + '<div class="ar-stat-head">UNIT 统计</div>'
-        + '累计解锁 <b>' + unitCount + '</b> 首 UNIT，累计出演 <b>' + unitTotalTimes + '</b> 次；'
-        + '重复次数最多：《' + escapeHtml(topUnit) + '》<b>' + topUnitCount + '</b> 次，'
-        + '占全部 UNIT 出演的 <b>' + unitPct + '%</b>；'
-        + '高频前三：' + (unitTop3 || '暂无') + '。'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">累计解锁 <b>' + unitCount + '</b> 首 UNIT</span>'
+        + '<span class="ar-item">累计出演 <b>' + unitTotalTimes + '</b> 次</span>'
+        + '</div>'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">重复次数最多：《' + escapeHtml(topUnit) + '》<b>' + topUnitCount + '</b> 次</span>'
+        + '<span class="ar-item">占全部 UNIT 出演的 <b>' + unitPct + '%</b></span>'
+        + '</div>'
+        + '<div style="margin-top:6px;line-height:1.8;">高频前三：' + (unitTop3 || "暂无") + '</div>'
         + '</div>'
         + '<div class="ar-stat-block">'
         + '<div class="ar-stat-head">首次记录</div>'
-        + '首次公演：《' + escapeHtml(firstStageName) + '》（' + firstStageDate + '）；'
-        + '首次 UNIT：《' + escapeHtml(firstUnit) + '》（' + firstUnitDate + '）。'
+        + '<div class="ar-stat-row">'
+        + '<span class="ar-item">首次公演：《' + escapeHtml(firstStageName) + '》（' + firstStageDate + '）</span>'
+        + '<span class="ar-item">首次 UNIT：《' + escapeHtml(firstUnit) + '》（' + firstUnitDate + '）</span>'
+        + '</div>'
         + '</div>';
     });
   }
@@ -5608,6 +5715,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   trySet();
 })();
+
+
 
 
 
