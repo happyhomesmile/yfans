@@ -1,4 +1,4 @@
-
+﻿
 // ===== 农历节日数据 (2020-2030) - 硬编码公历日期 =====
 const lunarFestivalData = {
   // 春节
@@ -4162,13 +4162,6 @@ ${data.content}
 
     syncMobileDarkUI();
 
-    const darkToggle = document.getElementById('darkToggle');
-    if (darkToggle) {
-      darkToggle.addEventListener('click', function() {
-        setTimeout(syncMobileDarkUI, 50);
-      });
-    }
-
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
         closeMenu();
@@ -5615,3 +5608,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   trySet();
 })();
+
+
+

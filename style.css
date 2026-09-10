@@ -1,4 +1,4 @@
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+﻿    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { 
       width: 100%; 
       height: 100%; 
@@ -486,8 +486,12 @@
     
     /* 平板及以下：隐藏侧边栏，内容区占满，切换到手机端适配方案 */
     @media (max-width: 1024px) {
-      .info-box {
+      .info-box,
+      .stage-wrap,
+      .fancam-wrap {
         max-width: 100%;
+      }
+      .info-box {
         padding: 18px 16px;
       }
       .left-profile-card,
@@ -1505,19 +1509,15 @@
 
     .footer-slogan {
       text-align: center;
-      margin-top: 20px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(184,224,255,0.2);
+      margin-top: 16px;
+      margin-bottom: 8px;
+      padding-top: 0;
+      border-top: none;
       font-size: 13px;
       letter-spacing: 1.5px;
       color: #4a779e;
       opacity: 0.6;
       font-weight: 400;
-    }
-
-    .stage-wrap { 
-      max-width: min(780px, calc(100vw - 650px)); 
-      margin: 0 auto; 
     }
 
     .stage-nav {
@@ -3304,6 +3304,13 @@
         padding: 16px 12px 100px 12px !important;
       }
 
+      /* 修复手机端内容区宽度：覆盖桌面端的 calc(100vw - 650px) */
+      .stage-wrap,
+      .info-box {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
       .info-grid,
       .stage-grid,
       .stage-grid.list-mode .video-card {
@@ -3316,6 +3323,31 @@
 
       .fancam-wrap {
         flex-direction: column !important;
+      }
+
+      /* 手机端筛选栏和搜索框布局优化 */
+      .stage-wrap > div[style*="display:flex"] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      .stage-nav-wrapper {
+        width: 100% !important;
+        justify-content: center !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .stage-nav {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+      }
+      .search-box {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .mobile-filter-btn {
+        width: 100% !important;
       }
 
       .formal-display-area .single-mode .img-grid {
@@ -6553,4 +6585,9 @@ body.dark-mode .archive-chart-note {
         animation: none;
       }
     }
+
+
+
+
+
 
