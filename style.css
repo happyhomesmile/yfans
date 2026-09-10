@@ -3304,13 +3304,6 @@
         padding: 16px 12px 100px 12px !important;
       }
 
-      /* 修复手机端内容区宽度：覆盖桌面端的 calc(100vw - 650px) */
-      .stage-wrap,
-      .info-box {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-
       .info-grid,
       .stage-grid,
       .stage-grid.list-mode .video-card {
