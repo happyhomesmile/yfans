@@ -1,4 +1,4 @@
-    *{ margin:0; padding:0; box-sizing:border-box; }
+﻿    *{ margin:0; padding:0; box-sizing:border-box; }
     html{ 
       width:100%; 
       height:100%; 
@@ -145,14 +145,18 @@
       left:0;
       right:0;
       bottom:0;
-      background-image:var(--bg-image, url("https://gitee.com/a1814747459/img-bed/raw/master/20260820173717440.webp"));
+      background-image:var(--bg-image, url("https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/others/100dc24c-1dab-4ede-b1ef-6d8b6180968b_1789008230768_284b04926a5916a9ecf7519941cacd2d.webp"));
       background-size:cover;
       background-position:center 30%;
-      opacity:var(--bg-opacity, .5);
+      opacity:0;
       filter:blur(var(--blur-amount, 0));
       z-index:-1;
       pointer-events:none;
-      transition:opacity .3s ease, filter .3s ease;
+      transition:opacity .8s ease, filter .3s ease;
+    }
+    /* 壁纸加载完成后渐现 */
+    body.bg-loaded .content-area:before{
+      opacity:var(--bg-opacity, .5);
     }
 
     .page-box{ 
@@ -468,6 +472,194 @@
       gap:6px; 
       z-index:999;
     }
+
+    .sidebar-player{
+      position:relative;
+      width:100%;
+      box-sizing:border-box;
+      background:rgba(255, 255, 255, var(--card-opacity, 1));
+      border-radius:5px;
+      padding:14px 16px;
+      margin-top:0;
+      border:1px solid hsla(var(--theme-hue), 80%, 55%, .15);
+      z-index:999;
+      transition:background .2s, box-shadow .2s, color .2s;
+    }
+    .player-info{
+      margin-bottom:10px;
+    }
+    .player-name{
+      font-size:14px;
+      font-weight:600;
+      color:#1a1a1a;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .player-status{
+      font-size:11px;
+      color:#9aa7b2;
+      margin-top:2px;
+    }
+    .player-volume{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:10px;
+    }
+    .volume-label{
+      font-size:11px;
+      color:#8aa0b0;
+      flex-shrink:0;
+    }
+    .volume-slider{
+      width:110px;
+      flex-shrink:0;
+      -webkit-appearance:none;
+      appearance:none;
+      height:4px;
+      border-radius:99px;
+      background:#e2e9f0;
+      outline:none;
+      cursor:pointer;
+    }
+    .volume-slider::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:2px;
+      height:14px;
+      border-radius:1px;
+      background:#1a1a1a;
+      border:none;
+      cursor:pointer;
+    }
+    .volume-slider::-moz-range-thumb{
+      width:2px;
+      height:14px;
+      border-radius:1px;
+      background:#1a1a1a;
+      border:none;
+      cursor:pointer;
+    }
+    .player-progress-row{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .player-time{
+      font-size:10px;
+      color:#8aa0b0;
+      width:32px;
+      text-align:center;
+      flex-shrink:0;
+    }
+    .player-progress{
+      flex:1;
+      height:5px;
+      background:#e2e9f0;
+      border-radius:99px;
+      cursor:pointer;
+      position:relative;
+    }
+    .player-progress-bar{
+      height:100%;
+      width:0%;
+      background:hsla(var(--theme-hue), 80%, 55%, .9);
+      border-radius:99px;
+      transition:width .1s linear;
+    }
+    .player-btns{
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+    }
+    .player-btn{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      border:none;
+      background:transparent;
+      color:#5a6a78;
+      font-size:15px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background .15s, color .15s;
+    }
+    .player-btn:hover:not(:disabled){
+      background:rgba(255,255,255,.8);
+      color:#1a1a1a;
+    }
+    .player-btn:disabled{
+      opacity:.35;
+      cursor:not-allowed;
+    }
+    .player-btn.player-play{
+      width:34px;
+      height:34px;
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      color:#1a1a1a;
+      font-size:18px;
+    }
+    .player-btn.player-play:hover{
+      background:rgba(255,255,255,.8);
+      color:#1a1a1a;
+    }
+    .player-btn .player-btn-icon{
+      width:16px;
+      height:16px;
+      object-fit:contain;
+      display:block;
+      pointer-events:none;
+    }
+    .player-btn.player-play .player-btn-icon{
+      width:22px;
+      height:22px;
+    }
+    .player-btn.active{
+      color:hsla(var(--theme-hue), 80%, 45%, 1);
+      background:rgba(255,255,255,.7);
+    }
+    .sidebar-player{ position:relative; }
+    .sidebar-player.fixed{
+      position:fixed !important;
+      right:2px !important;
+      width:300px;
+      z-index:997 !important;
+    }
+    .music-playlist-dropdown{
+      position:absolute;
+      top:calc(100% + 6px);
+      left:0;
+      right:0;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(0,0,0,.15);
+      padding:6px;
+      display:none;
+      max-height:240px;
+      overflow-y:auto;
+      z-index:999;
+    }
+    .music-playlist-dropdown.open{ display:block; }
+    .music-playlist-item{
+      padding:10px 12px;
+      font-size:14px;
+      color:#444;
+      border-radius:8px;
+      cursor:pointer;
+      transition:background .15s;
+    }
+    .music-playlist-item:hover{ background:#f5f7fa; }
+    .music-playlist-item.active{
+      color:var(--theme-color);
+      font-weight:600;
+      background:rgba(255,255,255,.7);
+    }
+
 
     .stage-nav-wrapper{
       display:inline-flex;
@@ -1429,6 +1621,12 @@
       .mt-row.left-date .mt-card,.mt-row.right-date .mt-card{
         padding:0;
         text-align:left;
+      }
+      .mt-tags{
+        justify-content:flex-start;
+      }
+      .mt-row.right-date .mt-tags{
+        justify-content:flex-start;
       }
     }
 
@@ -6166,3 +6364,133 @@ body.dark-mode .archive-chart-note{
 
 
 
+
+
+
+/* ===== 足迹 · 中国地图 ===== */
+.travel-wrap{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 10px 12px 30px;
+}
+.travel-legend{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+  padding:10px 6px 14px;
+  font-size:12px;
+  color: hsla(var(--theme-hue), 60%, 35%, 0.75);
+}
+.travel-legend-item{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+.travel-legend-item .dot{
+  width:12px;
+  height:12px;
+  border-radius:3px;
+  display:inline-block;
+}
+.travel-legend-item .dot.home{ background:#f5e3b3; border:1px solid #e2c276; }
+.travel-legend-item .dot.visited{ background:#d8e7f8; border:1px solid #a9c8ee; }
+.travel-legend-item .dot.unvisited{ background:#f5f5f5; border:1px solid #d8d8d8; }
+.travel-hint{ margin-left:auto; opacity:0.6; font-size:11px; }
+.travel-map{
+  width:100%;
+  height:760px;
+  background: #ffffff;
+  border-radius:20px;
+  border:1px solid #ece4d6;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  overflow:hidden;
+}
+/* 足迹弹窗 */
+.travel-popup{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+.travel-popup.show{ display:flex; }
+.travel-popup-card{
+  background:#fff;
+  border-radius:28px;
+  max-width:420px;
+  width:90%;
+  max-height:80vh;
+  overflow-y:auto;
+  padding:26px 24px 20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  position:relative;
+  animation:popIn .25s ease;
+}
+.travel-popup-close{
+  position:absolute;
+  top:10px; right:14px;
+  font-size:18px;
+  color:hsla(var(--theme-hue), 80%, 40%, 0.5);
+  background:none;
+  border:none;
+  cursor:pointer;
+  transition:color .2s;
+}
+.travel-popup-close:hover{ color:hsla(var(--theme-hue), 80%, 40%, 0.9); }
+.travel-popup-head{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-bottom:12px;
+  padding-bottom:10px;
+  border-bottom:1px solid hsla(var(--theme-hue), 80%, 55%, 0.25);
+}
+.travel-popup-title{
+  font-size:19px;
+  font-weight:700;
+  color:#222;
+}
+.travel-popup-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+.travel-popup-tag{
+  background:rgba(255,255,255,calc(var(--card-opacity,0.72)*0.95));
+  padding:2px 10px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:500;
+  color:#000000;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 0 0 1px hsla(var(--theme-hue),80%,55%,0.1);
+}
+.travel-popup-intro{
+  font-size:14px;
+  line-height:1.8;
+  color:#444;
+}
+.travel-popup-intro p{ margin:0 0 6px; }
+.travel-popup-sub{
+  font-size:13px;
+  font-weight:700;
+  color:var(--theme-color);
+  margin:10px 0 4px;
+  letter-spacing:.5px;
+}
+.travel-popup-footer{
+  margin-top:14px;
+  padding-top:10px;
+  border-top:1px dashed hsla(var(--theme-hue), 60%, 80%, 0.6);
+  font-size:11px;
+  text-align:center;
+  color:hsla(var(--theme-hue), 60%, 50%, 0.6);
+  letter-spacing:1px;
+}
+/* 移动端适配 */
+@media (max-width:768px){
+  .travel-map{ height:420px; }
+  .travel-hint{ margin-left:0; width:100%; }
+}

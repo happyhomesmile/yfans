@@ -342,7 +342,7 @@ if (typeof getDayUpdates !== 'function') {
         document.getElementById('popupTags').innerHTML = data.tags.map(t =>
           `<span style="background:rgba(255,255,255,calc(var(--card-opacity,0.72)*0.95));padding:2px 10px;border-radius:10px;font-size:12px;font-weight:500;color:#000000;border:1px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px hsla(var(--theme-hue),80%,55%,0.1);">${t}</span>`
         ).join('');
-        document.getElementById('popupImage').innerHTML = `<img decoding="async" src="${data.image}" style="width:100%;height:auto;display:block;border-radius:12px;cursor:pointer;" onclick="previewImage('${data.image}')" />`;
+        document.getElementById('popupImage').innerHTML = data.image ? `<img decoding="async" referrerpolicy="no-referrer" src="${data.image}" style="width:100%;height:auto;display:block;border-radius:12px;cursor:pointer;" onclick="previewImage('${data.image}')" />` : '';
         document.getElementById('popupMessages').innerHTML = data.messages.map(m =>
           `<div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
             <div style="background:#ffffff;padding:5px 12px;border-radius:4px 12px 12px 12px;font-size:14px;font-weight:400;color:#1a1a1a;max-width:fit-content;border:1px solid #e5e5e5;box-shadow:0 1px 2px rgba(0,0,0,0.04);">${m.text}</div>
@@ -510,7 +510,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     document.getElementById('popupTags').innerHTML = data.tags.map(t =>
       `<span style="background:rgba(255,255,255,calc(var(--card-opacity,0.72)*0.95));padding:2px 10px;border-radius:10px;font-size:12px;font-weight:500;color:#000000;border:1px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px hsla(var(--theme-hue),80%,55%,0.1);">${t}</span>`
     ).join('');
-    document.getElementById('popupImage').innerHTML = `<img decoding="async" src="${data.image}" style="width:100%;height:auto;display:block;border-radius:12px;cursor:pointer;" onclick="previewImage('${data.image}')" />`;
+    document.getElementById('popupImage').innerHTML = data.image ? `<img decoding="async" referrerpolicy="no-referrer" src="${data.image}" style="width:100%;height:auto;display:block;border-radius:12px;cursor:pointer;" onclick="previewImage('${data.image}')" />` : '';
     document.getElementById('popupMessages').innerHTML = data.messages.map(m =>
       `<div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
         <div style="background:#ffffff;padding:5px 12px;border-radius:4px 12px 12px 12px;font-size:14px;font-weight:400;color:#1a1a1a;max-width:fit-content;border:1px solid #e5e5e5;box-shadow:0 1px 2px rgba(0,0,0,0.04);">${m.text}</div>
@@ -557,7 +557,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         const h1 = document.createElement('h1');
         if (pageId === 'home') {
           h1.innerHTML = `
-          <img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp"
+          <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp"
             alt="图标"
             style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" />
                ${config.title}
@@ -614,16 +614,16 @@ randomDrinkBtn?.addEventListener('click', function() {
   var PAGE_ROUTES = {
     'home': '/',
     'stage': '/stage',
-    'bobo': '/bobo',
-    'gongyan': '/gongyan',
-    'fancam': '/fancam',
-    'travel': '/travel',
+    'bobo': '/live',
+    'gongyan': '/perform',
+    'fancam': '/photo',
+    'travel': '/selfie',
     'words': '/words',
     'calendar': '/calendar',
     'archive': '/archive',
-    'music': '/music',
+    'music': '/footprint',
     'fan-rec': '/fan-rec',
-    'card-collection': '/card-collection',
+    'card-collection': '/cards',
     'wait': '/about'
   };
   var PATH_TO_PAGE = {};
@@ -774,7 +774,7 @@ randomDrinkBtn?.addEventListener('click', function() {
           }
           const h1 = document.createElement('h1');
           if (pageId === 'home') {
-              h1.innerHTML = `<img decoding="async" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp" alt="图标" style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" /> ${config.title}`;
+              h1.innerHTML = `<img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/592663db-cf03-40c6-b164-5f3a907bbb3f_1789006822967_fuzhushuxian.webp" alt="图标" style="width:28px; height:45px; display:inline-block; vertical-align:middle; margin-right:-12px; margin-left:-25px; transform:translateY(-2px); filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg)); opacity:0.5;" /> ${config.title}`;
           } else {
               h1.textContent = config.title;
           }
@@ -2427,8 +2427,8 @@ randomDrinkBtn?.addEventListener('click', function() {
     // ===== 从 Hugging Face 动态加载口袋图集 =====
     const HF_DATASET = '156816SAFE/image-bed';
     const HF_BASE_PATH = 'pocketphoto';
-    const HF_API_BASE = 'https://huggingface.co/api/datasets/' + HF_DATASET + '/tree/main/' + HF_BASE_PATH;
-    const HF_RESOLVE_BASE = 'https://huggingface.co/datasets/' + HF_DATASET + '/resolve/main/' + HF_BASE_PATH;
+    const HF_API_BASE = 'https://hf-mirror.com/api/datasets/' + HF_DATASET + '/tree/main/' + HF_BASE_PATH;
+    const HF_RESOLVE_BASE = 'https://hf-mirror.com/datasets/' + HF_DATASET + '/resolve/main/' + HF_BASE_PATH;
 
     function extractDateFromFilename(filename) {
       var m = filename.match(/_(\d{4}-\d{2}-\d{2})_/);
@@ -2460,12 +2460,12 @@ randomDrinkBtn?.addEventListener('click', function() {
       if (!grid) return;
       grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">加载中...</div>';
       try {
-        var resp = await fetch(HF_API_BASE);
-        if (!resp.ok) throw new Error('API请求失败');
-        var folders = await resp.json();
-        var monthFolders = folders
-          .filter(function(f) { return f.type === 'directory' && /^\d{4}-\d{2}$/.test(f.path.split('/').pop()); })
-          .map(function(f) { return f.path.split('/').pop(); })
+        // 改用静态数据（data/monthImages.js），hf-mirror 的 API 有 CORS 限制，浏览器无法直接 fetch
+        var staticData = (typeof monthImages !== 'undefined' && monthImages && Object.keys(monthImages).length > 0)
+          ? monthImages
+          : (window.monthImages || {});
+        var monthFolders = Object.keys(staticData)
+          .filter(function(m) { return /^\d{4}-\d{2}$/.test(m) && staticData[m] && staticData[m].length > 0; })
           .sort(function(a, b) { return b.localeCompare(a); });
         
         if (monthFolders.length === 0) {
@@ -2473,11 +2473,8 @@ randomDrinkBtn?.addEventListener('click', function() {
           return;
         }
 
-        var results = await Promise.all(monthFolders.map(function(m) { return fetchImagesInFolder(m); }));
         var newMonthImages = {};
-        monthFolders.forEach(function(m, i) {
-          if (results[i].length > 0) newMonthImages[m] = results[i];
-        });
+        monthFolders.forEach(function(m) { newMonthImages[m] = staticData[m]; });
         
         if (typeof monthImages !== 'undefined') {
           Object.keys(newMonthImages).forEach(function(k) { monthImages[k] = newMonthImages[k]; });
@@ -2490,7 +2487,9 @@ randomDrinkBtn?.addEventListener('click', function() {
           .map(function(m) {
             var monthNum = parseInt(m.substring(5, 7));
             var yearMonth = m.replace('-', '.');
-            var coverUrl = newMonthImages[m][0].url;
+            // 封面优先用缩略图（monthCovers），没有则用该月第一张原图
+            var covers = (typeof monthCovers !== 'undefined' && monthCovers) ? monthCovers : (window.monthCovers || {});
+            var coverUrl = covers[m] || newMonthImages[m][0].url;
             return '              <div class="miracle-card" data-month="' + m + '">' +
               '                <div class="cover-image">' +
               '                  <img decoding="async" src="' + coverUrl + '" alt="' + yearMonth + '" loading="lazy" />' +
@@ -2501,7 +2500,7 @@ randomDrinkBtn?.addEventListener('click', function() {
           })
           .join('');
 
-        console.log('口袋图集加载完成：' + Object.keys(newMonthImages).length + '个月，共' + results.reduce(function(s, r) { return s + r.length; }, 0) + '张图片');
+        console.log('口袋图集加载完成：' + Object.keys(newMonthImages).length + '个月，共' + monthFolders.reduce(function(s, m) { return s + (newMonthImages[m] || []).length; }, 0) + '张图片');
       } catch (e) {
         console.error('加载口袋图集失败:', e);
         grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;">加载失败，请刷新重试</div>';
@@ -2530,11 +2529,30 @@ randomDrinkBtn?.addEventListener('click', function() {
       
       popupGrid.innerHTML = images.length ? images.map(item =>
         `<div style="width:calc(25% - 10px); aspect-ratio:1/1; border-radius:6px; overflow:hidden; position:relative; cursor:pointer;" onclick="window.previewImage && window.previewImage('${item.url}')">
-          <img decoding="async" src="${item.url}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          <img decoding="async" class="miracle-thumb" data-src="${item.url}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:cover;display:block;" />
           <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.6));color:#fff;font-size:10px;font-weight:600;padding:16px 8px 6px;text-align:center;">${item.date}</div>
         </div>`
       ).join('') : `<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;width:100%;">暂无图片</div>`;
       
+      // 懒加载：滚到可视区才真正加载图片，避免一次性请求几十张原图导致卡顿
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(en) {
+            if (en.isIntersecting) {
+              var img = en.target;
+              if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+              }
+              io.unobserve(img);
+            }
+          });
+        }, { rootMargin: '300px' });
+        popupGrid.querySelectorAll('img.miracle-thumb').forEach(function(img) { io.observe(img); });
+      } else {
+        popupGrid.querySelectorAll('img.miracle-thumb').forEach(function(img) { img.src = img.dataset.src; });
+      }
+
       popup.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -2694,8 +2712,8 @@ randomDrinkBtn?.addEventListener('click', function() {
   (function() {
     const darkToggle = document.getElementById('darkToggle');
     const darkIcon = document.getElementById('darkIcon');
-    const lightIcon = 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp';
-    const darkIconUrl = 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
+    const lightIcon = 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp';
+    const darkIconUrl = 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
 
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode === 'dark') {
@@ -3091,7 +3109,7 @@ function getBoboDateColors() {
 
     if (filteredUpdates.length === 0) {
       listEl.innerHTML = '<div class="cal-update-empty">暂无更新</div>';
-      headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
+      headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">0</span>`;
       return;
     }
 
@@ -3127,7 +3145,7 @@ function getBoboDateColors() {
 
     listEl.innerHTML = html;
     const count = filteredUpdates.length;
-    headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
+    headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
     
     // 口袋回放点击弹出播放器
     listEl.querySelectorAll('.pocket-player-item').forEach(el => {
@@ -4192,8 +4210,8 @@ ${data.content}
       
       if (icon) {
         icon.src = isDark 
-          ? 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp'
-          : 'https://huggingface.co/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
+          ? 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp'
+          : 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/4201ec23-44a4-4802-9a45-6134e40578ab_1789006835993_taiyang.webp';
       }
       
       if (label) {
@@ -4398,15 +4416,15 @@ ${data.content}
   function updateDrinkFixed() {
     const drinkCard = document.querySelector('.daily-drink-card');
     const onThisDayCard = document.querySelector('.on-this-day-card');
+    const recentUpdateCard = document.querySelector('.recent-update-card');
+    const musicPlayer = document.querySelector('.sidebar-player');
     if (!drinkCard) return;
-    
-    if (drinkCard.style.display === 'none') {
-      drinkCard.classList.remove('fixed');
-      drinkCard.style.top = '';
-      if (onThisDayCard) {
-        onThisDayCard.classList.remove('fixed');
-        onThisDayCard.style.top = '';
-      }
+
+    // 卡片被隐藏（如窄屏媒体查询）时不参与固定
+    if (drinkCard.style.display === 'none' || drinkCard.offsetHeight === 0) {
+      [drinkCard, onThisDayCard, recentUpdateCard, musicPlayer].forEach(function(el) {
+        if (el) { el.classList.remove('fixed'); el.style.top = ''; }
+      });
       return;
     }
 
@@ -4418,30 +4436,42 @@ ${data.content}
     const initialTop = parseFloat(drinkCard.dataset.initialTop);
     const scrollY = window.pageYOffset;
 
-    const recentUpdateCard = document.querySelector('.recent-update-card');
-    
     if (scrollY >= initialTop) {
-      drinkCard.classList.add('fixed');
-      if (onThisDayCard) {
-        onThisDayCard.classList.add('fixed');
-        onThisDayCard.style.top = (4 + drinkCard.offsetHeight + 6) + 'px';
-      }
-      if (recentUpdateCard && onThisDayCard) {
-        recentUpdateCard.classList.add('fixed');
-        recentUpdateCard.style.top = (4 + drinkCard.offsetHeight + 6 + onThisDayCard.offsetHeight + 6) + 'px';
+      const drinkH = drinkCard.offsetHeight;
+      const onH = onThisDayCard ? onThisDayCard.offsetHeight : 0;
+      const recH = recentUpdateCard ? recentUpdateCard.offsetHeight : 0;
+
+      if (drinkH > 0) {
+        drinkCard.classList.add('fixed');
+        if (onThisDayCard && onH > 0) {
+          onThisDayCard.classList.add('fixed');
+          onThisDayCard.style.top = (4 + drinkH + 6) + 'px';
+        }
+        if (recentUpdateCard && recH > 0) {
+          recentUpdateCard.classList.add('fixed');
+          recentUpdateCard.style.top = (4 + drinkH + 6 + onH + 6) + 'px';
+        }
+        // 播放器：等它滚到堆叠目标位置附近再固定，原位固定不弹跳
+        if (musicPlayer && recH > 0) {
+          const fixedTop = 4 + drinkH + 6 + onH + 6 + recH + 6;
+          if (musicPlayer.getBoundingClientRect().top <= fixedTop + 8) {
+            // 固定前对齐宽度：和流内一致，避免固定瞬间“大框缩小”
+            const wrapper = document.querySelector('.sidebar-wrapper');
+            if (wrapper) musicPlayer.style.width = wrapper.offsetWidth + 'px';
+            musicPlayer.classList.add('fixed');
+            musicPlayer.style.top = fixedTop + 'px';
+          } else {
+            musicPlayer.classList.remove('fixed');
+            musicPlayer.style.width = '';
+            musicPlayer.style.top = '';
+          }
+        }
       }
     } else {
-      drinkCard.classList.remove('fixed');
-      drinkCard.style.top = '';
+      [drinkCard, onThisDayCard, recentUpdateCard, musicPlayer].forEach(function(el) {
+        if (el) { el.classList.remove('fixed'); el.style.top = ''; }
+      });
       delete drinkCard.dataset.initialTop;
-      if (onThisDayCard) {
-        onThisDayCard.classList.remove('fixed');
-        onThisDayCard.style.top = '';
-      }
-      if (recentUpdateCard) {
-        recentUpdateCard.classList.remove('fixed');
-        recentUpdateCard.style.top = '';
-      }
     }
   }
 
@@ -5699,24 +5729,166 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// ===== 随机背景：进入页面时从 bgImages 随机选一张 =====
-(function () {
-  if (typeof bgImages === 'undefined' || !bgImages.length) return;
-  var pool = bgImages.slice().sort(function () { return Math.random() - 0.5; });
-  var i = 0;
-  function trySet() {
-    if (i >= pool.length) return; // 全部失败则不换背景，用 CSS 默认图
-    var img = new Image();
-    img.onload = function () {
-      document.documentElement.style.setProperty('--bg-image', 'url("' + pool[i] + '")');
-    };
-    img.onerror = function () { i++; trySet(); };
-    img.src = pool[i];
+// ===== 音乐播放器（右侧侧边栏） =====
+(function() {
+  var audio = document.getElementById('playerAudio');
+  var toggle = document.getElementById('playerToggle');
+  var loopBtn = document.getElementById('playerLoop');
+  var playlistBtn = document.getElementById('playerPlaylist');
+  var playlistDropdown = document.getElementById('musicPlaylistDropdown');
+  var nameEl = document.querySelector('.player-name');
+  var volume = document.getElementById('playerVolume');
+  var bar = document.getElementById('playerProgressBar');
+  var curEl = document.getElementById('playerTimeCur');
+  var totalEl = document.getElementById('playerTimeTotal');
+  var statusEl = document.getElementById('playerStatus');
+  var wrap = document.getElementById('playerProgress');
+  var disc = document.getElementById('playerDisc');
+  if (!audio || !toggle) return;
+  var ICON_CF = 'https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/';
+  var ICON_PLAY = ICON_CF + '播放.webp';
+  var ICON_PAUSE = ICON_CF + '暂停.webp';
+  var ICON_LOOP_LIST = ICON_CF + '列表循环.webp';
+  var ICON_LOOP_SINGLE = ICON_CF + '播放栏-循环单曲.webp';
+  var ICON_SHUFFLE = ICON_CF + '24gl-shuffle.webp';
+  var ICON_LIST = ICON_CF + '歌曲列表.webp';
+  function iconImg(src, alt) {
+    return '<img class="player-btn-icon" decoding="async" src="' + src + '" alt="' + alt + '" />';
   }
-  trySet();
+  var SRC = 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/music/Dream_up.mp3?v=2';
+  // 播放模式：0=列表循环 1=单曲循环 2=随机
+  var PLAY_MODES = ['list', 'single', 'shuffle'];
+  var playModeIdx = 0;
+  var MODE_ICONS = { list: ICON_LOOP_LIST, single: ICON_LOOP_SINGLE, shuffle: ICON_SHUFFLE };
+  function applyPlayMode() {
+    var mode = PLAY_MODES[playModeIdx];
+    if (loopBtn) {
+      loopBtn.innerHTML = iconImg(MODE_ICONS[mode], '播放模式');
+      loopBtn.classList.toggle('active', mode !== 'list');
+    }
+    audio.loop = mode === 'single';
+  }
+  // 歌曲列表
+  var PLAYLIST = [];
+  function playlistBase() {
+    return (audio.getAttribute('src') || '').split('?')[0];
+  }
+  function renderPlaylist() {
+    if (!playlistDropdown) return;
+    playlistDropdown.innerHTML = '';
+    var cur = playlistBase();
+    PLAYLIST.forEach(function(song) {
+      var d = document.createElement('div');
+      d.className = 'music-playlist-item' + (song.url.split('?')[0] === cur ? ' active' : '');
+      d.textContent = song.name;
+      d.addEventListener('click', function() {
+        playSong(song);
+        if (playlistDropdown) playlistDropdown.classList.remove('open');
+      });
+      playlistDropdown.appendChild(d);
+    });
+  }
+  function playSong(song) {
+    audio.src = song.url;
+    audio.play().catch(function(){});
+    if (nameEl) nameEl.textContent = song.name;
+    setStatus('正在播放');
+    renderPlaylist();
+  }
+  function loadPlaylist() {
+    fetch('https://hf-mirror.com/api/datasets/156816SAFE/image-bed/tree/main/music')
+      .then(function(r) { return r.json(); })
+      .then(function(files) {
+        var arr = (files || []).filter(function(f) {
+          return /.(mp3|m4a|flac|ogg|aac)$/i.test(f.path) && (!f.size || f.size < 20 * 1024 * 1024);
+        }).map(function(f) {
+          return {
+            name: f.path.split('/').pop().replace(/\.\w+$/, '').replace(/_/g, ' '),
+            url: 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/' + f.path
+          };
+        });
+        PLAYLIST = arr.length ? arr : [{ name: 'Dream up', url: SRC }];
+        renderPlaylist();
+      })
+      .catch(function() {
+        PLAYLIST = [{ name: 'Dream up', url: SRC }];
+        renderPlaylist();
+      });
+  }
+  function fmt(sec) {
+    sec = Math.floor(sec || 0);
+    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+  }
+  function setStatus(txt) { if (statusEl) statusEl.textContent = txt; }
+  toggle.addEventListener('click', function() {
+    if (!audio.getAttribute('src')) audio.setAttribute('src', SRC);
+    if (audio.paused) { audio.play().catch(function(){}); } else { audio.pause(); }
+  });
+  audio.addEventListener('play', function() {
+    toggle.innerHTML = iconImg(ICON_PAUSE, '暂停');
+    setStatus('正在播放');
+    if (disc) disc.style.animation = 'discSpin 3s linear infinite';
+  });
+  audio.addEventListener('pause', function() {
+    toggle.innerHTML = iconImg(ICON_PLAY, '播放');
+    setStatus(audio.currentTime ? '已暂停' : '暂未播放');
+    if (disc) disc.style.animation = 'none';
+  });
+  audio.addEventListener('ended', function() {
+    toggle.innerHTML = iconImg(ICON_PLAY, '播放');
+    setStatus('已结束');
+    if (disc) disc.style.animation = 'none';
+  });
+  audio.addEventListener('waiting', function() {
+    if (!audio.paused) setStatus('加载中…');
+  });
+  audio.addEventListener('canplay', function() {
+    if (!audio.paused) setStatus('正在播放');
+  });
+  audio.addEventListener('loadedmetadata', function() { if (totalEl) totalEl.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', function() {
+    if (audio.duration && bar && curEl) {
+      bar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      curEl.textContent = fmt(audio.currentTime);
+    }
+  });
+  wrap.addEventListener('click', function(e) {
+    if (!audio.duration) return;
+    var r = wrap.getBoundingClientRect();
+    audio.currentTime = (e.clientX - r.left) / r.width * audio.duration;
+  });
+  if (volume) {
+    function paintVolume() {
+      var v = parseInt(volume.value, 10) || 0;
+      volume.style.background = 'linear-gradient(to right, #1a1a1a ' + v + '%, #e2e9f0 ' + v + '%)';
+    }
+    volume.addEventListener('input', function() {
+      audio.volume = volume.value / 100;
+      paintVolume();
+    });
+    audio.volume = (parseInt(volume.value, 10) || 80) / 100;
+    paintVolume();
+  }
+  if (loopBtn) {
+    loopBtn.addEventListener('click', function() {
+      playModeIdx = (playModeIdx + 1) % PLAY_MODES.length;
+      applyPlayMode();
+    });
+  }
+  applyPlayMode();
+  if (playlistBtn) {
+    playlistBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!PLAYLIST.length) loadPlaylist();
+      else renderPlaylist();
+      if (playlistDropdown) playlistDropdown.classList.toggle('open');
+    });
+  }
+  document.addEventListener('click', function(e) {
+    var p = playlistDropdown && playlistDropdown.parentElement;
+    if (playlistDropdown && playlistDropdown.classList.contains('open') && p && !p.contains(e.target)) {
+      playlistDropdown.classList.remove('open');
+    }
+  });
+  loadPlaylist();
 })();
-
-
-
-
-

@@ -3,13 +3,13 @@ const drinkData = {
     'drink_0724': {
       title: '2026.07.24 霸王茶姬·伯牙绝弦',
       tags: ['中杯', '花香款', '标准冰', '标准糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423290.webp',
+      image: '',
       messages: [{ text: '喝！', time: '2026-07-24 16:30:49' }]
     },
     'drink_0716': {
       title: '2026.07.16 林里柠檬茶·西瓜冰柠茶霸王杯',
       tags: ['正常冰', '3分糖', '去脆波波'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423296.webp',
+      image: '',
       messages: [
         { text: '喝一口醒醒神', time: '2026-07-16 23:29:13' },
         { text: '我三分糖居然还甜', time: '2026-07-16 23:31:09' }
@@ -18,7 +18,7 @@ const drinkData = {
     'drink_0706': {
       title: '2026.07.06 太犇牛手作茶铺·大颗芒果冰茶',
       tags: ['双倍芒果版','少冰','正常糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260810144524161.webp',
+      image: '',
       messages: [
         { text: '喝一杯恢复能量[奋斗]', time: '2026-07-06 17:01:46' },
         { text: '像桃子芒果罐头', time: '2026-07-06 17:02:15' }
@@ -27,13 +27,13 @@ const drinkData = {
     'drink_0705': {
       title: '2026.07.05 茶颜悦色·幽兰拿铁',
       tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727203423293.webp',
+      image: '',
       messages: [{ text: '哇咔咔', time: '2026-07-05 11:11:07' }]
     },
     'drink_0611': {
       title: '2026.06.11 CoCo都可·现煮绿豆木薯冰',
       tags: ['原味版', '冰沙', '3分糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727211330808.webp',
+      image: '',
       messages: [
         { text: '到了喝绿豆冰的季节啦！', time: '2026-06-11 14:14:36' },
         { text: '米味！', time: '2026-06-11 14:14:51' },
@@ -45,7 +45,7 @@ const drinkData = {
     'drink_0608': {
       title: '2026.06.08 屈臣氏·蒸馏饮用水',
       tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727211932900.webp',
+      image: '',
       messages: [
         { text: '俺最近要转变成屈臣氏梦女了', time: '2026-06-08 21:05:25' },
         { text: '虽然是简单的水', time: '2026-06-08 21:05:45' }
@@ -54,19 +54,19 @@ const drinkData = {
     'drink_0605': {
       title: '2026.06.05 霸王茶姬·轻因 伯牙绝弦',
       tags: ['大杯', '去冰', '微糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.webp',
+      image: '',
       messages: [{ text: '我喝', time: '2026-06-05 16:42:26' }]
     },
     'drink_0531': {
       title: '2026.05.31 霸王茶姬·伯牙绝弦',
       tags: ['大杯', '花香款', '标准糖', '标准冰'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212938704.webp',
+      image: '',
       messages: [{ text: '今天喝这个', time: '2026-05-31 14:52:21' }]
     },
     'drink_0530': {
       title: '2026.05.30 星巴克·玫瑰20抹茶拿铁',
       tags: ['中杯', '热'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727213100883.webp',
+      image: '',
       messages: [
         { text: '谢谢好心人的咖啡', time: '2026-05-30 16:08:24' },
         { text: '我提神了', time: '2026-05-30 16:08:27' }
@@ -75,25 +75,25 @@ const drinkData = {
     'drink_0528': {
       title: '2026.05.28 喜茶·多肉芒芒',
       tags: ['冰沙', '加倍芒果果肉', '纯粹真冰糖', '少少少甜', '加轻芝芝云顶'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727213857354.webp',
+      image: '',
       messages: [{ text: '芒果爱好者', time: '2026-05-28 16:28:34' }]
     },
     'drink_0520': {
       title: '2026.05.20 瑞幸·小黄油美式',
       tags: ['全冰去水', '大杯', '不另外加糖', '深烘豆001'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727222334081.webp',
+      image: '',
       messages: [{ text: '我又喝了', time: '2026-05-20 15:26:35' }]
     },
     'drink_0519': {
       title: '2026.05.19 瑞幸·小黄油美式',
       tags: ['全冰去水', '超大24', '不另外加糖', '深烘豆010'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727222640951.webp',
+      image: '',
       messages: [{ text: '米西米西', time: '2026-05-19 17:13:53' }]
     },
     'drink_0513': {
       title: '2026.05.13 Tulipkoko泰茶公司·山竹荔枝冰茶',
       tags: ['少糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727223040936.webp',
+      image: '',
       messages: [
         { text: '味道还阔以', time: '2026-05-13 18:24:06' },
         { text: '挺清爽的', time: '2026-05-13 18:24:27' },
@@ -103,25 +103,25 @@ const drinkData = {
     'drink_0503': {
       title: '2026.05.03 霸王茶姬·轻因 伯牙绝弦',
       tags: [],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727212621910.webp',
+      image: '',
       messages: [{ text: '我喝', time: '2026-05-03 16:42:26' }]
     },
     'drink_0425': {
       title: '2026.04.25 霸王茶姬·伯牙绝弦',
       tags: ['中杯', '茶香款', '标准冰', '标准糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727230856180.webp',
+      image: '',
       messages: [{ text: '今天喝这个🤤', time: '2026-04-25 11:50:54' }]
     },
     'drink_0419': {
       title: '2026.04.19 星巴克·冰摇红莓黑加仑',
       tags: ['大杯', '冰'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260727231607195.webp',
+      image: '',
       messages: [{ text: '今天喝这个', time: '2026-04-19 20:35:38' }]
     },
     'drink_0416': {
       title: '2026.04.16 星巴克·冰摇柠檬茶',
       tags: ['少甜'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141311923.webp',
+      image: '',
       messages: [
         { text: '今天喝这个', time: '2026-04-16 12:42:38' },
         { text: '点了个少糖的柠檬茶', time: '2026-04-16 12:48:58' }]
@@ -129,7 +129,7 @@ const drinkData = {
     'drink_0415': {
       title: '2026.04.15 七分甜·青芒山竹冰',
       tags: ['中杯', '少糖', '正常冰', '天然蔗糖'],
-      image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817141746501.webp',
+      image: '',
       messages: [
         { text: '今天喝这个', time: '2026-04-15 18:37:39' },
         { text: '也是酸酸的', time: '2026-04-15 18:37:43' },
@@ -138,7 +138,7 @@ const drinkData = {
   'drink_0411': {
     title: '2026.04.11 霸王茶姬·醒时春山',
     tags: ['大杯', '少冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142341852.webp',
+    image: '',
     messages: [
       { text: '今天喝这个🤤', time: '2026-04-11 18:08:54' },
       { text: '还可以', time: '2026-04-11 18:12:15' },
@@ -147,7 +147,7 @@ const drinkData = {
   'drink_0404': {
     title: '2026.04.04 七分甜·青芒黄芒',
     tags: ['中杯', '微糖', '正常冰', '天然蔗糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817142656268.webp',
+    image: '',
     messages: [
       { text: '今天喝这个', time: '2026-04-04 14:53:54' },
       { text: '天老姨，也太酸了', time: '2026-04-04 14:54:08' }]
@@ -155,7 +155,7 @@ const drinkData = {
   'drink_0329': {
     title: '2026.03.29 混果汁·轻体小绿瓶',
     tags: [],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143328907.webp',
+    image: '',
     messages: [
       { text: '喝这个', time: '2026-03-29 21:43:09' },
       { text: '酸酸的', time: '2026-03-29 21:43:14' }
@@ -164,7 +164,7 @@ const drinkData = {
   'drink_0328': {
     title: '2026.03.28 霸王茶姬·归云南·云焦卡美罗',
     tags: ['升运杯', '少冰', '不额外加糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143534571.webp',
+    image: '',
     messages: [
       { text: '今天喝这个', time: '2026-03-28 13:20:59' }
     ]
@@ -172,7 +172,7 @@ const drinkData = {
   'drink_0327': {
     title: '2026.03.27 瑞幸·拿铁',
     tags: ['大杯', '不额外加糖', '纯牛奶', '意式拼配'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817143807132.webp',
+    image: '',
     messages: [
       { text: '今天喝这个', time: '2026-03-27 13:08:04' },
       { text: '感觉我已经逐渐接受', time: '2026-03-27 13:08:07' },
@@ -182,7 +182,7 @@ const drinkData = {
   'drink_0323': {
     title: '2026.03.23 霸王茶姬·轻因·云栖梦',
     tags: ['中杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144442726.webp',
+    image: '',
     messages: [
       { text: '这个粉嫩嫩的', time: '2026-03-23 19:32:25' },
       { text: '微糖木有味道[奋斗]', time: '2026-03-23 19:32:46' },
@@ -192,7 +192,7 @@ const drinkData = {
   'drink_0305': {
     title: '2026.03.05 霸王茶姬·归云南·云漫普洱',
     tags: ['升运杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817144944081.webp',
+    image: '',
     messages: [
       { text: '喝这个', time: '2026-03-05 14:25:00' }
     ]
@@ -200,7 +200,7 @@ const drinkData = {
   'drink_0126': {
     title: '2026.01.26 霸王茶姬·归云南·云漫普洱',
     tags: ['主题杯', '标准冰', '微糖'],
-    image: 'https://gitee.com/a1814747459/img-bed/raw/master/20260817152551362.webp',
+    image: '',
     messages: [
       { text: '感觉这个', time: '2026-01-26 18:22:38' },
       { text: '淡淡的', time: '2026-01-26 18:22:43' },
