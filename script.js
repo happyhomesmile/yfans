@@ -1,4 +1,3 @@
-﻿
 // ===== 农历节日数据 (2020-2030) - 硬编码公历日期 =====
 const lunarFestivalData = {
   // 春节
@@ -6,47 +5,47 @@ const lunarFestivalData = {
     2020: '01-25', 2021: '02-12', 2022: '02-01', 2023: '01-22', 2024: '02-10',
     2025: '01-29', 2026: '02-17', 2027: '02-06', 2028: '01-26', 2029: '02-13', 2030: '02-03'
   }},
-  // 元宵节
+  // 春节
   'lantern': { name: '元宵节', dates: {
     2020: '02-08', 2021: '02-26', 2022: '02-15', 2023: '02-05', 2024: '02-24',
     2025: '02-12', 2026: '03-03', 2027: '02-20', 2028: '02-09', 2029: '02-27', 2030: '02-17'
   }},
-  // 端午节
+  // 春节
   'dragon': { name: '端午节', dates: {
     2020: '06-25', 2021: '06-14', 2022: '06-03', 2023: '06-22', 2024: '06-10',
     2025: '05-31', 2026: '06-19', 2027: '06-09', 2028: '05-28', 2029: '06-16', 2030: '06-05'
   }},
-  // 七夕
+  // 春节
   'qixi': { name: '七夕', dates: {
     2020: '08-25', 2021: '08-14', 2022: '08-04', 2023: '08-22', 2024: '08-10',
     2025: '08-29', 2026: '08-19', 2027: '08-08', 2028: '07-26', 2029: '08-16', 2030: '08-04'
   }},
-  // 中元节
+  // 春节
   'zhongyuan': { name: '中元节', dates: {
     2020: '09-02', 2021: '08-22', 2022: '08-12', 2023: '08-30', 2024: '08-18',
     2025: '09-06', 2026: '08-27', 2027: '08-15', 2028: '08-04', 2029: '08-23', 2030: '08-12'
   }},
-  // 中秋节
+  // 春节
   'midautumn': { name: '中秋节', dates: {
     2020: '10-01', 2021: '09-21', 2022: '09-10', 2023: '09-29', 2024: '09-17',
     2025: '10-06', 2026: '09-25', 2027: '09-15', 2028: '10-03', 2029: '09-22', 2030: '09-12'
   }},
-  // 重阳节
+  // 春节
   'chongyang': { name: '重阳节', dates: {
     2020: '10-25', 2021: '10-14', 2022: '10-04', 2023: '10-23', 2024: '10-11',
     2025: '10-29', 2026: '10-18', 2027: '10-08', 2028: '09-21', 2029: '10-16', 2030: '10-05'
   }},
-  // 腊八节
+  // 春节
   'laba': { name: '腊八节', dates: {
     2020: '01-02', 2021: '01-20', 2022: '01-10', 2023: '12-30', 2024: '01-18',
     2025: '01-07', 2026: '01-26', 2027: '01-15', 2028: '01-04', 2029: '01-22', 2030: '01-10'
   }},
-  // 小年
+  // 春节
   'xiaonian': { name: '小年', dates: {
     2020: '01-17', 2021: '02-04', 2022: '01-25', 2023: '01-14', 2024: '02-02',
     2025: '01-22', 2026: '02-10', 2027: '01-30', 2028: '01-19', 2029: '02-06', 2030: '01-26'
   }},
-  // 除夕
+  // 春节
   'chuxi': { name: '除夕', dates: {
     2020: '01-24', 2021: '02-11', 2022: '01-31', 2023: '01-21', 2024: '02-09',
     2025: '01-28', 2026: '02-16', 2027: '02-05', 2028: '01-25', 2029: '02-12', 2030: '02-02'
@@ -61,12 +60,12 @@ const solarFestivals = {
   '10-31': '万圣夜', '12-24': '平安夜', '12-25': '圣诞节',
 };
 
-// 获取节日
+// 公历节日
 function getFestival(year, month, day) {
   const solarKey = String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
   if (solarFestivals[solarKey]) return solarFestivals[solarKey];
   
-  // 查农历节日
+  // 春节
   for (const key in lunarFestivalData) {
     const festival = lunarFestivalData[key];
     if (festival.dates[year] === solarKey) {
@@ -83,7 +82,6 @@ function getShortFestival(year, month, day) {
   if (!name) return null;
   // 去掉结尾的"节"或"夜"字，变成两个字
   if (name.endsWith('节')) return name.substring(0, name.length - 1);
-  if (name.endsWith('夜')) return name.substring(0, name.length - 1);
   return name;
 }
 
@@ -132,7 +130,7 @@ if (document.readyState === 'loading') {
   renderMileageTimeline();
 }
 
-// ===== 大日历状态 =====
+// ===== 里程时间线（历年公式照下方） =====
 let bigCalYear = 2026;
 let bigCalMonth = 7; // 0-indexed, 7=8月
 let bigCalSelectedDate = null;
@@ -143,6 +141,16 @@ function renderBigCalendar() {
   if (!grid || !title) return;
   
   title.textContent = bigCalYear + '年' + (bigCalMonth + 1) + '月';
+
+  // 每个 type 一个浅色（浅色背景 + 深色文字）
+  const TYPE_PALETTE = {
+    performance: { bg: '#d9e9f8', fg: '#2c5f8a' },  // 公演：浅蓝（首演也归公演）
+    tour:        { bg: '#d3eef0', fg: '#2a6f74' },  // 巡演：浅青
+    concert:     { bg: '#ecd9f5', fg: '#7a3e9e' },  // 演唱会：浅紫红
+    special:     { bg: '#f8e6cd', fg: '#9a5d1f' },  // 特别公演：浅橙
+    handshake:   { bg: '#d8f0dc', fg: '#2f7d43' },  // 握手会：浅绿
+    external:    { bg: '#e2d9f5', fg: '#5b4a9e' }   // 外务：浅紫
+  };
   
   const firstDay = new Date(bigCalYear, bigCalMonth, 1).getDay();
   const daysInMonth = new Date(bigCalYear, bigCalMonth + 1, 0).getDate();
@@ -152,7 +160,7 @@ function renderBigCalendar() {
   
   let html = '';
   
-  // 上个月
+  // 春节
   for (let i = firstDay - 1; i >= 0; i--) {
     const d = prevMonthDays - i;
     let prevY = bigCalYear, prevM = bigCalMonth;
@@ -164,41 +172,45 @@ function renderBigCalendar() {
     </div>`;
   }
   
-  // 当月
+  // 春节
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = bigCalYear + '-' + String(bigCalMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
     const isToday = dateStr === todayStr ? 'today' : '';
     const isSelected = bigCalSelectedDate === dateStr ? 'selected' : '';
     const festival = getShortFestival(bigCalYear, bigCalMonth + 1, d);
+    // 生日提醒（每年7月23日）
+    const isBirthday = (bigCalMonth + 1 === 7 && d === 23);
     // 获取当日公演行程
     const scheduleDateKey = `${bigCalYear}.${String(bigCalMonth+1).padStart(2,'0')}.${String(d).padStart(2,'0')}`;
     const daySchedules = performanceSchedule.filter(s => s.date === scheduleDateKey);
     const isMobile = window.innerWidth <= 768;
     
-    // 获取当日更新事件
+    // 获取当日公演行程
     let eventHtml = '';
     if (daySchedules.length > 0) {
       // 多场公演显示多个标签
       eventHtml = '<div class="big-cal-schedule-wrap">';
       daySchedules.forEach((sch, idx) => {
         if (idx < 2) { // 最多显示2个标签
+          // 握手会 / 外务：固定短标签 + 浅色（每个 type 一个浅色）
+          if (sch.type === 'handshake') {
+            eventHtml += `<div class="big-cal-event big-cal-schedule" style="background:${TYPE_PALETTE.handshake.bg};color:${TYPE_PALETTE.handshake.fg};">握手会</div>`;
+            return;
+          }
+          if (sch.type === 'external') {
+            eventHtml += `<div class="big-cal-event big-cal-schedule" style="background:${TYPE_PALETTE.external.bg};color:${TYPE_PALETTE.external.fg};">外务</div>`;
+            return;
+          }
           let title = sch.title || '公演';
           
           if (isMobile) {
-            // 移动端：判断是否是金曲大赏演唱会
+            // 移动端：短标签 + 按 type 取浅色
             const isJinQu = sch.title.includes('金曲') || sch.title.includes('演唱会');
-            let displayTitle, bgColor;
-            if (isJinQu) {
-              displayTitle = '金曲';
-              bgColor = '#9b59b6'; // 紫色，区别于蓝色和橙色
-            } else {
-              displayTitle = '公演';
-              const isNII = sch.title.includes('NII') || sch.title.includes('Team NII') || sch.title.includes('TEAM NII');
-              bgColor = isNII ? '#4a90d9' : '#e8a84a';
-            }
-            eventHtml += `<div class="big-cal-event big-cal-schedule" style="background:${bgColor};color:#fff;">${displayTitle}</div>`;
+            const pal = TYPE_PALETTE[sch.type] || TYPE_PALETTE.performance;
+            const displayTitle = isJinQu ? '金曲' : '公演';
+            eventHtml += `<div class="big-cal-event big-cal-schedule" style="background:${pal.bg};color:${pal.fg};">${displayTitle}</div>`;
           } else {
-            // 电脑端：显示团队名和公演名，加上颜色判断
+            // 移动端：判断是否是金曲大赏演唱会
             const teamMatch = title.match(/(TEAM\s+\w+|SNH48)/i);
             const showMatch = title.match(/《([^》]+)》/);
             if (teamMatch && showMatch) {
@@ -208,16 +220,9 @@ function renderBigCalendar() {
             } else {
               if (title.length > 10) title = title.substring(0, 10) + '…';
             }
-            // 颜色判断：金曲大赏演唱会紫色，NII队蓝色，其他队橙色
-            const isJinQu = sch.title.includes('金曲') || sch.title.includes('演唱会');
-            const isNII = sch.title.includes('NII') || sch.title.includes('Team NII') || sch.title.includes('TEAM NII');
-            let bgStyle = '';
-            if (isJinQu) {
-              bgStyle = ' style="background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;"';
-            } else if (!isNII) {
-              bgStyle = ' style="background:linear-gradient(135deg,#e8a84a,#d4923a);color:#fff;"';
-            }
-            eventHtml += `<div class="big-cal-event big-cal-schedule"${bgStyle}>${title}</div>`;
+            // 每个 type 一个浅色
+            const pal = TYPE_PALETTE[sch.type] || TYPE_PALETTE.performance;
+            eventHtml += `<div class="big-cal-event big-cal-schedule" style="background:${pal.bg};color:${pal.fg};">${title}</div>`;
           }
         }
       });
@@ -236,14 +241,15 @@ function renderBigCalendar() {
       }
     }
     
-    html += `<div class="big-cal-cell ${isToday} ${isSelected} ${daySchedules.length > 0 ? 'has-schedule' : ''}" data-date="${dateStr}">
+    html += `<div class="big-cal-cell ${isToday} ${isSelected} ${isBirthday ? 'birthday' : ''} ${daySchedules.length > 0 ? 'has-schedule' : ''}" data-date="${dateStr}">
       <div class="big-cal-date-num">${d}</div>
       ${festival ? `<div class="big-cal-festival">${festival}</div>` : ''}
+      ${isBirthday ? '<div class="big-cal-event big-cal-birthday">生日</div>' : ''}
       ${eventHtml}
     </div>`;
   }
   
-  // 下个月
+  // 春节
   const totalCells = firstDay + daysInMonth;
   const remaining = (7 - totalCells % 7) % 7;
   for (let d = 1; d <= remaining; d++) {
@@ -258,7 +264,7 @@ function renderBigCalendar() {
   
   grid.innerHTML = html;
   
-  // 点击日期
+  // 春节
   grid.querySelectorAll('.big-cal-cell').forEach(cell => {
     cell.addEventListener('click', function() {
       bigCalSelectedDate = this.dataset.date;
@@ -280,21 +286,29 @@ function renderTodaySchedule(dateStr) {
   const weekDays = ['日','一','二','三','四','五','六'];
   dateEl.textContent = `${y}年${m}月${d}日 周${weekDays[today.getDay()]}`;
   
-  // 获取当日更新
+  // 春节
   let schedules = [];
   if (typeof getDayUpdates === 'function') {
     schedules = getDayUpdates(y, m, d) || [];
   }
   
-  // 加入公演行程
+  // 获取生日日程（每年7月23日）
+  if (m === 7 && d === 23) {
+    schedules.push({ time: '全天', title: '🎂 生日', type: '生日', isBirthday: true });
+  }
+  // 春节
   const scheduleDateKey = `${y}.${String(m).padStart(2,'0')}.${String(d).padStart(2,'0')}`;
   const dayPerformances = performanceSchedule.filter(s => s.date === scheduleDateKey);
   dayPerformances.forEach(sch => {
+    let typeName = '公演';
+    if (sch.type === 'handshake') typeName = '握手会';
+    else if (sch.type === 'external') typeName = '外务';
     schedules.push({
       time: sch.time || '全天',
       title: sch.title,
-      type: '公演',
-      isPerformance: true
+      type: typeName,
+      isPerformance: true,
+      rawType: sch.type || ''
     });
   });
   
@@ -305,7 +319,10 @@ function renderTodaySchedule(dateStr) {
   
   let html = '';
   schedules.forEach(item => {
-    const perfClass = item.isPerformance ? ' performance-item' : '';
+    let perfClass = item.isPerformance ? ' performance-item' : '';
+    if (item.isBirthday) perfClass += ' birthday-item';
+    if (item.rawType === 'handshake') perfClass += ' handshake-item';
+    if (item.rawType === 'external') perfClass += ' external-item';
     html += `<div class="today-schedule-item${perfClass}">
       <div class="today-schedule-time">${item.time || '全天'}</div>
       <div class="today-schedule-content">${item.title || item.type || '更新'}</div>
@@ -314,7 +331,7 @@ function renderTodaySchedule(dateStr) {
   list.innerHTML = html;
 }
 
-// 获取当日更新（如果不存在则定义空函数）
+// 公历节日
 if (typeof getDayUpdates !== 'function') {
   function getDayUpdates(year, month, day) {
     return [];
@@ -326,7 +343,7 @@ if (typeof getDayUpdates !== 'function') {
   
   
   document.addEventListener('DOMContentLoaded', function() {
-    // 加载微博数据
+    // 获取当日公演行程
     if (typeof loadWeiboPosts === 'function') loadWeiboPosts();
     if (typeof loadDouyinPosts === 'function') loadDouyinPosts();
     if (typeof loadXiaohongshuPosts === 'function') loadXiaohongshuPosts();
@@ -393,9 +410,9 @@ function openDailyRecord(type) {
     if (switchBtn) switchBtn.textContent = '⏺ 切换到每日一杯';
   } else if (type === 'drink' && isKaomojiMode) {
     isKaomojiMode = false;
-    if (cardTitle) cardTitle.textContent = '每日一杯';
+    if (cardTitle) cardTitle.textContent = '颜文字大全';
     if (cardBadge) cardBadge.textContent = 'RANDOM';
-    if (cardBtnText) cardBtnText.textContent = '今天喝什么';
+    if (cardBtnText) cardBtnText.textContent = '今天用什么';
     if (switchBtn) switchBtn.textContent = '⏺ 切换到颜文字';
   }
   
@@ -404,7 +421,7 @@ function openDailyRecord(type) {
   }, 200);
 }
 
-// 卡片模式数组
+// 公历节日
 const cardModes = [
   { id: 'drink', title: '每日一杯', badge: 'RANDOM', btnText: '今天喝什么' },
   { id: 'kaomoji', title: '颜文字大全', badge: 'EMOJI', btnText: '今天用什么' },
@@ -455,7 +472,7 @@ function showKaomojiPopup() {
   overlay.style.display = 'flex';
   overlay.innerHTML = `
     <div class="popup-box" style="max-width:420px; padding:40px 30px 30px; border-radius:20px; text-align:center; background:#ffffff; box-shadow:0 20px 60px rgba(0,0,0,0.15);">
-      <button class="popup-close" style="position:absolute; top:12px; right:16px; font-size:22px; background:none; border:none; cursor:pointer; color:#bbb; transition:color 0.2s;" onmouseover="this.style.color='#666'" onmouseout="this.style.color='#bbb'">✕</button>
+      <button class="popup-close" style="position:absolute; top:12px; right:16px; font-size:22px; background:none; border:none; cursor:pointer; color:#bbb; transition:color 0.2s;" onmouseover="this.style.color='#666'" onmouseout="this.style.color='#bbb'">?</button>
       <div style="font-size:24px; padding:16px 0 8px; line-height:1.8; word-break:break-all; min-height:50px; display:flex; align-items:center; justify-content:center; color:#1a1a2e; font-weight:400; letter-spacing:1px;">${kaomoji}</div>
       <div style="font-size:12px; color:#ccc; margin-top:16px; letter-spacing:1px;">点击空白处或按 ESC 关闭</div>
     </div>
@@ -640,7 +657,7 @@ randomDrinkBtn?.addEventListener('click', function() {
   let currentMonth = new Date().getMonth();
 
   function switchPage(pageId) {
-    // 同步更新浏览器地址栏（用户点击导航时写入历史记录）
+    // 获取当日公演行程
     if (!__isPoppingState && PAGE_ROUTES[pageId]) {
       var targetPath = PAGE_ROUTES[pageId];
       if (window.location.pathname !== targetPath) {
@@ -702,7 +719,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         const keyword = document.getElementById('stageSearch')?.value || '';
         renderCards('all', keyword);
       } else {
-        // 数据还在加载，等加载完再渲染
+        // 数据已加载，直接渲染
         loadStageData().then(() => {
           const stagePage = document.getElementById('stage');
           if (stagePage && stagePage.classList.contains('active')) {
@@ -798,8 +815,10 @@ randomDrinkBtn?.addEventListener('click', function() {
   }
 
   document.querySelectorAll('.top-nav .menu-item[data-page]').forEach(item => {
+    if (item.id === 'foodWorksBtn' || item.id === 'foodNotesBtn' || item.id === 'recordsBtn') return;
     item.addEventListener('click', function(e) {
       e.stopPropagation();
+      if (window.closeAllNavDropdowns) window.closeAllNavDropdowns();
       switchPage(this.dataset.page);
     });
   });
@@ -815,14 +834,20 @@ randomDrinkBtn?.addEventListener('click', function() {
   (function() {
     const foodNotesBtn = document.getElementById('foodNotesBtn');
     const foodWorksBtn = document.getElementById('foodWorksBtn');
+    const recordsBtn = document.getElementById('recordsBtn');
     const foodNotesDropdown = document.getElementById('foodNotesDropdown');
     const foodWorksDropdown = document.getElementById('foodWorksDropdown');
+    const recordsDropdown = document.getElementById('recordsDropdown');
     let closeTimer = null;
+    let pinnedDropdown = null;
 
     function closeAllDropdowns() {
       clearTimeout(closeTimer);
       document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      pinnedDropdown = null;
+      window.pinnedNavBtn = null;
     }
+    window.closeAllNavDropdowns = closeAllDropdowns;
 
     function openDropdown(btn, dropdown) {
       clearTimeout(closeTimer);
@@ -837,61 +862,57 @@ randomDrinkBtn?.addEventListener('click', function() {
       return btn.matches(':hover') || dropdown.matches(':hover');
     }
 
-    if (foodNotesBtn && foodNotesDropdown) {
-      foodNotesBtn.addEventListener('mouseenter', function() {
+    function bindNavDropdown(btn, dropdown) {
+      if (!btn || !dropdown) return;
+      // 悬停：未固定时显示、离开收回（维持原行为）
+      btn.addEventListener('mouseenter', function() {
+        // 已固定任一下拉：悬停只让滑块跟随，不切换下拉
+        if (pinnedDropdown) return;
         closeAllDropdowns();
-        openDropdown(this, foodNotesDropdown);
+        openDropdown(this, dropdown);
       });
-      foodNotesBtn.addEventListener('mouseleave', function() {
+      btn.addEventListener('mouseleave', function() {
         closeTimer = setTimeout(() => {
-          if (!isHovering(foodNotesBtn, foodNotesDropdown)) closeAllDropdowns();
+          if (pinnedDropdown !== dropdown && !isHovering(btn, dropdown)) closeAllDropdowns();
         }, 100);
       });
-      foodNotesDropdown.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-      foodNotesDropdown.addEventListener('mouseleave', function() {
+      dropdown.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+      dropdown.addEventListener('mouseleave', function() {
         closeTimer = setTimeout(() => {
-          if (!isHovering(foodNotesBtn, foodNotesDropdown)) closeAllDropdowns();
+          if (pinnedDropdown !== dropdown && !isHovering(btn, dropdown)) closeAllDropdowns();
         }, 100);
+      });
+      // 点击：固定下拉；再点同一按钮收回；点击时不跳转页面
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        if (pinnedDropdown === dropdown) {
+          closeAllDropdowns();
+        } else {
+          closeAllDropdowns();
+          openDropdown(this, dropdown);
+          pinnedDropdown = dropdown;
+          window.pinnedNavBtn = this;
+          if (window.navMoveSlider) window.navMoveSlider(this, true);
+        }
+      });
+      // 点击下拉项后清除固定标记（跳页由 .nav-dropdown-item 上方监听处理）
+      dropdown.querySelectorAll('.nav-dropdown-item').forEach(function(it) {
+        it.addEventListener('click', function() { pinnedDropdown = null; window.pinnedNavBtn = null; });
       });
     }
 
-    if (foodWorksBtn && foodWorksDropdown) {
-      foodWorksBtn.addEventListener('mouseenter', function() {
-        closeAllDropdowns();
-        openDropdown(this, foodWorksDropdown);
-      });
-      foodWorksBtn.addEventListener('mouseleave', function() {
-        closeTimer = setTimeout(() => {
-          if (!isHovering(foodWorksBtn, foodWorksDropdown)) closeAllDropdowns();
-        }, 100);
-      });
-      foodWorksDropdown.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-      foodWorksDropdown.addEventListener('mouseleave', function() {
-        closeTimer = setTimeout(() => {
-          if (!isHovering(foodWorksBtn, foodWorksDropdown)) closeAllDropdowns();
-        }, 100);
-      });
-    }
+    bindNavDropdown(foodNotesBtn, foodNotesDropdown);
+    bindNavDropdown(foodWorksBtn, foodWorksDropdown);
+    bindNavDropdown(recordsBtn, recordsDropdown);
 
-    const recordsBtn = document.getElementById('recordsBtn');
-    const recordsDropdown = document.getElementById('recordsDropdown');
-    if (recordsBtn && recordsDropdown) {
-      recordsBtn.addEventListener('mouseenter', function() {
-        closeAllDropdowns();
-        openDropdown(this, recordsDropdown);
-      });
-      recordsBtn.addEventListener('mouseleave', function() {
-        closeTimer = setTimeout(() => {
-          if (!isHovering(recordsBtn, recordsDropdown)) closeAllDropdowns();
-        }, 100);
-      });
-      recordsDropdown.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-      recordsDropdown.addEventListener('mouseleave', function() {
-        closeTimer = setTimeout(() => {
-          if (!isHovering(recordsBtn, recordsDropdown)) closeAllDropdowns();
-        }, 100);
-      });
-    }
+    // 点击其他任何地方：收回固定下拉
+    document.addEventListener('click', function(e) {
+      if (!pinnedDropdown) return;
+      const inBtn = e.target.closest('#foodWorksBtn, #foodNotesBtn, #recordsBtn');
+      const inDd = e.target.closest('.nav-dropdown');
+      if (!inBtn && !inDd) closeAllDropdowns();
+    });
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllDropdowns(); });
   })();
@@ -951,9 +972,16 @@ randomDrinkBtn?.addEventListener('click', function() {
     }
 
     function returnToActive() {
+      // 下拉固定状态下：滑块回到被固定的按钮，而不是页面 active
+      if (window.pinnedNavBtn && nav.contains(window.pinnedNavBtn)) {
+        moveSliderToItem(window.pinnedNavBtn, true);
+        return;
+      }
       const activeItem = nav.querySelector(`.menu-item[data-page="${activePage}"]`);
       if (activeItem) moveSliderToItem(activeItem, true);
     }
+
+    window.navMoveSlider = moveSliderToItem;
 
     function initSlider() {
       const activeItem = nav.querySelector('.menu-item.active');
@@ -978,6 +1006,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         moveSliderToItem(this, true);
       });
       item.addEventListener('click', function() {
+        if (this.id === 'foodWorksBtn' || this.id === 'foodNotesBtn' || this.id === 'recordsBtn') return;
         const page = this.dataset.page;
         if (page) {
           switchPage(page);
@@ -1029,7 +1058,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     return result;
   }
 
-  // 更新舞台缓存和计数
+  // 春节
   function updateStageCache() {
     stageCategoryCache.all = [...unitData, ...specialData, ...assistData, ...substituteData].sort((a, b) => b.date.localeCompare(a.date));
     stageCategoryCache.unit = [...unitData].sort((a, b) => b.date.localeCompare(a.date));
@@ -1052,7 +1081,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       });
     });
 
-    // 更新页面上的计数显示
+    // 获取当日公演行程
     const totalEl = document.getElementById('stageTotalCount');
     const unitEl = document.getElementById('stageUnitCount');
     const specialEl = document.getElementById('stageSpecialCount');
@@ -1065,7 +1094,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     if (subEl) subEl.textContent = stageCategoryCounts.substitute;
   }
 
-  // 加载舞台数据（从外部JSON文件）
+  // 将JSON视频数据转换成舞台格式
   async function loadStageData() {
     try {
       console.log('正在加载舞台数据...');
@@ -1098,7 +1127,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         total: stageCategoryCache.all.length
       });
 
-      // 数据加载完成后刷新右侧更新列表
+      // 多场公演显示多个标签
       if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
         const activePage = document.querySelector('.page-box.active')?.id || 'home';
         renderCalendar(currentYear, currentMonth);
@@ -1288,7 +1317,11 @@ randomDrinkBtn?.addEventListener('click', function() {
     const data = getDataByCategory(category);
     let filtered = data.filter(item => {
       const k = keyword.trim().toLowerCase();
-      return k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+      return k === '' ||
+        (item.title && item.title.toLowerCase().includes(k)) ||
+        (item.date && item.date.includes(keyword)) ||
+        (item.show && item.show.toLowerCase().includes(k)) ||
+        ((getSongBelong(item.title, item.show) || '').toLowerCase().includes(k));
     });
 
     if (calFilteredMonth) {
@@ -1348,6 +1381,8 @@ randomDrinkBtn?.addEventListener('click', function() {
         coverHtml = `<div class="cover-fallback" style="background:linear-gradient(135deg,#b8d4e8,#8ab3d0);"><div class="video-icon">🎬</div><div class="video-tip" style="color:#fff;">加载中...</div></div>`;
       }
 
+      const belong = getSongBelong(item.title, item.show);
+
       const dateMatch = item.date ? item.date.match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/) : null;
       const dataMonth = dateMatch ? `${dateMatch[1]}-${dateMatch[2].padStart(2,'0')}` : '';
       const dataDay = dateMatch ? dateMatch[3].padStart(2,'0') : '';
@@ -1362,7 +1397,10 @@ randomDrinkBtn?.addEventListener('click', function() {
             <div class="video-name">${cleanUnitName(item.title)}</div>
             ${stageFullTitle(item) ? `<div class="video-show">${stageFullTitle(item)}</div>` : (item.show ? `<div class="video-show">${item.show}</div>` : '')}
             ${item.date ? `<div class="video-date">${item.date}</div>` : ''}
-            <div class="video-tag-bottom" style="background:${tagColor};">${tagText}</div>
+            <div class="video-tag-line">
+              <div class="video-tag-bottom" style="background:${tagColor};">${tagText}</div>
+              ${belong ? `<div class="video-tag-belong">${belong}</div>` : ''}
+            </div>
           </div>
         </div>
       `;
@@ -1382,8 +1420,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     const subEl = document.getElementById('stageSubstituteCount');
     if (subEl) subEl.textContent = stageCategoryCounts.substitute;
 
-    // 更新归档页面的统计信息
-    // 计算天数函数
+    // 获取当日公演行程
     function calcDaysFromDate(dateStr) {
       const parts = dateStr.split('.');
       const target = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
@@ -1423,7 +1460,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       }
     }
     
-    // 网站相关统计
+    // 获取当日公演行程
     const siteDaysEl = document.getElementById("siteDays");
     if (siteDaysEl) siteDaysEl.textContent = calcDaysFromDate('2026.01.01') + '天';
     
@@ -1503,7 +1540,11 @@ randomDrinkBtn?.addEventListener('click', function() {
     const keyword = document.getElementById('stageSearch').value;
     const filtered = getDataByCategory(currentCategory).filter(item => {
       const k = keyword.trim().toLowerCase();
-      return k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+      return k === '' ||
+        (item.title && item.title.toLowerCase().includes(k)) ||
+        (item.date && item.date.includes(keyword)) ||
+        (item.show && item.show.toLowerCase().includes(k)) ||
+        ((getSongBelong(item.title, item.show) || '').toLowerCase().includes(k));
     });
     const totalPages = Math.ceil(filtered.length / pageSize);
     const newPage = currentPage + delta;
@@ -1541,7 +1582,7 @@ randomDrinkBtn?.addEventListener('click', function() {
   let pocketDanmakuTimer = null;
   let pocketDanmakuList = [];
 
-  // 加载口袋回放数据
+  // 春节
   async function loadPocketLives() {
     try {
       const res = await fetch('pocket_lives.json?_=' + Date.now());
@@ -1561,7 +1602,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         timestamp: item.timestamp,
         liveId: item.liveId
       }));
-      // 更新计数
+      // 多场公演显示多个标签
       const totalCount = pocketLivesData.length;
       const videoCount = pocketLivesData.filter(item => item.type === '直播').length;
       const radioCount = pocketLivesData.filter(item => item.type === '电台').length;
@@ -1572,7 +1613,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       if (videoCountEl) videoCountEl.textContent = videoCount;
       if (radioCountEl) radioCountEl.textContent = radioCount;
       
-      // 数据加载完成后刷新右侧更新列表
+      // 多场公演显示多个标签
       if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
         const activePage = document.querySelector('.page-box.active')?.id || 'home';
         renderCalendar(currentYear, currentMonth);
@@ -1603,7 +1644,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     return cache[category] || cache.all;
   }
 
-  // 直播分页
+  // 春节
   let currentBoboPage = 1;
   const boboPageSize = 20;
   let isBoboPaginationClick = false;
@@ -1658,7 +1699,11 @@ randomDrinkBtn?.addEventListener('click', function() {
     const data = getBoboDataByCategory(category);
     let filtered = data.filter(item => {
       const k = keyword.trim().toLowerCase();
-      return k === '' || item.title.toLowerCase().includes(k) || (item.date && item.date.includes(keyword));
+      return k === '' ||
+        (item.title && item.title.toLowerCase().includes(k)) ||
+        (item.date && item.date.includes(keyword)) ||
+        (item.show && item.show.toLowerCase().includes(k)) ||
+        ((getSongBelong(item.title, item.show) || '').toLowerCase().includes(k));
     });
 
     if (calFilteredYear) {
@@ -1703,7 +1748,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       return;
     }
 
-    // 分页
+    // 获取当日公演行程
     if (!isBoboPaginationClick) currentBoboPage = 1;
     isBoboPaginationClick = false;
     const pageData = filtered.slice((currentBoboPage - 1) * boboPageSize, currentBoboPage * boboPageSize);
@@ -1743,7 +1788,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
     grid.className = 'stage-grid' + (currentLayoutMode === 'list' ? ' list-mode' : '');
     grid.innerHTML = html;
-    // 根据当前布局模式设置样式
+    // 获取当日公演行程
     if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
       grid.className = 'stage-grid list-mode';
     } else {
@@ -1780,7 +1825,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       weiboPostsData = data.posts || [];
       renderWeiboPosts();
     } catch (e) {
-      console.log('微博数据加载失败:', e.message);
+      console.log('口袋回放数据加载失败:', e.message);
     }
   }
 
@@ -1791,12 +1836,12 @@ randomDrinkBtn?.addEventListener('click', function() {
       const data = await res.json();
       douyinPostsData = data.posts || [];
       console.log('抖音数据加载成功:', douyinPostsData.length, '条');
-      // 延迟一下，等微博渲染完成后再渲染抖音（避免被覆盖）
+      // 多场公演显示多个标签
       setTimeout(() => {
         if (typeof renderDouyinPosts === 'function') renderDouyinPosts();
       }, 300);
     } catch (e) {
-      console.log('抖音数据加载失败:', e.message);
+      console.log('口袋回放数据加载失败:', e.message);
     }
   }
 
@@ -1811,7 +1856,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         if (typeof renderXiaohongshuPosts === 'function') renderXiaohongshuPosts();
       }, 500);
     } catch (e) {
-      console.log('小红书数据加载失败:', e.message);
+      console.log('口袋回放数据加载失败:', e.message);
     }
   }
 
@@ -1858,7 +1903,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       const timeStr = post.formattedTime || '';
       const searchText = (post.text || '').replace(/"/g, '&quot;');
 
-      // 判断是视频还是图文
+      // 多场公演显示多个标签
       const isNote = post.type === 'note' || (post.url && post.url.includes('/note/'));
       const typeLabel = isNote ? '图文' : '视频';
       
@@ -1879,7 +1924,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     console.log('抖音渲染: 实际渲染', rendered, '条新卡片');
 
     if (html && rendered > 0) {
-      // 找到最后一个微博卡片，插入到它后面
+      // 多场公演显示多个标签
       const weiboCards = feed.querySelectorAll('[data-platform="weibo"]');
       if (weiboCards.length > 0) {
         const lastWeibo = weiboCards[weiboCards.length - 1];
@@ -1889,7 +1934,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       }
       filterWeiboFeed();
       console.log('抖音渲染: 插入完成');
-      // 抖音渲染完成后重新渲染最近更新
+      // 多场公演显示多个标签
       setTimeout(() => { renderRecentUpdates(); }, 500);
     }
   }
@@ -1898,7 +1943,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     const feed = document.getElementById('weiboFeed');
     if (!feed || xiaohongshuPostsData.length === 0) return;
 
-    // 收集已有的小红书作品ID（去重）
+    // 收集已有的抖音作品ID（去重）
     const existingIds = new Set();
     feed.querySelectorAll('[data-platform="xiaohongshu"]').forEach(card => {
       const link = card.querySelector('a[href*="xiaohongshu.com"]');
@@ -1922,7 +1967,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       const hasImages = post.images && post.images.length > 0;
 
       if (hasImages) {
-        // 有图片：用微博卡片样式，显示图片网格
+        // 数据已加载，直接渲染
         const setId = 'xhsSlider' + index;
         if (typeof imageSets !== 'undefined') {
           imageSets[setId] = post.images;
@@ -1947,7 +1992,7 @@ randomDrinkBtn?.addEventListener('click', function() {
           <a href="${post.url || ('https://www.xiaohongshu.com/explore/' + post.id)}" target="_blank" class="weibo-link-button">点击跳转查看原文</a>
         </div>`;
       } else {
-        // 没有图片：用视频卡片样式
+        // 数据已加载，直接渲染
         html += `<div class="weibo-card" data-platform="xiaohongshu" data-id="${post.id}" data-month="${month}" data-day="${day}" data-search-text="${searchText}">
           <div class="weibo-time">
             <span class="platform-tag xiaohongshu">小红书</span>
@@ -1963,16 +2008,16 @@ randomDrinkBtn?.addEventListener('click', function() {
       rendered++;
     });
 
-    console.log('小红书渲染: 实际渲染', rendered, '条新卡片');
+    console.log('抖音渲染: 实际渲染', rendered, '条新卡片');
 
     if (html && rendered > 0) {
-      // 找到最后一个抖音卡片，插入到它后面
+      // 多场公演显示多个标签
       const douyinCards = feed.querySelectorAll('[data-platform="douyin"]');
       if (douyinCards.length > 0) {
         const lastDouyin = douyinCards[douyinCards.length - 1];
         lastDouyin.insertAdjacentHTML('afterend', html);
       } else {
-        // 找到最后一个微博卡片，插入到它后面
+        // 数据已加载，直接渲染
         const weiboCards = feed.querySelectorAll('[data-platform="weibo"]');
         if (weiboCards.length > 0) {
           const lastWeibo = weiboCards[weiboCards.length - 1];
@@ -1982,7 +2027,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         }
       }
       filterWeiboFeed();
-      console.log('小红书渲染: 插入完成');
+      console.log('抖音渲染: 插入完成');
     }
   }
 
@@ -2003,7 +2048,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       const day = dateMatch ? dateMatch[3] : '';
       const timeStr = post.formattedTime || '';
       
-      // 处理转发
+      // 多场公演显示多个标签
       let retweetHtml = '';
       if (post.isRetweet && post.retweetedText) {
         retweetHtml = `<div class="weibo-retweet">
@@ -2012,7 +2057,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         </div>`;
       }
 
-      // 处理图片
+      // 多场公演显示多个标签
       let mediaHtml = '';
       if (post.images && post.images.length > 0) {
         const setId = 'weiboSlider' + index;
@@ -2030,7 +2075,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         mediaHtml += `</div>`;
       }
 
-      // 互动数据
+      // 多场公演显示多个标签
       const statsHtml = `<div class="weibo-stats">
         <span>转发 ${post.repostsCount || 0}</span>
         <span>评论 ${post.commentsCount || 0}</span>
@@ -2052,12 +2097,12 @@ randomDrinkBtn?.addEventListener('click', function() {
       `;
     });
 
-    // 把微博卡片和其他平台卡片合并
+    // 获取当日公演行程
     feed.innerHTML = html + '\n' + otherHtml;
     filterWeiboFeed();
-    // 渲染动态抖音卡片
+    // 获取当日公演行程
     if (typeof renderDouyinPosts === 'function') renderDouyinPosts();
-    // 渲染动态小红书卡片
+    // 获取当日公演行程
     if (typeof renderXiaohongshuPosts === 'function') renderXiaohongshuPosts();
     if (typeof renderBilibiliPosts === 'function') renderBilibiliPosts();
     
@@ -2107,13 +2152,13 @@ randomDrinkBtn?.addEventListener('click', function() {
     console.log('B站渲染: 实际渲染', rendered, '条新卡片');
 
     if (html && rendered > 0) {
-      // 插入到最后一个小红书卡片后面
+      // 多场公演显示多个标签
       const xhsCards = feed.querySelectorAll('[data-platform="xiaohongshu"]');
       if (xhsCards.length > 0) {
         const lastXhs = xhsCards[xhsCards.length - 1];
         lastXhs.insertAdjacentHTML('afterend', html);
       } else {
-        // 没有小红书卡片，插入到最后一个抖音卡片后面
+        // 数据已加载，直接渲染
         const douyinCards = feed.querySelectorAll('[data-platform="douyin"]');
         if (douyinCards.length > 0) {
           const lastDouyin = douyinCards[douyinCards.length - 1];
@@ -2127,7 +2172,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     }
   }
 
-  // 所有平台卡片按日期统一排序
+  // 春节
   function sortAllCardsByDate() {
     const feed = document.getElementById('weiboFeed');
     if (!feed) return;
@@ -2142,7 +2187,7 @@ randomDrinkBtn?.addEventListener('click', function() {
       return;
     }
     
-    // 统计各平台数量
+    // 获取当日公演行程
     const platformCount = {};
     allCards.forEach(card => {
       const p = card.dataset.platform || 'unknown';
@@ -2150,7 +2195,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     });
     console.log('排序前各平台数量:', platformCount, '总计:', allCards.length);
     
-    // 按日期降序排序（最新的在前面）
+    // 获取当日公演行程
     allCards.sort((a, b) => {
       const dateA = (a.dataset.month || '') + '-' + (a.dataset.day || '00');
       const dateB = (b.dataset.month || '') + '-' + (b.dataset.day || '00');
@@ -2179,7 +2224,7 @@ randomDrinkBtn?.addEventListener('click', function() {
     
     console.log('卡片按日期排序完成，共', allCards.length, '条');
     
-    // 平台数据排序完成后刷新右侧更新列表
+    // 获取当日公演行程
     if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
       const activePage = document.querySelector('.page-box.active')?.id || 'home';
       renderCalendar(currentYear, currentMonth);
@@ -2335,7 +2380,7 @@ randomDrinkBtn?.addEventListener('click', function() {
               };
           }
       
-    // 平台数据渲染完成后，重新渲染右侧日历
+    // 获取当日公演行程
     if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
       calCurrentPage = 'fancam';
       renderCalendar(currentYear, currentMonth);
@@ -2534,7 +2579,7 @@ randomDrinkBtn?.addEventListener('click', function() {
         </div>`
       ).join('') : `<div style="text-align:center;padding:40px 0;color:#7a9ab0;font-size:14px;width:100%;">暂无图片</div>`;
       
-      // 懒加载：滚到可视区才真正加载图片，避免一次性请求几十张原图导致卡顿
+      // 多场公演显示多个标签
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(en) {
@@ -2579,6 +2624,15 @@ randomDrinkBtn?.addEventListener('click', function() {
         e.stopPropagation();
         panelOpen = !panelOpen;
         this.classList.toggle('active', panelOpen);
+        if (panelOpen) {
+          // 解析发送者和内容（制表符或冒号分隔）
+          var r = this.getBoundingClientRect();
+          var pw = settingsPanel.offsetWidth || 340;
+          settingsPanel.style.left = (r.right - pw) + 'px';
+          settingsPanel.style.top = (r.bottom + 10) + 'px';
+          settingsPanel.style.right = 'auto';
+          settingsPanel.style.bottom = 'auto';
+        }
         settingsPanel.classList.toggle('open', panelOpen);
       });
       document.addEventListener('click', function(e) {
@@ -2727,6 +2781,12 @@ randomDrinkBtn?.addEventListener('click', function() {
         darkIcon.src = isDark ? darkIconUrl : lightIcon;
         localStorage.setItem('darkMode', isDark ? 'dark' : 'light');
         syncMobileDarkUI();
+        var volEl = document.getElementById('playerVolume');
+        if (volEl) {
+          var vv = parseInt(volEl.value, 10) || 0;
+          var volTrack = document.getElementById('volumeTrack') || volEl.parentElement;
+          volTrack.style.setProperty('--vol', vv + '%');
+        }
         if (window.updateNavIndicator) {
           setTimeout(() => {
             window.updateNavIndicator('stageNav', 'stageNavIndicator');
@@ -2743,7 +2803,7 @@ randomDrinkBtn?.addEventListener('click', function() {
 
   // 确保DOM加载完成后再初始化舞台
   function initStage() {
-    // 绑定分页按钮点击事件
+    // 获取当日公演行程
     const prevBtn = document.getElementById('prevPageBtn');
     const nextBtn = document.getElementById('nextPageBtn');
     if (prevBtn) prevBtn.addEventListener('click', () => changePage(-1));
@@ -2916,7 +2976,7 @@ function getBoboDateColors() {
   }
 
 
-  // ===== 公演行程数据 =====
+  // ===== 微博数据加载与渲染 =====
   
 
   function getUpdateTypesForPage(pageId) {
@@ -3147,7 +3207,7 @@ function getBoboDateColors() {
     const count = filteredUpdates.length;
     headerEl.innerHTML = `<span class="update-title">本月更新汇总</span><img decoding="async" id="calResetMonth" class="cal-reset-icon" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/f3b5214a-19b2-47e9-8a49-007fd5f1ff55_1789006840023_fanhui.webp" alt="重置" title="恢复到当月" /><span class="update-count">${count}</span>`;
     
-    // 口袋回放点击弹出播放器
+    // 获取当日公演行程
     listEl.querySelectorAll('.pocket-player-item').forEach(el => {
       el.addEventListener('click', function() {
         const liveId = this.dataset.liveId;
@@ -3193,7 +3253,7 @@ function getBoboDateColors() {
       titleHtml = `<span class="update-title-text" title="${fullTitle}">${title}${subtitle}</span>`;
     }
     
-    // 类型标签颜色：和内容区卡片标签一致
+    // 获取当日公演行程
     let typeLabelHtml = '';
     let tagColor = '';
     if (item.type === 'bobo') {
@@ -3345,13 +3405,13 @@ function getBoboDateColors() {
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    // 确保年月为当前时间
+    // 获取当日公演行程
     currentYear = new Date().getFullYear();
     currentMonth = new Date().getMonth();
     renderCalendar(currentYear, currentMonth);
     renderUpdateList(currentYear, currentMonth, null, 'home');
     
-    // 大日历初始化
+    // 获取当日公演行程
     const now = new Date();
     bigCalYear = now.getFullYear();
     bigCalMonth = now.getMonth();
@@ -3731,7 +3791,7 @@ function getBoboDateColors() {
 
   
 
-  const formalKeys = ['2026-newyear', '2025-autumn', '2025-newyear', '2024-autumn', '2024-spring', '2023-2024'];
+  const formalKeys = ['2026-autumn', '2026-newyear', '2025-autumn', '2025-newyear', '2024-autumn', '2024-spring', '2023-2024'];
 
   function renderFormal(key) {
     const scroll = document.getElementById('formalScroll');
@@ -3886,7 +3946,7 @@ function getBoboDateColors() {
         show: '',
         url: item.url || '#',
         type: 'bobo',
-        typeLabel: '直播',
+        typeLabel: '舞台',
         tag: item.category || 'pocket',
         tagLabel: item.category === 'pocket' ? '口袋回放' : '特殊直播',
         searchText: (item.title + ' ' + (item.date || '') + ' ' + (item.category || '')).toLowerCase()
@@ -3913,7 +3973,7 @@ function getBoboDateColors() {
         show: textContent.substring(0, 30),
         url: url,
         type: 'fancam',
-        typeLabel: '平台',
+        typeLabel: '舞台',
         tag: platform,
         tagLabel: platformNames[platform] || platform,
         searchText: (dateText + ' ' + textContent + ' ' + (platformNames[platform] || '')).toLowerCase()
@@ -4090,7 +4150,7 @@ function getBoboDateColors() {
     });
 
     grid.innerHTML = html;
-    // 根据当前布局模式设置样式
+    // 获取当日公演行程
     if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
       grid.className = 'stage-grid list-mode';
     } else {
@@ -4109,7 +4169,7 @@ function getBoboDateColors() {
 
     overlay.innerHTML = `
       <div class="popup-box" style="max-width:600px; padding:32px 36px 28px; border-radius:2px; background:#fcf9f5; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
-        <button class="popup-close" onclick="closeWordsPopup()" style="position:absolute; top:12px; right:16px; font-size:24px; background:none; border:none; cursor:pointer; color:#999;">✕</button>
+        <button class="popup-close" onclick="closeWordsPopup()" style="position:absolute; top:12px; right:16px; font-size:24px; background:none; border:none; cursor:pointer; color:#999;">?</button>
         
         <div style="font-family: 'Chiron GoRound TC', 'PingFang SC', sans-serif; min-height:300px; padding:8px 4px;">
           <div style="font-size:15px; line-height:2; color:#3a3a3a; white-space:pre-wrap; letter-spacing:0.5px; padding:0 8px;">
@@ -4414,14 +4474,16 @@ ${data.content}
   }
 
   function updateDrinkFixed() {
+    if (!fixedReady) return;  // 页面初次加载不固定，用户滚动后才启用（避免刷新时卡片卡住）
     const drinkCard = document.querySelector('.daily-drink-card');
     const onThisDayCard = document.querySelector('.on-this-day-card');
     const recentUpdateCard = document.querySelector('.recent-update-card');
     const musicPlayer = document.querySelector('.sidebar-player');
     if (!drinkCard) return;
 
-    // 卡片被隐藏（如窄屏媒体查询）时不参与固定
-    if (drinkCard.style.display === 'none' || drinkCard.offsetHeight === 0) {
+    // 获取当日公演行程
+    const isHidden = function(el) { return el && (el.style.display === 'none' || el.offsetHeight === 0); };
+    if (isHidden(drinkCard) || isHidden(onThisDayCard) || isHidden(recentUpdateCard)) {
       [drinkCard, onThisDayCard, recentUpdateCard, musicPlayer].forEach(function(el) {
         if (el) { el.classList.remove('fixed'); el.style.top = ''; }
       });
@@ -4429,6 +4491,8 @@ ${data.content}
     }
 
     if (!drinkCard.dataset.initialTop) {
+      // 内容还没渲染出来时先不初始化固定位置，避免刷新时卡片卡在错误位置
+      if (drinkCard.offsetHeight === 0) return;
       const rect = drinkCard.getBoundingClientRect();
       drinkCard.dataset.initialTop = rect.top + window.pageYOffset;
     }
@@ -4451,11 +4515,16 @@ ${data.content}
           recentUpdateCard.classList.add('fixed');
           recentUpdateCard.style.top = (4 + drinkH + 6 + onH + 6) + 'px';
         }
-        // 播放器：等它滚到堆叠目标位置附近再固定，原位固定不弹跳
-        if (musicPlayer && recH > 0) {
+        // 数据已加载，直接渲染
+        if (musicPlayer && onH > 0 && recH > 0) {
           const fixedTop = 4 + drinkH + 6 + onH + 6 + recH + 6;
-          if (musicPlayer.getBoundingClientRect().top <= fixedTop + 8) {
-            // 固定前对齐宽度：和流内一致，避免固定瞬间“大框缩小”
+          // 展开歌曲列表下拉会撑高卡片，固定判断应只看卡片本体高度，否则展开后 fits 变 false 导致卡片瞬移
+          const dd = document.getElementById('musicPlaylistDropdown');
+          const ddH = dd && dd.classList.contains('open') ? dd.offsetHeight : 0;
+          const baseH = Math.max(0, musicPlayer.offsetHeight - ddH);
+          // 固定后如果播放器底部超出视口（放不下），就保持自然滚动，避免按钮行被截断
+          const fits = fixedTop + baseH <= window.innerHeight;
+          if (musicPlayer.getBoundingClientRect().top <= fixedTop + 8 && fits) {
             const wrapper = document.querySelector('.sidebar-wrapper');
             if (wrapper) musicPlayer.style.width = wrapper.offsetWidth + 'px';
             musicPlayer.classList.add('fixed');
@@ -4475,7 +4544,7 @@ ${data.content}
     }
   }
 
-  // 目录和快速安利的固定位置配置
+  // ===== 侧边栏固定定位配置 =====
   const TOC_CONFIG = {
     topFixed: 4,         // 固定时目录的top位置（靠近顶部）
     gap: 6,                // 目录和快速安利之间的间距
@@ -4483,6 +4552,7 @@ ${data.content}
   };
   
   function updateTocFixed() {
+    if (!fixedReady) return;  // 页面初次加载不固定，用户滚动后才启用（避免刷新时卡片卡住）
     const tocCard = document.querySelector('.left-toc-card');
     const countdownCard = document.querySelector('.left-countdown-card');
     const promoCard = document.querySelector('.left-promo-card');
@@ -4495,7 +4565,7 @@ ${data.content}
     const tocHeight = tocCard.offsetHeight || 200;
     const countdownHeight = countdownCard ? countdownCard.offsetHeight : 150;
     
-    // 动态计算信息栏的底部位置（不固定时目录应该在信息栏下面）
+    // 目录的初始位置（个人简介下方）
     let topNormal = 500;
     let threshold = 500;
     if (profileCard) {
@@ -4511,13 +4581,13 @@ ${data.content}
       tocCard.classList.add('fixed');
       tocCard.style.top = cfg.topFixed + 'px';
       
-      // 行程倒计时固定在目录下面
+      // 多场公演显示多个标签
       if (countdownCard) {
         countdownCard.classList.add('fixed');
         countdownCard.style.top = (cfg.topFixed + tocHeight + cfg.gap) + 'px';
       }
       
-      // 快速安利区固定在行程倒计时下面
+      // 多场公演显示多个标签
       if (promoCard) {
         promoCard.classList.add('fixed');
         promoCard.style.top = (cfg.topFixed + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
@@ -4526,13 +4596,13 @@ ${data.content}
       tocCard.classList.remove('fixed');
       tocCard.style.top = topNormal + 'px';
       
-      // 行程倒计时不固定时也在目录下面
+      // 多场公演显示多个标签
       if (countdownCard) {
         countdownCard.classList.remove('fixed');
         countdownCard.style.top = (topNormal + tocHeight + cfg.gap) + 'px';
       }
       
-      // 快速安利区不固定时在行程倒计时下面
+      // 多场公演显示多个标签
       if (promoCard) {
         promoCard.classList.remove('fixed');
         promoCard.style.top = (topNormal + tocHeight + cfg.gap + countdownHeight + cfg.gap) + 'px';
@@ -4542,14 +4612,40 @@ ${data.content}
     updateDrinkFixed();
   }
   
-  // 页面加载后立即设置目录和快速安利的初始位置
+  // 页面加载后初始化固定逻辑，所有资源加载完成后再重算一次（避免刷新时高度未定导致卡片卡住）
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
+      restoreScrollAndFix();
       setTimeout(updateTocFixed, 300);
     });
   } else {
+    restoreScrollAndFix();
     setTimeout(updateTocFixed, 300);
   }
+  // 禁用浏览器默认滚动恢复，改为手动记住/恢复滚动位置（刷新时不再先跳顶部再回原位）
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('beforeunload', function() {
+    try {
+      var y = window.pageYOffset || 0;
+      sessionStorage.setItem('_scrollPos', String(y));
+      sessionStorage.setItem('_scrollPosKeep', String(y));
+    } catch (e) {}
+  });
+  // 布局就绪（DOMContentLoaded）立即恢复滚动位置，侧边栏显示时已一步到位
+  function restoreScrollAndFix() {
+    var pos = parseInt(sessionStorage.getItem('_scrollPos') || '0', 10);
+    try { sessionStorage.removeItem('_scrollPos'); } catch (e) {}
+    fixedReady = true;  // 恢复位置后立即启用固定逻辑，一次到位
+    if (pos > 0) window.scrollTo(0, pos);
+    setTimeout(updateTocFixed, 120);
+  }
+  // 图片等资源全部加载后再校正一次滚动位置（页面高度可能因图片变化）
+  window.addEventListener('load', function() {
+    var pos = parseInt(sessionStorage.getItem('_scrollPosKeep') || '0', 10);
+    try { sessionStorage.removeItem('_scrollPosKeep'); } catch (e) {}
+    if (pos > 0) window.scrollTo(0, pos);
+    setTimeout(updateTocFixed, 120);
+  });
 
   function renderOnThisDay() {
     const listEl = document.getElementById('onThisDayList');
@@ -4589,7 +4685,7 @@ ${data.content}
           items.push({
             year: parts[0],
             type: 'bobo',
-            typeLabel: '直播',
+            typeLabel: '舞台',
             title: item.title,
             url: item.url,
             sortDate: datePart[1]
@@ -4683,7 +4779,7 @@ ${data.content}
     }
   }
   
-  // 同步重算所有位置，浏览器只重绘一次，和右侧一样丝滑
+  // 春节
   document.querySelectorAll('.left-toc-card .toc-item').forEach(t => t.classList.remove('active'));
   setDrinkPosition();
   updateActiveOnScroll();
@@ -4696,19 +4792,22 @@ ${data.content}
       tocCard.classList.remove('fixed');
     }
   
-  // 同步初始化位置，避免跳动
+  // 初次加载不立即固定，等用户第一次滚动后再启用固定逻辑（一步到位，刷新时卡片不卡住）
+  var fixedReady = false;
   setDrinkPosition();
-  updateTocFixed();
   renderOnThisDay();
+  setTimeout(function(){ ensureSidebarScrollable(); }, 300);
 
   let ticking = false;
   let lastScrollY = 0;
   window.addEventListener('scroll', function() {
+    if (!fixedReady) fixedReady = true;  // 用户开始滚动才启用固定
     if (!ticking) {
       window.requestAnimationFrame(function() {
         const sy = window.pageYOffset;
         updateActiveOnScroll();
         updateTocFixed();
+        ensureSidebarScrollable();
         lastScrollY = sy;
         ticking = false;
       });
@@ -4718,9 +4817,10 @@ ${data.content}
 
   let resizeTimer;
   window.addEventListener('resize', function() {
+    if (!fixedReady) fixedReady = true;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      // 重置右侧侧边栏卡片状态，避免窗口缩放后卡在顶部
+      // 多场公演显示多个标签
       const rDrinkCard = document.querySelector('.daily-drink-card');
       const rOnThisDayCard = document.querySelector('.on-this-day-card');
       const rRecentUpdateCard = document.querySelector('.recent-update-card');
@@ -4739,6 +4839,7 @@ ${data.content}
       }
       setDrinkPosition();
       updateTocFixed();
+      ensureSidebarScrollable();
     }, 150);
   });
 
@@ -4769,7 +4870,7 @@ ${data.content}
     }
   }
 
-  // ===== 口袋回放播放器 =====
+  // ===== 微博数据加载与渲染 =====
   function openPocketPlayer(liveId) {
     const item = pocketLivesData.find(x => x.liveId === liveId);
     if (!item) { alert('未找到该回放'); return; }
@@ -4792,7 +4893,7 @@ ${data.content}
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // 播放视频
+    // 获取当日公演行程
     if (pocketCurrentHls) { pocketCurrentHls.destroy(); pocketCurrentHls = null; }
     if (item.m3u8) {
       if (window.Hls && window.Hls.isSupported()) {
@@ -4809,7 +4910,7 @@ ${data.content}
       }
     }
 
-    // 加载弹幕
+    // 获取当日公演行程
     if (item.danmaku && item.danmaku.trim()) {
       loadPocketDanmaku(item.danmaku);
     } else {
@@ -4869,7 +4970,7 @@ ${data.content}
       }
       pocketDanmakuList.sort((a, b) => a.time - b.time);
       
-      // 渲染列表
+      // 多场公演显示多个标签
       if (pocketDanmakuList.length === 0) {
         listEl.innerHTML = '<div class="pocket-danmaku-empty">暂无弹幕</div>';
       } else {
@@ -4887,7 +4988,7 @@ ${data.content}
         }
         listEl.innerHTML = html;
         
-        // 点击跳转
+        // 数据已加载，直接渲染
         listEl.querySelectorAll('.pocket-danmaku-item').forEach(el => {
           el.addEventListener('click', function() {
             const video = document.getElementById('pocketPlayerVideo');
@@ -4902,13 +5003,13 @@ ${data.content}
       if (countEl) countEl.textContent = pocketDanmakuList.length + '条';
       startPocketDanmaku();
     } catch (e) {
-      console.log('弹幕加载失败:', e.message);
+      console.log('口袋回放数据加载失败:', e.message);
       listEl.innerHTML = '<div class="pocket-danmaku-empty">弹幕加载失败</div>';
     }
   }
 
   function startPocketDanmaku() {
-    // 弹幕不需要自动高亮，只保留点击跳转
+    // 获取当日公演行程
   }
 
   function clearPocketDanmaku() {
@@ -4931,18 +5032,31 @@ ${data.content}
   });
 
 
-// ===== 渲染行程倒计时 =====
+// ===== 里程时间线（历年公式照下方） =====
+// 行程 time 可能是时间段（'16:30-18:30'），倒计时取开始时间
+function parseStartTime(t) {
+  if (!t) return '19:30';
+  var parts = String(t).split('-');
+  return parts[0].trim();
+}
+
 function renderCountdown() {
   const listEl = document.getElementById('countdownList');
   if (!listEl) return;
+
+  // 春节
+  let schedule = [];
+  try {
+    schedule = (typeof performanceSchedule !== 'undefined' && Array.isArray(performanceSchedule)) ? performanceSchedule : [];
+  } catch (e) { schedule = []; }
   
   const now = new Date();
   
-  // 筛选还没到的行程
-  const upcoming = performanceSchedule.filter(item => {
-    const itemDate = new Date(item.date.replace(/\./g, '-') + 'T' + (item.time || '19:30') + ':00');
+  // 春节
+  const upcoming = schedule.filter(item => {
+    const itemDate = new Date(item.date.replace(/\./g, '-') + 'T' + parseStartTime(item.time) + ':00');
     return itemDate > now;
-  }).sort((a, b) => new Date(a.date.replace(/\./g, '-') + 'T' + (a.time || '19:30') + ':00') - new Date(b.date.replace(/\./g, '-') + 'T' + (b.time || '19:30') + ':00'));
+  }).sort((a, b) => new Date(a.date.replace(/\./g, '-') + 'T' + parseStartTime(a.time) + ':00') - new Date(b.date.replace(/\./g, '-') + 'T' + parseStartTime(b.time) + ':00'));
   
   if (upcoming.length === 0) {
     listEl.innerHTML = '<div class="countdown-empty">暂无 upcoming 行程</div>';
@@ -4951,20 +5065,19 @@ function renderCountdown() {
   
   let html = '';
   upcoming.forEach((item, index) => {
-    const targetTime = item.date.replace(/\./g, '-') + 'T' + (item.time || '19:30') + ':00';
+    const targetTime = item.date.replace(/\./g, '-') + 'T' + parseStartTime(item.time) + ':00';
     const itemDate = new Date(targetTime);
     const diffTime = itemDate - now;
     
-    // 计算天、时、分、秒
+    // 获取当日公演行程
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
     const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
     
-    // 简化标题
+    // 获取当日公演行程
     let title = item.title;
     title = title.replace(/TEAM NII全新原创公演/g, 'TEAM NII');
-    title = title.replace(/TEAM NII焕新公演/g, 'TEAM NII');
     title = title.replace(/SNH48 TEAM NII/g, 'TEAM NII');
     
     html += `<div class="countdown-item" data-target="${targetTime}">
@@ -4980,9 +5093,41 @@ function renderCountdown() {
   });
   
   listEl.innerHTML = html;
+
+  // 行程倒计时最多显示 2 条，多余滚动（高度按第一条实际高度 × 2 动态计算）
+  var firstItem = listEl.querySelector('.countdown-item');
+  if (firstItem && firstItem.offsetHeight > 0) {
+    listEl.style.maxHeight = Math.floor(firstItem.offsetHeight * 2) + 'px';
+    listEl.style.overflowY = 'auto';
+  }
+  ensureSidebarScrollable();
 }
 
-// 实时更新倒计时
+// ===== 两侧侧边栏没滚到底时，内容区到底后页面还能继续滚动到侧边栏底部 =====
+// 左右侧边栏是 absolute 定位（脱离文档流不撑高页面），侧边栏比内容区高时页面滚到底就停住了。
+// 这里动态把 .main-page 撑到侧边栏底部，让侧边栏可以继续滑到底。
+function ensureSidebarScrollable() {
+  var mp = document.querySelector('.main-page');
+  var content = document.getElementById('contentWrap');
+  if (!mp || !content) return;
+  var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  var maxBottom = 0;
+  document.querySelectorAll('.left-profile-card, .left-toc-card, .left-countdown-card, .left-promo-card, .sidebar-wrapper').forEach(function(c) {
+    if (c.classList.contains('fixed')) return; // fixed 卡片固定在视口，不参与撑高
+    var r = c.getBoundingClientRect();
+    var b = r.bottom + scrollY;
+    if (b > maxBottom) maxBottom = b;
+  });
+  var cr = content.getBoundingClientRect();
+  var contentBottom = cr.bottom + scrollY;
+  if (maxBottom > contentBottom) {
+    mp.style.minHeight = (maxBottom + 24) + 'px';
+  } else {
+    mp.style.minHeight = '';
+  }
+}
+
+// 公历节日
 let countdownTimer = null;
 function startCountdownTimer() {
   if (countdownTimer) clearInterval(countdownTimer);
@@ -4997,7 +5142,7 @@ function startCountdownTimer() {
       const diffTime = targetDate - now;
       
       if (diffTime <= 0) {
-        // 时间到了，重新渲染
+        // 数据已加载，直接渲染
         renderCountdown();
         return;
       }
@@ -5020,7 +5165,7 @@ function startCountdownTimer() {
   }, 1000);
 }
 
-// ===== 渲染最近更新 =====
+// ===== 里程时间线（历年公式照下方） =====
 function renderRecentUpdates() {
   const listEl = document.getElementById('recentUpdateList');
   if (!listEl) return;
@@ -5033,7 +5178,7 @@ function renderRecentUpdates() {
   
   let updates = [];
   
-  // 舞台数据
+  // 春节
   const allStageData = [...unitData, ...specialData, ...assistData, ...substituteData];
   allStageData.forEach(item => {
     if (item.date) {
@@ -5049,7 +5194,7 @@ function renderRecentUpdates() {
     }
   });
   
-  // 直播数据
+  // 春节
   const allBoboData = [...boboData, ...pocketLivesData];
   allBoboData.forEach(item => {
     if (item.date) {
@@ -5060,13 +5205,13 @@ function renderRecentUpdates() {
           date: pureDate,
           title: item.title,
           type: 'bobo',
-          typeLabel: '直播'
+          typeLabel: item.type === '电台' ? '电台' : '直播'
         });
       }
     }
   });
   
-  // 平台更新数据
+  // 春节
   const platformCards = document.querySelectorAll('#weiboFeed [data-platform], #weiboFeed .video-card');
   platformCards.forEach(card => {
     const platform = card.dataset.platform;
@@ -5084,13 +5229,14 @@ function renderRecentUpdates() {
           date: dateStr,
           title: title,
           type: 'fancam',
-          typeLabel: platformNames[platform] || '平台'
+          typeLabel: platformNames[platform] || '平台',
+          platform: platform
         });
       }
     }
   });
   
-  // 按日期降序排序
+  // 春节
   updates.sort((a, b) => new Date(b.date.replace(/\./g, '-')) - new Date(a.date.replace(/\./g, '-')));
   
   // 最多显示10条
@@ -5103,23 +5249,75 @@ function renderRecentUpdates() {
   
   let html = '';
   updates.forEach(item => {
+    const pcls = item.platform ? ' ' + item.platform : (item.type === 'bobo' && item.typeLabel === '电台' ? ' radio' : '');
     html += `<div class="recent-update-item">
       <div class="recent-update-date">${item.date}</div>
-      <div class="recent-update-title">${item.title}<span class="recent-update-type ${item.type}">${item.typeLabel}</span></div>
+      <div class="recent-update-title">${item.title}<span class="recent-update-type ${item.type}${pcls}">${item.typeLabel}</span></div>
     </div>`;
   });
   
   listEl.innerHTML = html;
 }
 
-// 页面加载完成后渲染
+// ===== 里程时间线（历年公式照下方） =====
+function alignSidebarHeights() {
+// 左侧栏高度以内容区为准，计算时考虑各卡片 padding，toc 从 top:85px 开始固定
+  var area = document.getElementById('contentWrap') || document.querySelector('.content-area');
+  if (!area) return;
+  var target = area.offsetHeight - 78;
+  if (target < 0) target = 0;
+
+// 右侧栏 min-height 对齐内容区高度，保证图片等分布局
+  var wrap = document.querySelector('.sidebar-wrapper');
+  if (wrap) {
+    var sp = document.getElementById('sidebarSpacerRight');
+    if (!sp) {
+      sp = document.createElement('div');
+      sp.id = 'sidebarSpacerRight';
+      sp.style.flex = '1 1 auto';
+      wrap.appendChild(sp);
+    }
+    wrap.style.minHeight = target + 'px';
+    wrap.style.justifyContent = 'space-between';
+    sp.style.display = 'block';
+  }
+
+// 底部给 promo 卡片留出间距，避免占位错乱
+  var promo = document.querySelector('.left-promo-card');
+  if (promo) {
+    var sp2 = document.getElementById('sidebarSpacerLeft');
+    if (!sp2) {
+      sp2 = document.createElement('div');
+      sp2.id = 'sidebarSpacerLeft';
+      sp2.style.position = 'absolute';
+      sp2.style.left = '2px';
+      sp2.style.width = '300px';
+      sp2.style.zIndex = '1';
+      promo.insertAdjacentElement('afterend', sp2);
+    }
+    var used = 0;
+    ['left-profile-card', 'left-toc-card', 'left-countdown-card', 'left-promo-card'].forEach(function(c) {
+      var el = document.querySelector('.' + c);
+      if (el) used += el.offsetHeight + 6;
+    });
+    var top = promo.offsetTop + promo.offsetHeight + 6;
+    sp2.style.top = top + 'px';
+    sp2.style.height = Math.max(0, target - (promo.offsetTop + promo.offsetHeight + 6 - 78)) + 'px';
+  }
+}
+
+// 公历节日
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     renderCountdown();
     renderRecentUpdates();
     startCountdownTimer();
+    alignSidebarHeights();
   }, 500);
 });
+setTimeout(alignSidebarHeights, 1200);
+window.addEventListener('resize', alignSidebarHeights);
+document.addEventListener('navUpdate', function() { setTimeout(alignSidebarHeights, 300); });
 
 
 // ========== 快速安利区轮播 ==========
@@ -5150,7 +5348,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // 左右切换箭头
+  // 春节
   const prevBtn = document.getElementById('promoPrevBtn');
   const nextBtn = document.getElementById('promoNextBtn');
   if (prevBtn) {
@@ -5170,20 +5368,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 5000);
 })();
 
-// ========== 公演页面模块 ==========
+// ========== 快速安利区轮播 ==========
 (function() {
   let gongyanData = [];
   let gongyanLoaded = false;
   let currentGongyanCategory = 'all';
 
-  // 加载公演数据
+  // 春节
   async function loadGongyanData() {
     if (gongyanLoaded) return;
     try {
       const res = await fetch('bilibili_nii_videos.json');
       const data = await res.json();
       gongyanData = data.videos || [];
-      // 按公演日期从新到旧排序（无日期排最后）
+      // 多场公演显示多个标签
       gongyanData.sort(function(a, b) {
         return String(b.pubdate || '').localeCompare(String(a.pubdate || ''));
       });
@@ -5191,18 +5389,18 @@ document.addEventListener('DOMContentLoaded', function() {
       window.gongyanData = gongyanData;  // 同步更新全局引用
       console.log('公演数据加载完成，共' + gongyanData.length + '条');
     } catch (e) {
-      console.log('公演数据加载失败:', e.message);
+      console.log('口袋回放数据加载失败:', e.message);
       gongyanData = [];
       gongyanLoaded = true;
     }
   }
 
-  // 判断是否是公演（有日期的）
+  // 春节
   function isGongyan(item) {
     return item.pubdate && item.pubdate !== '';
   }
 
-  // 获取分类数据
+  // 春节
   function getCategoryData(category) {
     if (category === 'gongyan') {
       return gongyanData.filter(isGongyan);
@@ -5212,7 +5410,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return gongyanData;
   }
 
-  // 更新分类计数
+  // 春节
   function updateGongyanCounts() {
     const allCount = gongyanData.length;
     const gongyanCount = gongyanData.filter(isGongyan).length;
@@ -5227,8 +5425,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (otherEl) otherEl.textContent = otherCount;
   }
 
-  // 渲染公演卡片（和舞台同款）
-  // 公演分页
+  // 春节
   let currentGongyanPage = 1;
   const gongyanPageSize = 20;
   let isGongyanPaginationClick = false;
@@ -5274,7 +5471,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let data = getCategoryData(category);
     
-    // 搜索过滤
+    // 获取当日公演行程
     if (searchText && searchText.trim()) {
       const keyword = searchText.trim().toLowerCase();
       data = data.filter(item => 
@@ -5289,7 +5486,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // 分页
+    // 获取当日公演行程
     if (!isGongyanPaginationClick) currentGongyanPage = 1;
     isGongyanPaginationClick = false;
     const pageData = data.slice((currentGongyanPage - 1) * gongyanPageSize, currentGongyanPage * gongyanPageSize);
@@ -5329,7 +5526,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     grid.innerHTML = html;
-    // 根据当前布局模式设置样式
+    // 获取当日公演行程
     if (typeof currentLayoutMode !== 'undefined' && currentLayoutMode === 'list') {
       grid.className = 'stage-grid list-mode';
     } else {
@@ -5339,7 +5536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateGongyanPaginationUI(data.length);
   }
 
-  // 格式化播放量
+  // 春节
   function formatPlayCount(count) {
     if (!count) return '0';
     if (count >= 10000) {
@@ -5348,18 +5545,18 @@ document.addEventListener('DOMContentLoaded', function() {
     return count.toString();
   }
 
-  // 初始化公演页面
+  // 春节
   async function initGongyanPage() {
     await loadGongyanData();
     updateGongyanCounts();
     renderGongyanCards(currentGongyanCategory, document.getElementById('gongyanSearch')?.value || '');
     
-    // 更新导航指示器
+    // 获取当日公演行程
     if (window.updateNavIndicator) {
       window.updateNavIndicator('gongyanNav', 'gongyanNavIndicator');
     }
     
-    // 重新渲染右侧日历（日期颜色标记 + 更新汇总列表）
+    // 公演数（只算公演数据，按《》标题 + 规则归并）
     if (typeof currentYear !== 'undefined' && typeof currentMonth !== 'undefined') {
       calCurrentPage = 'gongyan';
       renderCalendar(currentYear, currentMonth);
@@ -5367,7 +5564,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // 标签切换
+  // 春节
   document.addEventListener('click', function(e) {
     const btn = e.target.closest('#gongyanNav .stage-nav-item');
     if (!btn) return;
@@ -5386,15 +5583,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 搜索
+  // 春节
   document.addEventListener('input', function(e) {
     if (e.target.id === 'gongyanSearch') {
       renderGongyanCards(currentGongyanCategory, e.target.value);
     }
   });
 
-  // 页面切换时初始化
-  // 暴露初始化函数
+  // 春节
   window.initGongyanPage = initGongyanPage;
 
   // 暴露分页函数和数据到全局作用域，供HTML onclick和日历函数调用
@@ -5412,7 +5608,7 @@ document.addEventListener('DOMContentLoaded', function() {
     __isPoppingState = false;
   });
 
-  // 页面首次加载时，根据地址栏中的路径直接显示对应页面
+  // 春节
   // （例如直接访问 /stage 或刷新 /stage 页面时）
   function initRouteFromUrl() {
     var pageId = getPageFromUrl();
@@ -5518,6 +5714,33 @@ document.addEventListener('DOMContentLoaded', function() {
     return s;
   }
 
+  // 歌曲归属标签：从表格生成的 SONG_BELONG 映射中查这首歌属于哪套公演/EP/组合
+  function getSongBelong(name, show) {
+    if (typeof SONG_BELONG === 'undefined') return '';
+    let s = cleanUnitName(name || '').trim();
+    if (!s) return '';
+    const M = SONG_BELONG;
+    const hit = (k) => (M[k] ? M[k] : null) || (M[k.toLowerCase ? k.toLowerCase() : k] ? M[k.toLowerCase()] : null);
+    let arr = hit(s) || null;
+    if (!arr) {
+      const core = s.replace(/[（(].*?[)）]/g, '').trim();
+      if (core && core !== s) arr = hit(core) || null;
+    }
+    if (!arr) {
+      // 去空格统一小写（"High Light" 与 "Highlight" 视为同一首歌）
+      const comp = s.replace(/\s+/g, '').toLowerCase();
+      if (comp && comp !== s.toLowerCase()) arr = hit(comp) || null;
+    }
+    if (!arr) {
+      // 抛去"今日之星"标题后再匹配一次（如"今日之星 青春的约定"→"青春的约定"）
+      const stripped = s.replace(/今日之星/g, '').replace(/^[\s·:：\-—]+/, '').trim();
+      if (stripped && stripped !== s) arr = hit(stripped) || null;
+    }
+    if (!arr || !arr.length) return '';
+    // 归属数组按出现时间升序（公演优先），第一项 = 最早出现的那套公演
+    return arr[0];
+  }
+
   function getUnitStats() {
     const src = (typeof stageCategoryCache !== 'undefined' && stageCategoryCache && stageCategoryCache.all) ? stageCategoryCache.all : (typeof unitData !== 'undefined' && unitData ? unitData : []);
     const cleaned = src.filter(function(i) { return i && i.title; }).map(function(i) {
@@ -5612,7 +5835,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       var entries = getUnitCounts();
       if (!entries.length) {
-        // 舞台数据还没加载完，等待后重试
+        // 数据已加载，直接渲染
         if (typeof loadStageData === 'function' && typeof stageCategoryCache !== 'undefined' && (!stageCategoryCache.all || !stageCategoryCache.all.length)) {
           loadStageData().then(function() {
             archiveUnitCounts = null;
@@ -5654,10 +5877,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const debut = calcReportDays('2023.09.30');
       const promo = calcReportDays('2024.02.02');
 
-      // 完整场次分布（降序）
+      // 多场公演显示多个标签
       const showEntries = Object.keys(st.showMap).map(function(k) { return [k, st.showMap[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
       const showDist = showEntries.map(function(e) { return '《' + escapeHtml(e[0]) + '》' + e[1] + '场'; }).join('、');
-      // 公演占比
+      // 多场公演显示多个标签
       const showPct = stageTotal ? Math.round((topShowCount / stageTotal) * 1000) / 10 : 0;
       // UNIT 完整排序列表
       const unitEntries = getUnitCounts();
@@ -5702,7 +5925,7 @@ document.addEventListener('DOMContentLoaded', function() {
         + '<div style="margin-top:6px;line-height:1.8;">高频前三：' + (unitTop3 || "暂无") + '</div>'
         + '</div>'
         + '<div class="ar-stat-block">'
-        + '<div class="ar-stat-head">首次记录</div>'
+        + '<div class="ar-stat-head">公演统计</div>'
         + '<div class="ar-stat-row">'
         + '<span class="ar-item">首次公演：《' + escapeHtml(firstStageName) + '》（' + firstStageDate + '）</span>'
         + '<span class="ar-item">首次 UNIT：《' + escapeHtml(firstUnit) + '》（' + firstUnitDate + '）</span>'
@@ -5729,13 +5952,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// ===== 音乐播放器（右侧侧边栏） =====
+// ===== 里程时间线（历年公式照下方） =====
 (function() {
   var audio = document.getElementById('playerAudio');
   var toggle = document.getElementById('playerToggle');
   var loopBtn = document.getElementById('playerLoop');
   var playlistBtn = document.getElementById('playerPlaylist');
   var playlistDropdown = document.getElementById('musicPlaylistDropdown');
+  var playlistList = document.getElementById('musicPlaylistList');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var curIdx = -1;
   var nameEl = document.querySelector('.player-name');
   var volume = document.getElementById('playerVolume');
   var bar = document.getElementById('playerProgressBar');
@@ -5745,13 +5972,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var wrap = document.getElementById('playerProgress');
   var disc = document.getElementById('playerDisc');
   if (!audio || !toggle) return;
-  var ICON_CF = 'https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/';
-  var ICON_PLAY = ICON_CF + '播放.webp';
-  var ICON_PAUSE = ICON_CF + '暂停.webp';
-  var ICON_LOOP_LIST = ICON_CF + '列表循环.webp';
-  var ICON_LOOP_SINGLE = ICON_CF + '播放栏-循环单曲.webp';
-  var ICON_SHUFFLE = ICON_CF + '24gl-shuffle.webp';
-  var ICON_LIST = ICON_CF + '歌曲列表.webp';
+  var ICON_PLAY = 'icon/play.png';
+  var ICON_PAUSE = 'icon/pause.png';
+  var ICON_LOOP_LIST = 'icon/loop_list.png';
+  var ICON_LOOP_SINGLE = 'icon/loop_single.png';
+  var ICON_SHUFFLE = 'icon/shuffle.png';
+  var ICON_LIST = 'icon/playlist.png';
   function iconImg(src, alt) {
     return '<img class="player-btn-icon" decoding="async" src="' + src + '" alt="' + alt + '" />';
   }
@@ -5768,14 +5994,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     audio.loop = mode === 'single';
   }
-  // 歌曲列表
+  // 播放器（音乐播放器）
   var PLAYLIST = [];
   function playlistBase() {
     return (audio.getAttribute('src') || '').split('?')[0];
   }
+  function updateNavBtns() {
+    var canNav = PLAYLIST.length > 1;
+    if (prevBtn) {
+      prevBtn.disabled = !canNav;
+      prevBtn.style.opacity = canNav ? '1' : '0.4';
+    }
+    if (nextBtn) {
+      nextBtn.disabled = !canNav;
+      nextBtn.style.opacity = canNav ? '1' : '0.4';
+    }
+  }
   function renderPlaylist() {
-    if (!playlistDropdown) return;
-    playlistDropdown.innerHTML = '';
+    if (!playlistList) return;
+    playlistList.innerHTML = '';
     var cur = playlistBase();
     PLAYLIST.forEach(function(song) {
       var d = document.createElement('div');
@@ -5785,35 +6022,66 @@ document.addEventListener('DOMContentLoaded', function() {
         playSong(song);
         if (playlistDropdown) playlistDropdown.classList.remove('open');
       });
-      playlistDropdown.appendChild(d);
+      playlistList.appendChild(d);
     });
+    updateNavBtns();
   }
   function playSong(song) {
     audio.src = song.url;
     audio.play().catch(function(){});
     if (nameEl) nameEl.textContent = song.name;
     setStatus('正在播放');
+    curIdx = PLAYLIST.indexOf(song);
     renderPlaylist();
   }
+  function stepSong(dir) {
+    if (PLAYLIST.length < 2) return;
+    var idx = curIdx;
+    if (idx < 0) idx = 0;  // 还没播放过时从第一首开始切换
+    var next = (idx + dir + PLAYLIST.length) % PLAYLIST.length;
+    playSong(PLAYLIST[next]);
+  }
+  function syncCurIdxWithDisplay() {
+    var curName = nameEl ? nameEl.textContent : '';
+    if (curName) {
+      for (var i = 0; i < PLAYLIST.length; i++) {
+        var n = PLAYLIST[i].name;
+        if (n === curName || (n && curName.indexOf(n) >= 0) || (n && n.indexOf(curName) >= 0)) {
+          curIdx = i;
+          return;
+        }
+      }
+    }
+    if (curIdx < 0 || curIdx >= PLAYLIST.length) curIdx = 0;
+  }
   function loadPlaylist() {
-    fetch('https://hf-mirror.com/api/datasets/156816SAFE/image-bed/tree/main/music')
+    // 优先渲染本地静态歌单（保底）
+    if (window.MUSIC_LIST && MUSIC_LIST.length) {
+      PLAYLIST = MUSIC_LIST.slice();
+      syncCurIdxWithDisplay();
+      renderPlaylist();
+    }
+// 先从 HF 拉取歌单列表（带时间戳防缓存），成功则覆盖歌单
+    fetch('https://hf-mirror.com/api/datasets/156816SAFE/image-bed/tree/main/music?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(files) {
         var arr = (files || []).filter(function(f) {
-          return /.(mp3|m4a|flac|ogg|aac)$/i.test(f.path) && (!f.size || f.size < 20 * 1024 * 1024);
+          return /.(mp3|m4a|flac|ogg|aac|wav)$/i.test(f.path) && (!f.size || f.size < 50 * 1024 * 1024);
         }).map(function(f) {
-          return {
-            name: f.path.split('/').pop().replace(/\.\w+$/, '').replace(/_/g, ' '),
-            url: 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/' + f.path
-          };
+          var n = f.path.split('/').pop().replace(/\.\w+$/, '');
+          n = n.replace(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}_/, '').replace(/_/g, ' ');
+          var url = 'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/' + f.path;
+          // 歌名优先用静态歌单 musicList.js 里的 name（按 url 匹配），不采用拉取到的文件名
+          if (window.MUSIC_LIST) {
+            for (var i = 0; i < window.MUSIC_LIST.length; i++) {
+              if (window.MUSIC_LIST[i].url.split('?')[0] === url.split('?')[0]) { n = window.MUSIC_LIST[i].name; break; }
+            }
+          }
+          return { name: n, url: url };
         });
-        PLAYLIST = arr.length ? arr : [{ name: 'Dream up', url: SRC }];
-        renderPlaylist();
+        if (arr.length) { PLAYLIST = arr; syncCurIdxWithDisplay(); renderPlaylist(); }
       })
-      .catch(function() {
-        PLAYLIST = [{ name: 'Dream up', url: SRC }];
-        renderPlaylist();
-      });
+      .catch(function() { /* 静态歌单已兜底，无需处理 */ });
   }
   function fmt(sec) {
     sec = Math.floor(sec || 0);
@@ -5836,14 +6104,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   audio.addEventListener('ended', function() {
     toggle.innerHTML = iconImg(ICON_PLAY, '播放');
-    setStatus('已结束');
     if (disc) disc.style.animation = 'none';
+    // 非单曲循环模式下自动切下一首
+    if (PLAY_MODES[playModeIdx] !== 'single' && PLAYLIST.length > 1) {
+      stepSong(1);
+    } else {
+      setStatus('已播放完毕');
+    }
   });
   audio.addEventListener('waiting', function() {
     if (!audio.paused) setStatus('加载中…');
   });
   audio.addEventListener('canplay', function() {
-    if (!audio.paused) setStatus('正在播放');
+    if (!audio.paused) setStatus('加载中…');
   });
   audio.addEventListener('loadedmetadata', function() { if (totalEl) totalEl.textContent = fmt(audio.duration); });
   audio.addEventListener('timeupdate', function() {
@@ -5860,7 +6133,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (volume) {
     function paintVolume() {
       var v = parseInt(volume.value, 10) || 0;
-      volume.style.background = 'linear-gradient(to right, #1a1a1a ' + v + '%, #e2e9f0 ' + v + '%)';
+      var volTrack = document.getElementById('volumeTrack') || volume.parentElement;
+      volTrack.style.setProperty('--vol', v + '%');
     }
     volume.addEventListener('input', function() {
       audio.volume = volume.value / 100;
@@ -5876,11 +6150,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   applyPlayMode();
+  if (prevBtn) prevBtn.addEventListener('click', function() { stepSong(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { stepSong(1); });
   if (playlistBtn) {
     playlistBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (!PLAYLIST.length) loadPlaylist();
-      else renderPlaylist();
+      loadPlaylist(); // 每次点击都重新拉取，及时显示新上传的歌
       if (playlistDropdown) playlistDropdown.classList.toggle('open');
     });
   }
@@ -5892,3 +6167,36 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   loadPlaylist();
 })();
+
+(function(){
+  var SCROLL_TRIGGER = 120;
+  var OPEN_W = 82;   // 矩形胶囊宽度（按钮32*2 + gap6 + padding12）
+  function syncActions(){
+    var nav = document.querySelector('.top-nav');
+    var act = document.querySelector('.nav-actions');
+    if (!nav || !act) return;
+    if (window.innerWidth <= 768) return;
+    var h = nav.getBoundingClientRect().height;
+    var scrolled = window.scrollY > SCROLL_TRIGGER;
+    act.classList.toggle('scrolled', scrolled);
+    if (h > 20) {
+      act.style.display = 'flex';
+      // 胶囊高度跟随导航栏（顶部与滚动后圆形都保持导航栏高度）
+      act.style.height = h + 'px';
+      act.style.setProperty('--ch', h + 'px');
+      // 左缘定位：未滚动 right:20px 的等效 left；滚动后贴导航栏右侧 8px
+      act.style.right = 'auto';
+      if (scrolled) {
+        var navRect = nav.getBoundingClientRect();
+        act.style.left = Math.round(navRect.right + 8) + 'px';
+      } else {
+        act.style.left = Math.round(window.innerWidth - 20 - OPEN_W) + 'px';
+      }
+    }
+  }
+  window.addEventListener('load', syncActions);
+  window.addEventListener('resize', syncActions);
+  window.addEventListener('scroll', function() { syncActions(); }, { passive: true });
+  setTimeout(syncActions, 300);
+})();
+

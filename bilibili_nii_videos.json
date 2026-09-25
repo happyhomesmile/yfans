@@ -2,13 +2,25 @@
   "uid": "2832224",
   "dateRange": {
     "start": "2023-09-30",
-    "end": "2026-09-03"
+    "end": "2026-09-20"
   },
-  "totalCollected": 208,
-  "niiVideoCount": 208,
-  "coverCount": 208,
-  "fetchTime": "2026-09-03T07:29:32.247Z",
+  "totalCollected": 209,
+  "niiVideoCount": 209,
+  "coverCount": 209,
+  "fetchTime": "2026-09-20T15:30:30.480Z",
   "videos": [
+    {
+      "bvid": "BV1aEeh6cEHB",
+      "title": "【SNH48】TEAM NII《肆时墟》公演20260919",
+      "pubdate": "2026-09-19",
+      "created": 1789747200,
+      "length": "03:41:31",
+      "play": 15000,
+      "url": "https://www.bilibili.com/video/BV1aEeh6cEHB",
+      "isNII": true,
+      "cover": "http://i1.hdslb.com/bfs/archive/c28faffaa553e41957f216028855172ad8e633ab.jpg",
+      "pic": "http://i1.hdslb.com/bfs/archive/c28faffaa553e41957f216028855172ad8e633ab.jpg"
+    },
     {
       "bvid": "BV1QYtn6EEFw",
       "title": "【SNH48】TEAM NII《肆时墟》公演20260830",

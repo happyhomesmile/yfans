@@ -1,5 +1,15 @@
 // 数据文件：formalData（从 script.js 拆分，自动生成）
 const formalData = {
+    '2026-autumn': {
+      label: '2026年秋季队服公式照',
+      images: [
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/29dd3192-dc1a-4347-b9a9-68139eeb10c3_zp_10298__6_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/03487f04-87ec-4c10-b197-4c722c757d2a_gs4_10298_1__6_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/6677e689-6c83-4b91-83da-4f6b9e52dd11_gs4_10298_2__6_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/82f8d0e9-d945-4d5b-8811-9036acc1e4aa_gs4_10298_3__6_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/f8708b98-0b18-4c60-bbaa-f2f4d3673e35_gs4_10298_4__6_.webp'
+      ]
+    },
     '2026-newyear': {
       label: '2026年新年公式照',
       images: [
@@ -33,10 +43,10 @@ const formalData = {
     '2024-autumn': {
       label: '2024年秋季队服公式照',
       images: [
-        'https://cloudflare-imgbed-95w.pages.dev/file/gsz/1789010870395_zp_10298__2_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/1789010870395_zp_10298__2_.webp',
         'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/488ec743-128e-4927-812c-581cee9f4f7c_1789010859440_gs4_10298_3__2_.webp',
         'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/f5d8b3db-983c-4116-ab55-c1993ebcca24_1789010858186_gs4_10298_1__2_.webp',
-        'https://cloudflare-imgbed-95w.pages.dev/file/gsz/1789010859633_gs4_10298_2__2_.webp',
+        'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/1789010859633_gs4_10298_2__2_.webp',
         'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/gsz/bfa767a9-1dab-4a94-b09a-ce8e59fa4988_1789010864364_gs4_10298_4__2_.webp'
       ]
     },

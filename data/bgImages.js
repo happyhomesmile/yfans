@@ -6,4 +6,5 @@ const bgImages = [
   'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/others/c0f2fc769ec12d679305f49f57320e75.webp',
   'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/others/fb60f2936e08d4671a7439ffd9b307a7.webp',
   'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/others/28193dbd7880c645c44d9ffad05fd712.webp',
+  'https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/others/7c5dd045-c466-4bfa-bda5-9027648cad9b__20260924173922_61196_548.webp'
 ];

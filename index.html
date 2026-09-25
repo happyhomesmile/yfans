@@ -1,13 +1,14 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<script>document.documentElement.className+=" preload";document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){document.documentElement.className=document.documentElement.className.replace(/(^| )preload( |$)/,"$1").replace(/\s+/g," ").trim();},80);});</script>
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
   <!-- 壁纸优先加载：head 阶段立即随机选一张并开始下载，不等 script.js -->
-  <script src="data/bgImages.js?v=20261020"></script>
+  <script src="data/bgImages.js?v=20261084"></script>
   <script>
   (function() {
     if (typeof bgImages === 'undefined' || !bgImages.length) return;
@@ -28,10 +29,10 @@
   </script>
   <meta name="referrer" content="no-referrer" />
   <title>一颗椰饭饲养指南</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261020">
+  <link rel="preconnect" href="https://fonts.font.im">
+  <link rel="preconnect" href="https://fonts.gstatic.font.im" crossorigin>
+  <link href="https://fonts.font.im/css2?family=Noto+Serif+SC:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20261133">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
 </head>
 
@@ -141,8 +142,8 @@
     <div class="close-hint">点击图片外任意处关闭</div>
   </div>
 
-  <button id="backToTop">
-    <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b40c1ddf-ee92-42a5-b7da-13801baabb5f_1789006837946_huidaodingbu.webp" alt="返回顶部" />
+  <button id="backToTop" aria-label="返回顶部" title="返回顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
   </button>
 
   <div class="left-profile-card">
@@ -182,17 +183,14 @@
     </div>
   </div>
 
-  <!-- 行程倒计时 -->
+  <!-- 行程倒计时（右栏） -->
   <div class="left-countdown-card">
     <div class="countdown-header">
       <span class="title">行程倒计时</span>
       <span class="badge">UPCOMING</span>
     </div>
-    <div class="countdown-list" id="countdownList">
-      <div class="countdown-empty">加载中...</div>
-    </div>
+    <div class="countdown-list" id="countdownList"></div>
   </div>
-
   <!-- 快速安利区 -->
   <div class="left-promo-card" id="leftPromoCard">
     <div class="promo-header">
@@ -308,7 +306,7 @@
             </select>
           </div>
           <div class="mobile-filter-row">
-            <label>日期<span style="color:#999;font-size:10px;">选填</span></label>
+            <label>日期</label>
             <select id="filterDay">
               <option value="">全部</option>
             </select>
@@ -328,13 +326,13 @@
     <div class="nav-dropdown" id="foodNotesDropdown">
       <div class="nav-dropdown-item" data-page="travel">口袋图集</div>
       <div class="nav-dropdown-item" data-page="words">演讲</div>
+      <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
     </div>
 
     <div class="nav-dropdown" id="foodWorksDropdown">
       <div class="nav-dropdown-item" data-page="stage">舞台</div>
       <div class="nav-dropdown-item" data-page="bobo">直播</div>
       <div class="nav-dropdown-item" data-page="gongyan">公演</div>
-      <div class="nav-dropdown-item" data-page="fancam">平台更新</div>
     </div>
 
     <div class="nav-dropdown" id="recordsDropdown">
@@ -362,12 +360,12 @@
       <div class="menu-item" data-page="wait">关于本站</div>
     </div>
 
-    <div class="page-actions">
-      <div class="menu-item palette-nav" id="paletteToggle" style="cursor:pointer;">
-        <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b63730ef-7695-4dd6-9897-0ba2a1703137_1789006832657_jiemianzujian_tiaosepan_platte.webp" alt="调色盘" style="width:20px; height:20px; display:block; opacity: 0.7; filter: brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue) * 1deg));" />
+    <div class="nav-actions">
+      <div class="nav-action-btn palette-nav" id="paletteToggle" style="cursor:pointer;" title="主题设置">
+        <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/b63730ef-7695-4dd6-9897-0ba2a1703137_1789006832657_jiemianzujian_tiaosepan_platte.webp" alt="调色盘" class="nav-action-icon" />
       </div>
-      <div class="menu-item dark-toggle" id="darkToggle" style="cursor:pointer;">
-        <img decoding="async" id="darkIcon" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp" alt="切换主题" class="dark-toggle-icon" />
+      <div class="nav-action-btn dark-toggle" id="darkToggle" style="cursor:pointer;" title="暗色模式">
+        <img decoding="async" id="darkIcon" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/5ecf3cc9-50bd-4348-97e2-90b5560baf51_1789006828553_taiyangtianqi.webp" alt="切换主题" class="dark-toggle-icon nav-action-icon" />
       </div>
     </div>
 
@@ -438,6 +436,10 @@
       </div>
     </div>
 
+
+
+
+
     <!-- 音乐播放器 -->
     <div class="sidebar-player" id="musicPlayer">
       <div class="recent-update-header">
@@ -450,7 +452,10 @@
       </div>
       <div class="player-volume">
         <span class="volume-label">音量</span>
-        <input type="range" id="playerVolume" min="0" max="100" value="80" class="volume-slider" />
+        <div class="volume-track" id="volumeTrack">
+          <div class="volume-fill" id="volumeFill"></div>
+          <input type="range" id="playerVolume" min="0" max="100" value="80" class="volume-slider" />
+        </div>
       </div>
       <div class="player-progress-row">
         <span class="player-time" id="playerTimeCur">0:00</span>
@@ -459,17 +464,18 @@
         </div>
         <span class="player-time" id="playerTimeTotal">0:00</span>
       </div>
-      <div class="music-playlist-dropdown" id="musicPlaylistDropdown"></div>
       <div class="player-btns">
-        <button id="playerLoop" class="player-btn" title="循环播放"><img class="player-btn-icon" decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/列表循环.webp" alt="循环" /></button>
-        <button id="playerPrev" class="player-btn" title="上一曲" disabled><img class="player-btn-icon" decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/左播放.webp" alt="上一曲" /></button>
-        <button id="playerToggle" class="player-btn player-play" title="播放/暂停"><img class="player-btn-icon" decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/播放.webp" alt="播放" /></button>
-        <button id="playerNext" class="player-btn" title="下一曲" disabled><img class="player-btn-icon" decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/右播放-copy.webp" alt="下一曲" /></button>
-        <button id="playerPlaylist" class="player-btn" title="歌曲列表"><img class="player-btn-icon" decoding="async" src="https://cloudflare-imgbed-95w.pages.dev/file/icon_bip5uayjrmg/歌曲列表.webp" alt="歌曲列表" /></button>
+        <button id="playerLoop" class="player-btn" title="循环播放"><img class="player-btn-icon" decoding="async" src="icon/loop_list.png" alt="循环" /></button>
+        <button id="playerPrev" class="player-btn" title="上一曲" disabled><img class="player-btn-icon" decoding="async" src="icon/prev.png" alt="上一曲" /></button>
+        <button id="playerToggle" class="player-btn player-play" title="播放/暂停"><img class="player-btn-icon" decoding="async" src="icon/play.png" alt="播放" /></button>
+        <button id="playerNext" class="player-btn" title="下一曲" disabled><img class="player-btn-icon" decoding="async" src="icon/next.png" alt="下一曲" /></button>
+        <button id="playerPlaylist" class="player-btn" title="歌曲列表"><img class="player-btn-icon" decoding="async" src="icon/playlist.png" alt="歌曲列表" /></button>
+      </div>
+      <div class="music-playlist-dropdown" id="musicPlaylistDropdown">
+        <div class="music-playlist-list" id="musicPlaylistList"></div>
       </div>
     </div>
     <audio id="playerAudio" preload="none" loop></audio>
-
   </div>
 
       <div class="page-box active" id="home">
@@ -545,9 +551,9 @@
             <span class="title-en">Gallery</span>
           </div>
           <div class="formal-btn-wrapper">
-            <button class="formal-scroll-btn left" id="formalScrollLeft" onclick="scrollFormalBtn(-1)">‹</button>
             <div class="formal-btn-group" id="formalBtnGroup">
               <div class="drink-btn active" data-key="all" onclick="switchFormal('all')" style="cursor:pointer;">全部</div>
+              <div class="drink-btn" data-key="2026-autumn" onclick="switchFormal('2026-autumn')" style="cursor:pointer;">2026年秋季队服公式照</div>
               <div class="drink-btn" data-key="2026-newyear" onclick="switchFormal('2026-newyear')" style="cursor:pointer;">2026年新年公式照</div>
               <div class="drink-btn" data-key="2025-autumn" onclick="switchFormal('2025-autumn')" style="cursor:pointer;">2025年秋季队服公式照</div>
               <div class="drink-btn" data-key="2025-newyear" onclick="switchFormal('2025-newyear')" style="cursor:pointer;">2025年新年公式照</div>
@@ -555,7 +561,6 @@
               <div class="drink-btn" data-key="2024-spring" onclick="switchFormal('2024-spring')" style="cursor:pointer;">2024年春季队服公式照</div>
               <div class="drink-btn" data-key="2023-2024" onclick="switchFormal('2023-2024')" style="cursor:pointer;">2023-2024年度青春盛典公式照</div>
             </div>
-            <button class="formal-scroll-btn right" id="formalScrollRight" onclick="scrollFormalBtn(1)">›</button>
           </div>
 
           <div class="formal-display-area" id="formalDisplay">
@@ -601,7 +606,7 @@
               <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="stageSearch" placeholder="搜索..." />
             </div>
-            <button class="mobile-filter-btn" data-page="stage" onclick="openFilterPanel('stage')">筛选</button>
+            <button class="mobile-filter-btn" data-page="stage" onclick="openFilterPanel('stage')"><svg class="filter-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span class="filter-text">筛选</span></button>
           </div>
 
           <div class="stage-grid" id="stageGrid"></div>
@@ -632,7 +637,7 @@
               <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="boboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
             </div>
-            <button class="mobile-filter-btn" data-page="bobo" onclick="openFilterPanel('bobo')">筛选</button>
+            <button class="mobile-filter-btn" data-page="bobo" onclick="openFilterPanel('bobo')"><svg class="filter-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span class="filter-text">筛选</span></button>
           </div>
 
           <div class="stage-grid" id="boboGrid"></div>
@@ -664,7 +669,7 @@
                 <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
                 <input type="text" id="weiboSearch" placeholder="搜索..." style="border:none; outline:none; background:transparent; padding:6px 4px; font-size:13px; width:100%; color:#1a3a4f;" />
               </div>
-              <button class="mobile-filter-btn" data-page="fancam" onclick="openFilterPanel('fancam')">筛选</button>
+              <button class="mobile-filter-btn" data-page="fancam" onclick="openFilterPanel('fancam')"><svg class="filter-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span class="filter-text">筛选</span></button>
             </div>
 
       <div id="weiboFeed">
@@ -691,7 +696,7 @@
               <img decoding="async" src="https://hf-mirror.com/datasets/156816SAFE/image-bed/resolve/main/icon_bip5uayjrmg/0be726e5-5e6e-4999-a81c-834307591f8a_1789006832322_sousuo.webp" alt="搜索" class="search-icon" style="width:16px; height:16px; display:inline-block; flex-shrink:0; opacity:0.7; filter:brightness(0) saturate(100%) invert(32%) sepia(98%) saturate(2000%) hue-rotate(calc(var(--theme-hue)*1deg));" />
               <input type="text" id="gongyanSearch" placeholder="搜索..." />
             </div>
-            <button class="mobile-filter-btn" data-page="gongyan" onclick="openFilterPanel('gongyan')">筛选</button>
+            <button class="mobile-filter-btn" data-page="gongyan" onclick="openFilterPanel('gongyan')"><svg class="filter-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span class="filter-text">筛选</span></button>
           </div>
 
           <div class="stage-grid" id="gongyanGrid"></div>
@@ -1010,19 +1015,21 @@
     </div>
   </div>
 
-<script src="data/monthImages.js?v=20261020"></script>
-<script src="data/monthCovers.js?v=20261020"></script>
-<script src="data/formalData.js?v=20261020"></script>
-<script src="data/wordsData.js?v=20261020"></script>
-<script src="data/drinkData.js?v=20261020"></script>
-<script src="data/kaomojiList.js?v=20261020"></script>
-<script src="data/performanceSchedule.js?v=20261020"></script>
-<script src="lib/echarts.min.js?v=20261020"></script>
-<script src="data/china.js?v=20261020"></script>
-<script src="data/travelData.js?v=20261020"></script>
+<script src="data/monthImages.js?v=20261091"></script>
+<script src="data/monthCovers.js?v=20261091"></script>
+<script src="data/formalData.js?v=20261085"></script>
+<script src="data/wordsData.js?v=20261084"></script>
+<script src="data/drinkData.js?v=20261084"></script>
+<script src="data/kaomojiList.js?v=20261084"></script>
+<script src="data/performanceSchedule.js?v=20261085"></script>
+<script src="lib/echarts.min.js?v=20261084"></script>
+<script src="data/china.js?v=20261084"></script>
+<script src="data/travelData.js?v=20261085"></script>
 
-<script src="script.js?v=20261020"></script>
-<script src="travel-map.js?v=20261020"></script>
+<script src="data/musicList.js?v=20261084"></script>
+<script src="data/songBelong.js?v=20261092"></script>
+<script src="script.js?v=20260934u"></script>
+<script src="travel-map.js?v=20261090"></script>
   <!-- ===== 口袋回放播放器弹窗 ===== -->
   <div class="pocket-player-overlay" id="pocketPlayerOverlay" onclick="closePocketPlayer(event)">
     <div class="pocket-player-modal" onclick="event.stopPropagation()">
@@ -1052,3 +1059,5 @@
   </div>
 </body>
 </html>
+
+

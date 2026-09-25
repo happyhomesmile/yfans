@@ -16,6 +16,10 @@
     } catch (e) { return '210'; }
   }
 
+  function isDark() {
+    return document.body.classList.contains('dark-mode');
+  }
+
   // ---------- 弹窗 ----------
   var popup = null;
 
@@ -85,7 +89,7 @@
       intro.innerHTML = '';
       intro.appendChild(frag);
     } else {
-      intro.innerHTML = '正在统计中';
+      intro.innerHTML = '暂未解锁';
     }
     footer.textContent = data.footerText || '';
     popup.classList.add('show');
@@ -105,45 +109,53 @@
     });
 
     function areaColor(state) {
-      // 去过的省份填浅蓝色
-      if (state === 1) return '#d8e7f8';
-      return '#ffffff';
+      // 去过的省份浅灰、未开发的深灰（暗色模式，不带蓝调）
+      if (state === 1) return isDark() ? '#565a63' : '#d8e7f8';
+      return isDark() ? '#2f3136' : '#ffffff';
     }
     function borderColor(state) {
-      return '#e3e3e3';
+      return isDark() ? '#3a3e48' : '#e3e3e3';
     }
 
     return {
-      tooltip: { show: false },
+      tooltip: {
+        show: true,
+        trigger: 'item',
+        backgroundColor: isDark() ? 'rgba(20,20,20,.96)' : 'rgba(255,255,255,.95)',
+        borderColor: 'hsla(' + hue + ', 70%, 60%, .45)',
+        borderWidth: 1,
+        padding: [8, 12],
+        extraCssText: 'box-shadow:none!important;',
+        textStyle: { color: isDark() ? '#e6e9f2' : '#333', fontSize: 12 },
+        formatter: function(params) {
+          var vi = data.visited && data.visited[params.name];
+          if (params.value === 1 && vi) {
+            if (vi.time) return params.name + '<br/>去过时间：' + vi.time;
+            return params.name + '<br/>已探索';
+          }
+          return params.name + '<br/>暂未探索';
+        }
+      },
       visualMap: false,
       series: [{
         type: 'map',
         map: 'china',
         roam: true,
         selectedMode: false,
-        zoom: 1.05,
+        zoom: 1.15,
         label: {
-          show: true,
-          fontSize: 10,
-          color: '#666666',
-          formatter: function (params) {
-            return params.name;
-          }
+          show: false
         },
         itemStyle: {
           borderColor: '#e3e3e3',
           borderWidth: 1
         },
         emphasis: {
-          label: { show: true, fontSize: 11, fontWeight: 'bold', color: '#333' },
+          scale: false,
+          label: { show: true, fontSize: 11, fontWeight: 'bold', color: isDark() ? '#ffffff' : '#333' },
           itemStyle: {
-            shadowBlur: 12,
-            shadowColor: 'hsla(' + hue + ', 70%, 50%, 0.35)',
-            areaColor: function (p) {
-              var st = p.data && p.data.value;
-              if (st === 1) return '#c3dcf4';
-              return '#f2f2f2';
-            }
+            borderWidth: 1.2,
+            borderColor: 'hsla(' + hue + ', 70%, 50%, 0.85)'
           }
         },
         data: mapData.map(function (d) {
@@ -153,6 +165,11 @@
             itemStyle: {
               areaColor: areaColor(d.value),
               borderColor: borderColor(d.value)
+            },
+            emphasis: {
+              itemStyle: {
+                areaColor: areaColor(d.value)
+              }
             }
           };
         })
@@ -168,7 +185,7 @@
     if (!echarts.getMap('china')) {
       echarts.registerMap('china', CHINA_GEO);
     }
-    var chart = echarts.init(container);
+    chart = echarts.init(container);
     chart.setOption(buildOption());
 
     chart.on('click', function (params) {
@@ -194,6 +211,17 @@
   // 监听足迹页切换（class 变为 active 时初始化）
   if (page && window.MutationObserver) {
     new MutationObserver(function () { tryInit(); }).observe(page, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  }
+
+  // 暗色/亮色切换时重绘地图
+  var chart = null;
+  if (window.MutationObserver) {
+    new MutationObserver(function () {
+      if (inited && chart) chart.setOption(buildOption());
+    }).observe(document.body, {
       attributes: true,
       attributeFilter: ['class']
     });
